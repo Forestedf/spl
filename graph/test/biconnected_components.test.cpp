@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/biconnected_components"
 #define FAST_IO
-#include "spl/graph/biconnected_components.hpp"
-#include "spl/template/template.hpp"
+#include "../../graph/biconnected_components.hpp"
+#include "../../template/template.hpp"
 
 void solve() {
     I32(n, m);

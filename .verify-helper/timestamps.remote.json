@@ -8,6 +8,7 @@
 "data_structure/test/queue_operate_all_composite.test.cpp": "2023-12-26 16:56:23 +0900",
 "data_structure/test/range_affine_range_sum.test.cpp": "2023-12-26 16:56:23 +0900",
 "data_structure/test/range_kth_smallest.test.cpp": "2023-12-26 16:56:23 +0900",
+"data_structure/test/rectangle_sum.test.cpp": "2023-12-26 17:08:45 +0900",
 "data_structure/test/static_range_frequency.test.cpp": "2023-12-26 16:56:23 +0900",
 "data_structure/test/staticrmq.test.cpp": "2023-12-26 16:56:23 +0900",
 "data_structure/test/unionfind.test.cpp": "2023-12-26 16:56:23 +0900",

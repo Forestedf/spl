@@ -2,10 +2,52 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: data_structure/test/1891.test.cpp
+    title: data_structure/test/1891.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: data_structure/test/cartesian_tree.test.cpp
+    title: data_structure/test/cartesian_tree.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: data_structure/test/dsl_2_g.test.cpp
+    title: data_structure/test/dsl_2_g.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: data_structure/test/point_add_range_sum.test.cpp
+    title: data_structure/test/point_add_range_sum.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: data_structure/test/point_add_rectangle_sum.test.cpp
+    title: data_structure/test/point_add_rectangle_sum.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: data_structure/test/point_set_range_composite.test.cpp
+    title: data_structure/test/point_set_range_composite.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: data_structure/test/queue_operate_all_composite.test.cpp
+    title: data_structure/test/queue_operate_all_composite.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: data_structure/test/range_affine_range_sum.test.cpp
+    title: data_structure/test/range_affine_range_sum.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: data_structure/test/range_kth_smallest.test.cpp
+    title: data_structure/test/range_kth_smallest.test.cpp
+  - icon: ':x:'
+    path: data_structure/test/rectangle_sum.test.cpp
+    title: data_structure/test/rectangle_sum.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: data_structure/test/static_range_frequency.test.cpp
+    title: data_structure/test/static_range_frequency.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: data_structure/test/staticrmq.test.cpp
+    title: data_structure/test/staticrmq.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: data_structure/test/unionfind.test.cpp
+    title: data_structure/test/unionfind.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: data_structure/test/wavelet_matrix.test.cpp
+    title: data_structure/test/wavelet_matrix.test.cpp
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 1 \"template/template.hpp\"\n#include <bits/stdc++.h>\n#define\
@@ -96,8 +138,22 @@ data:
   path: template/template.hpp
   requiredBy: []
   timestamp: '2023-12-26 15:25:30+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_SOME_WA
+  verifiedWith:
+  - data_structure/test/point_set_range_composite.test.cpp
+  - data_structure/test/rectangle_sum.test.cpp
+  - data_structure/test/dsl_2_g.test.cpp
+  - data_structure/test/1891.test.cpp
+  - data_structure/test/unionfind.test.cpp
+  - data_structure/test/cartesian_tree.test.cpp
+  - data_structure/test/range_kth_smallest.test.cpp
+  - data_structure/test/wavelet_matrix.test.cpp
+  - data_structure/test/queue_operate_all_composite.test.cpp
+  - data_structure/test/staticrmq.test.cpp
+  - data_structure/test/static_range_frequency.test.cpp
+  - data_structure/test/range_affine_range_sum.test.cpp
+  - data_structure/test/point_add_rectangle_sum.test.cpp
+  - data_structure/test/point_add_range_sum.test.cpp
 documentation_of: template/template.hpp
 layout: document
 redirect_from:

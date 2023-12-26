@@ -1,6 +1,7 @@
 #pragma once
 
 #include <algorithm>
+#include <vector>
 #include <tuple>
 
 template <typename Coordinate, typename CommutativeGroup>

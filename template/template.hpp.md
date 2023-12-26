@@ -30,7 +30,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: data_structure/test/range_kth_smallest.test.cpp
     title: data_structure/test/range_kth_smallest.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: data_structure/test/rectangle_sum.test.cpp
     title: data_structure/test/rectangle_sum.test.cpp
   - icon: ':heavy_check_mark:'
@@ -45,9 +45,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: data_structure/test/wavelet_matrix.test.cpp
     title: data_structure/test/wavelet_matrix.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 1 \"template/template.hpp\"\n#include <bits/stdc++.h>\n#define\
@@ -138,7 +138,7 @@ data:
   path: template/template.hpp
   requiredBy: []
   timestamp: '2023-12-26 15:25:30+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - data_structure/test/point_set_range_composite.test.cpp
   - data_structure/test/rectangle_sum.test.cpp

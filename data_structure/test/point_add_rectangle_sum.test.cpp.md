@@ -7,10 +7,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: data_structure/general_range_tree.hpp
     title: data_structure/general_range_tree.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: data_structure/operations.hpp
     title: data_structure/operations.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/template.hpp
     title: template/template.hpp
   _extendedRequiredBy: []

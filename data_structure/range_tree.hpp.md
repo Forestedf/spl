@@ -3,17 +3,17 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: data_structure/test/rectangle_sum.test.cpp
     title: data_structure/test/rectangle_sum.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"data_structure/range_tree.hpp\"\n\n#include <algorithm>\n\
-    #include <tuple>\n\ntemplate <typename Coordinate, typename CommutativeGroup>\n\
-    class RangeTree {\npublic:\n    using Value = typename CommutativeGroup::Value;\n\
+    #include <vector>\n#include <tuple>\n\ntemplate <typename Coordinate, typename\
+    \ CommutativeGroup>\nclass RangeTree {\npublic:\n    using Value = typename CommutativeGroup::Value;\n\
     \nprivate:\n    struct Node {\n        std::vector<Coordinate> ys;\n        std::vector<Value>\
     \ cum;\n\n        Value sum(Coordinate yl, Coordinate yr) const {\n          \
     \  int yli =\n                (int)(std::lower_bound(ys.begin(), ys.end(), yl)\
@@ -47,14 +47,14 @@ data:
     \ sum(Coordinate xl, Coordinate xr, Coordinate yl,\n              Coordinate yr)\
     \ const {\n        Value l = sum(xl, yl, yr), r = sum(xr, yl, yr);\n        return\
     \ CommutativeGroup::op(r, CommutativeGroup::inv(l));\n    }\n};\n"
-  code: "#pragma once\n\n#include <algorithm>\n#include <tuple>\n\ntemplate <typename\
-    \ Coordinate, typename CommutativeGroup>\nclass RangeTree {\npublic:\n    using\
-    \ Value = typename CommutativeGroup::Value;\n\nprivate:\n    struct Node {\n \
-    \       std::vector<Coordinate> ys;\n        std::vector<Value> cum;\n\n     \
-    \   Value sum(Coordinate yl, Coordinate yr) const {\n            int yli =\n \
-    \               (int)(std::lower_bound(ys.begin(), ys.end(), yl) - ys.begin());\n\
-    \            int yri =\n                (int)(std::lower_bound(ys.begin(), ys.end(),\
-    \ yr) - ys.begin());\n            return CommutativeGroup::op(CommutativeGroup::inv(cum[yli]),\n\
+  code: "#pragma once\n\n#include <algorithm>\n#include <vector>\n#include <tuple>\n\
+    \ntemplate <typename Coordinate, typename CommutativeGroup>\nclass RangeTree {\n\
+    public:\n    using Value = typename CommutativeGroup::Value;\n\nprivate:\n   \
+    \ struct Node {\n        std::vector<Coordinate> ys;\n        std::vector<Value>\
+    \ cum;\n\n        Value sum(Coordinate yl, Coordinate yr) const {\n          \
+    \  int yli =\n                (int)(std::lower_bound(ys.begin(), ys.end(), yl)\
+    \ - ys.begin());\n            int yri =\n                (int)(std::lower_bound(ys.begin(),\
+    \ ys.end(), yr) - ys.begin());\n            return CommutativeGroup::op(CommutativeGroup::inv(cum[yli]),\n\
     \                                        cum[yri]);\n        }\n    };\n\n   \
     \ static void dedup(std::vector<Coordinate> &xs) {\n        std::sort(xs.begin(),\
     \ xs.end());\n        xs.erase(std::unique(xs.begin(), xs.end()), xs.end());\n\
@@ -87,8 +87,8 @@ data:
   isVerificationFile: false
   path: data_structure/range_tree.hpp
   requiredBy: []
-  timestamp: '2023-12-26 16:56:23+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2023-12-26 17:08:45+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - data_structure/test/rectangle_sum.test.cpp
 documentation_of: data_structure/range_tree.hpp

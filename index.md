@@ -21,13 +21,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: data_structure/lazy_segment_tree.hpp
       title: data_structure/lazy_segment_tree.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: data_structure/operations.hpp
       title: data_structure/operations.hpp
     - icon: ':heavy_check_mark:'
       path: data_structure/range_add_range_sum.hpp
       title: data_structure/range_add_range_sum.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: data_structure/range_tree.hpp
       title: data_structure/range_tree.hpp
     - icon: ':heavy_check_mark:'
@@ -83,7 +83,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: template/random.hpp
       title: template/random.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/template.hpp
       title: template/template.hpp
   verificationCategories:
@@ -116,7 +116,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: data_structure/test/range_kth_smallest.test.cpp
       title: data_structure/test/range_kth_smallest.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: data_structure/test/rectangle_sum.test.cpp
       title: data_structure/test/rectangle_sum.test.cpp
     - icon: ':heavy_check_mark:'

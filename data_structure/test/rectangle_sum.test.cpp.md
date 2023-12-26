@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: data_structure/operations.hpp
     title: data_structure/operations.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: data_structure/range_tree.hpp
     title: data_structure/range_tree.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/template.hpp
     title: template/template.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/rectangle_sum
@@ -45,8 +45,8 @@ data:
     \ Value op(const Value &v1, const Value &v2) {\n        return Value(Monoid::op(v1.first,\
     \ v2.first),\n                     Monoid::op(v2.second, v1.second));\n    }\n\
     };\n#line 2 \"data_structure/range_tree.hpp\"\n\n#line 4 \"data_structure/range_tree.hpp\"\
-    \n#include <tuple>\n\ntemplate <typename Coordinate, typename CommutativeGroup>\n\
-    class RangeTree {\npublic:\n    using Value = typename CommutativeGroup::Value;\n\
+    \n#include <vector>\n#include <tuple>\n\ntemplate <typename Coordinate, typename\
+    \ CommutativeGroup>\nclass RangeTree {\npublic:\n    using Value = typename CommutativeGroup::Value;\n\
     \nprivate:\n    struct Node {\n        std::vector<Coordinate> ys;\n        std::vector<Value>\
     \ cum;\n\n        Value sum(Coordinate yl, Coordinate yr) const {\n          \
     \  int yli =\n                (int)(std::lower_bound(ys.begin(), ys.end(), yl)\
@@ -142,8 +142,8 @@ data:
   isVerificationFile: true
   path: data_structure/test/rectangle_sum.test.cpp
   requiredBy: []
-  timestamp: '2023-12-26 16:56:23+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-12-26 17:08:45+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: data_structure/test/rectangle_sum.test.cpp
 layout: document

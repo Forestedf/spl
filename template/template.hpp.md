@@ -49,6 +49,12 @@ data:
     path: graph/test/biconnected_components.test.cpp
     title: graph/test/biconnected_components.test.cpp
   - icon: ':heavy_check_mark:'
+    path: graph/test/jump_on_tree.test.cpp
+    title: graph/test/jump_on_tree.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: graph/test/lca.test.cpp
+    title: graph/test/lca.test.cpp
+  - icon: ':heavy_check_mark:'
     path: graph/test/scc.test.cpp
     title: graph/test/scc.test.cpp
   - icon: ':heavy_check_mark:'
@@ -167,9 +173,11 @@ data:
   - data_structure/test/point_add_rectangle_sum.test.cpp
   - data_structure/test/point_add_range_sum.test.cpp
   - graph/test/scc.test.cpp
+  - graph/test/jump_on_tree.test.cpp
   - graph/test/two_edge_connected_components.test.cpp
   - graph/test/shortest_path.test.cpp
   - graph/test/biconnected_components.test.cpp
+  - graph/test/lca.test.cpp
 documentation_of: template/template.hpp
 layout: document
 redirect_from:

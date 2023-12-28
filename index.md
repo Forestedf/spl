@@ -66,6 +66,9 @@ data:
       path: graph/graph.hpp
       title: graph/graph.hpp
     - icon: ':heavy_check_mark:'
+      path: graph/heavy_light_decomposition.hpp
+      title: graph/heavy_light_decomposition.hpp
+    - icon: ':heavy_check_mark:'
       path: graph/strongly_connected_components.hpp
       title: graph/strongly_connected_components.hpp
     - icon: ':heavy_check_mark:'
@@ -145,6 +148,12 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/test/biconnected_components.test.cpp
       title: graph/test/biconnected_components.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: graph/test/jump_on_tree.test.cpp
+      title: graph/test/jump_on_tree.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: graph/test/lca.test.cpp
+      title: graph/test/lca.test.cpp
     - icon: ':heavy_check_mark:'
       path: graph/test/scc.test.cpp
       title: graph/test/scc.test.cpp

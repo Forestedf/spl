@@ -9,6 +9,9 @@ data:
     path: graph/dijkstra.hpp
     title: graph/dijkstra.hpp
   - icon: ':heavy_check_mark:'
+    path: graph/heavy_light_decomposition.hpp
+    title: graph/heavy_light_decomposition.hpp
+  - icon: ':heavy_check_mark:'
     path: graph/strongly_connected_components.hpp
     title: graph/strongly_connected_components.hpp
   - icon: ':heavy_check_mark:'
@@ -18,6 +21,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/test/biconnected_components.test.cpp
     title: graph/test/biconnected_components.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: graph/test/jump_on_tree.test.cpp
+    title: graph/test/jump_on_tree.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: graph/test/lca.test.cpp
+    title: graph/test/lca.test.cpp
   - icon: ':heavy_check_mark:'
     path: graph/test/scc.test.cpp
     title: graph/test/scc.test.cpp
@@ -104,13 +113,16 @@ data:
   - graph/strongly_connected_components.hpp
   - graph/two_edge_connected_components.hpp
   - graph/dijkstra.hpp
+  - graph/heavy_light_decomposition.hpp
   timestamp: '2023-12-26 15:25:30+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - graph/test/scc.test.cpp
+  - graph/test/jump_on_tree.test.cpp
   - graph/test/two_edge_connected_components.test.cpp
   - graph/test/shortest_path.test.cpp
   - graph/test/biconnected_components.test.cpp
+  - graph/test/lca.test.cpp
 documentation_of: graph/graph.hpp
 layout: document
 redirect_from:

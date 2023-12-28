@@ -13,5 +13,6 @@
 "data_structure/test/staticrmq.test.cpp": "2023-12-26 16:56:23 +0900",
 "data_structure/test/unionfind.test.cpp": "2023-12-26 16:56:23 +0900",
 "data_structure/test/wavelet_matrix.test.cpp": "2023-12-26 16:56:23 +0900",
-"graph/test/biconnected_components.test.cpp": "2023-12-26 17:13:59 +0900"
+"graph/test/biconnected_components.test.cpp": "2023-12-26 17:13:59 +0900",
+"graph/test/shortest_path.test.cpp": "2023-12-28 17:33:07 +0900"
 }

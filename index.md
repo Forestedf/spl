@@ -87,6 +87,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: other/coordinate_compression.hpp
       title: other/coordinate_compression.hpp
+  - name: string
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: string/z_algorithm.hpp
+      title: string/z_algorithm.hpp
   - name: template
     pages:
     - icon: ':heavy_check_mark:'
@@ -166,5 +171,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/test/vertex_add_path_sum.test.cpp
       title: graph/test/vertex_add_path_sum.test.cpp
+  - name: string/test
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: string/test/zalgorithm.test.cpp
+      title: string/test/zalgorithm.test.cpp
 layout: toppage
 ---

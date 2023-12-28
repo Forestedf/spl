@@ -66,6 +66,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/test/vertex_add_path_sum.test.cpp
     title: graph/test/vertex_add_path_sum.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: string/test/zalgorithm.test.cpp
+    title: string/test/zalgorithm.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -182,6 +185,7 @@ data:
   - graph/test/biconnected_components.test.cpp
   - graph/test/vertex_add_path_sum.test.cpp
   - graph/test/lca.test.cpp
+  - string/test/zalgorithm.test.cpp
 documentation_of: template/template.hpp
 layout: document
 redirect_from:

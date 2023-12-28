@@ -63,6 +63,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/test/two_edge_connected_components.test.cpp
     title: graph/test/two_edge_connected_components.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: graph/test/vertex_add_path_sum.test.cpp
+    title: graph/test/vertex_add_path_sum.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -177,6 +180,7 @@ data:
   - graph/test/two_edge_connected_components.test.cpp
   - graph/test/shortest_path.test.cpp
   - graph/test/biconnected_components.test.cpp
+  - graph/test/vertex_add_path_sum.test.cpp
   - graph/test/lca.test.cpp
 documentation_of: template/template.hpp
 layout: document

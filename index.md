@@ -163,5 +163,8 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/test/two_edge_connected_components.test.cpp
       title: graph/test/two_edge_connected_components.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: graph/test/vertex_add_path_sum.test.cpp
+      title: graph/test/vertex_add_path_sum.test.cpp
 layout: toppage
 ---

@@ -12,6 +12,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/test/lca.test.cpp
     title: graph/test/lca.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: graph/test/vertex_add_path_sum.test.cpp
+    title: graph/test/vertex_add_path_sum.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -168,6 +171,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - graph/test/jump_on_tree.test.cpp
+  - graph/test/vertex_add_path_sum.test.cpp
   - graph/test/lca.test.cpp
 documentation_of: graph/heavy_light_decomposition.hpp
 layout: document

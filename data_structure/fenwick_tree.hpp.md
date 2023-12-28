@@ -18,6 +18,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: data_structure/test/point_add_rectangle_sum.test.cpp
     title: data_structure/test/point_add_rectangle_sum.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: graph/test/vertex_add_path_sum.test.cpp
+    title: graph/test/vertex_add_path_sum.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -85,6 +88,7 @@ data:
   - data_structure/test/dsl_2_g.test.cpp
   - data_structure/test/point_add_rectangle_sum.test.cpp
   - data_structure/test/point_add_range_sum.test.cpp
+  - graph/test/vertex_add_path_sum.test.cpp
 documentation_of: data_structure/fenwick_tree.hpp
 layout: document
 redirect_from:

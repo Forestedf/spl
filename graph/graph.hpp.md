@@ -8,10 +8,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/dijkstra.hpp
     title: graph/dijkstra.hpp
+  - icon: ':heavy_check_mark:'
+    path: graph/strongly_connected_components.hpp
+    title: graph/strongly_connected_components.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: graph/test/biconnected_components.test.cpp
     title: graph/test/biconnected_components.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: graph/test/scc.test.cpp
+    title: graph/test/scc.test.cpp
   - icon: ':heavy_check_mark:'
     path: graph/test/shortest_path.test.cpp
     title: graph/test/shortest_path.test.cpp
@@ -89,10 +95,12 @@ data:
   path: graph/graph.hpp
   requiredBy:
   - graph/biconnected_components.hpp
+  - graph/strongly_connected_components.hpp
   - graph/dijkstra.hpp
   timestamp: '2023-12-26 15:25:30+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - graph/test/scc.test.cpp
   - graph/test/shortest_path.test.cpp
   - graph/test/biconnected_components.test.cpp
 documentation_of: graph/graph.hpp

@@ -49,6 +49,9 @@ data:
     path: graph/test/biconnected_components.test.cpp
     title: graph/test/biconnected_components.test.cpp
   - icon: ':heavy_check_mark:'
+    path: graph/test/scc.test.cpp
+    title: graph/test/scc.test.cpp
+  - icon: ':heavy_check_mark:'
     path: graph/test/shortest_path.test.cpp
     title: graph/test/shortest_path.test.cpp
   _isVerificationFailed: false
@@ -160,6 +163,7 @@ data:
   - data_structure/test/range_affine_range_sum.test.cpp
   - data_structure/test/point_add_rectangle_sum.test.cpp
   - data_structure/test/point_add_range_sum.test.cpp
+  - graph/test/scc.test.cpp
   - graph/test/shortest_path.test.cpp
   - graph/test/biconnected_components.test.cpp
 documentation_of: template/template.hpp

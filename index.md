@@ -65,6 +65,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/graph.hpp
       title: graph/graph.hpp
+    - icon: ':heavy_check_mark:'
+      path: graph/strongly_connected_components.hpp
+      title: graph/strongly_connected_components.hpp
   - name: number_theory
     pages:
     - icon: ':heavy_check_mark:'
@@ -139,6 +142,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/test/biconnected_components.test.cpp
       title: graph/test/biconnected_components.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: graph/test/scc.test.cpp
+      title: graph/test/scc.test.cpp
     - icon: ':heavy_check_mark:'
       path: graph/test/shortest_path.test.cpp
       title: graph/test/shortest_path.test.cpp

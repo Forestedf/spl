@@ -60,6 +60,9 @@ data:
       path: graph/biconnected_components.hpp
       title: graph/biconnected_components.hpp
     - icon: ':heavy_check_mark:'
+      path: graph/dijkstra.hpp
+      title: graph/dijkstra.hpp
+    - icon: ':heavy_check_mark:'
       path: graph/graph.hpp
       title: graph/graph.hpp
   - name: number_theory
@@ -136,5 +139,8 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/test/biconnected_components.test.cpp
       title: graph/test/biconnected_components.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: graph/test/shortest_path.test.cpp
+      title: graph/test/shortest_path.test.cpp
 layout: toppage
 ---

@@ -97,8 +97,8 @@ void read(Head &head, Tail &...tail) {
     scan(head);
     read(tail...);
 }
-#define CHAR(...)       \
-    string __VA_ARGS__; \
+#define CHAR(...)     \
+    char __VA_ARGS__; \
     read(__VA_ARGS__);
 #define U32(...)     \
     u32 __VA_ARGS__; \

@@ -76,6 +76,9 @@ data:
       title: graph/two_edge_connected_components.hpp
   - name: number_theory
     pages:
+    - icon: ':x:'
+      path: number_theory/frac_binsearch.hpp
+      title: number_theory/frac_binsearch.hpp
     - icon: ':heavy_check_mark:'
       path: number_theory/mod_int.hpp
       title: number_theory/mod_int.hpp
@@ -97,10 +100,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: template/bitop.hpp
       title: template/bitop.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/random.hpp
       title: template/random.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/template.hpp
       title: template/template.hpp
   verificationCategories:
@@ -171,6 +174,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/test/vertex_add_path_sum.test.cpp
       title: graph/test/vertex_add_path_sum.test.cpp
+  - name: number_theory/test
+    pages:
+    - icon: ':x:'
+      path: number_theory/test/frac_binsearch_stress.test.cpp
+      title: number_theory/test/frac_binsearch_stress.test.cpp
   - name: string/test
     pages:
     - icon: ':heavy_check_mark:'

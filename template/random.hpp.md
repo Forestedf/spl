@@ -6,9 +6,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: data_structure/test/wavelet_matrix.test.cpp
     title: data_structure/test/wavelet_matrix.test.cpp
-  _isVerificationFailed: false
+  - icon: ':x:'
+    path: number_theory/test/frac_binsearch_stress.test.cpp
+    title: number_theory/test/frac_binsearch_stress.test.cpp
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"template/random.hpp\"\n#include <chrono>\n#include <random>\n\
@@ -28,8 +31,9 @@ data:
   path: template/random.hpp
   requiredBy: []
   timestamp: '2023-12-26 16:56:23+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - number_theory/test/frac_binsearch_stress.test.cpp
   - data_structure/test/wavelet_matrix.test.cpp
 documentation_of: template/random.hpp
 layout: document

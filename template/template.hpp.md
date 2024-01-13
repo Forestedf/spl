@@ -66,12 +66,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/test/vertex_add_path_sum.test.cpp
     title: graph/test/vertex_add_path_sum.test.cpp
+  - icon: ':x:'
+    path: number_theory/test/frac_binsearch_stress.test.cpp
+    title: number_theory/test/frac_binsearch_stress.test.cpp
   - icon: ':heavy_check_mark:'
     path: string/test/zalgorithm.test.cpp
     title: string/test/zalgorithm.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 1 \"template/template.hpp\"\n#include <bits/stdc++.h>\n#define\
@@ -108,11 +111,11 @@ data:
     \ <typename T>\nvoid scan(V<T> &x) {\n    for (T &ele : x) {\n        scan(ele);\n\
     \    }\n}\nvoid read() {}\ntemplate <typename Head, typename... Tail>\nvoid read(Head\
     \ &head, Tail &...tail) {\n    scan(head);\n    read(tail...);\n}\n#define CHAR(...)\
-    \       \\\n    string __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define U32(...)\
-    \     \\\n    u32 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define U64(...)  \
-    \   \\\n    u64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define I32(...)    \
-    \ \\\n    i32 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define I64(...)     \\\
-    \n    i64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define STR(...)        \\\n\
+    \     \\\n    char __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define U32(...) \
+    \    \\\n    u32 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define U64(...)   \
+    \  \\\n    u64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define I32(...)     \\\
+    \n    i32 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define I64(...)     \\\n \
+    \   i64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define STR(...)        \\\n\
     \    string __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define VEC(type, name, size)\
     \ \\\n    V<type> name(size);       \\\n    read(name);\n#define VVEC(type, name,\
     \ size1, size2)    \\\n    VV<type> name(size1, V<type>(size2)); \\\n    read(name);\n"
@@ -149,11 +152,11 @@ data:
     \ <typename T>\nvoid scan(V<T> &x) {\n    for (T &ele : x) {\n        scan(ele);\n\
     \    }\n}\nvoid read() {}\ntemplate <typename Head, typename... Tail>\nvoid read(Head\
     \ &head, Tail &...tail) {\n    scan(head);\n    read(tail...);\n}\n#define CHAR(...)\
-    \       \\\n    string __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define U32(...)\
-    \     \\\n    u32 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define U64(...)  \
-    \   \\\n    u64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define I32(...)    \
-    \ \\\n    i32 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define I64(...)     \\\
-    \n    i64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define STR(...)        \\\n\
+    \     \\\n    char __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define U32(...) \
+    \    \\\n    u32 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define U64(...)   \
+    \  \\\n    u64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define I32(...)     \\\
+    \n    i32 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define I64(...)     \\\n \
+    \   i64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define STR(...)        \\\n\
     \    string __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define VEC(type, name, size)\
     \ \\\n    V<type> name(size);       \\\n    read(name);\n#define VVEC(type, name,\
     \ size1, size2)    \\\n    VV<type> name(size1, V<type>(size2)); \\\n    read(name);"
@@ -161,9 +164,10 @@ data:
   isVerificationFile: false
   path: template/template.hpp
   requiredBy: []
-  timestamp: '2023-12-26 15:25:30+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2024-01-13 18:43:37+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - number_theory/test/frac_binsearch_stress.test.cpp
   - data_structure/test/point_set_range_composite.test.cpp
   - data_structure/test/rectangle_sum.test.cpp
   - data_structure/test/dsl_2_g.test.cpp

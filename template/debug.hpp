@@ -169,7 +169,7 @@ void debug(std::deque<T> dq) {
 
 void debug_many(bool first) {}
 template <typename Head, typename... Tail>
-void debug_many(bool first, const Head &head, const Tail &... tail) {
+void debug_many(bool first, const Head &head, const Tail &...tail) {
     if (!first) {
         std::cerr << ", ";
     }
@@ -180,6 +180,6 @@ void debug_many(bool first, const Head &head, const Tail &... tail) {
 #define DBG(...)                            \
     do {                                    \
         std::cerr << #__VA_ARGS__ << " : "; \
-        debug_many(true, __VA_ARGS__);                 \
+        debug_many(true, __VA_ARGS__);      \
         std::cerr << std::endl;             \
     } while (false)

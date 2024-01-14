@@ -6,14 +6,13 @@
 #include "utils.hpp"
 
 template <unsigned mod>
-class ModInt {
+struct ModInt {
     static_assert(mod != 0, "`mod` must not be equal to 0.");
     static_assert(mod < (1u << 31),
                   "`mod` must be less than (1u << 31) = 2147483648.");
 
     unsigned val;
 
-public:
     static constexpr unsigned get_mod() { return mod; }
 
     constexpr ModInt() : val(0) {}
@@ -102,3 +101,8 @@ public:
         return lhs.val != rhs.val;
     }
 };
+
+template <unsigned mod>
+void debug(ModInt<mod> x) {
+    std::cerr << x.val;
+}

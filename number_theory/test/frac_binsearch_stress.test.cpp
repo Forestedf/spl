@@ -6,8 +6,6 @@
 #include "../../template/random.hpp"
 #include "../../number_theory/frac_binsearch.hpp"
 
-#include <compare>
-
 struct Rational {
     i64 num, den;
     Rational() : num(0), den(1) {}
@@ -21,11 +19,26 @@ struct Rational {
             den = -den;
         }
     }
-    friend auto operator<=>(Rational lhs, Rational rhs) -> std::strong_ordering {
-        return lhs.num * rhs.den <=> rhs.num * lhs.den;
+    friend i64 comp(Rational lhs, Rational rhs) {
+        return lhs.num * rhs.den - rhs.num * lhs.den;
+    }
+    friend bool operator<(Rational lhs, Rational rhs) {
+        return comp(lhs, rhs) < 0;
+    }
+    friend bool operator>(Rational lhs, Rational rhs) {
+        return comp(lhs, rhs) > 0;
+    }
+    friend bool operator<=(Rational lhs, Rational rhs) {
+        return comp(lhs, rhs) <= 0;
+    }
+    friend bool operator>=(Rational lhs, Rational rhs) {
+        return comp(lhs, rhs) >= 0;
     }
     friend bool operator==(Rational lhs, Rational rhs) {
-        return lhs.num * rhs.den == rhs.num * lhs.den;
+        return comp(lhs, rhs) == 0;
+    }
+    friend bool operator!=(Rational lhs, Rational rhs) {
+        return comp(lhs, rhs) != 0;
     }
 };
 

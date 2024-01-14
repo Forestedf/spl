@@ -50,6 +50,11 @@ public:
         assert(0 <= from && from < n && 0 <= to && to < n);
         edges.emplace_back(E{from, to, m++, weight});
     }
+    void add_edge(E e) {
+        assert(0 <= e.from && e.from < n && 0 <= e.to && e.to < n);
+        edges.emplace_back(e);
+        ++m;
+    }
     void build() {
         sep.assign(n + 1, 0);
         csr.resize(DIRECTED ? m : 2 * m);

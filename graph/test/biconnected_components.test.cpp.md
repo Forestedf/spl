@@ -42,15 +42,17 @@ data:
     \  int v() const { return n; }\n    int e() const { return m; }\n    void add_edge(int\
     \ from, int to, W weight = 1) {\n        assert(0 <= from && from < n && 0 <=\
     \ to && to < n);\n        edges.emplace_back(E{from, to, m++, weight});\n    }\n\
-    \    void build() {\n        sep.assign(n + 1, 0);\n        csr.resize(DIRECTED\
-    \ ? m : 2 * m);\n        for (const E &e : edges) {\n            ++sep[e.from\
-    \ + 1];\n            if (!DIRECTED) {\n                ++sep[e.to + 1];\n    \
-    \        }\n        }\n        for (int i = 0; i < n; ++i) {\n            sep[i\
-    \ + 1] += sep[i];\n        }\n        std::vector<int> c = sep;\n        for (const\
-    \ E &e : edges) {\n            csr[c[e.from]++] = e;\n            if (!DIRECTED)\
-    \ {\n                csr[c[e.to]++] = E{e.to, e.from, e.id, e.weight};\n     \
-    \       }\n        }\n        built = true;\n    }\n    Adjacency operator[](int\
-    \ v) {\n        assert(built && 0 <= v && v < n);\n        return Adjacency{csr.begin()\
+    \    void add_edge(E e) {\n        assert(0 <= e.from && e.from < n && 0 <= e.to\
+    \ && e.to < n);\n        edges.emplace_back(e);\n        ++m;\n    }\n    void\
+    \ build() {\n        sep.assign(n + 1, 0);\n        csr.resize(DIRECTED ? m :\
+    \ 2 * m);\n        for (const E &e : edges) {\n            ++sep[e.from + 1];\n\
+    \            if (!DIRECTED) {\n                ++sep[e.to + 1];\n            }\n\
+    \        }\n        for (int i = 0; i < n; ++i) {\n            sep[i + 1] += sep[i];\n\
+    \        }\n        std::vector<int> c = sep;\n        for (const E &e : edges)\
+    \ {\n            csr[c[e.from]++] = e;\n            if (!DIRECTED) {\n       \
+    \         csr[c[e.to]++] = E{e.to, e.from, e.id, e.weight};\n            }\n \
+    \       }\n        built = true;\n    }\n    Adjacency operator[](int v) {\n \
+    \       assert(built && 0 <= v && v < n);\n        return Adjacency{csr.begin()\
     \ + sep[v], csr.begin() + sep[v + 1]};\n    }\n    ConstAdjacency operator[](int\
     \ v) const {\n        assert(built && 0 <= v && v < n);\n        return ConstAdjacency{csr.begin()\
     \ + sep[v], csr.begin() + sep[v + 1]};\n    }\n};\n#line 3 \"graph/biconnected_components.hpp\"\
@@ -145,7 +147,7 @@ data:
   isVerificationFile: true
   path: graph/test/biconnected_components.test.cpp
   requiredBy: []
-  timestamp: '2024-01-13 18:43:37+09:00'
+  timestamp: '2024-01-14 18:28:02+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: graph/test/biconnected_components.test.cpp

@@ -56,12 +56,12 @@ data:
     \        dq.pop_front();\n        debug(ele);\n        if (!dq.empty()) {\n  \
     \          std::cerr << ' ';\n        }\n    }\n    std::cerr << ']';\n}\n\nvoid\
     \ debug_many(bool first) {}\ntemplate <typename Head, typename... Tail>\nvoid\
-    \ debug_many(bool first, const Head &head, const Tail &... tail) {\n    if (!first)\
+    \ debug_many(bool first, const Head &head, const Tail &...tail) {\n    if (!first)\
     \ {\n        std::cerr << \", \";\n    }\n    debug(head);\n    debug_many(false,\
     \ tail...);\n}\n\n#define DBG(...)                            \\\n    do {   \
     \                                 \\\n        std::cerr << #__VA_ARGS__ << \"\
-    \ : \"; \\\n        debug_many(true, __VA_ARGS__);                 \\\n      \
-    \  std::cerr << std::endl;             \\\n    } while (false)\n"
+    \ : \"; \\\n        debug_many(true, __VA_ARGS__);      \\\n        std::cerr\
+    \ << std::endl;             \\\n    } while (false)\n"
   code: "#pragma once\n\n#include <array>\n#include <atcoder/modint>\n#include <deque>\n\
     #include <iostream>\n#include <map>\n#include <queue>\n#include <set>\n#include\
     \ <stack>\n#include <tuple>\n#include <type_traits>\n#include <utility>\n#include\
@@ -110,17 +110,17 @@ data:
     \        dq.pop_front();\n        debug(ele);\n        if (!dq.empty()) {\n  \
     \          std::cerr << ' ';\n        }\n    }\n    std::cerr << ']';\n}\n\nvoid\
     \ debug_many(bool first) {}\ntemplate <typename Head, typename... Tail>\nvoid\
-    \ debug_many(bool first, const Head &head, const Tail &... tail) {\n    if (!first)\
+    \ debug_many(bool first, const Head &head, const Tail &...tail) {\n    if (!first)\
     \ {\n        std::cerr << \", \";\n    }\n    debug(head);\n    debug_many(false,\
     \ tail...);\n}\n\n#define DBG(...)                            \\\n    do {   \
     \                                 \\\n        std::cerr << #__VA_ARGS__ << \"\
-    \ : \"; \\\n        debug_many(true, __VA_ARGS__);                 \\\n      \
-    \  std::cerr << std::endl;             \\\n    } while (false)"
+    \ : \"; \\\n        debug_many(true, __VA_ARGS__);      \\\n        std::cerr\
+    \ << std::endl;             \\\n    } while (false)"
   dependsOn: []
   isVerificationFile: false
   path: template/debug.hpp
   requiredBy: []
-  timestamp: '2024-01-14 15:15:52+09:00'
+  timestamp: '2024-01-14 18:28:27+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template/debug.hpp

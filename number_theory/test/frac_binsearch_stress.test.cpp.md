@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: number_theory/frac_binsearch.hpp
     title: number_theory/frac_binsearch.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/random.hpp
     title: template/random.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/template.hpp
     title: template/template.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/lesson/2/ITP1/1/ITP1_1_A
@@ -94,17 +94,23 @@ data:
     \ I>(from.first + to.first * l, from.second + to.second * l);\n            } else\
     \ {\n                return to;\n            }\n        }\n        from.first\
     \ += to.first * l;\n        from.second += to.second * l;\n    }\n    assert(false);\n\
-    }\n#line 8 \"number_theory/test/frac_binsearch_stress.test.cpp\"\n\n#include <compare>\n\
-    \nstruct Rational {\n    i64 num, den;\n    Rational() : num(0), den(1) {}\n \
-    \   Rational(i64 n, i64 d) : num(n), den(d) {\n        assert(den != 0);\n   \
-    \     i64 g = gcd(num, den);\n        num /= g;\n        den /= g;\n        if\
-    \ (den < 0) {\n            num = -num;\n            den = -den;\n        }\n \
-    \   }\n    friend auto operator<=>(Rational lhs, Rational rhs) -> std::strong_ordering\
-    \ {\n        return lhs.num * rhs.den <=> rhs.num * lhs.den;\n    }\n    friend\
-    \ bool operator==(Rational lhs, Rational rhs) {\n        return lhs.num * rhs.den\
-    \ == rhs.num * lhs.den;\n    }\n};\n\nvoid test() {\n    constexpr i32 B = 1000;\n\
-    \    V<Rational> rats;\n    REP(num, 1, B + 1) {\n        REP(den, num + 1, B\
-    \ + 1) {\n            if (gcd(num, den) == 1) {\n                rats.push_back(Rational(num,\
+    }\n#line 8 \"number_theory/test/frac_binsearch_stress.test.cpp\"\n\nstruct Rational\
+    \ {\n    i64 num, den;\n    Rational() : num(0), den(1) {}\n    Rational(i64 n,\
+    \ i64 d) : num(n), den(d) {\n        assert(den != 0);\n        i64 g = gcd(num,\
+    \ den);\n        num /= g;\n        den /= g;\n        if (den < 0) {\n      \
+    \      num = -num;\n            den = -den;\n        }\n    }\n    friend i64\
+    \ comp(Rational lhs, Rational rhs) {\n        return lhs.num * rhs.den - rhs.num\
+    \ * lhs.den;\n    }\n    friend bool operator<(Rational lhs, Rational rhs) {\n\
+    \        return comp(lhs, rhs) < 0;\n    }\n    friend bool operator>(Rational\
+    \ lhs, Rational rhs) {\n        return comp(lhs, rhs) > 0;\n    }\n    friend\
+    \ bool operator<=(Rational lhs, Rational rhs) {\n        return comp(lhs, rhs)\
+    \ <= 0;\n    }\n    friend bool operator>=(Rational lhs, Rational rhs) {\n   \
+    \     return comp(lhs, rhs) >= 0;\n    }\n    friend bool operator==(Rational\
+    \ lhs, Rational rhs) {\n        return comp(lhs, rhs) == 0;\n    }\n    friend\
+    \ bool operator!=(Rational lhs, Rational rhs) {\n        return comp(lhs, rhs)\
+    \ != 0;\n    }\n};\n\nvoid test() {\n    constexpr i32 B = 1000;\n    V<Rational>\
+    \ rats;\n    REP(num, 1, B + 1) {\n        REP(den, num + 1, B + 1) {\n      \
+    \      if (gcd(num, den) == 1) {\n                rats.push_back(Rational(num,\
     \ den));\n            }\n        }\n    }\n    rats.push_back(Rational(0, 1));\n\
     \    rats.push_back(Rational(1, 1));\n    sort(ALL(rats));\n    constexpr i64\
     \ C = 1'000'000'000'000'000;\n    REP(i, 100000) {\n        i64 c = (uniform(2)\
@@ -130,38 +136,44 @@ data:
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/lesson/2/ITP1/1/ITP1_1_A\"\
     \n#define FAST_IO\n#define FIX_SEED\n\n#include \"../../template/template.hpp\"\
     \n#include \"../../template/random.hpp\"\n#include \"../../number_theory/frac_binsearch.hpp\"\
-    \n\n#include <compare>\n\nstruct Rational {\n    i64 num, den;\n    Rational()\
-    \ : num(0), den(1) {}\n    Rational(i64 n, i64 d) : num(n), den(d) {\n       \
-    \ assert(den != 0);\n        i64 g = gcd(num, den);\n        num /= g;\n     \
-    \   den /= g;\n        if (den < 0) {\n            num = -num;\n            den\
-    \ = -den;\n        }\n    }\n    friend auto operator<=>(Rational lhs, Rational\
-    \ rhs) -> std::strong_ordering {\n        return lhs.num * rhs.den <=> rhs.num\
-    \ * lhs.den;\n    }\n    friend bool operator==(Rational lhs, Rational rhs) {\n\
-    \        return lhs.num * rhs.den == rhs.num * lhs.den;\n    }\n};\n\nvoid test()\
-    \ {\n    constexpr i32 B = 1000;\n    V<Rational> rats;\n    REP(num, 1, B + 1)\
-    \ {\n        REP(den, num + 1, B + 1) {\n            if (gcd(num, den) == 1) {\n\
-    \                rats.push_back(Rational(num, den));\n            }\n        }\n\
-    \    }\n    rats.push_back(Rational(0, 1));\n    rats.push_back(Rational(1, 1));\n\
-    \    sort(ALL(rats));\n    constexpr i64 C = 1'000'000'000'000'000;\n    REP(i,\
-    \ 100000) {\n        i64 c = (uniform(2) ? B + 1 : C + 1);\n        i64 num =\
-    \ uniform(1LL, c + 1);\n        i64 den = uniform(1LL, c + 1);\n        while\
-    \ (num == den) {\n            num = uniform(1LL, c + 1);\n            den = uniform(1LL,\
-    \ c + 1);\n        }\n        if (num > den) {\n            swap(num, den);\n\
-    \        }\n        Rational r(num, den);\n        // >=r\n        {\n       \
-    \     auto [a, b] = get_lim_true(B, [&](i32 x, i32 y) -> bool {\n            \
-    \    return Rational(x, y) >= r;\n            });\n            auto it = lower_bound(ALL(rats),\
-    \ r);\n            assert(Rational(a, b) == *it);\n        }\n        // <=r\n\
-    \        {\n            auto [a, b] = get_lim_true(B, [&](i32 x, i32 y) -> bool\
-    \ {\n                return Rational(x, y) <= r;\n            });\n          \
-    \  auto it = upper_bound(ALL(rats), r) - 1;\n            assert(Rational(a, b)\
-    \ == *it);\n        }\n        // >r\n        {\n            auto [a, b] = get_lim_true(B,\
-    \ [&](i32 x, i32 y) -> bool {\n                return Rational(x, y) > r;\n  \
-    \          });\n            auto it = upper_bound(ALL(rats), r);\n           \
-    \ assert(Rational(a, b) == *it);\n        }\n        // <r\n        {\n      \
-    \      auto [a, b] = get_lim_true(B, [&](i32 x, i32 y) -> bool {\n           \
-    \     return Rational(x, y) < r;\n            });\n            auto it = lower_bound(ALL(rats),\
-    \ r) - 1;\n            assert(Rational(a, b) == *it);\n        }\n    }\n}\n\n\
-    int main() {\n    test();\n    cout << \"Hello World\\n\";\n}\n"
+    \n\nstruct Rational {\n    i64 num, den;\n    Rational() : num(0), den(1) {}\n\
+    \    Rational(i64 n, i64 d) : num(n), den(d) {\n        assert(den != 0);\n  \
+    \      i64 g = gcd(num, den);\n        num /= g;\n        den /= g;\n        if\
+    \ (den < 0) {\n            num = -num;\n            den = -den;\n        }\n \
+    \   }\n    friend i64 comp(Rational lhs, Rational rhs) {\n        return lhs.num\
+    \ * rhs.den - rhs.num * lhs.den;\n    }\n    friend bool operator<(Rational lhs,\
+    \ Rational rhs) {\n        return comp(lhs, rhs) < 0;\n    }\n    friend bool\
+    \ operator>(Rational lhs, Rational rhs) {\n        return comp(lhs, rhs) > 0;\n\
+    \    }\n    friend bool operator<=(Rational lhs, Rational rhs) {\n        return\
+    \ comp(lhs, rhs) <= 0;\n    }\n    friend bool operator>=(Rational lhs, Rational\
+    \ rhs) {\n        return comp(lhs, rhs) >= 0;\n    }\n    friend bool operator==(Rational\
+    \ lhs, Rational rhs) {\n        return comp(lhs, rhs) == 0;\n    }\n    friend\
+    \ bool operator!=(Rational lhs, Rational rhs) {\n        return comp(lhs, rhs)\
+    \ != 0;\n    }\n};\n\nvoid test() {\n    constexpr i32 B = 1000;\n    V<Rational>\
+    \ rats;\n    REP(num, 1, B + 1) {\n        REP(den, num + 1, B + 1) {\n      \
+    \      if (gcd(num, den) == 1) {\n                rats.push_back(Rational(num,\
+    \ den));\n            }\n        }\n    }\n    rats.push_back(Rational(0, 1));\n\
+    \    rats.push_back(Rational(1, 1));\n    sort(ALL(rats));\n    constexpr i64\
+    \ C = 1'000'000'000'000'000;\n    REP(i, 100000) {\n        i64 c = (uniform(2)\
+    \ ? B + 1 : C + 1);\n        i64 num = uniform(1LL, c + 1);\n        i64 den =\
+    \ uniform(1LL, c + 1);\n        while (num == den) {\n            num = uniform(1LL,\
+    \ c + 1);\n            den = uniform(1LL, c + 1);\n        }\n        if (num\
+    \ > den) {\n            swap(num, den);\n        }\n        Rational r(num, den);\n\
+    \        // >=r\n        {\n            auto [a, b] = get_lim_true(B, [&](i32\
+    \ x, i32 y) -> bool {\n                return Rational(x, y) >= r;\n         \
+    \   });\n            auto it = lower_bound(ALL(rats), r);\n            assert(Rational(a,\
+    \ b) == *it);\n        }\n        // <=r\n        {\n            auto [a, b] =\
+    \ get_lim_true(B, [&](i32 x, i32 y) -> bool {\n                return Rational(x,\
+    \ y) <= r;\n            });\n            auto it = upper_bound(ALL(rats), r) -\
+    \ 1;\n            assert(Rational(a, b) == *it);\n        }\n        // >r\n \
+    \       {\n            auto [a, b] = get_lim_true(B, [&](i32 x, i32 y) -> bool\
+    \ {\n                return Rational(x, y) > r;\n            });\n           \
+    \ auto it = upper_bound(ALL(rats), r);\n            assert(Rational(a, b) == *it);\n\
+    \        }\n        // <r\n        {\n            auto [a, b] = get_lim_true(B,\
+    \ [&](i32 x, i32 y) -> bool {\n                return Rational(x, y) < r;\n  \
+    \          });\n            auto it = lower_bound(ALL(rats), r) - 1;\n       \
+    \     assert(Rational(a, b) == *it);\n        }\n    }\n}\n\nint main() {\n  \
+    \  test();\n    cout << \"Hello World\\n\";\n}\n"
   dependsOn:
   - template/template.hpp
   - template/random.hpp
@@ -169,8 +181,8 @@ data:
   isVerificationFile: true
   path: number_theory/test/frac_binsearch_stress.test.cpp
   requiredBy: []
-  timestamp: '2024-01-13 18:43:37+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2024-01-14 14:02:13+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: number_theory/test/frac_binsearch_stress.test.cpp
 layout: document

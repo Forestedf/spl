@@ -6,6 +6,9 @@ data:
     path: graph/biconnected_components.hpp
     title: graph/biconnected_components.hpp
   - icon: ':heavy_check_mark:'
+    path: graph/connected_components.hpp
+    title: graph/connected_components.hpp
+  - icon: ':heavy_check_mark:'
     path: graph/dijkstra.hpp
     title: graph/dijkstra.hpp
   - icon: ':heavy_check_mark:'
@@ -18,6 +21,9 @@ data:
     path: graph/two_edge_connected_components.hpp
     title: graph/two_edge_connected_components.hpp
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: graph/test/ALDS1_11_D.test.cpp
+    title: graph/test/ALDS1_11_D.test.cpp
   - icon: ':heavy_check_mark:'
     path: graph/test/biconnected_components.test.cpp
     title: graph/test/biconnected_components.test.cpp
@@ -113,6 +119,7 @@ data:
   path: graph/graph.hpp
   requiredBy:
   - graph/biconnected_components.hpp
+  - graph/connected_components.hpp
   - graph/strongly_connected_components.hpp
   - graph/two_edge_connected_components.hpp
   - graph/dijkstra.hpp
@@ -126,6 +133,7 @@ data:
   - graph/test/shortest_path.test.cpp
   - graph/test/biconnected_components.test.cpp
   - graph/test/vertex_add_path_sum.test.cpp
+  - graph/test/ALDS1_11_D.test.cpp
   - graph/test/lca.test.cpp
 documentation_of: graph/graph.hpp
 layout: document

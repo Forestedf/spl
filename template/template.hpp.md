@@ -46,6 +46,9 @@ data:
     path: data_structure/test/wavelet_matrix.test.cpp
     title: data_structure/test/wavelet_matrix.test.cpp
   - icon: ':heavy_check_mark:'
+    path: graph/test/ALDS1_11_D.test.cpp
+    title: graph/test/ALDS1_11_D.test.cpp
+  - icon: ':heavy_check_mark:'
     path: graph/test/biconnected_components.test.cpp
     title: graph/test/biconnected_components.test.cpp
   - icon: ':heavy_check_mark:'
@@ -188,6 +191,7 @@ data:
   - graph/test/shortest_path.test.cpp
   - graph/test/biconnected_components.test.cpp
   - graph/test/vertex_add_path_sum.test.cpp
+  - graph/test/ALDS1_11_D.test.cpp
   - graph/test/lca.test.cpp
   - string/test/zalgorithm.test.cpp
 documentation_of: template/template.hpp

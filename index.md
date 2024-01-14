@@ -60,6 +60,9 @@ data:
       path: graph/biconnected_components.hpp
       title: graph/biconnected_components.hpp
     - icon: ':heavy_check_mark:'
+      path: graph/connected_components.hpp
+      title: graph/connected_components.hpp
+    - icon: ':heavy_check_mark:'
       path: graph/dijkstra.hpp
       title: graph/dijkstra.hpp
     - icon: ':heavy_check_mark:'
@@ -156,6 +159,9 @@ data:
       title: data_structure/test/wavelet_matrix.test.cpp
   - name: graph/test
     pages:
+    - icon: ':heavy_check_mark:'
+      path: graph/test/ALDS1_11_D.test.cpp
+      title: graph/test/ALDS1_11_D.test.cpp
     - icon: ':heavy_check_mark:'
       path: graph/test/biconnected_components.test.cpp
       title: graph/test/biconnected_components.test.cpp

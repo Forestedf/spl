@@ -52,13 +52,13 @@ data:
     \ x, T y) {\n    if (y < 0) {\n        x *= -1;\n        y *= -1;\n    }\n   \
     \ if (x >= 0) {\n        return (x + y - 1) / y;\n    } else {\n        return\
     \ -(-x / y);\n    }\n}\n#line 7 \"number_theory/mod_int.hpp\"\n\ntemplate <unsigned\
-    \ mod>\nclass ModInt {\n    static_assert(mod != 0, \"`mod` must not be equal\
+    \ mod>\nstruct ModInt {\n    static_assert(mod != 0, \"`mod` must not be equal\
     \ to 0.\");\n    static_assert(mod < (1u << 31),\n                  \"`mod` must\
-    \ be less than (1u << 31) = 2147483648.\");\n\n    unsigned val;\n\npublic:\n\
-    \    static constexpr unsigned get_mod() { return mod; }\n\n    constexpr ModInt()\
-    \ : val(0) {}\n    template <typename T, std::enable_if_t<std::is_signed_v<T>>\
-    \ * = nullptr>\n    constexpr ModInt(T x)\n        : val((unsigned)((long long)x\
-    \ % (long long)mod + (x < 0 ? mod : 0))) {}\n    template <typename T, std::enable_if_t<std::is_unsigned_v<T>>\
+    \ be less than (1u << 31) = 2147483648.\");\n\n    unsigned val;\n\n    static\
+    \ constexpr unsigned get_mod() { return mod; }\n\n    constexpr ModInt() : val(0)\
+    \ {}\n    template <typename T, std::enable_if_t<std::is_signed_v<T>> * = nullptr>\n\
+    \    constexpr ModInt(T x)\n        : val((unsigned)((long long)x % (long long)mod\
+    \ + (x < 0 ? mod : 0))) {}\n    template <typename T, std::enable_if_t<std::is_unsigned_v<T>>\
     \ * = nullptr>\n    constexpr ModInt(T x) : val((unsigned)(x % mod)) {}\n\n  \
     \  static constexpr ModInt raw(unsigned x) {\n        ModInt<mod> ret;\n     \
     \   ret.val = x;\n        return ret;\n    }\n\n    constexpr unsigned get_val()\
@@ -90,13 +90,14 @@ data:
     \ os << x.val;\n        return os;\n    }\n\n    friend bool operator==(const\
     \ ModInt &lhs, const ModInt &rhs) {\n        return lhs.val == rhs.val;\n    }\n\
     \n    friend bool operator!=(const ModInt &lhs, const ModInt &rhs) {\n       \
-    \ return lhs.val != rhs.val;\n    }\n};\n"
+    \ return lhs.val != rhs.val;\n    }\n};\n\ntemplate <unsigned mod>\nvoid debug(ModInt<mod>\
+    \ x) {\n    std::cerr << x.val;\n}\n"
   code: "#pragma once\n\n#include <cassert>\n#include <iostream>\n#include <type_traits>\n\
-    #include \"utils.hpp\"\n\ntemplate <unsigned mod>\nclass ModInt {\n    static_assert(mod\
+    #include \"utils.hpp\"\n\ntemplate <unsigned mod>\nstruct ModInt {\n    static_assert(mod\
     \ != 0, \"`mod` must not be equal to 0.\");\n    static_assert(mod < (1u << 31),\n\
     \                  \"`mod` must be less than (1u << 31) = 2147483648.\");\n\n\
-    \    unsigned val;\n\npublic:\n    static constexpr unsigned get_mod() { return\
-    \ mod; }\n\n    constexpr ModInt() : val(0) {}\n    template <typename T, std::enable_if_t<std::is_signed_v<T>>\
+    \    unsigned val;\n\n    static constexpr unsigned get_mod() { return mod; }\n\
+    \n    constexpr ModInt() : val(0) {}\n    template <typename T, std::enable_if_t<std::is_signed_v<T>>\
     \ * = nullptr>\n    constexpr ModInt(T x)\n        : val((unsigned)((long long)x\
     \ % (long long)mod + (x < 0 ? mod : 0))) {}\n    template <typename T, std::enable_if_t<std::is_unsigned_v<T>>\
     \ * = nullptr>\n    constexpr ModInt(T x) : val((unsigned)(x % mod)) {}\n\n  \
@@ -130,13 +131,14 @@ data:
     \ os << x.val;\n        return os;\n    }\n\n    friend bool operator==(const\
     \ ModInt &lhs, const ModInt &rhs) {\n        return lhs.val == rhs.val;\n    }\n\
     \n    friend bool operator!=(const ModInt &lhs, const ModInt &rhs) {\n       \
-    \ return lhs.val != rhs.val;\n    }\n};"
+    \ return lhs.val != rhs.val;\n    }\n};\n\ntemplate <unsigned mod>\nvoid debug(ModInt<mod>\
+    \ x) {\n    std::cerr << x.val;\n}"
   dependsOn:
   - number_theory/utils.hpp
   isVerificationFile: false
   path: number_theory/mod_int.hpp
   requiredBy: []
-  timestamp: '2023-12-26 16:56:23+09:00'
+  timestamp: '2024-01-14 15:15:52+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - data_structure/test/point_set_range_composite.test.cpp

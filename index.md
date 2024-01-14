@@ -100,6 +100,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: template/bitop.hpp
       title: template/bitop.hpp
+    - icon: ':warning:'
+      path: template/debug.hpp
+      title: template/debug.hpp
     - icon: ':heavy_check_mark:'
       path: template/random.hpp
       title: template/random.hpp

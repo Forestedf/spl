@@ -96,13 +96,13 @@ data:
     \ x, T y) {\n    if (y < 0) {\n        x *= -1;\n        y *= -1;\n    }\n   \
     \ if (x >= 0) {\n        return (x + y - 1) / y;\n    } else {\n        return\
     \ -(-x / y);\n    }\n}\n#line 7 \"number_theory/mod_int.hpp\"\n\ntemplate <unsigned\
-    \ mod>\nclass ModInt {\n    static_assert(mod != 0, \"`mod` must not be equal\
+    \ mod>\nstruct ModInt {\n    static_assert(mod != 0, \"`mod` must not be equal\
     \ to 0.\");\n    static_assert(mod < (1u << 31),\n                  \"`mod` must\
-    \ be less than (1u << 31) = 2147483648.\");\n\n    unsigned val;\n\npublic:\n\
-    \    static constexpr unsigned get_mod() { return mod; }\n\n    constexpr ModInt()\
-    \ : val(0) {}\n    template <typename T, std::enable_if_t<std::is_signed_v<T>>\
-    \ * = nullptr>\n    constexpr ModInt(T x)\n        : val((unsigned)((long long)x\
-    \ % (long long)mod + (x < 0 ? mod : 0))) {}\n    template <typename T, std::enable_if_t<std::is_unsigned_v<T>>\
+    \ be less than (1u << 31) = 2147483648.\");\n\n    unsigned val;\n\n    static\
+    \ constexpr unsigned get_mod() { return mod; }\n\n    constexpr ModInt() : val(0)\
+    \ {}\n    template <typename T, std::enable_if_t<std::is_signed_v<T>> * = nullptr>\n\
+    \    constexpr ModInt(T x)\n        : val((unsigned)((long long)x % (long long)mod\
+    \ + (x < 0 ? mod : 0))) {}\n    template <typename T, std::enable_if_t<std::is_unsigned_v<T>>\
     \ * = nullptr>\n    constexpr ModInt(T x) : val((unsigned)(x % mod)) {}\n\n  \
     \  static constexpr ModInt raw(unsigned x) {\n        ModInt<mod> ret;\n     \
     \   ret.val = x;\n        return ret;\n    }\n\n    constexpr unsigned get_val()\
@@ -134,7 +134,8 @@ data:
     \ os << x.val;\n        return os;\n    }\n\n    friend bool operator==(const\
     \ ModInt &lhs, const ModInt &rhs) {\n        return lhs.val == rhs.val;\n    }\n\
     \n    friend bool operator!=(const ModInt &lhs, const ModInt &rhs) {\n       \
-    \ return lhs.val != rhs.val;\n    }\n};\n#line 2 \"data_structure/lazy_segment_tree.hpp\"\
+    \ return lhs.val != rhs.val;\n    }\n};\n\ntemplate <unsigned mod>\nvoid debug(ModInt<mod>\
+    \ x) {\n    std::cerr << x.val;\n}\n#line 2 \"data_structure/lazy_segment_tree.hpp\"\
     \n\n#line 6 \"data_structure/lazy_segment_tree.hpp\"\n\ntemplate <typename MonoidFunc>\n\
     class LazySegmentTree {\npublic:\n    using Value = typename MonoidFunc::Value;\n\
     \    using Func = typename MonoidFunc::Func;\n\nprivate:\n    int old_length;\n\
@@ -229,7 +230,7 @@ data:
   isVerificationFile: true
   path: data_structure/test/range_affine_range_sum.test.cpp
   requiredBy: []
-  timestamp: '2024-01-13 18:43:37+09:00'
+  timestamp: '2024-01-14 15:15:52+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: data_structure/test/range_affine_range_sum.test.cpp

@@ -20,5 +20,6 @@
 "graph/test/shortest_path.test.cpp": "2024-01-13 18:43:37 +0900",
 "graph/test/two_edge_connected_components.test.cpp": "2024-01-13 18:43:37 +0900",
 "graph/test/vertex_add_path_sum.test.cpp": "2024-01-13 18:43:37 +0900",
+"number_theory/test/frac_binsearch_stress.test.cpp": "2024-01-14 14:02:13 +0900",
 "string/test/zalgorithm.test.cpp": "2024-01-13 18:43:37 +0900"
 }

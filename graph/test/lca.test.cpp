@@ -6,7 +6,7 @@
 void solve() {
     I32(n, q);
     VEC(i32, p, n - 1);
-    Graph<i32, true> g(n);
+    Graph<void, true> g(n);
     REP(i, n - 1) {
         g.add_edge(p[i], i + 1);
     }

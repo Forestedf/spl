@@ -9,7 +9,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: data_structure/cartesian_tree.hpp
       title: data_structure/cartesian_tree.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: data_structure/fenwick_tree.hpp
       title: data_structure/fenwick_tree.hpp
     - icon: ':heavy_check_mark:'
@@ -21,7 +21,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: data_structure/lazy_segment_tree.hpp
       title: data_structure/lazy_segment_tree.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: data_structure/operations.hpp
       title: data_structure/operations.hpp
     - icon: ':heavy_check_mark:'
@@ -56,25 +56,28 @@ data:
       title: data_structure/wavelet_matrix.hpp
   - name: graph
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: graph/biconnected_components.hpp
       title: graph/biconnected_components.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
+      path: graph/block_cut_tree.hpp
+      title: graph/block_cut_tree.hpp
+    - icon: ':x:'
       path: graph/connected_components.hpp
       title: graph/connected_components.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: graph/dijkstra.hpp
       title: graph/dijkstra.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: graph/graph.hpp
       title: graph/graph.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: graph/heavy_light_decomposition.hpp
       title: graph/heavy_light_decomposition.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: graph/strongly_connected_components.hpp
       title: graph/strongly_connected_components.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: graph/two_edge_connected_components.hpp
       title: graph/two_edge_connected_components.hpp
   - name: number_theory
@@ -109,7 +112,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: template/random.hpp
       title: template/random.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/template.hpp
       title: template/template.hpp
   verificationCategories:
@@ -159,28 +162,31 @@ data:
       title: data_structure/test/wavelet_matrix.test.cpp
   - name: graph/test
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: graph/test/ALDS1_11_D.test.cpp
       title: graph/test/ALDS1_11_D.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: graph/test/biconnected_components.test.cpp
       title: graph/test/biconnected_components.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
+      path: graph/test/block_cut_tree.test.cpp
+      title: graph/test/block_cut_tree.test.cpp
+    - icon: ':x:'
       path: graph/test/jump_on_tree.test.cpp
       title: graph/test/jump_on_tree.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: graph/test/lca.test.cpp
       title: graph/test/lca.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: graph/test/scc.test.cpp
       title: graph/test/scc.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: graph/test/shortest_path.test.cpp
       title: graph/test/shortest_path.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: graph/test/two_edge_connected_components.test.cpp
       title: graph/test/two_edge_connected_components.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: graph/test/vertex_add_path_sum.test.cpp
       title: graph/test/vertex_add_path_sum.test.cpp
   - name: number_theory/test

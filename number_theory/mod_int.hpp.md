@@ -143,8 +143,8 @@ data:
   verifiedWith:
   - data_structure/test/point_set_range_composite.test.cpp
   - data_structure/test/1891.test.cpp
-  - data_structure/test/queue_operate_all_composite.test.cpp
   - data_structure/test/range_affine_range_sum.test.cpp
+  - data_structure/test/queue_operate_all_composite.test.cpp
 documentation_of: number_theory/mod_int.hpp
 layout: document
 redirect_from:

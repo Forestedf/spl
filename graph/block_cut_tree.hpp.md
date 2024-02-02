@@ -7,8 +7,8 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':x:'
-    path: graph/test/ALDS1_11_D.test.cpp
-    title: graph/test/ALDS1_11_D.test.cpp
+    path: graph/test/block_cut_tree.test.cpp
+    title: graph/test/block_cut_tree.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
   _verificationStatusIcon: ':x:'
@@ -56,39 +56,61 @@ data:
     \ v && v < n);\n        return Adjacency{csr.begin() + sep[v], csr.begin() + sep[v\
     \ + 1]};\n    }\n    ConstAdjacency operator[](int v) const {\n        assert(built\
     \ && 0 <= v && v < n);\n        return ConstAdjacency{csr.begin() + sep[v], csr.begin()\
-    \ + sep[v + 1]};\n    }\n};\n#line 3 \"graph/connected_components.hpp\"\ntemplate\
-    \ <typename T>\nstd::vector<int> connected_components(const Graph<T> &g) {\n \
-    \   std::vector<int> comp(g.v(), -1), stc;\n    int c = 0;\n    for (int r = 0;\
-    \ r < g.v(); ++r) {\n        if (comp[r] == -1) {\n            comp[r] = c++;\n\
-    \            stc.push_back(r);\n            while (!stc.empty()) {\n         \
-    \       int v = stc.back();\n                stc.pop_back();\n               \
-    \ for (const Edge<T> &e : g[v]) {\n                    if (comp[e.to] == -1) {\n\
-    \                        comp[e.to] = comp[v];\n                        stc.push_back(e.to);\n\
-    \                    }\n                }\n            }\n        }\n    }\n \
-    \   return comp;\n}\n"
-  code: "#pragma once\n#include \"graph.hpp\"\ntemplate <typename T>\nstd::vector<int>\
-    \ connected_components(const Graph<T> &g) {\n    std::vector<int> comp(g.v(),\
-    \ -1), stc;\n    int c = 0;\n    for (int r = 0; r < g.v(); ++r) {\n        if\
-    \ (comp[r] == -1) {\n            comp[r] = c++;\n            stc.push_back(r);\n\
-    \            while (!stc.empty()) {\n                int v = stc.back();\n   \
-    \             stc.pop_back();\n                for (const Edge<T> &e : g[v]) {\n\
-    \                    if (comp[e.to] == -1) {\n                        comp[e.to]\
-    \ = comp[v];\n                        stc.push_back(e.to);\n                 \
-    \   }\n                }\n            }\n        }\n    }\n    return comp;\n\
-    }\n"
+    \ + sep[v + 1]};\n    }\n};\n#line 3 \"graph/block_cut_tree.hpp\"\ntemplate <typename\
+    \ T>\nGraph<> block_cut_tree(const Graph<T> &g) {\n    std::vector<int> ord(g.v()),\
+    \ low(g.v()), used(g.v(), 0);\n    std::vector<int> vstc;\n    vstc.reserve(g.v());\n\
+    \    Graph<> tree(g.v());\n    int t = 0;\n    auto dfs = [&](auto dfs, int v,\
+    \ int p) -> void {\n        used[v] = 1;\n        ord[v] = t++;\n        low[v]\
+    \ = t;\n        vstc.push_back(v);\n        bool pf = false;\n        int chl\
+    \ = 0;\n        for (const auto &e : g[v]) {\n            if (e.to == p && !pf)\
+    \ {\n                pf = true;\n                continue;\n            }\n  \
+    \          if (used[e.to]) {\n                low[v] = std::min(low[v], ord[e.to]);\n\
+    \            } else {\n                int vsz = (int)vstc.size();\n         \
+    \       ++chl;\n                dfs(dfs, e.to, v);\n                low[v] = std::min(low[v],\
+    \ low[e.to]);\n                if ((p == -1 && chl >= 2) || (p != -1 && low[e.to]\
+    \ >= ord[v])) {\n                    int bcc = tree.add_vertex();\n          \
+    \          while ((int)vstc.size() > vsz) {\n                        tree.add_edge(bcc,\
+    \ vstc.back());\n                        vstc.pop_back();\n                  \
+    \  }\n                    tree.add_edge(bcc, v);\n                }\n        \
+    \    }\n        }\n    };\n    for (int i = 0; i < g.v(); ++i) {\n        if (!used[i])\
+    \ {\n            dfs(dfs, i, -1);\n            int bcc = tree.add_vertex();\n\
+    \            for (int v : vstc) {\n                tree.add_edge(bcc, v);\n  \
+    \          }\n            vstc.clear();\n        }\n    }\n    tree.build();\n\
+    \    return tree;\n}\n"
+  code: "#pragma once\n#include \"graph.hpp\"\ntemplate <typename T>\nGraph<> block_cut_tree(const\
+    \ Graph<T> &g) {\n    std::vector<int> ord(g.v()), low(g.v()), used(g.v(), 0);\n\
+    \    std::vector<int> vstc;\n    vstc.reserve(g.v());\n    Graph<> tree(g.v());\n\
+    \    int t = 0;\n    auto dfs = [&](auto dfs, int v, int p) -> void {\n      \
+    \  used[v] = 1;\n        ord[v] = t++;\n        low[v] = t;\n        vstc.push_back(v);\n\
+    \        bool pf = false;\n        int chl = 0;\n        for (const auto &e :\
+    \ g[v]) {\n            if (e.to == p && !pf) {\n                pf = true;\n \
+    \               continue;\n            }\n            if (used[e.to]) {\n    \
+    \            low[v] = std::min(low[v], ord[e.to]);\n            } else {\n   \
+    \             int vsz = (int)vstc.size();\n                ++chl;\n          \
+    \      dfs(dfs, e.to, v);\n                low[v] = std::min(low[v], low[e.to]);\n\
+    \                if ((p == -1 && chl >= 2) || (p != -1 && low[e.to] >= ord[v]))\
+    \ {\n                    int bcc = tree.add_vertex();\n                    while\
+    \ ((int)vstc.size() > vsz) {\n                        tree.add_edge(bcc, vstc.back());\n\
+    \                        vstc.pop_back();\n                    }\n           \
+    \         tree.add_edge(bcc, v);\n                }\n            }\n        }\n\
+    \    };\n    for (int i = 0; i < g.v(); ++i) {\n        if (!used[i]) {\n    \
+    \        dfs(dfs, i, -1);\n            int bcc = tree.add_vertex();\n        \
+    \    for (int v : vstc) {\n                tree.add_edge(bcc, v);\n          \
+    \  }\n            vstc.clear();\n        }\n    }\n    tree.build();\n    return\
+    \ tree;\n}"
   dependsOn:
   - graph/graph.hpp
   isVerificationFile: false
-  path: graph/connected_components.hpp
+  path: graph/block_cut_tree.hpp
   requiredBy: []
   timestamp: '2024-02-02 22:23:38+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
-  - graph/test/ALDS1_11_D.test.cpp
-documentation_of: graph/connected_components.hpp
+  - graph/test/block_cut_tree.test.cpp
+documentation_of: graph/block_cut_tree.hpp
 layout: document
 redirect_from:
-- /library/graph/connected_components.hpp
-- /library/graph/connected_components.hpp.html
-title: graph/connected_components.hpp
+- /library/graph/block_cut_tree.hpp
+- /library/graph/block_cut_tree.hpp.html
+title: graph/block_cut_tree.hpp
 ---

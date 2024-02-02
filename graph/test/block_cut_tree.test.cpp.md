@@ -2,8 +2,8 @@
 data:
   _extendedDependsOn:
   - icon: ':x:'
-    path: graph/biconnected_components.hpp
-    title: graph/biconnected_components.hpp
+    path: graph/block_cut_tree.hpp
+    title: graph/block_cut_tree.hpp
   - icon: ':x:'
     path: graph/graph.hpp
     title: graph/graph.hpp
@@ -20,15 +20,15 @@ data:
     PROBLEM: https://judge.yosupo.jp/problem/biconnected_components
     links:
     - https://judge.yosupo.jp/problem/biconnected_components
-  bundledCode: "#line 1 \"graph/test/biconnected_components.test.cpp\"\n#define PROBLEM\
-    \ \"https://judge.yosupo.jp/problem/biconnected_components\"\n#define FAST_IO\n\
-    #line 2 \"graph/graph.hpp\"\n#include <iostream>\n#include <cassert>\n#include\
-    \ <vector>\ntemplate <typename T>\nstruct Edge {\n    using W = T;\n    int from,\
-    \ to, id;\n    W weight;\n    Edge<T> rev() const {\n        return Edge<T>{to,\
-    \ from, id, weight};\n    }\n};\ntemplate<>\nstruct Edge<void> {\n    int from,\
-    \ to, id;\n    Edge<void> rev() const {\n        return Edge<void>{to, from, id};\n\
-    \    }\n};\ntemplate <typename T>\nvoid debug(const Edge<T> &e) {\n    std::cerr\
-    \ << e.from << \" -> \" << e.to << \" id = \" << e.id;\n    if constexpr (!std::is_same_v<T,\
+  bundledCode: "#line 1 \"graph/test/block_cut_tree.test.cpp\"\n#define PROBLEM \"\
+    https://judge.yosupo.jp/problem/biconnected_components\"\n#define FAST_IO\n#line\
+    \ 2 \"graph/graph.hpp\"\n#include <iostream>\n#include <cassert>\n#include <vector>\n\
+    template <typename T>\nstruct Edge {\n    using W = T;\n    int from, to, id;\n\
+    \    W weight;\n    Edge<T> rev() const {\n        return Edge<T>{to, from, id,\
+    \ weight};\n    }\n};\ntemplate<>\nstruct Edge<void> {\n    int from, to, id;\n\
+    \    Edge<void> rev() const {\n        return Edge<void>{to, from, id};\n    }\n\
+    };\ntemplate <typename T>\nvoid debug(const Edge<T> &e) {\n    std::cerr << e.from\
+    \ << \" -> \" << e.to << \" id = \" << e.id;\n    if constexpr (!std::is_same_v<T,\
     \ void>) {\n        std::cerr << \" weight = \";\n        debug(e.weight);\n \
     \   }\n}\ntemplate <typename T = void, bool DIR = false>\nclass Graph {\npublic:\n\
     \    using E = Edge<T>;\n    using W = T;\n    static constexpr bool DIRECTED\
@@ -63,33 +63,27 @@ data:
     \ v) {\n        assert(built && 0 <= v && v < n);\n        return Adjacency{csr.begin()\
     \ + sep[v], csr.begin() + sep[v + 1]};\n    }\n    ConstAdjacency operator[](int\
     \ v) const {\n        assert(built && 0 <= v && v < n);\n        return ConstAdjacency{csr.begin()\
-    \ + sep[v], csr.begin() + sep[v + 1]};\n    }\n};\n#line 3 \"graph/biconnected_components.hpp\"\
-    \ntemplate <typename T>\nstruct BiConnectedComponentInfo {\n    std::vector<int>\
-    \ vertices;\n    std::vector<Edge<T>> edges;\n};\ntemplate <typename T>\nstd::vector<BiConnectedComponentInfo<T>>\
-    \ bi_connected_components(\n    const Graph<T> &g) {\n    std::vector<int> ord(g.v()),\
-    \ low(g.v()), used(g.v(), 0);\n    std::vector<int> vstc;\n    std::vector<Edge<T>>\
-    \ estc;\n    std::vector<BiConnectedComponentInfo<T>> ret;\n    int t = 0;\n \
-    \   auto dfs = [&](auto dfs, int v, int p) -> void {\n        used[v] = 1;\n \
-    \       ord[v] = t++;\n        low[v] = t;\n        vstc.push_back(v);\n     \
-    \   bool pf = false;\n        int chl = 0;\n        for (const auto &e : g[v])\
-    \ {\n            if (used[e.to] && ord[e.to] < ord[v]) {\n                estc.push_back(e);\n\
-    \            }\n            if (e.to == p && !pf) {\n                pf = true;\n\
-    \                continue;\n            }\n            if (used[e.to]) {\n   \
-    \             low[v] = std::min(low[v], ord[e.to]);\n            } else {\n  \
-    \              int vsz = (int)vstc.size();\n                int esz = (int)estc.size();\n\
-    \                ++chl;\n                dfs(dfs, e.to, v);\n                low[v]\
-    \ = std::min(low[v], low[e.to]);\n                if ((p == -1 && chl >= 2) ||\
-    \ (p != -1 && low[e.to] >= ord[v])) {\n                    BiConnectedComponentInfo<T>\
-    \ bcc;\n                    while ((int)vstc.size() > vsz) {\n               \
-    \         bcc.vertices.push_back(vstc.back());\n                        vstc.pop_back();\n\
-    \                    }\n                    while ((int)estc.size() > esz) {\n\
-    \                        bcc.edges.push_back(estc.back());\n                 \
-    \       estc.pop_back();\n                    }\n                    bcc.vertices.push_back(v);\n\
-    \                    ret.push_back(bcc);\n                }\n            }\n \
-    \       }\n    };\n    for (int i = 0; i < g.v(); ++i) {\n        if (!used[i])\
-    \ {\n            dfs(dfs, i, -1);\n            ret.push_back(BiConnectedComponentInfo<T>{vstc,\
-    \ estc});\n            vstc.clear();\n            estc.clear();\n        }\n \
-    \   }\n    return ret;\n}\n#line 1 \"template/template.hpp\"\n#include <bits/stdc++.h>\n\
+    \ + sep[v], csr.begin() + sep[v + 1]};\n    }\n};\n#line 3 \"graph/block_cut_tree.hpp\"\
+    \ntemplate <typename T>\nGraph<> block_cut_tree(const Graph<T> &g) {\n    std::vector<int>\
+    \ ord(g.v()), low(g.v()), used(g.v(), 0);\n    std::vector<int> vstc;\n    vstc.reserve(g.v());\n\
+    \    Graph<> tree(g.v());\n    int t = 0;\n    auto dfs = [&](auto dfs, int v,\
+    \ int p) -> void {\n        used[v] = 1;\n        ord[v] = t++;\n        low[v]\
+    \ = t;\n        vstc.push_back(v);\n        bool pf = false;\n        int chl\
+    \ = 0;\n        for (const auto &e : g[v]) {\n            if (e.to == p && !pf)\
+    \ {\n                pf = true;\n                continue;\n            }\n  \
+    \          if (used[e.to]) {\n                low[v] = std::min(low[v], ord[e.to]);\n\
+    \            } else {\n                int vsz = (int)vstc.size();\n         \
+    \       ++chl;\n                dfs(dfs, e.to, v);\n                low[v] = std::min(low[v],\
+    \ low[e.to]);\n                if ((p == -1 && chl >= 2) || (p != -1 && low[e.to]\
+    \ >= ord[v])) {\n                    int bcc = tree.add_vertex();\n          \
+    \          while ((int)vstc.size() > vsz) {\n                        tree.add_edge(bcc,\
+    \ vstc.back());\n                        vstc.pop_back();\n                  \
+    \  }\n                    tree.add_edge(bcc, v);\n                }\n        \
+    \    }\n        }\n    };\n    for (int i = 0; i < g.v(); ++i) {\n        if (!used[i])\
+    \ {\n            dfs(dfs, i, -1);\n            int bcc = tree.add_vertex();\n\
+    \            for (int v : vstc) {\n                tree.add_edge(bcc, v);\n  \
+    \          }\n            vstc.clear();\n        }\n    }\n    tree.build();\n\
+    \    return tree;\n}\n#line 1 \"template/template.hpp\"\n#include <bits/stdc++.h>\n\
     #define OVERRIDE(a, b, c, d, ...) d\n#define REP2(i, n) for (i32 i = 0; i < (i32)(n);\
     \ ++i)\n#define REP3(i, m, n) for (i32 i = (i32)(m); i < (i32)(n); ++i)\n#define\
     \ REP(...) OVERRIDE(__VA_ARGS__, REP3, REP2)(__VA_ARGS__)\n#define PER2(i, n)\
@@ -131,37 +125,36 @@ data:
     \    string __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define VEC(type, name, size)\
     \ \\\n    V<type> name(size);       \\\n    read(name);\n#define VVEC(type, name,\
     \ size1, size2)    \\\n    VV<type> name(size1, V<type>(size2)); \\\n    read(name);\n\
-    #line 5 \"graph/test/biconnected_components.test.cpp\"\n\nvoid solve() {\n   \
-    \ I32(n, m);\n    Graph<> g(n);\n    REP(i, m) {\n        I32(u, v);\n       \
-    \ g.add_edge(u, v);\n    }\n    g.build();\n    auto bccs = bi_connected_components(g);\n\
-    \    cout << LEN(bccs) << '\\n';\n    for (const auto &bcc : bccs) {\n       \
-    \ cout << LEN(bcc.vertices);\n        for (i32 v : bcc.vertices) {\n         \
-    \   cout << ' ' << v;\n        }\n        cout << '\\n';\n    }\n}\n\nint main()\
-    \ {\n    i32 t = 1;\n    // cin >> t;\n    while (t--) {\n        solve();\n \
-    \   }\n}\n"
+    #line 5 \"graph/test/block_cut_tree.test.cpp\"\n\nvoid solve() {\n    I32(n, m);\n\
+    \    Graph<> g(n);\n    REP(i, m) {\n        I32(u, v);\n        g.add_edge(u,\
+    \ v);\n    }\n    g.build();\n    Graph<> bct = block_cut_tree(g);\n    cout <<\
+    \ bct.v() - n << '\\n';\n    REP(i, n, bct.v()) {\n        cout << LEN(bct[i]);\n\
+    \        for (auto e : bct[i]) {\n            cout << ' ' << e.to;\n        }\n\
+    \        cout << '\\n';\n    }\n}\n\nint main() {\n    i32 t = 1;\n    // cin\
+    \ >> t;\n    while (t--) {\n        solve();\n    }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/biconnected_components\"\
-    \n#define FAST_IO\n#include \"../../graph/biconnected_components.hpp\"\n#include\
-    \ \"../../template/template.hpp\"\n\nvoid solve() {\n    I32(n, m);\n    Graph<>\
-    \ g(n);\n    REP(i, m) {\n        I32(u, v);\n        g.add_edge(u, v);\n    }\n\
-    \    g.build();\n    auto bccs = bi_connected_components(g);\n    cout << LEN(bccs)\
-    \ << '\\n';\n    for (const auto &bcc : bccs) {\n        cout << LEN(bcc.vertices);\n\
-    \        for (i32 v : bcc.vertices) {\n            cout << ' ' << v;\n       \
-    \ }\n        cout << '\\n';\n    }\n}\n\nint main() {\n    i32 t = 1;\n    //\
-    \ cin >> t;\n    while (t--) {\n        solve();\n    }\n}"
+    \n#define FAST_IO\n#include \"../../graph/block_cut_tree.hpp\"\n#include \"../../template/template.hpp\"\
+    \n\nvoid solve() {\n    I32(n, m);\n    Graph<> g(n);\n    REP(i, m) {\n     \
+    \   I32(u, v);\n        g.add_edge(u, v);\n    }\n    g.build();\n    Graph<>\
+    \ bct = block_cut_tree(g);\n    cout << bct.v() - n << '\\n';\n    REP(i, n, bct.v())\
+    \ {\n        cout << LEN(bct[i]);\n        for (auto e : bct[i]) {\n         \
+    \   cout << ' ' << e.to;\n        }\n        cout << '\\n';\n    }\n}\n\nint main()\
+    \ {\n    i32 t = 1;\n    // cin >> t;\n    while (t--) {\n        solve();\n \
+    \   }\n}"
   dependsOn:
-  - graph/biconnected_components.hpp
+  - graph/block_cut_tree.hpp
   - graph/graph.hpp
   - template/template.hpp
   isVerificationFile: true
-  path: graph/test/biconnected_components.test.cpp
+  path: graph/test/block_cut_tree.test.cpp
   requiredBy: []
   timestamp: '2024-02-02 22:23:38+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: graph/test/biconnected_components.test.cpp
+documentation_of: graph/test/block_cut_tree.test.cpp
 layout: document
 redirect_from:
-- /verify/graph/test/biconnected_components.test.cpp
-- /verify/graph/test/biconnected_components.test.cpp.html
-title: graph/test/biconnected_components.test.cpp
+- /verify/graph/test/block_cut_tree.test.cpp
+- /verify/graph/test/block_cut_tree.test.cpp.html
+title: graph/test/block_cut_tree.test.cpp
 ---

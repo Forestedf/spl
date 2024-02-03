@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/block_cut_tree.hpp
     title: graph/block_cut_tree.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/graph.hpp
     title: graph/graph.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/template.hpp
     title: template/template.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/biconnected_components
@@ -25,47 +25,39 @@ data:
     \ 2 \"graph/graph.hpp\"\n#include <iostream>\n#include <cassert>\n#include <vector>\n\
     template <typename T>\nstruct Edge {\n    using W = T;\n    int from, to, id;\n\
     \    W weight;\n    Edge<T> rev() const {\n        return Edge<T>{to, from, id,\
-    \ weight};\n    }\n};\ntemplate<>\nstruct Edge<void> {\n    int from, to, id;\n\
-    \    Edge<void> rev() const {\n        return Edge<void>{to, from, id};\n    }\n\
-    };\ntemplate <typename T>\nvoid debug(const Edge<T> &e) {\n    std::cerr << e.from\
-    \ << \" -> \" << e.to << \" id = \" << e.id;\n    if constexpr (!std::is_same_v<T,\
-    \ void>) {\n        std::cerr << \" weight = \";\n        debug(e.weight);\n \
-    \   }\n}\ntemplate <typename T = void, bool DIR = false>\nclass Graph {\npublic:\n\
-    \    using E = Edge<T>;\n    using W = T;\n    static constexpr bool DIRECTED\
-    \ = DIR;\n    struct Adjacency {\n        using Iter = typename std::vector<E>::iterator;\n\
-    \        Iter be, en;\n        Iter begin() const { return be; }\n        Iter\
-    \ end() const { return en; }\n        int size() const { return (int)std::distance(be,\
-    \ en); }\n        E &operator[](int idx) const { return be[idx]; }\n    };\n \
-    \   struct ConstAdjacency {\n        using Iter = typename std::vector<E>::const_iterator;\n\
-    \        Iter be, en;\n        Iter begin() const { return be; }\n        Iter\
-    \ end() const { return en; }\n        int size() const { return (int)std::distance(be,\
-    \ en); }\n        const E &operator[](int idx) const { return be[idx]; }\n   \
-    \ };\n\nprivate:\n    int n, m;\n    std::vector<E> edges, csr;\n    std::vector<int>\
+    \ weight};\n    }\n};\ntemplate <typename T>\nvoid debug(const Edge<T> &e) {\n\
+    \    std::cerr << e.from << \" -> \" << e.to << \" id = \" << e.id << std::cerr\
+    \ << \" weight = \";\n    debug(e.weight);\n}\ntemplate <typename T = int, bool\
+    \ DIR = false>\nclass Graph {\npublic:\n    using E = Edge<T>;\n    using W =\
+    \ T;\n    static constexpr bool DIRECTED = DIR;\n    struct Adjacency {\n    \
+    \    using Iter = typename std::vector<E>::iterator;\n        Iter be, en;\n \
+    \       Iter begin() const { return be; }\n        Iter end() const { return en;\
+    \ }\n        int size() const { return (int)std::distance(be, en); }\n       \
+    \ E &operator[](int idx) const { return be[idx]; }\n    };\n    struct ConstAdjacency\
+    \ {\n        using Iter = typename std::vector<E>::const_iterator;\n        Iter\
+    \ be, en;\n        Iter begin() const { return be; }\n        Iter end() const\
+    \ { return en; }\n        int size() const { return (int)std::distance(be, en);\
+    \ }\n        const E &operator[](int idx) const { return be[idx]; }\n    };\n\n\
+    private:\n    int n, m;\n    std::vector<E> edges, csr;\n    std::vector<int>\
     \ sep;\n    bool built;\n\npublic:\n    Graph(int n) : n(n), m(0), built(false)\
     \ {}\n    int v() const { return n; }\n    int e() const { return m; }\n    int\
-    \ add_vertex() {\n        return n++;\n    }\n    template <std::nullptr_t P =\
-    \ nullptr>\n    auto add_edge(int from, int to) -> std::enable_if_t<std::is_same_v<T,\
-    \ void> && P == nullptr> {\n        assert(0 <= from && from < n && 0 <= to &&\
-    \ to < n);\n        edges.emplace_back(E{from, to, m++});\n    }\n    template\
-    \ <std::nullptr_t P = nullptr>\n    auto add_edge(int from, int to, auto weight)\
-    \ -> std::enable_if_t<!std::is_same_v<T, void> && P == nullptr> {\n        assert(0\
-    \ <= from && from < n && 0 <= to && to < n);\n        edges.emplace_back(E{from,\
-    \ to, m++, weight});\n    }\n    void add_edge(E e) {\n        assert(0 <= e.from\
-    \ && e.from < n && 0 <= e.to && e.to < n);\n        edges.emplace_back(e);\n \
-    \       ++m;\n    }\n    void build() {\n        sep.assign(n + 1, 0);\n     \
-    \   csr.resize(DIRECTED ? m : 2 * m);\n        for (const E &e : edges) {\n  \
-    \          ++sep[e.from + 1];\n            if (!DIRECTED) {\n                ++sep[e.to\
-    \ + 1];\n            }\n        }\n        for (int i = 0; i < n; ++i) {\n   \
-    \         sep[i + 1] += sep[i];\n        }\n        std::vector<int> c = sep;\n\
-    \        for (const E &e : edges) {\n            csr[c[e.from]++] = e;\n     \
-    \       if (!DIRECTED) {\n                csr[c[e.to]++] = e.rev();\n        \
-    \    }\n        }\n        built = true;\n    }\n    Adjacency operator[](int\
-    \ v) {\n        assert(built && 0 <= v && v < n);\n        return Adjacency{csr.begin()\
-    \ + sep[v], csr.begin() + sep[v + 1]};\n    }\n    ConstAdjacency operator[](int\
-    \ v) const {\n        assert(built && 0 <= v && v < n);\n        return ConstAdjacency{csr.begin()\
-    \ + sep[v], csr.begin() + sep[v + 1]};\n    }\n};\n#line 3 \"graph/block_cut_tree.hpp\"\
-    \ntemplate <typename T>\nGraph<> block_cut_tree(const Graph<T> &g) {\n    std::vector<int>\
-    \ ord(g.v()), low(g.v()), used(g.v(), 0);\n    std::vector<int> vstc;\n    vstc.reserve(g.v());\n\
+    \ add_vertex() {\n        return n++;\n    }\n    auto add_edge(int from, int\
+    \ to, W weight = 1) {\n        assert(0 <= from && from < n && 0 <= to && to <\
+    \ n);\n        edges.emplace_back(E{from, to, m++, weight});\n    }\n    void\
+    \ build() {\n        sep.assign(n + 1, 0);\n        csr.resize(DIRECTED ? m :\
+    \ 2 * m);\n        for (const E &e : edges) {\n            ++sep[e.from + 1];\n\
+    \            if (!DIRECTED) {\n                ++sep[e.to + 1];\n            }\n\
+    \        }\n        for (int i = 0; i < n; ++i) {\n            sep[i + 1] += sep[i];\n\
+    \        }\n        std::vector<int> c = sep;\n        for (const E &e : edges)\
+    \ {\n            csr[c[e.from]++] = e;\n            if (!DIRECTED) {\n       \
+    \         csr[c[e.to]++] = e.rev();\n            }\n        }\n        built =\
+    \ true;\n    }\n    Adjacency operator[](int v) {\n        assert(built && 0 <=\
+    \ v && v < n);\n        return Adjacency{csr.begin() + sep[v], csr.begin() + sep[v\
+    \ + 1]};\n    }\n    ConstAdjacency operator[](int v) const {\n        assert(built\
+    \ && 0 <= v && v < n);\n        return ConstAdjacency{csr.begin() + sep[v], csr.begin()\
+    \ + sep[v + 1]};\n    }\n};\n#line 3 \"graph/block_cut_tree.hpp\"\ntemplate <typename\
+    \ T>\nGraph<> block_cut_tree(const Graph<T> &g) {\n    std::vector<int> ord(g.v()),\
+    \ low(g.v()), used(g.v(), 0);\n    std::vector<int> vstc;\n    vstc.reserve(g.v());\n\
     \    Graph<> tree(g.v());\n    int t = 0;\n    auto dfs = [&](auto dfs, int v,\
     \ int p) -> void {\n        used[v] = 1;\n        ord[v] = t++;\n        low[v]\
     \ = t;\n        vstc.push_back(v);\n        bool pf = false;\n        int chl\
@@ -148,8 +140,8 @@ data:
   isVerificationFile: true
   path: graph/test/block_cut_tree.test.cpp
   requiredBy: []
-  timestamp: '2024-02-02 22:23:38+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2024-02-03 15:25:53+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: graph/test/block_cut_tree.test.cpp
 layout: document

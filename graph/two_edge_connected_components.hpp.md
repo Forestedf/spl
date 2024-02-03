@@ -1,50 +1,41 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/graph.hpp
     title: graph/graph.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/test/two_edge_connected_components.test.cpp
     title: graph/test/two_edge_connected_components.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"graph/graph.hpp\"\n#include <iostream>\n#include <cassert>\n\
     #include <vector>\ntemplate <typename T>\nstruct Edge {\n    using W = T;\n  \
     \  int from, to, id;\n    W weight;\n    Edge<T> rev() const {\n        return\
-    \ Edge<T>{to, from, id, weight};\n    }\n};\ntemplate<>\nstruct Edge<void> {\n\
-    \    int from, to, id;\n    Edge<void> rev() const {\n        return Edge<void>{to,\
-    \ from, id};\n    }\n};\ntemplate <typename T>\nvoid debug(const Edge<T> &e) {\n\
-    \    std::cerr << e.from << \" -> \" << e.to << \" id = \" << e.id;\n    if constexpr\
-    \ (!std::is_same_v<T, void>) {\n        std::cerr << \" weight = \";\n       \
-    \ debug(e.weight);\n    }\n}\ntemplate <typename T = void, bool DIR = false>\n\
-    class Graph {\npublic:\n    using E = Edge<T>;\n    using W = T;\n    static constexpr\
-    \ bool DIRECTED = DIR;\n    struct Adjacency {\n        using Iter = typename\
-    \ std::vector<E>::iterator;\n        Iter be, en;\n        Iter begin() const\
-    \ { return be; }\n        Iter end() const { return en; }\n        int size()\
-    \ const { return (int)std::distance(be, en); }\n        E &operator[](int idx)\
-    \ const { return be[idx]; }\n    };\n    struct ConstAdjacency {\n        using\
-    \ Iter = typename std::vector<E>::const_iterator;\n        Iter be, en;\n    \
-    \    Iter begin() const { return be; }\n        Iter end() const { return en;\
-    \ }\n        int size() const { return (int)std::distance(be, en); }\n       \
-    \ const E &operator[](int idx) const { return be[idx]; }\n    };\n\nprivate:\n\
-    \    int n, m;\n    std::vector<E> edges, csr;\n    std::vector<int> sep;\n  \
-    \  bool built;\n\npublic:\n    Graph(int n) : n(n), m(0), built(false) {}\n  \
-    \  int v() const { return n; }\n    int e() const { return m; }\n    int add_vertex()\
-    \ {\n        return n++;\n    }\n    template <std::nullptr_t P = nullptr>\n \
-    \   auto add_edge(int from, int to) -> std::enable_if_t<std::is_same_v<T, void>\
-    \ && P == nullptr> {\n        assert(0 <= from && from < n && 0 <= to && to <\
-    \ n);\n        edges.emplace_back(E{from, to, m++});\n    }\n    template <std::nullptr_t\
-    \ P = nullptr>\n    auto add_edge(int from, int to, auto weight) -> std::enable_if_t<!std::is_same_v<T,\
-    \ void> && P == nullptr> {\n        assert(0 <= from && from < n && 0 <= to &&\
-    \ to < n);\n        edges.emplace_back(E{from, to, m++, weight});\n    }\n   \
-    \ void add_edge(E e) {\n        assert(0 <= e.from && e.from < n && 0 <= e.to\
-    \ && e.to < n);\n        edges.emplace_back(e);\n        ++m;\n    }\n    void\
+    \ Edge<T>{to, from, id, weight};\n    }\n};\ntemplate <typename T>\nvoid debug(const\
+    \ Edge<T> &e) {\n    std::cerr << e.from << \" -> \" << e.to << \" id = \" <<\
+    \ e.id << std::cerr << \" weight = \";\n    debug(e.weight);\n}\ntemplate <typename\
+    \ T = int, bool DIR = false>\nclass Graph {\npublic:\n    using E = Edge<T>;\n\
+    \    using W = T;\n    static constexpr bool DIRECTED = DIR;\n    struct Adjacency\
+    \ {\n        using Iter = typename std::vector<E>::iterator;\n        Iter be,\
+    \ en;\n        Iter begin() const { return be; }\n        Iter end() const { return\
+    \ en; }\n        int size() const { return (int)std::distance(be, en); }\n   \
+    \     E &operator[](int idx) const { return be[idx]; }\n    };\n    struct ConstAdjacency\
+    \ {\n        using Iter = typename std::vector<E>::const_iterator;\n        Iter\
+    \ be, en;\n        Iter begin() const { return be; }\n        Iter end() const\
+    \ { return en; }\n        int size() const { return (int)std::distance(be, en);\
+    \ }\n        const E &operator[](int idx) const { return be[idx]; }\n    };\n\n\
+    private:\n    int n, m;\n    std::vector<E> edges, csr;\n    std::vector<int>\
+    \ sep;\n    bool built;\n\npublic:\n    Graph(int n) : n(n), m(0), built(false)\
+    \ {}\n    int v() const { return n; }\n    int e() const { return m; }\n    int\
+    \ add_vertex() {\n        return n++;\n    }\n    auto add_edge(int from, int\
+    \ to, W weight = 1) {\n        assert(0 <= from && from < n && 0 <= to && to <\
+    \ n);\n        edges.emplace_back(E{from, to, m++, weight});\n    }\n    void\
     \ build() {\n        sep.assign(n + 1, 0);\n        csr.resize(DIRECTED ? m :\
     \ 2 * m);\n        for (const E &e : edges) {\n            ++sep[e.from + 1];\n\
     \            if (!DIRECTED) {\n                ++sep[e.to + 1];\n            }\n\
@@ -92,8 +83,8 @@ data:
   isVerificationFile: false
   path: graph/two_edge_connected_components.hpp
   requiredBy: []
-  timestamp: '2024-02-02 22:23:38+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2024-02-03 15:25:53+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - graph/test/two_edge_connected_components.test.cpp
 documentation_of: graph/two_edge_connected_components.hpp

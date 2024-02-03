@@ -52,7 +52,7 @@ public:
     int add_vertex() {
         return n++;
     }
-    auto add_edge(int from, int to, W weight = 1) {
+    void add_edge(int from, int to, W weight = 1) {
         assert(0 <= from && from < n && 0 <= to && to < n);
         edges.emplace_back(E{from, to, m++, weight});
     }

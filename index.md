@@ -65,6 +65,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/connected_components.hpp
       title: graph/connected_components.hpp
+    - icon: ':warning:'
+      path: graph/dense_dijkstra.hpp
+      title: graph/dense_dijkstra.hpp
     - icon: ':heavy_check_mark:'
       path: graph/dijkstra.hpp
       title: graph/dijkstra.hpp

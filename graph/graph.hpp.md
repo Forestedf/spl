@@ -11,6 +11,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/connected_components.hpp
     title: graph/connected_components.hpp
+  - icon: ':warning:'
+    path: graph/dense_dijkstra.hpp
+    title: graph/dense_dijkstra.hpp
   - icon: ':heavy_check_mark:'
     path: graph/dijkstra.hpp
     title: graph/dijkstra.hpp
@@ -75,7 +78,7 @@ data:
     private:\n    int n, m;\n    std::vector<E> edges, csr;\n    std::vector<int>\
     \ sep;\n    bool built;\n\npublic:\n    Graph(int n) : n(n), m(0), built(false)\
     \ {}\n    int v() const { return n; }\n    int e() const { return m; }\n    int\
-    \ add_vertex() {\n        return n++;\n    }\n    auto add_edge(int from, int\
+    \ add_vertex() {\n        return n++;\n    }\n    void add_edge(int from, int\
     \ to, W weight = 1) {\n        assert(0 <= from && from < n && 0 <= to && to <\
     \ n);\n        edges.emplace_back(E{from, to, m++, weight});\n    }\n    void\
     \ build() {\n        sep.assign(n + 1, 0);\n        csr.resize(DIRECTED ? m :\
@@ -109,7 +112,7 @@ data:
     private:\n    int n, m;\n    std::vector<E> edges, csr;\n    std::vector<int>\
     \ sep;\n    bool built;\n\npublic:\n    Graph(int n) : n(n), m(0), built(false)\
     \ {}\n    int v() const { return n; }\n    int e() const { return m; }\n    int\
-    \ add_vertex() {\n        return n++;\n    }\n    auto add_edge(int from, int\
+    \ add_vertex() {\n        return n++;\n    }\n    void add_edge(int from, int\
     \ to, W weight = 1) {\n        assert(0 <= from && from < n && 0 <= to && to <\
     \ n);\n        edges.emplace_back(E{from, to, m++, weight});\n    }\n    void\
     \ build() {\n        sep.assign(n + 1, 0);\n        csr.resize(DIRECTED ? m :\
@@ -134,8 +137,9 @@ data:
   - graph/two_edge_connected_components.hpp
   - graph/heavy_light_decomposition.hpp
   - graph/strongly_connected_components.hpp
+  - graph/dense_dijkstra.hpp
   - graph/connected_components.hpp
-  timestamp: '2024-02-03 15:25:53+09:00'
+  timestamp: '2024-02-03 17:22:22+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - graph/test/scc.test.cpp

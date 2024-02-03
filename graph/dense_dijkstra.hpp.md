@@ -5,16 +5,14 @@ data:
     path: graph/graph.hpp
     title: graph/graph.hpp
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: graph/test/ALDS1_11_D.test.cpp
-    title: graph/test/ALDS1_11_D.test.cpp
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"graph/graph.hpp\"\n#include <iostream>\n#include <cassert>\n\
+  bundledCode: "#line 2 \"graph/dense_dijkstra.hpp\"\n#include <limits>\n#include\
+    \ <queue>\n#line 2 \"graph/graph.hpp\"\n#include <iostream>\n#include <cassert>\n\
     #include <vector>\ntemplate <typename T>\nstruct Edge {\n    using W = T;\n  \
     \  int from, to, id;\n    W weight;\n    Edge<T> rev() const {\n        return\
     \ Edge<T>{to, from, id, weight};\n    }\n};\ntemplate <typename T>\nvoid debug(const\
@@ -47,39 +45,43 @@ data:
     \ v && v < n);\n        return Adjacency{csr.begin() + sep[v], csr.begin() + sep[v\
     \ + 1]};\n    }\n    ConstAdjacency operator[](int v) const {\n        assert(built\
     \ && 0 <= v && v < n);\n        return ConstAdjacency{csr.begin() + sep[v], csr.begin()\
-    \ + sep[v + 1]};\n    }\n};\n#line 3 \"graph/connected_components.hpp\"\ntemplate\
-    \ <typename T>\nstd::vector<int> connected_components(const Graph<T> &g) {\n \
-    \   std::vector<int> comp(g.v(), -1), stc;\n    int c = 0;\n    for (int r = 0;\
-    \ r < g.v(); ++r) {\n        if (comp[r] == -1) {\n            comp[r] = c++;\n\
-    \            stc.push_back(r);\n            while (!stc.empty()) {\n         \
-    \       int v = stc.back();\n                stc.pop_back();\n               \
-    \ for (const Edge<T> &e : g[v]) {\n                    if (comp[e.to] == -1) {\n\
-    \                        comp[e.to] = comp[v];\n                        stc.push_back(e.to);\n\
-    \                    }\n                }\n            }\n        }\n    }\n \
-    \   return comp;\n}\n"
-  code: "#pragma once\n#include \"graph.hpp\"\ntemplate <typename T>\nstd::vector<int>\
-    \ connected_components(const Graph<T> &g) {\n    std::vector<int> comp(g.v(),\
-    \ -1), stc;\n    int c = 0;\n    for (int r = 0; r < g.v(); ++r) {\n        if\
-    \ (comp[r] == -1) {\n            comp[r] = c++;\n            stc.push_back(r);\n\
-    \            while (!stc.empty()) {\n                int v = stc.back();\n   \
-    \             stc.pop_back();\n                for (const Edge<T> &e : g[v]) {\n\
-    \                    if (comp[e.to] == -1) {\n                        comp[e.to]\
-    \ = comp[v];\n                        stc.push_back(e.to);\n                 \
-    \   }\n                }\n            }\n        }\n    }\n    return comp;\n\
-    }\n"
+    \ + sep[v + 1]};\n    }\n};\n#line 5 \"graph/dense_dijkstra.hpp\"\n// (dist, from)\n\
+    template <typename T, bool DIR>\nstd::pair<std::vector<T>, std::vector<int>> dense_dijkstra(\n\
+    \    const Graph<T, DIR> &g, int s, T inf = std::numeric_limits<T>::max()) {\n\
+    \    assert(0 <= s && s < g.v());\n    std::vector<T> dist(g.v(), inf);\n    std::vector<int>\
+    \ par(g.v(), -1);\n    std::vector<int> used(g.v(), 0);\n    dist[s] = 0;\n  \
+    \  while (true) {\n        T d = inf;\n        int v = -1;\n        for (int i\
+    \ = 0; i < g.v(); ++i) {\n            if (!used[i] && dist[i] < d) {\n       \
+    \         d = dist[i];\n                v = i;\n            }\n        } \n  \
+    \      if (v == -1) {\n            break;\n        }\n        used[v] = 1;\n \
+    \       for (const Edge<T> &e : g[v]) {\n            if (d + e.weight < dist[e.to])\
+    \ {\n                dist[e.to] = d + e.weight;\n                par[e.to] = v;\n\
+    \            }\n        }\n    }\n    return std::make_pair(dist, par);\n}\n"
+  code: "#pragma once\n#include <limits>\n#include <queue>\n#include \"graph.hpp\"\
+    \n// (dist, from)\ntemplate <typename T, bool DIR>\nstd::pair<std::vector<T>,\
+    \ std::vector<int>> dense_dijkstra(\n    const Graph<T, DIR> &g, int s, T inf\
+    \ = std::numeric_limits<T>::max()) {\n    assert(0 <= s && s < g.v());\n    std::vector<T>\
+    \ dist(g.v(), inf);\n    std::vector<int> par(g.v(), -1);\n    std::vector<int>\
+    \ used(g.v(), 0);\n    dist[s] = 0;\n    while (true) {\n        T d = inf;\n\
+    \        int v = -1;\n        for (int i = 0; i < g.v(); ++i) {\n            if\
+    \ (!used[i] && dist[i] < d) {\n                d = dist[i];\n                v\
+    \ = i;\n            }\n        } \n        if (v == -1) {\n            break;\n\
+    \        }\n        used[v] = 1;\n        for (const Edge<T> &e : g[v]) {\n  \
+    \          if (d + e.weight < dist[e.to]) {\n                dist[e.to] = d +\
+    \ e.weight;\n                par[e.to] = v;\n            }\n        }\n    }\n\
+    \    return std::make_pair(dist, par);\n}"
   dependsOn:
   - graph/graph.hpp
   isVerificationFile: false
-  path: graph/connected_components.hpp
+  path: graph/dense_dijkstra.hpp
   requiredBy: []
   timestamp: '2024-02-03 17:22:22+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - graph/test/ALDS1_11_D.test.cpp
-documentation_of: graph/connected_components.hpp
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
+documentation_of: graph/dense_dijkstra.hpp
 layout: document
 redirect_from:
-- /library/graph/connected_components.hpp
-- /library/graph/connected_components.hpp.html
-title: graph/connected_components.hpp
+- /library/graph/dense_dijkstra.hpp
+- /library/graph/dense_dijkstra.hpp.html
+title: graph/dense_dijkstra.hpp
 ---

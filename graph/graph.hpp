@@ -11,22 +11,12 @@ struct Edge {
         return Edge<T>{to, from, id, weight};
     }
 };
-template<>
-struct Edge<void> {
-    int from, to, id;
-    Edge<void> rev() const {
-        return Edge<void>{to, from, id};
-    }
-};
 template <typename T>
 void debug(const Edge<T> &e) {
-    std::cerr << e.from << " -> " << e.to << " id = " << e.id;
-    if constexpr (!std::is_same_v<T, void>) {
-        std::cerr << " weight = ";
-        debug(e.weight);
-    }
+    std::cerr << e.from << " -> " << e.to << " id = " << e.id << std::cerr << " weight = ";
+    debug(e.weight);
 }
-template <typename T = void, bool DIR = false>
+template <typename T = int, bool DIR = false>
 class Graph {
 public:
     using E = Edge<T>;
@@ -62,20 +52,9 @@ public:
     int add_vertex() {
         return n++;
     }
-    template <std::nullptr_t P = nullptr>
-    auto add_edge(int from, int to) -> std::enable_if_t<std::is_same_v<T, void> && P == nullptr> {
-        assert(0 <= from && from < n && 0 <= to && to < n);
-        edges.emplace_back(E{from, to, m++});
-    }
-    template <std::nullptr_t P = nullptr>
-    auto add_edge(int from, int to, auto weight) -> std::enable_if_t<!std::is_same_v<T, void> && P == nullptr> {
+    auto add_edge(int from, int to, W weight = 1) {
         assert(0 <= from && from < n && 0 <= to && to < n);
         edges.emplace_back(E{from, to, m++, weight});
-    }
-    void add_edge(E e) {
-        assert(0 <= e.from && e.from < n && 0 <= e.to && e.to < n);
-        edges.emplace_back(e);
-        ++m;
     }
     void build() {
         sep.assign(n + 1, 0);

@@ -5,7 +5,7 @@
 
 void solve() {
     I32(n, q);
-    Graph<void, false> g(n);
+    Graph<> g(n);
     REP(i, n - 1) {
         I32(a, b);
         g.add_edge(a, b);

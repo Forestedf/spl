@@ -1,5 +1,7 @@
 #pragma once
 
+#include <utility>
+
 constexpr bool is_prime(unsigned n) {
     if (n == 0 || n == 1) {
         return false;
@@ -96,4 +98,30 @@ constexpr T ceil_div(T x, T y) {
     } else {
         return -(-x / y);
     }
+}
+
+// a, b >= 1
+// finds (x, y) such that |x| <= b, |y| <= a, a * x + b * y == gcd(a, b)
+template <typename T>
+std::pair<T, T> extgcd(T a, T b) {
+    if (a % b == 0) {
+        return std::pair<T, T>(0, 1);
+    } else {
+        T q = a / b, r = a % b;
+        auto [c, d] = extgcd(b, r);
+        return std::pair<T, T>(d, c - q * d);
+    }
+}
+
+// gcd(x, m) == 1
+template <typename T>
+T inv_mod(T x, T m) {
+    auto [a, b] = extgcd(x, m);
+    if (a < 0) {
+        a += m;
+    }
+    if (a == m) {
+        a -= m;
+    }
+    return a;
 }

@@ -24,6 +24,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: data_structure/operations.hpp
       title: data_structure/operations.hpp
+    - icon: ':warning:'
+      path: data_structure/range_add_point_get.hpp
+      title: data_structure/range_add_point_get.hpp
     - icon: ':heavy_check_mark:'
       path: data_structure/range_add_range_sum.hpp
       title: data_structure/range_add_range_sum.hpp
@@ -62,6 +65,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/block_cut_tree.hpp
       title: graph/block_cut_tree.hpp
+    - icon: ':warning:'
+      path: graph/complement_graph_connected_components.hpp
+      title: graph/complement_graph_connected_components.hpp
     - icon: ':heavy_check_mark:'
       path: graph/connected_components.hpp
       title: graph/connected_components.hpp
@@ -101,6 +107,9 @@ data:
       title: other/coordinate_compression.hpp
   - name: string
     pages:
+    - icon: ':warning:'
+      path: string/sa_lcp.hpp
+      title: string/sa_lcp.hpp
     - icon: ':heavy_check_mark:'
       path: string/z_algorithm.hpp
       title: string/z_algorithm.hpp
@@ -197,6 +206,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: number_theory/test/frac_binsearch_stress.test.cpp
       title: number_theory/test/frac_binsearch_stress.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: number_theory/test/inv_mod_stress.test.cpp
+      title: number_theory/test/inv_mod_stress.test.cpp
   - name: string/test
     pages:
     - icon: ':heavy_check_mark:'

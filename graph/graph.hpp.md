@@ -8,6 +8,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/block_cut_tree.hpp
     title: graph/block_cut_tree.hpp
+  - icon: ':warning:'
+    path: graph/complement_graph_connected_components.hpp
+    title: graph/complement_graph_connected_components.hpp
   - icon: ':heavy_check_mark:'
     path: graph/connected_components.hpp
     title: graph/connected_components.hpp
@@ -131,26 +134,27 @@ data:
   isVerificationFile: false
   path: graph/graph.hpp
   requiredBy:
-  - graph/dijkstra.hpp
-  - graph/biconnected_components.hpp
-  - graph/block_cut_tree.hpp
-  - graph/two_edge_connected_components.hpp
-  - graph/heavy_light_decomposition.hpp
-  - graph/strongly_connected_components.hpp
   - graph/dense_dijkstra.hpp
   - graph/connected_components.hpp
+  - graph/heavy_light_decomposition.hpp
+  - graph/block_cut_tree.hpp
+  - graph/two_edge_connected_components.hpp
+  - graph/strongly_connected_components.hpp
+  - graph/complement_graph_connected_components.hpp
+  - graph/biconnected_components.hpp
+  - graph/dijkstra.hpp
   timestamp: '2024-02-03 17:22:22+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - graph/test/scc.test.cpp
   - graph/test/vertex_add_path_sum.test.cpp
-  - graph/test/biconnected_components.test.cpp
-  - graph/test/ALDS1_11_D.test.cpp
-  - graph/test/lca.test.cpp
-  - graph/test/shortest_path.test.cpp
-  - graph/test/jump_on_tree.test.cpp
-  - graph/test/two_edge_connected_components.test.cpp
   - graph/test/block_cut_tree.test.cpp
+  - graph/test/shortest_path.test.cpp
+  - graph/test/lca.test.cpp
+  - graph/test/two_edge_connected_components.test.cpp
+  - graph/test/ALDS1_11_D.test.cpp
+  - graph/test/jump_on_tree.test.cpp
+  - graph/test/biconnected_components.test.cpp
+  - graph/test/scc.test.cpp
 documentation_of: graph/graph.hpp
 layout: document
 redirect_from:

@@ -68,41 +68,48 @@ data:
     \ \\\n    V<type> name(size);       \\\n    read(name);\n#define VVEC(type, name,\
     \ size1, size2)    \\\n    VV<type> name(size1, V<type>(size2)); \\\n    read(name);\n\
     #line 2 \"number_theory/mod_int.hpp\"\n\n#line 5 \"number_theory/mod_int.hpp\"\
-    \n#include <type_traits>\n#line 2 \"number_theory/utils.hpp\"\n\nconstexpr bool\
-    \ is_prime(unsigned n) {\n    if (n == 0 || n == 1) {\n        return false;\n\
-    \    }\n    for (unsigned i = 2; i * i <= n; ++i) {\n        if (n % i == 0) {\n\
-    \            return false;\n        }\n    }\n    return true;\n}\n\nconstexpr\
-    \ unsigned mod_pow(unsigned x, unsigned y, unsigned mod) {\n    unsigned ret =\
-    \ 1, self = x;\n    while (y != 0) {\n        if (y & 1) {\n            ret =\
-    \ (unsigned)((unsigned long long)ret * self % mod);\n        }\n        self =\
-    \ (unsigned)((unsigned long long)self * self % mod);\n        y /= 2;\n    }\n\
-    \    return ret;\n}\n\ntemplate <unsigned mod>\nconstexpr unsigned primitive_root()\
-    \ {\n    static_assert(is_prime(mod), \"`mod` must be a prime number.\");\n  \
-    \  if (mod == 2) {\n        return 1;\n    }\n\n    unsigned primes[32] = {};\n\
-    \    int it = 0;\n    {\n        unsigned m = mod - 1;\n        for (unsigned\
-    \ i = 2; i * i <= m; ++i) {\n            if (m % i == 0) {\n                primes[it++]\
-    \ = i;\n                while (m % i == 0) {\n                    m /= i;\n  \
-    \              }\n            }\n        }\n        if (m != 1) {\n          \
-    \  primes[it++] = m;\n        }\n    }\n    for (unsigned i = 2; i < mod; ++i)\
-    \ {\n        bool ok = true;\n        for (int j = 0; j < it; ++j) {\n       \
-    \     if (mod_pow(i, (mod - 1) / primes[j], mod) == 1) {\n                ok =\
-    \ false;\n                break;\n            }\n        }\n        if (ok) return\
-    \ i;\n    }\n    return 0;\n}\n\n// y >= 1\ntemplate <typename T>\nconstexpr T\
-    \ safe_mod(T x, T y) {\n    x %= y;\n    if (x < 0) {\n        x += y;\n    }\n\
-    \    return x;\n}\n\n// y != 0\ntemplate <typename T>\nconstexpr T floor_div(T\
-    \ x, T y) {\n    if (y < 0) {\n        x *= -1;\n        y *= -1;\n    }\n   \
-    \ if (x >= 0) {\n        return x / y;\n    } else {\n        return -((-x + y\
-    \ - 1) / y);\n    }\n}\n\n// y != 0\ntemplate <typename T>\nconstexpr T ceil_div(T\
-    \ x, T y) {\n    if (y < 0) {\n        x *= -1;\n        y *= -1;\n    }\n   \
-    \ if (x >= 0) {\n        return (x + y - 1) / y;\n    } else {\n        return\
-    \ -(-x / y);\n    }\n}\n#line 7 \"number_theory/mod_int.hpp\"\n\ntemplate <unsigned\
-    \ mod>\nstruct ModInt {\n    static_assert(mod != 0, \"`mod` must not be equal\
-    \ to 0.\");\n    static_assert(mod < (1u << 31),\n                  \"`mod` must\
-    \ be less than (1u << 31) = 2147483648.\");\n\n    unsigned val;\n\n    static\
-    \ constexpr unsigned get_mod() { return mod; }\n\n    constexpr ModInt() : val(0)\
-    \ {}\n    template <typename T, std::enable_if_t<std::is_signed_v<T>> * = nullptr>\n\
-    \    constexpr ModInt(T x)\n        : val((unsigned)((long long)x % (long long)mod\
-    \ + (x < 0 ? mod : 0))) {}\n    template <typename T, std::enable_if_t<std::is_unsigned_v<T>>\
+    \n#include <type_traits>\n#line 2 \"number_theory/utils.hpp\"\n\n#line 4 \"number_theory/utils.hpp\"\
+    \n\nconstexpr bool is_prime(unsigned n) {\n    if (n == 0 || n == 1) {\n     \
+    \   return false;\n    }\n    for (unsigned i = 2; i * i <= n; ++i) {\n      \
+    \  if (n % i == 0) {\n            return false;\n        }\n    }\n    return\
+    \ true;\n}\n\nconstexpr unsigned mod_pow(unsigned x, unsigned y, unsigned mod)\
+    \ {\n    unsigned ret = 1, self = x;\n    while (y != 0) {\n        if (y & 1)\
+    \ {\n            ret = (unsigned)((unsigned long long)ret * self % mod);\n   \
+    \     }\n        self = (unsigned)((unsigned long long)self * self % mod);\n \
+    \       y /= 2;\n    }\n    return ret;\n}\n\ntemplate <unsigned mod>\nconstexpr\
+    \ unsigned primitive_root() {\n    static_assert(is_prime(mod), \"`mod` must be\
+    \ a prime number.\");\n    if (mod == 2) {\n        return 1;\n    }\n\n    unsigned\
+    \ primes[32] = {};\n    int it = 0;\n    {\n        unsigned m = mod - 1;\n  \
+    \      for (unsigned i = 2; i * i <= m; ++i) {\n            if (m % i == 0) {\n\
+    \                primes[it++] = i;\n                while (m % i == 0) {\n   \
+    \                 m /= i;\n                }\n            }\n        }\n     \
+    \   if (m != 1) {\n            primes[it++] = m;\n        }\n    }\n    for (unsigned\
+    \ i = 2; i < mod; ++i) {\n        bool ok = true;\n        for (int j = 0; j <\
+    \ it; ++j) {\n            if (mod_pow(i, (mod - 1) / primes[j], mod) == 1) {\n\
+    \                ok = false;\n                break;\n            }\n        }\n\
+    \        if (ok) return i;\n    }\n    return 0;\n}\n\n// y >= 1\ntemplate <typename\
+    \ T>\nconstexpr T safe_mod(T x, T y) {\n    x %= y;\n    if (x < 0) {\n      \
+    \  x += y;\n    }\n    return x;\n}\n\n// y != 0\ntemplate <typename T>\nconstexpr\
+    \ T floor_div(T x, T y) {\n    if (y < 0) {\n        x *= -1;\n        y *= -1;\n\
+    \    }\n    if (x >= 0) {\n        return x / y;\n    } else {\n        return\
+    \ -((-x + y - 1) / y);\n    }\n}\n\n// y != 0\ntemplate <typename T>\nconstexpr\
+    \ T ceil_div(T x, T y) {\n    if (y < 0) {\n        x *= -1;\n        y *= -1;\n\
+    \    }\n    if (x >= 0) {\n        return (x + y - 1) / y;\n    } else {\n   \
+    \     return -(-x / y);\n    }\n}\n\n// a, b >= 1\n// finds (x, y) such that |x|\
+    \ <= b, |y| <= a, a * x + b * y == gcd(a, b)\ntemplate <typename T>\nstd::pair<T,\
+    \ T> extgcd(T a, T b) {\n    if (a % b == 0) {\n        return std::pair<T, T>(0,\
+    \ 1);\n    } else {\n        T q = a / b, r = a % b;\n        auto [c, d] = extgcd(b,\
+    \ r);\n        return std::pair<T, T>(d, c - q * d);\n    }\n}\n\n// gcd(x, m)\
+    \ == 1\ntemplate <typename T>\nT inv_mod(T x, T m) {\n    auto [a, b] = extgcd(x,\
+    \ m);\n    if (a < 0) {\n        a += m;\n    }\n    if (a == m) {\n        a\
+    \ -= m;\n    }\n    return a;\n}\n#line 7 \"number_theory/mod_int.hpp\"\n\ntemplate\
+    \ <unsigned mod>\nstruct ModInt {\n    static_assert(mod != 0, \"`mod` must not\
+    \ be equal to 0.\");\n    static_assert(mod < (1u << 31),\n                  \"\
+    `mod` must be less than (1u << 31) = 2147483648.\");\n\n    unsigned val;\n\n\
+    \    static constexpr unsigned get_mod() { return mod; }\n\n    constexpr ModInt()\
+    \ : val(0) {}\n    template <typename T, std::enable_if_t<std::is_signed_v<T>>\
+    \ * = nullptr>\n    constexpr ModInt(T x)\n        : val((unsigned)((long long)x\
+    \ % (long long)mod + (x < 0 ? mod : 0))) {}\n    template <typename T, std::enable_if_t<std::is_unsigned_v<T>>\
     \ * = nullptr>\n    constexpr ModInt(T x) : val((unsigned)(x % mod)) {}\n\n  \
     \  static constexpr ModInt raw(unsigned x) {\n        ModInt<mod> ret;\n     \
     \   ret.val = x;\n        return ret;\n    }\n\n    constexpr unsigned get_val()\
@@ -230,7 +237,7 @@ data:
   isVerificationFile: true
   path: data_structure/test/range_affine_range_sum.test.cpp
   requiredBy: []
-  timestamp: '2024-01-14 15:15:52+09:00'
+  timestamp: '2024-02-10 22:34:05+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: data_structure/test/range_affine_range_sum.test.cpp

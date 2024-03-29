@@ -120,6 +120,30 @@ std::pair<T, T> extgcd(T a, T b) {
     return std::pair<T, T>(s, m0);
 }
 
+// b >= 1
+// returns (g, x, y) s.t. g = gcd(a, b), a * x + b * y = g, 0 <= x < b / g, |y| < max(2, |a| / g)
+template <typename T>
+std::tuple<T, T, T> extgcd2(T a, T b) {
+    T _a = safe_mod(a, b);
+    T quot = (a - _a) / b;
+    T x00 = 0, x01 = 1, y0 = b;
+    T x10 = 1, x11 = -quot, y1 = _a;
+    while (y1) {
+        T u = y0 / y1;
+        x00 -= u * x10;
+        x01 -= u * x11;
+        y0 -= u * y1;
+        std::swap(x00, x10);
+        std::swap(x01, x11);
+        std::swap(y0, y1);
+    }
+    if (x00 < 0) {
+        x00 += b / y0;
+        x01 -= a / y0;
+    }
+    return std::tuple<T, T, T>(y0, x00, x01);
+}
+
 // gcd(x, m) == 1
 template <typename T>
 T inv_mod(T x, T m) {

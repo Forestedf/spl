@@ -30,11 +30,10 @@ std::optional<std::pair<T, T>> ax_by_c(T a, T b, T c) {
         b = -b;
         c = -c;
     }
-    auto [g, x] = extgcd(a, b);
+    auto [g, x, y] = extgcd2(a, b);
     if (c % g) {
         return std::nullopt;
-    } 
-    T y = (g - a * x) / b;
+    }
     T mult = c / g;
     x *= mult;
     y *= mult;

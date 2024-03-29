@@ -37,6 +37,9 @@ data:
     path: data_structure/test/rectangle_sum.test.cpp
     title: data_structure/test/rectangle_sum.test.cpp
   - icon: ':heavy_check_mark:'
+    path: data_structure/test/rectangle_sum_range_tree.test.cpp
+    title: data_structure/test/rectangle_sum_range_tree.test.cpp
+  - icon: ':heavy_check_mark:'
     path: data_structure/test/static_range_frequency.test.cpp
     title: data_structure/test/static_range_frequency.test.cpp
   - icon: ':heavy_check_mark:'
@@ -187,6 +190,7 @@ data:
   - data_structure/test/dsl_2_g.test.cpp
   - data_structure/test/cartesian_tree.test.cpp
   - data_structure/test/staticrmq.test.cpp
+  - data_structure/test/rectangle_sum_range_tree.test.cpp
   - data_structure/test/1891.test.cpp
   - data_structure/test/point_add_range_sum.test.cpp
   - data_structure/test/queue_operate_all_composite.test.cpp

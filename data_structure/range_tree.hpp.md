@@ -4,8 +4,8 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: data_structure/test/rectangle_sum.test.cpp
-    title: data_structure/test/rectangle_sum.test.cpp
+    path: data_structure/test/rectangle_sum_range_tree.test.cpp
+    title: data_structure/test/rectangle_sum_range_tree.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -90,7 +90,7 @@ data:
   timestamp: '2023-12-26 17:08:45+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - data_structure/test/rectangle_sum.test.cpp
+  - data_structure/test/rectangle_sum_range_tree.test.cpp
 documentation_of: data_structure/range_tree.hpp
 layout: document
 redirect_from:

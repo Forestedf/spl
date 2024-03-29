@@ -33,6 +33,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: data_structure/range_tree.hpp
       title: data_structure/range_tree.hpp
+    - icon: ':heavy_check_mark:'
+      path: data_structure/rectangle_sum.hpp
+      title: data_structure/rectangle_sum.hpp
     - icon: ':warning:'
       path: data_structure/removable_priority_queue.hpp
       title: data_structure/removable_priority_queue.hpp
@@ -169,6 +172,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: data_structure/test/rectangle_sum.test.cpp
       title: data_structure/test/rectangle_sum.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: data_structure/test/rectangle_sum_range_tree.test.cpp
+      title: data_structure/test/rectangle_sum_range_tree.test.cpp
     - icon: ':heavy_check_mark:'
       path: data_structure/test/static_range_frequency.test.cpp
       title: data_structure/test/static_range_frequency.test.cpp

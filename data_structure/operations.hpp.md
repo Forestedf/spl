@@ -12,6 +12,9 @@ data:
     path: data_structure/range_add_range_sum.hpp
     title: data_structure/range_add_range_sum.hpp
   - icon: ':heavy_check_mark:'
+    path: data_structure/rectangle_sum.hpp
+    title: data_structure/rectangle_sum.hpp
+  - icon: ':heavy_check_mark:'
     path: data_structure/segment_tree.hpp
     title: data_structure/segment_tree.hpp
   _extendedVerifiedWith:
@@ -30,6 +33,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: data_structure/test/rectangle_sum.test.cpp
     title: data_structure/test/rectangle_sum.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: data_structure/test/rectangle_sum_range_tree.test.cpp
+    title: data_structure/test/rectangle_sum_range_tree.test.cpp
   - icon: ':heavy_check_mark:'
     path: graph/test/vertex_add_path_sum.test.cpp
     title: graph/test/vertex_add_path_sum.test.cpp
@@ -91,11 +97,13 @@ data:
   - data_structure/range_add_range_sum.hpp
   - data_structure/segment_tree.hpp
   - data_structure/fenwick_tree.hpp
+  - data_structure/rectangle_sum.hpp
   timestamp: '2023-12-26 16:56:23+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - data_structure/test/rectangle_sum.test.cpp
   - data_structure/test/dsl_2_g.test.cpp
+  - data_structure/test/rectangle_sum_range_tree.test.cpp
   - data_structure/test/point_add_range_sum.test.cpp
   - data_structure/test/point_set_range_composite.test.cpp
   - data_structure/test/point_add_rectangle_sum.test.cpp

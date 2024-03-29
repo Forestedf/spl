@@ -100,28 +100,28 @@ constexpr T ceil_div(T x, T y) {
     }
 }
 
-// a, b >= 1
-// finds (x, y) such that |x| <= b, |y| <= a, a * x + b * y == gcd(a, b)
+// b >= 1
+// returns (g, x) s.t. g = gcd(a, b), a * x = g (mod b), 0 <= x < b / g
+// from ACL
 template <typename T>
 std::pair<T, T> extgcd(T a, T b) {
-    if (a % b == 0) {
-        return std::pair<T, T>(0, 1);
-    } else {
-        T q = a / b, r = a % b;
-        auto [c, d] = extgcd(b, r);
-        return std::pair<T, T>(d, c - q * d);
+    a = safe_mod(a, b);
+    T s = b, t = a, m0 = 0, m1 = 1;
+    while (t) {
+        T u = s / t;
+        s -= t * u;
+        m0 -= m1 * u;
+        std::swap(s, t);
+        std::swap(m0, m1);
     }
+    if (m0 < 0) {
+        m0 += b / s;
+    }
+    return std::pair<T, T>(s, m0);
 }
 
 // gcd(x, m) == 1
 template <typename T>
 T inv_mod(T x, T m) {
-    auto [a, b] = extgcd(x, m);
-    if (a < 0) {
-        a += m;
-    }
-    if (a == m) {
-        a -= m;
-    }
-    return a;
+    return extgcd(x, m).second;
 }

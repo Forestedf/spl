@@ -51,16 +51,16 @@ data:
     \        return CommutativeGroup::op(sum(r), CommutativeGroup::inv(sum(l)));\n\
     \    }\n};\n\ntemplate <typename T>\nusing FenwickTreeAdd = FenwickTree<Add<T>>;\n\
     #line 4 \"data_structure/range_add_point_get.hpp\"\n\ntemplate <typename T>\n\
-    class RangeAddRangeSum {\n    int n;\n    FenwickTree<Add<T>> ft;\n\npublic:\n\
-    \    RangeAddRangeSum(int n) : n(n), ft(n + 1) {}\n\n    void add(int l, int r,\
+    class RangeAddPointGet {\n    int n;\n    FenwickTree<Add<T>> ft;\n\npublic:\n\
+    \    RangeAddPointGet(int n) : n(n), ft(n + 1) {}\n\n    void add(int l, int r,\
     \ const T &v) {\n        assert(0 <= l && l <= r && r <= n);\n        ft.add(l,\
-    \ v);\n        ft.add(r, -v);\n    }\n\n    T sum(int idx) const {\n        assert(0\
+    \ v);\n        ft.add(r, -v);\n    }\n\n    T get(int idx) const {\n        assert(0\
     \ <= idx && idx < n);\n        return ft.sum(idx + 1);\n    }\n};\n"
   code: "#pragma once\n\n#include \"fenwick_tree.hpp\"\n\ntemplate <typename T>\n\
-    class RangeAddRangeSum {\n    int n;\n    FenwickTree<Add<T>> ft;\n\npublic:\n\
-    \    RangeAddRangeSum(int n) : n(n), ft(n + 1) {}\n\n    void add(int l, int r,\
+    class RangeAddPointGet {\n    int n;\n    FenwickTree<Add<T>> ft;\n\npublic:\n\
+    \    RangeAddPointGet(int n) : n(n), ft(n + 1) {}\n\n    void add(int l, int r,\
     \ const T &v) {\n        assert(0 <= l && l <= r && r <= n);\n        ft.add(l,\
-    \ v);\n        ft.add(r, -v);\n    }\n\n    T sum(int idx) const {\n        assert(0\
+    \ v);\n        ft.add(r, -v);\n    }\n\n    T get(int idx) const {\n        assert(0\
     \ <= idx && idx < n);\n        return ft.sum(idx + 1);\n    }\n};"
   dependsOn:
   - data_structure/fenwick_tree.hpp
@@ -68,7 +68,7 @@ data:
   isVerificationFile: false
   path: data_structure/range_add_point_get.hpp
   requiredBy: []
-  timestamp: '2024-02-04 18:18:19+09:00'
+  timestamp: '2024-02-24 21:55:02+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: data_structure/range_add_point_get.hpp

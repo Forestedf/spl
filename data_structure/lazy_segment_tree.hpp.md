@@ -1,8 +1,14 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: data_structure/union_of_rectangles.hpp
+    title: data_structure/union_of_rectangles.hpp
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: data_structure/test/area_of_union_of_rectangles.test.cpp
+    title: data_structure/test/area_of_union_of_rectangles.test.cpp
   - icon: ':heavy_check_mark:'
     path: data_structure/test/range_affine_range_sum.test.cpp
     title: data_structure/test/range_affine_range_sum.test.cpp
@@ -119,11 +125,13 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: data_structure/lazy_segment_tree.hpp
-  requiredBy: []
+  requiredBy:
+  - data_structure/union_of_rectangles.hpp
   timestamp: '2023-12-26 16:56:23+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - data_structure/test/range_affine_range_sum.test.cpp
+  - data_structure/test/area_of_union_of_rectangles.test.cpp
 documentation_of: data_structure/lazy_segment_tree.hpp
 layout: document
 redirect_from:

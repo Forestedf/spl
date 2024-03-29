@@ -33,6 +33,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: data_structure/range_tree.hpp
       title: data_structure/range_tree.hpp
+    - icon: ':warning:'
+      path: data_structure/removable_priority_queue.hpp
+      title: data_structure/removable_priority_queue.hpp
     - icon: ':heavy_check_mark:'
       path: data_structure/segment_tree.hpp
       title: data_structure/segment_tree.hpp
@@ -54,6 +57,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: data_structure/union_find.hpp
       title: data_structure/union_find.hpp
+    - icon: ':heavy_check_mark:'
+      path: data_structure/union_of_rectangles.hpp
+      title: data_structure/union_of_rectangles.hpp
     - icon: ':heavy_check_mark:'
       path: data_structure/wavelet_matrix.hpp
       title: data_structure/wavelet_matrix.hpp
@@ -133,6 +139,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: data_structure/test/1891.test.cpp
       title: data_structure/test/1891.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: data_structure/test/area_of_union_of_rectangles.test.cpp
+      title: data_structure/test/area_of_union_of_rectangles.test.cpp
     - icon: ':heavy_check_mark:'
       path: data_structure/test/cartesian_tree.test.cpp
       title: data_structure/test/cartesian_tree.test.cpp

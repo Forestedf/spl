@@ -114,10 +114,18 @@ data:
     \    a = safe_mod(a, b);\n    T s = b, t = a, m0 = 0, m1 = 1;\n    while (t) {\n\
     \        T u = s / t;\n        s -= t * u;\n        m0 -= m1 * u;\n        std::swap(s,\
     \ t);\n        std::swap(m0, m1);\n    }\n    if (m0 < 0) {\n        m0 += b /\
-    \ s;\n    }\n    return std::pair<T, T>(s, m0);\n}\n\n// gcd(x, m) == 1\ntemplate\
-    \ <typename T>\nT inv_mod(T x, T m) {\n    return extgcd(x, m).second;\n}\n#line\
-    \ 7 \"number_theory/mod_int.hpp\"\n\ntemplate <unsigned mod>\nstruct ModInt {\n\
-    \    static_assert(mod != 0, \"`mod` must not be equal to 0.\");\n    static_assert(mod\
+    \ s;\n    }\n    return std::pair<T, T>(s, m0);\n}\n\n// b >= 1\n// returns (g,\
+    \ x, y) s.t. g = gcd(a, b), a * x + b * y = g, 0 <= x < b / g, |y| < max(2, |a|\
+    \ / g)\ntemplate <typename T>\nstd::tuple<T, T, T> extgcd2(T a, T b) {\n    T\
+    \ _a = safe_mod(a, b);\n    T quot = (a - _a) / b;\n    T x00 = 0, x01 = 1, y0\
+    \ = b;\n    T x10 = 1, x11 = -quot, y1 = _a;\n    while (y1) {\n        T u =\
+    \ y0 / y1;\n        x00 -= u * x10;\n        x01 -= u * x11;\n        y0 -= u\
+    \ * y1;\n        std::swap(x00, x10);\n        std::swap(x01, x11);\n        std::swap(y0,\
+    \ y1);\n    }\n    if (x00 < 0) {\n        x00 += b / y0;\n        x01 -= a /\
+    \ y0;\n    }\n    return std::tuple<T, T, T>(y0, x00, x01);\n}\n\n// gcd(x, m)\
+    \ == 1\ntemplate <typename T>\nT inv_mod(T x, T m) {\n    return extgcd(x, m).second;\n\
+    }\n#line 7 \"number_theory/mod_int.hpp\"\n\ntemplate <unsigned mod>\nstruct ModInt\
+    \ {\n    static_assert(mod != 0, \"`mod` must not be equal to 0.\");\n    static_assert(mod\
     \ < (1u << 31),\n                  \"`mod` must be less than (1u << 31) = 2147483648.\"\
     );\n\n    unsigned val;\n\n    static constexpr unsigned get_mod() { return mod;\
     \ }\n\n    constexpr ModInt() : val(0) {}\n    template <typename T, std::enable_if_t<std::is_signed_v<T>>\
@@ -237,7 +245,7 @@ data:
   isVerificationFile: true
   path: data_structure/test/point_set_range_composite.test.cpp
   requiredBy: []
-  timestamp: '2024-03-29 11:59:03+09:00'
+  timestamp: '2024-03-29 12:47:49+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: data_structure/test/point_set_range_composite.test.cpp

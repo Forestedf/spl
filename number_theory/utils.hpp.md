@@ -25,6 +25,9 @@ data:
     path: number_theory/test/ax_by_c_stress.test.cpp
     title: number_theory/test/ax_by_c_stress.test.cpp
   - icon: ':heavy_check_mark:'
+    path: number_theory/test/extgcd2_stress.test.cpp
+    title: number_theory/test/extgcd2_stress.test.cpp
+  - icon: ':heavy_check_mark:'
     path: number_theory/test/inv_mod_stress.test.cpp
     title: number_theory/test/inv_mod_stress.test.cpp
   _isVerificationFailed: false
@@ -65,7 +68,15 @@ data:
     \ m1 = 1;\n    while (t) {\n        T u = s / t;\n        s -= t * u;\n      \
     \  m0 -= m1 * u;\n        std::swap(s, t);\n        std::swap(m0, m1);\n    }\n\
     \    if (m0 < 0) {\n        m0 += b / s;\n    }\n    return std::pair<T, T>(s,\
-    \ m0);\n}\n\n// gcd(x, m) == 1\ntemplate <typename T>\nT inv_mod(T x, T m) {\n\
+    \ m0);\n}\n\n// b >= 1\n// returns (g, x, y) s.t. g = gcd(a, b), a * x + b * y\
+    \ = g, 0 <= x < b / g, |y| < max(2, |a| / g)\ntemplate <typename T>\nstd::tuple<T,\
+    \ T, T> extgcd2(T a, T b) {\n    T _a = safe_mod(a, b);\n    T quot = (a - _a)\
+    \ / b;\n    T x00 = 0, x01 = 1, y0 = b;\n    T x10 = 1, x11 = -quot, y1 = _a;\n\
+    \    while (y1) {\n        T u = y0 / y1;\n        x00 -= u * x10;\n        x01\
+    \ -= u * x11;\n        y0 -= u * y1;\n        std::swap(x00, x10);\n        std::swap(x01,\
+    \ x11);\n        std::swap(y0, y1);\n    }\n    if (x00 < 0) {\n        x00 +=\
+    \ b / y0;\n        x01 -= a / y0;\n    }\n    return std::tuple<T, T, T>(y0, x00,\
+    \ x01);\n}\n\n// gcd(x, m) == 1\ntemplate <typename T>\nT inv_mod(T x, T m) {\n\
     \    return extgcd(x, m).second;\n}\n"
   code: "#pragma once\n\n#include <utility>\n\nconstexpr bool is_prime(unsigned n)\
     \ {\n    if (n == 0 || n == 1) {\n        return false;\n    }\n    for (unsigned\
@@ -99,15 +110,24 @@ data:
     \    a = safe_mod(a, b);\n    T s = b, t = a, m0 = 0, m1 = 1;\n    while (t) {\n\
     \        T u = s / t;\n        s -= t * u;\n        m0 -= m1 * u;\n        std::swap(s,\
     \ t);\n        std::swap(m0, m1);\n    }\n    if (m0 < 0) {\n        m0 += b /\
-    \ s;\n    }\n    return std::pair<T, T>(s, m0);\n}\n\n// gcd(x, m) == 1\ntemplate\
-    \ <typename T>\nT inv_mod(T x, T m) {\n    return extgcd(x, m).second;\n}"
+    \ s;\n    }\n    return std::pair<T, T>(s, m0);\n}\n\n// b >= 1\n// returns (g,\
+    \ x, y) s.t. g = gcd(a, b), a * x + b * y = g, 0 <= x < b / g, |y| < max(2, |a|\
+    \ / g)\ntemplate <typename T>\nstd::tuple<T, T, T> extgcd2(T a, T b) {\n    T\
+    \ _a = safe_mod(a, b);\n    T quot = (a - _a) / b;\n    T x00 = 0, x01 = 1, y0\
+    \ = b;\n    T x10 = 1, x11 = -quot, y1 = _a;\n    while (y1) {\n        T u =\
+    \ y0 / y1;\n        x00 -= u * x10;\n        x01 -= u * x11;\n        y0 -= u\
+    \ * y1;\n        std::swap(x00, x10);\n        std::swap(x01, x11);\n        std::swap(y0,\
+    \ y1);\n    }\n    if (x00 < 0) {\n        x00 += b / y0;\n        x01 -= a /\
+    \ y0;\n    }\n    return std::tuple<T, T, T>(y0, x00, x01);\n}\n\n// gcd(x, m)\
+    \ == 1\ntemplate <typename T>\nT inv_mod(T x, T m) {\n    return extgcd(x, m).second;\n\
+    }"
   dependsOn: []
   isVerificationFile: false
   path: number_theory/utils.hpp
   requiredBy:
   - number_theory/ax_by_c.hpp
   - number_theory/mod_int.hpp
-  timestamp: '2024-03-29 11:59:03+09:00'
+  timestamp: '2024-03-29 12:47:49+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - data_structure/test/1891.test.cpp
@@ -116,6 +136,7 @@ data:
   - data_structure/test/point_set_range_composite.test.cpp
   - number_theory/test/inv_mod_stress.test.cpp
   - number_theory/test/ax_by_c_stress.test.cpp
+  - number_theory/test/extgcd2_stress.test.cpp
 documentation_of: number_theory/utils.hpp
 layout: document
 redirect_from:

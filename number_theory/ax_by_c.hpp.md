@@ -47,20 +47,28 @@ data:
     \    a = safe_mod(a, b);\n    T s = b, t = a, m0 = 0, m1 = 1;\n    while (t) {\n\
     \        T u = s / t;\n        s -= t * u;\n        m0 -= m1 * u;\n        std::swap(s,\
     \ t);\n        std::swap(m0, m1);\n    }\n    if (m0 < 0) {\n        m0 += b /\
-    \ s;\n    }\n    return std::pair<T, T>(s, m0);\n}\n\n// gcd(x, m) == 1\ntemplate\
-    \ <typename T>\nT inv_mod(T x, T m) {\n    return extgcd(x, m).second;\n}\n#line\
-    \ 4 \"number_theory/ax_by_c.hpp\"\n#include <optional>\n\n// solve a * x + b *\
-    \ y = c\n// |x| <= |b * c|, |y| <= |a * c| (|a|, |b|, |c| > 0)\ntemplate <typename\
-    \ T>\nstd::optional<std::pair<T, T>> ax_by_c(T a, T b, T c) {\n    if (c == 0)\
-    \ {\n        return std::pair<T, T>(0, 0);\n    }\n    if (a == 0 && b == 0) {\n\
-    \        return std::nullopt;\n    }\n    if (a == 0) {\n        if (c % b) {\n\
-    \            return std::nullopt;\n        }\n        return std::pair<T, T>(0,\
-    \ c / b);\n    }\n    if (b == 0) {\n        if (c % a) {\n            return\
+    \ s;\n    }\n    return std::pair<T, T>(s, m0);\n}\n\n// b >= 1\n// returns (g,\
+    \ x, y) s.t. g = gcd(a, b), a * x + b * y = g, 0 <= x < b / g, |y| < max(2, |a|\
+    \ / g)\ntemplate <typename T>\nstd::tuple<T, T, T> extgcd2(T a, T b) {\n    T\
+    \ _a = safe_mod(a, b);\n    T quot = (a - _a) / b;\n    T x00 = 0, x01 = 1, y0\
+    \ = b;\n    T x10 = 1, x11 = -quot, y1 = _a;\n    while (y1) {\n        T u =\
+    \ y0 / y1;\n        x00 -= u * x10;\n        x01 -= u * x11;\n        y0 -= u\
+    \ * y1;\n        std::swap(x00, x10);\n        std::swap(x01, x11);\n        std::swap(y0,\
+    \ y1);\n    }\n    if (x00 < 0) {\n        x00 += b / y0;\n        x01 -= a /\
+    \ y0;\n    }\n    return std::tuple<T, T, T>(y0, x00, x01);\n}\n\n// gcd(x, m)\
+    \ == 1\ntemplate <typename T>\nT inv_mod(T x, T m) {\n    return extgcd(x, m).second;\n\
+    }\n#line 4 \"number_theory/ax_by_c.hpp\"\n#include <optional>\n\n// solve a *\
+    \ x + b * y = c\n// |x| <= |b * c|, |y| <= |a * c| (|a|, |b|, |c| > 0)\ntemplate\
+    \ <typename T>\nstd::optional<std::pair<T, T>> ax_by_c(T a, T b, T c) {\n    if\
+    \ (c == 0) {\n        return std::pair<T, T>(0, 0);\n    }\n    if (a == 0 &&\
+    \ b == 0) {\n        return std::nullopt;\n    }\n    if (a == 0) {\n        if\
+    \ (c % b) {\n            return std::nullopt;\n        }\n        return std::pair<T,\
+    \ T>(0, c / b);\n    }\n    if (b == 0) {\n        if (c % a) {\n            return\
     \ std::nullopt;\n        }\n        return std::pair<T, T>(c / a, 0);\n    }\n\
     \    if (b < 0) {\n        a = -a;\n        b = -b;\n        c = -c;\n    }\n\
-    \    auto [g, x] = extgcd(a, b);\n    if (c % g) {\n        return std::nullopt;\n\
-    \    } \n    T y = (g - a * x) / b;\n    T mult = c / g;\n    x *= mult;\n   \
-    \ y *= mult;\n    return std::pair<T, T>(x, y);\n}\n"
+    \    auto [g, x, y] = extgcd2(a, b);\n    if (c % g) {\n        return std::nullopt;\n\
+    \    }\n    T mult = c / g;\n    x *= mult;\n    y *= mult;\n    return std::pair<T,\
+    \ T>(x, y);\n}\n"
   code: "#pragma once\n\n#include \"utils.hpp\"\n#include <optional>\n\n// solve a\
     \ * x + b * y = c\n// |x| <= |b * c|, |y| <= |a * c| (|a|, |b|, |c| > 0)\ntemplate\
     \ <typename T>\nstd::optional<std::pair<T, T>> ax_by_c(T a, T b, T c) {\n    if\
@@ -70,15 +78,15 @@ data:
     \ T>(0, c / b);\n    }\n    if (b == 0) {\n        if (c % a) {\n            return\
     \ std::nullopt;\n        }\n        return std::pair<T, T>(c / a, 0);\n    }\n\
     \    if (b < 0) {\n        a = -a;\n        b = -b;\n        c = -c;\n    }\n\
-    \    auto [g, x] = extgcd(a, b);\n    if (c % g) {\n        return std::nullopt;\n\
-    \    } \n    T y = (g - a * x) / b;\n    T mult = c / g;\n    x *= mult;\n   \
-    \ y *= mult;\n    return std::pair<T, T>(x, y);\n}\n"
+    \    auto [g, x, y] = extgcd2(a, b);\n    if (c % g) {\n        return std::nullopt;\n\
+    \    }\n    T mult = c / g;\n    x *= mult;\n    y *= mult;\n    return std::pair<T,\
+    \ T>(x, y);\n}\n"
   dependsOn:
   - number_theory/utils.hpp
   isVerificationFile: false
   path: number_theory/ax_by_c.hpp
   requiredBy: []
-  timestamp: '2024-03-29 11:59:03+09:00'
+  timestamp: '2024-03-29 12:47:49+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - number_theory/test/ax_by_c_stress.test.cpp

@@ -225,6 +225,9 @@ data:
       path: number_theory/test/ax_by_c_stress.test.cpp
       title: number_theory/test/ax_by_c_stress.test.cpp
     - icon: ':heavy_check_mark:'
+      path: number_theory/test/extgcd2_stress.test.cpp
+      title: number_theory/test/extgcd2_stress.test.cpp
+    - icon: ':heavy_check_mark:'
       path: number_theory/test/frac_binsearch_stress.test.cpp
       title: number_theory/test/frac_binsearch_stress.test.cpp
     - icon: ':heavy_check_mark:'

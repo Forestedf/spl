@@ -20,7 +20,7 @@ data:
     PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/lesson/2/ITP1/1/ITP1_1_A
     links:
     - https://onlinejudge.u-aizu.ac.jp/courses/lesson/2/ITP1/1/ITP1_1_A
-  bundledCode: "#line 1 \"number_theory/test/inv_mod_stress.test.cpp\"\n#define PROBLEM\
+  bundledCode: "#line 1 \"number_theory/test/extgcd2_stress.test.cpp\"\n#define PROBLEM\
     \ \"https://onlinejudge.u-aizu.ac.jp/courses/lesson/2/ITP1/1/ITP1_1_A\"\n#define\
     \ FAST_IO\n#define FIX_SEED\n\n#line 1 \"template/template.hpp\"\n#include <bits/stdc++.h>\n\
     #define OVERRIDE(a, b, c, d, ...) d\n#define REP2(i, n) for (i32 i = 0; i < (i32)(n);\
@@ -110,38 +110,42 @@ data:
     \ x11);\n        std::swap(y0, y1);\n    }\n    if (x00 < 0) {\n        x00 +=\
     \ b / y0;\n        x01 -= a / y0;\n    }\n    return std::tuple<T, T, T>(y0, x00,\
     \ x01);\n}\n\n// gcd(x, m) == 1\ntemplate <typename T>\nT inv_mod(T x, T m) {\n\
-    \    return extgcd(x, m).second;\n}\n#line 8 \"number_theory/test/inv_mod_stress.test.cpp\"\
-    \n\nvoid test() {\n    constexpr int ITER = 1'000'000;\n    for (int t = 0; t\
-    \ < ITER; ++t) {\n        int a = uniform(1, 1'000'000'000);\n        int b =\
-    \ uniform(1, 1'000'000'000);\n        while (gcd(a, b) != 1) {\n            a\
-    \ = uniform(1, 1'000'000'000);\n            b = uniform(1, 1'000'000'000);\n \
-    \       }\n        int c = inv_mod(a, b);\n        assert((long long)a * c % b\
-    \ == 1 && 0 <= c && c < b);\n    }\n}\n\nint main() {\n    test();\n    cout <<\
-    \ \"Hello World\\n\";\n}\n"
+    \    return extgcd(x, m).second;\n}\n#line 8 \"number_theory/test/extgcd2_stress.test.cpp\"\
+    \n\nvoid test(int a, int b) {\n    auto [g, x, y] = extgcd2(a, b);\n    assert(g\
+    \ == gcd(a, b));\n    assert((long long)a * x + (long long)b * y == g);\n    assert(0\
+    \ <= x && x < b / g);\n    assert(abs(y) < max(2, abs(a) / g));\n}\n\nvoid test()\
+    \ {\n    constexpr int ITER = 1'000'000;\n    for (int t = 0; t < ITER; ++t) {\n\
+    \        int a = uniform(-1'000'000'000, 1'000'000'000);\n        int b = uniform(1,\
+    \ 1'000'000'000);\n        test(a, b);\n    }\n    for (int a = -1000; a <= 1000;\
+    \ ++a) {\n        for (int b = 1; b <= 1000; ++b) {\n            test(a, b);\n\
+    \        }\n    }\n}\n\nint main() {\n    test();\n    cout << \"Hello World\\\
+    n\";\n}\n"
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/lesson/2/ITP1/1/ITP1_1_A\"\
     \n#define FAST_IO\n#define FIX_SEED\n\n#include \"../../template/template.hpp\"\
     \n#include \"../../template/random.hpp\"\n#include \"../../number_theory/utils.hpp\"\
-    \n\nvoid test() {\n    constexpr int ITER = 1'000'000;\n    for (int t = 0; t\
-    \ < ITER; ++t) {\n        int a = uniform(1, 1'000'000'000);\n        int b =\
-    \ uniform(1, 1'000'000'000);\n        while (gcd(a, b) != 1) {\n            a\
-    \ = uniform(1, 1'000'000'000);\n            b = uniform(1, 1'000'000'000);\n \
-    \       }\n        int c = inv_mod(a, b);\n        assert((long long)a * c % b\
-    \ == 1 && 0 <= c && c < b);\n    }\n}\n\nint main() {\n    test();\n    cout <<\
-    \ \"Hello World\\n\";\n}\n"
+    \n\nvoid test(int a, int b) {\n    auto [g, x, y] = extgcd2(a, b);\n    assert(g\
+    \ == gcd(a, b));\n    assert((long long)a * x + (long long)b * y == g);\n    assert(0\
+    \ <= x && x < b / g);\n    assert(abs(y) < max(2, abs(a) / g));\n}\n\nvoid test()\
+    \ {\n    constexpr int ITER = 1'000'000;\n    for (int t = 0; t < ITER; ++t) {\n\
+    \        int a = uniform(-1'000'000'000, 1'000'000'000);\n        int b = uniform(1,\
+    \ 1'000'000'000);\n        test(a, b);\n    }\n    for (int a = -1000; a <= 1000;\
+    \ ++a) {\n        for (int b = 1; b <= 1000; ++b) {\n            test(a, b);\n\
+    \        }\n    }\n}\n\nint main() {\n    test();\n    cout << \"Hello World\\\
+    n\";\n}\n"
   dependsOn:
   - template/template.hpp
   - template/random.hpp
   - number_theory/utils.hpp
   isVerificationFile: true
-  path: number_theory/test/inv_mod_stress.test.cpp
+  path: number_theory/test/extgcd2_stress.test.cpp
   requiredBy: []
   timestamp: '2024-03-29 12:47:49+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: number_theory/test/inv_mod_stress.test.cpp
+documentation_of: number_theory/test/extgcd2_stress.test.cpp
 layout: document
 redirect_from:
-- /verify/number_theory/test/inv_mod_stress.test.cpp
-- /verify/number_theory/test/inv_mod_stress.test.cpp.html
-title: number_theory/test/inv_mod_stress.test.cpp
+- /verify/number_theory/test/extgcd2_stress.test.cpp
+- /verify/number_theory/test/extgcd2_stress.test.cpp.html
+title: number_theory/test/extgcd2_stress.test.cpp
 ---

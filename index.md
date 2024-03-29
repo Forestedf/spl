@@ -133,6 +133,9 @@ data:
     - icon: ':warning:'
       path: template/debug.hpp
       title: template/debug.hpp
+    - icon: ':warning:'
+      path: template/fastio.hpp
+      title: template/fastio.hpp
     - icon: ':heavy_check_mark:'
       path: template/random.hpp
       title: template/random.hpp

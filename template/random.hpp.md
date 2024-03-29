@@ -7,6 +7,9 @@ data:
     path: data_structure/test/wavelet_matrix.test.cpp
     title: data_structure/test/wavelet_matrix.test.cpp
   - icon: ':heavy_check_mark:'
+    path: number_theory/test/ax_by_c_stress.test.cpp
+    title: number_theory/test/ax_by_c_stress.test.cpp
+  - icon: ':heavy_check_mark:'
     path: number_theory/test/frac_binsearch_stress.test.cpp
     title: number_theory/test/frac_binsearch_stress.test.cpp
   - icon: ':heavy_check_mark:'
@@ -38,6 +41,7 @@ data:
   verifiedWith:
   - data_structure/test/wavelet_matrix.test.cpp
   - number_theory/test/inv_mod_stress.test.cpp
+  - number_theory/test/ax_by_c_stress.test.cpp
   - number_theory/test/frac_binsearch_stress.test.cpp
 documentation_of: template/random.hpp
 layout: document

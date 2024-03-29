@@ -3,6 +3,9 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
+    path: number_theory/ax_by_c.hpp
+    title: number_theory/ax_by_c.hpp
+  - icon: ':heavy_check_mark:'
     path: number_theory/mod_int.hpp
     title: number_theory/mod_int.hpp
   _extendedVerifiedWith:
@@ -18,6 +21,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: data_structure/test/range_affine_range_sum.test.cpp
     title: data_structure/test/range_affine_range_sum.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: number_theory/test/ax_by_c_stress.test.cpp
+    title: number_theory/test/ax_by_c_stress.test.cpp
   - icon: ':heavy_check_mark:'
     path: number_theory/test/inv_mod_stress.test.cpp
     title: number_theory/test/inv_mod_stress.test.cpp
@@ -53,14 +59,14 @@ data:
     \ - 1) / y);\n    }\n}\n\n// y != 0\ntemplate <typename T>\nconstexpr T ceil_div(T\
     \ x, T y) {\n    if (y < 0) {\n        x *= -1;\n        y *= -1;\n    }\n   \
     \ if (x >= 0) {\n        return (x + y - 1) / y;\n    } else {\n        return\
-    \ -(-x / y);\n    }\n}\n\n// a, b >= 1\n// finds (x, y) such that |x| <= b, |y|\
-    \ <= a, a * x + b * y == gcd(a, b)\ntemplate <typename T>\nstd::pair<T, T> extgcd(T\
-    \ a, T b) {\n    if (a % b == 0) {\n        return std::pair<T, T>(0, 1);\n  \
-    \  } else {\n        T q = a / b, r = a % b;\n        auto [c, d] = extgcd(b,\
-    \ r);\n        return std::pair<T, T>(d, c - q * d);\n    }\n}\n\n// gcd(x, m)\
-    \ == 1\ntemplate <typename T>\nT inv_mod(T x, T m) {\n    auto [a, b] = extgcd(x,\
-    \ m);\n    if (a < 0) {\n        a += m;\n    }\n    if (a == m) {\n        a\
-    \ -= m;\n    }\n    return a;\n}\n"
+    \ -(-x / y);\n    }\n}\n\n// b >= 1\n// returns (g, x) s.t. g = gcd(a, b), a *\
+    \ x = g (mod b), 0 <= x < b / g\n// from ACL\ntemplate <typename T>\nstd::pair<T,\
+    \ T> extgcd(T a, T b) {\n    a = safe_mod(a, b);\n    T s = b, t = a, m0 = 0,\
+    \ m1 = 1;\n    while (t) {\n        T u = s / t;\n        s -= t * u;\n      \
+    \  m0 -= m1 * u;\n        std::swap(s, t);\n        std::swap(m0, m1);\n    }\n\
+    \    if (m0 < 0) {\n        m0 += b / s;\n    }\n    return std::pair<T, T>(s,\
+    \ m0);\n}\n\n// gcd(x, m) == 1\ntemplate <typename T>\nT inv_mod(T x, T m) {\n\
+    \    return extgcd(x, m).second;\n}\n"
   code: "#pragma once\n\n#include <utility>\n\nconstexpr bool is_prime(unsigned n)\
     \ {\n    if (n == 0 || n == 1) {\n        return false;\n    }\n    for (unsigned\
     \ i = 2; i * i <= n; ++i) {\n        if (n % i == 0) {\n            return false;\n\
@@ -87,20 +93,21 @@ data:
     \ / y;\n    } else {\n        return -((-x + y - 1) / y);\n    }\n}\n\n// y !=\
     \ 0\ntemplate <typename T>\nconstexpr T ceil_div(T x, T y) {\n    if (y < 0) {\n\
     \        x *= -1;\n        y *= -1;\n    }\n    if (x >= 0) {\n        return\
-    \ (x + y - 1) / y;\n    } else {\n        return -(-x / y);\n    }\n}\n\n// a,\
-    \ b >= 1\n// finds (x, y) such that |x| <= b, |y| <= a, a * x + b * y == gcd(a,\
-    \ b)\ntemplate <typename T>\nstd::pair<T, T> extgcd(T a, T b) {\n    if (a % b\
-    \ == 0) {\n        return std::pair<T, T>(0, 1);\n    } else {\n        T q =\
-    \ a / b, r = a % b;\n        auto [c, d] = extgcd(b, r);\n        return std::pair<T,\
-    \ T>(d, c - q * d);\n    }\n}\n\n// gcd(x, m) == 1\ntemplate <typename T>\nT inv_mod(T\
-    \ x, T m) {\n    auto [a, b] = extgcd(x, m);\n    if (a < 0) {\n        a += m;\n\
-    \    }\n    if (a == m) {\n        a -= m;\n    }\n    return a;\n}"
+    \ (x + y - 1) / y;\n    } else {\n        return -(-x / y);\n    }\n}\n\n// b\
+    \ >= 1\n// returns (g, x) s.t. g = gcd(a, b), a * x = g (mod b), 0 <= x < b /\
+    \ g\n// from ACL\ntemplate <typename T>\nstd::pair<T, T> extgcd(T a, T b) {\n\
+    \    a = safe_mod(a, b);\n    T s = b, t = a, m0 = 0, m1 = 1;\n    while (t) {\n\
+    \        T u = s / t;\n        s -= t * u;\n        m0 -= m1 * u;\n        std::swap(s,\
+    \ t);\n        std::swap(m0, m1);\n    }\n    if (m0 < 0) {\n        m0 += b /\
+    \ s;\n    }\n    return std::pair<T, T>(s, m0);\n}\n\n// gcd(x, m) == 1\ntemplate\
+    \ <typename T>\nT inv_mod(T x, T m) {\n    return extgcd(x, m).second;\n}"
   dependsOn: []
   isVerificationFile: false
   path: number_theory/utils.hpp
   requiredBy:
+  - number_theory/ax_by_c.hpp
   - number_theory/mod_int.hpp
-  timestamp: '2024-02-10 22:34:05+09:00'
+  timestamp: '2024-03-29 11:59:03+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - data_structure/test/1891.test.cpp
@@ -108,6 +115,7 @@ data:
   - data_structure/test/range_affine_range_sum.test.cpp
   - data_structure/test/point_set_range_composite.test.cpp
   - number_theory/test/inv_mod_stress.test.cpp
+  - number_theory/test/ax_by_c_stress.test.cpp
 documentation_of: number_theory/utils.hpp
 layout: document
 redirect_from:

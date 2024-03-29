@@ -79,6 +79,9 @@ data:
     path: graph/test/vertex_add_path_sum.test.cpp
     title: graph/test/vertex_add_path_sum.test.cpp
   - icon: ':heavy_check_mark:'
+    path: number_theory/test/ax_by_c_stress.test.cpp
+    title: number_theory/test/ax_by_c_stress.test.cpp
+  - icon: ':heavy_check_mark:'
     path: number_theory/test/frac_binsearch_stress.test.cpp
     title: number_theory/test/frac_binsearch_stress.test.cpp
   - icon: ':heavy_check_mark:'
@@ -200,6 +203,7 @@ data:
   - data_structure/test/point_set_range_composite.test.cpp
   - data_structure/test/point_add_rectangle_sum.test.cpp
   - number_theory/test/inv_mod_stress.test.cpp
+  - number_theory/test/ax_by_c_stress.test.cpp
   - number_theory/test/frac_binsearch_stress.test.cpp
   - graph/test/vertex_add_path_sum.test.cpp
   - graph/test/ALDS1_11_D.test.cpp

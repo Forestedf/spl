@@ -95,14 +95,14 @@ data:
     \ -((-x + y - 1) / y);\n    }\n}\n\n// y != 0\ntemplate <typename T>\nconstexpr\
     \ T ceil_div(T x, T y) {\n    if (y < 0) {\n        x *= -1;\n        y *= -1;\n\
     \    }\n    if (x >= 0) {\n        return (x + y - 1) / y;\n    } else {\n   \
-    \     return -(-x / y);\n    }\n}\n\n// a, b >= 1\n// finds (x, y) such that |x|\
-    \ <= b, |y| <= a, a * x + b * y == gcd(a, b)\ntemplate <typename T>\nstd::pair<T,\
-    \ T> extgcd(T a, T b) {\n    if (a % b == 0) {\n        return std::pair<T, T>(0,\
-    \ 1);\n    } else {\n        T q = a / b, r = a % b;\n        auto [c, d] = extgcd(b,\
-    \ r);\n        return std::pair<T, T>(d, c - q * d);\n    }\n}\n\n// gcd(x, m)\
-    \ == 1\ntemplate <typename T>\nT inv_mod(T x, T m) {\n    auto [a, b] = extgcd(x,\
-    \ m);\n    if (a < 0) {\n        a += m;\n    }\n    if (a == m) {\n        a\
-    \ -= m;\n    }\n    return a;\n}\n#line 8 \"number_theory/test/inv_mod_stress.test.cpp\"\
+    \     return -(-x / y);\n    }\n}\n\n// b >= 1\n// returns (g, x) s.t. g = gcd(a,\
+    \ b), a * x = g (mod b), 0 <= x < b / g\n// from ACL\ntemplate <typename T>\n\
+    std::pair<T, T> extgcd(T a, T b) {\n    a = safe_mod(a, b);\n    T s = b, t =\
+    \ a, m0 = 0, m1 = 1;\n    while (t) {\n        T u = s / t;\n        s -= t *\
+    \ u;\n        m0 -= m1 * u;\n        std::swap(s, t);\n        std::swap(m0, m1);\n\
+    \    }\n    if (m0 < 0) {\n        m0 += b / s;\n    }\n    return std::pair<T,\
+    \ T>(s, m0);\n}\n\n// gcd(x, m) == 1\ntemplate <typename T>\nT inv_mod(T x, T\
+    \ m) {\n    return extgcd(x, m).second;\n}\n#line 8 \"number_theory/test/inv_mod_stress.test.cpp\"\
     \n\nvoid test() {\n    constexpr int ITER = 1'000'000;\n    for (int t = 0; t\
     \ < ITER; ++t) {\n        int a = uniform(1, 1'000'000'000);\n        int b =\
     \ uniform(1, 1'000'000'000);\n        while (gcd(a, b) != 1) {\n            a\
@@ -127,7 +127,7 @@ data:
   isVerificationFile: true
   path: number_theory/test/inv_mod_stress.test.cpp
   requiredBy: []
-  timestamp: '2024-02-10 22:34:05+09:00'
+  timestamp: '2024-03-29 11:59:03+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: number_theory/test/inv_mod_stress.test.cpp

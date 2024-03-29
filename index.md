@@ -101,6 +101,9 @@ data:
   - name: number_theory
     pages:
     - icon: ':heavy_check_mark:'
+      path: number_theory/ax_by_c.hpp
+      title: number_theory/ax_by_c.hpp
+    - icon: ':heavy_check_mark:'
       path: number_theory/frac_binsearch.hpp
       title: number_theory/frac_binsearch.hpp
     - icon: ':heavy_check_mark:'
@@ -218,6 +221,9 @@ data:
       title: graph/test/vertex_add_path_sum.test.cpp
   - name: number_theory/test
     pages:
+    - icon: ':heavy_check_mark:'
+      path: number_theory/test/ax_by_c_stress.test.cpp
+      title: number_theory/test/ax_by_c_stress.test.cpp
     - icon: ':heavy_check_mark:'
       path: number_theory/test/frac_binsearch_stress.test.cpp
       title: number_theory/test/frac_binsearch_stress.test.cpp

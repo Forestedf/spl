@@ -2,19 +2,19 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
+    path: number_theory/factorial.hpp
+    title: number_theory/factorial.hpp
+  - icon: ':heavy_check_mark:'
     path: number_theory/mod_int.hpp
     title: number_theory/mod_int.hpp
   - icon: ':heavy_check_mark:'
     path: number_theory/utils.hpp
     title: number_theory/utils.hpp
-  _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
-    path: poly/taylor_shift.hpp
-    title: poly/taylor_shift.hpp
+    path: poly/fft.hpp
+    title: poly/fft.hpp
+  _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: poly/test/convolution_mod.test.cpp
-    title: poly/test/convolution_mod.test.cpp
   - icon: ':heavy_check_mark:'
     path: poly/test/polynomial_taylor_shift.test.cpp
     title: poly/test/polynomial_taylor_shift.test.cpp
@@ -194,112 +194,58 @@ data:
     template <typename M>\nstd::vector<M> convolve(const std::vector<M> &a, const\
     \ std::vector<M> &b) {\n    if (a.empty() || b.empty()) {\n        return std::vector<M>(0);\n\
     \    }\n    if (std::min(a.size(), b.size()) <= 60) {\n        return convolve_naive(a,\
-    \ b);\n    } else {\n        return convolve_fft(a, b);\n    }\n}\n"
-  code: "#pragma once\n#include <array>\n#include <vector>\n#include \"../number_theory/mod_int.hpp\"\
-    \n\nconstexpr int ctz_constexpr(unsigned n) {\n    int x = 0;\n    while (!(n\
-    \ & (1u << x))) {\n        ++x;\n    }\n    return x;\n}\n\ntemplate <unsigned\
-    \ MOD>\nstruct FFTRoot {\n    static constexpr unsigned R = ctz_constexpr(MOD\
-    \ - 1);\n    std::array<ModInt<MOD>, R + 1> root, iroot;\n    std::array<ModInt<MOD>,\
-    \ R> rate2, irate2;\n    std::array<ModInt<MOD>, R - 1> rate3, irate3;\n    std::array<ModInt<MOD>,\
-    \ R + 1> inv2;\n\n    constexpr FFTRoot() : root{}, iroot{}, rate2{}, irate2{},\
-    \ rate3{}, irate3{}, inv2{} {\n        unsigned pr = primitive_root<MOD>();\n\
-    \        root[R] = ModInt<MOD>(pr).pow(MOD >> R);\n        iroot[R] = root[R].inv();\n\
-    \        for (int i = R - 1; i >= 0; --i) {\n            root[i] = root[i + 1]\
-    \ * root[i + 1];\n            iroot[i] = iroot[i + 1] * iroot[i + 1];\n      \
-    \  }\n        ModInt<MOD> prod(1), iprod(1);\n        for (int i = 0; i < R -\
-    \ 1; ++i) {\n            rate2[i] = prod * root[i + 2];\n            irate2[i]\
-    \ = iprod * iroot[i + 2];\n            prod *= iroot[i + 2];\n            iprod\
-    \ *= root[i + 2];\n        }\n        prod = ModInt<MOD>(1);\n        iprod =\
-    \ ModInt<MOD>(1);\n        for (int i = 0; i < R - 2; ++i) {\n            rate3[i]\
-    \ = prod * root[i + 3];\n            irate3[i] = iprod * iroot[i + 3];\n     \
-    \       prod *= iroot[i + 3];\n            iprod *= root[i + 3];\n        }\n\
-    \        ModInt<MOD> i2 = ModInt<MOD>(2).inv();\n        inv2[0] = ModInt<MOD>(1);\n\
-    \        for (int i = 0; i < R; ++i) {\n            inv2[i + 1] = inv2[i] * i2;\n\
-    \        }\n    }\n};\n\ntemplate <typename M>\nvoid fft(std::vector<M> &a) {\n\
-    \    using ull = unsigned long long;\n    static_assert(M::get_mod() < (1u <<\
-    \ 30));\n    static constexpr FFTRoot<M::get_mod()> fftroot;\n    static constexpr\
-    \ ull CEIL = 2ULL * M::get_mod() * M::get_mod();\n    int n = (int)a.size();\n\
-    \    int l = __builtin_ctz(n);\n    int ph = 0;\n    while (ph < l) {\n      \
-    \  if (ph + 1 == l) {\n            int b = 1 << ph;\n            M z = M::raw(1);\n\
-    \            for (int i = 0; i < b; ++i) {\n                int offset = i <<\
-    \ 1;\n                M x = a[offset];\n                M y = a[offset + 1] *\
-    \ z;\n                a[offset] = x + y;\n                a[offset + 1] = x -\
-    \ y;\n                z *= fftroot.rate2[__builtin_ctz(~i)];\n            }\n\
-    \            ++ph;\n        } else {\n            int bl = 1 << ph;\n        \
-    \    int wd = 1 << (l - 2 - ph);\n            M zeta = M::raw(1);\n          \
-    \  for (int i = 0; i < bl; ++i) {\n                int offset = i << (l - ph);\n\
-    \                M zeta2 = zeta * zeta;\n                M zeta3 = zeta2 * zeta;\n\
-    \                for (int j = 0; j < wd; ++j) {\n                    ull w = a[offset\
-    \ + j].val;\n                    ull x = (ull)a[offset + j + wd].val * zeta.val;\n\
-    \                    ull y = (ull)a[offset + j + 2 * wd].val * zeta2.val;\n  \
-    \                  ull z = (ull)a[offset + j + 3 * wd].val * zeta3.val;\n    \
-    \                ull ix_m_iz = (CEIL + x - z) % M::get_mod() * fftroot.root[2].val;\n\
-    \                    a[offset + j] = M(w + x + y + z);\n                    a[offset\
-    \ + j + wd] = M(CEIL + w - x + y - z);\n                    a[offset + j + 2 *\
-    \ wd] = M(CEIL + w - y + ix_m_iz);\n                    a[offset + j + 3 * wd]\
-    \ = M(CEIL + w - y - ix_m_iz);\n                }\n                zeta *= fftroot.rate3[__builtin_ctz(~i)];\n\
-    \            }\n            ph += 2;\n        }\n    }\n}\n\ntemplate <typename\
-    \ M>\nvoid ifft(std::vector<M> &a) {\n    using ull = unsigned long long;\n  \
-    \  static_assert(M::get_mod() < (1u << 30));\n    static constexpr FFTRoot<M::get_mod()>\
-    \ fftroot;\n    int n = (int)a.size();\n    int l = __builtin_ctz(n);\n    int\
-    \ ph = l;\n    while (ph > 0) {\n        if (ph == 1) {\n            --ph;\n \
-    \           int wd = 1 << (l - 1);\n            for (int i = 0; i < wd; ++i) {\n\
-    \                M x = a[i];\n                M y = a[i + wd];\n             \
-    \   a[i] = x + y;\n                a[i + wd] = x - y;\n            }\n       \
-    \ } else {\n            ph -= 2;\n            int bl = 1 << ph;\n            int\
-    \ wd = 1 << (l - 2 - ph);\n            M zeta = M::raw(1);\n            for (int\
-    \ i = 0; i < bl; ++i) {\n                int offset = i << (l - ph);\n       \
-    \         M zeta2 = zeta * zeta;\n                M zeta3 = zeta2 * zeta;\n  \
-    \              for (int j = 0; j < wd; ++j) {\n                    unsigned w\
-    \ = a[offset + j].val;\n                    unsigned x = a[offset + j + wd].val;\n\
-    \                    unsigned y = a[offset + j + 2 * wd].val;\n              \
-    \      unsigned z = a[offset + j + 3 * wd].val;\n                    unsigned\
-    \ iy_m_iz = (ull)(M::get_mod() + y - z) * fftroot.root[2].val % M::get_mod();\n\
-    \                    a[offset + j] = M(w + x + y + z);\n                    a[offset\
-    \ + j + wd] = M((ull)zeta.val * (2 * M::get_mod() + w - x - iy_m_iz));\n     \
-    \               a[offset + j + 2 * wd] = M((ull)zeta2.val * (2 * M::get_mod()\
-    \ + w + x - y - z));\n                    a[offset + j + 3 * wd] = M((ull)zeta3.val\
-    \ * (M::get_mod() + w - x + iy_m_iz));\n                }\n                zeta\
-    \ *= fftroot.irate3[__builtin_ctz(~i)];\n            }\n        }\n    }\n   \
-    \ for (M &ele : a) {\n        ele *= fftroot.inv2[l];\n    }\n}\n\ntemplate <typename\
-    \ M>\nstd::vector<M> convolve_naive(const std::vector<M> &a,\n               \
-    \               const std::vector<M> &b) {\n    int n = (int)a.size();\n    int\
-    \ m = (int)b.size();\n    std::vector<M> c(n + m - 1);\n    if (n < m) {\n   \
-    \     for (int j = 0; j < m; ++j) {\n            for (int i = 0; i < n; ++i) {\n\
-    \                c[i + j] += a[i] * b[j];\n            }\n        }\n    } else\
-    \ {\n        for (int i = 0; i < n; ++i) {\n            for (int j = 0; j < m;\
-    \ ++j) {\n                c[i + j] += a[i] * b[j];\n            }\n        }\n\
-    \    }\n    return c;\n}\n\ntemplate <typename M>\nstd::vector<M> convolve_fft(std::vector<M>\
-    \ a, std::vector<M> b) {\n    int n = (int)a.size() + (int)b.size() - 1;\n   \
-    \ int m = 1;\n    while (m < n) {\n        m <<= 1;\n    }\n    bool shr = false;\n\
-    \    M last;\n    if (n >= 3 && n == m / 2 + 1) {\n        shr = true;\n     \
-    \   last = a.back() * b.back();\n        m /= 2;\n        while ((int)a.size()\
-    \ > m) {\n            a[(int)a.size() - 1 - m] += a.back();\n            a.pop_back();\n\
-    \        }\n        while ((int)b.size() > m) {\n            b[(int)b.size() -\
-    \ 1 - m] += b.back();\n            b.pop_back();\n        }\n    }\n    a.resize(m);\n\
-    \    b.resize(m);\n    fft(a);\n    fft(b);\n    for (int i = 0; i < m; ++i) {\n\
-    \        a[i] *= b[i];\n    }\n    ifft(a);\n    a.resize(n);\n    if (shr) {\n\
-    \        a[0] -= last;\n        a[n - 1] = last;\n    }\n    return a;\n}\n\n\
-    template <typename M>\nstd::vector<M> convolve(const std::vector<M> &a, const\
-    \ std::vector<M> &b) {\n    if (a.empty() || b.empty()) {\n        return std::vector<M>(0);\n\
-    \    }\n    if (std::min(a.size(), b.size()) <= 60) {\n        return convolve_naive(a,\
-    \ b);\n    } else {\n        return convolve_fft(a, b);\n    }\n}\n"
+    \ b);\n    } else {\n        return convolve_fft(a, b);\n    }\n}\n#line 4 \"\
+    number_theory/factorial.hpp\"\n\ntemplate <typename M>\nM inv(int n) {\n    static\
+    \ std::vector<M> data{M::raw(0), M::raw(1)};\n    static constexpr unsigned MOD\
+    \ = M::get_mod();\n    assert(0 < n);\n    while ((int)data.size() <= n) {\n \
+    \       unsigned k = (unsigned)data.size();\n        unsigned r = MOD / k + 1;\n\
+    \        data.push_back(M::raw(r) * data[k * r - MOD]);\n    }\n    return data[n];\n\
+    }\n\ntemplate <typename M>\nM fact(int n) {\n    static std::vector<M> data{M::raw(1),\
+    \ M::raw(1)};\n    assert(0 <= n);\n    while ((int)data.size() <= n) {\n    \
+    \    unsigned k = (unsigned)data.size();\n        data.push_back(M::raw(k) * data.back());\n\
+    \    }\n    return data[n];\n}\n\ntemplate <typename M>\nM inv_fact(int n) {\n\
+    \    static std::vector<M> data{M::raw(1), M::raw(1)};\n    assert(0 <= n);\n\
+    \    while ((int)data.size() <= n) {\n        unsigned k = (unsigned)data.size();\n\
+    \        data.push_back(inv<M>(k) * data.back());\n    }\n    return data[n];\n\
+    }\n\ntemplate <typename M>\nM binom(int n, int k) {\n    assert(0 <= n);\n   \
+    \ if (k < 0 || n < k) {\n        return M::raw(0);\n    }\n    return fact<M>(n)\
+    \ * inv_fact<M>(k) * inv_fact<M>(n - k);\n}\n\ntemplate <typename M>\nM n_terms_sum_k(int\
+    \ n, int k) {\n    assert(0 <= n && 0 <= k);\n    if (n == 0) {\n        return\
+    \ (k == 0 ? M::raw(1) : M::raw(0));\n    }\n    return binom<M>(n + k - 1, n -\
+    \ 1);\n}\n#line 4 \"poly/taylor_shift.hpp\"\n#include <algorithm>\n// f(x) ->\
+    \ f(x+c)\ntemplate <typename M>\nstd::vector<M> taylor_shift(std::vector<M> f,\
+    \ M c) {\n    for (int i = 0; i < (int)f.size(); ++i) {\n        f[i] *= fact<M>(i);\n\
+    \    }\n    std::reverse(f.begin(), f.end());\n    M cp(1);\n    std::vector<M>\
+    \ g(f.size());\n    for (int i = 0; i < (int)f.size(); ++i) {\n        g[i] =\
+    \ cp * inv_fact<M>(i);\n        cp *= c;\n    }\n    std::vector<M> h = convolve(f,\
+    \ g);\n    h.resize(f.size());\n    std::reverse(h.begin(), h.end());\n    for\
+    \ (int i = 0; i < (int)f.size(); ++i) {\n        h[i] *= inv_fact<M>(i);\n   \
+    \ }\n    return h;\n}\n"
+  code: "#pragma once\n#include \"fft.hpp\"\n#include \"../number_theory/factorial.hpp\"\
+    \n#include <algorithm>\n// f(x) -> f(x+c)\ntemplate <typename M>\nstd::vector<M>\
+    \ taylor_shift(std::vector<M> f, M c) {\n    for (int i = 0; i < (int)f.size();\
+    \ ++i) {\n        f[i] *= fact<M>(i);\n    }\n    std::reverse(f.begin(), f.end());\n\
+    \    M cp(1);\n    std::vector<M> g(f.size());\n    for (int i = 0; i < (int)f.size();\
+    \ ++i) {\n        g[i] = cp * inv_fact<M>(i);\n        cp *= c;\n    }\n    std::vector<M>\
+    \ h = convolve(f, g);\n    h.resize(f.size());\n    std::reverse(h.begin(), h.end());\n\
+    \    for (int i = 0; i < (int)f.size(); ++i) {\n        h[i] *= inv_fact<M>(i);\n\
+    \    }\n    return h;\n}\n"
   dependsOn:
+  - poly/fft.hpp
   - number_theory/mod_int.hpp
   - number_theory/utils.hpp
+  - number_theory/factorial.hpp
   isVerificationFile: false
-  path: poly/fft.hpp
-  requiredBy:
-  - poly/taylor_shift.hpp
-  timestamp: '2024-03-30 17:11:53+09:00'
+  path: poly/taylor_shift.hpp
+  requiredBy: []
+  timestamp: '2024-03-30 17:34:28+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - poly/test/convolution_mod.test.cpp
   - poly/test/polynomial_taylor_shift.test.cpp
-documentation_of: poly/fft.hpp
+documentation_of: poly/taylor_shift.hpp
 layout: document
 redirect_from:
-- /library/poly/fft.hpp
-- /library/poly/fft.hpp.html
-title: poly/fft.hpp
+- /library/poly/taylor_shift.hpp
+- /library/poly/taylor_shift.hpp.html
+title: poly/taylor_shift.hpp
 ---

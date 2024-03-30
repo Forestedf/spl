@@ -8,6 +8,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: poly/fft.hpp
     title: poly/fft.hpp
+  - icon: ':heavy_check_mark:'
+    path: poly/taylor_shift.hpp
+    title: poly/taylor_shift.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: data_structure/test/1891.test.cpp
@@ -24,6 +27,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: poly/test/convolution_mod.test.cpp
     title: poly/test/convolution_mod.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: poly/test/polynomial_taylor_shift.test.cpp
+    title: poly/test/polynomial_taylor_shift.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -159,6 +165,7 @@ data:
   isVerificationFile: false
   path: number_theory/mod_int.hpp
   requiredBy:
+  - poly/taylor_shift.hpp
   - poly/fft.hpp
   timestamp: '2024-03-29 12:47:49+09:00'
   verificationStatus: LIBRARY_ALL_AC
@@ -168,6 +175,7 @@ data:
   - data_structure/test/range_affine_range_sum.test.cpp
   - data_structure/test/point_set_range_composite.test.cpp
   - poly/test/convolution_mod.test.cpp
+  - poly/test/polynomial_taylor_shift.test.cpp
 documentation_of: number_theory/mod_int.hpp
 layout: document
 redirect_from:

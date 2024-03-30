@@ -103,7 +103,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: number_theory/ax_by_c.hpp
       title: number_theory/ax_by_c.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: number_theory/factorial.hpp
       title: number_theory/factorial.hpp
     - icon: ':heavy_check_mark:'
@@ -125,6 +125,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: poly/fft.hpp
       title: poly/fft.hpp
+    - icon: ':heavy_check_mark:'
+      path: poly/taylor_shift.hpp
+      title: poly/taylor_shift.hpp
   - name: string
     pages:
     - icon: ':warning:'
@@ -249,6 +252,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: poly/test/convolution_mod.test.cpp
       title: poly/test/convolution_mod.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: poly/test/polynomial_taylor_shift.test.cpp
+      title: poly/test/polynomial_taylor_shift.test.cpp
   - name: string/test
     pages:
     - icon: ':heavy_check_mark:'

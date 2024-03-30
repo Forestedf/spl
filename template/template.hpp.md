@@ -94,6 +94,9 @@ data:
     path: poly/test/convolution_mod.test.cpp
     title: poly/test/convolution_mod.test.cpp
   - icon: ':heavy_check_mark:'
+    path: poly/test/polynomial_taylor_shift.test.cpp
+    title: poly/test/polynomial_taylor_shift.test.cpp
+  - icon: ':heavy_check_mark:'
     path: string/test/zalgorithm.test.cpp
     title: string/test/zalgorithm.test.cpp
   _isVerificationFailed: false
@@ -213,6 +216,7 @@ data:
   - number_theory/test/extgcd2_stress.test.cpp
   - number_theory/test/frac_binsearch_stress.test.cpp
   - poly/test/convolution_mod.test.cpp
+  - poly/test/polynomial_taylor_shift.test.cpp
   - graph/test/vertex_add_path_sum.test.cpp
   - graph/test/ALDS1_11_D.test.cpp
   - graph/test/lca.test.cpp

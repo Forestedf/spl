@@ -1,11 +1,17 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: poly/taylor_shift.hpp
+    title: poly/taylor_shift.hpp
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: poly/test/polynomial_taylor_shift.test.cpp
+    title: poly/test/polynomial_taylor_shift.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"number_theory/factorial.hpp\"\n#include <cassert>\n#include\
@@ -47,10 +53,12 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: number_theory/factorial.hpp
-  requiredBy: []
+  requiredBy:
+  - poly/taylor_shift.hpp
   timestamp: '2024-03-29 17:56:07+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - poly/test/polynomial_taylor_shift.test.cpp
 documentation_of: number_theory/factorial.hpp
 layout: document
 redirect_from:

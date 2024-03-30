@@ -5,9 +5,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: number_theory/ax_by_c.hpp
     title: number_theory/ax_by_c.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/mod_int.hpp
     title: number_theory/mod_int.hpp
+  - icon: ':x:'
+    path: poly/fft.hpp
+    title: poly/fft.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: data_structure/test/1891.test.cpp
@@ -30,9 +33,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: number_theory/test/inv_mod_stress.test.cpp
     title: number_theory/test/inv_mod_stress.test.cpp
-  _isVerificationFailed: false
+  - icon: ':x:'
+    path: poly/test/convolution_mod.test.cpp
+    title: poly/test/convolution_mod.test.cpp
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"number_theory/utils.hpp\"\n\n#include <utility>\n\nconstexpr\
@@ -127,8 +133,9 @@ data:
   requiredBy:
   - number_theory/ax_by_c.hpp
   - number_theory/mod_int.hpp
+  - poly/fft.hpp
   timestamp: '2024-03-29 12:47:49+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - data_structure/test/1891.test.cpp
   - data_structure/test/queue_operate_all_composite.test.cpp
@@ -137,6 +144,7 @@ data:
   - number_theory/test/inv_mod_stress.test.cpp
   - number_theory/test/ax_by_c_stress.test.cpp
   - number_theory/test/extgcd2_stress.test.cpp
+  - poly/test/convolution_mod.test.cpp
 documentation_of: number_theory/utils.hpp
 layout: document
 redirect_from:

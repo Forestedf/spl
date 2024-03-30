@@ -65,13 +65,13 @@ class Reader {
     void read_single(unsigned long &x) { read_signed(x); }
     void read_single(long long &x) { read_signed(x); }
     void read_single(unsigned long long &x) { read_unsigned(x); }
-    
+
 public:
     Reader(FILE *fp) : fp(fp), pl(buf), pr(buf) { reread(); }
 
     void read() {}
-    template <typename Head, typename ...Tail>
-    void read(Head &head, Tail &... tail) {
+    template <typename Head, typename... Tail>
+    void read(Head &head, Tail &...tail) {
         read_single(head);
         read(tail...);
     }
@@ -188,13 +188,14 @@ class Writer {
 
     template <typename T>
     void write_unsigned(T x) {
-        if constexpr (std::is_same_v<T, unsigned long long> || std::is_same_v<T, unsigned long>) {
+        if constexpr (std::is_same_v<T, unsigned long long> ||
+                      std::is_same_v<T, unsigned long>) {
             write_u64(x);
         } else {
             write_u32(x);
         }
     }
-    
+
     template <typename T>
     void write_signed(T x) {
         std::make_unsigned_t<T> y = x;
@@ -204,13 +205,14 @@ class Writer {
         }
         write_unsigned(y);
     }
-    
+
     void write_single(int x) { write_signed(x); }
     void write_single(unsigned x) { write_unsigned(x); }
     void write_single(long x) { write_signed(x); }
     void write_single(unsigned long x) { write_unsigned(x); }
     void write_single(long long x) { write_signed(x); }
     void write_single(unsigned long long x) { write_unsigned(x); }
+    void write_single(char c) { write_char(c); }
 
 public:
     Writer(FILE *fp) : fp(fp), ptr(buf) {}
@@ -220,10 +222,10 @@ public:
         std::fwrite(buf, 1, ptr - buf, fp);
         ptr = buf;
     }
-    
+
     void write() {}
     template <typename Head, typename... Tail>
-    void write(Head &&head, Tail &&... tail) {
+    void write(Head &&head, Tail &&...tail) {
         write_single(head);
         if (sizeof...(Tail)) {
             write_char(' ');
@@ -232,7 +234,7 @@ public:
     }
 
     template <typename... T>
-    void writeln(T &&... t) {
+    void writeln(T &&...t) {
         write(std::forward<T>(t)...);
         write_char('\n');
     }

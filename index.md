@@ -115,6 +115,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: number_theory/utils.hpp
       title: number_theory/utils.hpp
+  - name: opt
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: opt/monge_min_cut.hpp
+      title: opt/monge_min_cut.hpp
   - name: other
     pages:
     - icon: ':heavy_check_mark:'
@@ -253,6 +258,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: number_theory/test/inv_mod_stress.test.cpp
       title: number_theory/test/inv_mod_stress.test.cpp
+  - name: opt/test
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: opt/test/yuki_119.test.cpp
+      title: opt/test/yuki_119.test.cpp
   - name: poly/test
     pages:
     - icon: ':heavy_check_mark:'

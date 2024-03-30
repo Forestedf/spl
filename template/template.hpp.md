@@ -91,6 +91,9 @@ data:
     path: number_theory/test/inv_mod_stress.test.cpp
     title: number_theory/test/inv_mod_stress.test.cpp
   - icon: ':heavy_check_mark:'
+    path: opt/test/yuki_119.test.cpp
+    title: opt/test/yuki_119.test.cpp
+  - icon: ':heavy_check_mark:'
     path: poly/test/convolution_mod.test.cpp
     title: poly/test/convolution_mod.test.cpp
   - icon: ':heavy_check_mark:'
@@ -225,6 +228,7 @@ data:
   - poly/test/convolution_mod.test.cpp
   - poly/test/stirling_number_of_the_second_kind.test.cpp
   - poly/test/polynomial_taylor_shift.test.cpp
+  - opt/test/yuki_119.test.cpp
   - graph/test/vertex_add_path_sum.test.cpp
   - graph/test/ALDS1_11_D.test.cpp
   - graph/test/lca.test.cpp

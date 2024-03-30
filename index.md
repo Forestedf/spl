@@ -103,6 +103,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: number_theory/ax_by_c.hpp
       title: number_theory/ax_by_c.hpp
+    - icon: ':warning:'
+      path: number_theory/factorial.hpp
+      title: number_theory/factorial.hpp
     - icon: ':heavy_check_mark:'
       path: number_theory/frac_binsearch.hpp
       title: number_theory/frac_binsearch.hpp

@@ -1,0 +1,60 @@
+---
+data:
+  _extendedDependsOn: []
+  _extendedRequiredBy: []
+  _extendedVerifiedWith: []
+  _isVerificationFailed: false
+  _pathExtension: hpp
+  _verificationStatusIcon: ':warning:'
+  attributes:
+    links: []
+  bundledCode: "#line 2 \"number_theory/factorial.hpp\"\n#include <cassert>\n#include\
+    \ <vector>\n\ntemplate <typename M>\nM inv(int n) {\n    static std::vector<M>\
+    \ data{M::raw(0), M::raw(1)};\n    static constexpr unsigned MOD = M::get_mod();\n\
+    \    assert(0 < n);\n    while ((int)data.size() <= n) {\n        unsigned k =\
+    \ (unsigned)data.size();\n        unsigned r = MOD / k + 1;\n        data.push_back(M::raw(r)\
+    \ * data[k * r - MOD]);\n    }\n    return data[n];\n}\n\ntemplate <typename M>\n\
+    M fact(int n) {\n    static std::vector<M> data{M::raw(1), M::raw(1)};\n    assert(0\
+    \ <= n);\n    while ((int)data.size() <= n) {\n        unsigned k = (unsigned)data.size();\n\
+    \        data.push_back(M::raw(k) * data.back());\n    }\n    return data[n];\n\
+    }\n\ntemplate <typename M>\nM inv_fact(int n) {\n    static std::vector<M> data{M::raw(1),\
+    \ M::raw(1)};\n    assert(0 <= n);\n    while ((int)data.size() <= n) {\n    \
+    \    unsigned k = (unsigned)data.size();\n        data.push_back(inv<M>(k) * data.back());\n\
+    \    }\n    return data[n];\n}\n\ntemplate <typename M>\nM binom(int n, int k)\
+    \ {\n    assert(0 <= n);\n    if (k < 0 || n < k) {\n        return M::raw(0);\n\
+    \    }\n    return fact<M>(n) * inv_fact<M>(k) * inv_fact<M>(n - k);\n}\n\ntemplate\
+    \ <typename M>\nM n_terms_sum_k(int n, int k) {\n    assert(0 <= n && 0 <= k);\n\
+    \    if (n == 0) {\n        return (k == 0 ? M::raw(1) : M::raw(0));\n    }\n\
+    \    return binom<M>(n + k - 1, n - 1);\n}\n"
+  code: "#pragma once\n#include <cassert>\n#include <vector>\n\ntemplate <typename\
+    \ M>\nM inv(int n) {\n    static std::vector<M> data{M::raw(0), M::raw(1)};\n\
+    \    static constexpr unsigned MOD = M::get_mod();\n    assert(0 < n);\n    while\
+    \ ((int)data.size() <= n) {\n        unsigned k = (unsigned)data.size();\n   \
+    \     unsigned r = MOD / k + 1;\n        data.push_back(M::raw(r) * data[k * r\
+    \ - MOD]);\n    }\n    return data[n];\n}\n\ntemplate <typename M>\nM fact(int\
+    \ n) {\n    static std::vector<M> data{M::raw(1), M::raw(1)};\n    assert(0 <=\
+    \ n);\n    while ((int)data.size() <= n) {\n        unsigned k = (unsigned)data.size();\n\
+    \        data.push_back(M::raw(k) * data.back());\n    }\n    return data[n];\n\
+    }\n\ntemplate <typename M>\nM inv_fact(int n) {\n    static std::vector<M> data{M::raw(1),\
+    \ M::raw(1)};\n    assert(0 <= n);\n    while ((int)data.size() <= n) {\n    \
+    \    unsigned k = (unsigned)data.size();\n        data.push_back(inv<M>(k) * data.back());\n\
+    \    }\n    return data[n];\n}\n\ntemplate <typename M>\nM binom(int n, int k)\
+    \ {\n    assert(0 <= n);\n    if (k < 0 || n < k) {\n        return M::raw(0);\n\
+    \    }\n    return fact<M>(n) * inv_fact<M>(k) * inv_fact<M>(n - k);\n}\n\ntemplate\
+    \ <typename M>\nM n_terms_sum_k(int n, int k) {\n    assert(0 <= n && 0 <= k);\n\
+    \    if (n == 0) {\n        return (k == 0 ? M::raw(1) : M::raw(0));\n    }\n\
+    \    return binom<M>(n + k - 1, n - 1);\n}\n"
+  dependsOn: []
+  isVerificationFile: false
+  path: number_theory/factorial.hpp
+  requiredBy: []
+  timestamp: '2024-03-29 17:56:07+09:00'
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
+documentation_of: number_theory/factorial.hpp
+layout: document
+redirect_from:
+- /library/number_theory/factorial.hpp
+- /library/number_theory/factorial.hpp.html
+title: number_theory/factorial.hpp
+---

@@ -29,9 +29,9 @@ data:
     \ &x) { read_unsigned(x); }\n    void read_single(long &x) { read_signed(x); }\n\
     \    void read_single(unsigned long &x) { read_signed(x); }\n    void read_single(long\
     \ long &x) { read_signed(x); }\n    void read_single(unsigned long long &x) {\
-    \ read_unsigned(x); }\n    \npublic:\n    Reader(FILE *fp) : fp(fp), pl(buf),\
-    \ pr(buf) { reread(); }\n\n    void read() {}\n    template <typename Head, typename\
-    \ ...Tail>\n    void read(Head &head, Tail &... tail) {\n        read_single(head);\n\
+    \ read_unsigned(x); }\n\npublic:\n    Reader(FILE *fp) : fp(fp), pl(buf), pr(buf)\
+    \ { reread(); }\n\n    void read() {}\n    template <typename Head, typename...\
+    \ Tail>\n    void read(Head &head, Tail &...tail) {\n        read_single(head);\n\
     \        read(tail...);\n    }\n};\n\nstruct NumberToString {\n    char buf[10000][4];\n\
     \    constexpr NumberToString() : buf() {\n        for (int i = 0; i < 10000;\
     \ ++i) {\n            int n = i;\n            for (int j = 3; j >= 0; --j) {\n\
@@ -78,23 +78,24 @@ data:
     \        }\n    }\n\n    void write_char(char c) {\n        if (ptr == buf + BUF)\
     \ {\n            flush();\n        }\n        *ptr++ = c;\n    }\n\n    template\
     \ <typename T>\n    void write_unsigned(T x) {\n        if constexpr (std::is_same_v<T,\
-    \ unsigned long long> || std::is_same_v<T, unsigned long>) {\n            write_u64(x);\n\
-    \        } else {\n            write_u32(x);\n        }\n    }\n    \n    template\
-    \ <typename T>\n    void write_signed(T x) {\n        std::make_unsigned_t<T>\
-    \ y = x;\n        if (x < 0) {\n            write_char('-');\n            y =\
-    \ -y;\n        }\n        write_unsigned(y);\n    }\n    \n    void write_single(int\
-    \ x) { write_signed(x); }\n    void write_single(unsigned x) { write_unsigned(x);\
-    \ }\n    void write_single(long x) { write_signed(x); }\n    void write_single(unsigned\
-    \ long x) { write_unsigned(x); }\n    void write_single(long long x) { write_signed(x);\
-    \ }\n    void write_single(unsigned long long x) { write_unsigned(x); }\n\npublic:\n\
+    \ unsigned long long> ||\n                      std::is_same_v<T, unsigned long>)\
+    \ {\n            write_u64(x);\n        } else {\n            write_u32(x);\n\
+    \        }\n    }\n\n    template <typename T>\n    void write_signed(T x) {\n\
+    \        std::make_unsigned_t<T> y = x;\n        if (x < 0) {\n            write_char('-');\n\
+    \            y = -y;\n        }\n        write_unsigned(y);\n    }\n\n    void\
+    \ write_single(int x) { write_signed(x); }\n    void write_single(unsigned x)\
+    \ { write_unsigned(x); }\n    void write_single(long x) { write_signed(x); }\n\
+    \    void write_single(unsigned long x) { write_unsigned(x); }\n    void write_single(long\
+    \ long x) { write_signed(x); }\n    void write_single(unsigned long long x) {\
+    \ write_unsigned(x); }\n    void write_single(char c) { write_char(c); }\n\npublic:\n\
     \    Writer(FILE *fp) : fp(fp), ptr(buf) {}\n    ~Writer() { flush(); }\n\n  \
     \  void flush() {\n        std::fwrite(buf, 1, ptr - buf, fp);\n        ptr =\
-    \ buf;\n    }\n    \n    void write() {}\n    template <typename Head, typename...\
-    \ Tail>\n    void write(Head &&head, Tail &&... tail) {\n        write_single(head);\n\
+    \ buf;\n    }\n\n    void write() {}\n    template <typename Head, typename...\
+    \ Tail>\n    void write(Head &&head, Tail &&...tail) {\n        write_single(head);\n\
     \        if (sizeof...(Tail)) {\n            write_char(' ');\n        }\n   \
     \     write(std::forward<Tail>(tail)...);\n    }\n\n    template <typename...\
-    \ T>\n    void writeln(T &&... t) {\n        write(std::forward<T>(t)...);\n \
-    \       write_char('\\n');\n    }\n};\n\nReader rd(stdin);\nWriter wr(stdout);\n"
+    \ T>\n    void writeln(T &&...t) {\n        write(std::forward<T>(t)...);\n  \
+    \      write_char('\\n');\n    }\n};\n\nReader rd(stdin);\nWriter wr(stdout);\n"
   code: "#include <cstdio>\n#include <cstring>\n#include <type_traits>\n#include <utility>\n\
     \n// unable to read INT_MIN (int), LLONG_MIN (long long)\nclass Reader {\n   \
     \ FILE *fp;\n    static constexpr int BUF = 1 << 18;\n    char buf[BUF];\n   \
@@ -115,10 +116,10 @@ data:
     \ read_single(unsigned &x) { read_unsigned(x); }\n    void read_single(long &x)\
     \ { read_signed(x); }\n    void read_single(unsigned long &x) { read_signed(x);\
     \ }\n    void read_single(long long &x) { read_signed(x); }\n    void read_single(unsigned\
-    \ long long &x) { read_unsigned(x); }\n    \npublic:\n    Reader(FILE *fp) : fp(fp),\
+    \ long long &x) { read_unsigned(x); }\n\npublic:\n    Reader(FILE *fp) : fp(fp),\
     \ pl(buf), pr(buf) { reread(); }\n\n    void read() {}\n    template <typename\
-    \ Head, typename ...Tail>\n    void read(Head &head, Tail &... tail) {\n     \
-    \   read_single(head);\n        read(tail...);\n    }\n};\n\nstruct NumberToString\
+    \ Head, typename... Tail>\n    void read(Head &head, Tail &...tail) {\n      \
+    \  read_single(head);\n        read(tail...);\n    }\n};\n\nstruct NumberToString\
     \ {\n    char buf[10000][4];\n    constexpr NumberToString() : buf() {\n     \
     \   for (int i = 0; i < 10000; ++i) {\n            int n = i;\n            for\
     \ (int j = 3; j >= 0; --j) {\n                buf[i][j] = '0' + n % 10;\n    \
@@ -164,29 +165,29 @@ data:
     \         ptr += 8 - t;\n        }\n    }\n\n    void write_char(char c) {\n \
     \       if (ptr == buf + BUF) {\n            flush();\n        }\n        *ptr++\
     \ = c;\n    }\n\n    template <typename T>\n    void write_unsigned(T x) {\n \
-    \       if constexpr (std::is_same_v<T, unsigned long long> || std::is_same_v<T,\
-    \ unsigned long>) {\n            write_u64(x);\n        } else {\n           \
-    \ write_u32(x);\n        }\n    }\n    \n    template <typename T>\n    void write_signed(T\
-    \ x) {\n        std::make_unsigned_t<T> y = x;\n        if (x < 0) {\n       \
-    \     write_char('-');\n            y = -y;\n        }\n        write_unsigned(y);\n\
-    \    }\n    \n    void write_single(int x) { write_signed(x); }\n    void write_single(unsigned\
-    \ x) { write_unsigned(x); }\n    void write_single(long x) { write_signed(x);\
-    \ }\n    void write_single(unsigned long x) { write_unsigned(x); }\n    void write_single(long\
-    \ long x) { write_signed(x); }\n    void write_single(unsigned long long x) {\
-    \ write_unsigned(x); }\n\npublic:\n    Writer(FILE *fp) : fp(fp), ptr(buf) {}\n\
-    \    ~Writer() { flush(); }\n\n    void flush() {\n        std::fwrite(buf, 1,\
-    \ ptr - buf, fp);\n        ptr = buf;\n    }\n    \n    void write() {}\n    template\
-    \ <typename Head, typename... Tail>\n    void write(Head &&head, Tail &&... tail)\
-    \ {\n        write_single(head);\n        if (sizeof...(Tail)) {\n           \
-    \ write_char(' ');\n        }\n        write(std::forward<Tail>(tail)...);\n \
-    \   }\n\n    template <typename... T>\n    void writeln(T &&... t) {\n       \
-    \ write(std::forward<T>(t)...);\n        write_char('\\n');\n    }\n};\n\nReader\
-    \ rd(stdin);\nWriter wr(stdout);"
+    \       if constexpr (std::is_same_v<T, unsigned long long> ||\n             \
+    \         std::is_same_v<T, unsigned long>) {\n            write_u64(x);\n   \
+    \     } else {\n            write_u32(x);\n        }\n    }\n\n    template <typename\
+    \ T>\n    void write_signed(T x) {\n        std::make_unsigned_t<T> y = x;\n \
+    \       if (x < 0) {\n            write_char('-');\n            y = -y;\n    \
+    \    }\n        write_unsigned(y);\n    }\n\n    void write_single(int x) { write_signed(x);\
+    \ }\n    void write_single(unsigned x) { write_unsigned(x); }\n    void write_single(long\
+    \ x) { write_signed(x); }\n    void write_single(unsigned long x) { write_unsigned(x);\
+    \ }\n    void write_single(long long x) { write_signed(x); }\n    void write_single(unsigned\
+    \ long long x) { write_unsigned(x); }\n    void write_single(char c) { write_char(c);\
+    \ }\n\npublic:\n    Writer(FILE *fp) : fp(fp), ptr(buf) {}\n    ~Writer() { flush();\
+    \ }\n\n    void flush() {\n        std::fwrite(buf, 1, ptr - buf, fp);\n     \
+    \   ptr = buf;\n    }\n\n    void write() {}\n    template <typename Head, typename...\
+    \ Tail>\n    void write(Head &&head, Tail &&...tail) {\n        write_single(head);\n\
+    \        if (sizeof...(Tail)) {\n            write_char(' ');\n        }\n   \
+    \     write(std::forward<Tail>(tail)...);\n    }\n\n    template <typename...\
+    \ T>\n    void writeln(T &&...t) {\n        write(std::forward<T>(t)...);\n  \
+    \      write_char('\\n');\n    }\n};\n\nReader rd(stdin);\nWriter wr(stdout);"
   dependsOn: []
   isVerificationFile: false
   path: template/fastio.hpp
   requiredBy: []
-  timestamp: '2024-03-29 17:33:09+09:00'
+  timestamp: '2024-03-30 15:09:52+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template/fastio.hpp

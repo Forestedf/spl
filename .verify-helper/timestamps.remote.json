@@ -29,5 +29,6 @@
 "number_theory/test/frac_binsearch_stress.test.cpp": "2024-01-14 14:02:13 +0900",
 "number_theory/test/inv_mod_stress.test.cpp": "2024-03-29 12:47:49 +0900",
 "poly/test/convolution_mod.test.cpp": "2024-03-30 17:25:21 +0900",
+"poly/test/polynomial_taylor_shift.test.cpp": "2024-03-30 17:34:28 +0900",
 "string/test/zalgorithm.test.cpp": "2024-01-13 18:43:37 +0900"
 }

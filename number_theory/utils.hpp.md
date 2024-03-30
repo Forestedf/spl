@@ -12,6 +12,12 @@ data:
     path: poly/fft.hpp
     title: poly/fft.hpp
   - icon: ':heavy_check_mark:'
+    path: poly/stirling1.hpp
+    title: poly/stirling1.hpp
+  - icon: ':heavy_check_mark:'
+    path: poly/stirling2.hpp
+    title: poly/stirling2.hpp
+  - icon: ':heavy_check_mark:'
     path: poly/taylor_shift.hpp
     title: poly/taylor_shift.hpp
   _extendedVerifiedWith:
@@ -42,6 +48,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: poly/test/polynomial_taylor_shift.test.cpp
     title: poly/test/polynomial_taylor_shift.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: poly/test/stirling_number_of_the_first_kind.test.cpp
+    title: poly/test/stirling_number_of_the_first_kind.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: poly/test/stirling_number_of_the_second_kind.test.cpp
+    title: poly/test/stirling_number_of_the_second_kind.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -140,6 +152,8 @@ data:
   - number_theory/ax_by_c.hpp
   - number_theory/mod_int.hpp
   - poly/taylor_shift.hpp
+  - poly/stirling2.hpp
+  - poly/stirling1.hpp
   - poly/fft.hpp
   timestamp: '2024-03-29 12:47:49+09:00'
   verificationStatus: LIBRARY_ALL_AC
@@ -151,7 +165,9 @@ data:
   - number_theory/test/inv_mod_stress.test.cpp
   - number_theory/test/ax_by_c_stress.test.cpp
   - number_theory/test/extgcd2_stress.test.cpp
+  - poly/test/stirling_number_of_the_first_kind.test.cpp
   - poly/test/convolution_mod.test.cpp
+  - poly/test/stirling_number_of_the_second_kind.test.cpp
   - poly/test/polynomial_taylor_shift.test.cpp
 documentation_of: number_theory/utils.hpp
 layout: document

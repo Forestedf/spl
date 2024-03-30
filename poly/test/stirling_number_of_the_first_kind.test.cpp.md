@@ -13,24 +13,29 @@ data:
   - icon: ':heavy_check_mark:'
     path: poly/fft.hpp
     title: poly/fft.hpp
-  _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
     path: poly/stirling1.hpp
     title: poly/stirling1.hpp
-  _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: poly/test/polynomial_taylor_shift.test.cpp
-    title: poly/test/polynomial_taylor_shift.test.cpp
+    path: poly/taylor_shift.hpp
+    title: poly/taylor_shift.hpp
   - icon: ':heavy_check_mark:'
-    path: poly/test/stirling_number_of_the_first_kind.test.cpp
-    title: poly/test/stirling_number_of_the_first_kind.test.cpp
+    path: template/template.hpp
+    title: template/template.hpp
+  _extendedRequiredBy: []
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
-  _pathExtension: hpp
+  _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    links: []
-  bundledCode: "#line 2 \"poly/fft.hpp\"\n#include <array>\n#include <vector>\n#line\
-    \ 2 \"number_theory/mod_int.hpp\"\n\n#include <cassert>\n#include <iostream>\n\
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: https://judge.yosupo.jp/problem/stirling_number_of_the_first_kind
+    links:
+    - https://judge.yosupo.jp/problem/stirling_number_of_the_first_kind
+  bundledCode: "#line 1 \"poly/test/stirling_number_of_the_first_kind.test.cpp\"\n\
+    #define PROBLEM \"https://judge.yosupo.jp/problem/stirling_number_of_the_first_kind\"\
+    \n#define FAST_IO\n#line 2 \"poly/fft.hpp\"\n#include <array>\n#include <vector>\n\
+    #line 2 \"number_theory/mod_int.hpp\"\n\n#include <cassert>\n#include <iostream>\n\
     #include <type_traits>\n#line 2 \"number_theory/utils.hpp\"\n\n#include <utility>\n\
     \nconstexpr bool is_prime(unsigned n) {\n    if (n == 0 || n == 1) {\n       \
     \ return false;\n    }\n    for (unsigned i = 2; i * i <= n; ++i) {\n        if\
@@ -226,34 +231,85 @@ data:
     \ cp * inv_fact<M>(i);\n        cp *= c;\n    }\n    std::vector<M> h = convolve(f,\
     \ g);\n    h.resize(f.size());\n    std::reverse(h.begin(), h.end());\n    for\
     \ (int i = 0; i < (int)f.size(); ++i) {\n        h[i] *= inv_fact<M>(i);\n   \
-    \ }\n    return h;\n}\n"
-  code: "#pragma once\n#include \"fft.hpp\"\n#include \"../number_theory/factorial.hpp\"\
-    \n#include <algorithm>\n// f(x) -> f(x+c)\ntemplate <typename M>\nstd::vector<M>\
-    \ taylor_shift(std::vector<M> f, M c) {\n    for (int i = 0; i < (int)f.size();\
-    \ ++i) {\n        f[i] *= fact<M>(i);\n    }\n    std::reverse(f.begin(), f.end());\n\
-    \    M cp(1);\n    std::vector<M> g(f.size());\n    for (int i = 0; i < (int)f.size();\
-    \ ++i) {\n        g[i] = cp * inv_fact<M>(i);\n        cp *= c;\n    }\n    std::vector<M>\
-    \ h = convolve(f, g);\n    h.resize(f.size());\n    std::reverse(h.begin(), h.end());\n\
-    \    for (int i = 0; i < (int)f.size(); ++i) {\n        h[i] *= inv_fact<M>(i);\n\
-    \    }\n    return h;\n}\n"
+    \ }\n    return h;\n}\n#line 3 \"poly/stirling1.hpp\"\ntemplate <typename M>\n\
+    std::vector<M> stirling_1_signed(int n) {\n    assert(0 <= n);\n    if (n == 0)\
+    \ {\n        return std::vector<M>(1, M(1));\n    }\n    std::vector<M> f{M(0),\
+    \ M(1)};\n    int lg = 31 - __builtin_clz(n);\n    for (int i = lg - 1; i >= 0;\
+    \ --i) {\n        f = convolve(f, taylor_shift(f, -M(n >> (i + 1))));\n      \
+    \  if (n & (1 << i)) {\n            M k((n >> i) - 1);\n            f.push_back(M());\n\
+    \            for (int j = (int)f.size() - 1; j > 0; --j) {\n                f[j]\
+    \ = f[j - 1] - f[j] * k;\n            }\n            f[0] = -k * f[0];\n     \
+    \   }\n    }\n    return f;\n}\ntemplate <typename M>\nstd::vector<M> stirling_1_unsigned(int\
+    \ n) {\n    assert(0 <= n);\n    std::vector<M> f = stirling_1_signed<M>(n);\n\
+    \    for (int i = n - 1; i >= 0; i -= 2) {\n        f[i] = -f[i];\n    }\n   \
+    \ return f;\n}\n#line 1 \"template/template.hpp\"\n#include <bits/stdc++.h>\n\
+    #define OVERRIDE(a, b, c, d, ...) d\n#define REP2(i, n) for (i32 i = 0; i < (i32)(n);\
+    \ ++i)\n#define REP3(i, m, n) for (i32 i = (i32)(m); i < (i32)(n); ++i)\n#define\
+    \ REP(...) OVERRIDE(__VA_ARGS__, REP3, REP2)(__VA_ARGS__)\n#define PER2(i, n)\
+    \ for (i32 i = (i32)(n)-1; i >= 0; --i)\n#define PER3(i, m, n) for (i32 i = (i32)(n)-1;\
+    \ i >= (i32)(m); --i)\n#define PER(...) OVERRIDE(__VA_ARGS__, PER3, PER2)(__VA_ARGS__)\n\
+    #define ALL(x) begin(x), end(x)\n#define LEN(x) (i32)(x.size())\nusing namespace\
+    \ std;\nusing u32 = unsigned int;\nusing u64 = unsigned long long;\nusing i32\
+    \ = signed int;\nusing i64 = signed long long;\nusing f64 = double;\nusing f80\
+    \ = long double;\nusing pi = pair<i32, i32>;\nusing pl = pair<i64, i64>;\ntemplate\
+    \ <typename T>\nusing V = vector<T>;\ntemplate <typename T>\nusing VV = V<V<T>>;\n\
+    template <typename T>\nusing VVV = V<V<V<T>>>;\ntemplate <typename T>\nusing VVVV\
+    \ = V<V<V<V<T>>>>;\ntemplate <typename T>\nusing PQR = priority_queue<T, V<T>,\
+    \ greater<T>>;\ntemplate <typename T>\nbool chmin(T &x, const T &y) {\n    if\
+    \ (x > y) {\n        x = y;\n        return true;\n    }\n    return false;\n\
+    }\ntemplate <typename T>\nbool chmax(T &x, const T &y) {\n    if (x < y) {\n \
+    \       x = y;\n        return true;\n    }\n    return false;\n}\ntemplate <typename\
+    \ T>\ni32 lob(const V<T> &arr, const T &v) {\n    return (i32)(lower_bound(ALL(arr),\
+    \ v) - arr.begin());\n}\ntemplate <typename T>\ni32 upb(const V<T> &arr, const\
+    \ T &v) {\n    return (i32)(upper_bound(ALL(arr), v) - arr.begin());\n}\ntemplate\
+    \ <typename T>\nV<i32> argsort(const V<T> &arr) {\n    V<i32> ret(arr.size());\n\
+    \    iota(ALL(ret), 0);\n    sort(ALL(ret), [&](i32 i, i32 j) -> bool {\n    \
+    \    if (arr[i] == arr[j]) {\n            return i < j;\n        } else {\n  \
+    \          return arr[i] < arr[j];\n        }\n    });\n    return ret;\n}\n#ifdef\
+    \ INT128\nusing u128 = __uint128_t;\nusing i128 = __int128_t;\n#endif\n[[maybe_unused]]\
+    \ constexpr i32 INF = 1000000100;\n[[maybe_unused]] constexpr i64 INF64 = 3000000000000000100;\n\
+    struct SetUpIO {\n    SetUpIO() {\n#ifdef FAST_IO\n        ios::sync_with_stdio(false);\n\
+    \        cin.tie(nullptr);\n#endif\n        cout << fixed << setprecision(15);\n\
+    \    }\n} set_up_io;\nvoid scan(char &x) { cin >> x; }\nvoid scan(u32 &x) { cin\
+    \ >> x; }\nvoid scan(u64 &x) { cin >> x; }\nvoid scan(i32 &x) { cin >> x; }\n\
+    void scan(i64 &x) { cin >> x; }\nvoid scan(string &x) { cin >> x; }\ntemplate\
+    \ <typename T>\nvoid scan(V<T> &x) {\n    for (T &ele : x) {\n        scan(ele);\n\
+    \    }\n}\nvoid read() {}\ntemplate <typename Head, typename... Tail>\nvoid read(Head\
+    \ &head, Tail &...tail) {\n    scan(head);\n    read(tail...);\n}\n#define CHAR(...)\
+    \     \\\n    char __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define U32(...) \
+    \    \\\n    u32 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define U64(...)   \
+    \  \\\n    u64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define I32(...)     \\\
+    \n    i32 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define I64(...)     \\\n \
+    \   i64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define STR(...)        \\\n\
+    \    string __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define VEC(type, name, size)\
+    \ \\\n    V<type> name(size);       \\\n    read(name);\n#define VVEC(type, name,\
+    \ size1, size2)    \\\n    VV<type> name(size1, V<type>(size2)); \\\n    read(name);\n\
+    #line 5 \"poly/test/stirling_number_of_the_first_kind.test.cpp\"\n\nint main()\
+    \ {\n    using M = ModInt<998244353>;\n    I32(n);\n    V<M> ans = stirling_1_signed<M>(n);\n\
+    \    REP(i, n + 1) {\n        cout << ans[i] << \" \\n\"[i == n];\n    }\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/stirling_number_of_the_first_kind\"\
+    \n#define FAST_IO\n#include \"../../poly/stirling1.hpp\"\n#include \"../../template/template.hpp\"\
+    \n\nint main() {\n    using M = ModInt<998244353>;\n    I32(n);\n    V<M> ans\
+    \ = stirling_1_signed<M>(n);\n    REP(i, n + 1) {\n        cout << ans[i] << \"\
+    \ \\n\"[i == n];\n    }\n}\n"
   dependsOn:
+  - poly/stirling1.hpp
+  - poly/taylor_shift.hpp
   - poly/fft.hpp
   - number_theory/mod_int.hpp
   - number_theory/utils.hpp
   - number_theory/factorial.hpp
-  isVerificationFile: false
-  path: poly/taylor_shift.hpp
-  requiredBy:
-  - poly/stirling1.hpp
-  timestamp: '2024-03-30 17:34:28+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - poly/test/stirling_number_of_the_first_kind.test.cpp
-  - poly/test/polynomial_taylor_shift.test.cpp
-documentation_of: poly/taylor_shift.hpp
+  - template/template.hpp
+  isVerificationFile: true
+  path: poly/test/stirling_number_of_the_first_kind.test.cpp
+  requiredBy: []
+  timestamp: '2024-03-30 18:10:15+09:00'
+  verificationStatus: TEST_ACCEPTED
+  verifiedWith: []
+documentation_of: poly/test/stirling_number_of_the_first_kind.test.cpp
 layout: document
 redirect_from:
-- /library/poly/taylor_shift.hpp
-- /library/poly/taylor_shift.hpp.html
-title: poly/taylor_shift.hpp
+- /verify/poly/test/stirling_number_of_the_first_kind.test.cpp
+- /verify/poly/test/stirling_number_of_the_first_kind.test.cpp.html
+title: poly/test/stirling_number_of_the_first_kind.test.cpp
 ---

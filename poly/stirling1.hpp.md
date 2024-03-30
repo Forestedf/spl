@@ -13,14 +13,11 @@ data:
   - icon: ':heavy_check_mark:'
     path: poly/fft.hpp
     title: poly/fft.hpp
-  _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
-    path: poly/stirling1.hpp
-    title: poly/stirling1.hpp
+    path: poly/taylor_shift.hpp
+    title: poly/taylor_shift.hpp
+  _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: poly/test/polynomial_taylor_shift.test.cpp
-    title: poly/test/polynomial_taylor_shift.test.cpp
   - icon: ':heavy_check_mark:'
     path: poly/test/stirling_number_of_the_first_kind.test.cpp
     title: poly/test/stirling_number_of_the_first_kind.test.cpp
@@ -226,34 +223,47 @@ data:
     \ cp * inv_fact<M>(i);\n        cp *= c;\n    }\n    std::vector<M> h = convolve(f,\
     \ g);\n    h.resize(f.size());\n    std::reverse(h.begin(), h.end());\n    for\
     \ (int i = 0; i < (int)f.size(); ++i) {\n        h[i] *= inv_fact<M>(i);\n   \
-    \ }\n    return h;\n}\n"
-  code: "#pragma once\n#include \"fft.hpp\"\n#include \"../number_theory/factorial.hpp\"\
-    \n#include <algorithm>\n// f(x) -> f(x+c)\ntemplate <typename M>\nstd::vector<M>\
-    \ taylor_shift(std::vector<M> f, M c) {\n    for (int i = 0; i < (int)f.size();\
-    \ ++i) {\n        f[i] *= fact<M>(i);\n    }\n    std::reverse(f.begin(), f.end());\n\
-    \    M cp(1);\n    std::vector<M> g(f.size());\n    for (int i = 0; i < (int)f.size();\
-    \ ++i) {\n        g[i] = cp * inv_fact<M>(i);\n        cp *= c;\n    }\n    std::vector<M>\
-    \ h = convolve(f, g);\n    h.resize(f.size());\n    std::reverse(h.begin(), h.end());\n\
-    \    for (int i = 0; i < (int)f.size(); ++i) {\n        h[i] *= inv_fact<M>(i);\n\
-    \    }\n    return h;\n}\n"
+    \ }\n    return h;\n}\n#line 3 \"poly/stirling1.hpp\"\ntemplate <typename M>\n\
+    std::vector<M> stirling_1_signed(int n) {\n    assert(0 <= n);\n    if (n == 0)\
+    \ {\n        return std::vector<M>(1, M(1));\n    }\n    std::vector<M> f{M(0),\
+    \ M(1)};\n    int lg = 31 - __builtin_clz(n);\n    for (int i = lg - 1; i >= 0;\
+    \ --i) {\n        f = convolve(f, taylor_shift(f, -M(n >> (i + 1))));\n      \
+    \  if (n & (1 << i)) {\n            M k((n >> i) - 1);\n            f.push_back(M());\n\
+    \            for (int j = (int)f.size() - 1; j > 0; --j) {\n                f[j]\
+    \ = f[j - 1] - f[j] * k;\n            }\n            f[0] = -k * f[0];\n     \
+    \   }\n    }\n    return f;\n}\ntemplate <typename M>\nstd::vector<M> stirling_1_unsigned(int\
+    \ n) {\n    assert(0 <= n);\n    std::vector<M> f = stirling_1_signed<M>(n);\n\
+    \    for (int i = n - 1; i >= 0; i -= 2) {\n        f[i] = -f[i];\n    }\n   \
+    \ return f;\n}\n"
+  code: "#pragma once\n#include \"taylor_shift.hpp\"\ntemplate <typename M>\nstd::vector<M>\
+    \ stirling_1_signed(int n) {\n    assert(0 <= n);\n    if (n == 0) {\n       \
+    \ return std::vector<M>(1, M(1));\n    }\n    std::vector<M> f{M(0), M(1)};\n\
+    \    int lg = 31 - __builtin_clz(n);\n    for (int i = lg - 1; i >= 0; --i) {\n\
+    \        f = convolve(f, taylor_shift(f, -M(n >> (i + 1))));\n        if (n &\
+    \ (1 << i)) {\n            M k((n >> i) - 1);\n            f.push_back(M());\n\
+    \            for (int j = (int)f.size() - 1; j > 0; --j) {\n                f[j]\
+    \ = f[j - 1] - f[j] * k;\n            }\n            f[0] = -k * f[0];\n     \
+    \   }\n    }\n    return f;\n}\ntemplate <typename M>\nstd::vector<M> stirling_1_unsigned(int\
+    \ n) {\n    assert(0 <= n);\n    std::vector<M> f = stirling_1_signed<M>(n);\n\
+    \    for (int i = n - 1; i >= 0; i -= 2) {\n        f[i] = -f[i];\n    }\n   \
+    \ return f;\n}\n"
   dependsOn:
+  - poly/taylor_shift.hpp
   - poly/fft.hpp
   - number_theory/mod_int.hpp
   - number_theory/utils.hpp
   - number_theory/factorial.hpp
   isVerificationFile: false
-  path: poly/taylor_shift.hpp
-  requiredBy:
-  - poly/stirling1.hpp
-  timestamp: '2024-03-30 17:34:28+09:00'
+  path: poly/stirling1.hpp
+  requiredBy: []
+  timestamp: '2024-03-30 18:10:15+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - poly/test/stirling_number_of_the_first_kind.test.cpp
-  - poly/test/polynomial_taylor_shift.test.cpp
-documentation_of: poly/taylor_shift.hpp
+documentation_of: poly/stirling1.hpp
 layout: document
 redirect_from:
-- /library/poly/taylor_shift.hpp
-- /library/poly/taylor_shift.hpp.html
-title: poly/taylor_shift.hpp
+- /library/poly/stirling1.hpp
+- /library/poly/stirling1.hpp.html
+title: poly/stirling1.hpp
 ---

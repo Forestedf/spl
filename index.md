@@ -109,10 +109,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: number_theory/frac_binsearch.hpp
       title: number_theory/frac_binsearch.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: number_theory/mod_int.hpp
       title: number_theory/mod_int.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: number_theory/utils.hpp
       title: number_theory/utils.hpp
   - name: other
@@ -122,7 +122,7 @@ data:
       title: other/coordinate_compression.hpp
   - name: poly
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: poly/fft.hpp
       title: poly/fft.hpp
   - name: string
@@ -147,7 +147,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: template/random.hpp
       title: template/random.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/template.hpp
       title: template/template.hpp
   verificationCategories:
@@ -246,7 +246,7 @@ data:
       title: number_theory/test/inv_mod_stress.test.cpp
   - name: poly/test
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: poly/test/convolution_mod.test.cpp
       title: poly/test/convolution_mod.test.cpp
   - name: string/test

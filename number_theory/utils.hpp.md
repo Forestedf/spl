@@ -149,25 +149,25 @@ data:
   isVerificationFile: false
   path: number_theory/utils.hpp
   requiredBy:
-  - number_theory/ax_by_c.hpp
   - number_theory/mod_int.hpp
-  - poly/taylor_shift.hpp
+  - number_theory/ax_by_c.hpp
   - poly/stirling2.hpp
-  - poly/stirling1.hpp
   - poly/fft.hpp
+  - poly/taylor_shift.hpp
+  - poly/stirling1.hpp
   timestamp: '2024-03-29 12:47:49+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - data_structure/test/1891.test.cpp
   - data_structure/test/queue_operate_all_composite.test.cpp
   - data_structure/test/range_affine_range_sum.test.cpp
+  - data_structure/test/1891.test.cpp
   - data_structure/test/point_set_range_composite.test.cpp
-  - number_theory/test/inv_mod_stress.test.cpp
   - number_theory/test/ax_by_c_stress.test.cpp
   - number_theory/test/extgcd2_stress.test.cpp
-  - poly/test/stirling_number_of_the_first_kind.test.cpp
+  - number_theory/test/inv_mod_stress.test.cpp
   - poly/test/convolution_mod.test.cpp
   - poly/test/stirling_number_of_the_second_kind.test.cpp
+  - poly/test/stirling_number_of_the_first_kind.test.cpp
   - poly/test/polynomial_taylor_shift.test.cpp
 documentation_of: number_theory/utils.hpp
 layout: document

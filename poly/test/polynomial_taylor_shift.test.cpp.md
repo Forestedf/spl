@@ -125,69 +125,69 @@ data:
     \ >> R);\n        iroot[R] = root[R].inv();\n        for (int i = R - 1; i >=\
     \ 0; --i) {\n            root[i] = root[i + 1] * root[i + 1];\n            iroot[i]\
     \ = iroot[i + 1] * iroot[i + 1];\n        }\n        ModInt<MOD> prod(1), iprod(1);\n\
-    \        for (int i = 0; i < R - 1; ++i) {\n            rate2[i] = prod * root[i\
-    \ + 2];\n            irate2[i] = iprod * iroot[i + 2];\n            prod *= iroot[i\
-    \ + 2];\n            iprod *= root[i + 2];\n        }\n        prod = ModInt<MOD>(1);\n\
-    \        iprod = ModInt<MOD>(1);\n        for (int i = 0; i < R - 2; ++i) {\n\
-    \            rate3[i] = prod * root[i + 3];\n            irate3[i] = iprod * iroot[i\
-    \ + 3];\n            prod *= iroot[i + 3];\n            iprod *= root[i + 3];\n\
-    \        }\n        ModInt<MOD> i2 = ModInt<MOD>(2).inv();\n        inv2[0] =\
-    \ ModInt<MOD>(1);\n        for (int i = 0; i < R; ++i) {\n            inv2[i +\
-    \ 1] = inv2[i] * i2;\n        }\n    }\n};\n\ntemplate <typename M>\nvoid fft(std::vector<M>\
+    \        for (int i = 0; i < (int)R - 1; ++i) {\n            rate2[i] = prod *\
+    \ root[i + 2];\n            irate2[i] = iprod * iroot[i + 2];\n            prod\
+    \ *= iroot[i + 2];\n            iprod *= root[i + 2];\n        }\n        prod\
+    \ = ModInt<MOD>(1);\n        iprod = ModInt<MOD>(1);\n        for (int i = 0;\
+    \ i < (int)R - 2; ++i) {\n            rate3[i] = prod * root[i + 3];\n       \
+    \     irate3[i] = iprod * iroot[i + 3];\n            prod *= iroot[i + 3];\n \
+    \           iprod *= root[i + 3];\n        }\n        ModInt<MOD> i2 = ModInt<MOD>(2).inv();\n\
+    \        inv2[0] = ModInt<MOD>(1);\n        for (int i = 0; i < (int)R; ++i) {\n\
+    \            inv2[i + 1] = inv2[i] * i2;\n        }\n    }\n};\n\ntemplate <typename\
+    \ M>\nvoid fft(std::vector<M> &a) {\n    using ull = unsigned long long;\n   \
+    \ static_assert(M::get_mod() < (1u << 30));\n    static constexpr FFTRoot<M::get_mod()>\
+    \ fftroot;\n    static constexpr ull CEIL = 2ULL * M::get_mod() * M::get_mod();\n\
+    \    int n = (int)a.size();\n    int l = __builtin_ctz(n);\n    int ph = 0;\n\
+    \    while (ph < l) {\n        if (ph + 1 == l) {\n            int b = 1 << ph;\n\
+    \            M z = M::raw(1);\n            for (int i = 0; i < b; ++i) {\n   \
+    \             int offset = i << 1;\n                M x = a[offset];\n       \
+    \         M y = a[offset + 1] * z;\n                a[offset] = x + y;\n     \
+    \           a[offset + 1] = x - y;\n                z *= fftroot.rate2[__builtin_ctz(~i)];\n\
+    \            }\n            ++ph;\n        } else {\n            int bl = 1 <<\
+    \ ph;\n            int wd = 1 << (l - 2 - ph);\n            M zeta = M::raw(1);\n\
+    \            for (int i = 0; i < bl; ++i) {\n                int offset = i <<\
+    \ (l - ph);\n                M zeta2 = zeta * zeta;\n                M zeta3 =\
+    \ zeta2 * zeta;\n                for (int j = 0; j < wd; ++j) {\n            \
+    \        ull w = a[offset + j].val;\n                    ull x = (ull)a[offset\
+    \ + j + wd].val * zeta.val;\n                    ull y = (ull)a[offset + j + 2\
+    \ * wd].val * zeta2.val;\n                    ull z = (ull)a[offset + j + 3 *\
+    \ wd].val * zeta3.val;\n                    ull ix_m_iz = (CEIL + x - z) % M::get_mod()\
+    \ * fftroot.root[2].val;\n                    a[offset + j] = M(w + x + y + z);\n\
+    \                    a[offset + j + wd] = M(CEIL + w - x + y - z);\n         \
+    \           a[offset + j + 2 * wd] = M(CEIL + w - y + ix_m_iz);\n            \
+    \        a[offset + j + 3 * wd] = M(CEIL + w - y - ix_m_iz);\n               \
+    \ }\n                zeta *= fftroot.rate3[__builtin_ctz(~i)];\n            }\n\
+    \            ph += 2;\n        }\n    }\n}\n\ntemplate <typename M>\nvoid ifft(std::vector<M>\
     \ &a) {\n    using ull = unsigned long long;\n    static_assert(M::get_mod() <\
-    \ (1u << 30));\n    static constexpr FFTRoot<M::get_mod()> fftroot;\n    static\
-    \ constexpr ull CEIL = 2ULL * M::get_mod() * M::get_mod();\n    int n = (int)a.size();\n\
-    \    int l = __builtin_ctz(n);\n    int ph = 0;\n    while (ph < l) {\n      \
-    \  if (ph + 1 == l) {\n            int b = 1 << ph;\n            M z = M::raw(1);\n\
-    \            for (int i = 0; i < b; ++i) {\n                int offset = i <<\
-    \ 1;\n                M x = a[offset];\n                M y = a[offset + 1] *\
-    \ z;\n                a[offset] = x + y;\n                a[offset + 1] = x -\
-    \ y;\n                z *= fftroot.rate2[__builtin_ctz(~i)];\n            }\n\
-    \            ++ph;\n        } else {\n            int bl = 1 << ph;\n        \
-    \    int wd = 1 << (l - 2 - ph);\n            M zeta = M::raw(1);\n          \
-    \  for (int i = 0; i < bl; ++i) {\n                int offset = i << (l - ph);\n\
-    \                M zeta2 = zeta * zeta;\n                M zeta3 = zeta2 * zeta;\n\
-    \                for (int j = 0; j < wd; ++j) {\n                    ull w = a[offset\
-    \ + j].val;\n                    ull x = (ull)a[offset + j + wd].val * zeta.val;\n\
-    \                    ull y = (ull)a[offset + j + 2 * wd].val * zeta2.val;\n  \
-    \                  ull z = (ull)a[offset + j + 3 * wd].val * zeta3.val;\n    \
-    \                ull ix_m_iz = (CEIL + x - z) % M::get_mod() * fftroot.root[2].val;\n\
-    \                    a[offset + j] = M(w + x + y + z);\n                    a[offset\
-    \ + j + wd] = M(CEIL + w - x + y - z);\n                    a[offset + j + 2 *\
-    \ wd] = M(CEIL + w - y + ix_m_iz);\n                    a[offset + j + 3 * wd]\
-    \ = M(CEIL + w - y - ix_m_iz);\n                }\n                zeta *= fftroot.rate3[__builtin_ctz(~i)];\n\
-    \            }\n            ph += 2;\n        }\n    }\n}\n\ntemplate <typename\
-    \ M>\nvoid ifft(std::vector<M> &a) {\n    using ull = unsigned long long;\n  \
-    \  static_assert(M::get_mod() < (1u << 30));\n    static constexpr FFTRoot<M::get_mod()>\
-    \ fftroot;\n    int n = (int)a.size();\n    int l = __builtin_ctz(n);\n    int\
-    \ ph = l;\n    while (ph > 0) {\n        if (ph == 1) {\n            --ph;\n \
-    \           int wd = 1 << (l - 1);\n            for (int i = 0; i < wd; ++i) {\n\
-    \                M x = a[i];\n                M y = a[i + wd];\n             \
-    \   a[i] = x + y;\n                a[i + wd] = x - y;\n            }\n       \
-    \ } else {\n            ph -= 2;\n            int bl = 1 << ph;\n            int\
-    \ wd = 1 << (l - 2 - ph);\n            M zeta = M::raw(1);\n            for (int\
-    \ i = 0; i < bl; ++i) {\n                int offset = i << (l - ph);\n       \
-    \         M zeta2 = zeta * zeta;\n                M zeta3 = zeta2 * zeta;\n  \
-    \              for (int j = 0; j < wd; ++j) {\n                    unsigned w\
-    \ = a[offset + j].val;\n                    unsigned x = a[offset + j + wd].val;\n\
-    \                    unsigned y = a[offset + j + 2 * wd].val;\n              \
-    \      unsigned z = a[offset + j + 3 * wd].val;\n                    unsigned\
-    \ iy_m_iz = (ull)(M::get_mod() + y - z) * fftroot.root[2].val % M::get_mod();\n\
-    \                    a[offset + j] = M(w + x + y + z);\n                    a[offset\
-    \ + j + wd] = M((ull)zeta.val * (2 * M::get_mod() + w - x - iy_m_iz));\n     \
-    \               a[offset + j + 2 * wd] = M((ull)zeta2.val * (2 * M::get_mod()\
-    \ + w + x - y - z));\n                    a[offset + j + 3 * wd] = M((ull)zeta3.val\
-    \ * (M::get_mod() + w - x + iy_m_iz));\n                }\n                zeta\
-    \ *= fftroot.irate3[__builtin_ctz(~i)];\n            }\n        }\n    }\n   \
-    \ for (M &ele : a) {\n        ele *= fftroot.inv2[l];\n    }\n}\n\ntemplate <typename\
-    \ M>\nstd::vector<M> convolve_naive(const std::vector<M> &a,\n               \
-    \               const std::vector<M> &b) {\n    int n = (int)a.size();\n    int\
-    \ m = (int)b.size();\n    std::vector<M> c(n + m - 1);\n    if (n < m) {\n   \
-    \     for (int j = 0; j < m; ++j) {\n            for (int i = 0; i < n; ++i) {\n\
-    \                c[i + j] += a[i] * b[j];\n            }\n        }\n    } else\
-    \ {\n        for (int i = 0; i < n; ++i) {\n            for (int j = 0; j < m;\
-    \ ++j) {\n                c[i + j] += a[i] * b[j];\n            }\n        }\n\
-    \    }\n    return c;\n}\n\ntemplate <typename M>\nstd::vector<M> convolve_fft(std::vector<M>\
+    \ (1u << 30));\n    static constexpr FFTRoot<M::get_mod()> fftroot;\n    int n\
+    \ = (int)a.size();\n    int l = __builtin_ctz(n);\n    int ph = l;\n    while\
+    \ (ph > 0) {\n        if (ph == 1) {\n            --ph;\n            int wd =\
+    \ 1 << (l - 1);\n            for (int i = 0; i < wd; ++i) {\n                M\
+    \ x = a[i];\n                M y = a[i + wd];\n                a[i] = x + y;\n\
+    \                a[i + wd] = x - y;\n            }\n        } else {\n       \
+    \     ph -= 2;\n            int bl = 1 << ph;\n            int wd = 1 << (l -\
+    \ 2 - ph);\n            M zeta = M::raw(1);\n            for (int i = 0; i < bl;\
+    \ ++i) {\n                int offset = i << (l - ph);\n                M zeta2\
+    \ = zeta * zeta;\n                M zeta3 = zeta2 * zeta;\n                for\
+    \ (int j = 0; j < wd; ++j) {\n                    unsigned w = a[offset + j].val;\n\
+    \                    unsigned x = a[offset + j + wd].val;\n                  \
+    \  unsigned y = a[offset + j + 2 * wd].val;\n                    unsigned z =\
+    \ a[offset + j + 3 * wd].val;\n                    unsigned iy_m_iz = (ull)(M::get_mod()\
+    \ + y - z) * fftroot.root[2].val % M::get_mod();\n                    a[offset\
+    \ + j] = M(w + x + y + z);\n                    a[offset + j + wd] = M((ull)zeta.val\
+    \ * (2 * M::get_mod() + w - x - iy_m_iz));\n                    a[offset + j +\
+    \ 2 * wd] = M((ull)zeta2.val * (2 * M::get_mod() + w + x - y - z));\n        \
+    \            a[offset + j + 3 * wd] = M((ull)zeta3.val * (M::get_mod() + w - x\
+    \ + iy_m_iz));\n                }\n                zeta *= fftroot.irate3[__builtin_ctz(~i)];\n\
+    \            }\n        }\n    }\n    for (M &ele : a) {\n        ele *= fftroot.inv2[l];\n\
+    \    }\n}\n\ntemplate <typename M>\nstd::vector<M> convolve_naive(const std::vector<M>\
+    \ &a,\n                              const std::vector<M> &b) {\n    int n = (int)a.size();\n\
+    \    int m = (int)b.size();\n    std::vector<M> c(n + m - 1);\n    if (n < m)\
+    \ {\n        for (int j = 0; j < m; ++j) {\n            for (int i = 0; i < n;\
+    \ ++i) {\n                c[i + j] += a[i] * b[j];\n            }\n        }\n\
+    \    } else {\n        for (int i = 0; i < n; ++i) {\n            for (int j =\
+    \ 0; j < m; ++j) {\n                c[i + j] += a[i] * b[j];\n            }\n\
+    \        }\n    }\n    return c;\n}\n\ntemplate <typename M>\nstd::vector<M> convolve_fft(std::vector<M>\
     \ a, std::vector<M> b) {\n    int n = (int)a.size() + (int)b.size() - 1;\n   \
     \ int m = 1;\n    while (m < n) {\n        m <<= 1;\n    }\n    bool shr = false;\n\
     \    M last;\n    if (n >= 3 && n == m / 2 + 1) {\n        shr = true;\n     \
@@ -289,7 +289,7 @@ data:
   isVerificationFile: true
   path: poly/test/polynomial_taylor_shift.test.cpp
   requiredBy: []
-  timestamp: '2024-03-30 17:34:28+09:00'
+  timestamp: '2024-04-08 20:24:54+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: poly/test/polynomial_taylor_shift.test.cpp

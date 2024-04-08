@@ -43,10 +43,10 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - data_structure/test/wavelet_matrix.test.cpp
-  - number_theory/test/inv_mod_stress.test.cpp
   - number_theory/test/ax_by_c_stress.test.cpp
   - number_theory/test/extgcd2_stress.test.cpp
   - number_theory/test/frac_binsearch_stress.test.cpp
+  - number_theory/test/inv_mod_stress.test.cpp
 documentation_of: template/random.hpp
 layout: document
 redirect_from:

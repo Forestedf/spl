@@ -28,7 +28,7 @@ struct FFTRoot {
             iroot[i] = iroot[i + 1] * iroot[i + 1];
         }
         ModInt<MOD> prod(1), iprod(1);
-        for (int i = 0; i < R - 1; ++i) {
+        for (int i = 0; i < (int)R - 1; ++i) {
             rate2[i] = prod * root[i + 2];
             irate2[i] = iprod * iroot[i + 2];
             prod *= iroot[i + 2];
@@ -36,7 +36,7 @@ struct FFTRoot {
         }
         prod = ModInt<MOD>(1);
         iprod = ModInt<MOD>(1);
-        for (int i = 0; i < R - 2; ++i) {
+        for (int i = 0; i < (int)R - 2; ++i) {
             rate3[i] = prod * root[i + 3];
             irate3[i] = iprod * iroot[i + 3];
             prod *= iroot[i + 3];
@@ -44,7 +44,7 @@ struct FFTRoot {
         }
         ModInt<MOD> i2 = ModInt<MOD>(2).inv();
         inv2[0] = ModInt<MOD>(1);
-        for (int i = 0; i < R; ++i) {
+        for (int i = 0; i < (int)R; ++i) {
             inv2[i + 1] = inv2[i] * i2;
         }
     }

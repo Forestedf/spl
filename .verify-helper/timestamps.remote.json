@@ -1,5 +1,6 @@
 {
 "algebra/test/inverse_matrix.test.cpp": "2024-04-17 20:50:21 +0900",
+"algebra/test/matrix_det.test.cpp": "2024-04-17 21:02:29 +0900",
 "algebra/test/matrix_product.test.cpp": "2024-04-17 20:50:21 +0900",
 "data_structure/test/1891.test.cpp": "2024-03-29 12:47:49 +0900",
 "data_structure/test/area_of_union_of_rectangles.test.cpp": "2024-03-29 10:44:36 +0900",

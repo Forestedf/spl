@@ -4,6 +4,9 @@ data:
   - name: algebra
     pages:
     - icon: ':heavy_check_mark:'
+      path: algebra/determinant.hpp
+      title: algebra/determinant.hpp
+    - icon: ':heavy_check_mark:'
       path: algebra/inverse_matrix.hpp
       title: algebra/inverse_matrix.hpp
     - icon: ':heavy_check_mark:'
@@ -178,6 +181,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: algebra/test/inverse_matrix.test.cpp
       title: algebra/test/inverse_matrix.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: algebra/test/matrix_det.test.cpp
+      title: algebra/test/matrix_det.test.cpp
     - icon: ':heavy_check_mark:'
       path: algebra/test/matrix_product.test.cpp
       title: algebra/test/matrix_product.test.cpp

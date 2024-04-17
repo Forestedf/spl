@@ -7,6 +7,9 @@ data:
     path: algebra/test/inverse_matrix.test.cpp
     title: algebra/test/inverse_matrix.test.cpp
   - icon: ':heavy_check_mark:'
+    path: algebra/test/matrix_det.test.cpp
+    title: algebra/test/matrix_det.test.cpp
+  - icon: ':heavy_check_mark:'
     path: algebra/test/matrix_product.test.cpp
     title: algebra/test/matrix_product.test.cpp
   _isVerificationFailed: false
@@ -196,6 +199,7 @@ data:
   timestamp: '2024-03-30 15:09:52+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - algebra/test/matrix_det.test.cpp
   - algebra/test/matrix_product.test.cpp
   - algebra/test/inverse_matrix.test.cpp
 documentation_of: template/fastio.hpp

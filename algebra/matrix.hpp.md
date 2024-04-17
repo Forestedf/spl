@@ -3,12 +3,18 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
+    path: algebra/determinant.hpp
+    title: algebra/determinant.hpp
+  - icon: ':heavy_check_mark:'
     path: algebra/inverse_matrix.hpp
     title: algebra/inverse_matrix.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: algebra/test/inverse_matrix.test.cpp
     title: algebra/test/inverse_matrix.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: algebra/test/matrix_det.test.cpp
+    title: algebra/test/matrix_det.test.cpp
   - icon: ':heavy_check_mark:'
     path: algebra/test/matrix_product.test.cpp
     title: algebra/test/matrix_product.test.cpp
@@ -94,9 +100,11 @@ data:
   path: algebra/matrix.hpp
   requiredBy:
   - algebra/inverse_matrix.hpp
+  - algebra/determinant.hpp
   timestamp: '2024-04-17 20:50:21+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - algebra/test/matrix_det.test.cpp
   - algebra/test/matrix_product.test.cpp
   - algebra/test/inverse_matrix.test.cpp
 documentation_of: algebra/matrix.hpp

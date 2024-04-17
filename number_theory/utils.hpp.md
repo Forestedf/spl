@@ -25,6 +25,9 @@ data:
     path: algebra/test/inverse_matrix.test.cpp
     title: algebra/test/inverse_matrix.test.cpp
   - icon: ':heavy_check_mark:'
+    path: algebra/test/matrix_det.test.cpp
+    title: algebra/test/matrix_det.test.cpp
+  - icon: ':heavy_check_mark:'
     path: algebra/test/matrix_product.test.cpp
     title: algebra/test/matrix_product.test.cpp
   - icon: ':heavy_check_mark:'
@@ -171,6 +174,7 @@ data:
   - poly/test/polynomial_taylor_shift.test.cpp
   - poly/test/stirling_number_of_the_second_kind.test.cpp
   - poly/test/stirling_number_of_the_first_kind.test.cpp
+  - algebra/test/matrix_det.test.cpp
   - algebra/test/matrix_product.test.cpp
   - algebra/test/inverse_matrix.test.cpp
   - data_structure/test/range_affine_range_sum.test.cpp

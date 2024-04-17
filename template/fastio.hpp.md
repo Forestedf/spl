@@ -2,10 +2,16 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: algebra/test/inverse_matrix.test.cpp
+    title: algebra/test/inverse_matrix.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: algebra/test/matrix_product.test.cpp
+    title: algebra/test/matrix_product.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 1 \"template/fastio.hpp\"\n#include <cstdio>\n#include <cstring>\n\
@@ -188,8 +194,10 @@ data:
   path: template/fastio.hpp
   requiredBy: []
   timestamp: '2024-03-30 15:09:52+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - algebra/test/matrix_product.test.cpp
+  - algebra/test/inverse_matrix.test.cpp
 documentation_of: template/fastio.hpp
 layout: document
 redirect_from:

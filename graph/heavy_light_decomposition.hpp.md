@@ -172,8 +172,8 @@ data:
   timestamp: '2024-02-03 17:22:22+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - graph/test/jump_on_tree.test.cpp
   - graph/test/lca.test.cpp
+  - graph/test/jump_on_tree.test.cpp
   - graph/test/vertex_add_path_sum.test.cpp
 documentation_of: graph/heavy_light_decomposition.hpp
 layout: document

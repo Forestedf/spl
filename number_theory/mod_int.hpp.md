@@ -19,6 +19,12 @@ data:
     title: poly/taylor_shift.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: algebra/test/inverse_matrix.test.cpp
+    title: algebra/test/inverse_matrix.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: algebra/test/matrix_product.test.cpp
+    title: algebra/test/matrix_product.test.cpp
+  - icon: ':heavy_check_mark:'
     path: data_structure/test/1891.test.cpp
     title: data_structure/test/1891.test.cpp
   - icon: ':heavy_check_mark:'
@@ -177,21 +183,23 @@ data:
   isVerificationFile: false
   path: number_theory/mod_int.hpp
   requiredBy:
-  - poly/stirling2.hpp
-  - poly/fft.hpp
-  - poly/taylor_shift.hpp
   - poly/stirling1.hpp
+  - poly/fft.hpp
+  - poly/stirling2.hpp
+  - poly/taylor_shift.hpp
   timestamp: '2024-03-29 12:47:49+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - data_structure/test/queue_operate_all_composite.test.cpp
-  - data_structure/test/range_affine_range_sum.test.cpp
-  - data_structure/test/1891.test.cpp
-  - data_structure/test/point_set_range_composite.test.cpp
   - poly/test/convolution_mod.test.cpp
+  - poly/test/polynomial_taylor_shift.test.cpp
   - poly/test/stirling_number_of_the_second_kind.test.cpp
   - poly/test/stirling_number_of_the_first_kind.test.cpp
-  - poly/test/polynomial_taylor_shift.test.cpp
+  - algebra/test/matrix_product.test.cpp
+  - algebra/test/inverse_matrix.test.cpp
+  - data_structure/test/range_affine_range_sum.test.cpp
+  - data_structure/test/point_set_range_composite.test.cpp
+  - data_structure/test/1891.test.cpp
+  - data_structure/test/queue_operate_all_composite.test.cpp
 documentation_of: number_theory/mod_int.hpp
 layout: document
 redirect_from:

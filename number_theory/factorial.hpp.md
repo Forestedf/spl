@@ -66,15 +66,15 @@ data:
   isVerificationFile: false
   path: number_theory/factorial.hpp
   requiredBy:
+  - poly/stirling1.hpp
   - poly/stirling2.hpp
   - poly/taylor_shift.hpp
-  - poly/stirling1.hpp
   timestamp: '2024-03-29 17:56:07+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - poly/test/polynomial_taylor_shift.test.cpp
   - poly/test/stirling_number_of_the_second_kind.test.cpp
   - poly/test/stirling_number_of_the_first_kind.test.cpp
-  - poly/test/polynomial_taylor_shift.test.cpp
 documentation_of: number_theory/factorial.hpp
 layout: document
 redirect_from:

@@ -1,6 +1,14 @@
 ---
 data:
   libraryCategories:
+  - name: algebra
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: algebra/inverse_matrix.hpp
+      title: algebra/inverse_matrix.hpp
+    - icon: ':heavy_check_mark:'
+      path: algebra/matrix.hpp
+      title: algebra/matrix.hpp
   - name: data_structure
     pages:
     - icon: ':heavy_check_mark:'
@@ -155,7 +163,7 @@ data:
     - icon: ':warning:'
       path: template/debug.hpp
       title: template/debug.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: template/fastio.hpp
       title: template/fastio.hpp
     - icon: ':heavy_check_mark:'
@@ -165,6 +173,14 @@ data:
       path: template/template.hpp
       title: template/template.hpp
   verificationCategories:
+  - name: algebra/test
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: algebra/test/inverse_matrix.test.cpp
+      title: algebra/test/inverse_matrix.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: algebra/test/matrix_product.test.cpp
+      title: algebra/test/matrix_product.test.cpp
   - name: data_structure/test
     pages:
     - icon: ':heavy_check_mark:'

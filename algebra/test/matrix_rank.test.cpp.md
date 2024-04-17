@@ -2,11 +2,11 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: algebra/inverse_matrix.hpp
-    title: algebra/inverse_matrix.hpp
-  - icon: ':heavy_check_mark:'
     path: algebra/matrix.hpp
     title: algebra/matrix.hpp
+  - icon: ':heavy_check_mark:'
+    path: algebra/rank_of_matrix.hpp
+    title: algebra/rank_of_matrix.hpp
   - icon: ':heavy_check_mark:'
     path: number_theory/mod_int.hpp
     title: number_theory/mod_int.hpp
@@ -26,11 +26,11 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/inverse_matrix
+    PROBLEM: https://judge.yosupo.jp/problem/matrix_rank
     links:
-    - https://judge.yosupo.jp/problem/inverse_matrix
-  bundledCode: "#line 1 \"algebra/test/inverse_matrix.test.cpp\"\n#define PROBLEM\
-    \ \"https://judge.yosupo.jp/problem/inverse_matrix\"\n#line 1 \"template/template.hpp\"\
+    - https://judge.yosupo.jp/problem/matrix_rank
+  bundledCode: "#line 1 \"algebra/test/matrix_rank.test.cpp\"\n#define PROBLEM \"\
+    https://judge.yosupo.jp/problem/matrix_rank\"\n#line 1 \"template/template.hpp\"\
     \n#include <bits/stdc++.h>\n#define OVERRIDE(a, b, c, d, ...) d\n#define REP2(i,\
     \ n) for (i32 i = 0; i < (i32)(n); ++i)\n#define REP3(i, m, n) for (i32 i = (i32)(m);\
     \ i < (i32)(n); ++i)\n#define REP(...) OVERRIDE(__VA_ARGS__, REP3, REP2)(__VA_ARGS__)\n\
@@ -159,94 +159,92 @@ data:
     \     write(std::forward<Tail>(tail)...);\n    }\n\n    template <typename...\
     \ T>\n    void writeln(T &&...t) {\n        write(std::forward<T>(t)...);\n  \
     \      write_char('\\n');\n    }\n};\n\nReader rd(stdin);\nWriter wr(stdout);\n\
-    #line 2 \"algebra/inverse_matrix.hpp\"\n#include <optional>\n#line 5 \"algebra/matrix.hpp\"\
-    \ntemplate <typename T>\nclass Matrix {\n    int _h, _w;\n    std::vector<std::vector<T>>\
-    \ dat;\n\npublic:\n    Matrix() : dat() {}\n    Matrix(int n) : _h(n), _w(n),\
-    \ dat(n, std::vector<T>(n, T())) {\n        assert(0 <= n);\n    }\n    Matrix(int\
-    \ _h, int _w) : _h(_h), _w(_w), dat(_h, std::vector<T>(_w, T())) {\n        assert(0\
-    \ <= _h && 0 <= _w);\n    }\n    static Matrix<T> ident(int n) {\n        assert(0\
-    \ <= n);\n        Matrix<T> ret(n);\n        for (int i = 0; i < n; ++i) {\n \
-    \           ret.dat[i][i] = T(1);\n        }\n        return ret;\n    }\n   \
-    \ int h() const { return _h; }\n    int w() const { return _w; }\n    std::pair<int,\
-    \ int> shape() const { return std::pair<int, int>(_h, _w); }\n    const T &operator()(int\
-    \ i, int j) const {\n        assert(0 <= i && i < _h && 0 <= j && j < _w);\n \
-    \       return dat[i][j];\n    }\n    T &operator()(int i, int j) {\n        assert(0\
-    \ <= i && i < _h && 0 <= j && j < _w);\n        return dat[i][j];\n    }\n   \
-    \ void swap_row(int i, int j) {\n        assert(0 <= i && i < _h && 0 <= j &&\
-    \ j < _h);\n        std::swap(dat[i], dat[j]);\n    }\n    void swap_column(int\
-    \ i, int j) {\n        assert(0 <= i && i < _w && 0 <= j && j < _w);\n       \
-    \ for (int k = 0; k < _h; ++k) {\n            std::swap(dat[k][i], dat[k][j]);\n\
-    \        }\n    }\n    Matrix<T> trans() const {\n        Matrix<T> ret(_w, _h);\n\
-    \        for (int i = 0; i < _h; ++i) {\n            for (int j = 0; j < _w; ++j)\
-    \ {\n                ret.dat[j][i] = dat[i][j];\n            }\n        }\n  \
-    \      return ret;\n    }\n    Matrix<T> &operator+=(const Matrix<T> &rhs) {\n\
-    \        assert(shape() == rhs.shape());\n        for (int i = 0; i < _h; ++i)\
-    \ {\n            for (int j = 0; j < _w; ++j) {\n                dat[i][j] +=\
-    \ rhs.dat[i][j];\n            }\n        }\n        return *this;\n    }\n   \
-    \ Matrix<T> &operator-=(const Matrix<T> &rhs) {\n        assert(shape() == rhs.shape());\n\
-    \        for (int i = 0; i < _h; ++i) {\n            for (int j = 0; j < _w; ++j)\
-    \ {\n                dat[i][j] -= rhs.dat[i][j];\n            }\n        }\n \
-    \       return *this;\n    }\n    Matrix<T> &operator*=(const Matrix<T> &rhs)\
-    \ { return *this = *this * rhs; }\n    friend Matrix<T> operator+(Matrix<T> lhs,\
-    \ const Matrix<T> &rhs) {\n        return lhs += rhs;\n    }\n    friend Matrix<T>\
-    \ operator-(Matrix<T> lhs, const Matrix<T> &rhs) {\n        return lhs -= rhs;\n\
-    \    }\n    friend Matrix<T> operator*(const Matrix<T> &lhs, const Matrix<T> &rhs)\
-    \ {\n        assert(lhs._w == rhs._h);\n        std::vector<std::vector<T>> dat(lhs._h,\
-    \ std::vector<T>(rhs._w, T()));\n        for (int i = 0; i < lhs._h; ++i) {\n\
-    \            for (int j = 0; j < rhs._w; ++j) {\n                for (int k =\
-    \ 0; k < lhs._w; ++k) {\n                    dat[i][j] += lhs.dat[i][k] * rhs.dat[k][j];\n\
-    \                }\n            }\n        }\n        Matrix<T> ret;\n       \
-    \ ret._h = lhs._h;\n        ret._w = rhs._w;\n        ret.dat = dat;\n       \
-    \ return ret;\n    }\n};\n#line 4 \"algebra/inverse_matrix.hpp\"\ntemplate <typename\
-    \ T>\nstd::optional<Matrix<T>> inverse_matrix(Matrix<T> a) {\n    assert(a.h()\
-    \ == a.w());\n    int n = a.h();\n    Matrix<T> b = Matrix<T>::ident(n);\n   \
-    \ for (int i = 0; i < n; ++i) {\n        int row = -1;\n        for (int j = i;\
-    \ j < n; ++j) {\n            if (a(j, i) != T()) {\n                row = j;\n\
-    \                break;\n            }\n        }\n        if (row == -1) {\n\
-    \            return std::nullopt;\n        }\n        a.swap_row(i, row);\n  \
-    \      b.swap_row(i, row);\n        T inv = T(1) / a(i, i);\n        for (int\
-    \ j = i; j < n; ++j) {\n            a(i, j) *= inv;\n        }\n        for (int\
-    \ j = 0; j < n; ++j) {\n            b(i, j) *= inv;\n        }\n        for (int\
-    \ j = 0; j < n; ++j) {\n            if (j == i) {\n                continue;\n\
-    \            }\n            T cf = a(j, i);\n            for (int k = i; k < n;\
-    \ ++k) {\n                a(j, k) -= a(i, k) * cf;\n            }\n          \
-    \  for (int k = 0; k < n; ++k) {\n                b(j, k) -= b(i, k) * cf;\n \
-    \           }\n        }\n    }\n    return b;\n}\n#line 2 \"number_theory/mod_int.hpp\"\
-    \n\n#line 2 \"number_theory/utils.hpp\"\n\n#line 4 \"number_theory/utils.hpp\"\
-    \n\nconstexpr bool is_prime(unsigned n) {\n    if (n == 0 || n == 1) {\n     \
-    \   return false;\n    }\n    for (unsigned i = 2; i * i <= n; ++i) {\n      \
-    \  if (n % i == 0) {\n            return false;\n        }\n    }\n    return\
-    \ true;\n}\n\nconstexpr unsigned mod_pow(unsigned x, unsigned y, unsigned mod)\
-    \ {\n    unsigned ret = 1, self = x;\n    while (y != 0) {\n        if (y & 1)\
-    \ {\n            ret = (unsigned)((unsigned long long)ret * self % mod);\n   \
-    \     }\n        self = (unsigned)((unsigned long long)self * self % mod);\n \
-    \       y /= 2;\n    }\n    return ret;\n}\n\ntemplate <unsigned mod>\nconstexpr\
-    \ unsigned primitive_root() {\n    static_assert(is_prime(mod), \"`mod` must be\
-    \ a prime number.\");\n    if (mod == 2) {\n        return 1;\n    }\n\n    unsigned\
-    \ primes[32] = {};\n    int it = 0;\n    {\n        unsigned m = mod - 1;\n  \
-    \      for (unsigned i = 2; i * i <= m; ++i) {\n            if (m % i == 0) {\n\
-    \                primes[it++] = i;\n                while (m % i == 0) {\n   \
-    \                 m /= i;\n                }\n            }\n        }\n     \
-    \   if (m != 1) {\n            primes[it++] = m;\n        }\n    }\n    for (unsigned\
-    \ i = 2; i < mod; ++i) {\n        bool ok = true;\n        for (int j = 0; j <\
-    \ it; ++j) {\n            if (mod_pow(i, (mod - 1) / primes[j], mod) == 1) {\n\
-    \                ok = false;\n                break;\n            }\n        }\n\
-    \        if (ok) return i;\n    }\n    return 0;\n}\n\n// y >= 1\ntemplate <typename\
-    \ T>\nconstexpr T safe_mod(T x, T y) {\n    x %= y;\n    if (x < 0) {\n      \
-    \  x += y;\n    }\n    return x;\n}\n\n// y != 0\ntemplate <typename T>\nconstexpr\
-    \ T floor_div(T x, T y) {\n    if (y < 0) {\n        x *= -1;\n        y *= -1;\n\
-    \    }\n    if (x >= 0) {\n        return x / y;\n    } else {\n        return\
-    \ -((-x + y - 1) / y);\n    }\n}\n\n// y != 0\ntemplate <typename T>\nconstexpr\
-    \ T ceil_div(T x, T y) {\n    if (y < 0) {\n        x *= -1;\n        y *= -1;\n\
-    \    }\n    if (x >= 0) {\n        return (x + y - 1) / y;\n    } else {\n   \
-    \     return -(-x / y);\n    }\n}\n\n// b >= 1\n// returns (g, x) s.t. g = gcd(a,\
-    \ b), a * x = g (mod b), 0 <= x < b / g\n// from ACL\ntemplate <typename T>\n\
-    std::pair<T, T> extgcd(T a, T b) {\n    a = safe_mod(a, b);\n    T s = b, t =\
-    \ a, m0 = 0, m1 = 1;\n    while (t) {\n        T u = s / t;\n        s -= t *\
-    \ u;\n        m0 -= m1 * u;\n        std::swap(s, t);\n        std::swap(m0, m1);\n\
-    \    }\n    if (m0 < 0) {\n        m0 += b / s;\n    }\n    return std::pair<T,\
-    \ T>(s, m0);\n}\n\n// b >= 1\n// returns (g, x, y) s.t. g = gcd(a, b), a * x +\
-    \ b * y = g, 0 <= x < b / g, |y| < max(2, |a| / g)\ntemplate <typename T>\nstd::tuple<T,\
+    #line 5 \"algebra/matrix.hpp\"\ntemplate <typename T>\nclass Matrix {\n    int\
+    \ _h, _w;\n    std::vector<std::vector<T>> dat;\n\npublic:\n    Matrix() : dat()\
+    \ {}\n    Matrix(int n) : _h(n), _w(n), dat(n, std::vector<T>(n, T())) {\n   \
+    \     assert(0 <= n);\n    }\n    Matrix(int _h, int _w) : _h(_h), _w(_w), dat(_h,\
+    \ std::vector<T>(_w, T())) {\n        assert(0 <= _h && 0 <= _w);\n    }\n   \
+    \ static Matrix<T> ident(int n) {\n        assert(0 <= n);\n        Matrix<T>\
+    \ ret(n);\n        for (int i = 0; i < n; ++i) {\n            ret.dat[i][i] =\
+    \ T(1);\n        }\n        return ret;\n    }\n    int h() const { return _h;\
+    \ }\n    int w() const { return _w; }\n    std::pair<int, int> shape() const {\
+    \ return std::pair<int, int>(_h, _w); }\n    const T &operator()(int i, int j)\
+    \ const {\n        assert(0 <= i && i < _h && 0 <= j && j < _w);\n        return\
+    \ dat[i][j];\n    }\n    T &operator()(int i, int j) {\n        assert(0 <= i\
+    \ && i < _h && 0 <= j && j < _w);\n        return dat[i][j];\n    }\n    void\
+    \ swap_row(int i, int j) {\n        assert(0 <= i && i < _h && 0 <= j && j < _h);\n\
+    \        std::swap(dat[i], dat[j]);\n    }\n    void swap_column(int i, int j)\
+    \ {\n        assert(0 <= i && i < _w && 0 <= j && j < _w);\n        for (int k\
+    \ = 0; k < _h; ++k) {\n            std::swap(dat[k][i], dat[k][j]);\n        }\n\
+    \    }\n    Matrix<T> trans() const {\n        Matrix<T> ret(_w, _h);\n      \
+    \  for (int i = 0; i < _h; ++i) {\n            for (int j = 0; j < _w; ++j) {\n\
+    \                ret.dat[j][i] = dat[i][j];\n            }\n        }\n      \
+    \  return ret;\n    }\n    Matrix<T> &operator+=(const Matrix<T> &rhs) {\n   \
+    \     assert(shape() == rhs.shape());\n        for (int i = 0; i < _h; ++i) {\n\
+    \            for (int j = 0; j < _w; ++j) {\n                dat[i][j] += rhs.dat[i][j];\n\
+    \            }\n        }\n        return *this;\n    }\n    Matrix<T> &operator-=(const\
+    \ Matrix<T> &rhs) {\n        assert(shape() == rhs.shape());\n        for (int\
+    \ i = 0; i < _h; ++i) {\n            for (int j = 0; j < _w; ++j) {\n        \
+    \        dat[i][j] -= rhs.dat[i][j];\n            }\n        }\n        return\
+    \ *this;\n    }\n    Matrix<T> &operator*=(const Matrix<T> &rhs) { return *this\
+    \ = *this * rhs; }\n    friend Matrix<T> operator+(Matrix<T> lhs, const Matrix<T>\
+    \ &rhs) {\n        return lhs += rhs;\n    }\n    friend Matrix<T> operator-(Matrix<T>\
+    \ lhs, const Matrix<T> &rhs) {\n        return lhs -= rhs;\n    }\n    friend\
+    \ Matrix<T> operator*(const Matrix<T> &lhs, const Matrix<T> &rhs) {\n        assert(lhs._w\
+    \ == rhs._h);\n        std::vector<std::vector<T>> dat(lhs._h, std::vector<T>(rhs._w,\
+    \ T()));\n        for (int i = 0; i < lhs._h; ++i) {\n            for (int j =\
+    \ 0; j < rhs._w; ++j) {\n                for (int k = 0; k < lhs._w; ++k) {\n\
+    \                    dat[i][j] += lhs.dat[i][k] * rhs.dat[k][j];\n           \
+    \     }\n            }\n        }\n        Matrix<T> ret;\n        ret._h = lhs._h;\n\
+    \        ret._w = rhs._w;\n        ret.dat = dat;\n        return ret;\n    }\n\
+    };\n#line 3 \"algebra/rank_of_matrix.hpp\"\n// O(HW min(H,W))\ntemplate <typename\
+    \ T>\nint rank_of_matrix(Matrix<T> a) {\n    if (a.h() > a.w()) {\n        a =\
+    \ a.trans();\n    }\n    if (a.h() == 0) {\n        return 0;\n    }\n    int\
+    \ rank = 0;\n    for (int i = 0; i < a.w(); ++i) {\n        int row = -1;\n  \
+    \      for (int j = rank; j < a.h(); ++j) {\n            if (a(j, i) != T()) {\n\
+    \                row = j;\n                break;\n            }\n        }\n\
+    \        if (row == -1) {\n            continue;\n        }\n        a.swap_row(rank,\
+    \ row);\n        T inv = T(1) / a(rank, i);\n        for (int j = i; j < a.w();\
+    \ ++j) {\n            a(rank, j) *= inv;\n        }\n        for (int j = rank\
+    \ + 1; j < a.h(); ++j) {\n            T cf = a(j, i);\n            for (int k\
+    \ = i + 1; k < a.w(); ++k) {\n                a(j, k) -= a(rank, k) * cf;\n  \
+    \          }\n        }\n        if (++rank == a.h()) {\n            break;\n\
+    \        }\n    }\n    return rank;\n}\n#line 2 \"number_theory/mod_int.hpp\"\n\
+    \n#line 2 \"number_theory/utils.hpp\"\n\n#line 4 \"number_theory/utils.hpp\"\n\
+    \nconstexpr bool is_prime(unsigned n) {\n    if (n == 0 || n == 1) {\n       \
+    \ return false;\n    }\n    for (unsigned i = 2; i * i <= n; ++i) {\n        if\
+    \ (n % i == 0) {\n            return false;\n        }\n    }\n    return true;\n\
+    }\n\nconstexpr unsigned mod_pow(unsigned x, unsigned y, unsigned mod) {\n    unsigned\
+    \ ret = 1, self = x;\n    while (y != 0) {\n        if (y & 1) {\n           \
+    \ ret = (unsigned)((unsigned long long)ret * self % mod);\n        }\n       \
+    \ self = (unsigned)((unsigned long long)self * self % mod);\n        y /= 2;\n\
+    \    }\n    return ret;\n}\n\ntemplate <unsigned mod>\nconstexpr unsigned primitive_root()\
+    \ {\n    static_assert(is_prime(mod), \"`mod` must be a prime number.\");\n  \
+    \  if (mod == 2) {\n        return 1;\n    }\n\n    unsigned primes[32] = {};\n\
+    \    int it = 0;\n    {\n        unsigned m = mod - 1;\n        for (unsigned\
+    \ i = 2; i * i <= m; ++i) {\n            if (m % i == 0) {\n                primes[it++]\
+    \ = i;\n                while (m % i == 0) {\n                    m /= i;\n  \
+    \              }\n            }\n        }\n        if (m != 1) {\n          \
+    \  primes[it++] = m;\n        }\n    }\n    for (unsigned i = 2; i < mod; ++i)\
+    \ {\n        bool ok = true;\n        for (int j = 0; j < it; ++j) {\n       \
+    \     if (mod_pow(i, (mod - 1) / primes[j], mod) == 1) {\n                ok =\
+    \ false;\n                break;\n            }\n        }\n        if (ok) return\
+    \ i;\n    }\n    return 0;\n}\n\n// y >= 1\ntemplate <typename T>\nconstexpr T\
+    \ safe_mod(T x, T y) {\n    x %= y;\n    if (x < 0) {\n        x += y;\n    }\n\
+    \    return x;\n}\n\n// y != 0\ntemplate <typename T>\nconstexpr T floor_div(T\
+    \ x, T y) {\n    if (y < 0) {\n        x *= -1;\n        y *= -1;\n    }\n   \
+    \ if (x >= 0) {\n        return x / y;\n    } else {\n        return -((-x + y\
+    \ - 1) / y);\n    }\n}\n\n// y != 0\ntemplate <typename T>\nconstexpr T ceil_div(T\
+    \ x, T y) {\n    if (y < 0) {\n        x *= -1;\n        y *= -1;\n    }\n   \
+    \ if (x >= 0) {\n        return (x + y - 1) / y;\n    } else {\n        return\
+    \ -(-x / y);\n    }\n}\n\n// b >= 1\n// returns (g, x) s.t. g = gcd(a, b), a *\
+    \ x = g (mod b), 0 <= x < b / g\n// from ACL\ntemplate <typename T>\nstd::pair<T,\
+    \ T> extgcd(T a, T b) {\n    a = safe_mod(a, b);\n    T s = b, t = a, m0 = 0,\
+    \ m1 = 1;\n    while (t) {\n        T u = s / t;\n        s -= t * u;\n      \
+    \  m0 -= m1 * u;\n        std::swap(s, t);\n        std::swap(m0, m1);\n    }\n\
+    \    if (m0 < 0) {\n        m0 += b / s;\n    }\n    return std::pair<T, T>(s,\
+    \ m0);\n}\n\n// b >= 1\n// returns (g, x, y) s.t. g = gcd(a, b), a * x + b * y\
+    \ = g, 0 <= x < b / g, |y| < max(2, |a| / g)\ntemplate <typename T>\nstd::tuple<T,\
     \ T, T> extgcd2(T a, T b) {\n    T _a = safe_mod(a, b);\n    T quot = (a - _a)\
     \ / b;\n    T x00 = 0, x01 = 1, y0 = b;\n    T x10 = 1, x11 = -quot, y1 = _a;\n\
     \    while (y1) {\n        T u = y0 / y1;\n        x00 -= u * x10;\n        x01\
@@ -294,39 +292,33 @@ data:
     \ ModInt &lhs, const ModInt &rhs) {\n        return lhs.val == rhs.val;\n    }\n\
     \n    friend bool operator!=(const ModInt &lhs, const ModInt &rhs) {\n       \
     \ return lhs.val != rhs.val;\n    }\n};\n\ntemplate <unsigned mod>\nvoid debug(ModInt<mod>\
-    \ x) {\n    std::cerr << x.val;\n}\n#line 6 \"algebra/test/inverse_matrix.test.cpp\"\
-    \n\nint main() {\n    using M = ModInt<998244353>;\n    i32 n;\n    rd.read(n);\n\
-    \    Matrix<M> a(n);\n    REP(i, n) REP(j, n) {\n        rd.read(a(i, j).val);\n\
-    \    }\n    optional<Matrix<M>> b = inverse_matrix(a);\n    if (b.has_value())\
-    \ {\n        REP(i, n) REP(j, n) {\n            wr.write(b->operator()(i, j).val);\n\
-    \            wr.write(\" \\n\"[j + 1 == n]);\n        }\n    } else {\n      \
-    \  wr.writeln(-1);\n    }\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/inverse_matrix\"\n#include\
+    \ x) {\n    std::cerr << x.val;\n}\n#line 6 \"algebra/test/matrix_rank.test.cpp\"\
+    \n\nint main() {\n    using M = ModInt<998244353>;\n    i32 n, m;\n    rd.read(n,\
+    \ m);\n    Matrix<M> a(n, m);\n    REP(i, n) REP(j, m) {\n        rd.read(a(i,\
+    \ j).val);\n    }\n    wr.writeln(rank_of_matrix(a));\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/matrix_rank\"\n#include\
     \ \"../../template/template.hpp\"\n#include \"../../template/fastio.hpp\"\n#include\
-    \ \"../../algebra/inverse_matrix.hpp\"\n#include \"../../number_theory/mod_int.hpp\"\
-    \n\nint main() {\n    using M = ModInt<998244353>;\n    i32 n;\n    rd.read(n);\n\
-    \    Matrix<M> a(n);\n    REP(i, n) REP(j, n) {\n        rd.read(a(i, j).val);\n\
-    \    }\n    optional<Matrix<M>> b = inverse_matrix(a);\n    if (b.has_value())\
-    \ {\n        REP(i, n) REP(j, n) {\n            wr.write(b->operator()(i, j).val);\n\
-    \            wr.write(\" \\n\"[j + 1 == n]);\n        }\n    } else {\n      \
-    \  wr.writeln(-1);\n    }\n}\n"
+    \ \"../../algebra/rank_of_matrix.hpp\"\n#include \"../../number_theory/mod_int.hpp\"\
+    \n\nint main() {\n    using M = ModInt<998244353>;\n    i32 n, m;\n    rd.read(n,\
+    \ m);\n    Matrix<M> a(n, m);\n    REP(i, n) REP(j, m) {\n        rd.read(a(i,\
+    \ j).val);\n    }\n    wr.writeln(rank_of_matrix(a));\n}\n"
   dependsOn:
   - template/template.hpp
   - template/fastio.hpp
-  - algebra/inverse_matrix.hpp
+  - algebra/rank_of_matrix.hpp
   - algebra/matrix.hpp
   - number_theory/mod_int.hpp
   - number_theory/utils.hpp
   isVerificationFile: true
-  path: algebra/test/inverse_matrix.test.cpp
+  path: algebra/test/matrix_rank.test.cpp
   requiredBy: []
   timestamp: '2024-04-17 21:23:06+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: algebra/test/inverse_matrix.test.cpp
+documentation_of: algebra/test/matrix_rank.test.cpp
 layout: document
 redirect_from:
-- /verify/algebra/test/inverse_matrix.test.cpp
-- /verify/algebra/test/inverse_matrix.test.cpp.html
-title: algebra/test/inverse_matrix.test.cpp
+- /verify/algebra/test/matrix_rank.test.cpp
+- /verify/algebra/test/matrix_rank.test.cpp.html
+title: algebra/test/matrix_rank.test.cpp
 ---

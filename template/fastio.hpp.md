@@ -12,6 +12,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: algebra/test/matrix_product.test.cpp
     title: algebra/test/matrix_product.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: algebra/test/matrix_rank.test.cpp
+    title: algebra/test/matrix_rank.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -202,6 +205,7 @@ data:
   - algebra/test/matrix_det.test.cpp
   - algebra/test/matrix_product.test.cpp
   - algebra/test/inverse_matrix.test.cpp
+  - algebra/test/matrix_rank.test.cpp
 documentation_of: template/fastio.hpp
 layout: document
 redirect_from:

@@ -174,10 +174,13 @@ data:
     \        std::swap(dat[i], dat[j]);\n    }\n    void swap_column(int i, int j)\
     \ {\n        assert(0 <= i && i < _w && 0 <= j && j < _w);\n        for (int k\
     \ = 0; k < _h; ++k) {\n            std::swap(dat[k][i], dat[k][j]);\n        }\n\
-    \    }\n    Matrix<T> &operator+=(const Matrix<T> &rhs) {\n        assert(shape()\
-    \ == rhs.shape());\n        for (int i = 0; i < _h; ++i) {\n            for (int\
-    \ j = 0; j < _w; ++j) {\n                dat[i][j] += rhs.dat[i][j];\n       \
-    \     }\n        }\n        return *this;\n    }\n    Matrix<T> &operator-=(const\
+    \    }\n    Matrix<T> trans() const {\n        Matrix<T> ret(_w, _h);\n      \
+    \  for (int i = 0; i < _h; ++i) {\n            for (int j = 0; j < _w; ++j) {\n\
+    \                ret.dat[j][i] = dat[i][j];\n            }\n        }\n      \
+    \  return ret;\n    }\n    Matrix<T> &operator+=(const Matrix<T> &rhs) {\n   \
+    \     assert(shape() == rhs.shape());\n        for (int i = 0; i < _h; ++i) {\n\
+    \            for (int j = 0; j < _w; ++j) {\n                dat[i][j] += rhs.dat[i][j];\n\
+    \            }\n        }\n        return *this;\n    }\n    Matrix<T> &operator-=(const\
     \ Matrix<T> &rhs) {\n        assert(shape() == rhs.shape());\n        for (int\
     \ i = 0; i < _h; ++i) {\n            for (int j = 0; j < _w; ++j) {\n        \
     \        dat[i][j] -= rhs.dat[i][j];\n            }\n        }\n        return\
@@ -297,7 +300,7 @@ data:
   isVerificationFile: true
   path: algebra/test/matrix_product.test.cpp
   requiredBy: []
-  timestamp: '2024-04-17 20:50:21+09:00'
+  timestamp: '2024-04-17 21:23:06+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: algebra/test/matrix_product.test.cpp

@@ -7,8 +7,8 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: algebra/test/matrix_det.test.cpp
-    title: algebra/test/matrix_det.test.cpp
+    path: algebra/test/matrix_rank.test.cpp
+    title: algebra/test/matrix_rank.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -52,44 +52,45 @@ data:
     \ (int k = 0; k < lhs._w; ++k) {\n                    dat[i][j] += lhs.dat[i][k]\
     \ * rhs.dat[k][j];\n                }\n            }\n        }\n        Matrix<T>\
     \ ret;\n        ret._h = lhs._h;\n        ret._w = rhs._w;\n        ret.dat =\
-    \ dat;\n        return ret;\n    }\n};\n#line 3 \"algebra/determinant.hpp\"\n\
-    template <typename T>\nT determinant(Matrix<T> a) {\n    assert(a.h() == a.w());\n\
-    \    int n = a.h();\n    T det(1);\n    for (int i = 0; i < n; ++i) {\n      \
-    \  int row = -1;\n        for (int j = i; j < n; ++j) {\n            if (a(j,\
-    \ i) != T()) {\n                row = j;\n                break;\n           \
-    \ }\n        }\n        if (row == -1) {\n            det = T(0);\n          \
-    \  break;\n        }\n        if (row != i) {\n            a.swap_row(i, row);\n\
-    \            det = -det;\n        }\n        det *= a(i, i);\n        T inv =\
-    \ T(1) / a(i, i);\n        for (int j = i; j < n; ++j) {\n            a(i, j)\
-    \ *= inv;\n        }\n        for (int j = i + 1; j < n; ++j) {\n            T\
-    \ cf = a(j, i);\n            for (int k = i + 1; k < n; ++k) {\n             \
-    \   a(j, k) -= cf * a(i, k);\n            }\n        }\n    }\n    return det;\n\
-    }\n"
-  code: "#pragma once\n#include \"matrix.hpp\"\ntemplate <typename T>\nT determinant(Matrix<T>\
-    \ a) {\n    assert(a.h() == a.w());\n    int n = a.h();\n    T det(1);\n    for\
-    \ (int i = 0; i < n; ++i) {\n        int row = -1;\n        for (int j = i; j\
-    \ < n; ++j) {\n            if (a(j, i) != T()) {\n                row = j;\n \
-    \               break;\n            }\n        }\n        if (row == -1) {\n \
-    \           det = T(0);\n            break;\n        }\n        if (row != i)\
-    \ {\n            a.swap_row(i, row);\n            det = -det;\n        }\n   \
-    \     det *= a(i, i);\n        T inv = T(1) / a(i, i);\n        for (int j = i;\
-    \ j < n; ++j) {\n            a(i, j) *= inv;\n        }\n        for (int j =\
-    \ i + 1; j < n; ++j) {\n            T cf = a(j, i);\n            for (int k =\
-    \ i + 1; k < n; ++k) {\n                a(j, k) -= cf * a(i, k);\n           \
-    \ }\n        }\n    }\n    return det;\n}\n"
+    \ dat;\n        return ret;\n    }\n};\n#line 3 \"algebra/rank_of_matrix.hpp\"\
+    \n// O(HW min(H,W))\ntemplate <typename T>\nint rank_of_matrix(Matrix<T> a) {\n\
+    \    if (a.h() > a.w()) {\n        a = a.trans();\n    }\n    if (a.h() == 0)\
+    \ {\n        return 0;\n    }\n    int rank = 0;\n    for (int i = 0; i < a.w();\
+    \ ++i) {\n        int row = -1;\n        for (int j = rank; j < a.h(); ++j) {\n\
+    \            if (a(j, i) != T()) {\n                row = j;\n               \
+    \ break;\n            }\n        }\n        if (row == -1) {\n            continue;\n\
+    \        }\n        a.swap_row(rank, row);\n        T inv = T(1) / a(rank, i);\n\
+    \        for (int j = i; j < a.w(); ++j) {\n            a(rank, j) *= inv;\n \
+    \       }\n        for (int j = rank + 1; j < a.h(); ++j) {\n            T cf\
+    \ = a(j, i);\n            for (int k = i + 1; k < a.w(); ++k) {\n            \
+    \    a(j, k) -= a(rank, k) * cf;\n            }\n        }\n        if (++rank\
+    \ == a.h()) {\n            break;\n        }\n    }\n    return rank;\n}\n"
+  code: "#pragma once\n#include \"matrix.hpp\"\n// O(HW min(H,W))\ntemplate <typename\
+    \ T>\nint rank_of_matrix(Matrix<T> a) {\n    if (a.h() > a.w()) {\n        a =\
+    \ a.trans();\n    }\n    if (a.h() == 0) {\n        return 0;\n    }\n    int\
+    \ rank = 0;\n    for (int i = 0; i < a.w(); ++i) {\n        int row = -1;\n  \
+    \      for (int j = rank; j < a.h(); ++j) {\n            if (a(j, i) != T()) {\n\
+    \                row = j;\n                break;\n            }\n        }\n\
+    \        if (row == -1) {\n            continue;\n        }\n        a.swap_row(rank,\
+    \ row);\n        T inv = T(1) / a(rank, i);\n        for (int j = i; j < a.w();\
+    \ ++j) {\n            a(rank, j) *= inv;\n        }\n        for (int j = rank\
+    \ + 1; j < a.h(); ++j) {\n            T cf = a(j, i);\n            for (int k\
+    \ = i + 1; k < a.w(); ++k) {\n                a(j, k) -= a(rank, k) * cf;\n  \
+    \          }\n        }\n        if (++rank == a.h()) {\n            break;\n\
+    \        }\n    }\n    return rank;\n}\n"
   dependsOn:
   - algebra/matrix.hpp
   isVerificationFile: false
-  path: algebra/determinant.hpp
+  path: algebra/rank_of_matrix.hpp
   requiredBy: []
   timestamp: '2024-04-17 21:23:06+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - algebra/test/matrix_det.test.cpp
-documentation_of: algebra/determinant.hpp
+  - algebra/test/matrix_rank.test.cpp
+documentation_of: algebra/rank_of_matrix.hpp
 layout: document
 redirect_from:
-- /library/algebra/determinant.hpp
-- /library/algebra/determinant.hpp.html
-title: algebra/determinant.hpp
+- /library/algebra/rank_of_matrix.hpp
+- /library/algebra/rank_of_matrix.hpp.html
+title: algebra/rank_of_matrix.hpp
 ---

@@ -32,39 +32,42 @@ data:
     \ j < _h);\n        std::swap(dat[i], dat[j]);\n    }\n    void swap_column(int\
     \ i, int j) {\n        assert(0 <= i && i < _w && 0 <= j && j < _w);\n       \
     \ for (int k = 0; k < _h; ++k) {\n            std::swap(dat[k][i], dat[k][j]);\n\
-    \        }\n    }\n    Matrix<T> &operator+=(const Matrix<T> &rhs) {\n       \
-    \ assert(shape() == rhs.shape());\n        for (int i = 0; i < _h; ++i) {\n  \
-    \          for (int j = 0; j < _w; ++j) {\n                dat[i][j] += rhs.dat[i][j];\n\
-    \            }\n        }\n        return *this;\n    }\n    Matrix<T> &operator-=(const\
-    \ Matrix<T> &rhs) {\n        assert(shape() == rhs.shape());\n        for (int\
-    \ i = 0; i < _h; ++i) {\n            for (int j = 0; j < _w; ++j) {\n        \
-    \        dat[i][j] -= rhs.dat[i][j];\n            }\n        }\n        return\
-    \ *this;\n    }\n    Matrix<T> &operator*=(const Matrix<T> &rhs) { return *this\
-    \ = *this * rhs; }\n    friend Matrix<T> operator+(Matrix<T> lhs, const Matrix<T>\
-    \ &rhs) {\n        return lhs += rhs;\n    }\n    friend Matrix<T> operator-(Matrix<T>\
-    \ lhs, const Matrix<T> &rhs) {\n        return lhs -= rhs;\n    }\n    friend\
-    \ Matrix<T> operator*(const Matrix<T> &lhs, const Matrix<T> &rhs) {\n        assert(lhs._w\
-    \ == rhs._h);\n        std::vector<std::vector<T>> dat(lhs._h, std::vector<T>(rhs._w,\
-    \ T()));\n        for (int i = 0; i < lhs._h; ++i) {\n            for (int j =\
-    \ 0; j < rhs._w; ++j) {\n                for (int k = 0; k < lhs._w; ++k) {\n\
-    \                    dat[i][j] += lhs.dat[i][k] * rhs.dat[k][j];\n           \
-    \     }\n            }\n        }\n        Matrix<T> ret;\n        ret._h = lhs._h;\n\
-    \        ret._w = rhs._w;\n        ret.dat = dat;\n        return ret;\n    }\n\
-    };\n#line 4 \"algebra/inverse_matrix.hpp\"\ntemplate <typename T>\nstd::optional<Matrix<T>>\
-    \ inverse_matrix(Matrix<T> a) {\n    assert(a.h() == a.w());\n    int n = a.h();\n\
-    \    Matrix<T> b = Matrix<T>::ident(n);\n    for (int i = 0; i < n; ++i) {\n \
-    \       int row = -1;\n        for (int j = i; j < n; ++j) {\n            if (a(j,\
-    \ i) != T()) {\n                row = j;\n                break;\n           \
-    \ }\n        }\n        if (row == -1) {\n            return std::nullopt;\n \
-    \       }\n        a.swap_row(i, row);\n        b.swap_row(i, row);\n        T\
-    \ inv = T(1) / a(i, i);\n        for (int j = i; j < n; ++j) {\n            a(i,\
-    \ j) *= inv;\n        }\n        for (int j = 0; j < n; ++j) {\n            b(i,\
-    \ j) *= inv;\n        }\n        for (int j = 0; j < n; ++j) {\n            if\
-    \ (j == i) {\n                continue;\n            }\n            T cf = a(j,\
-    \ i);\n            for (int k = i; k < n; ++k) {\n                a(j, k) -= a(i,\
-    \ k) * cf;\n            }\n            for (int k = 0; k < n; ++k) {\n       \
-    \         b(j, k) -= b(i, k) * cf;\n            }\n        }\n    }\n    return\
-    \ b;\n}\n"
+    \        }\n    }\n    Matrix<T> trans() const {\n        Matrix<T> ret(_w, _h);\n\
+    \        for (int i = 0; i < _h; ++i) {\n            for (int j = 0; j < _w; ++j)\
+    \ {\n                ret.dat[j][i] = dat[i][j];\n            }\n        }\n  \
+    \      return ret;\n    }\n    Matrix<T> &operator+=(const Matrix<T> &rhs) {\n\
+    \        assert(shape() == rhs.shape());\n        for (int i = 0; i < _h; ++i)\
+    \ {\n            for (int j = 0; j < _w; ++j) {\n                dat[i][j] +=\
+    \ rhs.dat[i][j];\n            }\n        }\n        return *this;\n    }\n   \
+    \ Matrix<T> &operator-=(const Matrix<T> &rhs) {\n        assert(shape() == rhs.shape());\n\
+    \        for (int i = 0; i < _h; ++i) {\n            for (int j = 0; j < _w; ++j)\
+    \ {\n                dat[i][j] -= rhs.dat[i][j];\n            }\n        }\n \
+    \       return *this;\n    }\n    Matrix<T> &operator*=(const Matrix<T> &rhs)\
+    \ { return *this = *this * rhs; }\n    friend Matrix<T> operator+(Matrix<T> lhs,\
+    \ const Matrix<T> &rhs) {\n        return lhs += rhs;\n    }\n    friend Matrix<T>\
+    \ operator-(Matrix<T> lhs, const Matrix<T> &rhs) {\n        return lhs -= rhs;\n\
+    \    }\n    friend Matrix<T> operator*(const Matrix<T> &lhs, const Matrix<T> &rhs)\
+    \ {\n        assert(lhs._w == rhs._h);\n        std::vector<std::vector<T>> dat(lhs._h,\
+    \ std::vector<T>(rhs._w, T()));\n        for (int i = 0; i < lhs._h; ++i) {\n\
+    \            for (int j = 0; j < rhs._w; ++j) {\n                for (int k =\
+    \ 0; k < lhs._w; ++k) {\n                    dat[i][j] += lhs.dat[i][k] * rhs.dat[k][j];\n\
+    \                }\n            }\n        }\n        Matrix<T> ret;\n       \
+    \ ret._h = lhs._h;\n        ret._w = rhs._w;\n        ret.dat = dat;\n       \
+    \ return ret;\n    }\n};\n#line 4 \"algebra/inverse_matrix.hpp\"\ntemplate <typename\
+    \ T>\nstd::optional<Matrix<T>> inverse_matrix(Matrix<T> a) {\n    assert(a.h()\
+    \ == a.w());\n    int n = a.h();\n    Matrix<T> b = Matrix<T>::ident(n);\n   \
+    \ for (int i = 0; i < n; ++i) {\n        int row = -1;\n        for (int j = i;\
+    \ j < n; ++j) {\n            if (a(j, i) != T()) {\n                row = j;\n\
+    \                break;\n            }\n        }\n        if (row == -1) {\n\
+    \            return std::nullopt;\n        }\n        a.swap_row(i, row);\n  \
+    \      b.swap_row(i, row);\n        T inv = T(1) / a(i, i);\n        for (int\
+    \ j = i; j < n; ++j) {\n            a(i, j) *= inv;\n        }\n        for (int\
+    \ j = 0; j < n; ++j) {\n            b(i, j) *= inv;\n        }\n        for (int\
+    \ j = 0; j < n; ++j) {\n            if (j == i) {\n                continue;\n\
+    \            }\n            T cf = a(j, i);\n            for (int k = i; k < n;\
+    \ ++k) {\n                a(j, k) -= a(i, k) * cf;\n            }\n          \
+    \  for (int k = 0; k < n; ++k) {\n                b(j, k) -= b(i, k) * cf;\n \
+    \           }\n        }\n    }\n    return b;\n}\n"
   code: "#pragma once\n#include <optional>\n#include \"matrix.hpp\"\ntemplate <typename\
     \ T>\nstd::optional<Matrix<T>> inverse_matrix(Matrix<T> a) {\n    assert(a.h()\
     \ == a.w());\n    int n = a.h();\n    Matrix<T> b = Matrix<T>::ident(n);\n   \
@@ -85,7 +88,7 @@ data:
   isVerificationFile: false
   path: algebra/inverse_matrix.hpp
   requiredBy: []
-  timestamp: '2024-04-17 20:50:21+09:00'
+  timestamp: '2024-04-17 21:23:06+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - algebra/test/inverse_matrix.test.cpp

@@ -8,6 +8,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: algebra/inverse_matrix.hpp
     title: algebra/inverse_matrix.hpp
+  - icon: ':heavy_check_mark:'
+    path: algebra/rank_of_matrix.hpp
+    title: algebra/rank_of_matrix.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: algebra/test/inverse_matrix.test.cpp
@@ -18,6 +21,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: algebra/test/matrix_product.test.cpp
     title: algebra/test/matrix_product.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: algebra/test/matrix_rank.test.cpp
+    title: algebra/test/matrix_rank.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -40,9 +46,12 @@ data:
     \ <= i && i < _h && 0 <= j && j < _h);\n        std::swap(dat[i], dat[j]);\n \
     \   }\n    void swap_column(int i, int j) {\n        assert(0 <= i && i < _w &&\
     \ 0 <= j && j < _w);\n        for (int k = 0; k < _h; ++k) {\n            std::swap(dat[k][i],\
-    \ dat[k][j]);\n        }\n    }\n    Matrix<T> &operator+=(const Matrix<T> &rhs)\
-    \ {\n        assert(shape() == rhs.shape());\n        for (int i = 0; i < _h;\
-    \ ++i) {\n            for (int j = 0; j < _w; ++j) {\n                dat[i][j]\
+    \ dat[k][j]);\n        }\n    }\n    Matrix<T> trans() const {\n        Matrix<T>\
+    \ ret(_w, _h);\n        for (int i = 0; i < _h; ++i) {\n            for (int j\
+    \ = 0; j < _w; ++j) {\n                ret.dat[j][i] = dat[i][j];\n          \
+    \  }\n        }\n        return ret;\n    }\n    Matrix<T> &operator+=(const Matrix<T>\
+    \ &rhs) {\n        assert(shape() == rhs.shape());\n        for (int i = 0; i\
+    \ < _h; ++i) {\n            for (int j = 0; j < _w; ++j) {\n                dat[i][j]\
     \ += rhs.dat[i][j];\n            }\n        }\n        return *this;\n    }\n\
     \    Matrix<T> &operator-=(const Matrix<T> &rhs) {\n        assert(shape() ==\
     \ rhs.shape());\n        for (int i = 0; i < _h; ++i) {\n            for (int\
@@ -76,37 +85,42 @@ data:
     \ j < _h);\n        std::swap(dat[i], dat[j]);\n    }\n    void swap_column(int\
     \ i, int j) {\n        assert(0 <= i && i < _w && 0 <= j && j < _w);\n       \
     \ for (int k = 0; k < _h; ++k) {\n            std::swap(dat[k][i], dat[k][j]);\n\
-    \        }\n    }\n    Matrix<T> &operator+=(const Matrix<T> &rhs) {\n       \
-    \ assert(shape() == rhs.shape());\n        for (int i = 0; i < _h; ++i) {\n  \
-    \          for (int j = 0; j < _w; ++j) {\n                dat[i][j] += rhs.dat[i][j];\n\
-    \            }\n        }\n        return *this;\n    }\n    Matrix<T> &operator-=(const\
-    \ Matrix<T> &rhs) {\n        assert(shape() == rhs.shape());\n        for (int\
-    \ i = 0; i < _h; ++i) {\n            for (int j = 0; j < _w; ++j) {\n        \
-    \        dat[i][j] -= rhs.dat[i][j];\n            }\n        }\n        return\
-    \ *this;\n    }\n    Matrix<T> &operator*=(const Matrix<T> &rhs) { return *this\
-    \ = *this * rhs; }\n    friend Matrix<T> operator+(Matrix<T> lhs, const Matrix<T>\
-    \ &rhs) {\n        return lhs += rhs;\n    }\n    friend Matrix<T> operator-(Matrix<T>\
-    \ lhs, const Matrix<T> &rhs) {\n        return lhs -= rhs;\n    }\n    friend\
-    \ Matrix<T> operator*(const Matrix<T> &lhs, const Matrix<T> &rhs) {\n        assert(lhs._w\
-    \ == rhs._h);\n        std::vector<std::vector<T>> dat(lhs._h, std::vector<T>(rhs._w,\
-    \ T()));\n        for (int i = 0; i < lhs._h; ++i) {\n            for (int j =\
-    \ 0; j < rhs._w; ++j) {\n                for (int k = 0; k < lhs._w; ++k) {\n\
-    \                    dat[i][j] += lhs.dat[i][k] * rhs.dat[k][j];\n           \
-    \     }\n            }\n        }\n        Matrix<T> ret;\n        ret._h = lhs._h;\n\
-    \        ret._w = rhs._w;\n        ret.dat = dat;\n        return ret;\n    }\n\
-    };"
+    \        }\n    }\n    Matrix<T> trans() const {\n        Matrix<T> ret(_w, _h);\n\
+    \        for (int i = 0; i < _h; ++i) {\n            for (int j = 0; j < _w; ++j)\
+    \ {\n                ret.dat[j][i] = dat[i][j];\n            }\n        }\n  \
+    \      return ret;\n    }\n    Matrix<T> &operator+=(const Matrix<T> &rhs) {\n\
+    \        assert(shape() == rhs.shape());\n        for (int i = 0; i < _h; ++i)\
+    \ {\n            for (int j = 0; j < _w; ++j) {\n                dat[i][j] +=\
+    \ rhs.dat[i][j];\n            }\n        }\n        return *this;\n    }\n   \
+    \ Matrix<T> &operator-=(const Matrix<T> &rhs) {\n        assert(shape() == rhs.shape());\n\
+    \        for (int i = 0; i < _h; ++i) {\n            for (int j = 0; j < _w; ++j)\
+    \ {\n                dat[i][j] -= rhs.dat[i][j];\n            }\n        }\n \
+    \       return *this;\n    }\n    Matrix<T> &operator*=(const Matrix<T> &rhs)\
+    \ { return *this = *this * rhs; }\n    friend Matrix<T> operator+(Matrix<T> lhs,\
+    \ const Matrix<T> &rhs) {\n        return lhs += rhs;\n    }\n    friend Matrix<T>\
+    \ operator-(Matrix<T> lhs, const Matrix<T> &rhs) {\n        return lhs -= rhs;\n\
+    \    }\n    friend Matrix<T> operator*(const Matrix<T> &lhs, const Matrix<T> &rhs)\
+    \ {\n        assert(lhs._w == rhs._h);\n        std::vector<std::vector<T>> dat(lhs._h,\
+    \ std::vector<T>(rhs._w, T()));\n        for (int i = 0; i < lhs._h; ++i) {\n\
+    \            for (int j = 0; j < rhs._w; ++j) {\n                for (int k =\
+    \ 0; k < lhs._w; ++k) {\n                    dat[i][j] += lhs.dat[i][k] * rhs.dat[k][j];\n\
+    \                }\n            }\n        }\n        Matrix<T> ret;\n       \
+    \ ret._h = lhs._h;\n        ret._w = rhs._w;\n        ret.dat = dat;\n       \
+    \ return ret;\n    }\n};"
   dependsOn: []
   isVerificationFile: false
   path: algebra/matrix.hpp
   requiredBy:
   - algebra/inverse_matrix.hpp
+  - algebra/rank_of_matrix.hpp
   - algebra/determinant.hpp
-  timestamp: '2024-04-17 20:50:21+09:00'
+  timestamp: '2024-04-17 21:23:06+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - algebra/test/matrix_det.test.cpp
   - algebra/test/matrix_product.test.cpp
   - algebra/test/inverse_matrix.test.cpp
+  - algebra/test/matrix_rank.test.cpp
 documentation_of: algebra/matrix.hpp
 layout: document
 redirect_from:

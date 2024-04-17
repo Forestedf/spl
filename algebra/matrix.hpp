@@ -44,6 +44,15 @@ public:
             std::swap(dat[k][i], dat[k][j]);
         }
     }
+    Matrix<T> trans() const {
+        Matrix<T> ret(_w, _h);
+        for (int i = 0; i < _h; ++i) {
+            for (int j = 0; j < _w; ++j) {
+                ret.dat[j][i] = dat[i][j];
+            }
+        }
+        return ret;
+    }
     Matrix<T> &operator+=(const Matrix<T> &rhs) {
         assert(shape() == rhs.shape());
         for (int i = 0; i < _h; ++i) {

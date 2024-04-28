@@ -3,6 +3,7 @@
 "algebra/test/matrix_det.test.cpp": "2024-04-17 21:23:06 +0900",
 "algebra/test/matrix_product.test.cpp": "2024-04-17 21:23:06 +0900",
 "algebra/test/matrix_rank.test.cpp": "2024-04-17 21:23:06 +0900",
+"algebra/test/system_of_linear_equations.test.cpp": "2024-04-28 15:46:19 +0900",
 "data_structure/test/1891.test.cpp": "2024-03-29 12:47:49 +0900",
 "data_structure/test/area_of_union_of_rectangles.test.cpp": "2024-03-29 10:44:36 +0900",
 "data_structure/test/cartesian_tree.test.cpp": "2024-01-13 18:43:37 +0900",

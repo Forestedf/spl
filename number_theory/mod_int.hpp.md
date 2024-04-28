@@ -31,6 +31,9 @@ data:
     path: algebra/test/matrix_rank.test.cpp
     title: algebra/test/matrix_rank.test.cpp
   - icon: ':heavy_check_mark:'
+    path: algebra/test/system_of_linear_equations.test.cpp
+    title: algebra/test/system_of_linear_equations.test.cpp
+  - icon: ':heavy_check_mark:'
     path: data_structure/test/1891.test.cpp
     title: data_structure/test/1891.test.cpp
   - icon: ':heavy_check_mark:'
@@ -204,6 +207,7 @@ data:
   - algebra/test/matrix_product.test.cpp
   - algebra/test/inverse_matrix.test.cpp
   - algebra/test/matrix_rank.test.cpp
+  - algebra/test/system_of_linear_equations.test.cpp
   - data_structure/test/range_affine_range_sum.test.cpp
   - data_structure/test/point_set_range_composite.test.cpp
   - data_structure/test/1891.test.cpp

@@ -15,6 +15,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: algebra/rank_of_matrix.hpp
       title: algebra/rank_of_matrix.hpp
+    - icon: ':heavy_check_mark:'
+      path: algebra/system_of_linear_equations.hpp
+      title: algebra/system_of_linear_equations.hpp
   - name: data_structure
     pages:
     - icon: ':heavy_check_mark:'
@@ -193,6 +196,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: algebra/test/matrix_rank.test.cpp
       title: algebra/test/matrix_rank.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: algebra/test/system_of_linear_equations.test.cpp
+      title: algebra/test/system_of_linear_equations.test.cpp
   - name: data_structure/test
     pages:
     - icon: ':heavy_check_mark:'

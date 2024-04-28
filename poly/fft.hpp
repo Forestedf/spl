@@ -51,12 +51,11 @@ struct FFTRoot {
 };
 
 template <typename M>
-void fft(std::vector<M> &a) {
+void fft(M *a, int n) {
     using ull = unsigned long long;
     static_assert(M::get_mod() < (1u << 30));
     static constexpr FFTRoot<M::get_mod()> fftroot;
     static constexpr ull CEIL = 2ULL * M::get_mod() * M::get_mod();
-    int n = (int)a.size();
     int l = __builtin_ctz(n);
     int ph = 0;
     while (ph < l) {
@@ -99,11 +98,10 @@ void fft(std::vector<M> &a) {
 }
 
 template <typename M>
-void ifft(std::vector<M> &a) {
+void ifft(M *a, int n) {
     using ull = unsigned long long;
     static_assert(M::get_mod() < (1u << 30));
     static constexpr FFTRoot<M::get_mod()> fftroot;
-    int n = (int)a.size();
     int l = __builtin_ctz(n);
     int ph = l;
     while (ph > 0) {
@@ -140,9 +138,18 @@ void ifft(std::vector<M> &a) {
             }
         }
     }
-    for (M &ele : a) {
-        ele *= fftroot.inv2[l];
+    for (int i = 0; i < n; ++i) {
+        a[i] *= fftroot.inv2[l];
     }
+}
+
+template <typename M>
+void fft(std::vector<M> &a) {
+    fft(a.data(), (int)a.size());
+}
+template <typename M>
+void ifft(std::vector<M> &a) {
+    ifft(a.data(), (int)a.size());
 }
 
 template <typename M>

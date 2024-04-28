@@ -1,9 +1,6 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: number_theory/factorial.hpp
-    title: number_theory/factorial.hpp
   - icon: ':question:'
     path: number_theory/mod_int.hpp
     title: number_theory/mod_int.hpp
@@ -13,9 +10,9 @@ data:
   - icon: ':question:'
     path: poly/fft.hpp
     title: poly/fft.hpp
-  - icon: ':heavy_check_mark:'
-    path: poly/taylor_shift.hpp
-    title: poly/taylor_shift.hpp
+  - icon: ':question:'
+    path: template/fastio.hpp
+    title: template/fastio.hpp
   - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
@@ -26,12 +23,11 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/polynomial_taylor_shift
+    PROBLEM: https://judge.yosupo.jp/problem/product_of_polynomial_sequence
     links:
-    - https://judge.yosupo.jp/problem/polynomial_taylor_shift
-  bundledCode: "#line 1 \"poly/test/polynomial_taylor_shift.test.cpp\"\n#define PROBLEM\
-    \ \"https://judge.yosupo.jp/problem/polynomial_taylor_shift\"\n#define FAST_IO\n\
-    #line 2 \"poly/fft.hpp\"\n#include <array>\n#include <vector>\n#line 2 \"number_theory/mod_int.hpp\"\
+    - https://judge.yosupo.jp/problem/product_of_polynomial_sequence
+  bundledCode: "#line 1 \"poly/test/prod_of_polys.test.cpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/product_of_polynomial_sequence\"\
+    \n#line 2 \"poly/fft.hpp\"\n#include <array>\n#include <vector>\n#line 2 \"number_theory/mod_int.hpp\"\
     \n\n#include <cassert>\n#include <iostream>\n#include <type_traits>\n#line 2 \"\
     number_theory/utils.hpp\"\n\n#include <utility>\n\nconstexpr bool is_prime(unsigned\
     \ n) {\n    if (n == 0 || n == 1) {\n        return false;\n    }\n    for (unsigned\
@@ -203,101 +199,175 @@ data:
     template <typename M>\nstd::vector<M> convolve(const std::vector<M> &a, const\
     \ std::vector<M> &b) {\n    if (a.empty() || b.empty()) {\n        return std::vector<M>(0);\n\
     \    }\n    if (std::min(a.size(), b.size()) <= 60) {\n        return convolve_naive(a,\
-    \ b);\n    } else {\n        return convolve_fft(a, b);\n    }\n}\n#line 4 \"\
-    number_theory/factorial.hpp\"\n\ntemplate <typename M>\nM inv(int n) {\n    static\
-    \ std::vector<M> data{M::raw(0), M::raw(1)};\n    static constexpr unsigned MOD\
-    \ = M::get_mod();\n    assert(0 < n);\n    while ((int)data.size() <= n) {\n \
-    \       unsigned k = (unsigned)data.size();\n        unsigned r = MOD / k + 1;\n\
-    \        data.push_back(M::raw(r) * data[k * r - MOD]);\n    }\n    return data[n];\n\
-    }\n\ntemplate <typename M>\nM fact(int n) {\n    static std::vector<M> data{M::raw(1),\
-    \ M::raw(1)};\n    assert(0 <= n);\n    while ((int)data.size() <= n) {\n    \
-    \    unsigned k = (unsigned)data.size();\n        data.push_back(M::raw(k) * data.back());\n\
-    \    }\n    return data[n];\n}\n\ntemplate <typename M>\nM inv_fact(int n) {\n\
-    \    static std::vector<M> data{M::raw(1), M::raw(1)};\n    assert(0 <= n);\n\
-    \    while ((int)data.size() <= n) {\n        unsigned k = (unsigned)data.size();\n\
-    \        data.push_back(inv<M>(k) * data.back());\n    }\n    return data[n];\n\
-    }\n\ntemplate <typename M>\nM binom(int n, int k) {\n    assert(0 <= n);\n   \
-    \ if (k < 0 || n < k) {\n        return M::raw(0);\n    }\n    return fact<M>(n)\
-    \ * inv_fact<M>(k) * inv_fact<M>(n - k);\n}\n\ntemplate <typename M>\nM n_terms_sum_k(int\
-    \ n, int k) {\n    assert(0 <= n && 0 <= k);\n    if (n == 0) {\n        return\
-    \ (k == 0 ? M::raw(1) : M::raw(0));\n    }\n    return binom<M>(n + k - 1, n -\
-    \ 1);\n}\n#line 4 \"poly/taylor_shift.hpp\"\n#include <algorithm>\n// f(x) ->\
-    \ f(x+c)\ntemplate <typename M>\nstd::vector<M> taylor_shift(std::vector<M> f,\
-    \ M c) {\n    for (int i = 0; i < (int)f.size(); ++i) {\n        f[i] *= fact<M>(i);\n\
-    \    }\n    std::reverse(f.begin(), f.end());\n    M cp(1);\n    std::vector<M>\
-    \ g(f.size());\n    for (int i = 0; i < (int)f.size(); ++i) {\n        g[i] =\
-    \ cp * inv_fact<M>(i);\n        cp *= c;\n    }\n    std::vector<M> h = convolve(f,\
-    \ g);\n    h.resize(f.size());\n    std::reverse(h.begin(), h.end());\n    for\
-    \ (int i = 0; i < (int)f.size(); ++i) {\n        h[i] *= inv_fact<M>(i);\n   \
-    \ }\n    return h;\n}\n#line 1 \"template/template.hpp\"\n#include <bits/stdc++.h>\n\
-    #define OVERRIDE(a, b, c, d, ...) d\n#define REP2(i, n) for (i32 i = 0; i < (i32)(n);\
-    \ ++i)\n#define REP3(i, m, n) for (i32 i = (i32)(m); i < (i32)(n); ++i)\n#define\
-    \ REP(...) OVERRIDE(__VA_ARGS__, REP3, REP2)(__VA_ARGS__)\n#define PER2(i, n)\
-    \ for (i32 i = (i32)(n)-1; i >= 0; --i)\n#define PER3(i, m, n) for (i32 i = (i32)(n)-1;\
-    \ i >= (i32)(m); --i)\n#define PER(...) OVERRIDE(__VA_ARGS__, PER3, PER2)(__VA_ARGS__)\n\
-    #define ALL(x) begin(x), end(x)\n#define LEN(x) (i32)(x.size())\nusing namespace\
-    \ std;\nusing u32 = unsigned int;\nusing u64 = unsigned long long;\nusing i32\
-    \ = signed int;\nusing i64 = signed long long;\nusing f64 = double;\nusing f80\
-    \ = long double;\nusing pi = pair<i32, i32>;\nusing pl = pair<i64, i64>;\ntemplate\
-    \ <typename T>\nusing V = vector<T>;\ntemplate <typename T>\nusing VV = V<V<T>>;\n\
-    template <typename T>\nusing VVV = V<V<V<T>>>;\ntemplate <typename T>\nusing VVVV\
-    \ = V<V<V<V<T>>>>;\ntemplate <typename T>\nusing PQR = priority_queue<T, V<T>,\
-    \ greater<T>>;\ntemplate <typename T>\nbool chmin(T &x, const T &y) {\n    if\
-    \ (x > y) {\n        x = y;\n        return true;\n    }\n    return false;\n\
-    }\ntemplate <typename T>\nbool chmax(T &x, const T &y) {\n    if (x < y) {\n \
-    \       x = y;\n        return true;\n    }\n    return false;\n}\ntemplate <typename\
-    \ T>\ni32 lob(const V<T> &arr, const T &v) {\n    return (i32)(lower_bound(ALL(arr),\
-    \ v) - arr.begin());\n}\ntemplate <typename T>\ni32 upb(const V<T> &arr, const\
-    \ T &v) {\n    return (i32)(upper_bound(ALL(arr), v) - arr.begin());\n}\ntemplate\
-    \ <typename T>\nV<i32> argsort(const V<T> &arr) {\n    V<i32> ret(arr.size());\n\
-    \    iota(ALL(ret), 0);\n    sort(ALL(ret), [&](i32 i, i32 j) -> bool {\n    \
-    \    if (arr[i] == arr[j]) {\n            return i < j;\n        } else {\n  \
-    \          return arr[i] < arr[j];\n        }\n    });\n    return ret;\n}\n#ifdef\
-    \ INT128\nusing u128 = __uint128_t;\nusing i128 = __int128_t;\n#endif\n[[maybe_unused]]\
-    \ constexpr i32 INF = 1000000100;\n[[maybe_unused]] constexpr i64 INF64 = 3000000000000000100;\n\
-    struct SetUpIO {\n    SetUpIO() {\n#ifdef FAST_IO\n        ios::sync_with_stdio(false);\n\
-    \        cin.tie(nullptr);\n#endif\n        cout << fixed << setprecision(15);\n\
-    \    }\n} set_up_io;\nvoid scan(char &x) { cin >> x; }\nvoid scan(u32 &x) { cin\
-    \ >> x; }\nvoid scan(u64 &x) { cin >> x; }\nvoid scan(i32 &x) { cin >> x; }\n\
-    void scan(i64 &x) { cin >> x; }\nvoid scan(string &x) { cin >> x; }\ntemplate\
-    \ <typename T>\nvoid scan(V<T> &x) {\n    for (T &ele : x) {\n        scan(ele);\n\
-    \    }\n}\nvoid read() {}\ntemplate <typename Head, typename... Tail>\nvoid read(Head\
-    \ &head, Tail &...tail) {\n    scan(head);\n    read(tail...);\n}\n#define CHAR(...)\
-    \     \\\n    char __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define U32(...) \
-    \    \\\n    u32 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define U64(...)   \
-    \  \\\n    u64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define I32(...)     \\\
-    \n    i32 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define I64(...)     \\\n \
-    \   i64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define STR(...)        \\\n\
-    \    string __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define VEC(type, name, size)\
-    \ \\\n    V<type> name(size);       \\\n    read(name);\n#define VVEC(type, name,\
-    \ size1, size2)    \\\n    VV<type> name(size1, V<type>(size2)); \\\n    read(name);\n\
-    #line 5 \"poly/test/polynomial_taylor_shift.test.cpp\"\n\nint main() {\n    using\
-    \ M = ModInt<998244353>;\n    I32(n);\n    M c;\n    cin >> c;\n    V<M> f(n);\n\
-    \    REP(i, n) {\n        cin >> f[i];\n    }\n    V<M> g = taylor_shift(f, c);\n\
-    \    REP(i, n) {\n        cout << g[i] << \" \\n\"[i + 1 == n];\n    }\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/polynomial_taylor_shift\"\
-    \n#define FAST_IO\n#include \"../../poly/taylor_shift.hpp\"\n#include \"../../template/template.hpp\"\
-    \n\nint main() {\n    using M = ModInt<998244353>;\n    I32(n);\n    M c;\n  \
-    \  cin >> c;\n    V<M> f(n);\n    REP(i, n) {\n        cin >> f[i];\n    }\n \
-    \   V<M> g = taylor_shift(f, c);\n    REP(i, n) {\n        cout << g[i] << \"\
-    \ \\n\"[i + 1 == n];\n    }\n}\n"
+    \ b);\n    } else {\n        return convolve_fft(a, b);\n    }\n}\n#line 1 \"\
+    template/template.hpp\"\n#include <bits/stdc++.h>\n#define OVERRIDE(a, b, c, d,\
+    \ ...) d\n#define REP2(i, n) for (i32 i = 0; i < (i32)(n); ++i)\n#define REP3(i,\
+    \ m, n) for (i32 i = (i32)(m); i < (i32)(n); ++i)\n#define REP(...) OVERRIDE(__VA_ARGS__,\
+    \ REP3, REP2)(__VA_ARGS__)\n#define PER2(i, n) for (i32 i = (i32)(n)-1; i >= 0;\
+    \ --i)\n#define PER3(i, m, n) for (i32 i = (i32)(n)-1; i >= (i32)(m); --i)\n#define\
+    \ PER(...) OVERRIDE(__VA_ARGS__, PER3, PER2)(__VA_ARGS__)\n#define ALL(x) begin(x),\
+    \ end(x)\n#define LEN(x) (i32)(x.size())\nusing namespace std;\nusing u32 = unsigned\
+    \ int;\nusing u64 = unsigned long long;\nusing i32 = signed int;\nusing i64 =\
+    \ signed long long;\nusing f64 = double;\nusing f80 = long double;\nusing pi =\
+    \ pair<i32, i32>;\nusing pl = pair<i64, i64>;\ntemplate <typename T>\nusing V\
+    \ = vector<T>;\ntemplate <typename T>\nusing VV = V<V<T>>;\ntemplate <typename\
+    \ T>\nusing VVV = V<V<V<T>>>;\ntemplate <typename T>\nusing VVVV = V<V<V<V<T>>>>;\n\
+    template <typename T>\nusing PQR = priority_queue<T, V<T>, greater<T>>;\ntemplate\
+    \ <typename T>\nbool chmin(T &x, const T &y) {\n    if (x > y) {\n        x =\
+    \ y;\n        return true;\n    }\n    return false;\n}\ntemplate <typename T>\n\
+    bool chmax(T &x, const T &y) {\n    if (x < y) {\n        x = y;\n        return\
+    \ true;\n    }\n    return false;\n}\ntemplate <typename T>\ni32 lob(const V<T>\
+    \ &arr, const T &v) {\n    return (i32)(lower_bound(ALL(arr), v) - arr.begin());\n\
+    }\ntemplate <typename T>\ni32 upb(const V<T> &arr, const T &v) {\n    return (i32)(upper_bound(ALL(arr),\
+    \ v) - arr.begin());\n}\ntemplate <typename T>\nV<i32> argsort(const V<T> &arr)\
+    \ {\n    V<i32> ret(arr.size());\n    iota(ALL(ret), 0);\n    sort(ALL(ret), [&](i32\
+    \ i, i32 j) -> bool {\n        if (arr[i] == arr[j]) {\n            return i <\
+    \ j;\n        } else {\n            return arr[i] < arr[j];\n        }\n    });\n\
+    \    return ret;\n}\n#ifdef INT128\nusing u128 = __uint128_t;\nusing i128 = __int128_t;\n\
+    #endif\n[[maybe_unused]] constexpr i32 INF = 1000000100;\n[[maybe_unused]] constexpr\
+    \ i64 INF64 = 3000000000000000100;\nstruct SetUpIO {\n    SetUpIO() {\n#ifdef\
+    \ FAST_IO\n        ios::sync_with_stdio(false);\n        cin.tie(nullptr);\n#endif\n\
+    \        cout << fixed << setprecision(15);\n    }\n} set_up_io;\nvoid scan(char\
+    \ &x) { cin >> x; }\nvoid scan(u32 &x) { cin >> x; }\nvoid scan(u64 &x) { cin\
+    \ >> x; }\nvoid scan(i32 &x) { cin >> x; }\nvoid scan(i64 &x) { cin >> x; }\n\
+    void scan(string &x) { cin >> x; }\ntemplate <typename T>\nvoid scan(V<T> &x)\
+    \ {\n    for (T &ele : x) {\n        scan(ele);\n    }\n}\nvoid read() {}\ntemplate\
+    \ <typename Head, typename... Tail>\nvoid read(Head &head, Tail &...tail) {\n\
+    \    scan(head);\n    read(tail...);\n}\n#define CHAR(...)     \\\n    char __VA_ARGS__;\
+    \ \\\n    read(__VA_ARGS__);\n#define U32(...)     \\\n    u32 __VA_ARGS__; \\\
+    \n    read(__VA_ARGS__);\n#define U64(...)     \\\n    u64 __VA_ARGS__; \\\n \
+    \   read(__VA_ARGS__);\n#define I32(...)     \\\n    i32 __VA_ARGS__; \\\n   \
+    \ read(__VA_ARGS__);\n#define I64(...)     \\\n    i64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n\
+    #define STR(...)        \\\n    string __VA_ARGS__; \\\n    read(__VA_ARGS__);\n\
+    #define VEC(type, name, size) \\\n    V<type> name(size);       \\\n    read(name);\n\
+    #define VVEC(type, name, size1, size2)    \\\n    VV<type> name(size1, V<type>(size2));\
+    \ \\\n    read(name);\n#line 5 \"template/fastio.hpp\"\n\n// unable to read INT_MIN\
+    \ (int), LLONG_MIN (long long)\nclass Reader {\n    FILE *fp;\n    static constexpr\
+    \ int BUF = 1 << 18;\n    char buf[BUF];\n    char *pl, *pr;\n\n    void reread()\
+    \ {\n        int wd = pr - pl;\n        std::memcpy(buf, pl, wd);\n        pl\
+    \ = buf;\n        pr = buf + wd;\n        pr += std::fread(pr, 1, BUF - wd, fp);\n\
+    \    }\n\n    char skip() {\n        char ch = *pl++;\n        while (ch <= '\
+    \ ') {\n            ch = *pl++;\n        }\n        return ch;\n    }\n\n    template\
+    \ <typename T>\n    void read_unsigned(T &x) {\n        if (pr - pl < 64) {\n\
+    \            reread();\n        }\n        x = 0;\n        char ch = skip();\n\
+    \        while ('0' <= ch) {\n            x = 10 * x + (0xf & ch);\n         \
+    \   ch = *pl++;\n        }\n    }\n    template <typename T>\n    void read_signed(T\
+    \ &x) {\n        if (pr - pl < 64) {\n            reread();\n        }\n     \
+    \   x = 0;\n        bool neg = false;\n        char ch = skip();\n        if (ch\
+    \ == '-') {\n            ch = *pl++;\n            neg = true;\n        }\n   \
+    \     while ('0' <= ch) {\n            x = 10 * x + (0xf & ch);\n            ch\
+    \ = *pl++;\n        }\n        if (neg) {\n            x = -x;\n        }\n  \
+    \  }\n\n    void read_single(int &x) { read_signed(x); }\n    void read_single(unsigned\
+    \ &x) { read_unsigned(x); }\n    void read_single(long &x) { read_signed(x); }\n\
+    \    void read_single(unsigned long &x) { read_signed(x); }\n    void read_single(long\
+    \ long &x) { read_signed(x); }\n    void read_single(unsigned long long &x) {\
+    \ read_unsigned(x); }\n\npublic:\n    Reader(FILE *fp) : fp(fp), pl(buf), pr(buf)\
+    \ { reread(); }\n\n    void read() {}\n    template <typename Head, typename...\
+    \ Tail>\n    void read(Head &head, Tail &...tail) {\n        read_single(head);\n\
+    \        read(tail...);\n    }\n};\n\nstruct NumberToString {\n    char buf[10000][4];\n\
+    \    constexpr NumberToString() : buf() {\n        for (int i = 0; i < 10000;\
+    \ ++i) {\n            int n = i;\n            for (int j = 3; j >= 0; --j) {\n\
+    \                buf[i][j] = '0' + n % 10;\n                n /= 10;\n       \
+    \     }\n        }\n    }\n} constexpr number_to_string_precalc;\n\nclass Writer\
+    \ {\n    FILE *fp;\n    static constexpr int BUF = 1 << 18;\n    char buf[BUF];\n\
+    \    char *ptr;\n\n    void write_u32(unsigned x) {\n        if ((buf + BUF -\
+    \ ptr) < 32) {\n            flush();\n        }\n        static char sml[12];\n\
+    \        int t = 8;\n        while (x >= 10000) {\n            unsigned n = x\
+    \ % 10000;\n            x /= 10000;\n            std::memcpy(sml + t, number_to_string_precalc.buf[n],\
+    \ 4);\n            t -= 4;\n        }\n        if (x >= 1000) {\n            std::memcpy(ptr,\
+    \ number_to_string_precalc.buf[x], 4);\n            ptr += 4;\n        } else\
+    \ if (x >= 100) {\n            std::memcpy(ptr, number_to_string_precalc.buf[x]\
+    \ + 1, 3);\n            ptr += 3;\n        } else if (x >= 10) {\n           \
+    \ unsigned q = (x * 103) >> 10;\n            *ptr++ = q | '0';\n            *ptr++\
+    \ = (x - 10 * q) | '0';\n        } else {\n            *ptr++ = '0' | x;\n   \
+    \     }\n        std::memcpy(ptr, sml + (t + 4), 8 - t);\n        ptr += 8 - t;\n\
+    \    }\n\n    void write_u64(unsigned long long x) {\n        if ((buf + BUF -\
+    \ ptr) < 32) {\n            flush();\n        }\n        if (x >= 10000000000000000)\
+    \ {\n            unsigned long long z = x % 100000000;\n            x /= 100000000;\n\
+    \            unsigned long long y = x % 100000000;\n            x /= 100000000;\n\
+    \            if (x >= 1000) {\n                std::memcpy(ptr, number_to_string_precalc.buf[x],\
+    \ 4);\n                ptr += 4;\n            } else if (x >= 100) {\n       \
+    \         std::memcpy(ptr, number_to_string_precalc.buf[x] + 1, 3);\n        \
+    \        ptr += 3;\n            } else if (x >= 10) {\n                unsigned\
+    \ q = (x * 103) >> 10;\n                *ptr++ = q | '0';\n                *ptr++\
+    \ = (x - 10 * q) | '0';\n            } else {\n                *ptr++ = '0' |\
+    \ x;\n            }\n            std::memcpy(ptr, number_to_string_precalc.buf[y\
+    \ / 10000], 4);\n            std::memcpy(ptr + 4, number_to_string_precalc.buf[y\
+    \ % 10000], 4);\n            std::memcpy(ptr + 8, number_to_string_precalc.buf[z\
+    \ / 10000], 4);\n            std::memcpy(ptr + 12, number_to_string_precalc.buf[z\
+    \ % 10000], 4);\n            ptr += 16;\n        } else {\n            static\
+    \ char sml[12];\n            int t = 8;\n            while (x >= 10000) {\n  \
+    \              unsigned long long n = x % 10000;\n                x /= 10000;\n\
+    \                std::memcpy(sml + t, number_to_string_precalc.buf[n], 4);\n \
+    \               t -= 4;\n            }\n            if (x >= 1000) {\n       \
+    \         std::memcpy(ptr, number_to_string_precalc.buf[x], 4);\n            \
+    \    ptr += 4;\n            } else if (x >= 100) {\n                std::memcpy(ptr,\
+    \ number_to_string_precalc.buf[x] + 1, 3);\n                ptr += 3;\n      \
+    \      } else if (x >= 10) {\n                unsigned q = (x * 103) >> 10;\n\
+    \                *ptr++ = q | '0';\n                *ptr++ = (x - 10 * q) | '0';\n\
+    \            } else {\n                *ptr++ = '0' | x;\n            }\n    \
+    \        std::memcpy(ptr, sml + (t + 4), 8 - t);\n            ptr += 8 - t;\n\
+    \        }\n    }\n\n    void write_char(char c) {\n        if (ptr == buf + BUF)\
+    \ {\n            flush();\n        }\n        *ptr++ = c;\n    }\n\n    template\
+    \ <typename T>\n    void write_unsigned(T x) {\n        if constexpr (std::is_same_v<T,\
+    \ unsigned long long> ||\n                      std::is_same_v<T, unsigned long>)\
+    \ {\n            write_u64(x);\n        } else {\n            write_u32(x);\n\
+    \        }\n    }\n\n    template <typename T>\n    void write_signed(T x) {\n\
+    \        std::make_unsigned_t<T> y = x;\n        if (x < 0) {\n            write_char('-');\n\
+    \            y = -y;\n        }\n        write_unsigned(y);\n    }\n\n    void\
+    \ write_single(int x) { write_signed(x); }\n    void write_single(unsigned x)\
+    \ { write_unsigned(x); }\n    void write_single(long x) { write_signed(x); }\n\
+    \    void write_single(unsigned long x) { write_unsigned(x); }\n    void write_single(long\
+    \ long x) { write_signed(x); }\n    void write_single(unsigned long long x) {\
+    \ write_unsigned(x); }\n    void write_single(char c) { write_char(c); }\n\npublic:\n\
+    \    Writer(FILE *fp) : fp(fp), ptr(buf) {}\n    ~Writer() { flush(); }\n\n  \
+    \  void flush() {\n        std::fwrite(buf, 1, ptr - buf, fp);\n        ptr =\
+    \ buf;\n    }\n\n    void write() {}\n    template <typename Head, typename...\
+    \ Tail>\n    void write(Head &&head, Tail &&...tail) {\n        write_single(head);\n\
+    \        if (sizeof...(Tail)) {\n            write_char(' ');\n        }\n   \
+    \     write(std::forward<Tail>(tail)...);\n    }\n\n    template <typename...\
+    \ T>\n    void writeln(T &&...t) {\n        write(std::forward<T>(t)...);\n  \
+    \      write_char('\\n');\n    }\n};\n\nReader rd(stdin);\nWriter wr(stdout);\n\
+    #line 5 \"poly/test/prod_of_polys.test.cpp\"\n\nint main() {\n    using M = ModInt<998244353>;\n\
+    \    i32 n;\n    rd.read(n);\n    if (n == 0) {\n        wr.writeln(1);\n    \
+    \    return 0;\n    }\n    deque<V<M>> deq;\n    REP(i, n) {\n        i32 d;\n\
+    \        rd.read(d);\n        V<M> f(d + 1);\n        REP(j, d + 1) {\n      \
+    \      u32 v;\n            rd.read(v);\n            f[j] = M::raw(v);\n      \
+    \  }\n        deq.emplace_back(move(f));\n    }\n    while (LEN(deq) >= 2) {\n\
+    \        deq.emplace_back(convolve(deq[0], deq[1]));\n        deq.pop_front();\n\
+    \        deq.pop_front();\n    }\n    V<M> ans = deq[0];\n    REP(i, LEN(ans))\
+    \ {\n        wr.write(ans[i].val);\n        if (i != LEN(ans) - 1) {\n       \
+    \     wr.write(' ');\n        } else {\n            wr.writeln();\n        }\n\
+    \    }\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/product_of_polynomial_sequence\"\
+    \n#include \"../../poly/fft.hpp\"\n#include \"../../template/template.hpp\"\n\
+    #include \"../../template/fastio.hpp\"\n\nint main() {\n    using M = ModInt<998244353>;\n\
+    \    i32 n;\n    rd.read(n);\n    if (n == 0) {\n        wr.writeln(1);\n    \
+    \    return 0;\n    }\n    deque<V<M>> deq;\n    REP(i, n) {\n        i32 d;\n\
+    \        rd.read(d);\n        V<M> f(d + 1);\n        REP(j, d + 1) {\n      \
+    \      u32 v;\n            rd.read(v);\n            f[j] = M::raw(v);\n      \
+    \  }\n        deq.emplace_back(move(f));\n    }\n    while (LEN(deq) >= 2) {\n\
+    \        deq.emplace_back(convolve(deq[0], deq[1]));\n        deq.pop_front();\n\
+    \        deq.pop_front();\n    }\n    V<M> ans = deq[0];\n    REP(i, LEN(ans))\
+    \ {\n        wr.write(ans[i].val);\n        if (i != LEN(ans) - 1) {\n       \
+    \     wr.write(' ');\n        } else {\n            wr.writeln();\n        }\n\
+    \    }\n}\n"
   dependsOn:
-  - poly/taylor_shift.hpp
   - poly/fft.hpp
   - number_theory/mod_int.hpp
   - number_theory/utils.hpp
-  - number_theory/factorial.hpp
   - template/template.hpp
+  - template/fastio.hpp
   isVerificationFile: true
-  path: poly/test/polynomial_taylor_shift.test.cpp
+  path: poly/test/prod_of_polys.test.cpp
   requiredBy: []
   timestamp: '2024-04-28 17:24:38+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: poly/test/polynomial_taylor_shift.test.cpp
+documentation_of: poly/test/prod_of_polys.test.cpp
 layout: document
 redirect_from:
-- /verify/poly/test/polynomial_taylor_shift.test.cpp
-- /verify/poly/test/polynomial_taylor_shift.test.cpp.html
-title: poly/test/polynomial_taylor_shift.test.cpp
+- /verify/poly/test/prod_of_polys.test.cpp
+- /verify/poly/test/prod_of_polys.test.cpp.html
+title: poly/test/prod_of_polys.test.cpp
 ---

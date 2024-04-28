@@ -126,10 +126,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: number_theory/frac_binsearch.hpp
       title: number_theory/frac_binsearch.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: number_theory/mod_int.hpp
       title: number_theory/mod_int.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: number_theory/utils.hpp
       title: number_theory/utils.hpp
   - name: opt
@@ -144,9 +144,12 @@ data:
       title: other/coordinate_compression.hpp
   - name: poly
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: poly/fft.hpp
       title: poly/fft.hpp
+    - icon: ':x:'
+      path: poly/fps_div_at.hpp
+      title: poly/fps_div_at.hpp
     - icon: ':heavy_check_mark:'
       path: poly/stirling1.hpp
       title: poly/stirling1.hpp
@@ -172,13 +175,13 @@ data:
     - icon: ':warning:'
       path: template/debug.hpp
       title: template/debug.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/fastio.hpp
       title: template/fastio.hpp
     - icon: ':heavy_check_mark:'
       path: template/random.hpp
       title: template/random.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/template.hpp
       title: template/template.hpp
   verificationCategories:
@@ -302,9 +305,15 @@ data:
     - icon: ':heavy_check_mark:'
       path: poly/test/convolution_mod.test.cpp
       title: poly/test/convolution_mod.test.cpp
+    - icon: ':x:'
+      path: poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
+      title: poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
     - icon: ':heavy_check_mark:'
       path: poly/test/polynomial_taylor_shift.test.cpp
       title: poly/test/polynomial_taylor_shift.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: poly/test/prod_of_polys.test.cpp
+      title: poly/test/prod_of_polys.test.cpp
     - icon: ':heavy_check_mark:'
       path: poly/test/stirling_number_of_the_first_kind.test.cpp
       title: poly/test/stirling_number_of_the_first_kind.test.cpp

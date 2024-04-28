@@ -10,22 +10,29 @@ data:
   - icon: ':question:'
     path: poly/fft.hpp
     title: poly/fft.hpp
+  - icon: ':x:'
+    path: poly/fps_div_at.hpp
+    title: poly/fps_div_at.hpp
+  - icon: ':question:'
+    path: template/fastio.hpp
+    title: template/fastio.hpp
   - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/convolution_mod
+    PROBLEM: https://judge.yosupo.jp/problem/kth_term_of_linearly_recurrent_sequence
     links:
-    - https://judge.yosupo.jp/problem/convolution_mod
-  bundledCode: "#line 1 \"poly/test/convolution_mod.test.cpp\"\n#define PROBLEM \"\
-    https://judge.yosupo.jp/problem/convolution_mod\"\n#define FAST_IO\n#line 2 \"\
-    poly/fft.hpp\"\n#include <array>\n#include <vector>\n#line 2 \"number_theory/mod_int.hpp\"\
+    - https://judge.yosupo.jp/problem/kth_term_of_linearly_recurrent_sequence
+  bundledCode: "#line 1 \"poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/kth_term_of_linearly_recurrent_sequence\"\
+    \n#line 2 \"poly/fps_div_at.hpp\"\n#include <algorithm>\n#include <bit>\n#line\
+    \ 2 \"poly/fft.hpp\"\n#include <array>\n#include <vector>\n#line 2 \"number_theory/mod_int.hpp\"\
     \n\n#include <cassert>\n#include <iostream>\n#include <type_traits>\n#line 2 \"\
     number_theory/utils.hpp\"\n\n#include <utility>\n\nconstexpr bool is_prime(unsigned\
     \ n) {\n    if (n == 0 || n == 1) {\n        return false;\n    }\n    for (unsigned\
@@ -197,10 +204,33 @@ data:
     template <typename M>\nstd::vector<M> convolve(const std::vector<M> &a, const\
     \ std::vector<M> &b) {\n    if (a.empty() || b.empty()) {\n        return std::vector<M>(0);\n\
     \    }\n    if (std::min(a.size(), b.size()) <= 60) {\n        return convolve_naive(a,\
-    \ b);\n    } else {\n        return convolve_fft(a, b);\n    }\n}\n#line 1 \"\
-    template/template.hpp\"\n#include <bits/stdc++.h>\n#define OVERRIDE(a, b, c, d,\
-    \ ...) d\n#define REP2(i, n) for (i32 i = 0; i < (i32)(n); ++i)\n#define REP3(i,\
-    \ m, n) for (i32 i = (i32)(m); i < (i32)(n); ++i)\n#define REP(...) OVERRIDE(__VA_ARGS__,\
+    \ b);\n    } else {\n        return convolve_fft(a, b);\n    }\n}\n#line 5 \"\
+    poly/fps_div_at.hpp\"\ntemplate <typename M>\nvoid extend_fft(std::vector<M> &a)\
+    \ {\n    static constexpr FFTRoot<M::get_mod()> fft_root;\n    int n = (int)a.size();\n\
+    \    std::copy(a.begin(), a.begin() + n / 2, a.begin() + n / 2);\n    ifft(a.data()\
+    \ + n / 2, n / 2);\n    M pw(1);\n    M r = fft_root.root[std::bit_width((unsigned)n)\
+    \ - 1];\n    for (int i = n / 2; i < n; ++i) {\n        a[i] *= pw;\n        pw\
+    \ *= r;\n    }\n    fft(a.data() + n / 2, n / 2);\n}\n// returns [x^k] f(x) /\
+    \ g(x)\n// requires LEN(f) < LEN(g) and g[0] != 0 and T is NTT-friendly\ntemplate\
+    \ <typename T>\nT fps_div_at(std::vector<T> f, std::vector<T> g, long long k)\
+    \ {\n    static constexpr FFTRoot<T::get_mod()> fft_root;\n    static constexpr\
+    \ T INV2 = T(2).inv();\n    assert(f.size() < g.size() && g[0] != T(0));\n   \
+    \ if (g.size() == 1) {\n        return T(0);\n    }\n    int n = (int)std::bit_ceil(2\
+    \ * g.size() - 1);\n    int lg = std::bit_width((unsigned)n) - 1;\n    f.resize(n,\
+    \ T(0));\n    g.resize(n, T(0));\n    fft(f);\n    fft(g);\n    while (k > 0)\
+    \ {\n        for (int i = 0; i < n; ++i) {\n            f[i] *= g[i ^ 1];\n  \
+    \      }\n        if (k & 1) {\n            T p(1);\n            for (int i =\
+    \ 0; i < n / 2; ++i) {\n                f[i] = (f[2 * i] - f[2 * i + 1]) * INV2\
+    \ * p;\n                p *= fft_root.irate2[__builtin_ctz(~i)];\n           \
+    \ }\n        } else {\n            for (int i = 0; i < n / 2; ++i) {\n       \
+    \         f[i] = (f[2 * i] + f[2 * i + 1]) * INV2;\n            }\n        }\n\
+    \        extend_fft(f);\n        for (int i = 0; i < n / 2; ++i) {\n         \
+    \   g[i] = g[2 * i] * g[2 * i + 1];\n        }\n        extend_fft(g);\n     \
+    \   k /= 2;\n    }\n    T fsum(0), gsum(0);\n    for (int i = 0; i < n; ++i) {\n\
+    \        fsum += f[i];\n        gsum += g[i];\n    }\n    return fsum / gsum;\n\
+    }\n#line 1 \"template/template.hpp\"\n#include <bits/stdc++.h>\n#define OVERRIDE(a,\
+    \ b, c, d, ...) d\n#define REP2(i, n) for (i32 i = 0; i < (i32)(n); ++i)\n#define\
+    \ REP3(i, m, n) for (i32 i = (i32)(m); i < (i32)(n); ++i)\n#define REP(...) OVERRIDE(__VA_ARGS__,\
     \ REP3, REP2)(__VA_ARGS__)\n#define PER2(i, n) for (i32 i = (i32)(n)-1; i >= 0;\
     \ --i)\n#define PER3(i, m, n) for (i32 i = (i32)(n)-1; i >= (i32)(m); --i)\n#define\
     \ PER(...) OVERRIDE(__VA_ARGS__, PER3, PER2)(__VA_ARGS__)\n#define ALL(x) begin(x),\
@@ -239,32 +269,125 @@ data:
     #define STR(...)        \\\n    string __VA_ARGS__; \\\n    read(__VA_ARGS__);\n\
     #define VEC(type, name, size) \\\n    V<type> name(size);       \\\n    read(name);\n\
     #define VVEC(type, name, size1, size2)    \\\n    VV<type> name(size1, V<type>(size2));\
-    \ \\\n    read(name);\n#line 5 \"poly/test/convolution_mod.test.cpp\"\n\nint main()\
-    \ {\n    using M = ModInt<998244353>;\n    I32(n, m);\n    V<M> a(n), b(m);\n\
-    \    REP(i, n) {\n        cin >> a[i];\n    }\n    REP(i, m) {\n        cin >>\
-    \ b[i];\n    }\n    V<M> c = convolve(a, b);\n    REP(i, n + m - 1) {\n      \
-    \  cout << c[i] << \" \\n\"[i + 1 == n + m - 1];\n    }\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/convolution_mod\"\n#define\
-    \ FAST_IO\n#include \"../../poly/fft.hpp\"\n#include \"../../template/template.hpp\"\
-    \n\nint main() {\n    using M = ModInt<998244353>;\n    I32(n, m);\n    V<M> a(n),\
-    \ b(m);\n    REP(i, n) {\n        cin >> a[i];\n    }\n    REP(i, m) {\n     \
-    \   cin >> b[i];\n    }\n    V<M> c = convolve(a, b);\n    REP(i, n + m - 1) {\n\
-    \        cout << c[i] << \" \\n\"[i + 1 == n + m - 1];\n    }\n}\n"
+    \ \\\n    read(name);\n#line 5 \"template/fastio.hpp\"\n\n// unable to read INT_MIN\
+    \ (int), LLONG_MIN (long long)\nclass Reader {\n    FILE *fp;\n    static constexpr\
+    \ int BUF = 1 << 18;\n    char buf[BUF];\n    char *pl, *pr;\n\n    void reread()\
+    \ {\n        int wd = pr - pl;\n        std::memcpy(buf, pl, wd);\n        pl\
+    \ = buf;\n        pr = buf + wd;\n        pr += std::fread(pr, 1, BUF - wd, fp);\n\
+    \    }\n\n    char skip() {\n        char ch = *pl++;\n        while (ch <= '\
+    \ ') {\n            ch = *pl++;\n        }\n        return ch;\n    }\n\n    template\
+    \ <typename T>\n    void read_unsigned(T &x) {\n        if (pr - pl < 64) {\n\
+    \            reread();\n        }\n        x = 0;\n        char ch = skip();\n\
+    \        while ('0' <= ch) {\n            x = 10 * x + (0xf & ch);\n         \
+    \   ch = *pl++;\n        }\n    }\n    template <typename T>\n    void read_signed(T\
+    \ &x) {\n        if (pr - pl < 64) {\n            reread();\n        }\n     \
+    \   x = 0;\n        bool neg = false;\n        char ch = skip();\n        if (ch\
+    \ == '-') {\n            ch = *pl++;\n            neg = true;\n        }\n   \
+    \     while ('0' <= ch) {\n            x = 10 * x + (0xf & ch);\n            ch\
+    \ = *pl++;\n        }\n        if (neg) {\n            x = -x;\n        }\n  \
+    \  }\n\n    void read_single(int &x) { read_signed(x); }\n    void read_single(unsigned\
+    \ &x) { read_unsigned(x); }\n    void read_single(long &x) { read_signed(x); }\n\
+    \    void read_single(unsigned long &x) { read_signed(x); }\n    void read_single(long\
+    \ long &x) { read_signed(x); }\n    void read_single(unsigned long long &x) {\
+    \ read_unsigned(x); }\n\npublic:\n    Reader(FILE *fp) : fp(fp), pl(buf), pr(buf)\
+    \ { reread(); }\n\n    void read() {}\n    template <typename Head, typename...\
+    \ Tail>\n    void read(Head &head, Tail &...tail) {\n        read_single(head);\n\
+    \        read(tail...);\n    }\n};\n\nstruct NumberToString {\n    char buf[10000][4];\n\
+    \    constexpr NumberToString() : buf() {\n        for (int i = 0; i < 10000;\
+    \ ++i) {\n            int n = i;\n            for (int j = 3; j >= 0; --j) {\n\
+    \                buf[i][j] = '0' + n % 10;\n                n /= 10;\n       \
+    \     }\n        }\n    }\n} constexpr number_to_string_precalc;\n\nclass Writer\
+    \ {\n    FILE *fp;\n    static constexpr int BUF = 1 << 18;\n    char buf[BUF];\n\
+    \    char *ptr;\n\n    void write_u32(unsigned x) {\n        if ((buf + BUF -\
+    \ ptr) < 32) {\n            flush();\n        }\n        static char sml[12];\n\
+    \        int t = 8;\n        while (x >= 10000) {\n            unsigned n = x\
+    \ % 10000;\n            x /= 10000;\n            std::memcpy(sml + t, number_to_string_precalc.buf[n],\
+    \ 4);\n            t -= 4;\n        }\n        if (x >= 1000) {\n            std::memcpy(ptr,\
+    \ number_to_string_precalc.buf[x], 4);\n            ptr += 4;\n        } else\
+    \ if (x >= 100) {\n            std::memcpy(ptr, number_to_string_precalc.buf[x]\
+    \ + 1, 3);\n            ptr += 3;\n        } else if (x >= 10) {\n           \
+    \ unsigned q = (x * 103) >> 10;\n            *ptr++ = q | '0';\n            *ptr++\
+    \ = (x - 10 * q) | '0';\n        } else {\n            *ptr++ = '0' | x;\n   \
+    \     }\n        std::memcpy(ptr, sml + (t + 4), 8 - t);\n        ptr += 8 - t;\n\
+    \    }\n\n    void write_u64(unsigned long long x) {\n        if ((buf + BUF -\
+    \ ptr) < 32) {\n            flush();\n        }\n        if (x >= 10000000000000000)\
+    \ {\n            unsigned long long z = x % 100000000;\n            x /= 100000000;\n\
+    \            unsigned long long y = x % 100000000;\n            x /= 100000000;\n\
+    \            if (x >= 1000) {\n                std::memcpy(ptr, number_to_string_precalc.buf[x],\
+    \ 4);\n                ptr += 4;\n            } else if (x >= 100) {\n       \
+    \         std::memcpy(ptr, number_to_string_precalc.buf[x] + 1, 3);\n        \
+    \        ptr += 3;\n            } else if (x >= 10) {\n                unsigned\
+    \ q = (x * 103) >> 10;\n                *ptr++ = q | '0';\n                *ptr++\
+    \ = (x - 10 * q) | '0';\n            } else {\n                *ptr++ = '0' |\
+    \ x;\n            }\n            std::memcpy(ptr, number_to_string_precalc.buf[y\
+    \ / 10000], 4);\n            std::memcpy(ptr + 4, number_to_string_precalc.buf[y\
+    \ % 10000], 4);\n            std::memcpy(ptr + 8, number_to_string_precalc.buf[z\
+    \ / 10000], 4);\n            std::memcpy(ptr + 12, number_to_string_precalc.buf[z\
+    \ % 10000], 4);\n            ptr += 16;\n        } else {\n            static\
+    \ char sml[12];\n            int t = 8;\n            while (x >= 10000) {\n  \
+    \              unsigned long long n = x % 10000;\n                x /= 10000;\n\
+    \                std::memcpy(sml + t, number_to_string_precalc.buf[n], 4);\n \
+    \               t -= 4;\n            }\n            if (x >= 1000) {\n       \
+    \         std::memcpy(ptr, number_to_string_precalc.buf[x], 4);\n            \
+    \    ptr += 4;\n            } else if (x >= 100) {\n                std::memcpy(ptr,\
+    \ number_to_string_precalc.buf[x] + 1, 3);\n                ptr += 3;\n      \
+    \      } else if (x >= 10) {\n                unsigned q = (x * 103) >> 10;\n\
+    \                *ptr++ = q | '0';\n                *ptr++ = (x - 10 * q) | '0';\n\
+    \            } else {\n                *ptr++ = '0' | x;\n            }\n    \
+    \        std::memcpy(ptr, sml + (t + 4), 8 - t);\n            ptr += 8 - t;\n\
+    \        }\n    }\n\n    void write_char(char c) {\n        if (ptr == buf + BUF)\
+    \ {\n            flush();\n        }\n        *ptr++ = c;\n    }\n\n    template\
+    \ <typename T>\n    void write_unsigned(T x) {\n        if constexpr (std::is_same_v<T,\
+    \ unsigned long long> ||\n                      std::is_same_v<T, unsigned long>)\
+    \ {\n            write_u64(x);\n        } else {\n            write_u32(x);\n\
+    \        }\n    }\n\n    template <typename T>\n    void write_signed(T x) {\n\
+    \        std::make_unsigned_t<T> y = x;\n        if (x < 0) {\n            write_char('-');\n\
+    \            y = -y;\n        }\n        write_unsigned(y);\n    }\n\n    void\
+    \ write_single(int x) { write_signed(x); }\n    void write_single(unsigned x)\
+    \ { write_unsigned(x); }\n    void write_single(long x) { write_signed(x); }\n\
+    \    void write_single(unsigned long x) { write_unsigned(x); }\n    void write_single(long\
+    \ long x) { write_signed(x); }\n    void write_single(unsigned long long x) {\
+    \ write_unsigned(x); }\n    void write_single(char c) { write_char(c); }\n\npublic:\n\
+    \    Writer(FILE *fp) : fp(fp), ptr(buf) {}\n    ~Writer() { flush(); }\n\n  \
+    \  void flush() {\n        std::fwrite(buf, 1, ptr - buf, fp);\n        ptr =\
+    \ buf;\n    }\n\n    void write() {}\n    template <typename Head, typename...\
+    \ Tail>\n    void write(Head &&head, Tail &&...tail) {\n        write_single(head);\n\
+    \        if (sizeof...(Tail)) {\n            write_char(' ');\n        }\n   \
+    \     write(std::forward<Tail>(tail)...);\n    }\n\n    template <typename...\
+    \ T>\n    void writeln(T &&...t) {\n        write(std::forward<T>(t)...);\n  \
+    \      write_char('\\n');\n    }\n};\n\nReader rd(stdin);\nWriter wr(stdout);\n\
+    #line 5 \"poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp\"\n\nint\
+    \ main() {\n    using M = ModInt<998244353>;\n    i32 d;\n    i64 k;\n    rd.read(d,\
+    \ k);\n    V<M> a(d);\n    REP(i, d) {\n        rd.read(a[i].val);\n    }\n  \
+    \  V<M> c(d);\n    REP(i, d) {\n        rd.read(c[i].val);\n    }\n    V<M> den(d\
+    \ + 1);\n    den[0] = M(1);\n    REP(i, d) {\n        den[i + 1] = -c[i];\n  \
+    \  }\n    V<M> num = convolve(a, den);\n    num.resize(d);\n    M ans = fps_div_at(num,\
+    \ den, k);\n    wr.writeln(ans.val);\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/kth_term_of_linearly_recurrent_sequence\"\
+    \n#include \"../../poly/fps_div_at.hpp\"\n#include \"../../template/template.hpp\"\
+    \n#include \"../../template/fastio.hpp\"\n\nint main() {\n    using M = ModInt<998244353>;\n\
+    \    i32 d;\n    i64 k;\n    rd.read(d, k);\n    V<M> a(d);\n    REP(i, d) {\n\
+    \        rd.read(a[i].val);\n    }\n    V<M> c(d);\n    REP(i, d) {\n        rd.read(c[i].val);\n\
+    \    }\n    V<M> den(d + 1);\n    den[0] = M(1);\n    REP(i, d) {\n        den[i\
+    \ + 1] = -c[i];\n    }\n    V<M> num = convolve(a, den);\n    num.resize(d);\n\
+    \    M ans = fps_div_at(num, den, k);\n    wr.writeln(ans.val);\n}\n"
   dependsOn:
+  - poly/fps_div_at.hpp
   - poly/fft.hpp
   - number_theory/mod_int.hpp
   - number_theory/utils.hpp
   - template/template.hpp
+  - template/fastio.hpp
   isVerificationFile: true
-  path: poly/test/convolution_mod.test.cpp
+  path: poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
   requiredBy: []
   timestamp: '2024-04-28 17:24:38+09:00'
-  verificationStatus: TEST_ACCEPTED
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: poly/test/convolution_mod.test.cpp
+documentation_of: poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
 layout: document
 redirect_from:
-- /verify/poly/test/convolution_mod.test.cpp
-- /verify/poly/test/convolution_mod.test.cpp.html
-title: poly/test/convolution_mod.test.cpp
+- /verify/poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
+- /verify/poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp.html
+title: poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
 ---

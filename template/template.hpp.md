@@ -111,9 +111,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: poly/test/convolution_mod.test.cpp
     title: poly/test/convolution_mod.test.cpp
+  - icon: ':x:'
+    path: poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
+    title: poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
   - icon: ':heavy_check_mark:'
     path: poly/test/polynomial_taylor_shift.test.cpp
     title: poly/test/polynomial_taylor_shift.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: poly/test/prod_of_polys.test.cpp
+    title: poly/test/prod_of_polys.test.cpp
   - icon: ':heavy_check_mark:'
     path: poly/test/stirling_number_of_the_first_kind.test.cpp
     title: poly/test/stirling_number_of_the_first_kind.test.cpp
@@ -123,9 +129,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: string/test/zalgorithm.test.cpp
     title: string/test/zalgorithm.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 1 \"template/template.hpp\"\n#include <bits/stdc++.h>\n#define\
@@ -216,15 +222,17 @@ data:
   path: template/template.hpp
   requiredBy: []
   timestamp: '2024-01-13 18:43:37+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - number_theory/test/frac_binsearch_stress.test.cpp
   - number_theory/test/inv_mod_stress.test.cpp
   - number_theory/test/ax_by_c_stress.test.cpp
   - number_theory/test/extgcd2_stress.test.cpp
   - opt/test/yuki_119.test.cpp
+  - poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
   - poly/test/convolution_mod.test.cpp
   - poly/test/polynomial_taylor_shift.test.cpp
+  - poly/test/prod_of_polys.test.cpp
   - poly/test/stirling_number_of_the_second_kind.test.cpp
   - poly/test/stirling_number_of_the_first_kind.test.cpp
   - graph/test/lca.test.cpp

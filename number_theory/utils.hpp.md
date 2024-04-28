@@ -5,12 +5,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: number_theory/ax_by_c.hpp
     title: number_theory/ax_by_c.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/mod_int.hpp
     title: number_theory/mod_int.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: poly/fft.hpp
     title: poly/fft.hpp
+  - icon: ':x:'
+    path: poly/fps_div_at.hpp
+    title: poly/fps_div_at.hpp
   - icon: ':heavy_check_mark:'
     path: poly/stirling1.hpp
     title: poly/stirling1.hpp
@@ -60,18 +63,24 @@ data:
   - icon: ':heavy_check_mark:'
     path: poly/test/convolution_mod.test.cpp
     title: poly/test/convolution_mod.test.cpp
+  - icon: ':x:'
+    path: poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
+    title: poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
   - icon: ':heavy_check_mark:'
     path: poly/test/polynomial_taylor_shift.test.cpp
     title: poly/test/polynomial_taylor_shift.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: poly/test/prod_of_polys.test.cpp
+    title: poly/test/prod_of_polys.test.cpp
   - icon: ':heavy_check_mark:'
     path: poly/test/stirling_number_of_the_first_kind.test.cpp
     title: poly/test/stirling_number_of_the_first_kind.test.cpp
   - icon: ':heavy_check_mark:'
     path: poly/test/stirling_number_of_the_second_kind.test.cpp
     title: poly/test/stirling_number_of_the_second_kind.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"number_theory/utils.hpp\"\n\n#include <utility>\n\nconstexpr\
@@ -166,18 +175,21 @@ data:
   requiredBy:
   - number_theory/mod_int.hpp
   - number_theory/ax_by_c.hpp
+  - poly/fps_div_at.hpp
   - poly/stirling1.hpp
   - poly/fft.hpp
   - poly/stirling2.hpp
   - poly/taylor_shift.hpp
   timestamp: '2024-03-29 12:47:49+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - number_theory/test/inv_mod_stress.test.cpp
   - number_theory/test/ax_by_c_stress.test.cpp
   - number_theory/test/extgcd2_stress.test.cpp
+  - poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
   - poly/test/convolution_mod.test.cpp
   - poly/test/polynomial_taylor_shift.test.cpp
+  - poly/test/prod_of_polys.test.cpp
   - poly/test/stirling_number_of_the_second_kind.test.cpp
   - poly/test/stirling_number_of_the_first_kind.test.cpp
   - algebra/test/matrix_det.test.cpp

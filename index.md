@@ -151,8 +151,20 @@ data:
       path: poly/fps_div_at.hpp
       title: poly/fps_div_at.hpp
     - icon: ':heavy_check_mark:'
+      path: poly/fps_exp_sparse.hpp
+      title: poly/fps_exp_sparse.hpp
+    - icon: ':heavy_check_mark:'
       path: poly/fps_inv.hpp
       title: poly/fps_inv.hpp
+    - icon: ':heavy_check_mark:'
+      path: poly/fps_inv_sparse.hpp
+      title: poly/fps_inv_sparse.hpp
+    - icon: ':heavy_check_mark:'
+      path: poly/fps_log_sparse.hpp
+      title: poly/fps_log_sparse.hpp
+    - icon: ':heavy_check_mark:'
+      path: poly/fps_pow_sparse.hpp
+      title: poly/fps_pow_sparse.hpp
     - icon: ':heavy_check_mark:'
       path: poly/stirling1.hpp
       title: poly/stirling1.hpp
@@ -309,14 +321,26 @@ data:
       path: poly/test/convolution_mod.test.cpp
       title: poly/test/convolution_mod.test.cpp
     - icon: ':heavy_check_mark:'
+      path: poly/test/exp_of_formal_power_series.test.cpp
+      title: poly/test/exp_of_formal_power_series.test.cpp
+    - icon: ':heavy_check_mark:'
       path: poly/test/inv_of_formal_power_series.test.cpp
       title: poly/test/inv_of_formal_power_series.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: poly/test/inv_of_formal_power_series_sparse.test.cpp
+      title: poly/test/inv_of_formal_power_series_sparse.test.cpp
     - icon: ':heavy_check_mark:'
       path: poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
       title: poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
     - icon: ':heavy_check_mark:'
+      path: poly/test/log_of_formal_power_series.test.cpp
+      title: poly/test/log_of_formal_power_series.test.cpp
+    - icon: ':heavy_check_mark:'
       path: poly/test/polynomial_taylor_shift.test.cpp
       title: poly/test/polynomial_taylor_shift.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: poly/test/pow_of_formal_power_series.test.cpp
+      title: poly/test/pow_of_formal_power_series.test.cpp
     - icon: ':heavy_check_mark:'
       path: poly/test/prod_of_polys.test.cpp
       title: poly/test/prod_of_polys.test.cpp

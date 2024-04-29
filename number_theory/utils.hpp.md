@@ -15,6 +15,9 @@ data:
     path: poly/fps_div_at.hpp
     title: poly/fps_div_at.hpp
   - icon: ':heavy_check_mark:'
+    path: poly/fps_inv.hpp
+    title: poly/fps_inv.hpp
+  - icon: ':heavy_check_mark:'
     path: poly/stirling1.hpp
     title: poly/stirling1.hpp
   - icon: ':heavy_check_mark:'
@@ -63,6 +66,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: poly/test/convolution_mod.test.cpp
     title: poly/test/convolution_mod.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: poly/test/inv_of_formal_power_series.test.cpp
+    title: poly/test/inv_of_formal_power_series.test.cpp
   - icon: ':heavy_check_mark:'
     path: poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
     title: poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
@@ -178,6 +184,7 @@ data:
   - poly/fps_div_at.hpp
   - poly/stirling1.hpp
   - poly/fft.hpp
+  - poly/fps_inv.hpp
   - poly/stirling2.hpp
   - poly/taylor_shift.hpp
   timestamp: '2024-03-29 12:47:49+09:00'
@@ -187,6 +194,7 @@ data:
   - number_theory/test/ax_by_c_stress.test.cpp
   - number_theory/test/extgcd2_stress.test.cpp
   - poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
+  - poly/test/inv_of_formal_power_series.test.cpp
   - poly/test/convolution_mod.test.cpp
   - poly/test/polynomial_taylor_shift.test.cpp
   - poly/test/prod_of_polys.test.cpp

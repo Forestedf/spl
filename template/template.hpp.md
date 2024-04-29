@@ -112,6 +112,9 @@ data:
     path: poly/test/convolution_mod.test.cpp
     title: poly/test/convolution_mod.test.cpp
   - icon: ':heavy_check_mark:'
+    path: poly/test/inv_of_formal_power_series.test.cpp
+    title: poly/test/inv_of_formal_power_series.test.cpp
+  - icon: ':heavy_check_mark:'
     path: poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
     title: poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
   - icon: ':heavy_check_mark:'
@@ -230,6 +233,7 @@ data:
   - number_theory/test/extgcd2_stress.test.cpp
   - opt/test/yuki_119.test.cpp
   - poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
+  - poly/test/inv_of_formal_power_series.test.cpp
   - poly/test/convolution_mod.test.cpp
   - poly/test/polynomial_taylor_shift.test.cpp
   - poly/test/prod_of_polys.test.cpp

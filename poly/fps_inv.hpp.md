@@ -10,11 +10,14 @@ data:
   - icon: ':heavy_check_mark:'
     path: poly/fft.hpp
     title: poly/fft.hpp
+  _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
-    path: poly/fps_inv.hpp
-    title: poly/fps_inv.hpp
-  _extendedRequiredBy: []
+    path: poly/fps_div_at.hpp
+    title: poly/fps_div_at.hpp
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: poly/test/inv_of_formal_power_series.test.cpp
+    title: poly/test/inv_of_formal_power_series.test.cpp
   - icon: ':heavy_check_mark:'
     path: poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
     title: poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
@@ -23,9 +26,9 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"poly/fps_div_at.hpp\"\n#include <algorithm>\n#include <bit>\n\
-    #line 2 \"poly/fft.hpp\"\n#include <array>\n#include <vector>\n#line 2 \"number_theory/mod_int.hpp\"\
-    \n\n#include <cassert>\n#include <iostream>\n#include <type_traits>\n#line 2 \"\
+  bundledCode: "#line 2 \"poly/fps_inv.hpp\"\n#include <algorithm>\n#line 2 \"poly/fft.hpp\"\
+    \n#include <array>\n#include <vector>\n#line 2 \"number_theory/mod_int.hpp\"\n\
+    \n#include <cassert>\n#include <iostream>\n#include <type_traits>\n#line 2 \"\
     number_theory/utils.hpp\"\n\n#include <utility>\n\nconstexpr bool is_prime(unsigned\
     \ n) {\n    if (n == 0 || n == 1) {\n        return false;\n    }\n    for (unsigned\
     \ i = 2; i * i <= n; ++i) {\n        if (n % i == 0) {\n            return false;\n\
@@ -209,69 +212,37 @@ data:
     \ 2 * n; ++i) {\n            fft_f[i] *= fft_g[i];\n        }\n        ifft(fft_f);\n\
     \        g.resize(2 * n);\n        for (int i = n; i < 2 * n; ++i) {\n       \
     \     g[i] = -fft_f[i];\n        }\n    }\n    g.resize(f.size());\n    return\
-    \ g;\n}\n#line 5 \"poly/fps_div_at.hpp\"\ntemplate <typename M>\nvoid extend_fft(std::vector<M>\
-    \ &a) {\n    static constexpr FFTRoot<M::get_mod()> fft_root;\n    int n = (int)a.size();\n\
-    \    std::copy(a.begin(), a.begin() + n / 2, a.begin() + n / 2);\n    ifft(a.data()\
-    \ + n / 2, n / 2);\n    M pw(1);\n    M r = fft_root.root[std::bit_width((unsigned)n)\
-    \ - 1];\n    for (int i = n / 2; i < n; ++i) {\n        a[i] *= pw;\n        pw\
-    \ *= r;\n    }\n    fft(a.data() + n / 2, n / 2);\n}\n// returns [x^k] f(x) /\
-    \ g(x)\n// requires LEN(f) < LEN(g) and g[0] != 0\ntemplate <typename T>\nT fps_div_at(std::vector<T>\
-    \ f, std::vector<T> g, long long k) {\n    static constexpr FFTRoot<T::get_mod()>\
-    \ fft_root;\n    static constexpr T INV2 = T(2).inv();\n    assert(f.size() <\
-    \ g.size() && g[0] != T(0));\n    if (g.size() == 1) {\n        return T(0);\n\
-    \    }\n    int n = (int)std::bit_ceil(2 * g.size() - 1);\n    f.resize(n, T(0));\n\
-    \    g.resize(n, T(0));\n    fft(f);\n    fft(g);\n    while (k >= n) {\n    \
-    \    for (int i = 0; i < n; ++i) {\n            f[i] *= g[i ^ 1];\n        }\n\
-    \        if (k & 1) {\n            T p(1);\n            for (int i = 0; i < n\
-    \ / 2; ++i) {\n                f[i] = (f[2 * i] - f[2 * i + 1]) * INV2 * p;\n\
-    \                p *= fft_root.irate2[__builtin_ctz(~i)];\n            }\n   \
-    \     } else {\n            for (int i = 0; i < n / 2; ++i) {\n              \
-    \  f[i] = (f[2 * i] + f[2 * i + 1]) * INV2;\n            }\n        }\n      \
-    \  extend_fft(f);\n        for (int i = 0; i < n / 2; ++i) {\n            g[i]\
-    \ = g[2 * i] * g[2 * i + 1];\n        }\n        extend_fft(g);\n        k /=\
-    \ 2;\n    }\n    ifft(f);\n    ifft(g);\n    std::vector<T> inv_g = fps_inv(g);\n\
-    \    T ans(0);\n    for (int i = 0; i <= k; ++i) {\n        ans += f[i] * inv_g[k\
-    \ - i];\n    }\n    return ans;\n}\n"
-  code: "#pragma once\n#include <algorithm>\n#include <bit>\n#include \"fps_inv.hpp\"\
-    \ntemplate <typename M>\nvoid extend_fft(std::vector<M> &a) {\n    static constexpr\
-    \ FFTRoot<M::get_mod()> fft_root;\n    int n = (int)a.size();\n    std::copy(a.begin(),\
-    \ a.begin() + n / 2, a.begin() + n / 2);\n    ifft(a.data() + n / 2, n / 2);\n\
-    \    M pw(1);\n    M r = fft_root.root[std::bit_width((unsigned)n) - 1];\n   \
-    \ for (int i = n / 2; i < n; ++i) {\n        a[i] *= pw;\n        pw *= r;\n \
-    \   }\n    fft(a.data() + n / 2, n / 2);\n}\n// returns [x^k] f(x) / g(x)\n//\
-    \ requires LEN(f) < LEN(g) and g[0] != 0\ntemplate <typename T>\nT fps_div_at(std::vector<T>\
-    \ f, std::vector<T> g, long long k) {\n    static constexpr FFTRoot<T::get_mod()>\
-    \ fft_root;\n    static constexpr T INV2 = T(2).inv();\n    assert(f.size() <\
-    \ g.size() && g[0] != T(0));\n    if (g.size() == 1) {\n        return T(0);\n\
-    \    }\n    int n = (int)std::bit_ceil(2 * g.size() - 1);\n    f.resize(n, T(0));\n\
-    \    g.resize(n, T(0));\n    fft(f);\n    fft(g);\n    while (k >= n) {\n    \
-    \    for (int i = 0; i < n; ++i) {\n            f[i] *= g[i ^ 1];\n        }\n\
-    \        if (k & 1) {\n            T p(1);\n            for (int i = 0; i < n\
-    \ / 2; ++i) {\n                f[i] = (f[2 * i] - f[2 * i + 1]) * INV2 * p;\n\
-    \                p *= fft_root.irate2[__builtin_ctz(~i)];\n            }\n   \
-    \     } else {\n            for (int i = 0; i < n / 2; ++i) {\n              \
-    \  f[i] = (f[2 * i] + f[2 * i + 1]) * INV2;\n            }\n        }\n      \
-    \  extend_fft(f);\n        for (int i = 0; i < n / 2; ++i) {\n            g[i]\
-    \ = g[2 * i] * g[2 * i + 1];\n        }\n        extend_fft(g);\n        k /=\
-    \ 2;\n    }\n    ifft(f);\n    ifft(g);\n    std::vector<T> inv_g = fps_inv(g);\n\
-    \    T ans(0);\n    for (int i = 0; i <= k; ++i) {\n        ans += f[i] * inv_g[k\
-    \ - i];\n    }\n    return ans;\n}\n"
+    \ g;\n}\n"
+  code: "#pragma once\n#include <algorithm>\n#include \"fft.hpp\"\n// 10 FFT(n)\n\
+    template <typename T>\nstd::vector<T> fps_inv(std::vector<T> f) {\n    assert(!f.empty()\
+    \ && f[0] != T(0));\n    std::vector<T> g(1, T(1) / f[0]);\n    while (g.size()\
+    \ < f.size()) {\n        int n = (int)g.size();\n        std::vector<T> fft_f(2\
+    \ * n), fft_g(2 * n);\n        std::copy(f.begin(), f.begin() + std::min(2 * n,\
+    \ (int)f.size()),\n                  fft_f.begin());\n        std::copy(g.begin(),\
+    \ g.end(), fft_g.begin());\n        fft(fft_f);\n        fft(fft_g);\n       \
+    \ for (int i = 0; i < 2 * n; ++i) {\n            fft_f[i] *= fft_g[i];\n     \
+    \   }\n        ifft(fft_f);\n        std::fill(fft_f.begin(), fft_f.begin() +\
+    \ n, T(0));\n        fft(fft_f);\n        for (int i = 0; i < 2 * n; ++i) {\n\
+    \            fft_f[i] *= fft_g[i];\n        }\n        ifft(fft_f);\n        g.resize(2\
+    \ * n);\n        for (int i = n; i < 2 * n; ++i) {\n            g[i] = -fft_f[i];\n\
+    \        }\n    }\n    g.resize(f.size());\n    return g;\n}\n"
   dependsOn:
-  - poly/fps_inv.hpp
   - poly/fft.hpp
   - number_theory/mod_int.hpp
   - number_theory/utils.hpp
   isVerificationFile: false
-  path: poly/fps_div_at.hpp
-  requiredBy: []
+  path: poly/fps_inv.hpp
+  requiredBy:
+  - poly/fps_div_at.hpp
   timestamp: '2024-04-29 13:10:36+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
-documentation_of: poly/fps_div_at.hpp
+  - poly/test/inv_of_formal_power_series.test.cpp
+documentation_of: poly/fps_inv.hpp
 layout: document
 redirect_from:
-- /library/poly/fps_div_at.hpp
-- /library/poly/fps_div_at.hpp.html
-title: poly/fps_div_at.hpp
+- /library/poly/fps_inv.hpp
+- /library/poly/fps_inv.hpp.html
+title: poly/fps_inv.hpp
 ---

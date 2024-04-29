@@ -14,6 +14,9 @@ data:
     path: poly/fps_div_at.hpp
     title: poly/fps_div_at.hpp
   - icon: ':heavy_check_mark:'
+    path: poly/fps_inv.hpp
+    title: poly/fps_inv.hpp
+  - icon: ':heavy_check_mark:'
     path: template/fastio.hpp
     title: template/fastio.hpp
   - icon: ':heavy_check_mark:'
@@ -204,77 +207,90 @@ data:
     template <typename M>\nstd::vector<M> convolve(const std::vector<M> &a, const\
     \ std::vector<M> &b) {\n    if (a.empty() || b.empty()) {\n        return std::vector<M>(0);\n\
     \    }\n    if (std::min(a.size(), b.size()) <= 60) {\n        return convolve_naive(a,\
-    \ b);\n    } else {\n        return convolve_fft(a, b);\n    }\n}\n#line 5 \"\
-    poly/fps_div_at.hpp\"\ntemplate <typename M>\nvoid extend_fft(std::vector<M> &a)\
-    \ {\n    static constexpr FFTRoot<M::get_mod()> fft_root;\n    int n = (int)a.size();\n\
+    \ b);\n    } else {\n        return convolve_fft(a, b);\n    }\n}\n#line 4 \"\
+    poly/fps_inv.hpp\"\n// 10 FFT(n)\ntemplate <typename T>\nstd::vector<T> fps_inv(std::vector<T>\
+    \ f) {\n    assert(!f.empty() && f[0] != T(0));\n    std::vector<T> g(1, T(1)\
+    \ / f[0]);\n    while (g.size() < f.size()) {\n        int n = (int)g.size();\n\
+    \        std::vector<T> fft_f(2 * n), fft_g(2 * n);\n        std::copy(f.begin(),\
+    \ f.begin() + std::min(2 * n, (int)f.size()),\n                  fft_f.begin());\n\
+    \        std::copy(g.begin(), g.end(), fft_g.begin());\n        fft(fft_f);\n\
+    \        fft(fft_g);\n        for (int i = 0; i < 2 * n; ++i) {\n            fft_f[i]\
+    \ *= fft_g[i];\n        }\n        ifft(fft_f);\n        std::fill(fft_f.begin(),\
+    \ fft_f.begin() + n, T(0));\n        fft(fft_f);\n        for (int i = 0; i <\
+    \ 2 * n; ++i) {\n            fft_f[i] *= fft_g[i];\n        }\n        ifft(fft_f);\n\
+    \        g.resize(2 * n);\n        for (int i = n; i < 2 * n; ++i) {\n       \
+    \     g[i] = -fft_f[i];\n        }\n    }\n    g.resize(f.size());\n    return\
+    \ g;\n}\n#line 5 \"poly/fps_div_at.hpp\"\ntemplate <typename M>\nvoid extend_fft(std::vector<M>\
+    \ &a) {\n    static constexpr FFTRoot<M::get_mod()> fft_root;\n    int n = (int)a.size();\n\
     \    std::copy(a.begin(), a.begin() + n / 2, a.begin() + n / 2);\n    ifft(a.data()\
     \ + n / 2, n / 2);\n    M pw(1);\n    M r = fft_root.root[std::bit_width((unsigned)n)\
     \ - 1];\n    for (int i = n / 2; i < n; ++i) {\n        a[i] *= pw;\n        pw\
     \ *= r;\n    }\n    fft(a.data() + n / 2, n / 2);\n}\n// returns [x^k] f(x) /\
-    \ g(x)\n// requires LEN(f) < LEN(g) and g[0] != 0 and T is NTT-friendly\ntemplate\
-    \ <typename T>\nT fps_div_at(std::vector<T> f, std::vector<T> g, long long k)\
-    \ {\n    static constexpr FFTRoot<T::get_mod()> fft_root;\n    static constexpr\
-    \ T INV2 = T(2).inv();\n    assert(f.size() < g.size() && g[0] != T(0));\n   \
-    \ if (g.size() == 1) {\n        return T(0);\n    }\n    int n = (int)std::bit_ceil(2\
-    \ * g.size() - 1);\n    f.resize(n, T(0));\n    g.resize(n, T(0));\n    fft(f);\n\
-    \    fft(g);\n    while (k > 0) {\n        for (int i = 0; i < n; ++i) {\n   \
-    \         f[i] *= g[i ^ 1];\n        }\n        if (k & 1) {\n            T p(1);\n\
-    \            for (int i = 0; i < n / 2; ++i) {\n                f[i] = (f[2 *\
-    \ i] - f[2 * i + 1]) * INV2 * p;\n                p *= fft_root.irate2[__builtin_ctz(~i)];\n\
-    \            }\n        } else {\n            for (int i = 0; i < n / 2; ++i)\
-    \ {\n                f[i] = (f[2 * i] + f[2 * i + 1]) * INV2;\n            }\n\
-    \        }\n        extend_fft(f);\n        for (int i = 0; i < n / 2; ++i) {\n\
-    \            g[i] = g[2 * i] * g[2 * i + 1];\n        }\n        extend_fft(g);\n\
-    \        k /= 2;\n    }\n    T fsum(0), gsum(0);\n    for (int i = 0; i < n; ++i)\
-    \ {\n        fsum += f[i];\n        gsum += g[i];\n    }\n    return fsum / gsum;\n\
-    }\n#line 1 \"template/template.hpp\"\n#include <bits/stdc++.h>\n#define OVERRIDE(a,\
-    \ b, c, d, ...) d\n#define REP2(i, n) for (i32 i = 0; i < (i32)(n); ++i)\n#define\
-    \ REP3(i, m, n) for (i32 i = (i32)(m); i < (i32)(n); ++i)\n#define REP(...) OVERRIDE(__VA_ARGS__,\
-    \ REP3, REP2)(__VA_ARGS__)\n#define PER2(i, n) for (i32 i = (i32)(n)-1; i >= 0;\
-    \ --i)\n#define PER3(i, m, n) for (i32 i = (i32)(n)-1; i >= (i32)(m); --i)\n#define\
-    \ PER(...) OVERRIDE(__VA_ARGS__, PER3, PER2)(__VA_ARGS__)\n#define ALL(x) begin(x),\
-    \ end(x)\n#define LEN(x) (i32)(x.size())\nusing namespace std;\nusing u32 = unsigned\
-    \ int;\nusing u64 = unsigned long long;\nusing i32 = signed int;\nusing i64 =\
-    \ signed long long;\nusing f64 = double;\nusing f80 = long double;\nusing pi =\
-    \ pair<i32, i32>;\nusing pl = pair<i64, i64>;\ntemplate <typename T>\nusing V\
-    \ = vector<T>;\ntemplate <typename T>\nusing VV = V<V<T>>;\ntemplate <typename\
-    \ T>\nusing VVV = V<V<V<T>>>;\ntemplate <typename T>\nusing VVVV = V<V<V<V<T>>>>;\n\
-    template <typename T>\nusing PQR = priority_queue<T, V<T>, greater<T>>;\ntemplate\
-    \ <typename T>\nbool chmin(T &x, const T &y) {\n    if (x > y) {\n        x =\
-    \ y;\n        return true;\n    }\n    return false;\n}\ntemplate <typename T>\n\
-    bool chmax(T &x, const T &y) {\n    if (x < y) {\n        x = y;\n        return\
-    \ true;\n    }\n    return false;\n}\ntemplate <typename T>\ni32 lob(const V<T>\
-    \ &arr, const T &v) {\n    return (i32)(lower_bound(ALL(arr), v) - arr.begin());\n\
-    }\ntemplate <typename T>\ni32 upb(const V<T> &arr, const T &v) {\n    return (i32)(upper_bound(ALL(arr),\
-    \ v) - arr.begin());\n}\ntemplate <typename T>\nV<i32> argsort(const V<T> &arr)\
-    \ {\n    V<i32> ret(arr.size());\n    iota(ALL(ret), 0);\n    sort(ALL(ret), [&](i32\
-    \ i, i32 j) -> bool {\n        if (arr[i] == arr[j]) {\n            return i <\
-    \ j;\n        } else {\n            return arr[i] < arr[j];\n        }\n    });\n\
-    \    return ret;\n}\n#ifdef INT128\nusing u128 = __uint128_t;\nusing i128 = __int128_t;\n\
-    #endif\n[[maybe_unused]] constexpr i32 INF = 1000000100;\n[[maybe_unused]] constexpr\
-    \ i64 INF64 = 3000000000000000100;\nstruct SetUpIO {\n    SetUpIO() {\n#ifdef\
-    \ FAST_IO\n        ios::sync_with_stdio(false);\n        cin.tie(nullptr);\n#endif\n\
-    \        cout << fixed << setprecision(15);\n    }\n} set_up_io;\nvoid scan(char\
-    \ &x) { cin >> x; }\nvoid scan(u32 &x) { cin >> x; }\nvoid scan(u64 &x) { cin\
-    \ >> x; }\nvoid scan(i32 &x) { cin >> x; }\nvoid scan(i64 &x) { cin >> x; }\n\
-    void scan(string &x) { cin >> x; }\ntemplate <typename T>\nvoid scan(V<T> &x)\
-    \ {\n    for (T &ele : x) {\n        scan(ele);\n    }\n}\nvoid read() {}\ntemplate\
-    \ <typename Head, typename... Tail>\nvoid read(Head &head, Tail &...tail) {\n\
-    \    scan(head);\n    read(tail...);\n}\n#define CHAR(...)     \\\n    char __VA_ARGS__;\
-    \ \\\n    read(__VA_ARGS__);\n#define U32(...)     \\\n    u32 __VA_ARGS__; \\\
-    \n    read(__VA_ARGS__);\n#define U64(...)     \\\n    u64 __VA_ARGS__; \\\n \
-    \   read(__VA_ARGS__);\n#define I32(...)     \\\n    i32 __VA_ARGS__; \\\n   \
-    \ read(__VA_ARGS__);\n#define I64(...)     \\\n    i64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n\
-    #define STR(...)        \\\n    string __VA_ARGS__; \\\n    read(__VA_ARGS__);\n\
-    #define VEC(type, name, size) \\\n    V<type> name(size);       \\\n    read(name);\n\
-    #define VVEC(type, name, size1, size2)    \\\n    VV<type> name(size1, V<type>(size2));\
-    \ \\\n    read(name);\n#line 5 \"template/fastio.hpp\"\n\n// unable to read INT_MIN\
-    \ (int), LLONG_MIN (long long)\nclass Reader {\n    FILE *fp;\n    static constexpr\
-    \ int BUF = 1 << 18;\n    char buf[BUF];\n    char *pl, *pr;\n\n    void reread()\
-    \ {\n        int wd = pr - pl;\n        std::memcpy(buf, pl, wd);\n        pl\
-    \ = buf;\n        pr = buf + wd;\n        pr += std::fread(pr, 1, BUF - wd, fp);\n\
-    \    }\n\n    char skip() {\n        char ch = *pl++;\n        while (ch <= '\
-    \ ') {\n            ch = *pl++;\n        }\n        return ch;\n    }\n\n    template\
+    \ g(x)\n// requires LEN(f) < LEN(g) and g[0] != 0\ntemplate <typename T>\nT fps_div_at(std::vector<T>\
+    \ f, std::vector<T> g, long long k) {\n    static constexpr FFTRoot<T::get_mod()>\
+    \ fft_root;\n    static constexpr T INV2 = T(2).inv();\n    assert(f.size() <\
+    \ g.size() && g[0] != T(0));\n    if (g.size() == 1) {\n        return T(0);\n\
+    \    }\n    int n = (int)std::bit_ceil(2 * g.size() - 1);\n    f.resize(n, T(0));\n\
+    \    g.resize(n, T(0));\n    fft(f);\n    fft(g);\n    while (k >= n) {\n    \
+    \    for (int i = 0; i < n; ++i) {\n            f[i] *= g[i ^ 1];\n        }\n\
+    \        if (k & 1) {\n            T p(1);\n            for (int i = 0; i < n\
+    \ / 2; ++i) {\n                f[i] = (f[2 * i] - f[2 * i + 1]) * INV2 * p;\n\
+    \                p *= fft_root.irate2[__builtin_ctz(~i)];\n            }\n   \
+    \     } else {\n            for (int i = 0; i < n / 2; ++i) {\n              \
+    \  f[i] = (f[2 * i] + f[2 * i + 1]) * INV2;\n            }\n        }\n      \
+    \  extend_fft(f);\n        for (int i = 0; i < n / 2; ++i) {\n            g[i]\
+    \ = g[2 * i] * g[2 * i + 1];\n        }\n        extend_fft(g);\n        k /=\
+    \ 2;\n    }\n    ifft(f);\n    ifft(g);\n    std::vector<T> inv_g = fps_inv(g);\n\
+    \    T ans(0);\n    for (int i = 0; i <= k; ++i) {\n        ans += f[i] * inv_g[k\
+    \ - i];\n    }\n    return ans;\n}\n#line 1 \"template/template.hpp\"\n#include\
+    \ <bits/stdc++.h>\n#define OVERRIDE(a, b, c, d, ...) d\n#define REP2(i, n) for\
+    \ (i32 i = 0; i < (i32)(n); ++i)\n#define REP3(i, m, n) for (i32 i = (i32)(m);\
+    \ i < (i32)(n); ++i)\n#define REP(...) OVERRIDE(__VA_ARGS__, REP3, REP2)(__VA_ARGS__)\n\
+    #define PER2(i, n) for (i32 i = (i32)(n)-1; i >= 0; --i)\n#define PER3(i, m, n)\
+    \ for (i32 i = (i32)(n)-1; i >= (i32)(m); --i)\n#define PER(...) OVERRIDE(__VA_ARGS__,\
+    \ PER3, PER2)(__VA_ARGS__)\n#define ALL(x) begin(x), end(x)\n#define LEN(x) (i32)(x.size())\n\
+    using namespace std;\nusing u32 = unsigned int;\nusing u64 = unsigned long long;\n\
+    using i32 = signed int;\nusing i64 = signed long long;\nusing f64 = double;\n\
+    using f80 = long double;\nusing pi = pair<i32, i32>;\nusing pl = pair<i64, i64>;\n\
+    template <typename T>\nusing V = vector<T>;\ntemplate <typename T>\nusing VV =\
+    \ V<V<T>>;\ntemplate <typename T>\nusing VVV = V<V<V<T>>>;\ntemplate <typename\
+    \ T>\nusing VVVV = V<V<V<V<T>>>>;\ntemplate <typename T>\nusing PQR = priority_queue<T,\
+    \ V<T>, greater<T>>;\ntemplate <typename T>\nbool chmin(T &x, const T &y) {\n\
+    \    if (x > y) {\n        x = y;\n        return true;\n    }\n    return false;\n\
+    }\ntemplate <typename T>\nbool chmax(T &x, const T &y) {\n    if (x < y) {\n \
+    \       x = y;\n        return true;\n    }\n    return false;\n}\ntemplate <typename\
+    \ T>\ni32 lob(const V<T> &arr, const T &v) {\n    return (i32)(lower_bound(ALL(arr),\
+    \ v) - arr.begin());\n}\ntemplate <typename T>\ni32 upb(const V<T> &arr, const\
+    \ T &v) {\n    return (i32)(upper_bound(ALL(arr), v) - arr.begin());\n}\ntemplate\
+    \ <typename T>\nV<i32> argsort(const V<T> &arr) {\n    V<i32> ret(arr.size());\n\
+    \    iota(ALL(ret), 0);\n    sort(ALL(ret), [&](i32 i, i32 j) -> bool {\n    \
+    \    if (arr[i] == arr[j]) {\n            return i < j;\n        } else {\n  \
+    \          return arr[i] < arr[j];\n        }\n    });\n    return ret;\n}\n#ifdef\
+    \ INT128\nusing u128 = __uint128_t;\nusing i128 = __int128_t;\n#endif\n[[maybe_unused]]\
+    \ constexpr i32 INF = 1000000100;\n[[maybe_unused]] constexpr i64 INF64 = 3000000000000000100;\n\
+    struct SetUpIO {\n    SetUpIO() {\n#ifdef FAST_IO\n        ios::sync_with_stdio(false);\n\
+    \        cin.tie(nullptr);\n#endif\n        cout << fixed << setprecision(15);\n\
+    \    }\n} set_up_io;\nvoid scan(char &x) { cin >> x; }\nvoid scan(u32 &x) { cin\
+    \ >> x; }\nvoid scan(u64 &x) { cin >> x; }\nvoid scan(i32 &x) { cin >> x; }\n\
+    void scan(i64 &x) { cin >> x; }\nvoid scan(string &x) { cin >> x; }\ntemplate\
+    \ <typename T>\nvoid scan(V<T> &x) {\n    for (T &ele : x) {\n        scan(ele);\n\
+    \    }\n}\nvoid read() {}\ntemplate <typename Head, typename... Tail>\nvoid read(Head\
+    \ &head, Tail &...tail) {\n    scan(head);\n    read(tail...);\n}\n#define CHAR(...)\
+    \     \\\n    char __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define U32(...) \
+    \    \\\n    u32 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define U64(...)   \
+    \  \\\n    u64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define I32(...)     \\\
+    \n    i32 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define I64(...)     \\\n \
+    \   i64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define STR(...)        \\\n\
+    \    string __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define VEC(type, name, size)\
+    \ \\\n    V<type> name(size);       \\\n    read(name);\n#define VVEC(type, name,\
+    \ size1, size2)    \\\n    VV<type> name(size1, V<type>(size2)); \\\n    read(name);\n\
+    #line 5 \"template/fastio.hpp\"\n\n// unable to read INT_MIN (int), LLONG_MIN\
+    \ (long long)\nclass Reader {\n    FILE *fp;\n    static constexpr int BUF = 1\
+    \ << 18;\n    char buf[BUF];\n    char *pl, *pr;\n\n    void reread() {\n    \
+    \    int wd = pr - pl;\n        std::memcpy(buf, pl, wd);\n        pl = buf;\n\
+    \        pr = buf + wd;\n        pr += std::fread(pr, 1, BUF - wd, fp);\n    }\n\
+    \n    char skip() {\n        char ch = *pl++;\n        while (ch <= ' ') {\n \
+    \           ch = *pl++;\n        }\n        return ch;\n    }\n\n    template\
     \ <typename T>\n    void read_unsigned(T &x) {\n        if (pr - pl < 64) {\n\
     \            reread();\n        }\n        x = 0;\n        char ch = skip();\n\
     \        while ('0' <= ch) {\n            x = 10 * x + (0xf & ch);\n         \
@@ -372,6 +388,7 @@ data:
     \    M ans = fps_div_at(num, den, k);\n    wr.writeln(ans.val);\n}\n"
   dependsOn:
   - poly/fps_div_at.hpp
+  - poly/fps_inv.hpp
   - poly/fft.hpp
   - number_theory/mod_int.hpp
   - number_theory/utils.hpp
@@ -380,7 +397,7 @@ data:
   isVerificationFile: true
   path: poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
   requiredBy: []
-  timestamp: '2024-04-29 12:29:16+09:00'
+  timestamp: '2024-04-29 13:10:36+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp

@@ -111,7 +111,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: poly/test/convolution_mod.test.cpp
     title: poly/test/convolution_mod.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
     title: poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
   - icon: ':heavy_check_mark:'
@@ -129,9 +129,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: string/test/zalgorithm.test.cpp
     title: string/test/zalgorithm.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 1 \"template/template.hpp\"\n#include <bits/stdc++.h>\n#define\
@@ -222,7 +222,7 @@ data:
   path: template/template.hpp
   requiredBy: []
   timestamp: '2024-01-13 18:43:37+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - number_theory/test/frac_binsearch_stress.test.cpp
   - number_theory/test/inv_mod_stress.test.cpp

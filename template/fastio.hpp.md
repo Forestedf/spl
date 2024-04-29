@@ -18,15 +18,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: algebra/test/system_of_linear_equations.test.cpp
     title: algebra/test/system_of_linear_equations.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
     title: poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
   - icon: ':heavy_check_mark:'
     path: poly/test/prod_of_polys.test.cpp
     title: poly/test/prod_of_polys.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 1 \"template/fastio.hpp\"\n#include <cstdio>\n#include <cstring>\n\
@@ -209,7 +209,7 @@ data:
   path: template/fastio.hpp
   requiredBy: []
   timestamp: '2024-03-30 15:09:52+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
   - poly/test/prod_of_polys.test.cpp

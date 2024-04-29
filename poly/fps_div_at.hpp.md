@@ -205,18 +205,17 @@ data:
     \ {\n    static constexpr FFTRoot<T::get_mod()> fft_root;\n    static constexpr\
     \ T INV2 = T(2).inv();\n    assert(f.size() < g.size() && g[0] != T(0));\n   \
     \ if (g.size() == 1) {\n        return T(0);\n    }\n    int n = (int)std::bit_ceil(2\
-    \ * g.size() - 1);\n    int lg = std::bit_width((unsigned)n) - 1;\n    f.resize(n,\
-    \ T(0));\n    g.resize(n, T(0));\n    fft(f);\n    fft(g);\n    while (k > 0)\
-    \ {\n        for (int i = 0; i < n; ++i) {\n            f[i] *= g[i ^ 1];\n  \
-    \      }\n        if (k & 1) {\n            T p(1);\n            for (int i =\
-    \ 0; i < n / 2; ++i) {\n                f[i] = (f[2 * i] - f[2 * i + 1]) * INV2\
-    \ * p;\n                p *= fft_root.irate2[__builtin_ctz(~i)];\n           \
-    \ }\n        } else {\n            for (int i = 0; i < n / 2; ++i) {\n       \
-    \         f[i] = (f[2 * i] + f[2 * i + 1]) * INV2;\n            }\n        }\n\
-    \        extend_fft(f);\n        for (int i = 0; i < n / 2; ++i) {\n         \
-    \   g[i] = g[2 * i] * g[2 * i + 1];\n        }\n        extend_fft(g);\n     \
-    \   k /= 2;\n    }\n    T fsum(0), gsum(0);\n    for (int i = 0; i < n; ++i) {\n\
-    \        fsum += f[i];\n        gsum += g[i];\n    }\n    return fsum / gsum;\n\
+    \ * g.size() - 1);\n    f.resize(n, T(0));\n    g.resize(n, T(0));\n    fft(f);\n\
+    \    fft(g);\n    while (k > 0) {\n        for (int i = 0; i < n; ++i) {\n   \
+    \         f[i] *= g[i ^ 1];\n        }\n        if (k & 1) {\n            T p(1);\n\
+    \            for (int i = 0; i < n / 2; ++i) {\n                f[i] = (f[2 *\
+    \ i] - f[2 * i + 1]) * INV2 * p;\n                p *= fft_root.irate2[__builtin_ctz(~i)];\n\
+    \            }\n        } else {\n            for (int i = 0; i < n / 2; ++i)\
+    \ {\n                f[i] = (f[2 * i] + f[2 * i + 1]) * INV2;\n            }\n\
+    \        }\n        extend_fft(f);\n        for (int i = 0; i < n / 2; ++i) {\n\
+    \            g[i] = g[2 * i] * g[2 * i + 1];\n        }\n        extend_fft(g);\n\
+    \        k /= 2;\n    }\n    T fsum(0), gsum(0);\n    for (int i = 0; i < n; ++i)\
+    \ {\n        fsum += f[i];\n        gsum += g[i];\n    }\n    return fsum / gsum;\n\
     }\n"
   code: "#pragma once\n#include <algorithm>\n#include <bit>\n#include \"fft.hpp\"\n\
     template <typename M>\nvoid extend_fft(std::vector<M> &a) {\n    static constexpr\
@@ -230,18 +229,18 @@ data:
     \ constexpr FFTRoot<T::get_mod()> fft_root;\n    static constexpr T INV2 = T(2).inv();\n\
     \    assert(f.size() < g.size() && g[0] != T(0));\n    if (g.size() == 1) {\n\
     \        return T(0);\n    }\n    int n = (int)std::bit_ceil(2 * g.size() - 1);\n\
-    \    int lg = std::bit_width((unsigned)n) - 1;\n    f.resize(n, T(0));\n    g.resize(n,\
-    \ T(0));\n    fft(f);\n    fft(g);\n    while (k > 0) {\n        for (int i =\
-    \ 0; i < n; ++i) {\n            f[i] *= g[i ^ 1];\n        }\n        if (k &\
-    \ 1) {\n            T p(1);\n            for (int i = 0; i < n / 2; ++i) {\n \
-    \               f[i] = (f[2 * i] - f[2 * i + 1]) * INV2 * p;\n               \
-    \ p *= fft_root.irate2[__builtin_ctz(~i)];\n            }\n        } else {\n\
-    \            for (int i = 0; i < n / 2; ++i) {\n                f[i] = (f[2 *\
-    \ i] + f[2 * i + 1]) * INV2;\n            }\n        }\n        extend_fft(f);\n\
-    \        for (int i = 0; i < n / 2; ++i) {\n            g[i] = g[2 * i] * g[2\
-    \ * i + 1];\n        }\n        extend_fft(g);\n        k /= 2;\n    }\n    T\
-    \ fsum(0), gsum(0);\n    for (int i = 0; i < n; ++i) {\n        fsum += f[i];\n\
-    \        gsum += g[i];\n    }\n    return fsum / gsum;\n}\n"
+    \    f.resize(n, T(0));\n    g.resize(n, T(0));\n    fft(f);\n    fft(g);\n  \
+    \  while (k > 0) {\n        for (int i = 0; i < n; ++i) {\n            f[i] *=\
+    \ g[i ^ 1];\n        }\n        if (k & 1) {\n            T p(1);\n          \
+    \  for (int i = 0; i < n / 2; ++i) {\n                f[i] = (f[2 * i] - f[2 *\
+    \ i + 1]) * INV2 * p;\n                p *= fft_root.irate2[__builtin_ctz(~i)];\n\
+    \            }\n        } else {\n            for (int i = 0; i < n / 2; ++i)\
+    \ {\n                f[i] = (f[2 * i] + f[2 * i + 1]) * INV2;\n            }\n\
+    \        }\n        extend_fft(f);\n        for (int i = 0; i < n / 2; ++i) {\n\
+    \            g[i] = g[2 * i] * g[2 * i + 1];\n        }\n        extend_fft(g);\n\
+    \        k /= 2;\n    }\n    T fsum(0), gsum(0);\n    for (int i = 0; i < n; ++i)\
+    \ {\n        fsum += f[i];\n        gsum += g[i];\n    }\n    return fsum / gsum;\n\
+    }\n"
   dependsOn:
   - poly/fft.hpp
   - number_theory/mod_int.hpp
@@ -249,7 +248,7 @@ data:
   isVerificationFile: false
   path: poly/fps_div_at.hpp
   requiredBy: []
-  timestamp: '2024-04-28 17:24:38+09:00'
+  timestamp: '2024-04-29 12:29:16+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp

@@ -27,7 +27,6 @@ T fps_div_at(std::vector<T> f, std::vector<T> g, long long k) {
         return T(0);
     }
     int n = (int)std::bit_ceil(2 * g.size() - 1);
-    int lg = std::bit_width((unsigned)n) - 1;
     f.resize(n, T(0));
     g.resize(n, T(0));
     fft(f);

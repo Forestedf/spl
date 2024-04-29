@@ -1,7 +1,7 @@
 #pragma once
 #include <algorithm>
 #include <bit>
-#include "fft.hpp"
+#include "fps_inv.hpp"
 template <typename M>
 void extend_fft(std::vector<M> &a) {
     static constexpr FFTRoot<M::get_mod()> fft_root;
@@ -17,7 +17,7 @@ void extend_fft(std::vector<M> &a) {
     fft(a.data() + n / 2, n / 2);
 }
 // returns [x^k] f(x) / g(x)
-// requires LEN(f) < LEN(g) and g[0] != 0 and T is NTT-friendly
+// requires LEN(f) < LEN(g) and g[0] != 0
 template <typename T>
 T fps_div_at(std::vector<T> f, std::vector<T> g, long long k) {
     static constexpr FFTRoot<T::get_mod()> fft_root;
@@ -31,7 +31,7 @@ T fps_div_at(std::vector<T> f, std::vector<T> g, long long k) {
     g.resize(n, T(0));
     fft(f);
     fft(g);
-    while (k > 0) {
+    while (k >= n) {
         for (int i = 0; i < n; ++i) {
             f[i] *= g[i ^ 1];
         }
@@ -53,10 +53,12 @@ T fps_div_at(std::vector<T> f, std::vector<T> g, long long k) {
         extend_fft(g);
         k /= 2;
     }
-    T fsum(0), gsum(0);
-    for (int i = 0; i < n; ++i) {
-        fsum += f[i];
-        gsum += g[i];
+    ifft(f);
+    ifft(g);
+    std::vector<T> inv_g = fps_inv(g);
+    T ans(0);
+    for (int i = 0; i <= k; ++i) {
+        ans += f[i] * inv_g[k - i];
     }
-    return fsum / gsum;
+    return ans;
 }

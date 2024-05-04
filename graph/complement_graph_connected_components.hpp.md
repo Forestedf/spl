@@ -5,10 +5,13 @@ data:
     path: graph/graph.hpp
     title: graph/graph.hpp
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: graph/test/connected_components_of_complement_graph.test.cpp
+    title: graph/test/connected_components_of_complement_graph.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"graph/graph.hpp\"\n#include <iostream>\n#include <cassert>\n\
@@ -79,8 +82,9 @@ data:
   path: graph/complement_graph_connected_components.hpp
   requiredBy: []
   timestamp: '2024-02-04 18:18:19+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - graph/test/connected_components_of_complement_graph.test.cpp
 documentation_of: graph/complement_graph_connected_components.hpp
 layout: document
 redirect_from:

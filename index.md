@@ -18,6 +18,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: algebra/system_of_linear_equations.hpp
       title: algebra/system_of_linear_equations.hpp
+  - name: bit
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: bit/xor_convolution.hpp
+      title: bit/xor_convolution.hpp
   - name: data_structure
     pages:
     - icon: ':heavy_check_mark:'
@@ -91,7 +96,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/block_cut_tree.hpp
       title: graph/block_cut_tree.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: graph/complement_graph_connected_components.hpp
       title: graph/complement_graph_connected_components.hpp
     - icon: ':heavy_check_mark:'
@@ -217,6 +222,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: algebra/test/system_of_linear_equations.test.cpp
       title: algebra/test/system_of_linear_equations.test.cpp
+  - name: bit/test
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: bit/test/bitwise_xor_convolution.test.cpp
+      title: bit/test/bitwise_xor_convolution.test.cpp
   - name: data_structure/test
     pages:
     - icon: ':heavy_check_mark:'
@@ -278,6 +288,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/test/block_cut_tree.test.cpp
       title: graph/test/block_cut_tree.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: graph/test/connected_components_of_complement_graph.test.cpp
+      title: graph/test/connected_components_of_complement_graph.test.cpp
     - icon: ':heavy_check_mark:'
       path: graph/test/jump_on_tree.test.cpp
       title: graph/test/jump_on_tree.test.cpp

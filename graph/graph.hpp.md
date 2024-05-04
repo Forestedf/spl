@@ -8,7 +8,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/block_cut_tree.hpp
     title: graph/block_cut_tree.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: graph/complement_graph_connected_components.hpp
     title: graph/complement_graph_connected_components.hpp
   - icon: ':heavy_check_mark:'
@@ -39,6 +39,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/test/block_cut_tree.test.cpp
     title: graph/test/block_cut_tree.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: graph/test/connected_components_of_complement_graph.test.cpp
+    title: graph/test/connected_components_of_complement_graph.test.cpp
   - icon: ':heavy_check_mark:'
     path: graph/test/jump_on_tree.test.cpp
     title: graph/test/jump_on_tree.test.cpp
@@ -151,6 +154,7 @@ data:
   - graph/test/scc.test.cpp
   - graph/test/block_cut_tree.test.cpp
   - graph/test/biconnected_components.test.cpp
+  - graph/test/connected_components_of_complement_graph.test.cpp
   - graph/test/ALDS1_11_D.test.cpp
   - graph/test/jump_on_tree.test.cpp
   - graph/test/two_edge_connected_components.test.cpp

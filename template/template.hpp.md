@@ -19,6 +19,9 @@ data:
     path: algebra/test/system_of_linear_equations.test.cpp
     title: algebra/test/system_of_linear_equations.test.cpp
   - icon: ':heavy_check_mark:'
+    path: bit/test/bitwise_xor_convolution.test.cpp
+    title: bit/test/bitwise_xor_convolution.test.cpp
+  - icon: ':heavy_check_mark:'
     path: data_structure/test/1891.test.cpp
     title: data_structure/test/1891.test.cpp
   - icon: ':heavy_check_mark:'
@@ -75,6 +78,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/test/block_cut_tree.test.cpp
     title: graph/test/block_cut_tree.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: graph/test/connected_components_of_complement_graph.test.cpp
+    title: graph/test/connected_components_of_complement_graph.test.cpp
   - icon: ':heavy_check_mark:'
     path: graph/test/jump_on_tree.test.cpp
     title: graph/test/jump_on_tree.test.cpp
@@ -260,6 +266,7 @@ data:
   - graph/test/scc.test.cpp
   - graph/test/block_cut_tree.test.cpp
   - graph/test/biconnected_components.test.cpp
+  - graph/test/connected_components_of_complement_graph.test.cpp
   - graph/test/ALDS1_11_D.test.cpp
   - graph/test/jump_on_tree.test.cpp
   - graph/test/two_edge_connected_components.test.cpp
@@ -286,6 +293,7 @@ data:
   - data_structure/test/staticrmq.test.cpp
   - data_structure/test/queue_operate_all_composite.test.cpp
   - string/test/zalgorithm.test.cpp
+  - bit/test/bitwise_xor_convolution.test.cpp
 documentation_of: template/template.hpp
 layout: document
 redirect_from:

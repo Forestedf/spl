@@ -40,6 +40,9 @@ data:
     path: algebra/test/system_of_linear_equations.test.cpp
     title: algebra/test/system_of_linear_equations.test.cpp
   - icon: ':heavy_check_mark:'
+    path: bit/test/bitwise_xor_convolution.test.cpp
+    title: bit/test/bitwise_xor_convolution.test.cpp
+  - icon: ':heavy_check_mark:'
     path: data_structure/test/1891.test.cpp
     title: data_structure/test/1891.test.cpp
   - icon: ':heavy_check_mark:'
@@ -248,6 +251,7 @@ data:
   - data_structure/test/point_set_range_composite.test.cpp
   - data_structure/test/1891.test.cpp
   - data_structure/test/queue_operate_all_composite.test.cpp
+  - bit/test/bitwise_xor_convolution.test.cpp
 documentation_of: number_theory/mod_int.hpp
 layout: document
 redirect_from:

@@ -1,5 +1,6 @@
 #pragma once
 
+#include <algorithm>
 #include <array>
 #include <atcoder/modint>
 #include <deque>
@@ -12,6 +13,40 @@
 #include <type_traits>
 #include <utility>
 #include <vector>
+
+std::ostream &operator<<(std::ostream &os, __int128_t x) {
+    std::string s;
+    if (x < 0) {
+        x = -x;
+        os << '-';
+    }
+    if (x == 0) {
+        s.push_back('0');
+    } else {
+        while (x > 0) {
+            s.push_back('0' + x % 10);
+            x /= 10;
+        }
+        std::reverse(s.begin(), s.end());
+    }
+    os << s;
+    return os;
+}
+std::ostream &operator<<(std::ostream &os, __uint128_t x) {
+    std::string s;
+    if (x == 0) {
+        s.push_back('0');
+    } else {
+        while (x > 0) {
+            s.push_back('0' + x % 10);
+            x /= 10;
+        }
+        std::reverse(s.begin(), s.end());
+    }
+    os << s;
+    return os;
+}
+
 template <typename T, std::enable_if_t<std::is_integral_v<T>> * = nullptr>
 void debug(T x) {
     std::cerr << x;

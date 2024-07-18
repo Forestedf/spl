@@ -7,7 +7,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: data_structure/union_of_rectangles.hpp
     title: data_structure/union_of_rectangles.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
   _extendedRequiredBy: []
@@ -166,7 +166,7 @@ data:
   isVerificationFile: true
   path: data_structure/test/area_of_union_of_rectangles.test.cpp
   requiredBy: []
-  timestamp: '2024-03-29 10:44:36+09:00'
+  timestamp: '2024-07-18 16:56:22+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: data_structure/test/area_of_union_of_rectangles.test.cpp

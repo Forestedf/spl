@@ -6,21 +6,21 @@ data:
   - icon: ':heavy_check_mark:'
     path: data_structure/test/wavelet_matrix.test.cpp
     title: data_structure/test/wavelet_matrix.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number_theory/test/ax_by_c_stress.test.cpp
     title: number_theory/test/ax_by_c_stress.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number_theory/test/extgcd2_stress.test.cpp
     title: number_theory/test/extgcd2_stress.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number_theory/test/frac_binsearch_stress.test.cpp
     title: number_theory/test/frac_binsearch_stress.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number_theory/test/inv_mod_stress.test.cpp
     title: number_theory/test/inv_mod_stress.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"template/random.hpp\"\n#include <chrono>\n#include <random>\n\
@@ -34,13 +34,13 @@ data:
     \ mt(std::chrono::steady_clock::now().time_since_epoch().count());\n#endif\n\n\
     template <typename T>\nT uniform(T l, T r) {\n    return std::uniform_int_distribution<T>(l,\
     \ r - 1)(mt);\n}\ntemplate <typename T>\nT uniform(T n) {\n    return std::uniform_int_distribution<T>(0,\
-    \ n - 1)(mt);\n}"
+    \ n - 1)(mt);\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: template/random.hpp
   requiredBy: []
-  timestamp: '2023-12-26 16:56:23+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2024-07-18 16:56:22+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - number_theory/test/frac_binsearch_stress.test.cpp
   - number_theory/test/inv_mod_stress.test.cpp

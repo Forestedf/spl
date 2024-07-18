@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/graph.hpp
     title: graph/graph.hpp
   _extendedRequiredBy: []
@@ -72,13 +72,13 @@ data:
     \            if (d + e.weight < dist[e.to]) {\n                dist[e.to] = d\
     \ + e.weight;\n                par[e.to] = v;\n                pq.emplace(dist[e.to],\
     \ e.to);\n            }\n        }\n    }\n    return std::make_pair(dist, par);\n\
-    }"
+    }\n"
   dependsOn:
   - graph/graph.hpp
   isVerificationFile: false
   path: graph/dijkstra.hpp
   requiredBy: []
-  timestamp: '2024-02-03 17:22:22+09:00'
+  timestamp: '2024-07-18 16:56:22+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - graph/test/shortest_path.test.cpp

@@ -115,12 +115,12 @@ data:
     \ tail...);\n}\n\n#define DBG(...)                            \\\n    do {   \
     \                                 \\\n        std::cerr << #__VA_ARGS__ << \"\
     \ : \"; \\\n        debug_many(true, __VA_ARGS__);      \\\n        std::cerr\
-    \ << std::endl;             \\\n    } while (false)"
+    \ << std::endl;             \\\n    } while (false)\n"
   dependsOn: []
   isVerificationFile: false
   path: template/debug.hpp
   requiredBy: []
-  timestamp: '2024-01-14 18:28:27+09:00'
+  timestamp: '2024-07-18 16:56:22+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template/debug.hpp

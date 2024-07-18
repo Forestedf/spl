@@ -4,10 +4,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/connected_components.hpp
     title: graph/connected_components.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/graph.hpp
     title: graph/graph.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
   _extendedRequiredBy: []
@@ -124,7 +124,7 @@ data:
   isVerificationFile: true
   path: graph/test/ALDS1_11_D.test.cpp
   requiredBy: []
-  timestamp: '2024-02-03 17:22:22+09:00'
+  timestamp: '2024-07-18 16:56:22+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: graph/test/ALDS1_11_D.test.cpp

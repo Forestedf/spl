@@ -3,12 +3,12 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number_theory/test/frac_binsearch_stress.test.cpp
     title: number_theory/test/frac_binsearch_stress.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"number_theory/frac_binsearch.hpp\"\n\n#include <algorithm>\n\
@@ -64,13 +64,13 @@ data:
     \ I>(from.first + to.first * l, from.second + to.second * l);\n            } else\
     \ {\n                return to;\n            }\n        }\n        from.first\
     \ += to.first * l;\n        from.second += to.second * l;\n    }\n    assert(false);\n\
-    }"
+    }\n"
   dependsOn: []
   isVerificationFile: false
   path: number_theory/frac_binsearch.hpp
   requiredBy: []
-  timestamp: '2024-01-10 11:46:30+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2024-07-18 16:56:22+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - number_theory/test/frac_binsearch_stress.test.cpp
 documentation_of: number_theory/frac_binsearch.hpp

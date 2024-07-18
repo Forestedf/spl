@@ -10,7 +10,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
   _extendedRequiredBy: []
@@ -186,7 +186,7 @@ data:
   isVerificationFile: true
   path: data_structure/test/static_range_frequency.test.cpp
   requiredBy: []
-  timestamp: '2024-01-13 18:43:37+09:00'
+  timestamp: '2024-07-18 16:56:22+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: data_structure/test/static_range_frequency.test.cpp

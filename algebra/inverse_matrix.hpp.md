@@ -88,7 +88,7 @@ data:
   isVerificationFile: false
   path: algebra/inverse_matrix.hpp
   requiredBy: []
-  timestamp: '2024-04-17 21:23:06+09:00'
+  timestamp: '2024-07-18 16:56:22+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - algebra/test/inverse_matrix.test.cpp

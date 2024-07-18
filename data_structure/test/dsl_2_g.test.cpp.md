@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: data_structure/fenwick_tree.hpp
     title: data_structure/fenwick_tree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: data_structure/operations.hpp
     title: data_structure/operations.hpp
   - icon: ':heavy_check_mark:'
     path: data_structure/range_add_range_sum.hpp
     title: data_structure/range_add_range_sum.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
   _extendedRequiredBy: []
@@ -135,7 +135,7 @@ data:
   isVerificationFile: true
   path: data_structure/test/dsl_2_g.test.cpp
   requiredBy: []
-  timestamp: '2024-01-13 18:43:37+09:00'
+  timestamp: '2024-07-18 16:56:22+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: data_structure/test/dsl_2_g.test.cpp

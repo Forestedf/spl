@@ -4,10 +4,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/complement_graph_connected_components.hpp
     title: graph/complement_graph_connected_components.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/graph.hpp
     title: graph/graph.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
   _extendedRequiredBy: []
@@ -138,7 +138,7 @@ data:
   isVerificationFile: true
   path: graph/test/connected_components_of_complement_graph.test.cpp
   requiredBy: []
-  timestamp: '2024-05-04 22:51:19+09:00'
+  timestamp: '2024-07-18 16:56:22+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: graph/test/connected_components_of_complement_graph.test.cpp

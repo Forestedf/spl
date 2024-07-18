@@ -73,13 +73,13 @@ data:
     \ r0, l1, r1);\n        if (lc == r0 - l0 && lc == r1 - l1) {\n            return\
     \ 0;\n        }\n        if (lc == r0 - l0 || (lc != r1 - l1 && s[l0 + lc] < s[l1\
     \ + lc])) {\n            return -1;\n        } else {\n            return 1;\n\
-    \        }\n    }\n};"
+    \        }\n    }\n};\n"
   dependsOn:
   - data_structure/sparse_table.hpp
   isVerificationFile: false
   path: string/sa_lcp.hpp
   requiredBy: []
-  timestamp: '2024-02-04 18:18:19+09:00'
+  timestamp: '2024-07-18 16:56:22+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: string/sa_lcp.hpp

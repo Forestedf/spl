@@ -4,13 +4,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: bit/xor_convolution.hpp
     title: bit/xor_convolution.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/mod_int.hpp
     title: number_theory/mod_int.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/utils.hpp
     title: number_theory/utils.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
   _extendedRequiredBy: []
@@ -183,7 +183,7 @@ data:
   isVerificationFile: true
   path: bit/test/bitwise_xor_convolution.test.cpp
   requiredBy: []
-  timestamp: '2024-05-04 22:50:53+09:00'
+  timestamp: '2024-07-18 16:56:22+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: bit/test/bitwise_xor_convolution.test.cpp

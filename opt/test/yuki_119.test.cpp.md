@@ -1,17 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: opt/monge_min_cut.hpp
     title: opt/monge_min_cut.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://yukicoder.me/problems/no/119
@@ -122,8 +122,8 @@ data:
   isVerificationFile: true
   path: opt/test/yuki_119.test.cpp
   requiredBy: []
-  timestamp: '2024-03-30 23:06:17+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2024-07-18 16:56:22+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: opt/test/yuki_119.test.cpp
 layout: document

@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/graph.hpp
     title: graph/graph.hpp
   _extendedRequiredBy: []
@@ -99,13 +99,13 @@ data:
     \                }\n            }\n        }\n    };\n    for (int i = 0; i <\
     \ g.v(); ++i) {\n        if (!used[i]) {\n            dfs(dfs, i, -1);\n     \
     \       ret.push_back(BiConnectedComponentInfo<T>{vstc, estc});\n            vstc.clear();\n\
-    \            estc.clear();\n        }\n    }\n    return ret;\n}"
+    \            estc.clear();\n        }\n    }\n    return ret;\n}\n"
   dependsOn:
   - graph/graph.hpp
   isVerificationFile: false
   path: graph/biconnected_components.hpp
   requiredBy: []
-  timestamp: '2024-02-03 17:22:22+09:00'
+  timestamp: '2024-07-18 16:56:22+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - graph/test/biconnected_components.test.cpp

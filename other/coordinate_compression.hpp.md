@@ -50,12 +50,12 @@ data:
     \  bool contains(const T &ele) const {\n        auto it = std::lower_bound(data.begin(),\
     \ data.end(), ele);\n        return it != data.end() && *it == ele;\n    }\n\n\
     \    T cc(const T &ele) const {\n        return (T)(std::lower_bound(data.begin(),\
-    \ data.end(), ele) -\n                   data.begin());\n    }\n};"
+    \ data.end(), ele) -\n                   data.begin());\n    }\n};\n"
   dependsOn: []
   isVerificationFile: false
   path: other/coordinate_compression.hpp
   requiredBy: []
-  timestamp: '2023-12-26 16:56:23+09:00'
+  timestamp: '2024-07-18 16:56:22+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - data_structure/test/range_kth_smallest.test.cpp

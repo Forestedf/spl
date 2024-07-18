@@ -18,30 +18,30 @@ data:
   - icon: ':heavy_check_mark:'
     path: algebra/test/system_of_linear_equations.test.cpp
     title: algebra/test/system_of_linear_equations.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/test/exp_of_formal_power_series.test.cpp
     title: poly/test/exp_of_formal_power_series.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/test/inv_of_formal_power_series.test.cpp
     title: poly/test/inv_of_formal_power_series.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/test/inv_of_formal_power_series_sparse.test.cpp
     title: poly/test/inv_of_formal_power_series_sparse.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
     title: poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/test/log_of_formal_power_series.test.cpp
     title: poly/test/log_of_formal_power_series.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/test/pow_of_formal_power_series.test.cpp
     title: poly/test/pow_of_formal_power_series.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/test/prod_of_polys.test.cpp
     title: poly/test/prod_of_polys.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 1 \"template/fastio.hpp\"\n#include <cstdio>\n#include <cstring>\n\
@@ -218,26 +218,26 @@ data:
     \        if (sizeof...(Tail)) {\n            write_char(' ');\n        }\n   \
     \     write(std::forward<Tail>(tail)...);\n    }\n\n    template <typename...\
     \ T>\n    void writeln(T &&...t) {\n        write(std::forward<T>(t)...);\n  \
-    \      write_char('\\n');\n    }\n};\n\nReader rd(stdin);\nWriter wr(stdout);"
+    \      write_char('\\n');\n    }\n};\n\nReader rd(stdin);\nWriter wr(stdout);\n"
   dependsOn: []
   isVerificationFile: false
   path: template/fastio.hpp
   requiredBy: []
-  timestamp: '2024-03-30 15:09:52+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2024-07-18 16:56:22+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - poly/test/exp_of_formal_power_series.test.cpp
-  - poly/test/log_of_formal_power_series.test.cpp
-  - poly/test/inv_of_formal_power_series.test.cpp
-  - poly/test/pow_of_formal_power_series.test.cpp
-  - poly/test/inv_of_formal_power_series_sparse.test.cpp
-  - poly/test/prod_of_polys.test.cpp
-  - algebra/test/matrix_det.test.cpp
-  - algebra/test/matrix_product.test.cpp
   - algebra/test/inverse_matrix.test.cpp
-  - algebra/test/matrix_rank.test.cpp
+  - algebra/test/matrix_product.test.cpp
   - algebra/test/system_of_linear_equations.test.cpp
+  - algebra/test/matrix_rank.test.cpp
+  - algebra/test/matrix_det.test.cpp
+  - poly/test/prod_of_polys.test.cpp
+  - poly/test/pow_of_formal_power_series.test.cpp
+  - poly/test/inv_of_formal_power_series.test.cpp
+  - poly/test/log_of_formal_power_series.test.cpp
+  - poly/test/exp_of_formal_power_series.test.cpp
+  - poly/test/inv_of_formal_power_series_sparse.test.cpp
+  - poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
 documentation_of: template/fastio.hpp
 layout: document
 redirect_from:

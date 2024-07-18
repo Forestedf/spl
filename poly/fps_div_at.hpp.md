@@ -1,26 +1,26 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/mod_int.hpp
     title: number_theory/mod_int.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/utils.hpp
     title: number_theory/utils.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/fft.hpp
     title: poly/fft.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/fps_inv.hpp
     title: poly/fps_inv.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
     title: poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"poly/fps_div_at.hpp\"\n#include <algorithm>\n#include <bit>\n\
@@ -264,8 +264,8 @@ data:
   isVerificationFile: false
   path: poly/fps_div_at.hpp
   requiredBy: []
-  timestamp: '2024-04-29 13:10:36+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2024-07-18 16:56:22+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
 documentation_of: poly/fps_div_at.hpp

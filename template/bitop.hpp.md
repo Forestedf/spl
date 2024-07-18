@@ -54,19 +54,19 @@ data:
     \ }\nunsigned floor_log2(unsigned x) { return 31 - clz(x); }\nlong long floor_log2(long\
     \ long x) { return 63 - clz(x); }\nunsigned long long floor_log2(unsigned long\
     \ long x) { return 63 - clz(x); }\n\ntemplate <typename T>\nT mask_n(T x, T n)\
-    \ {\n    T mask = ((T)1 << n) - 1;\n    return x & mask;\n}"
+    \ {\n    T mask = ((T)1 << n) - 1;\n    return x & mask;\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: template/bitop.hpp
   requiredBy:
-  - data_structure/wavelet_matrix.hpp
   - data_structure/bit_vector.hpp
-  timestamp: '2023-12-26 16:56:23+09:00'
+  - data_structure/wavelet_matrix.hpp
+  timestamp: '2024-07-18 16:56:22+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - data_structure/test/range_kth_smallest.test.cpp
-  - data_structure/test/wavelet_matrix.test.cpp
   - data_structure/test/static_range_frequency.test.cpp
+  - data_structure/test/wavelet_matrix.test.cpp
+  - data_structure/test/range_kth_smallest.test.cpp
 documentation_of: template/bitop.hpp
 layout: document
 redirect_from:

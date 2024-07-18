@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/graph.hpp
     title: graph/graph.hpp
   _extendedRequiredBy: []
@@ -88,13 +88,13 @@ data:
     \        dfs(dfs, i, -1);\n            int bcc = tree.add_vertex();\n        \
     \    for (int v : vstc) {\n                tree.add_edge(bcc, v);\n          \
     \  }\n            vstc.clear();\n        }\n    }\n    tree.build();\n    return\
-    \ tree;\n}"
+    \ tree;\n}\n"
   dependsOn:
   - graph/graph.hpp
   isVerificationFile: false
   path: graph/block_cut_tree.hpp
   requiredBy: []
-  timestamp: '2024-02-03 17:22:22+09:00'
+  timestamp: '2024-07-18 16:56:22+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - graph/test/block_cut_tree.test.cpp

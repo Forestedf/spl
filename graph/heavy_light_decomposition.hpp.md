@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/graph.hpp
     title: graph/graph.hpp
   _extendedRequiredBy: []
@@ -12,12 +12,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/test/lca.test.cpp
     title: graph/test/lca.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/test/vertex_add_path_sum.test.cpp
     title: graph/test/vertex_add_path_sum.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"graph/heavy_light_decomposition.hpp\"\n#include <algorithm>\n\
@@ -163,14 +163,14 @@ data:
     \            std::swap(fromu, fromv);\n        }\n        std::reverse(fromv.begin(),\
     \ fromv.end());\n        fromu.reserve(fromv.size());\n        for (auto [x, y]\
     \ : fromv) {\n            fromu.emplace_back(y, x);\n        }\n        return\
-    \ fromu;\n    }\n};"
+    \ fromu;\n    }\n};\n"
   dependsOn:
   - graph/graph.hpp
   isVerificationFile: false
   path: graph/heavy_light_decomposition.hpp
   requiredBy: []
-  timestamp: '2024-02-03 17:22:22+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2024-07-18 16:56:22+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - graph/test/lca.test.cpp
   - graph/test/jump_on_tree.test.cpp

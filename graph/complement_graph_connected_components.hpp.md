@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/graph.hpp
     title: graph/graph.hpp
   _extendedRequiredBy: []
@@ -75,13 +75,13 @@ data:
     \                    stc.push_back(u);\n                }\n            }\n   \
     \         for (const Edge<T> &e : g[v]) {\n                tmp[e.to] = 0;\n  \
     \          }\n            std::swap(rem, nrem);\n            nrem.clear();\n \
-    \       }\n        ++c;\n    }\n    return comp;\n}"
+    \       }\n        ++c;\n    }\n    return comp;\n}\n"
   dependsOn:
   - graph/graph.hpp
   isVerificationFile: false
   path: graph/complement_graph_connected_components.hpp
   requiredBy: []
-  timestamp: '2024-02-04 18:18:19+09:00'
+  timestamp: '2024-07-18 16:56:22+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - graph/test/connected_components_of_complement_graph.test.cpp

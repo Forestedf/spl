@@ -106,7 +106,7 @@ data:
     \ 0; k < lhs._w; ++k) {\n                    dat[i][j] += lhs.dat[i][k] * rhs.dat[k][j];\n\
     \                }\n            }\n        }\n        Matrix<T> ret;\n       \
     \ ret._h = lhs._h;\n        ret._w = rhs._w;\n        ret.dat = dat;\n       \
-    \ return ret;\n    }\n};"
+    \ return ret;\n    }\n};\n"
   dependsOn: []
   isVerificationFile: false
   path: algebra/matrix.hpp
@@ -114,13 +114,13 @@ data:
   - algebra/inverse_matrix.hpp
   - algebra/rank_of_matrix.hpp
   - algebra/determinant.hpp
-  timestamp: '2024-04-17 21:23:06+09:00'
+  timestamp: '2024-07-18 16:56:22+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - algebra/test/matrix_det.test.cpp
-  - algebra/test/matrix_product.test.cpp
   - algebra/test/inverse_matrix.test.cpp
+  - algebra/test/matrix_product.test.cpp
   - algebra/test/matrix_rank.test.cpp
+  - algebra/test/matrix_det.test.cpp
 documentation_of: algebra/matrix.hpp
 layout: document
 redirect_from:

@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/graph.hpp
     title: graph/graph.hpp
   _extendedRequiredBy: []
@@ -77,13 +77,13 @@ data:
     \            while (comp[v] == -1) {\n                comp[vs.back()] = cc;\n\
     \                vs.pop_back();\n            }\n            ++cc;\n        }\n\
     \    };\n    for (int i = 0; i < g.v(); ++i) {\n        if (comp[i] == -1) {\n\
-    \            dfs(dfs, i, -1);\n        }\n    }\n    return comp;\n}"
+    \            dfs(dfs, i, -1);\n        }\n    }\n    return comp;\n}\n"
   dependsOn:
   - graph/graph.hpp
   isVerificationFile: false
   path: graph/two_edge_connected_components.hpp
   requiredBy: []
-  timestamp: '2024-02-03 17:22:22+09:00'
+  timestamp: '2024-07-18 16:56:22+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - graph/test/two_edge_connected_components.test.cpp

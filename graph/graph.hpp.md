@@ -20,7 +20,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/dijkstra.hpp
     title: graph/dijkstra.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph/heavy_light_decomposition.hpp
     title: graph/heavy_light_decomposition.hpp
   - icon: ':heavy_check_mark:'
@@ -57,12 +57,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/test/two_edge_connected_components.test.cpp
     title: graph/test/two_edge_connected_components.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/test/vertex_add_path_sum.test.cpp
     title: graph/test/vertex_add_path_sum.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"graph/graph.hpp\"\n#include <iostream>\n#include <cassert>\n\
@@ -147,7 +147,7 @@ data:
   - graph/two_edge_connected_components.hpp
   - graph/dense_dijkstra.hpp
   timestamp: '2024-07-18 16:56:22+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - graph/test/ALDS1_11_D.test.cpp
   - graph/test/shortest_path.test.cpp

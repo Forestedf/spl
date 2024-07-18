@@ -96,63 +96,63 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/test/two_edge_connected_components.test.cpp
     title: graph/test/two_edge_connected_components.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/test/vertex_add_path_sum.test.cpp
     title: graph/test/vertex_add_path_sum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: number_theory/test/ax_by_c_stress.test.cpp
     title: number_theory/test/ax_by_c_stress.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: number_theory/test/extgcd2_stress.test.cpp
     title: number_theory/test/extgcd2_stress.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: number_theory/test/frac_binsearch_stress.test.cpp
     title: number_theory/test/frac_binsearch_stress.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: number_theory/test/inv_mod_stress.test.cpp
     title: number_theory/test/inv_mod_stress.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: opt/test/yuki_119.test.cpp
     title: opt/test/yuki_119.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: poly/test/convolution_mod.test.cpp
     title: poly/test/convolution_mod.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: poly/test/exp_of_formal_power_series.test.cpp
     title: poly/test/exp_of_formal_power_series.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: poly/test/inv_of_formal_power_series.test.cpp
     title: poly/test/inv_of_formal_power_series.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: poly/test/inv_of_formal_power_series_sparse.test.cpp
     title: poly/test/inv_of_formal_power_series_sparse.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
     title: poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: poly/test/log_of_formal_power_series.test.cpp
     title: poly/test/log_of_formal_power_series.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: poly/test/polynomial_taylor_shift.test.cpp
     title: poly/test/polynomial_taylor_shift.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: poly/test/pow_of_formal_power_series.test.cpp
     title: poly/test/pow_of_formal_power_series.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: poly/test/prod_of_polys.test.cpp
     title: poly/test/prod_of_polys.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: poly/test/stirling_number_of_the_first_kind.test.cpp
     title: poly/test/stirling_number_of_the_first_kind.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: poly/test/stirling_number_of_the_second_kind.test.cpp
     title: poly/test/stirling_number_of_the_second_kind.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: string/test/zalgorithm.test.cpp
     title: string/test/zalgorithm.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 1 \"template/template.hpp\"\n#include <bits/stdc++.h>\n#define\
@@ -243,7 +243,7 @@ data:
   path: template/template.hpp
   requiredBy: []
   timestamp: '2024-07-18 16:56:22+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - opt/test/yuki_119.test.cpp
   - bit/test/bitwise_xor_convolution.test.cpp

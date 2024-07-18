@@ -1,17 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: number_theory/utils.hpp
     title: number_theory/utils.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: number_theory/test/ax_by_c_stress.test.cpp
     title: number_theory/test/ax_by_c_stress.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"number_theory/ax_by_c.hpp\"\n\n#line 2 \"number_theory/utils.hpp\"\
@@ -87,7 +87,7 @@ data:
   path: number_theory/ax_by_c.hpp
   requiredBy: []
   timestamp: '2024-07-18 16:56:22+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - number_theory/test/ax_by_c_stress.test.cpp
 documentation_of: number_theory/ax_by_c.hpp

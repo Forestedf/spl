@@ -8,10 +8,19 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"template/debug.hpp\"\n\n#include <array>\n#include <atcoder/modint>\n\
-    #include <deque>\n#include <iostream>\n#include <map>\n#include <queue>\n#include\
-    \ <set>\n#include <stack>\n#include <tuple>\n#include <type_traits>\n#include\
-    \ <utility>\n#include <vector>\ntemplate <typename T, std::enable_if_t<std::is_integral_v<T>>\
+  bundledCode: "#line 2 \"template/debug.hpp\"\n\n#include <algorithm>\n#include <array>\n\
+    #include <atcoder/modint>\n#include <deque>\n#include <iostream>\n#include <map>\n\
+    #include <queue>\n#include <set>\n#include <stack>\n#include <tuple>\n#include\
+    \ <type_traits>\n#include <utility>\n#include <vector>\n\nstd::ostream &operator<<(std::ostream\
+    \ &os, __int128_t x) {\n    std::string s;\n    if (x < 0) {\n        x = -x;\n\
+    \        os << '-';\n    }\n    if (x == 0) {\n        s.push_back('0');\n   \
+    \ } else {\n        while (x > 0) {\n            s.push_back('0' + x % 10);\n\
+    \            x /= 10;\n        }\n        std::reverse(s.begin(), s.end());\n\
+    \    }\n    os << s;\n    return os;\n}\nstd::ostream &operator<<(std::ostream\
+    \ &os, __uint128_t x) {\n    std::string s;\n    if (x == 0) {\n        s.push_back('0');\n\
+    \    } else {\n        while (x > 0) {\n            s.push_back('0' + x % 10);\n\
+    \            x /= 10;\n        }\n        std::reverse(s.begin(), s.end());\n\
+    \    }\n    os << s;\n    return os;\n}\n\ntemplate <typename T, std::enable_if_t<std::is_integral_v<T>>\
     \ * = nullptr>\nvoid debug(T x) {\n    std::cerr << x;\n}\n\ntemplate <typename\
     \ T, std::enable_if_t<std::is_floating_point_v<T>> * = nullptr>\nvoid debug(T\
     \ x) {\n    std::cerr << x;\n}\n\nvoid debug(bool b) {\n    if (b) {\n       \
@@ -62,19 +71,28 @@ data:
     \                                 \\\n        std::cerr << #__VA_ARGS__ << \"\
     \ : \"; \\\n        debug_many(true, __VA_ARGS__);      \\\n        std::cerr\
     \ << std::endl;             \\\n    } while (false)\n"
-  code: "#pragma once\n\n#include <array>\n#include <atcoder/modint>\n#include <deque>\n\
-    #include <iostream>\n#include <map>\n#include <queue>\n#include <set>\n#include\
-    \ <stack>\n#include <tuple>\n#include <type_traits>\n#include <utility>\n#include\
-    \ <vector>\ntemplate <typename T, std::enable_if_t<std::is_integral_v<T>> * =\
-    \ nullptr>\nvoid debug(T x) {\n    std::cerr << x;\n}\n\ntemplate <typename T,\
-    \ std::enable_if_t<std::is_floating_point_v<T>> * = nullptr>\nvoid debug(T x)\
-    \ {\n    std::cerr << x;\n}\n\nvoid debug(bool b) {\n    if (b) {\n        std::cerr\
-    \ << \"true\";\n    } else {\n        std::cerr << \"false\";\n    }\n}\n\ntemplate\
-    \ <typename T>\nvoid debug(const std::vector<T> &x);\n\ntemplate <int mod>\nvoid\
-    \ debug(atcoder::static_modint<mod> v) {\n    std::cerr << v.val();\n}\n\nvoid\
-    \ debug(const std::string &s) { std::cerr << '\"' << s << '\"'; }\n\ntemplate\
-    \ <typename T, typename U>\nvoid debug(const std::pair<T, U> &p) {\n    std::cerr\
-    \ << '(';\n    debug(p.first);\n    std::cerr << \", \";\n    debug(p.second);\n\
+  code: "#pragma once\n\n#include <algorithm>\n#include <array>\n#include <atcoder/modint>\n\
+    #include <deque>\n#include <iostream>\n#include <map>\n#include <queue>\n#include\
+    \ <set>\n#include <stack>\n#include <tuple>\n#include <type_traits>\n#include\
+    \ <utility>\n#include <vector>\n\nstd::ostream &operator<<(std::ostream &os, __int128_t\
+    \ x) {\n    std::string s;\n    if (x < 0) {\n        x = -x;\n        os << '-';\n\
+    \    }\n    if (x == 0) {\n        s.push_back('0');\n    } else {\n        while\
+    \ (x > 0) {\n            s.push_back('0' + x % 10);\n            x /= 10;\n  \
+    \      }\n        std::reverse(s.begin(), s.end());\n    }\n    os << s;\n   \
+    \ return os;\n}\nstd::ostream &operator<<(std::ostream &os, __uint128_t x) {\n\
+    \    std::string s;\n    if (x == 0) {\n        s.push_back('0');\n    } else\
+    \ {\n        while (x > 0) {\n            s.push_back('0' + x % 10);\n       \
+    \     x /= 10;\n        }\n        std::reverse(s.begin(), s.end());\n    }\n\
+    \    os << s;\n    return os;\n}\n\ntemplate <typename T, std::enable_if_t<std::is_integral_v<T>>\
+    \ * = nullptr>\nvoid debug(T x) {\n    std::cerr << x;\n}\n\ntemplate <typename\
+    \ T, std::enable_if_t<std::is_floating_point_v<T>> * = nullptr>\nvoid debug(T\
+    \ x) {\n    std::cerr << x;\n}\n\nvoid debug(bool b) {\n    if (b) {\n       \
+    \ std::cerr << \"true\";\n    } else {\n        std::cerr << \"false\";\n    }\n\
+    }\n\ntemplate <typename T>\nvoid debug(const std::vector<T> &x);\n\ntemplate <int\
+    \ mod>\nvoid debug(atcoder::static_modint<mod> v) {\n    std::cerr << v.val();\n\
+    }\n\nvoid debug(const std::string &s) { std::cerr << '\"' << s << '\"'; }\n\n\
+    template <typename T, typename U>\nvoid debug(const std::pair<T, U> &p) {\n  \
+    \  std::cerr << '(';\n    debug(p.first);\n    std::cerr << \", \";\n    debug(p.second);\n\
     \    std::cerr << ')';\n}\n\ntemplate <std::size_t cur, typename... Args>\nvoid\
     \ tuple_debug_inner(const std::tuple<Args...> &t) {\n    std::cerr << std::get<cur>(t);\n\
     \    if constexpr (cur + 1 != sizeof...(Args)) {\n        std::cerr << \", \"\
@@ -120,7 +138,7 @@ data:
   isVerificationFile: false
   path: template/debug.hpp
   requiredBy: []
-  timestamp: '2024-07-18 16:56:22+09:00'
+  timestamp: '2024-07-18 17:49:05+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template/debug.hpp

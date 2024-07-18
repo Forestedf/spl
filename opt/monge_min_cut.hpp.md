@@ -3,12 +3,12 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: opt/test/yuki_119.test.cpp
     title: opt/test/yuki_119.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"opt/monge_min_cut.hpp\"\n#include <atcoder/maxflow>\ntemplate\
@@ -96,7 +96,7 @@ data:
   path: opt/monge_min_cut.hpp
   requiredBy: []
   timestamp: '2024-03-30 23:06:17+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - opt/test/yuki_119.test.cpp
 documentation_of: opt/monge_min_cut.hpp

@@ -31,7 +31,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: data_structure/cartesian_tree.hpp
       title: data_structure/cartesian_tree.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: data_structure/fenwick_tree.hpp
       title: data_structure/fenwick_tree.hpp
     - icon: ':heavy_check_mark:'
@@ -43,7 +43,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: data_structure/lazy_segment_tree.hpp
       title: data_structure/lazy_segment_tree.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: data_structure/operations.hpp
       title: data_structure/operations.hpp
     - icon: ':warning:'
@@ -108,10 +108,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/dijkstra.hpp
       title: graph/dijkstra.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: graph/graph.hpp
       title: graph/graph.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: graph/heavy_light_decomposition.hpp
       title: graph/heavy_light_decomposition.hpp
     - icon: ':heavy_check_mark:'
@@ -122,24 +122,24 @@ data:
       title: graph/two_edge_connected_components.hpp
   - name: number_theory
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: number_theory/ax_by_c.hpp
       title: number_theory/ax_by_c.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: number_theory/factorial.hpp
       title: number_theory/factorial.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: number_theory/frac_binsearch.hpp
       title: number_theory/frac_binsearch.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: number_theory/mod_int.hpp
       title: number_theory/mod_int.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: number_theory/utils.hpp
       title: number_theory/utils.hpp
   - name: opt
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: opt/monge_min_cut.hpp
       title: opt/monge_min_cut.hpp
   - name: other
@@ -152,34 +152,34 @@ data:
       title: other/rational.hpp
   - name: poly
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: poly/fft.hpp
       title: poly/fft.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: poly/fps_div_at.hpp
       title: poly/fps_div_at.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: poly/fps_exp_sparse.hpp
       title: poly/fps_exp_sparse.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: poly/fps_inv.hpp
       title: poly/fps_inv.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: poly/fps_inv_sparse.hpp
       title: poly/fps_inv_sparse.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: poly/fps_log_sparse.hpp
       title: poly/fps_log_sparse.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: poly/fps_pow_sparse.hpp
       title: poly/fps_pow_sparse.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: poly/stirling1.hpp
       title: poly/stirling1.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: poly/stirling2.hpp
       title: poly/stirling2.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: poly/taylor_shift.hpp
       title: poly/taylor_shift.hpp
   - name: string
@@ -187,7 +187,7 @@ data:
     - icon: ':warning:'
       path: string/sa_lcp.hpp
       title: string/sa_lcp.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: string/z_algorithm.hpp
       title: string/z_algorithm.hpp
   - name: template
@@ -198,13 +198,13 @@ data:
     - icon: ':warning:'
       path: template/debug.hpp
       title: template/debug.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/fastio.hpp
       title: template/fastio.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/random.hpp
       title: template/random.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/template.hpp
       title: template/template.hpp
   verificationCategories:
@@ -309,66 +309,66 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/test/two_edge_connected_components.test.cpp
       title: graph/test/two_edge_connected_components.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: graph/test/vertex_add_path_sum.test.cpp
       title: graph/test/vertex_add_path_sum.test.cpp
   - name: number_theory/test
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: number_theory/test/ax_by_c_stress.test.cpp
       title: number_theory/test/ax_by_c_stress.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: number_theory/test/extgcd2_stress.test.cpp
       title: number_theory/test/extgcd2_stress.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: number_theory/test/frac_binsearch_stress.test.cpp
       title: number_theory/test/frac_binsearch_stress.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: number_theory/test/inv_mod_stress.test.cpp
       title: number_theory/test/inv_mod_stress.test.cpp
   - name: opt/test
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: opt/test/yuki_119.test.cpp
       title: opt/test/yuki_119.test.cpp
   - name: poly/test
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: poly/test/convolution_mod.test.cpp
       title: poly/test/convolution_mod.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: poly/test/exp_of_formal_power_series.test.cpp
       title: poly/test/exp_of_formal_power_series.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: poly/test/inv_of_formal_power_series.test.cpp
       title: poly/test/inv_of_formal_power_series.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: poly/test/inv_of_formal_power_series_sparse.test.cpp
       title: poly/test/inv_of_formal_power_series_sparse.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
       title: poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: poly/test/log_of_formal_power_series.test.cpp
       title: poly/test/log_of_formal_power_series.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: poly/test/polynomial_taylor_shift.test.cpp
       title: poly/test/polynomial_taylor_shift.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: poly/test/pow_of_formal_power_series.test.cpp
       title: poly/test/pow_of_formal_power_series.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: poly/test/prod_of_polys.test.cpp
       title: poly/test/prod_of_polys.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: poly/test/stirling_number_of_the_first_kind.test.cpp
       title: poly/test/stirling_number_of_the_first_kind.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: poly/test/stirling_number_of_the_second_kind.test.cpp
       title: poly/test/stirling_number_of_the_second_kind.test.cpp
   - name: string/test
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: string/test/zalgorithm.test.cpp
       title: string/test/zalgorithm.test.cpp
 layout: toppage

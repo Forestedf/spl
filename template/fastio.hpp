@@ -205,6 +205,12 @@ class Writer {
         }
         write_unsigned(y);
     }
+    
+    void write_string(const std::string &s) {
+        for (char c : s) {
+            write_char(c);
+        }
+    }
 
     void write_single(int x) { write_signed(x); }
     void write_single(unsigned x) { write_unsigned(x); }
@@ -213,6 +219,7 @@ class Writer {
     void write_single(long long x) { write_signed(x); }
     void write_single(unsigned long long x) { write_unsigned(x); }
     void write_single(char c) { write_char(c); }
+    void write_single(const std::string &s) { write_string(s); }
 
 public:
     Writer(FILE *fp) : fp(fp), ptr(buf) {}

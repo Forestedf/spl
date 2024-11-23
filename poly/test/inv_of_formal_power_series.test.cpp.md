@@ -332,12 +332,14 @@ data:
     \ {\n            write_u64(x);\n        } else {\n            write_u32(x);\n\
     \        }\n    }\n\n    template <typename T>\n    void write_signed(T x) {\n\
     \        std::make_unsigned_t<T> y = x;\n        if (x < 0) {\n            write_char('-');\n\
-    \            y = -y;\n        }\n        write_unsigned(y);\n    }\n\n    void\
-    \ write_single(int x) { write_signed(x); }\n    void write_single(unsigned x)\
-    \ { write_unsigned(x); }\n    void write_single(long x) { write_signed(x); }\n\
-    \    void write_single(unsigned long x) { write_unsigned(x); }\n    void write_single(long\
-    \ long x) { write_signed(x); }\n    void write_single(unsigned long long x) {\
-    \ write_unsigned(x); }\n    void write_single(char c) { write_char(c); }\n\npublic:\n\
+    \            y = -y;\n        }\n        write_unsigned(y);\n    }\n    \n   \
+    \ void write_string(const std::string &s) {\n        for (char c : s) {\n    \
+    \        write_char(c);\n        }\n    }\n\n    void write_single(int x) { write_signed(x);\
+    \ }\n    void write_single(unsigned x) { write_unsigned(x); }\n    void write_single(long\
+    \ x) { write_signed(x); }\n    void write_single(unsigned long x) { write_unsigned(x);\
+    \ }\n    void write_single(long long x) { write_signed(x); }\n    void write_single(unsigned\
+    \ long long x) { write_unsigned(x); }\n    void write_single(char c) { write_char(c);\
+    \ }\n    void write_single(const std::string &s) { write_string(s); }\n\npublic:\n\
     \    Writer(FILE *fp) : fp(fp), ptr(buf) {}\n    ~Writer() { flush(); }\n\n  \
     \  void flush() {\n        std::fwrite(buf, 1, ptr - buf, fp);\n        ptr =\
     \ buf;\n    }\n\n    void write() {}\n    template <typename Head, typename...\
@@ -367,7 +369,7 @@ data:
   isVerificationFile: true
   path: poly/test/inv_of_formal_power_series.test.cpp
   requiredBy: []
-  timestamp: '2024-07-18 16:56:22+09:00'
+  timestamp: '2024-11-23 22:57:41+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: poly/test/inv_of_formal_power_series.test.cpp

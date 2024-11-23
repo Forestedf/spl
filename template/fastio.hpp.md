@@ -118,12 +118,14 @@ data:
     \ {\n            write_u64(x);\n        } else {\n            write_u32(x);\n\
     \        }\n    }\n\n    template <typename T>\n    void write_signed(T x) {\n\
     \        std::make_unsigned_t<T> y = x;\n        if (x < 0) {\n            write_char('-');\n\
-    \            y = -y;\n        }\n        write_unsigned(y);\n    }\n\n    void\
-    \ write_single(int x) { write_signed(x); }\n    void write_single(unsigned x)\
-    \ { write_unsigned(x); }\n    void write_single(long x) { write_signed(x); }\n\
-    \    void write_single(unsigned long x) { write_unsigned(x); }\n    void write_single(long\
-    \ long x) { write_signed(x); }\n    void write_single(unsigned long long x) {\
-    \ write_unsigned(x); }\n    void write_single(char c) { write_char(c); }\n\npublic:\n\
+    \            y = -y;\n        }\n        write_unsigned(y);\n    }\n    \n   \
+    \ void write_string(const std::string &s) {\n        for (char c : s) {\n    \
+    \        write_char(c);\n        }\n    }\n\n    void write_single(int x) { write_signed(x);\
+    \ }\n    void write_single(unsigned x) { write_unsigned(x); }\n    void write_single(long\
+    \ x) { write_signed(x); }\n    void write_single(unsigned long x) { write_unsigned(x);\
+    \ }\n    void write_single(long long x) { write_signed(x); }\n    void write_single(unsigned\
+    \ long long x) { write_unsigned(x); }\n    void write_single(char c) { write_char(c);\
+    \ }\n    void write_single(const std::string &s) { write_string(s); }\n\npublic:\n\
     \    Writer(FILE *fp) : fp(fp), ptr(buf) {}\n    ~Writer() { flush(); }\n\n  \
     \  void flush() {\n        std::fwrite(buf, 1, ptr - buf, fp);\n        ptr =\
     \ buf;\n    }\n\n    void write() {}\n    template <typename Head, typename...\
@@ -206,15 +208,18 @@ data:
     \     } else {\n            write_u32(x);\n        }\n    }\n\n    template <typename\
     \ T>\n    void write_signed(T x) {\n        std::make_unsigned_t<T> y = x;\n \
     \       if (x < 0) {\n            write_char('-');\n            y = -y;\n    \
-    \    }\n        write_unsigned(y);\n    }\n\n    void write_single(int x) { write_signed(x);\
-    \ }\n    void write_single(unsigned x) { write_unsigned(x); }\n    void write_single(long\
-    \ x) { write_signed(x); }\n    void write_single(unsigned long x) { write_unsigned(x);\
-    \ }\n    void write_single(long long x) { write_signed(x); }\n    void write_single(unsigned\
-    \ long long x) { write_unsigned(x); }\n    void write_single(char c) { write_char(c);\
-    \ }\n\npublic:\n    Writer(FILE *fp) : fp(fp), ptr(buf) {}\n    ~Writer() { flush();\
-    \ }\n\n    void flush() {\n        std::fwrite(buf, 1, ptr - buf, fp);\n     \
-    \   ptr = buf;\n    }\n\n    void write() {}\n    template <typename Head, typename...\
-    \ Tail>\n    void write(Head &&head, Tail &&...tail) {\n        write_single(head);\n\
+    \    }\n        write_unsigned(y);\n    }\n    \n    void write_string(const std::string\
+    \ &s) {\n        for (char c : s) {\n            write_char(c);\n        }\n \
+    \   }\n\n    void write_single(int x) { write_signed(x); }\n    void write_single(unsigned\
+    \ x) { write_unsigned(x); }\n    void write_single(long x) { write_signed(x);\
+    \ }\n    void write_single(unsigned long x) { write_unsigned(x); }\n    void write_single(long\
+    \ long x) { write_signed(x); }\n    void write_single(unsigned long long x) {\
+    \ write_unsigned(x); }\n    void write_single(char c) { write_char(c); }\n   \
+    \ void write_single(const std::string &s) { write_string(s); }\n\npublic:\n  \
+    \  Writer(FILE *fp) : fp(fp), ptr(buf) {}\n    ~Writer() { flush(); }\n\n    void\
+    \ flush() {\n        std::fwrite(buf, 1, ptr - buf, fp);\n        ptr = buf;\n\
+    \    }\n\n    void write() {}\n    template <typename Head, typename... Tail>\n\
+    \    void write(Head &&head, Tail &&...tail) {\n        write_single(head);\n\
     \        if (sizeof...(Tail)) {\n            write_char(' ');\n        }\n   \
     \     write(std::forward<Tail>(tail)...);\n    }\n\n    template <typename...\
     \ T>\n    void writeln(T &&...t) {\n        write(std::forward<T>(t)...);\n  \
@@ -223,21 +228,21 @@ data:
   isVerificationFile: false
   path: template/fastio.hpp
   requiredBy: []
-  timestamp: '2024-07-18 16:56:22+09:00'
+  timestamp: '2024-11-23 22:57:41+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - algebra/test/inverse_matrix.test.cpp
+  - poly/test/inv_of_formal_power_series.test.cpp
+  - poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
+  - poly/test/pow_of_formal_power_series.test.cpp
+  - poly/test/log_of_formal_power_series.test.cpp
+  - poly/test/inv_of_formal_power_series_sparse.test.cpp
+  - poly/test/exp_of_formal_power_series.test.cpp
+  - poly/test/prod_of_polys.test.cpp
   - algebra/test/matrix_product.test.cpp
   - algebra/test/system_of_linear_equations.test.cpp
+  - algebra/test/inverse_matrix.test.cpp
   - algebra/test/matrix_rank.test.cpp
   - algebra/test/matrix_det.test.cpp
-  - poly/test/prod_of_polys.test.cpp
-  - poly/test/pow_of_formal_power_series.test.cpp
-  - poly/test/inv_of_formal_power_series.test.cpp
-  - poly/test/log_of_formal_power_series.test.cpp
-  - poly/test/exp_of_formal_power_series.test.cpp
-  - poly/test/inv_of_formal_power_series_sparse.test.cpp
-  - poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
 documentation_of: template/fastio.hpp
 layout: document
 redirect_from:

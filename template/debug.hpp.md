@@ -45,32 +45,34 @@ data:
     \        debug(v);\n    }\n    std::cerr << \" }\";\n}\n\ntemplate <typename T>\n\
     void debug(const std::set<T> &st) {\n    std::cerr << '{';\n    for (const T &ele\
     \ : st) {\n        std::cerr << ' ';\n        debug(ele);\n    }\n    std::cerr\
-    \ << \" }\";\n}\n\ntemplate <typename T>\nvoid debug(std::queue<T> que) {\n  \
-    \  std::cerr << '[';\n    while (!que.empty()) {\n        T ele = que.front();\n\
-    \        que.pop();\n        debug(ele);\n        if (!que.empty()) {\n      \
-    \      std::cerr << ' ';\n        }\n    }\n    std::cerr << ']';\n}\n\ntemplate\
-    \ <typename T>\nvoid debug(const std::vector<T> &v) {\n    std::cerr << '[';\n\
-    \    for (std::size_t i = 0; i < v.size(); ++i) {\n        debug(v[i]);\n    \
-    \    if (i + 1 != v.size()) {\n            std::cerr << \", \";\n        }\n \
-    \   }\n    std::cerr << ']';\n}\n\ntemplate <typename T, typename Container, typename\
-    \ Comp>\nvoid debug(std::priority_queue<T, Container, Comp> que) {\n    std::cerr\
-    \ << '[';\n    while (!que.empty()) {\n        T ele = que.top();\n        que.pop();\n\
-    \        debug(ele);\n        if (!que.empty()) {\n            std::cerr << '\
+    \ << \" }\";\n}\ntemplate <typename T>\nvoid debug(const std::multiset<T> &st)\
+    \ {\n    std::cerr << '{';\n    for (const T &ele : st) {\n        std::cerr <<\
+    \ ' ';\n        debug(ele);\n    }\n    std::cerr << \" }\";\n}\n\ntemplate <typename\
+    \ T>\nvoid debug(std::queue<T> que) {\n    std::cerr << '[';\n    while (!que.empty())\
+    \ {\n        T ele = que.front();\n        que.pop();\n        debug(ele);\n \
+    \       if (!que.empty()) {\n            std::cerr << ' ';\n        }\n    }\n\
+    \    std::cerr << ']';\n}\n\ntemplate <typename T>\nvoid debug(const std::vector<T>\
+    \ &v) {\n    std::cerr << '[';\n    for (std::size_t i = 0; i < v.size(); ++i)\
+    \ {\n        debug(v[i]);\n        if (i + 1 != v.size()) {\n            std::cerr\
+    \ << \", \";\n        }\n    }\n    std::cerr << ']';\n}\n\ntemplate <typename\
+    \ T, typename Container, typename Comp>\nvoid debug(std::priority_queue<T, Container,\
+    \ Comp> que) {\n    std::cerr << '[';\n    while (!que.empty()) {\n        T ele\
+    \ = que.top();\n        que.pop();\n        debug(ele);\n        if (!que.empty())\
+    \ {\n            std::cerr << ' ';\n        }\n    }\n    std::cerr << ']';\n\
+    }\n\ntemplate <typename T>\nvoid debug(std::stack<T> sta) {\n    std::cerr <<\
+    \ '[';\n    while (!sta.empty()) {\n        T ele = sta.top();\n        sta.pop();\n\
+    \        debug(ele);\n        if (!sta.empty()) {\n            std::cerr << '\
     \ ';\n        }\n    }\n    std::cerr << ']';\n}\n\ntemplate <typename T>\nvoid\
-    \ debug(std::stack<T> sta) {\n    std::cerr << '[';\n    while (!sta.empty())\
-    \ {\n        T ele = sta.top();\n        sta.pop();\n        debug(ele);\n   \
-    \     if (!sta.empty()) {\n            std::cerr << ' ';\n        }\n    }\n \
-    \   std::cerr << ']';\n}\n\ntemplate <typename T>\nvoid debug(std::deque<T> dq)\
-    \ {\n    std::cerr << '[';\n    while (!dq.empty()) {\n        T ele = dq.front();\n\
-    \        dq.pop_front();\n        debug(ele);\n        if (!dq.empty()) {\n  \
-    \          std::cerr << ' ';\n        }\n    }\n    std::cerr << ']';\n}\n\nvoid\
-    \ debug_many(bool first) {}\ntemplate <typename Head, typename... Tail>\nvoid\
-    \ debug_many(bool first, const Head &head, const Tail &...tail) {\n    if (!first)\
-    \ {\n        std::cerr << \", \";\n    }\n    debug(head);\n    debug_many(false,\
-    \ tail...);\n}\n\n#define DBG(...)                            \\\n    do {   \
-    \                                 \\\n        std::cerr << #__VA_ARGS__ << \"\
-    \ : \"; \\\n        debug_many(true, __VA_ARGS__);      \\\n        std::cerr\
-    \ << std::endl;             \\\n    } while (false)\n"
+    \ debug(std::deque<T> dq) {\n    std::cerr << '[';\n    while (!dq.empty()) {\n\
+    \        T ele = dq.front();\n        dq.pop_front();\n        debug(ele);\n \
+    \       if (!dq.empty()) {\n            std::cerr << ' ';\n        }\n    }\n\
+    \    std::cerr << ']';\n}\n\nvoid debug_many(bool first) {}\ntemplate <typename\
+    \ Head, typename... Tail>\nvoid debug_many(bool first, const Head &head, const\
+    \ Tail &...tail) {\n    if (!first) {\n        std::cerr << \", \";\n    }\n \
+    \   debug(head);\n    debug_many(false, tail...);\n}\n\n#define DBG(...)     \
+    \                       \\\n    do {                                    \\\n \
+    \       std::cerr << #__VA_ARGS__ << \" : \"; \\\n        debug_many(true, __VA_ARGS__);\
+    \      \\\n        std::cerr << std::endl;             \\\n    } while (false)\n"
   code: "#pragma once\n\n#include <algorithm>\n#include <array>\n#include <atcoder/modint>\n\
     #include <deque>\n#include <iostream>\n#include <map>\n#include <queue>\n#include\
     \ <set>\n#include <stack>\n#include <tuple>\n#include <type_traits>\n#include\
@@ -108,37 +110,39 @@ data:
     \        debug(v);\n    }\n    std::cerr << \" }\";\n}\n\ntemplate <typename T>\n\
     void debug(const std::set<T> &st) {\n    std::cerr << '{';\n    for (const T &ele\
     \ : st) {\n        std::cerr << ' ';\n        debug(ele);\n    }\n    std::cerr\
-    \ << \" }\";\n}\n\ntemplate <typename T>\nvoid debug(std::queue<T> que) {\n  \
-    \  std::cerr << '[';\n    while (!que.empty()) {\n        T ele = que.front();\n\
-    \        que.pop();\n        debug(ele);\n        if (!que.empty()) {\n      \
-    \      std::cerr << ' ';\n        }\n    }\n    std::cerr << ']';\n}\n\ntemplate\
-    \ <typename T>\nvoid debug(const std::vector<T> &v) {\n    std::cerr << '[';\n\
-    \    for (std::size_t i = 0; i < v.size(); ++i) {\n        debug(v[i]);\n    \
-    \    if (i + 1 != v.size()) {\n            std::cerr << \", \";\n        }\n \
-    \   }\n    std::cerr << ']';\n}\n\ntemplate <typename T, typename Container, typename\
-    \ Comp>\nvoid debug(std::priority_queue<T, Container, Comp> que) {\n    std::cerr\
-    \ << '[';\n    while (!que.empty()) {\n        T ele = que.top();\n        que.pop();\n\
-    \        debug(ele);\n        if (!que.empty()) {\n            std::cerr << '\
+    \ << \" }\";\n}\ntemplate <typename T>\nvoid debug(const std::multiset<T> &st)\
+    \ {\n    std::cerr << '{';\n    for (const T &ele : st) {\n        std::cerr <<\
+    \ ' ';\n        debug(ele);\n    }\n    std::cerr << \" }\";\n}\n\ntemplate <typename\
+    \ T>\nvoid debug(std::queue<T> que) {\n    std::cerr << '[';\n    while (!que.empty())\
+    \ {\n        T ele = que.front();\n        que.pop();\n        debug(ele);\n \
+    \       if (!que.empty()) {\n            std::cerr << ' ';\n        }\n    }\n\
+    \    std::cerr << ']';\n}\n\ntemplate <typename T>\nvoid debug(const std::vector<T>\
+    \ &v) {\n    std::cerr << '[';\n    for (std::size_t i = 0; i < v.size(); ++i)\
+    \ {\n        debug(v[i]);\n        if (i + 1 != v.size()) {\n            std::cerr\
+    \ << \", \";\n        }\n    }\n    std::cerr << ']';\n}\n\ntemplate <typename\
+    \ T, typename Container, typename Comp>\nvoid debug(std::priority_queue<T, Container,\
+    \ Comp> que) {\n    std::cerr << '[';\n    while (!que.empty()) {\n        T ele\
+    \ = que.top();\n        que.pop();\n        debug(ele);\n        if (!que.empty())\
+    \ {\n            std::cerr << ' ';\n        }\n    }\n    std::cerr << ']';\n\
+    }\n\ntemplate <typename T>\nvoid debug(std::stack<T> sta) {\n    std::cerr <<\
+    \ '[';\n    while (!sta.empty()) {\n        T ele = sta.top();\n        sta.pop();\n\
+    \        debug(ele);\n        if (!sta.empty()) {\n            std::cerr << '\
     \ ';\n        }\n    }\n    std::cerr << ']';\n}\n\ntemplate <typename T>\nvoid\
-    \ debug(std::stack<T> sta) {\n    std::cerr << '[';\n    while (!sta.empty())\
-    \ {\n        T ele = sta.top();\n        sta.pop();\n        debug(ele);\n   \
-    \     if (!sta.empty()) {\n            std::cerr << ' ';\n        }\n    }\n \
-    \   std::cerr << ']';\n}\n\ntemplate <typename T>\nvoid debug(std::deque<T> dq)\
-    \ {\n    std::cerr << '[';\n    while (!dq.empty()) {\n        T ele = dq.front();\n\
-    \        dq.pop_front();\n        debug(ele);\n        if (!dq.empty()) {\n  \
-    \          std::cerr << ' ';\n        }\n    }\n    std::cerr << ']';\n}\n\nvoid\
-    \ debug_many(bool first) {}\ntemplate <typename Head, typename... Tail>\nvoid\
-    \ debug_many(bool first, const Head &head, const Tail &...tail) {\n    if (!first)\
-    \ {\n        std::cerr << \", \";\n    }\n    debug(head);\n    debug_many(false,\
-    \ tail...);\n}\n\n#define DBG(...)                            \\\n    do {   \
-    \                                 \\\n        std::cerr << #__VA_ARGS__ << \"\
-    \ : \"; \\\n        debug_many(true, __VA_ARGS__);      \\\n        std::cerr\
-    \ << std::endl;             \\\n    } while (false)\n"
+    \ debug(std::deque<T> dq) {\n    std::cerr << '[';\n    while (!dq.empty()) {\n\
+    \        T ele = dq.front();\n        dq.pop_front();\n        debug(ele);\n \
+    \       if (!dq.empty()) {\n            std::cerr << ' ';\n        }\n    }\n\
+    \    std::cerr << ']';\n}\n\nvoid debug_many(bool first) {}\ntemplate <typename\
+    \ Head, typename... Tail>\nvoid debug_many(bool first, const Head &head, const\
+    \ Tail &...tail) {\n    if (!first) {\n        std::cerr << \", \";\n    }\n \
+    \   debug(head);\n    debug_many(false, tail...);\n}\n\n#define DBG(...)     \
+    \                       \\\n    do {                                    \\\n \
+    \       std::cerr << #__VA_ARGS__ << \" : \"; \\\n        debug_many(true, __VA_ARGS__);\
+    \      \\\n        std::cerr << std::endl;             \\\n    } while (false)\n"
   dependsOn: []
   isVerificationFile: false
   path: template/debug.hpp
   requiredBy: []
-  timestamp: '2024-07-18 17:49:05+09:00'
+  timestamp: '2024-11-23 22:57:29+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template/debug.hpp

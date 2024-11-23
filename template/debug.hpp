@@ -133,6 +133,15 @@ void debug(const std::set<T> &st) {
     }
     std::cerr << " }";
 }
+template <typename T>
+void debug(const std::multiset<T> &st) {
+    std::cerr << '{';
+    for (const T &ele : st) {
+        std::cerr << ' ';
+        debug(ele);
+    }
+    std::cerr << " }";
+}
 
 template <typename T>
 void debug(std::queue<T> que) {

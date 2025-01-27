@@ -1,7 +1,7 @@
 #pragma once
 #include <cassert>
 
-// mod: odd, < 2^{62}
+// mod: odd, < 2^{63}
 template <int id>
 struct MontgomeryModInt64 {
     using u64 = unsigned long long;

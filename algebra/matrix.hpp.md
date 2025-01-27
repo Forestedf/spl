@@ -112,15 +112,15 @@ data:
   path: algebra/matrix.hpp
   requiredBy:
   - algebra/rank_of_matrix.hpp
-  - algebra/inverse_matrix.hpp
   - algebra/determinant.hpp
+  - algebra/inverse_matrix.hpp
   timestamp: '2024-07-18 16:56:22+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - algebra/test/matrix_product.test.cpp
-  - algebra/test/inverse_matrix.test.cpp
   - algebra/test/matrix_rank.test.cpp
   - algebra/test/matrix_det.test.cpp
+  - algebra/test/inverse_matrix.test.cpp
+  - algebra/test/matrix_product.test.cpp
 documentation_of: algebra/matrix.hpp
 layout: document
 redirect_from:

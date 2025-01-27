@@ -106,11 +106,12 @@ data:
     \ - r0;\n            } else {\n                l = l0;\n                r = r0;\n\
     \            }\n        }\n        return r - l;\n    }\n\n    // count i s.t.\
     \ i \\in [l, r) and a[i] < upper\n    int range_freq(int l, int r, T upper) const\
-    \ {\n        assert(0 <= l && l < r && r <= n);\n        if (upper != 0 && floor_log2(upper)\
-    \ >= ht) {\n            return r - l;\n        }\n        int cnt = 0;\n     \
-    \   for (int i = 0; i < ht; ++i) {\n            int l0 = vecs[i].rank0(l);\n \
-    \           int r0 = vecs[i].rank0(r);\n            if (ith_bit(upper, ht - 1\
-    \ - i)) {\n                cnt += r0 - l0;\n                l += vecs[i].all_zeros()\
+    \ {\n        assert(0 <= l && l <= r && r <= n);\n        if (l == r) {\n    \
+    \        return 0;\n        }\n        if (upper != 0 && floor_log2(upper) >=\
+    \ ht) {\n            return r - l;\n        }\n        int cnt = 0;\n        for\
+    \ (int i = 0; i < ht; ++i) {\n            int l0 = vecs[i].rank0(l);\n       \
+    \     int r0 = vecs[i].rank0(r);\n            if (ith_bit(upper, ht - 1 - i))\
+    \ {\n                cnt += r0 - l0;\n                l += vecs[i].all_zeros()\
     \ - l0;\n                r += vecs[i].all_zeros() - r0;\n            } else {\n\
     \                l = l0;\n                r = r0;\n            }\n        }\n\
     \        return cnt;\n    }\n    // count i s.t. i \\in [l, r) and a[i] \\in [lower,\
@@ -186,7 +187,7 @@ data:
   isVerificationFile: true
   path: data_structure/test/static_range_frequency.test.cpp
   requiredBy: []
-  timestamp: '2024-07-18 16:56:22+09:00'
+  timestamp: '2025-01-27 10:52:49+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: data_structure/test/static_range_frequency.test.cpp

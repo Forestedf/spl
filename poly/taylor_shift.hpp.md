@@ -250,8 +250,8 @@ data:
   timestamp: '2024-07-18 16:56:22+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - poly/test/stirling_number_of_the_first_kind.test.cpp
   - poly/test/polynomial_taylor_shift.test.cpp
+  - poly/test/stirling_number_of_the_first_kind.test.cpp
 documentation_of: poly/taylor_shift.hpp
 layout: document
 redirect_from:

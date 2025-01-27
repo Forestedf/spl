@@ -135,6 +135,9 @@ data:
       path: number_theory/mod_int.hpp
       title: number_theory/mod_int.hpp
     - icon: ':heavy_check_mark:'
+      path: number_theory/primality.hpp
+      title: number_theory/primality.hpp
+    - icon: ':heavy_check_mark:'
       path: number_theory/utils.hpp
       title: number_theory/utils.hpp
   - name: opt
@@ -326,6 +329,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: number_theory/test/inv_mod_stress.test.cpp
       title: number_theory/test/inv_mod_stress.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: number_theory/test/primality_test.test.cpp
+      title: number_theory/test/primality_test.test.cpp
   - name: opt/test
     pages:
     - icon: ':heavy_check_mark:'

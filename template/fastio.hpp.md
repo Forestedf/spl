@@ -231,18 +231,18 @@ data:
   timestamp: '2024-11-23 22:57:41+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - poly/test/inv_of_formal_power_series_sparse.test.cpp
+  - poly/test/prod_of_polys.test.cpp
+  - poly/test/exp_of_formal_power_series.test.cpp
   - poly/test/inv_of_formal_power_series.test.cpp
+  - poly/test/log_of_formal_power_series.test.cpp
   - poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
   - poly/test/pow_of_formal_power_series.test.cpp
-  - poly/test/log_of_formal_power_series.test.cpp
-  - poly/test/inv_of_formal_power_series_sparse.test.cpp
-  - poly/test/exp_of_formal_power_series.test.cpp
-  - poly/test/prod_of_polys.test.cpp
-  - algebra/test/matrix_product.test.cpp
-  - algebra/test/system_of_linear_equations.test.cpp
-  - algebra/test/inverse_matrix.test.cpp
   - algebra/test/matrix_rank.test.cpp
   - algebra/test/matrix_det.test.cpp
+  - algebra/test/inverse_matrix.test.cpp
+  - algebra/test/matrix_product.test.cpp
+  - algebra/test/system_of_linear_equations.test.cpp
 documentation_of: template/fastio.hpp
 layout: document
 redirect_from:

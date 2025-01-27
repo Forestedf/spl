@@ -5,6 +5,29 @@
 #include "primality.hpp"
 #include "montgomery_64.hpp"
 
+namespace factorize_impl {
+
+unsigned long long bgcd(unsigned long long x, unsigned long long y) {
+    if (x == 0) {
+        return y;
+    }
+    if (y == 0) {
+        return x;
+    }
+    int n = __builtin_ctzll(x);
+    int m = __builtin_ctzll(y);
+    x >>= n;
+    y >>= m;
+    while (x != y) {
+        if (x > y) {
+            x = (x - y) >> __builtin_ctzll(x - y);
+        } else {
+            y = (y - x) >> __builtin_ctzll(y - x);
+        }
+    }
+    return x << (n < m ? n : m);
+}
+
 template <typename T>
 unsigned long long rho(unsigned long long n, unsigned long long c) {
     T cc(c);
@@ -25,13 +48,13 @@ unsigned long long rho(unsigned long long n, unsigned long long c) {
                 y = f(y);
                 p *= y - x;
             }
-            g = std::gcd(p.val(), n);
+            g = bgcd(p.val(), n);
         }
     }
     if (g == n) {
         do {
             z = f(z);
-            g = std::gcd((z - x).val(), n);
+            g = bgcd((z - x).val(), n);
         } while (g == 1);
     }
     return g;
@@ -65,12 +88,14 @@ void factor_inner(unsigned long long n, std::vector<unsigned long long> &ps) {
     factor_inner(n / m, ps);
 }
 
+}
+
 std::vector<unsigned long long> factorize(unsigned long long n) {
     if (n <= 1) {
         return std::vector<unsigned long long>();
     }
     std::vector<unsigned long long> ps;
-    factor_inner(n, ps);
+    factorize_impl::factor_inner(n, ps);
     std::sort(ps.begin(), ps.end());
     return ps;
 }

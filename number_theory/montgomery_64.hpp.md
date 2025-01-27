@@ -12,7 +12,7 @@ data:
   attributes:
     links: []
   bundledCode: "#line 2 \"number_theory/montgomery_64.hpp\"\n#include <cassert>\n\n\
-    // mod: odd, < 2^{62}\ntemplate <int id>\nstruct MontgomeryModInt64 {\n    using\
+    // mod: odd, < 2^{63}\ntemplate <int id>\nstruct MontgomeryModInt64 {\n    using\
     \ u64 = unsigned long long;\n    using u128 = __uint128_t;\n\n    static u64 inv_64(u64\
     \ n) {\n        u64 r = n;\n        for (int i = 0; i < 5; ++i) {\n          \
     \  r *= 2 - n * r;\n        }\n        return r;\n    }\n\n    static u64 mod,\
@@ -40,7 +40,7 @@ data:
     \ long MontgomeryModInt64<id>::mod = 1;\ntemplate <int id> unsigned long long\
     \ MontgomeryModInt64<id>::neg_inv = 1;\ntemplate <int id> unsigned long long MontgomeryModInt64<id>::sq\
     \ = 1;\n"
-  code: "#pragma once\n#include <cassert>\n\n// mod: odd, < 2^{62}\ntemplate <int\
+  code: "#pragma once\n#include <cassert>\n\n// mod: odd, < 2^{63}\ntemplate <int\
     \ id>\nstruct MontgomeryModInt64 {\n    using u64 = unsigned long long;\n    using\
     \ u128 = __uint128_t;\n\n    static u64 inv_64(u64 n) {\n        u64 r = n;\n\
     \        for (int i = 0; i < 5; ++i) {\n            r *= 2 - n * r;\n        }\n\
@@ -73,7 +73,7 @@ data:
   isVerificationFile: false
   path: number_theory/montgomery_64.hpp
   requiredBy: []
-  timestamp: '2025-01-27 21:07:03+09:00'
+  timestamp: '2025-01-27 21:12:31+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - number_theory/test/montgomery_64_stress.test.cpp

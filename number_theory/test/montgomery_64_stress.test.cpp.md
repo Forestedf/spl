@@ -23,7 +23,7 @@ data:
   bundledCode: "#line 1 \"number_theory/test/montgomery_64_stress.test.cpp\"\n#define\
     \ PROBLEM \\\n    \"https://onlinejudge.u-aizu.ac.jp/courses/lesson/2/ITP1/1/ITP1_1_A\"\
     \n#define FAST_IO\n#define FIX_SEED\n\n#line 2 \"number_theory/montgomery_64.hpp\"\
-    \n#include <cassert>\n\n// mod: odd, < 2^{62}\ntemplate <int id>\nstruct MontgomeryModInt64\
+    \n#include <cassert>\n\n// mod: odd, < 2^{63}\ntemplate <int id>\nstruct MontgomeryModInt64\
     \ {\n    using u64 = unsigned long long;\n    using u128 = __uint128_t;\n\n  \
     \  static u64 inv_64(u64 n) {\n        u64 r = n;\n        for (int i = 0; i <\
     \ 5; ++i) {\n            r *= 2 - n * r;\n        }\n        return r;\n    }\n\
@@ -141,7 +141,7 @@ data:
   isVerificationFile: true
   path: number_theory/test/montgomery_64_stress.test.cpp
   requiredBy: []
-  timestamp: '2025-01-27 21:07:03+09:00'
+  timestamp: '2025-01-27 21:12:31+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: number_theory/test/montgomery_64_stress.test.cpp

@@ -1,8 +1,14 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: number_theory/factorize.hpp
+    title: number_theory/factorize.hpp
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: number_theory/test/factorize.test.cpp
+    title: number_theory/test/factorize.test.cpp
   - icon: ':heavy_check_mark:'
     path: number_theory/test/montgomery_64_stress.test.cpp
     title: number_theory/test/montgomery_64_stress.test.cpp
@@ -72,10 +78,12 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: number_theory/montgomery_64.hpp
-  requiredBy: []
+  requiredBy:
+  - number_theory/factorize.hpp
   timestamp: '2025-01-27 21:12:31+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - number_theory/test/factorize.test.cpp
   - number_theory/test/montgomery_64_stress.test.cpp
 documentation_of: number_theory/montgomery_64.hpp
 layout: document

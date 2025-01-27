@@ -5,8 +5,14 @@ data:
     path: number_theory/factorize.hpp
     title: number_theory/factorize.hpp
   - icon: ':heavy_check_mark:'
+    path: number_theory/montgomery_64.hpp
+    title: number_theory/montgomery_64.hpp
+  - icon: ':heavy_check_mark:'
     path: number_theory/primality.hpp
     title: number_theory/primality.hpp
+  - icon: ':heavy_check_mark:'
+    path: template/fastio.hpp
+    title: template/fastio.hpp
   - icon: ':heavy_check_mark:'
     path: template/random.hpp
     title: template/random.hpp
@@ -54,85 +60,218 @@ data:
     \       break;\n            }\n            t = mont.mulmr(t, t);\n        }\n\
     \        if (i == s) {\n            return false;\n        }\n    }\n    return\
     \ true;\n}\n\n}  // namespace primality\n\nbool is_prime(unsigned long long n)\
-    \ {\n    return primality::is_prime(n);\n}\n#line 6 \"number_theory/factorize.hpp\"\
-    \n\nunsigned long long rho(unsigned long long n, unsigned long long c) {\n   \
-    \ auto f = [&](unsigned long long x) -> unsigned long long {\n        return ((__uint128_t)x\
-    \ * x + c) % n;\n    };\n    unsigned long long x = 1, y = 2;\n    unsigned long\
-    \ long g = 1;\n    for (int r = 1; g == 1; r *= 2) {\n        x = y;\n       \
-    \ for (int i = 0; i < r && g == 1; ++i) {\n            y = f(y);\n           \
-    \ g = std::gcd(x + n - y, n);\n        }\n    }\n    return g;\n}\n\nunsigned\
-    \ long long find_factor(unsigned long long n) {\n    while (true) {\n        unsigned\
-    \ long long c = uniform(n);\n        unsigned long long g = rho(n, c);\n     \
-    \   if (g != n) {\n            return g;\n        }\n    }\n    return 0;\n}\n\
-    \nvoid factor_inner(unsigned long long n, std::vector<unsigned long long> &ps)\
-    \ {\n    if (is_prime(n)) {\n        ps.push_back(n);\n        return;\n    }\n\
-    \    if (n % 2 == 0) {\n        ps.push_back(2);\n        factor_inner(n / 2,\
-    \ ps);\n        return;\n    }\n    unsigned long long m = find_factor(n);\n \
-    \   factor_inner(m, ps);\n    factor_inner(n / m, ps);\n}\n\nstd::vector<unsigned\
-    \ long long> factorize(unsigned long long n) {\n    if (n <= 1) {\n        return\
-    \ std::vector<unsigned long long>();\n    }\n    std::vector<unsigned long long>\
-    \ ps;\n    factor_inner(n, ps);\n    std::sort(ps.begin(), ps.end());\n    return\
-    \ ps;\n}\n#line 1 \"template/template.hpp\"\n#include <bits/stdc++.h>\n#define\
-    \ OVERRIDE(a, b, c, d, ...) d\n#define REP2(i, n) for (i32 i = 0; i < (i32)(n);\
-    \ ++i)\n#define REP3(i, m, n) for (i32 i = (i32)(m); i < (i32)(n); ++i)\n#define\
-    \ REP(...) OVERRIDE(__VA_ARGS__, REP3, REP2)(__VA_ARGS__)\n#define PER2(i, n)\
-    \ for (i32 i = (i32)(n)-1; i >= 0; --i)\n#define PER3(i, m, n) for (i32 i = (i32)(n)-1;\
-    \ i >= (i32)(m); --i)\n#define PER(...) OVERRIDE(__VA_ARGS__, PER3, PER2)(__VA_ARGS__)\n\
-    #define ALL(x) begin(x), end(x)\n#define LEN(x) (i32)(x.size())\nusing namespace\
-    \ std;\nusing u32 = unsigned int;\nusing u64 = unsigned long long;\nusing i32\
-    \ = signed int;\nusing i64 = signed long long;\nusing f64 = double;\nusing f80\
-    \ = long double;\nusing pi = pair<i32, i32>;\nusing pl = pair<i64, i64>;\ntemplate\
-    \ <typename T>\nusing V = vector<T>;\ntemplate <typename T>\nusing VV = V<V<T>>;\n\
-    template <typename T>\nusing VVV = V<V<V<T>>>;\ntemplate <typename T>\nusing VVVV\
-    \ = V<V<V<V<T>>>>;\ntemplate <typename T>\nusing PQR = priority_queue<T, V<T>,\
-    \ greater<T>>;\ntemplate <typename T>\nbool chmin(T &x, const T &y) {\n    if\
-    \ (x > y) {\n        x = y;\n        return true;\n    }\n    return false;\n\
-    }\ntemplate <typename T>\nbool chmax(T &x, const T &y) {\n    if (x < y) {\n \
-    \       x = y;\n        return true;\n    }\n    return false;\n}\ntemplate <typename\
-    \ T>\ni32 lob(const V<T> &arr, const T &v) {\n    return (i32)(lower_bound(ALL(arr),\
-    \ v) - arr.begin());\n}\ntemplate <typename T>\ni32 upb(const V<T> &arr, const\
-    \ T &v) {\n    return (i32)(upper_bound(ALL(arr), v) - arr.begin());\n}\ntemplate\
-    \ <typename T>\nV<i32> argsort(const V<T> &arr) {\n    V<i32> ret(arr.size());\n\
-    \    iota(ALL(ret), 0);\n    sort(ALL(ret), [&](i32 i, i32 j) -> bool {\n    \
-    \    if (arr[i] == arr[j]) {\n            return i < j;\n        } else {\n  \
-    \          return arr[i] < arr[j];\n        }\n    });\n    return ret;\n}\n#ifdef\
-    \ INT128\nusing u128 = __uint128_t;\nusing i128 = __int128_t;\n#endif\n[[maybe_unused]]\
-    \ constexpr i32 INF = 1000000100;\n[[maybe_unused]] constexpr i64 INF64 = 3000000000000000100;\n\
-    struct SetUpIO {\n    SetUpIO() {\n#ifdef FAST_IO\n        ios::sync_with_stdio(false);\n\
-    \        cin.tie(nullptr);\n#endif\n        cout << fixed << setprecision(15);\n\
-    \    }\n} set_up_io;\nvoid scan(char &x) { cin >> x; }\nvoid scan(u32 &x) { cin\
-    \ >> x; }\nvoid scan(u64 &x) { cin >> x; }\nvoid scan(i32 &x) { cin >> x; }\n\
-    void scan(i64 &x) { cin >> x; }\nvoid scan(string &x) { cin >> x; }\ntemplate\
-    \ <typename T>\nvoid scan(V<T> &x) {\n    for (T &ele : x) {\n        scan(ele);\n\
-    \    }\n}\nvoid read() {}\ntemplate <typename Head, typename... Tail>\nvoid read(Head\
-    \ &head, Tail &...tail) {\n    scan(head);\n    read(tail...);\n}\n#define CHAR(...)\
-    \     \\\n    char __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define U32(...) \
-    \    \\\n    u32 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define U64(...)   \
-    \  \\\n    u64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define I32(...)     \\\
-    \n    i32 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define I64(...)     \\\n \
-    \   i64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define STR(...)        \\\n\
-    \    string __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define VEC(type, name, size)\
-    \ \\\n    V<type> name(size);       \\\n    read(name);\n#define VVEC(type, name,\
-    \ size1, size2)    \\\n    VV<type> name(size1, V<type>(size2)); \\\n    read(name);\n\
-    #line 5 \"number_theory/test/factorize.test.cpp\"\n\nvoid solve() {\n    U64(n);\n\
-    \    V<u64> ps = factorize(n);\n    cout << LEN(ps);\n    for (i64 p : ps) {\n\
-    \        cout << ' ' << p;\n    }\n    cout << '\\n';\n}\n\nint main() {\n   \
-    \ i32 t = 1;\n    cin >> t;\n    while (t--) {\n        solve();\n    }\n}\n"
+    \ {\n    return primality::is_prime(n);\n}\n#line 2 \"number_theory/montgomery_64.hpp\"\
+    \n#include <cassert>\n\n// mod: odd, < 2^{63}\ntemplate <int id>\nstruct MontgomeryModInt64\
+    \ {\n    using u64 = unsigned long long;\n    using u128 = __uint128_t;\n\n  \
+    \  static u64 inv_64(u64 n) {\n        u64 r = n;\n        for (int i = 0; i <\
+    \ 5; ++i) {\n            r *= 2 - n * r;\n        }\n        return r;\n    }\n\
+    \n    static u64 mod, neg_inv, sq;\n    static void set_mod(u64 m) {\n       \
+    \ assert(m % 2 == 1 && m < (1ULL << 63));\n        mod = m;\n        neg_inv =\
+    \ -inv_64(m);\n        sq = -u128(mod) % mod;\n    }\n    static u64 get_mod()\
+    \ { return mod; }\n\n    static u64 reduce(u128 xr) {\n        u64 ret = (xr +\
+    \ u128(u64(xr) * neg_inv) * mod) >> 64;\n        if (ret >= mod) {\n         \
+    \   ret -= mod;\n        }\n        return ret;\n    }\n\n    using M = MontgomeryModInt64<id>;\n\
+    \n    u64 x;\n    MontgomeryModInt64() : x(0) {}\n    MontgomeryModInt64(u64 _x)\
+    \ : x(reduce(u128(_x) * sq)) {}\n\n    u64 val() const { return reduce(u128(x));\
+    \ }\n\n    M &operator+=(M rhs) {\n        if ((x += rhs.x) >= mod) {\n      \
+    \      x -= mod;\n        }\n        return *this;\n    }\n    M &operator-=(M\
+    \ rhs) {\n        if ((x -= rhs.x) >= mod) {\n            x += mod;\n        }\n\
+    \        return *this;\n    }\n    M &operator*=(M rhs) {\n        x = reduce(u128(x)\
+    \ * rhs.x);\n        return *this;\n    }\n    M operator+(M rhs) const { return\
+    \ M(*this) += rhs; }\n    M operator-(M rhs) const { return M(*this) -= rhs; }\n\
+    \    M operator*(M rhs) const { return M(*this) *= rhs; }\n\n    M pow(u64 t)\
+    \ const {\n        M ret(1);\n        M self = *this;\n        while (t) {\n \
+    \           if (t & 1) {\n                ret *= self;\n            }\n      \
+    \      self *= self;\n            t >>= 1;\n        }\n        return ret;\n \
+    \   }\n    M inv() const {\n        assert(x);\n        return this->pow(mod -\
+    \ 2);\n    }\n\n    M &operator/=(M rhs) {\n        *this /= rhs.inv();\n    \
+    \    return *this;\n    }\n    M operator/(M rhs) const { return M(*this) /= rhs;\
+    \ }\n};\n\ntemplate <int id> unsigned long long MontgomeryModInt64<id>::mod =\
+    \ 1;\ntemplate <int id> unsigned long long MontgomeryModInt64<id>::neg_inv = 1;\n\
+    template <int id> unsigned long long MontgomeryModInt64<id>::sq = 1;\n#line 7\
+    \ \"number_theory/factorize.hpp\"\n\nnamespace factorize_impl {\n\nunsigned long\
+    \ long bgcd(unsigned long long x, unsigned long long y) {\n    if (x == 0) {\n\
+    \        return y;\n    }\n    if (y == 0) {\n        return x;\n    }\n    int\
+    \ n = __builtin_ctzll(x);\n    int m = __builtin_ctzll(y);\n    x >>= n;\n   \
+    \ y >>= m;\n    while (x != y) {\n        if (x > y) {\n            x = (x - y)\
+    \ >> __builtin_ctzll(x - y);\n        } else {\n            y = (y - x) >> __builtin_ctzll(y\
+    \ - x);\n        }\n    }\n    return x << (n < m ? n : m);\n}\n\ntemplate <typename\
+    \ T>\nunsigned long long rho(unsigned long long n, unsigned long long c) {\n \
+    \   T cc(c);\n    auto f = [cc](T x) -> T {\n        return x * x + cc;\n    };\n\
+    \    T y(2);\n    T x = y;\n    T z = y;\n    T p(1);\n    unsigned long long\
+    \ g = 1;\n    constexpr int M = 128;\n    for (int r = 1; g == 1; r *= 2) {\n\
+    \        x = y;\n        for (int i = 0; i < r && g == 1; i += M) {\n        \
+    \    z = y;\n            for (int j = 0; j < r - i && j < M; ++j) {\n        \
+    \        y = f(y);\n                p *= y - x;\n            }\n            g\
+    \ = bgcd(p.val(), n);\n        }\n    }\n    if (g == n) {\n        do {\n   \
+    \         z = f(z);\n            g = bgcd((z - x).val(), n);\n        } while\
+    \ (g == 1);\n    }\n    return g;\n}\n\nunsigned long long find_factor(unsigned\
+    \ long long n) {\n    using M = MontgomeryModInt64<20250127>;\n    M::set_mod(n);\n\
+    \    while (true) {\n        unsigned long long c = uniform(n);\n        unsigned\
+    \ long long g = rho<M>(n, c);\n        if (g != n) {\n            return g;\n\
+    \        }\n    }\n    return 0;\n}\n\nvoid factor_inner(unsigned long long n,\
+    \ std::vector<unsigned long long> &ps) {\n    if (is_prime(n)) {\n        ps.push_back(n);\n\
+    \        return;\n    }\n    if (n % 2 == 0) {\n        ps.push_back(2);\n   \
+    \     factor_inner(n / 2, ps);\n        return;\n    }\n    unsigned long long\
+    \ m = find_factor(n);\n    factor_inner(m, ps);\n    factor_inner(n / m, ps);\n\
+    }\n\n}\n\nstd::vector<unsigned long long> factorize(unsigned long long n) {\n\
+    \    if (n <= 1) {\n        return std::vector<unsigned long long>();\n    }\n\
+    \    std::vector<unsigned long long> ps;\n    factorize_impl::factor_inner(n,\
+    \ ps);\n    std::sort(ps.begin(), ps.end());\n    return ps;\n}\n#line 1 \"template/fastio.hpp\"\
+    \n#include <cstdio>\n#include <cstring>\n#include <type_traits>\n#include <utility>\n\
+    \n// unable to read INT_MIN (int), LLONG_MIN (long long)\nclass Reader {\n   \
+    \ FILE *fp;\n    static constexpr int BUF = 1 << 18;\n    char buf[BUF];\n   \
+    \ char *pl, *pr;\n\n    void reread() {\n        int wd = pr - pl;\n        std::memcpy(buf,\
+    \ pl, wd);\n        pl = buf;\n        pr = buf + wd;\n        pr += std::fread(pr,\
+    \ 1, BUF - wd, fp);\n    }\n\n    char skip() {\n        char ch = *pl++;\n  \
+    \      while (ch <= ' ') {\n            ch = *pl++;\n        }\n        return\
+    \ ch;\n    }\n\n    template <typename T>\n    void read_unsigned(T &x) {\n  \
+    \      if (pr - pl < 64) {\n            reread();\n        }\n        x = 0;\n\
+    \        char ch = skip();\n        while ('0' <= ch) {\n            x = 10 *\
+    \ x + (0xf & ch);\n            ch = *pl++;\n        }\n    }\n    template <typename\
+    \ T>\n    void read_signed(T &x) {\n        if (pr - pl < 64) {\n            reread();\n\
+    \        }\n        x = 0;\n        bool neg = false;\n        char ch = skip();\n\
+    \        if (ch == '-') {\n            ch = *pl++;\n            neg = true;\n\
+    \        }\n        while ('0' <= ch) {\n            x = 10 * x + (0xf & ch);\n\
+    \            ch = *pl++;\n        }\n        if (neg) {\n            x = -x;\n\
+    \        }\n    }\n\n    void read_single(int &x) { read_signed(x); }\n    void\
+    \ read_single(unsigned &x) { read_unsigned(x); }\n    void read_single(long &x)\
+    \ { read_signed(x); }\n    void read_single(unsigned long &x) { read_signed(x);\
+    \ }\n    void read_single(long long &x) { read_signed(x); }\n    void read_single(unsigned\
+    \ long long &x) { read_unsigned(x); }\n\npublic:\n    Reader(FILE *fp) : fp(fp),\
+    \ pl(buf), pr(buf) { reread(); }\n\n    void read() {}\n    template <typename\
+    \ Head, typename... Tail>\n    void read(Head &head, Tail &...tail) {\n      \
+    \  read_single(head);\n        read(tail...);\n    }\n};\n\nstruct NumberToString\
+    \ {\n    char buf[10000][4];\n    constexpr NumberToString() : buf() {\n     \
+    \   for (int i = 0; i < 10000; ++i) {\n            int n = i;\n            for\
+    \ (int j = 3; j >= 0; --j) {\n                buf[i][j] = '0' + n % 10;\n    \
+    \            n /= 10;\n            }\n        }\n    }\n} constexpr number_to_string_precalc;\n\
+    \nclass Writer {\n    FILE *fp;\n    static constexpr int BUF = 1 << 18;\n   \
+    \ char buf[BUF];\n    char *ptr;\n\n    void write_u32(unsigned x) {\n       \
+    \ if ((buf + BUF - ptr) < 32) {\n            flush();\n        }\n        static\
+    \ char sml[12];\n        int t = 8;\n        while (x >= 10000) {\n          \
+    \  unsigned n = x % 10000;\n            x /= 10000;\n            std::memcpy(sml\
+    \ + t, number_to_string_precalc.buf[n], 4);\n            t -= 4;\n        }\n\
+    \        if (x >= 1000) {\n            std::memcpy(ptr, number_to_string_precalc.buf[x],\
+    \ 4);\n            ptr += 4;\n        } else if (x >= 100) {\n            std::memcpy(ptr,\
+    \ number_to_string_precalc.buf[x] + 1, 3);\n            ptr += 3;\n        } else\
+    \ if (x >= 10) {\n            unsigned q = (x * 103) >> 10;\n            *ptr++\
+    \ = q | '0';\n            *ptr++ = (x - 10 * q) | '0';\n        } else {\n   \
+    \         *ptr++ = '0' | x;\n        }\n        std::memcpy(ptr, sml + (t + 4),\
+    \ 8 - t);\n        ptr += 8 - t;\n    }\n\n    void write_u64(unsigned long long\
+    \ x) {\n        if ((buf + BUF - ptr) < 32) {\n            flush();\n        }\n\
+    \        if (x >= 10000000000000000) {\n            unsigned long long z = x %\
+    \ 100000000;\n            x /= 100000000;\n            unsigned long long y =\
+    \ x % 100000000;\n            x /= 100000000;\n            if (x >= 1000) {\n\
+    \                std::memcpy(ptr, number_to_string_precalc.buf[x], 4);\n     \
+    \           ptr += 4;\n            } else if (x >= 100) {\n                std::memcpy(ptr,\
+    \ number_to_string_precalc.buf[x] + 1, 3);\n                ptr += 3;\n      \
+    \      } else if (x >= 10) {\n                unsigned q = (x * 103) >> 10;\n\
+    \                *ptr++ = q | '0';\n                *ptr++ = (x - 10 * q) | '0';\n\
+    \            } else {\n                *ptr++ = '0' | x;\n            }\n    \
+    \        std::memcpy(ptr, number_to_string_precalc.buf[y / 10000], 4);\n     \
+    \       std::memcpy(ptr + 4, number_to_string_precalc.buf[y % 10000], 4);\n  \
+    \          std::memcpy(ptr + 8, number_to_string_precalc.buf[z / 10000], 4);\n\
+    \            std::memcpy(ptr + 12, number_to_string_precalc.buf[z % 10000], 4);\n\
+    \            ptr += 16;\n        } else {\n            static char sml[12];\n\
+    \            int t = 8;\n            while (x >= 10000) {\n                unsigned\
+    \ long long n = x % 10000;\n                x /= 10000;\n                std::memcpy(sml\
+    \ + t, number_to_string_precalc.buf[n], 4);\n                t -= 4;\n       \
+    \     }\n            if (x >= 1000) {\n                std::memcpy(ptr, number_to_string_precalc.buf[x],\
+    \ 4);\n                ptr += 4;\n            } else if (x >= 100) {\n       \
+    \         std::memcpy(ptr, number_to_string_precalc.buf[x] + 1, 3);\n        \
+    \        ptr += 3;\n            } else if (x >= 10) {\n                unsigned\
+    \ q = (x * 103) >> 10;\n                *ptr++ = q | '0';\n                *ptr++\
+    \ = (x - 10 * q) | '0';\n            } else {\n                *ptr++ = '0' |\
+    \ x;\n            }\n            std::memcpy(ptr, sml + (t + 4), 8 - t);\n   \
+    \         ptr += 8 - t;\n        }\n    }\n\n    void write_char(char c) {\n \
+    \       if (ptr == buf + BUF) {\n            flush();\n        }\n        *ptr++\
+    \ = c;\n    }\n\n    template <typename T>\n    void write_unsigned(T x) {\n \
+    \       if constexpr (std::is_same_v<T, unsigned long long> ||\n             \
+    \         std::is_same_v<T, unsigned long>) {\n            write_u64(x);\n   \
+    \     } else {\n            write_u32(x);\n        }\n    }\n\n    template <typename\
+    \ T>\n    void write_signed(T x) {\n        std::make_unsigned_t<T> y = x;\n \
+    \       if (x < 0) {\n            write_char('-');\n            y = -y;\n    \
+    \    }\n        write_unsigned(y);\n    }\n    \n    void write_string(const std::string\
+    \ &s) {\n        for (char c : s) {\n            write_char(c);\n        }\n \
+    \   }\n\n    void write_single(int x) { write_signed(x); }\n    void write_single(unsigned\
+    \ x) { write_unsigned(x); }\n    void write_single(long x) { write_signed(x);\
+    \ }\n    void write_single(unsigned long x) { write_unsigned(x); }\n    void write_single(long\
+    \ long x) { write_signed(x); }\n    void write_single(unsigned long long x) {\
+    \ write_unsigned(x); }\n    void write_single(char c) { write_char(c); }\n   \
+    \ void write_single(const std::string &s) { write_string(s); }\n\npublic:\n  \
+    \  Writer(FILE *fp) : fp(fp), ptr(buf) {}\n    ~Writer() { flush(); }\n\n    void\
+    \ flush() {\n        std::fwrite(buf, 1, ptr - buf, fp);\n        ptr = buf;\n\
+    \    }\n\n    void write() {}\n    template <typename Head, typename... Tail>\n\
+    \    void write(Head &&head, Tail &&...tail) {\n        write_single(head);\n\
+    \        if (sizeof...(Tail)) {\n            write_char(' ');\n        }\n   \
+    \     write(std::forward<Tail>(tail)...);\n    }\n\n    template <typename...\
+    \ T>\n    void writeln(T &&...t) {\n        write(std::forward<T>(t)...);\n  \
+    \      write_char('\\n');\n    }\n};\n\nReader rd(stdin);\nWriter wr(stdout);\n\
+    #line 1 \"template/template.hpp\"\n#include <bits/stdc++.h>\n#define OVERRIDE(a,\
+    \ b, c, d, ...) d\n#define REP2(i, n) for (i32 i = 0; i < (i32)(n); ++i)\n#define\
+    \ REP3(i, m, n) for (i32 i = (i32)(m); i < (i32)(n); ++i)\n#define REP(...) OVERRIDE(__VA_ARGS__,\
+    \ REP3, REP2)(__VA_ARGS__)\n#define PER2(i, n) for (i32 i = (i32)(n)-1; i >= 0;\
+    \ --i)\n#define PER3(i, m, n) for (i32 i = (i32)(n)-1; i >= (i32)(m); --i)\n#define\
+    \ PER(...) OVERRIDE(__VA_ARGS__, PER3, PER2)(__VA_ARGS__)\n#define ALL(x) begin(x),\
+    \ end(x)\n#define LEN(x) (i32)(x.size())\nusing namespace std;\nusing u32 = unsigned\
+    \ int;\nusing u64 = unsigned long long;\nusing i32 = signed int;\nusing i64 =\
+    \ signed long long;\nusing f64 = double;\nusing f80 = long double;\nusing pi =\
+    \ pair<i32, i32>;\nusing pl = pair<i64, i64>;\ntemplate <typename T>\nusing V\
+    \ = vector<T>;\ntemplate <typename T>\nusing VV = V<V<T>>;\ntemplate <typename\
+    \ T>\nusing VVV = V<V<V<T>>>;\ntemplate <typename T>\nusing VVVV = V<V<V<V<T>>>>;\n\
+    template <typename T>\nusing PQR = priority_queue<T, V<T>, greater<T>>;\ntemplate\
+    \ <typename T>\nbool chmin(T &x, const T &y) {\n    if (x > y) {\n        x =\
+    \ y;\n        return true;\n    }\n    return false;\n}\ntemplate <typename T>\n\
+    bool chmax(T &x, const T &y) {\n    if (x < y) {\n        x = y;\n        return\
+    \ true;\n    }\n    return false;\n}\ntemplate <typename T>\ni32 lob(const V<T>\
+    \ &arr, const T &v) {\n    return (i32)(lower_bound(ALL(arr), v) - arr.begin());\n\
+    }\ntemplate <typename T>\ni32 upb(const V<T> &arr, const T &v) {\n    return (i32)(upper_bound(ALL(arr),\
+    \ v) - arr.begin());\n}\ntemplate <typename T>\nV<i32> argsort(const V<T> &arr)\
+    \ {\n    V<i32> ret(arr.size());\n    iota(ALL(ret), 0);\n    sort(ALL(ret), [&](i32\
+    \ i, i32 j) -> bool {\n        if (arr[i] == arr[j]) {\n            return i <\
+    \ j;\n        } else {\n            return arr[i] < arr[j];\n        }\n    });\n\
+    \    return ret;\n}\n#ifdef INT128\nusing u128 = __uint128_t;\nusing i128 = __int128_t;\n\
+    #endif\n[[maybe_unused]] constexpr i32 INF = 1000000100;\n[[maybe_unused]] constexpr\
+    \ i64 INF64 = 3000000000000000100;\nstruct SetUpIO {\n    SetUpIO() {\n#ifdef\
+    \ FAST_IO\n        ios::sync_with_stdio(false);\n        cin.tie(nullptr);\n#endif\n\
+    \        cout << fixed << setprecision(15);\n    }\n} set_up_io;\nvoid scan(char\
+    \ &x) { cin >> x; }\nvoid scan(u32 &x) { cin >> x; }\nvoid scan(u64 &x) { cin\
+    \ >> x; }\nvoid scan(i32 &x) { cin >> x; }\nvoid scan(i64 &x) { cin >> x; }\n\
+    void scan(string &x) { cin >> x; }\ntemplate <typename T>\nvoid scan(V<T> &x)\
+    \ {\n    for (T &ele : x) {\n        scan(ele);\n    }\n}\nvoid read() {}\ntemplate\
+    \ <typename Head, typename... Tail>\nvoid read(Head &head, Tail &...tail) {\n\
+    \    scan(head);\n    read(tail...);\n}\n#define CHAR(...)     \\\n    char __VA_ARGS__;\
+    \ \\\n    read(__VA_ARGS__);\n#define U32(...)     \\\n    u32 __VA_ARGS__; \\\
+    \n    read(__VA_ARGS__);\n#define U64(...)     \\\n    u64 __VA_ARGS__; \\\n \
+    \   read(__VA_ARGS__);\n#define I32(...)     \\\n    i32 __VA_ARGS__; \\\n   \
+    \ read(__VA_ARGS__);\n#define I64(...)     \\\n    i64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n\
+    #define STR(...)        \\\n    string __VA_ARGS__; \\\n    read(__VA_ARGS__);\n\
+    #define VEC(type, name, size) \\\n    V<type> name(size);       \\\n    read(name);\n\
+    #define VVEC(type, name, size1, size2)    \\\n    VV<type> name(size1, V<type>(size2));\
+    \ \\\n    read(name);\n#line 6 \"number_theory/test/factorize.test.cpp\"\n\nvoid\
+    \ solve() {\n    u64 n;\n    rd.read(n);\n    V<u64> ps = factorize(n);\n    wr.write(LEN(ps));\n\
+    \    for (i64 p : ps) {\n        wr.write(' ');\n        wr.write(p);\n    }\n\
+    \    wr.writeln();\n}\n\nint main() {\n    i32 t = 1;\n    rd.read(t);\n    while\
+    \ (t--) {\n        solve();\n    }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/factorize\"\n#define FAST_IO\n\
-    #include \"../../number_theory/factorize.hpp\"\n#include \"../../template/template.hpp\"\
-    \n\nvoid solve() {\n    U64(n);\n    V<u64> ps = factorize(n);\n    cout << LEN(ps);\n\
-    \    for (i64 p : ps) {\n        cout << ' ' << p;\n    }\n    cout << '\\n';\n\
-    }\n\nint main() {\n    i32 t = 1;\n    cin >> t;\n    while (t--) {\n        solve();\n\
-    \    }\n}\n"
+    #include \"../../number_theory/factorize.hpp\"\n#include \"../../template/fastio.hpp\"\
+    \n#include \"../../template/template.hpp\"\n\nvoid solve() {\n    u64 n;\n   \
+    \ rd.read(n);\n    V<u64> ps = factorize(n);\n    wr.write(LEN(ps));\n    for\
+    \ (i64 p : ps) {\n        wr.write(' ');\n        wr.write(p);\n    }\n    wr.writeln();\n\
+    }\n\nint main() {\n    i32 t = 1;\n    rd.read(t);\n    while (t--) {\n      \
+    \  solve();\n    }\n}\n"
   dependsOn:
   - number_theory/factorize.hpp
   - template/random.hpp
   - number_theory/primality.hpp
+  - number_theory/montgomery_64.hpp
+  - template/fastio.hpp
   - template/template.hpp
   isVerificationFile: true
   path: number_theory/test/factorize.test.cpp
   requiredBy: []
-  timestamp: '2025-01-27 17:43:48+09:00'
+  timestamp: '2025-01-27 21:54:34+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: number_theory/test/factorize.test.cpp

@@ -19,6 +19,9 @@ data:
     path: algebra/test/system_of_linear_equations.test.cpp
     title: algebra/test/system_of_linear_equations.test.cpp
   - icon: ':heavy_check_mark:'
+    path: number_theory/test/factorize.test.cpp
+    title: number_theory/test/factorize.test.cpp
+  - icon: ':heavy_check_mark:'
     path: poly/test/exp_of_formal_power_series.test.cpp
     title: poly/test/exp_of_formal_power_series.test.cpp
   - icon: ':heavy_check_mark:'
@@ -243,6 +246,7 @@ data:
   - algebra/test/inverse_matrix.test.cpp
   - algebra/test/matrix_product.test.cpp
   - algebra/test/system_of_linear_equations.test.cpp
+  - number_theory/test/factorize.test.cpp
 documentation_of: template/fastio.hpp
 layout: document
 redirect_from:

@@ -8,14 +8,25 @@ unsigned long long rho(unsigned long long n, unsigned long long c) {
     auto f = [&](unsigned long long x) -> unsigned long long {
         return ((__uint128_t)x * x + c) % n;
     };
-    unsigned long long x = 1, y = 2;
+    unsigned long long x = 1, y = 2, z = 2, p = 1;
     unsigned long long g = 1;
+    constexpr int M = 128;
     for (int r = 1; g == 1; r *= 2) {
         x = y;
-        for (int i = 0; i < r && g == 1; ++i) {
-            y = f(y);
-            g = std::gcd(x + n - y, n);
+        for (int i = 0; i < r && g == 1; i += M) {
+            z = y;
+            for (int j = 0; j < r - i && j < M; ++j) {
+                y = f(y);
+                p = (__uint128_t)p * (n + y - x) % n;
+            }
+            g = std::gcd(p, n);
         }
+    }
+    if (g == n) {
+        do {
+            z = f(z);
+            g = std::gcd(n + z - x, n);
+        } while (g == 1);
     }
     return g;
 }

@@ -138,7 +138,10 @@ public:
 
     // count i s.t. i \in [l, r) and a[i] < upper
     int range_freq(int l, int r, T upper) const {
-        assert(0 <= l && l < r && r <= n);
+        assert(0 <= l && l <= r && r <= n);
+        if (l == r) {
+            return 0;
+        }
         if (upper != 0 && floor_log2(upper) >= ht) {
             return r - l;
         }

@@ -3,12 +3,18 @@
 #include <vector>
 #include "../template/random.hpp"
 #include "primality.hpp"
+#include "montgomery_64.hpp"
 
+template <typename T>
 unsigned long long rho(unsigned long long n, unsigned long long c) {
-    auto f = [&](unsigned long long x) -> unsigned long long {
-        return ((__uint128_t)x * x + c) % n;
+    T cc(c);
+    auto f = [cc](T x) -> T {
+        return x * x + cc;
     };
-    unsigned long long x = 1, y = 2, z = 2, p = 1;
+    T y(2);
+    T x = y;
+    T z = y;
+    T p(1);
     unsigned long long g = 1;
     constexpr int M = 128;
     for (int r = 1; g == 1; r *= 2) {
@@ -17,24 +23,26 @@ unsigned long long rho(unsigned long long n, unsigned long long c) {
             z = y;
             for (int j = 0; j < r - i && j < M; ++j) {
                 y = f(y);
-                p = (__uint128_t)p * (n + y - x) % n;
+                p *= y - x;
             }
-            g = std::gcd(p, n);
+            g = std::gcd(p.val(), n);
         }
     }
     if (g == n) {
         do {
             z = f(z);
-            g = std::gcd(n + z - x, n);
+            g = std::gcd((z - x).val(), n);
         } while (g == 1);
     }
     return g;
 }
 
 unsigned long long find_factor(unsigned long long n) {
+    using M = MontgomeryModInt64<20250127>;
+    M::set_mod(n);
     while (true) {
         unsigned long long c = uniform(n);
-        unsigned long long g = rho(n, c);
+        unsigned long long g = rho<M>(n, c);
         if (g != n) {
             return g;
         }

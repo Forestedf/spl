@@ -106,11 +106,17 @@ data:
     path: number_theory/test/extgcd2_stress.test.cpp
     title: number_theory/test/extgcd2_stress.test.cpp
   - icon: ':heavy_check_mark:'
+    path: number_theory/test/factorize.test.cpp
+    title: number_theory/test/factorize.test.cpp
+  - icon: ':heavy_check_mark:'
     path: number_theory/test/frac_binsearch_stress.test.cpp
     title: number_theory/test/frac_binsearch_stress.test.cpp
   - icon: ':heavy_check_mark:'
     path: number_theory/test/inv_mod_stress.test.cpp
     title: number_theory/test/inv_mod_stress.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: number_theory/test/montgomery_64_stress.test.cpp
+    title: number_theory/test/montgomery_64_stress.test.cpp
   - icon: ':heavy_check_mark:'
     path: number_theory/test/primality_test.test.cpp
     title: number_theory/test/primality_test.test.cpp
@@ -293,9 +299,11 @@ data:
   - algebra/test/system_of_linear_equations.test.cpp
   - number_theory/test/frac_binsearch_stress.test.cpp
   - number_theory/test/extgcd2_stress.test.cpp
+  - number_theory/test/factorize.test.cpp
   - number_theory/test/primality_test.test.cpp
   - number_theory/test/inv_mod_stress.test.cpp
   - number_theory/test/ax_by_c_stress.test.cpp
+  - number_theory/test/montgomery_64_stress.test.cpp
   - bit/test/bitwise_xor_convolution.test.cpp
   - string/test/zalgorithm.test.cpp
 documentation_of: template/template.hpp

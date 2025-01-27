@@ -1,7 +1,10 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: number_theory/factorize.hpp
+    title: number_theory/factorize.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: data_structure/test/wavelet_matrix.test.cpp
@@ -13,11 +16,17 @@ data:
     path: number_theory/test/extgcd2_stress.test.cpp
     title: number_theory/test/extgcd2_stress.test.cpp
   - icon: ':heavy_check_mark:'
+    path: number_theory/test/factorize.test.cpp
+    title: number_theory/test/factorize.test.cpp
+  - icon: ':heavy_check_mark:'
     path: number_theory/test/frac_binsearch_stress.test.cpp
     title: number_theory/test/frac_binsearch_stress.test.cpp
   - icon: ':heavy_check_mark:'
     path: number_theory/test/inv_mod_stress.test.cpp
     title: number_theory/test/inv_mod_stress.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: number_theory/test/montgomery_64_stress.test.cpp
+    title: number_theory/test/montgomery_64_stress.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -38,15 +47,18 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: template/random.hpp
-  requiredBy: []
+  requiredBy:
+  - number_theory/factorize.hpp
   timestamp: '2024-07-18 16:56:22+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - data_structure/test/wavelet_matrix.test.cpp
   - number_theory/test/frac_binsearch_stress.test.cpp
   - number_theory/test/extgcd2_stress.test.cpp
+  - number_theory/test/factorize.test.cpp
   - number_theory/test/inv_mod_stress.test.cpp
   - number_theory/test/ax_by_c_stress.test.cpp
+  - number_theory/test/montgomery_64_stress.test.cpp
 documentation_of: template/random.hpp
 layout: document
 redirect_from:

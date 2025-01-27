@@ -129,11 +129,17 @@ data:
       path: number_theory/factorial.hpp
       title: number_theory/factorial.hpp
     - icon: ':heavy_check_mark:'
+      path: number_theory/factorize.hpp
+      title: number_theory/factorize.hpp
+    - icon: ':heavy_check_mark:'
       path: number_theory/frac_binsearch.hpp
       title: number_theory/frac_binsearch.hpp
     - icon: ':heavy_check_mark:'
       path: number_theory/mod_int.hpp
       title: number_theory/mod_int.hpp
+    - icon: ':heavy_check_mark:'
+      path: number_theory/montgomery_64.hpp
+      title: number_theory/montgomery_64.hpp
     - icon: ':heavy_check_mark:'
       path: number_theory/primality.hpp
       title: number_theory/primality.hpp
@@ -324,11 +330,17 @@ data:
       path: number_theory/test/extgcd2_stress.test.cpp
       title: number_theory/test/extgcd2_stress.test.cpp
     - icon: ':heavy_check_mark:'
+      path: number_theory/test/factorize.test.cpp
+      title: number_theory/test/factorize.test.cpp
+    - icon: ':heavy_check_mark:'
       path: number_theory/test/frac_binsearch_stress.test.cpp
       title: number_theory/test/frac_binsearch_stress.test.cpp
     - icon: ':heavy_check_mark:'
       path: number_theory/test/inv_mod_stress.test.cpp
       title: number_theory/test/inv_mod_stress.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: number_theory/test/montgomery_64_stress.test.cpp
+      title: number_theory/test/montgomery_64_stress.test.cpp
     - icon: ':heavy_check_mark:'
       path: number_theory/test/primality_test.test.cpp
       title: number_theory/test/primality_test.test.cpp

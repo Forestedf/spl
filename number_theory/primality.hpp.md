@@ -1,8 +1,14 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: number_theory/factorize.hpp
+    title: number_theory/factorize.hpp
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: number_theory/test/factorize.test.cpp
+    title: number_theory/test/factorize.test.cpp
   - icon: ':heavy_check_mark:'
     path: number_theory/test/primality_test.test.cpp
     title: number_theory/test/primality_test.test.cpp
@@ -64,10 +70,12 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: number_theory/primality.hpp
-  requiredBy: []
+  requiredBy:
+  - number_theory/factorize.hpp
   timestamp: '2025-01-27 10:50:19+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - number_theory/test/factorize.test.cpp
   - number_theory/test/primality_test.test.cpp
 documentation_of: number_theory/primality.hpp
 layout: document

@@ -1,32 +1,32 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: number_theory/factorial.hpp
     title: number_theory/factorial.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: number_theory/mod_int.hpp
     title: number_theory/mod_int.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: number_theory/utils.hpp
     title: number_theory/utils.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: poly/fft.hpp
     title: poly/fft.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: poly/fps_exp.hpp
     title: poly/fps_exp.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/fastio.hpp
     title: template/fastio.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/template.hpp
     title: template/template.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/exp_of_formal_power_series
@@ -34,33 +34,33 @@ data:
     - https://judge.yosupo.jp/problem/exp_of_formal_power_series
   bundledCode: "#line 1 \"poly/test/exp_of_formal_power_series.test.cpp\"\n#define\
     \ PROBLEM \"https://judge.yosupo.jp/problem/exp_of_formal_power_series\"\n#line\
-    \ 2 \"number_theory/factorial.hpp\"\n#include <cassert>\n#include <vector>\n\n\
-    template <typename M>\nM inv(int n) {\n    static std::vector<M> data{M::raw(0),\
-    \ M::raw(1)};\n    static constexpr unsigned MOD = M::get_mod();\n    assert(0\
-    \ < n);\n    while ((int)data.size() <= n) {\n        unsigned k = (unsigned)data.size();\n\
-    \        unsigned r = MOD / k + 1;\n        data.push_back(M::raw(r) * data[k\
-    \ * r - MOD]);\n    }\n    return data[n];\n}\n\ntemplate <typename M>\nM fact(int\
+    \ 2 \"poly/fps_exp.hpp\"\n#include <algorithm>\n#line 2 \"number_theory/factorial.hpp\"\
+    \n#include <cassert>\n#include <vector>\n\ntemplate <typename M>\nM inv(int n)\
+    \ {\n    static std::vector<M> data{M::raw(0), M::raw(1)};\n    static constexpr\
+    \ unsigned MOD = M::get_mod();\n    assert(0 < n);\n    while ((int)data.size()\
+    \ <= n) {\n        unsigned k = (unsigned)data.size();\n        unsigned r = MOD\
+    \ / k + 1;\n        data.push_back(M::raw(r) * data[k * r - MOD]);\n    }\n  \
+    \  return data[n];\n}\n\ntemplate <typename M>\nM fact(int n) {\n    static std::vector<M>\
+    \ data{M::raw(1), M::raw(1)};\n    assert(0 <= n);\n    while ((int)data.size()\
+    \ <= n) {\n        unsigned k = (unsigned)data.size();\n        data.push_back(M::raw(k)\
+    \ * data.back());\n    }\n    return data[n];\n}\n\ntemplate <typename M>\nM inv_fact(int\
     \ n) {\n    static std::vector<M> data{M::raw(1), M::raw(1)};\n    assert(0 <=\
     \ n);\n    while ((int)data.size() <= n) {\n        unsigned k = (unsigned)data.size();\n\
-    \        data.push_back(M::raw(k) * data.back());\n    }\n    return data[n];\n\
-    }\n\ntemplate <typename M>\nM inv_fact(int n) {\n    static std::vector<M> data{M::raw(1),\
-    \ M::raw(1)};\n    assert(0 <= n);\n    while ((int)data.size() <= n) {\n    \
-    \    unsigned k = (unsigned)data.size();\n        data.push_back(inv<M>(k) * data.back());\n\
-    \    }\n    return data[n];\n}\n\ntemplate <typename M>\nM binom(int n, int k)\
-    \ {\n    assert(0 <= n);\n    if (k < 0 || n < k) {\n        return M::raw(0);\n\
-    \    }\n    return fact<M>(n) * inv_fact<M>(k) * inv_fact<M>(n - k);\n}\n\ntemplate\
-    \ <typename M>\nM n_terms_sum_k(int n, int k) {\n    assert(0 <= n && 0 <= k);\n\
-    \    if (n == 0) {\n        return (k == 0 ? M::raw(1) : M::raw(0));\n    }\n\
-    \    return binom<M>(n + k - 1, n - 1);\n}\n#line 2 \"poly/fft.hpp\"\n#include\
-    \ <array>\n#line 2 \"number_theory/mod_int.hpp\"\n\n#line 4 \"number_theory/mod_int.hpp\"\
-    \n#include <iostream>\n#include <type_traits>\n#line 2 \"number_theory/utils.hpp\"\
-    \n\n#include <utility>\n\nconstexpr bool is_prime(unsigned n) {\n    if (n ==\
-    \ 0 || n == 1) {\n        return false;\n    }\n    for (unsigned i = 2; i * i\
-    \ <= n; ++i) {\n        if (n % i == 0) {\n            return false;\n       \
-    \ }\n    }\n    return true;\n}\n\nconstexpr unsigned mod_pow(unsigned x, unsigned\
-    \ y, unsigned mod) {\n    unsigned ret = 1, self = x;\n    while (y != 0) {\n\
-    \        if (y & 1) {\n            ret = (unsigned)((unsigned long long)ret *\
-    \ self % mod);\n        }\n        self = (unsigned)((unsigned long long)self\
+    \        data.push_back(inv<M>(k) * data.back());\n    }\n    return data[n];\n\
+    }\n\ntemplate <typename M>\nM binom(int n, int k) {\n    assert(0 <= n);\n   \
+    \ if (k < 0 || n < k) {\n        return M::raw(0);\n    }\n    return fact<M>(n)\
+    \ * inv_fact<M>(k) * inv_fact<M>(n - k);\n}\n\ntemplate <typename M>\nM n_terms_sum_k(int\
+    \ n, int k) {\n    assert(0 <= n && 0 <= k);\n    if (n == 0) {\n        return\
+    \ (k == 0 ? M::raw(1) : M::raw(0));\n    }\n    return binom<M>(n + k - 1, n -\
+    \ 1);\n}\n#line 2 \"poly/fft.hpp\"\n#include <array>\n#line 2 \"number_theory/mod_int.hpp\"\
+    \n\n#line 4 \"number_theory/mod_int.hpp\"\n#include <iostream>\n#include <type_traits>\n\
+    #line 2 \"number_theory/utils.hpp\"\n\n#include <utility>\n\nconstexpr bool is_prime(unsigned\
+    \ n) {\n    if (n == 0 || n == 1) {\n        return false;\n    }\n    for (unsigned\
+    \ i = 2; i * i <= n; ++i) {\n        if (n % i == 0) {\n            return false;\n\
+    \        }\n    }\n    return true;\n}\n\nconstexpr unsigned mod_pow(unsigned\
+    \ x, unsigned y, unsigned mod) {\n    unsigned ret = 1, self = x;\n    while (y\
+    \ != 0) {\n        if (y & 1) {\n            ret = (unsigned)((unsigned long long)ret\
+    \ * self % mod);\n        }\n        self = (unsigned)((unsigned long long)self\
     \ * self % mod);\n        y /= 2;\n    }\n    return ret;\n}\n\ntemplate <unsigned\
     \ mod>\nconstexpr unsigned primitive_root() {\n    static_assert(is_prime(mod),\
     \ \"`mod` must be a prime number.\");\n    if (mod == 2) {\n        return 1;\n\
@@ -224,7 +224,7 @@ data:
     template <typename M>\nstd::vector<M> convolve(const std::vector<M> &a, const\
     \ std::vector<M> &b) {\n    if (a.empty() || b.empty()) {\n        return std::vector<M>(0);\n\
     \    }\n    if (std::min(a.size(), b.size()) <= 60) {\n        return convolve_naive(a,\
-    \ b);\n    } else {\n        return convolve_fft(a, b);\n    }\n}\n#line 4 \"\
+    \ b);\n    } else {\n        return convolve_fft(a, b);\n    }\n}\n#line 5 \"\
     poly/fps_exp.hpp\"\n\ntemplate <typename M>\nstd::vector<M> fps_exp(const std::vector<M>\
     \ &h, int len = -1) {\n    static constexpr FFTRoot<M::get_mod()> fftroot;\n \
     \   if (len == -1) {\n        len = (int)h.size();\n    }\n    assert((int)h.size()\
@@ -418,8 +418,8 @@ data:
   isVerificationFile: true
   path: poly/test/exp_of_formal_power_series.test.cpp
   requiredBy: []
-  timestamp: '2025-01-29 17:30:43+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2025-01-29 17:34:04+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: poly/test/exp_of_formal_power_series.test.cpp
 layout: document

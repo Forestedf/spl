@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/factorial.hpp
     title: number_theory/factorial.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: poly/test/exp_of_formal_power_series.test.cpp
-    title: poly/test/exp_of_formal_power_series.test.cpp
+    path: poly/test/exp_of_formal_power_series_sparse.test.cpp
+    title: poly/test/exp_of_formal_power_series_sparse.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -62,7 +62,7 @@ data:
   timestamp: '2024-04-29 14:44:15+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - poly/test/exp_of_formal_power_series.test.cpp
+  - poly/test/exp_of_formal_power_series_sparse.test.cpp
 documentation_of: poly/fps_exp_sparse.hpp
 layout: document
 redirect_from:

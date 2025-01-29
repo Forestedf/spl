@@ -132,9 +132,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: poly/test/convolution_mod.test.cpp
     title: poly/test/convolution_mod.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/test/exp_of_formal_power_series.test.cpp
     title: poly/test/exp_of_formal_power_series.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: poly/test/exp_of_formal_power_series_sparse.test.cpp
+    title: poly/test/exp_of_formal_power_series_sparse.test.cpp
   - icon: ':heavy_check_mark:'
     path: poly/test/inv_of_formal_power_series.test.cpp
     title: poly/test/inv_of_formal_power_series.test.cpp
@@ -168,9 +171,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: string/test/zalgorithm.test.cpp
     title: string/test/zalgorithm.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 1 \"template/template.hpp\"\n#include <bits/stdc++.h>\n#define\
@@ -261,7 +264,7 @@ data:
   path: template/template.hpp
   requiredBy: []
   timestamp: '2024-07-18 16:56:22+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - opt/test/yuki_119.test.cpp
   - graph/test/biconnected_components.test.cpp
@@ -294,6 +297,7 @@ data:
   - poly/test/polynomial_taylor_shift.test.cpp
   - poly/test/log_of_formal_power_series_sparse.test.cpp
   - poly/test/inv_of_formal_power_series_sparse.test.cpp
+  - poly/test/exp_of_formal_power_series_sparse.test.cpp
   - poly/test/prod_of_polys.test.cpp
   - poly/test/exp_of_formal_power_series.test.cpp
   - poly/test/inv_of_formal_power_series.test.cpp

@@ -2,6 +2,9 @@
 data:
   _extendedDependsOn:
   - icon: ':question:'
+    path: number_theory/factorial.hpp
+    title: number_theory/factorial.hpp
+  - icon: ':question:'
     path: number_theory/mod_int.hpp
     title: number_theory/mod_int.hpp
   - icon: ':question:'
@@ -10,30 +13,43 @@ data:
   - icon: ':question:'
     path: poly/fft.hpp
     title: poly/fft.hpp
-  - icon: ':question:'
-    path: template/template.hpp
-    title: template/template.hpp
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
-  _isVerificationFailed: false
-  _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _extendedVerifiedWith:
+  - icon: ':x:'
+    path: poly/test/exp_of_formal_power_series.test.cpp
+    title: poly/test/exp_of_formal_power_series.test.cpp
+  _isVerificationFailed: true
+  _pathExtension: hpp
+  _verificationStatusIcon: ':x:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/convolution_mod
-    links:
-    - https://judge.yosupo.jp/problem/convolution_mod
-  bundledCode: "#line 1 \"poly/test/convolution_mod.test.cpp\"\n#define PROBLEM \"\
-    https://judge.yosupo.jp/problem/convolution_mod\"\n#define FAST_IO\n#line 2 \"\
-    poly/fft.hpp\"\n#include <array>\n#include <vector>\n#line 2 \"number_theory/mod_int.hpp\"\
-    \n\n#include <cassert>\n#include <iostream>\n#include <type_traits>\n#line 2 \"\
-    number_theory/utils.hpp\"\n\n#include <utility>\n\nconstexpr bool is_prime(unsigned\
-    \ n) {\n    if (n == 0 || n == 1) {\n        return false;\n    }\n    for (unsigned\
-    \ i = 2; i * i <= n; ++i) {\n        if (n % i == 0) {\n            return false;\n\
-    \        }\n    }\n    return true;\n}\n\nconstexpr unsigned mod_pow(unsigned\
-    \ x, unsigned y, unsigned mod) {\n    unsigned ret = 1, self = x;\n    while (y\
-    \ != 0) {\n        if (y & 1) {\n            ret = (unsigned)((unsigned long long)ret\
-    \ * self % mod);\n        }\n        self = (unsigned)((unsigned long long)self\
+    links: []
+  bundledCode: "#line 2 \"number_theory/factorial.hpp\"\n#include <cassert>\n#include\
+    \ <vector>\n\ntemplate <typename M>\nM inv(int n) {\n    static std::vector<M>\
+    \ data{M::raw(0), M::raw(1)};\n    static constexpr unsigned MOD = M::get_mod();\n\
+    \    assert(0 < n);\n    while ((int)data.size() <= n) {\n        unsigned k =\
+    \ (unsigned)data.size();\n        unsigned r = MOD / k + 1;\n        data.push_back(M::raw(r)\
+    \ * data[k * r - MOD]);\n    }\n    return data[n];\n}\n\ntemplate <typename M>\n\
+    M fact(int n) {\n    static std::vector<M> data{M::raw(1), M::raw(1)};\n    assert(0\
+    \ <= n);\n    while ((int)data.size() <= n) {\n        unsigned k = (unsigned)data.size();\n\
+    \        data.push_back(M::raw(k) * data.back());\n    }\n    return data[n];\n\
+    }\n\ntemplate <typename M>\nM inv_fact(int n) {\n    static std::vector<M> data{M::raw(1),\
+    \ M::raw(1)};\n    assert(0 <= n);\n    while ((int)data.size() <= n) {\n    \
+    \    unsigned k = (unsigned)data.size();\n        data.push_back(inv<M>(k) * data.back());\n\
+    \    }\n    return data[n];\n}\n\ntemplate <typename M>\nM binom(int n, int k)\
+    \ {\n    assert(0 <= n);\n    if (k < 0 || n < k) {\n        return M::raw(0);\n\
+    \    }\n    return fact<M>(n) * inv_fact<M>(k) * inv_fact<M>(n - k);\n}\n\ntemplate\
+    \ <typename M>\nM n_terms_sum_k(int n, int k) {\n    assert(0 <= n && 0 <= k);\n\
+    \    if (n == 0) {\n        return (k == 0 ? M::raw(1) : M::raw(0));\n    }\n\
+    \    return binom<M>(n + k - 1, n - 1);\n}\n#line 2 \"poly/fft.hpp\"\n#include\
+    \ <array>\n#line 2 \"number_theory/mod_int.hpp\"\n\n#line 4 \"number_theory/mod_int.hpp\"\
+    \n#include <iostream>\n#include <type_traits>\n#line 2 \"number_theory/utils.hpp\"\
+    \n\n#include <utility>\n\nconstexpr bool is_prime(unsigned n) {\n    if (n ==\
+    \ 0 || n == 1) {\n        return false;\n    }\n    for (unsigned i = 2; i * i\
+    \ <= n; ++i) {\n        if (n % i == 0) {\n            return false;\n       \
+    \ }\n    }\n    return true;\n}\n\nconstexpr unsigned mod_pow(unsigned x, unsigned\
+    \ y, unsigned mod) {\n    unsigned ret = 1, self = x;\n    while (y != 0) {\n\
+    \        if (y & 1) {\n            ret = (unsigned)((unsigned long long)ret *\
+    \ self % mod);\n        }\n        self = (unsigned)((unsigned long long)self\
     \ * self % mod);\n        y /= 2;\n    }\n    return ret;\n}\n\ntemplate <unsigned\
     \ mod>\nconstexpr unsigned primitive_root() {\n    static_assert(is_prime(mod),\
     \ \"`mod` must be a prime number.\");\n    if (mod == 2) {\n        return 1;\n\
@@ -197,74 +213,106 @@ data:
     template <typename M>\nstd::vector<M> convolve(const std::vector<M> &a, const\
     \ std::vector<M> &b) {\n    if (a.empty() || b.empty()) {\n        return std::vector<M>(0);\n\
     \    }\n    if (std::min(a.size(), b.size()) <= 60) {\n        return convolve_naive(a,\
-    \ b);\n    } else {\n        return convolve_fft(a, b);\n    }\n}\n#line 1 \"\
-    template/template.hpp\"\n#include <bits/stdc++.h>\n#define OVERRIDE(a, b, c, d,\
-    \ ...) d\n#define REP2(i, n) for (i32 i = 0; i < (i32)(n); ++i)\n#define REP3(i,\
-    \ m, n) for (i32 i = (i32)(m); i < (i32)(n); ++i)\n#define REP(...) OVERRIDE(__VA_ARGS__,\
-    \ REP3, REP2)(__VA_ARGS__)\n#define PER2(i, n) for (i32 i = (i32)(n)-1; i >= 0;\
-    \ --i)\n#define PER3(i, m, n) for (i32 i = (i32)(n)-1; i >= (i32)(m); --i)\n#define\
-    \ PER(...) OVERRIDE(__VA_ARGS__, PER3, PER2)(__VA_ARGS__)\n#define ALL(x) begin(x),\
-    \ end(x)\n#define LEN(x) (i32)(x.size())\nusing namespace std;\nusing u32 = unsigned\
-    \ int;\nusing u64 = unsigned long long;\nusing i32 = signed int;\nusing i64 =\
-    \ signed long long;\nusing f64 = double;\nusing f80 = long double;\nusing pi =\
-    \ pair<i32, i32>;\nusing pl = pair<i64, i64>;\ntemplate <typename T>\nusing V\
-    \ = vector<T>;\ntemplate <typename T>\nusing VV = V<V<T>>;\ntemplate <typename\
-    \ T>\nusing VVV = V<V<V<T>>>;\ntemplate <typename T>\nusing VVVV = V<V<V<V<T>>>>;\n\
-    template <typename T>\nusing PQR = priority_queue<T, V<T>, greater<T>>;\ntemplate\
-    \ <typename T>\nbool chmin(T &x, const T &y) {\n    if (x > y) {\n        x =\
-    \ y;\n        return true;\n    }\n    return false;\n}\ntemplate <typename T>\n\
-    bool chmax(T &x, const T &y) {\n    if (x < y) {\n        x = y;\n        return\
-    \ true;\n    }\n    return false;\n}\ntemplate <typename T>\ni32 lob(const V<T>\
-    \ &arr, const T &v) {\n    return (i32)(lower_bound(ALL(arr), v) - arr.begin());\n\
-    }\ntemplate <typename T>\ni32 upb(const V<T> &arr, const T &v) {\n    return (i32)(upper_bound(ALL(arr),\
-    \ v) - arr.begin());\n}\ntemplate <typename T>\nV<i32> argsort(const V<T> &arr)\
-    \ {\n    V<i32> ret(arr.size());\n    iota(ALL(ret), 0);\n    sort(ALL(ret), [&](i32\
-    \ i, i32 j) -> bool {\n        if (arr[i] == arr[j]) {\n            return i <\
-    \ j;\n        } else {\n            return arr[i] < arr[j];\n        }\n    });\n\
-    \    return ret;\n}\n#ifdef INT128\nusing u128 = __uint128_t;\nusing i128 = __int128_t;\n\
-    #endif\n[[maybe_unused]] constexpr i32 INF = 1000000100;\n[[maybe_unused]] constexpr\
-    \ i64 INF64 = 3000000000000000100;\nstruct SetUpIO {\n    SetUpIO() {\n#ifdef\
-    \ FAST_IO\n        ios::sync_with_stdio(false);\n        cin.tie(nullptr);\n#endif\n\
-    \        cout << fixed << setprecision(15);\n    }\n} set_up_io;\nvoid scan(char\
-    \ &x) { cin >> x; }\nvoid scan(u32 &x) { cin >> x; }\nvoid scan(u64 &x) { cin\
-    \ >> x; }\nvoid scan(i32 &x) { cin >> x; }\nvoid scan(i64 &x) { cin >> x; }\n\
-    void scan(string &x) { cin >> x; }\ntemplate <typename T>\nvoid scan(V<T> &x)\
-    \ {\n    for (T &ele : x) {\n        scan(ele);\n    }\n}\nvoid read() {}\ntemplate\
-    \ <typename Head, typename... Tail>\nvoid read(Head &head, Tail &...tail) {\n\
-    \    scan(head);\n    read(tail...);\n}\n#define CHAR(...)     \\\n    char __VA_ARGS__;\
-    \ \\\n    read(__VA_ARGS__);\n#define U32(...)     \\\n    u32 __VA_ARGS__; \\\
-    \n    read(__VA_ARGS__);\n#define U64(...)     \\\n    u64 __VA_ARGS__; \\\n \
-    \   read(__VA_ARGS__);\n#define I32(...)     \\\n    i32 __VA_ARGS__; \\\n   \
-    \ read(__VA_ARGS__);\n#define I64(...)     \\\n    i64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n\
-    #define STR(...)        \\\n    string __VA_ARGS__; \\\n    read(__VA_ARGS__);\n\
-    #define VEC(type, name, size) \\\n    V<type> name(size);       \\\n    read(name);\n\
-    #define VVEC(type, name, size1, size2)    \\\n    VV<type> name(size1, V<type>(size2));\
-    \ \\\n    read(name);\n#line 5 \"poly/test/convolution_mod.test.cpp\"\n\nint main()\
-    \ {\n    using M = ModInt<998244353>;\n    I32(n, m);\n    V<M> a(n), b(m);\n\
-    \    REP(i, n) {\n        cin >> a[i];\n    }\n    REP(i, m) {\n        cin >>\
-    \ b[i];\n    }\n    V<M> c = convolve(a, b);\n    REP(i, n + m - 1) {\n      \
-    \  cout << c[i] << \" \\n\"[i + 1 == n + m - 1];\n    }\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/convolution_mod\"\n#define\
-    \ FAST_IO\n#include \"../../poly/fft.hpp\"\n#include \"../../template/template.hpp\"\
-    \n\nint main() {\n    using M = ModInt<998244353>;\n    I32(n, m);\n    V<M> a(n),\
-    \ b(m);\n    REP(i, n) {\n        cin >> a[i];\n    }\n    REP(i, m) {\n     \
-    \   cin >> b[i];\n    }\n    V<M> c = convolve(a, b);\n    REP(i, n + m - 1) {\n\
-    \        cout << c[i] << \" \\n\"[i + 1 == n + m - 1];\n    }\n}\n"
+    \ b);\n    } else {\n        return convolve_fft(a, b);\n    }\n}\n#line 4 \"\
+    poly/fps_exp.hpp\"\n\ntemplate <typename M>\nstd::vector<M> fps_exp(const std::vector<M>\
+    \ &h, int len = -1) {\n    static constexpr FFTRoot<M::get_mod()> fftroot;\n \
+    \   if (len == -1) {\n        len = (int)h.size();\n    }\n    assert((int)h.size()\
+    \ >= 1 && h[0] == M(0) && len >= 0);\n    if (len == 0) {\n        return std::vector<M>();\n\
+    \    }\n    std::vector<M> f(1, M(1)), g(1, M(1));\n    std::vector<M> fft_f(1,\
+    \ M(1));\n    while ((int)f.size() < len) {\n        int n = (int)f.size();\n\
+    \        f.resize(2 * n, M());\n        g.resize(2 * n, M());\n\n        std::vector<M>\
+    \ fft_g = g;\n        fft(fft_g);\n        fft_f.resize(2 * n);\n        {\n \
+    \           M cur(1);\n            M zeta = fftroot.root[__builtin_ctz(n) + 1];\n\
+    \            for (int i = 0; i < n; ++i) {\n                fft_f[n + i] = f[i]\
+    \ * cur;\n                cur *= zeta;\n            }\n        }\n        fft(fft_f.data()\
+    \ + n, n);\n\n        std::vector<M> delta(n);\n        for (int i = 0; i < n;\
+    \ ++i) {\n            delta[i] = fft_f[i] * fft_g[i];\n        }\n        ifft(delta);\n\
+    \        delta.resize(2 * n, M());\n        std::rotate(delta.begin(), delta.begin()\
+    \ + n, delta.end());\n        delta[n] -= M(1);\n\n        std::vector<M> eps(n,\
+    \ M());\n        for (int i = 0; i < n - 1; ++i) {\n            eps[i] = f[i +\
+    \ 1] * M(i + 1);\n        }\n        fft(eps);\n        for (int i = 0; i < n;\
+    \ ++i) {\n            eps[i] *= fft_g[i];\n        }\n        ifft(eps);\n   \
+    \     eps.resize(2 * n, M());\n        for (int i = 0; i < n - 1; ++i) {\n   \
+    \         M tmp = (i + 1 < (int)h.size() ? h[i + 1] * M(i + 1) : M());\n     \
+    \       eps[n + i] = eps[i] - tmp;\n            eps[i] = tmp;\n        }\n   \
+    \     std::vector<M> fft_dh(2 * n);\n        for (int i = 0; i < n; ++i) {\n \
+    \           M tmp = (i + 1 < (int)h.size() ? h[i + 1] * M(i + 1) : M());\n   \
+    \         fft_dh[i] = tmp;\n        }\n        fft(fft_dh);\n        fft(delta);\n\
+    \        for (int i = 0; i < 2 * n; ++i) {\n            delta[i] *= fft_dh[i];\n\
+    \        }\n        ifft(delta);\n        for (int i = n; i < 2 * n; ++i) {\n\
+    \            eps[i] -= delta[i];\n        }\n        for (int i = 0; i < 2 * n\
+    \ - 1; ++i) {\n            M tmp = (i + 1 < (int)h.size() ? h[i + 1] * M(i + 1)\
+    \ : M());\n            eps[i] -= tmp;\n        }\n        for (int i = 2 * n -\
+    \ 1; i >= 1; --i) {\n            eps[i] = eps[i - 1] * inv<M>(i);\n        }\n\
+    \        eps[0] = M(0);\n\n        fft(eps);\n        for (int i = 0; i < 2 *\
+    \ n; ++i) {\n            eps[i] *= fft_f[i];\n        }\n        ifft(eps);\n\
+    \        for (int i = n; i < 2 * n; ++i) {\n            f[i] = -eps[i];\n    \
+    \    }\n        if (2 * n >= len) {\n            break;\n        }\n\n       \
+    \ fft_f = f;\n        fft(fft_f);\n        for (int i = 0; i < 2 * n; ++i) {\n\
+    \            eps[i] = fft_f[i] * fft_g[i];\n        }\n        ifft(eps);\n  \
+    \      std::fill(eps.begin(), eps.begin() + n, M(0));\n        fft(eps);\n   \
+    \     for (int i = 0; i < 2 * n; ++i) {\n            eps[i] *= fft_g[i];\n   \
+    \     }\n        ifft(eps);\n        for (int i = n; i < 2 * n; ++i) {\n     \
+    \       g[i] = -eps[i];\n        }\n    }\n    f.resize(len);\n    return f;\n\
+    }\n"
+  code: "#pragma once\n#include \"../number_theory/factorial.hpp\"\n#include \"fft.hpp\"\
+    \n\ntemplate <typename M>\nstd::vector<M> fps_exp(const std::vector<M> &h, int\
+    \ len = -1) {\n    static constexpr FFTRoot<M::get_mod()> fftroot;\n    if (len\
+    \ == -1) {\n        len = (int)h.size();\n    }\n    assert((int)h.size() >= 1\
+    \ && h[0] == M(0) && len >= 0);\n    if (len == 0) {\n        return std::vector<M>();\n\
+    \    }\n    std::vector<M> f(1, M(1)), g(1, M(1));\n    std::vector<M> fft_f(1,\
+    \ M(1));\n    while ((int)f.size() < len) {\n        int n = (int)f.size();\n\
+    \        f.resize(2 * n, M());\n        g.resize(2 * n, M());\n\n        std::vector<M>\
+    \ fft_g = g;\n        fft(fft_g);\n        fft_f.resize(2 * n);\n        {\n \
+    \           M cur(1);\n            M zeta = fftroot.root[__builtin_ctz(n) + 1];\n\
+    \            for (int i = 0; i < n; ++i) {\n                fft_f[n + i] = f[i]\
+    \ * cur;\n                cur *= zeta;\n            }\n        }\n        fft(fft_f.data()\
+    \ + n, n);\n\n        std::vector<M> delta(n);\n        for (int i = 0; i < n;\
+    \ ++i) {\n            delta[i] = fft_f[i] * fft_g[i];\n        }\n        ifft(delta);\n\
+    \        delta.resize(2 * n, M());\n        std::rotate(delta.begin(), delta.begin()\
+    \ + n, delta.end());\n        delta[n] -= M(1);\n\n        std::vector<M> eps(n,\
+    \ M());\n        for (int i = 0; i < n - 1; ++i) {\n            eps[i] = f[i +\
+    \ 1] * M(i + 1);\n        }\n        fft(eps);\n        for (int i = 0; i < n;\
+    \ ++i) {\n            eps[i] *= fft_g[i];\n        }\n        ifft(eps);\n   \
+    \     eps.resize(2 * n, M());\n        for (int i = 0; i < n - 1; ++i) {\n   \
+    \         M tmp = (i + 1 < (int)h.size() ? h[i + 1] * M(i + 1) : M());\n     \
+    \       eps[n + i] = eps[i] - tmp;\n            eps[i] = tmp;\n        }\n   \
+    \     std::vector<M> fft_dh(2 * n);\n        for (int i = 0; i < n; ++i) {\n \
+    \           M tmp = (i + 1 < (int)h.size() ? h[i + 1] * M(i + 1) : M());\n   \
+    \         fft_dh[i] = tmp;\n        }\n        fft(fft_dh);\n        fft(delta);\n\
+    \        for (int i = 0; i < 2 * n; ++i) {\n            delta[i] *= fft_dh[i];\n\
+    \        }\n        ifft(delta);\n        for (int i = n; i < 2 * n; ++i) {\n\
+    \            eps[i] -= delta[i];\n        }\n        for (int i = 0; i < 2 * n\
+    \ - 1; ++i) {\n            M tmp = (i + 1 < (int)h.size() ? h[i + 1] * M(i + 1)\
+    \ : M());\n            eps[i] -= tmp;\n        }\n        for (int i = 2 * n -\
+    \ 1; i >= 1; --i) {\n            eps[i] = eps[i - 1] * inv<M>(i);\n        }\n\
+    \        eps[0] = M(0);\n\n        fft(eps);\n        for (int i = 0; i < 2 *\
+    \ n; ++i) {\n            eps[i] *= fft_f[i];\n        }\n        ifft(eps);\n\
+    \        for (int i = n; i < 2 * n; ++i) {\n            f[i] = -eps[i];\n    \
+    \    }\n        if (2 * n >= len) {\n            break;\n        }\n\n       \
+    \ fft_f = f;\n        fft(fft_f);\n        for (int i = 0; i < 2 * n; ++i) {\n\
+    \            eps[i] = fft_f[i] * fft_g[i];\n        }\n        ifft(eps);\n  \
+    \      std::fill(eps.begin(), eps.begin() + n, M(0));\n        fft(eps);\n   \
+    \     for (int i = 0; i < 2 * n; ++i) {\n            eps[i] *= fft_g[i];\n   \
+    \     }\n        ifft(eps);\n        for (int i = n; i < 2 * n; ++i) {\n     \
+    \       g[i] = -eps[i];\n        }\n    }\n    f.resize(len);\n    return f;\n\
+    }\n"
   dependsOn:
+  - number_theory/factorial.hpp
   - poly/fft.hpp
   - number_theory/mod_int.hpp
   - number_theory/utils.hpp
-  - template/template.hpp
-  isVerificationFile: true
-  path: poly/test/convolution_mod.test.cpp
+  isVerificationFile: false
+  path: poly/fps_exp.hpp
   requiredBy: []
-  timestamp: '2024-07-18 16:56:22+09:00'
-  verificationStatus: TEST_ACCEPTED
-  verifiedWith: []
-documentation_of: poly/test/convolution_mod.test.cpp
+  timestamp: '2025-01-29 17:30:43+09:00'
+  verificationStatus: LIBRARY_ALL_WA
+  verifiedWith:
+  - poly/test/exp_of_formal_power_series.test.cpp
+documentation_of: poly/fps_exp.hpp
 layout: document
 redirect_from:
-- /verify/poly/test/convolution_mod.test.cpp
-- /verify/poly/test/convolution_mod.test.cpp.html
-title: poly/test/convolution_mod.test.cpp
+- /library/poly/fps_exp.hpp
+- /library/poly/fps_exp.hpp.html
+title: poly/fps_exp.hpp
 ---

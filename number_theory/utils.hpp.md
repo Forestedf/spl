@@ -8,15 +8,18 @@ data:
   - icon: ':heavy_check_mark:'
     path: number_theory/ax_by_c.hpp
     title: number_theory/ax_by_c.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/mod_int.hpp
     title: number_theory/mod_int.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: poly/fft.hpp
     title: poly/fft.hpp
   - icon: ':heavy_check_mark:'
     path: poly/fps_div_at.hpp
     title: poly/fps_div_at.hpp
+  - icon: ':x:'
+    path: poly/fps_exp.hpp
+    title: poly/fps_exp.hpp
   - icon: ':heavy_check_mark:'
     path: poly/fps_inv.hpp
     title: poly/fps_inv.hpp
@@ -78,9 +81,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: poly/test/convolution_mod.test.cpp
     title: poly/test/convolution_mod.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/test/exp_of_formal_power_series.test.cpp
     title: poly/test/exp_of_formal_power_series.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: poly/test/exp_of_formal_power_series_sparse.test.cpp
+    title: poly/test/exp_of_formal_power_series_sparse.test.cpp
   - icon: ':heavy_check_mark:'
     path: poly/test/inv_of_formal_power_series.test.cpp
     title: poly/test/inv_of_formal_power_series.test.cpp
@@ -111,9 +117,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: poly/test/stirling_number_of_the_second_kind.test.cpp
     title: poly/test/stirling_number_of_the_second_kind.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"number_theory/utils.hpp\"\n\n#include <utility>\n\nconstexpr\
@@ -210,6 +216,7 @@ data:
   - poly/stirling2.hpp
   - poly/taylor_shift.hpp
   - poly/fps_inv.hpp
+  - poly/fps_exp.hpp
   - poly/fft.hpp
   - poly/fps_div_at.hpp
   - poly/stirling1.hpp
@@ -217,7 +224,7 @@ data:
   - number_theory/mod_int.hpp
   - number_theory/ax_by_c.hpp
   timestamp: '2024-07-18 16:56:22+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - convolution/test/mul_modp_convolution.test.cpp
   - data_structure/test/queue_operate_all_composite.test.cpp
@@ -227,6 +234,7 @@ data:
   - poly/test/polynomial_taylor_shift.test.cpp
   - poly/test/log_of_formal_power_series_sparse.test.cpp
   - poly/test/inv_of_formal_power_series_sparse.test.cpp
+  - poly/test/exp_of_formal_power_series_sparse.test.cpp
   - poly/test/prod_of_polys.test.cpp
   - poly/test/exp_of_formal_power_series.test.cpp
   - poly/test/inv_of_formal_power_series.test.cpp

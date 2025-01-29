@@ -24,9 +24,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: number_theory/test/factorize.test.cpp
     title: number_theory/test/factorize.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/test/exp_of_formal_power_series.test.cpp
     title: poly/test/exp_of_formal_power_series.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: poly/test/exp_of_formal_power_series_sparse.test.cpp
+    title: poly/test/exp_of_formal_power_series_sparse.test.cpp
   - icon: ':heavy_check_mark:'
     path: poly/test/inv_of_formal_power_series.test.cpp
     title: poly/test/inv_of_formal_power_series.test.cpp
@@ -48,9 +51,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: poly/test/prod_of_polys.test.cpp
     title: poly/test/prod_of_polys.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 1 \"template/fastio.hpp\"\n#include <cstdio>\n#include <cstring>\n\
@@ -238,11 +241,12 @@ data:
   path: template/fastio.hpp
   requiredBy: []
   timestamp: '2024-11-23 22:57:41+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - convolution/test/mul_modp_convolution.test.cpp
   - poly/test/log_of_formal_power_series_sparse.test.cpp
   - poly/test/inv_of_formal_power_series_sparse.test.cpp
+  - poly/test/exp_of_formal_power_series_sparse.test.cpp
   - poly/test/prod_of_polys.test.cpp
   - poly/test/exp_of_formal_power_series.test.cpp
   - poly/test/inv_of_formal_power_series.test.cpp

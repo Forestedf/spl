@@ -23,6 +23,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: bit/xor_convolution.hpp
       title: bit/xor_convolution.hpp
+  - name: convolution
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: convolution/mul_mod_p_conv.hpp
+      title: convolution/mul_mod_p_conv.hpp
   - name: data_structure
     pages:
     - icon: ':heavy_check_mark:'
@@ -144,6 +149,9 @@ data:
       path: number_theory/primality.hpp
       title: number_theory/primality.hpp
     - icon: ':heavy_check_mark:'
+      path: number_theory/primitive_root.hpp
+      title: number_theory/primitive_root.hpp
+    - icon: ':heavy_check_mark:'
       path: number_theory/utils.hpp
       title: number_theory/utils.hpp
   - name: opt
@@ -239,6 +247,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: bit/test/bitwise_xor_convolution.test.cpp
       title: bit/test/bitwise_xor_convolution.test.cpp
+  - name: convolution/test
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: convolution/test/mul_modp_convolution.test.cpp
+      title: convolution/test/mul_modp_convolution.test.cpp
   - name: data_structure/test
     pages:
     - icon: ':heavy_check_mark:'
@@ -344,6 +357,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: number_theory/test/primality_test.test.cpp
       title: number_theory/test/primality_test.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: number_theory/test/primitive_root.test.cpp
+      title: number_theory/test/primitive_root.test.cpp
   - name: opt/test
     pages:
     - icon: ':heavy_check_mark:'

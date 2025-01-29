@@ -2,41 +2,40 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
+    path: number_theory/factorize.hpp
+    title: number_theory/factorize.hpp
+  - icon: ':heavy_check_mark:'
     path: number_theory/montgomery_64.hpp
     title: number_theory/montgomery_64.hpp
   - icon: ':heavy_check_mark:'
     path: number_theory/primality.hpp
     title: number_theory/primality.hpp
   - icon: ':heavy_check_mark:'
-    path: template/random.hpp
-    title: template/random.hpp
-  _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
-    path: convolution/mul_mod_p_conv.hpp
-    title: convolution/mul_mod_p_conv.hpp
-  - icon: ':heavy_check_mark:'
     path: number_theory/primitive_root.hpp
     title: number_theory/primitive_root.hpp
-  _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: convolution/test/mul_modp_convolution.test.cpp
-    title: convolution/test/mul_modp_convolution.test.cpp
+    path: template/random.hpp
+    title: template/random.hpp
   - icon: ':heavy_check_mark:'
-    path: number_theory/test/factorize.test.cpp
-    title: number_theory/test/factorize.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: number_theory/test/primitive_root.test.cpp
-    title: number_theory/test/primitive_root.test.cpp
+    path: template/template.hpp
+    title: template/template.hpp
+  _extendedRequiredBy: []
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
-  _pathExtension: hpp
+  _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    links: []
-  bundledCode: "#line 2 \"number_theory/factorize.hpp\"\n#include <algorithm>\n#include\
-    \ <vector>\n#line 2 \"template/random.hpp\"\n#include <chrono>\n#include <random>\n\
-    \n#if defined(LOCAL) || defined(FIX_SEED)\nstd::mt19937_64 mt(123456789);\n#else\n\
-    std::mt19937_64 mt(std::chrono::steady_clock::now().time_since_epoch().count());\n\
-    #endif\n\ntemplate <typename T>\nT uniform(T l, T r) {\n    return std::uniform_int_distribution<T>(l,\
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: https://judge.yosupo.jp/problem/primitive_root
+    links:
+    - https://judge.yosupo.jp/problem/primitive_root
+  bundledCode: "#line 1 \"number_theory/test/primitive_root.test.cpp\"\n#define PROBLEM\
+    \ \"https://judge.yosupo.jp/problem/primitive_root\"\n#define FAST_IO\n#line 2\
+    \ \"number_theory/factorize.hpp\"\n#include <algorithm>\n#include <vector>\n#line\
+    \ 2 \"template/random.hpp\"\n#include <chrono>\n#include <random>\n\n#if defined(LOCAL)\
+    \ || defined(FIX_SEED)\nstd::mt19937_64 mt(123456789);\n#else\nstd::mt19937_64\
+    \ mt(std::chrono::steady_clock::now().time_since_epoch().count());\n#endif\n\n\
+    template <typename T>\nT uniform(T l, T r) {\n    return std::uniform_int_distribution<T>(l,\
     \ r - 1)(mt);\n}\ntemplate <typename T>\nT uniform(T n) {\n    return std::uniform_int_distribution<T>(0,\
     \ n - 1)(mt);\n}\n#line 2 \"number_theory/primality.hpp\"\n\nnamespace primality\
     \ {\n\nusing u64 = unsigned long long;\nusing u128 = __uint128_t;\n\nu64 inv_64(u64\
@@ -119,56 +118,83 @@ data:
     }\n\n}\n\nstd::vector<unsigned long long> factorize(unsigned long long n) {\n\
     \    if (n <= 1) {\n        return std::vector<unsigned long long>();\n    }\n\
     \    std::vector<unsigned long long> ps;\n    factorize_impl::factor_inner(n,\
-    \ ps);\n    std::sort(ps.begin(), ps.end());\n    return ps;\n}\n"
-  code: "#pragma once\n#include <algorithm>\n#include <vector>\n#include \"../template/random.hpp\"\
-    \n#include \"primality.hpp\"\n#include \"montgomery_64.hpp\"\n\nnamespace factorize_impl\
-    \ {\n\nunsigned long long bgcd(unsigned long long x, unsigned long long y) {\n\
-    \    if (x == 0) {\n        return y;\n    }\n    if (y == 0) {\n        return\
-    \ x;\n    }\n    int n = __builtin_ctzll(x);\n    int m = __builtin_ctzll(y);\n\
-    \    x >>= n;\n    y >>= m;\n    while (x != y) {\n        if (x > y) {\n    \
-    \        x = (x - y) >> __builtin_ctzll(x - y);\n        } else {\n          \
-    \  y = (y - x) >> __builtin_ctzll(y - x);\n        }\n    }\n    return x << (n\
-    \ < m ? n : m);\n}\n\ntemplate <typename T>\nunsigned long long rho(unsigned long\
-    \ long n, unsigned long long c) {\n    T cc(c);\n    auto f = [cc](T x) -> T {\n\
-    \        return x * x + cc;\n    };\n    T y(2);\n    T x = y;\n    T z = y;\n\
-    \    T p(1);\n    unsigned long long g = 1;\n    constexpr int M = 128;\n    for\
-    \ (int r = 1; g == 1; r *= 2) {\n        x = y;\n        for (int i = 0; i < r\
-    \ && g == 1; i += M) {\n            z = y;\n            for (int j = 0; j < r\
-    \ - i && j < M; ++j) {\n                y = f(y);\n                p *= y - x;\n\
-    \            }\n            g = bgcd(p.val(), n);\n        }\n    }\n    if (g\
-    \ == n) {\n        do {\n            z = f(z);\n            g = bgcd((z - x).val(),\
-    \ n);\n        } while (g == 1);\n    }\n    return g;\n}\n\nunsigned long long\
-    \ find_factor(unsigned long long n) {\n    using M = MontgomeryModInt64<20250127>;\n\
-    \    M::set_mod(n);\n    while (true) {\n        unsigned long long c = uniform(n);\n\
-    \        unsigned long long g = rho<M>(n, c);\n        if (g != n) {\n       \
-    \     return g;\n        }\n    }\n    return 0;\n}\n\nvoid factor_inner(unsigned\
-    \ long long n, std::vector<unsigned long long> &ps) {\n    if (is_prime(n)) {\n\
-    \        ps.push_back(n);\n        return;\n    }\n    if (n % 2 == 0) {\n   \
-    \     ps.push_back(2);\n        factor_inner(n / 2, ps);\n        return;\n  \
-    \  }\n    unsigned long long m = find_factor(n);\n    factor_inner(m, ps);\n \
-    \   factor_inner(n / m, ps);\n}\n\n}\n\nstd::vector<unsigned long long> factorize(unsigned\
-    \ long long n) {\n    if (n <= 1) {\n        return std::vector<unsigned long\
-    \ long>();\n    }\n    std::vector<unsigned long long> ps;\n    factorize_impl::factor_inner(n,\
-    \ ps);\n    std::sort(ps.begin(), ps.end());\n    return ps;\n}\n"
+    \ ps);\n    std::sort(ps.begin(), ps.end());\n    return ps;\n}\n#line 3 \"number_theory/primitive_root.hpp\"\
+    \n\n// p: prime\nunsigned long long find_primitive_root(unsigned long long p)\
+    \ {\n    using M = MontgomeryModInt64<20250128>;\n    assert(is_prime(p));\n \
+    \   if (p == 2) {\n        return 1;\n    }\n    M::set_mod(p);\n    std::vector<unsigned\
+    \ long long> ps = factorize(p - 1);\n    ps.erase(std::unique(ps.begin(), ps.end()),\
+    \ ps.end());\n    while (true) {\n        unsigned long long x = uniform<unsigned\
+    \ long long>(1, p);\n        M x_(x), one(1ULL);\n        bool ok = true;\n  \
+    \      for (unsigned long long q : ps) {\n            if (x_.pow((p - 1) / q).x\
+    \ == one.x) {\n                ok = false;\n                break;\n         \
+    \   }\n        }\n        if (ok) {\n            return x;\n        }\n    }\n\
+    \    return 0;\n}\n#line 1 \"template/template.hpp\"\n#include <bits/stdc++.h>\n\
+    #define OVERRIDE(a, b, c, d, ...) d\n#define REP2(i, n) for (i32 i = 0; i < (i32)(n);\
+    \ ++i)\n#define REP3(i, m, n) for (i32 i = (i32)(m); i < (i32)(n); ++i)\n#define\
+    \ REP(...) OVERRIDE(__VA_ARGS__, REP3, REP2)(__VA_ARGS__)\n#define PER2(i, n)\
+    \ for (i32 i = (i32)(n)-1; i >= 0; --i)\n#define PER3(i, m, n) for (i32 i = (i32)(n)-1;\
+    \ i >= (i32)(m); --i)\n#define PER(...) OVERRIDE(__VA_ARGS__, PER3, PER2)(__VA_ARGS__)\n\
+    #define ALL(x) begin(x), end(x)\n#define LEN(x) (i32)(x.size())\nusing namespace\
+    \ std;\nusing u32 = unsigned int;\nusing u64 = unsigned long long;\nusing i32\
+    \ = signed int;\nusing i64 = signed long long;\nusing f64 = double;\nusing f80\
+    \ = long double;\nusing pi = pair<i32, i32>;\nusing pl = pair<i64, i64>;\ntemplate\
+    \ <typename T>\nusing V = vector<T>;\ntemplate <typename T>\nusing VV = V<V<T>>;\n\
+    template <typename T>\nusing VVV = V<V<V<T>>>;\ntemplate <typename T>\nusing VVVV\
+    \ = V<V<V<V<T>>>>;\ntemplate <typename T>\nusing PQR = priority_queue<T, V<T>,\
+    \ greater<T>>;\ntemplate <typename T>\nbool chmin(T &x, const T &y) {\n    if\
+    \ (x > y) {\n        x = y;\n        return true;\n    }\n    return false;\n\
+    }\ntemplate <typename T>\nbool chmax(T &x, const T &y) {\n    if (x < y) {\n \
+    \       x = y;\n        return true;\n    }\n    return false;\n}\ntemplate <typename\
+    \ T>\ni32 lob(const V<T> &arr, const T &v) {\n    return (i32)(lower_bound(ALL(arr),\
+    \ v) - arr.begin());\n}\ntemplate <typename T>\ni32 upb(const V<T> &arr, const\
+    \ T &v) {\n    return (i32)(upper_bound(ALL(arr), v) - arr.begin());\n}\ntemplate\
+    \ <typename T>\nV<i32> argsort(const V<T> &arr) {\n    V<i32> ret(arr.size());\n\
+    \    iota(ALL(ret), 0);\n    sort(ALL(ret), [&](i32 i, i32 j) -> bool {\n    \
+    \    if (arr[i] == arr[j]) {\n            return i < j;\n        } else {\n  \
+    \          return arr[i] < arr[j];\n        }\n    });\n    return ret;\n}\n#ifdef\
+    \ INT128\nusing u128 = __uint128_t;\nusing i128 = __int128_t;\n#endif\n[[maybe_unused]]\
+    \ constexpr i32 INF = 1000000100;\n[[maybe_unused]] constexpr i64 INF64 = 3000000000000000100;\n\
+    struct SetUpIO {\n    SetUpIO() {\n#ifdef FAST_IO\n        ios::sync_with_stdio(false);\n\
+    \        cin.tie(nullptr);\n#endif\n        cout << fixed << setprecision(15);\n\
+    \    }\n} set_up_io;\nvoid scan(char &x) { cin >> x; }\nvoid scan(u32 &x) { cin\
+    \ >> x; }\nvoid scan(u64 &x) { cin >> x; }\nvoid scan(i32 &x) { cin >> x; }\n\
+    void scan(i64 &x) { cin >> x; }\nvoid scan(string &x) { cin >> x; }\ntemplate\
+    \ <typename T>\nvoid scan(V<T> &x) {\n    for (T &ele : x) {\n        scan(ele);\n\
+    \    }\n}\nvoid read() {}\ntemplate <typename Head, typename... Tail>\nvoid read(Head\
+    \ &head, Tail &...tail) {\n    scan(head);\n    read(tail...);\n}\n#define CHAR(...)\
+    \     \\\n    char __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define U32(...) \
+    \    \\\n    u32 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define U64(...)   \
+    \  \\\n    u64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define I32(...)     \\\
+    \n    i32 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define I64(...)     \\\n \
+    \   i64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define STR(...)        \\\n\
+    \    string __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define VEC(type, name, size)\
+    \ \\\n    V<type> name(size);       \\\n    read(name);\n#define VVEC(type, name,\
+    \ size1, size2)    \\\n    VV<type> name(size1, V<type>(size2)); \\\n    read(name);\n\
+    #line 5 \"number_theory/test/primitive_root.test.cpp\"\n\nvoid solve() {\n   \
+    \ U64(p);\n    cout << find_primitive_root(p) << '\\n';\n}\n\nint main() {\n \
+    \   i32 t = 1;\n    cin >> t;\n    while (t--) {\n        solve();\n    }\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/primitive_root\"\n#define\
+    \ FAST_IO\n#include \"../../number_theory/primitive_root.hpp\"\n#include \"../../template/template.hpp\"\
+    \n\nvoid solve() {\n    U64(p);\n    cout << find_primitive_root(p) << '\\n';\n\
+    }\n\nint main() {\n    i32 t = 1;\n    cin >> t;\n    while (t--) {\n        solve();\n\
+    \    }\n}\n"
   dependsOn:
+  - number_theory/primitive_root.hpp
+  - number_theory/factorize.hpp
   - template/random.hpp
   - number_theory/primality.hpp
   - number_theory/montgomery_64.hpp
-  isVerificationFile: false
-  path: number_theory/factorize.hpp
-  requiredBy:
-  - convolution/mul_mod_p_conv.hpp
-  - number_theory/primitive_root.hpp
-  timestamp: '2025-01-27 21:54:34+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - convolution/test/mul_modp_convolution.test.cpp
-  - number_theory/test/factorize.test.cpp
-  - number_theory/test/primitive_root.test.cpp
-documentation_of: number_theory/factorize.hpp
+  - template/template.hpp
+  isVerificationFile: true
+  path: number_theory/test/primitive_root.test.cpp
+  requiredBy: []
+  timestamp: '2025-01-29 16:01:19+09:00'
+  verificationStatus: TEST_ACCEPTED
+  verifiedWith: []
+documentation_of: number_theory/test/primitive_root.test.cpp
 layout: document
 redirect_from:
-- /library/number_theory/factorize.hpp
-- /library/number_theory/factorize.hpp.html
-title: number_theory/factorize.hpp
+- /verify/number_theory/test/primitive_root.test.cpp
+- /verify/number_theory/test/primitive_root.test.cpp.html
+title: number_theory/test/primitive_root.test.cpp
 ---

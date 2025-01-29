@@ -9,6 +9,9 @@ data:
     title: number_theory/utils.hpp
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
+    path: convolution/mul_mod_p_conv.hpp
+    title: convolution/mul_mod_p_conv.hpp
+  - icon: ':heavy_check_mark:'
     path: poly/fps_div_at.hpp
     title: poly/fps_div_at.hpp
   - icon: ':heavy_check_mark:'
@@ -24,6 +27,9 @@ data:
     path: poly/taylor_shift.hpp
     title: poly/taylor_shift.hpp
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: convolution/test/mul_modp_convolution.test.cpp
+    title: convolution/test/mul_modp_convolution.test.cpp
   - icon: ':heavy_check_mark:'
     path: poly/test/convolution_mod.test.cpp
     title: poly/test/convolution_mod.test.cpp
@@ -321,6 +327,7 @@ data:
   isVerificationFile: false
   path: poly/fft.hpp
   requiredBy:
+  - convolution/mul_mod_p_conv.hpp
   - poly/stirling2.hpp
   - poly/taylor_shift.hpp
   - poly/fps_inv.hpp
@@ -329,6 +336,7 @@ data:
   timestamp: '2024-07-18 16:56:22+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - convolution/test/mul_modp_convolution.test.cpp
   - poly/test/polynomial_taylor_shift.test.cpp
   - poly/test/prod_of_polys.test.cpp
   - poly/test/inv_of_formal_power_series.test.cpp

@@ -22,6 +22,9 @@ data:
     path: bit/test/bitwise_xor_convolution.test.cpp
     title: bit/test/bitwise_xor_convolution.test.cpp
   - icon: ':heavy_check_mark:'
+    path: convolution/test/mul_modp_convolution.test.cpp
+    title: convolution/test/mul_modp_convolution.test.cpp
+  - icon: ':heavy_check_mark:'
     path: data_structure/test/1891.test.cpp
     title: data_structure/test/1891.test.cpp
   - icon: ':heavy_check_mark:'
@@ -120,6 +123,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: number_theory/test/primality_test.test.cpp
     title: number_theory/test/primality_test.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: number_theory/test/primitive_root.test.cpp
+    title: number_theory/test/primitive_root.test.cpp
   - icon: ':heavy_check_mark:'
     path: opt/test/yuki_119.test.cpp
     title: opt/test/yuki_119.test.cpp
@@ -265,6 +271,7 @@ data:
   - graph/test/lca.test.cpp
   - graph/test/vertex_add_path_sum.test.cpp
   - graph/test/scc.test.cpp
+  - convolution/test/mul_modp_convolution.test.cpp
   - data_structure/test/cartesian_tree.test.cpp
   - data_structure/test/staticrmq.test.cpp
   - data_structure/test/queue_operate_all_composite.test.cpp
@@ -301,6 +308,7 @@ data:
   - number_theory/test/extgcd2_stress.test.cpp
   - number_theory/test/factorize.test.cpp
   - number_theory/test/primality_test.test.cpp
+  - number_theory/test/primitive_root.test.cpp
   - number_theory/test/inv_mod_stress.test.cpp
   - number_theory/test/ax_by_c_stress.test.cpp
   - number_theory/test/montgomery_64_stress.test.cpp

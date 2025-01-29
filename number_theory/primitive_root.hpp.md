@@ -2,6 +2,9 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
+    path: number_theory/factorize.hpp
+    title: number_theory/factorize.hpp
+  - icon: ':heavy_check_mark:'
     path: number_theory/montgomery_64.hpp
     title: number_theory/montgomery_64.hpp
   - icon: ':heavy_check_mark:'
@@ -14,16 +17,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: convolution/mul_mod_p_conv.hpp
     title: convolution/mul_mod_p_conv.hpp
-  - icon: ':heavy_check_mark:'
-    path: number_theory/primitive_root.hpp
-    title: number_theory/primitive_root.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: convolution/test/mul_modp_convolution.test.cpp
     title: convolution/test/mul_modp_convolution.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: number_theory/test/factorize.test.cpp
-    title: number_theory/test/factorize.test.cpp
   - icon: ':heavy_check_mark:'
     path: number_theory/test/primitive_root.test.cpp
     title: number_theory/test/primitive_root.test.cpp
@@ -119,56 +116,45 @@ data:
     }\n\n}\n\nstd::vector<unsigned long long> factorize(unsigned long long n) {\n\
     \    if (n <= 1) {\n        return std::vector<unsigned long long>();\n    }\n\
     \    std::vector<unsigned long long> ps;\n    factorize_impl::factor_inner(n,\
-    \ ps);\n    std::sort(ps.begin(), ps.end());\n    return ps;\n}\n"
-  code: "#pragma once\n#include <algorithm>\n#include <vector>\n#include \"../template/random.hpp\"\
-    \n#include \"primality.hpp\"\n#include \"montgomery_64.hpp\"\n\nnamespace factorize_impl\
-    \ {\n\nunsigned long long bgcd(unsigned long long x, unsigned long long y) {\n\
-    \    if (x == 0) {\n        return y;\n    }\n    if (y == 0) {\n        return\
-    \ x;\n    }\n    int n = __builtin_ctzll(x);\n    int m = __builtin_ctzll(y);\n\
-    \    x >>= n;\n    y >>= m;\n    while (x != y) {\n        if (x > y) {\n    \
-    \        x = (x - y) >> __builtin_ctzll(x - y);\n        } else {\n          \
-    \  y = (y - x) >> __builtin_ctzll(y - x);\n        }\n    }\n    return x << (n\
-    \ < m ? n : m);\n}\n\ntemplate <typename T>\nunsigned long long rho(unsigned long\
-    \ long n, unsigned long long c) {\n    T cc(c);\n    auto f = [cc](T x) -> T {\n\
-    \        return x * x + cc;\n    };\n    T y(2);\n    T x = y;\n    T z = y;\n\
-    \    T p(1);\n    unsigned long long g = 1;\n    constexpr int M = 128;\n    for\
-    \ (int r = 1; g == 1; r *= 2) {\n        x = y;\n        for (int i = 0; i < r\
-    \ && g == 1; i += M) {\n            z = y;\n            for (int j = 0; j < r\
-    \ - i && j < M; ++j) {\n                y = f(y);\n                p *= y - x;\n\
-    \            }\n            g = bgcd(p.val(), n);\n        }\n    }\n    if (g\
-    \ == n) {\n        do {\n            z = f(z);\n            g = bgcd((z - x).val(),\
-    \ n);\n        } while (g == 1);\n    }\n    return g;\n}\n\nunsigned long long\
-    \ find_factor(unsigned long long n) {\n    using M = MontgomeryModInt64<20250127>;\n\
-    \    M::set_mod(n);\n    while (true) {\n        unsigned long long c = uniform(n);\n\
-    \        unsigned long long g = rho<M>(n, c);\n        if (g != n) {\n       \
-    \     return g;\n        }\n    }\n    return 0;\n}\n\nvoid factor_inner(unsigned\
-    \ long long n, std::vector<unsigned long long> &ps) {\n    if (is_prime(n)) {\n\
-    \        ps.push_back(n);\n        return;\n    }\n    if (n % 2 == 0) {\n   \
-    \     ps.push_back(2);\n        factor_inner(n / 2, ps);\n        return;\n  \
-    \  }\n    unsigned long long m = find_factor(n);\n    factor_inner(m, ps);\n \
-    \   factor_inner(n / m, ps);\n}\n\n}\n\nstd::vector<unsigned long long> factorize(unsigned\
-    \ long long n) {\n    if (n <= 1) {\n        return std::vector<unsigned long\
-    \ long>();\n    }\n    std::vector<unsigned long long> ps;\n    factorize_impl::factor_inner(n,\
-    \ ps);\n    std::sort(ps.begin(), ps.end());\n    return ps;\n}\n"
+    \ ps);\n    std::sort(ps.begin(), ps.end());\n    return ps;\n}\n#line 3 \"number_theory/primitive_root.hpp\"\
+    \n\n// p: prime\nunsigned long long find_primitive_root(unsigned long long p)\
+    \ {\n    using M = MontgomeryModInt64<20250128>;\n    assert(is_prime(p));\n \
+    \   if (p == 2) {\n        return 1;\n    }\n    M::set_mod(p);\n    std::vector<unsigned\
+    \ long long> ps = factorize(p - 1);\n    ps.erase(std::unique(ps.begin(), ps.end()),\
+    \ ps.end());\n    while (true) {\n        unsigned long long x = uniform<unsigned\
+    \ long long>(1, p);\n        M x_(x), one(1ULL);\n        bool ok = true;\n  \
+    \      for (unsigned long long q : ps) {\n            if (x_.pow((p - 1) / q).x\
+    \ == one.x) {\n                ok = false;\n                break;\n         \
+    \   }\n        }\n        if (ok) {\n            return x;\n        }\n    }\n\
+    \    return 0;\n}\n"
+  code: "#pragma once\n#include \"factorize.hpp\"\n\n// p: prime\nunsigned long long\
+    \ find_primitive_root(unsigned long long p) {\n    using M = MontgomeryModInt64<20250128>;\n\
+    \    assert(is_prime(p));\n    if (p == 2) {\n        return 1;\n    }\n    M::set_mod(p);\n\
+    \    std::vector<unsigned long long> ps = factorize(p - 1);\n    ps.erase(std::unique(ps.begin(),\
+    \ ps.end()), ps.end());\n    while (true) {\n        unsigned long long x = uniform<unsigned\
+    \ long long>(1, p);\n        M x_(x), one(1ULL);\n        bool ok = true;\n  \
+    \      for (unsigned long long q : ps) {\n            if (x_.pow((p - 1) / q).x\
+    \ == one.x) {\n                ok = false;\n                break;\n         \
+    \   }\n        }\n        if (ok) {\n            return x;\n        }\n    }\n\
+    \    return 0;\n}\n"
   dependsOn:
+  - number_theory/factorize.hpp
   - template/random.hpp
   - number_theory/primality.hpp
   - number_theory/montgomery_64.hpp
   isVerificationFile: false
-  path: number_theory/factorize.hpp
+  path: number_theory/primitive_root.hpp
   requiredBy:
   - convolution/mul_mod_p_conv.hpp
-  - number_theory/primitive_root.hpp
-  timestamp: '2025-01-27 21:54:34+09:00'
+  timestamp: '2025-01-29 16:01:19+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - convolution/test/mul_modp_convolution.test.cpp
-  - number_theory/test/factorize.test.cpp
   - number_theory/test/primitive_root.test.cpp
-documentation_of: number_theory/factorize.hpp
+documentation_of: number_theory/primitive_root.hpp
 layout: document
 redirect_from:
-- /library/number_theory/factorize.hpp
-- /library/number_theory/factorize.hpp.html
-title: number_theory/factorize.hpp
+- /library/number_theory/primitive_root.hpp
+- /library/number_theory/primitive_root.hpp.html
+title: number_theory/primitive_root.hpp
 ---

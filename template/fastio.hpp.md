@@ -19,6 +19,9 @@ data:
     path: algebra/test/system_of_linear_equations.test.cpp
     title: algebra/test/system_of_linear_equations.test.cpp
   - icon: ':heavy_check_mark:'
+    path: convolution/test/mul_modp_convolution.test.cpp
+    title: convolution/test/mul_modp_convolution.test.cpp
+  - icon: ':heavy_check_mark:'
     path: number_theory/test/factorize.test.cpp
     title: number_theory/test/factorize.test.cpp
   - icon: ':heavy_check_mark:'
@@ -234,6 +237,7 @@ data:
   timestamp: '2024-11-23 22:57:41+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - convolution/test/mul_modp_convolution.test.cpp
   - poly/test/inv_of_formal_power_series_sparse.test.cpp
   - poly/test/prod_of_polys.test.cpp
   - poly/test/exp_of_formal_power_series.test.cpp

@@ -1,0 +1,355 @@
+---
+data:
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: number_theory/factorize.hpp
+    title: number_theory/factorize.hpp
+  - icon: ':heavy_check_mark:'
+    path: number_theory/mod_int.hpp
+    title: number_theory/mod_int.hpp
+  - icon: ':heavy_check_mark:'
+    path: number_theory/montgomery_64.hpp
+    title: number_theory/montgomery_64.hpp
+  - icon: ':heavy_check_mark:'
+    path: number_theory/primality.hpp
+    title: number_theory/primality.hpp
+  - icon: ':heavy_check_mark:'
+    path: number_theory/primitive_root.hpp
+    title: number_theory/primitive_root.hpp
+  - icon: ':heavy_check_mark:'
+    path: number_theory/utils.hpp
+    title: number_theory/utils.hpp
+  - icon: ':heavy_check_mark:'
+    path: poly/fft.hpp
+    title: poly/fft.hpp
+  - icon: ':heavy_check_mark:'
+    path: template/random.hpp
+    title: template/random.hpp
+  _extendedRequiredBy: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: convolution/test/mul_modp_convolution.test.cpp
+    title: convolution/test/mul_modp_convolution.test.cpp
+  _isVerificationFailed: false
+  _pathExtension: hpp
+  _verificationStatusIcon: ':heavy_check_mark:'
+  attributes:
+    links: []
+  bundledCode: "#line 2 \"number_theory/factorize.hpp\"\n#include <algorithm>\n#include\
+    \ <vector>\n#line 2 \"template/random.hpp\"\n#include <chrono>\n#include <random>\n\
+    \n#if defined(LOCAL) || defined(FIX_SEED)\nstd::mt19937_64 mt(123456789);\n#else\n\
+    std::mt19937_64 mt(std::chrono::steady_clock::now().time_since_epoch().count());\n\
+    #endif\n\ntemplate <typename T>\nT uniform(T l, T r) {\n    return std::uniform_int_distribution<T>(l,\
+    \ r - 1)(mt);\n}\ntemplate <typename T>\nT uniform(T n) {\n    return std::uniform_int_distribution<T>(0,\
+    \ n - 1)(mt);\n}\n#line 2 \"number_theory/primality.hpp\"\n\nnamespace primality\
+    \ {\n\nusing u64 = unsigned long long;\nusing u128 = __uint128_t;\n\nu64 inv_64(u64\
+    \ n) {\n    u64 r = n;\n    for (int i = 0; i < 5; ++i) {\n        r *= 2 - n\
+    \ * r;\n    }\n    return r;\n}\n\n// n: odd, < 2^{62}\nstruct Montgomery64 {\n\
+    \    u64 n, mni, p;\n    Montgomery64(u64 n) : n(n), mni(-inv_64(n)), p(-1ULL\
+    \ % n + 1) {}\n    u64 mulmr(u64 xr, u64 yr) const {\n        u128 z = (u128)xr\
+    \ * yr;\n        u64 ret = (z + (u128)((u64)z * mni) * n) >> 64;\n        if (ret\
+    \ >= n) {\n            ret -= n;\n        }\n        return ret;\n    }\n    u64\
+    \ mr(u64 xr) const {\n        u64 ret = (xr + (u128)(xr * mni) * n) >> 64;\n \
+    \       if (ret >= n) {\n            ret -= n;\n        }\n        return ret;\n\
+    \    }\n    u64 pow(u64 xr, u64 t) const {\n        u64 ret = p;\n        while\
+    \ (t) {\n            if (t & 1) {\n                ret = mulmr(ret, xr);\n   \
+    \         }\n            xr = mulmr(xr, xr);\n            t >>= 1;\n        }\n\
+    \        return ret;\n    }\n};\n\nbool is_prime(u64 n) {\n    if (n == 2) {\n\
+    \        return true;\n    }\n    if (n == 1 || n % 2 == 0) {\n        return\
+    \ false;\n    }\n    u64 s = __builtin_ctzll(n - 1);\n    u64 d = (n - 1) >> s;\n\
+    \    u64 base[] = {2, 325, 9375, 28178, 450775, 9780504, 1795265022};\n    Montgomery64\
+    \ mont(n);\n    u64 fl = n - mont.p;\n    for (u64 b : base) {\n        b = mont.mr(b);\n\
+    \        if (!b) {\n            continue;\n        }\n        u64 t = mont.pow(b,\
+    \ d);\n        if (t == mont.p) {\n            continue;\n        }\n        u64\
+    \ i = 0;\n        for (; i < s; ++i) {\n            if (t == fl) {\n         \
+    \       break;\n            }\n            t = mont.mulmr(t, t);\n        }\n\
+    \        if (i == s) {\n            return false;\n        }\n    }\n    return\
+    \ true;\n}\n\n}  // namespace primality\n\nbool is_prime(unsigned long long n)\
+    \ {\n    return primality::is_prime(n);\n}\n#line 2 \"number_theory/montgomery_64.hpp\"\
+    \n#include <cassert>\n\n// mod: odd, < 2^{63}\ntemplate <int id>\nstruct MontgomeryModInt64\
+    \ {\n    using u64 = unsigned long long;\n    using u128 = __uint128_t;\n\n  \
+    \  static u64 inv_64(u64 n) {\n        u64 r = n;\n        for (int i = 0; i <\
+    \ 5; ++i) {\n            r *= 2 - n * r;\n        }\n        return r;\n    }\n\
+    \n    static u64 mod, neg_inv, sq;\n    static void set_mod(u64 m) {\n       \
+    \ assert(m % 2 == 1 && m < (1ULL << 63));\n        mod = m;\n        neg_inv =\
+    \ -inv_64(m);\n        sq = -u128(mod) % mod;\n    }\n    static u64 get_mod()\
+    \ { return mod; }\n\n    static u64 reduce(u128 xr) {\n        u64 ret = (xr +\
+    \ u128(u64(xr) * neg_inv) * mod) >> 64;\n        if (ret >= mod) {\n         \
+    \   ret -= mod;\n        }\n        return ret;\n    }\n\n    using M = MontgomeryModInt64<id>;\n\
+    \n    u64 x;\n    MontgomeryModInt64() : x(0) {}\n    MontgomeryModInt64(u64 _x)\
+    \ : x(reduce(u128(_x) * sq)) {}\n\n    u64 val() const { return reduce(u128(x));\
+    \ }\n\n    M &operator+=(M rhs) {\n        if ((x += rhs.x) >= mod) {\n      \
+    \      x -= mod;\n        }\n        return *this;\n    }\n    M &operator-=(M\
+    \ rhs) {\n        if ((x -= rhs.x) >= mod) {\n            x += mod;\n        }\n\
+    \        return *this;\n    }\n    M &operator*=(M rhs) {\n        x = reduce(u128(x)\
+    \ * rhs.x);\n        return *this;\n    }\n    M operator+(M rhs) const { return\
+    \ M(*this) += rhs; }\n    M operator-(M rhs) const { return M(*this) -= rhs; }\n\
+    \    M operator*(M rhs) const { return M(*this) *= rhs; }\n\n    M pow(u64 t)\
+    \ const {\n        M ret(1);\n        M self = *this;\n        while (t) {\n \
+    \           if (t & 1) {\n                ret *= self;\n            }\n      \
+    \      self *= self;\n            t >>= 1;\n        }\n        return ret;\n \
+    \   }\n    M inv() const {\n        assert(x);\n        return this->pow(mod -\
+    \ 2);\n    }\n\n    M &operator/=(M rhs) {\n        *this /= rhs.inv();\n    \
+    \    return *this;\n    }\n    M operator/(M rhs) const { return M(*this) /= rhs;\
+    \ }\n};\n\ntemplate <int id> unsigned long long MontgomeryModInt64<id>::mod =\
+    \ 1;\ntemplate <int id> unsigned long long MontgomeryModInt64<id>::neg_inv = 1;\n\
+    template <int id> unsigned long long MontgomeryModInt64<id>::sq = 1;\n#line 7\
+    \ \"number_theory/factorize.hpp\"\n\nnamespace factorize_impl {\n\nunsigned long\
+    \ long bgcd(unsigned long long x, unsigned long long y) {\n    if (x == 0) {\n\
+    \        return y;\n    }\n    if (y == 0) {\n        return x;\n    }\n    int\
+    \ n = __builtin_ctzll(x);\n    int m = __builtin_ctzll(y);\n    x >>= n;\n   \
+    \ y >>= m;\n    while (x != y) {\n        if (x > y) {\n            x = (x - y)\
+    \ >> __builtin_ctzll(x - y);\n        } else {\n            y = (y - x) >> __builtin_ctzll(y\
+    \ - x);\n        }\n    }\n    return x << (n < m ? n : m);\n}\n\ntemplate <typename\
+    \ T>\nunsigned long long rho(unsigned long long n, unsigned long long c) {\n \
+    \   T cc(c);\n    auto f = [cc](T x) -> T {\n        return x * x + cc;\n    };\n\
+    \    T y(2);\n    T x = y;\n    T z = y;\n    T p(1);\n    unsigned long long\
+    \ g = 1;\n    constexpr int M = 128;\n    for (int r = 1; g == 1; r *= 2) {\n\
+    \        x = y;\n        for (int i = 0; i < r && g == 1; i += M) {\n        \
+    \    z = y;\n            for (int j = 0; j < r - i && j < M; ++j) {\n        \
+    \        y = f(y);\n                p *= y - x;\n            }\n            g\
+    \ = bgcd(p.val(), n);\n        }\n    }\n    if (g == n) {\n        do {\n   \
+    \         z = f(z);\n            g = bgcd((z - x).val(), n);\n        } while\
+    \ (g == 1);\n    }\n    return g;\n}\n\nunsigned long long find_factor(unsigned\
+    \ long long n) {\n    using M = MontgomeryModInt64<20250127>;\n    M::set_mod(n);\n\
+    \    while (true) {\n        unsigned long long c = uniform(n);\n        unsigned\
+    \ long long g = rho<M>(n, c);\n        if (g != n) {\n            return g;\n\
+    \        }\n    }\n    return 0;\n}\n\nvoid factor_inner(unsigned long long n,\
+    \ std::vector<unsigned long long> &ps) {\n    if (is_prime(n)) {\n        ps.push_back(n);\n\
+    \        return;\n    }\n    if (n % 2 == 0) {\n        ps.push_back(2);\n   \
+    \     factor_inner(n / 2, ps);\n        return;\n    }\n    unsigned long long\
+    \ m = find_factor(n);\n    factor_inner(m, ps);\n    factor_inner(n / m, ps);\n\
+    }\n\n}\n\nstd::vector<unsigned long long> factorize(unsigned long long n) {\n\
+    \    if (n <= 1) {\n        return std::vector<unsigned long long>();\n    }\n\
+    \    std::vector<unsigned long long> ps;\n    factorize_impl::factor_inner(n,\
+    \ ps);\n    std::sort(ps.begin(), ps.end());\n    return ps;\n}\n#line 3 \"number_theory/primitive_root.hpp\"\
+    \n\n// p: prime\nunsigned long long find_primitive_root(unsigned long long p)\
+    \ {\n    using M = MontgomeryModInt64<20250128>;\n    assert(is_prime(p));\n \
+    \   if (p == 2) {\n        return 1;\n    }\n    M::set_mod(p);\n    std::vector<unsigned\
+    \ long long> ps = factorize(p - 1);\n    ps.erase(std::unique(ps.begin(), ps.end()),\
+    \ ps.end());\n    while (true) {\n        unsigned long long x = uniform<unsigned\
+    \ long long>(1, p);\n        M x_(x), one(1ULL);\n        bool ok = true;\n  \
+    \      for (unsigned long long q : ps) {\n            if (x_.pow((p - 1) / q).x\
+    \ == one.x) {\n                ok = false;\n                break;\n         \
+    \   }\n        }\n        if (ok) {\n            return x;\n        }\n    }\n\
+    \    return 0;\n}\n#line 2 \"poly/fft.hpp\"\n#include <array>\n#line 2 \"number_theory/mod_int.hpp\"\
+    \n\n#line 4 \"number_theory/mod_int.hpp\"\n#include <iostream>\n#include <type_traits>\n\
+    #line 2 \"number_theory/utils.hpp\"\n\n#include <utility>\n\nconstexpr bool is_prime(unsigned\
+    \ n) {\n    if (n == 0 || n == 1) {\n        return false;\n    }\n    for (unsigned\
+    \ i = 2; i * i <= n; ++i) {\n        if (n % i == 0) {\n            return false;\n\
+    \        }\n    }\n    return true;\n}\n\nconstexpr unsigned mod_pow(unsigned\
+    \ x, unsigned y, unsigned mod) {\n    unsigned ret = 1, self = x;\n    while (y\
+    \ != 0) {\n        if (y & 1) {\n            ret = (unsigned)((unsigned long long)ret\
+    \ * self % mod);\n        }\n        self = (unsigned)((unsigned long long)self\
+    \ * self % mod);\n        y /= 2;\n    }\n    return ret;\n}\n\ntemplate <unsigned\
+    \ mod>\nconstexpr unsigned primitive_root() {\n    static_assert(is_prime(mod),\
+    \ \"`mod` must be a prime number.\");\n    if (mod == 2) {\n        return 1;\n\
+    \    }\n\n    unsigned primes[32] = {};\n    int it = 0;\n    {\n        unsigned\
+    \ m = mod - 1;\n        for (unsigned i = 2; i * i <= m; ++i) {\n            if\
+    \ (m % i == 0) {\n                primes[it++] = i;\n                while (m\
+    \ % i == 0) {\n                    m /= i;\n                }\n            }\n\
+    \        }\n        if (m != 1) {\n            primes[it++] = m;\n        }\n\
+    \    }\n    for (unsigned i = 2; i < mod; ++i) {\n        bool ok = true;\n  \
+    \      for (int j = 0; j < it; ++j) {\n            if (mod_pow(i, (mod - 1) /\
+    \ primes[j], mod) == 1) {\n                ok = false;\n                break;\n\
+    \            }\n        }\n        if (ok) return i;\n    }\n    return 0;\n}\n\
+    \n// y >= 1\ntemplate <typename T>\nconstexpr T safe_mod(T x, T y) {\n    x %=\
+    \ y;\n    if (x < 0) {\n        x += y;\n    }\n    return x;\n}\n\n// y != 0\n\
+    template <typename T>\nconstexpr T floor_div(T x, T y) {\n    if (y < 0) {\n \
+    \       x *= -1;\n        y *= -1;\n    }\n    if (x >= 0) {\n        return x\
+    \ / y;\n    } else {\n        return -((-x + y - 1) / y);\n    }\n}\n\n// y !=\
+    \ 0\ntemplate <typename T>\nconstexpr T ceil_div(T x, T y) {\n    if (y < 0) {\n\
+    \        x *= -1;\n        y *= -1;\n    }\n    if (x >= 0) {\n        return\
+    \ (x + y - 1) / y;\n    } else {\n        return -(-x / y);\n    }\n}\n\n// b\
+    \ >= 1\n// returns (g, x) s.t. g = gcd(a, b), a * x = g (mod b), 0 <= x < b /\
+    \ g\n// from ACL\ntemplate <typename T>\nstd::pair<T, T> extgcd(T a, T b) {\n\
+    \    a = safe_mod(a, b);\n    T s = b, t = a, m0 = 0, m1 = 1;\n    while (t) {\n\
+    \        T u = s / t;\n        s -= t * u;\n        m0 -= m1 * u;\n        std::swap(s,\
+    \ t);\n        std::swap(m0, m1);\n    }\n    if (m0 < 0) {\n        m0 += b /\
+    \ s;\n    }\n    return std::pair<T, T>(s, m0);\n}\n\n// b >= 1\n// returns (g,\
+    \ x, y) s.t. g = gcd(a, b), a * x + b * y = g, 0 <= x < b / g, |y| < max(2, |a|\
+    \ / g)\ntemplate <typename T>\nstd::tuple<T, T, T> extgcd2(T a, T b) {\n    T\
+    \ _a = safe_mod(a, b);\n    T quot = (a - _a) / b;\n    T x00 = 0, x01 = 1, y0\
+    \ = b;\n    T x10 = 1, x11 = -quot, y1 = _a;\n    while (y1) {\n        T u =\
+    \ y0 / y1;\n        x00 -= u * x10;\n        x01 -= u * x11;\n        y0 -= u\
+    \ * y1;\n        std::swap(x00, x10);\n        std::swap(x01, x11);\n        std::swap(y0,\
+    \ y1);\n    }\n    if (x00 < 0) {\n        x00 += b / y0;\n        x01 -= a /\
+    \ y0;\n    }\n    return std::tuple<T, T, T>(y0, x00, x01);\n}\n\n// gcd(x, m)\
+    \ == 1\ntemplate <typename T>\nT inv_mod(T x, T m) {\n    return extgcd(x, m).second;\n\
+    }\n#line 7 \"number_theory/mod_int.hpp\"\n\ntemplate <unsigned mod>\nstruct ModInt\
+    \ {\n    static_assert(mod != 0, \"`mod` must not be equal to 0.\");\n    static_assert(mod\
+    \ < (1u << 31),\n                  \"`mod` must be less than (1u << 31) = 2147483648.\"\
+    );\n\n    unsigned val;\n\n    static constexpr unsigned get_mod() { return mod;\
+    \ }\n\n    constexpr ModInt() : val(0) {}\n    template <typename T, std::enable_if_t<std::is_signed_v<T>>\
+    \ * = nullptr>\n    constexpr ModInt(T x)\n        : val((unsigned)((long long)x\
+    \ % (long long)mod + (x < 0 ? mod : 0))) {}\n    template <typename T, std::enable_if_t<std::is_unsigned_v<T>>\
+    \ * = nullptr>\n    constexpr ModInt(T x) : val((unsigned)(x % mod)) {}\n\n  \
+    \  static constexpr ModInt raw(unsigned x) {\n        ModInt<mod> ret;\n     \
+    \   ret.val = x;\n        return ret;\n    }\n\n    constexpr unsigned get_val()\
+    \ const { return val; }\n\n    constexpr ModInt operator+() const { return *this;\
+    \ }\n    constexpr ModInt operator-() const { return ModInt<mod>(0u) - *this;\
+    \ }\n\n    constexpr ModInt &operator+=(const ModInt &rhs) {\n        val += rhs.val;\n\
+    \        if (val >= mod) val -= mod;\n        return *this;\n    }\n    constexpr\
+    \ ModInt &operator-=(const ModInt &rhs) {\n        val -= rhs.val;\n        if\
+    \ (val >= mod) val += mod;\n        return *this;\n    }\n    constexpr ModInt\
+    \ &operator*=(const ModInt &rhs) {\n        val = (unsigned long long)val * rhs.val\
+    \ % mod;\n        return *this;\n    }\n    constexpr ModInt &operator/=(const\
+    \ ModInt &rhs) {\n        val = (unsigned long long)val * rhs.inv().val % mod;\n\
+    \        return *this;\n    }\n\n    friend constexpr ModInt operator+(const ModInt\
+    \ &lhs, const ModInt &rhs) {\n        return ModInt<mod>(lhs) += rhs;\n    }\n\
+    \    friend constexpr ModInt operator-(const ModInt &lhs, const ModInt &rhs) {\n\
+    \        return ModInt<mod>(lhs) -= rhs;\n    }\n    friend constexpr ModInt operator*(const\
+    \ ModInt &lhs, const ModInt &rhs) {\n        return ModInt<mod>(lhs) *= rhs;\n\
+    \    }\n    friend constexpr ModInt operator/(const ModInt &lhs, const ModInt\
+    \ &rhs) {\n        return ModInt<mod>(lhs) /= rhs;\n    }\n\n    constexpr ModInt\
+    \ pow(unsigned long long x) const {\n        ModInt<mod> ret = ModInt<mod>::raw(1);\n\
+    \        ModInt<mod> self = *this;\n        while (x != 0) {\n            if (x\
+    \ & 1) ret *= self;\n            self *= self;\n            x >>= 1;\n       \
+    \ }\n        return ret;\n    }\n    constexpr ModInt inv() const {\n        static_assert(is_prime(mod),\
+    \ \"`mod` must be a prime number.\");\n        assert(val != 0);\n        return\
+    \ this->pow(mod - 2);\n    }\n\n    friend std::istream &operator>>(std::istream\
+    \ &is, ModInt<mod> &x) {\n        long long val;\n        is >> val;\n       \
+    \ x.val = val % mod + (val < 0 ? mod : 0);\n        return is;\n    }\n\n    friend\
+    \ std::ostream &operator<<(std::ostream &os, const ModInt<mod> &x) {\n       \
+    \ os << x.val;\n        return os;\n    }\n\n    friend bool operator==(const\
+    \ ModInt &lhs, const ModInt &rhs) {\n        return lhs.val == rhs.val;\n    }\n\
+    \n    friend bool operator!=(const ModInt &lhs, const ModInt &rhs) {\n       \
+    \ return lhs.val != rhs.val;\n    }\n};\n\ntemplate <unsigned mod>\nvoid debug(ModInt<mod>\
+    \ x) {\n    std::cerr << x.val;\n}\n#line 5 \"poly/fft.hpp\"\n\nconstexpr int\
+    \ ctz_constexpr(unsigned n) {\n    int x = 0;\n    while (!(n & (1u << x))) {\n\
+    \        ++x;\n    }\n    return x;\n}\n\ntemplate <unsigned MOD>\nstruct FFTRoot\
+    \ {\n    static constexpr unsigned R = ctz_constexpr(MOD - 1);\n    std::array<ModInt<MOD>,\
+    \ R + 1> root, iroot;\n    std::array<ModInt<MOD>, R> rate2, irate2;\n    std::array<ModInt<MOD>,\
+    \ R - 1> rate3, irate3;\n    std::array<ModInt<MOD>, R + 1> inv2;\n\n    constexpr\
+    \ FFTRoot() : root{}, iroot{}, rate2{}, irate2{}, rate3{}, irate3{}, inv2{} {\n\
+    \        unsigned pr = primitive_root<MOD>();\n        root[R] = ModInt<MOD>(pr).pow(MOD\
+    \ >> R);\n        iroot[R] = root[R].inv();\n        for (int i = R - 1; i >=\
+    \ 0; --i) {\n            root[i] = root[i + 1] * root[i + 1];\n            iroot[i]\
+    \ = iroot[i + 1] * iroot[i + 1];\n        }\n        ModInt<MOD> prod(1), iprod(1);\n\
+    \        for (int i = 0; i < (int)R - 1; ++i) {\n            rate2[i] = prod *\
+    \ root[i + 2];\n            irate2[i] = iprod * iroot[i + 2];\n            prod\
+    \ *= iroot[i + 2];\n            iprod *= root[i + 2];\n        }\n        prod\
+    \ = ModInt<MOD>(1);\n        iprod = ModInt<MOD>(1);\n        for (int i = 0;\
+    \ i < (int)R - 2; ++i) {\n            rate3[i] = prod * root[i + 3];\n       \
+    \     irate3[i] = iprod * iroot[i + 3];\n            prod *= iroot[i + 3];\n \
+    \           iprod *= root[i + 3];\n        }\n        ModInt<MOD> i2 = ModInt<MOD>(2).inv();\n\
+    \        inv2[0] = ModInt<MOD>(1);\n        for (int i = 0; i < (int)R; ++i) {\n\
+    \            inv2[i + 1] = inv2[i] * i2;\n        }\n    }\n};\n\ntemplate <typename\
+    \ M>\nvoid fft(M *a, int n) {\n    using ull = unsigned long long;\n    static_assert(M::get_mod()\
+    \ < (1u << 30));\n    static constexpr FFTRoot<M::get_mod()> fftroot;\n    static\
+    \ constexpr ull CEIL = 2ULL * M::get_mod() * M::get_mod();\n    int l = __builtin_ctz(n);\n\
+    \    int ph = 0;\n    while (ph < l) {\n        if (ph + 1 == l) {\n         \
+    \   int b = 1 << ph;\n            M z = M::raw(1);\n            for (int i = 0;\
+    \ i < b; ++i) {\n                int offset = i << 1;\n                M x = a[offset];\n\
+    \                M y = a[offset + 1] * z;\n                a[offset] = x + y;\n\
+    \                a[offset + 1] = x - y;\n                z *= fftroot.rate2[__builtin_ctz(~i)];\n\
+    \            }\n            ++ph;\n        } else {\n            int bl = 1 <<\
+    \ ph;\n            int wd = 1 << (l - 2 - ph);\n            M zeta = M::raw(1);\n\
+    \            for (int i = 0; i < bl; ++i) {\n                int offset = i <<\
+    \ (l - ph);\n                M zeta2 = zeta * zeta;\n                M zeta3 =\
+    \ zeta2 * zeta;\n                for (int j = 0; j < wd; ++j) {\n            \
+    \        ull w = a[offset + j].val;\n                    ull x = (ull)a[offset\
+    \ + j + wd].val * zeta.val;\n                    ull y = (ull)a[offset + j + 2\
+    \ * wd].val * zeta2.val;\n                    ull z = (ull)a[offset + j + 3 *\
+    \ wd].val * zeta3.val;\n                    ull ix_m_iz = (CEIL + x - z) % M::get_mod()\
+    \ * fftroot.root[2].val;\n                    a[offset + j] = M(w + x + y + z);\n\
+    \                    a[offset + j + wd] = M(CEIL + w - x + y - z);\n         \
+    \           a[offset + j + 2 * wd] = M(CEIL + w - y + ix_m_iz);\n            \
+    \        a[offset + j + 3 * wd] = M(CEIL + w - y - ix_m_iz);\n               \
+    \ }\n                zeta *= fftroot.rate3[__builtin_ctz(~i)];\n            }\n\
+    \            ph += 2;\n        }\n    }\n}\n\ntemplate <typename M>\nvoid ifft(M\
+    \ *a, int n) {\n    using ull = unsigned long long;\n    static_assert(M::get_mod()\
+    \ < (1u << 30));\n    static constexpr FFTRoot<M::get_mod()> fftroot;\n    int\
+    \ l = __builtin_ctz(n);\n    int ph = l;\n    while (ph > 0) {\n        if (ph\
+    \ == 1) {\n            --ph;\n            int wd = 1 << (l - 1);\n           \
+    \ for (int i = 0; i < wd; ++i) {\n                M x = a[i];\n              \
+    \  M y = a[i + wd];\n                a[i] = x + y;\n                a[i + wd]\
+    \ = x - y;\n            }\n        } else {\n            ph -= 2;\n          \
+    \  int bl = 1 << ph;\n            int wd = 1 << (l - 2 - ph);\n            M zeta\
+    \ = M::raw(1);\n            for (int i = 0; i < bl; ++i) {\n                int\
+    \ offset = i << (l - ph);\n                M zeta2 = zeta * zeta;\n          \
+    \      M zeta3 = zeta2 * zeta;\n                for (int j = 0; j < wd; ++j) {\n\
+    \                    unsigned w = a[offset + j].val;\n                    unsigned\
+    \ x = a[offset + j + wd].val;\n                    unsigned y = a[offset + j +\
+    \ 2 * wd].val;\n                    unsigned z = a[offset + j + 3 * wd].val;\n\
+    \                    unsigned iy_m_iz = (ull)(M::get_mod() + y - z) * fftroot.root[2].val\
+    \ % M::get_mod();\n                    a[offset + j] = M(w + x + y + z);\n   \
+    \                 a[offset + j + wd] = M((ull)zeta.val * (2 * M::get_mod() + w\
+    \ - x - iy_m_iz));\n                    a[offset + j + 2 * wd] = M((ull)zeta2.val\
+    \ * (2 * M::get_mod() + w + x - y - z));\n                    a[offset + j + 3\
+    \ * wd] = M((ull)zeta3.val * (M::get_mod() + w - x + iy_m_iz));\n            \
+    \    }\n                zeta *= fftroot.irate3[__builtin_ctz(~i)];\n         \
+    \   }\n        }\n    }\n    for (int i = 0; i < n; ++i) {\n        a[i] *= fftroot.inv2[l];\n\
+    \    }\n}\n\ntemplate <typename M>\nvoid fft(std::vector<M> &a) {\n    fft(a.data(),\
+    \ (int)a.size());\n}\ntemplate <typename M>\nvoid ifft(std::vector<M> &a) {\n\
+    \    ifft(a.data(), (int)a.size());\n}\n\ntemplate <typename M>\nstd::vector<M>\
+    \ convolve_naive(const std::vector<M> &a,\n                              const\
+    \ std::vector<M> &b) {\n    int n = (int)a.size();\n    int m = (int)b.size();\n\
+    \    std::vector<M> c(n + m - 1);\n    if (n < m) {\n        for (int j = 0; j\
+    \ < m; ++j) {\n            for (int i = 0; i < n; ++i) {\n                c[i\
+    \ + j] += a[i] * b[j];\n            }\n        }\n    } else {\n        for (int\
+    \ i = 0; i < n; ++i) {\n            for (int j = 0; j < m; ++j) {\n          \
+    \      c[i + j] += a[i] * b[j];\n            }\n        }\n    }\n    return c;\n\
+    }\n\ntemplate <typename M>\nstd::vector<M> convolve_fft(std::vector<M> a, std::vector<M>\
+    \ b) {\n    int n = (int)a.size() + (int)b.size() - 1;\n    int m = 1;\n    while\
+    \ (m < n) {\n        m <<= 1;\n    }\n    bool shr = false;\n    M last;\n   \
+    \ if (n >= 3 && n == m / 2 + 1) {\n        shr = true;\n        last = a.back()\
+    \ * b.back();\n        m /= 2;\n        while ((int)a.size() > m) {\n        \
+    \    a[(int)a.size() - 1 - m] += a.back();\n            a.pop_back();\n      \
+    \  }\n        while ((int)b.size() > m) {\n            b[(int)b.size() - 1 - m]\
+    \ += b.back();\n            b.pop_back();\n        }\n    }\n    a.resize(m);\n\
+    \    b.resize(m);\n    fft(a);\n    fft(b);\n    for (int i = 0; i < m; ++i) {\n\
+    \        a[i] *= b[i];\n    }\n    ifft(a);\n    a.resize(n);\n    if (shr) {\n\
+    \        a[0] -= last;\n        a[n - 1] = last;\n    }\n    return a;\n}\n\n\
+    template <typename M>\nstd::vector<M> convolve(const std::vector<M> &a, const\
+    \ std::vector<M> &b) {\n    if (a.empty() || b.empty()) {\n        return std::vector<M>(0);\n\
+    \    }\n    if (std::min(a.size(), b.size()) <= 60) {\n        return convolve_naive(a,\
+    \ b);\n    } else {\n        return convolve_fft(a, b);\n    }\n}\n#line 4 \"\
+    convolution/mul_mod_p_conv.hpp\"\n\ntemplate <typename T>\nstd::vector<T> mul_mod_p_convolution(const\
+    \ std::vector<T> &a,\n                                     const std::vector<T>\
+    \ &b, int g = -1) {\n    int p = (int)a.size();\n    if (g == -1) {\n        g\
+    \ = find_primitive_root(p);\n    }\n\n    std::vector<int> pw(p - 1);\n    pw[0]\
+    \ = 1;\n    for (int i = 1; i < p - 1; ++i) {\n        pw[i] = (long long)pw[i\
+    \ - 1] * g % p;\n    }\n\n    std::vector<T> at(p - 1), bt(p - 1);\n    for (int\
+    \ i = 0; i < p - 1; ++i) {\n        at[i] = a[pw[i]];\n        bt[i] = b[pw[i]];\n\
+    \    }\n    std::vector<T> ct = convolve(at, bt);\n\n    std::vector<T> c(p, T(0));\n\
+    \    for (int i = 0; i < p; ++i) {\n        c[0] += a[i] * b[0];\n    }\n    for\
+    \ (int i = 1; i < p; ++i) {\n        c[0] += a[0] * b[i];\n    }\n    for (int\
+    \ i = 0; i < (int)ct.size(); ++i) {\n        c[pw[i % (p - 1)]] += ct[i];\n  \
+    \  }\n    return c;\n}\n"
+  code: "#pragma once\n#include \"../number_theory/primitive_root.hpp\"\n#include\
+    \ \"../poly/fft.hpp\"\n\ntemplate <typename T>\nstd::vector<T> mul_mod_p_convolution(const\
+    \ std::vector<T> &a,\n                                     const std::vector<T>\
+    \ &b, int g = -1) {\n    int p = (int)a.size();\n    if (g == -1) {\n        g\
+    \ = find_primitive_root(p);\n    }\n\n    std::vector<int> pw(p - 1);\n    pw[0]\
+    \ = 1;\n    for (int i = 1; i < p - 1; ++i) {\n        pw[i] = (long long)pw[i\
+    \ - 1] * g % p;\n    }\n\n    std::vector<T> at(p - 1), bt(p - 1);\n    for (int\
+    \ i = 0; i < p - 1; ++i) {\n        at[i] = a[pw[i]];\n        bt[i] = b[pw[i]];\n\
+    \    }\n    std::vector<T> ct = convolve(at, bt);\n\n    std::vector<T> c(p, T(0));\n\
+    \    for (int i = 0; i < p; ++i) {\n        c[0] += a[i] * b[0];\n    }\n    for\
+    \ (int i = 1; i < p; ++i) {\n        c[0] += a[0] * b[i];\n    }\n    for (int\
+    \ i = 0; i < (int)ct.size(); ++i) {\n        c[pw[i % (p - 1)]] += ct[i];\n  \
+    \  }\n    return c;\n}\n"
+  dependsOn:
+  - number_theory/primitive_root.hpp
+  - number_theory/factorize.hpp
+  - template/random.hpp
+  - number_theory/primality.hpp
+  - number_theory/montgomery_64.hpp
+  - poly/fft.hpp
+  - number_theory/mod_int.hpp
+  - number_theory/utils.hpp
+  isVerificationFile: false
+  path: convolution/mul_mod_p_conv.hpp
+  requiredBy: []
+  timestamp: '2025-01-29 16:15:05+09:00'
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - convolution/test/mul_modp_convolution.test.cpp
+documentation_of: convolution/mul_mod_p_conv.hpp
+layout: document
+redirect_from:
+- /library/convolution/mul_mod_p_conv.hpp
+- /library/convolution/mul_mod_p_conv.hpp.html
+title: convolution/mul_mod_p_conv.hpp
+---

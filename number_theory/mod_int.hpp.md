@@ -6,6 +6,9 @@ data:
     title: number_theory/utils.hpp
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
+    path: convolution/mul_mod_p_conv.hpp
+    title: convolution/mul_mod_p_conv.hpp
+  - icon: ':heavy_check_mark:'
     path: poly/fft.hpp
     title: poly/fft.hpp
   - icon: ':heavy_check_mark:'
@@ -42,6 +45,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: bit/test/bitwise_xor_convolution.test.cpp
     title: bit/test/bitwise_xor_convolution.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: convolution/test/mul_modp_convolution.test.cpp
+    title: convolution/test/mul_modp_convolution.test.cpp
   - icon: ':heavy_check_mark:'
     path: data_structure/test/1891.test.cpp
     title: data_structure/test/1891.test.cpp
@@ -222,6 +228,7 @@ data:
   isVerificationFile: false
   path: number_theory/mod_int.hpp
   requiredBy:
+  - convolution/mul_mod_p_conv.hpp
   - poly/stirling2.hpp
   - poly/taylor_shift.hpp
   - poly/fps_inv.hpp
@@ -231,6 +238,7 @@ data:
   timestamp: '2024-07-18 16:56:22+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - convolution/test/mul_modp_convolution.test.cpp
   - data_structure/test/queue_operate_all_composite.test.cpp
   - data_structure/test/1891.test.cpp
   - data_structure/test/point_set_range_composite.test.cpp

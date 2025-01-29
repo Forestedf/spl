@@ -3,10 +3,13 @@
 #include "fft.hpp"
 // 10 FFT(n)
 template <typename T>
-std::vector<T> fps_inv(std::vector<T> f) {
-    assert(!f.empty() && f[0] != T(0));
+std::vector<T> fps_inv(const std::vector<T> &f, int len = -1) {
+    if (len == -1) {
+        len = (int)f.size();
+    }
+    assert(!f.empty() && f[0] != T(0) && len >= 0);
     std::vector<T> g(1, T(1) / f[0]);
-    while (g.size() < f.size()) {
+    while ((int)g.size() < len) {
         int n = (int)g.size();
         std::vector<T> fft_f(2 * n), fft_g(2 * n);
         std::copy(f.begin(), f.begin() + std::min(2 * n, (int)f.size()),
@@ -29,6 +32,6 @@ std::vector<T> fps_inv(std::vector<T> f) {
             g[i] = -fft_f[i];
         }
     }
-    g.resize(f.size());
+    g.resize(len);
     return g;
 }

@@ -18,6 +18,9 @@ data:
     path: poly/fps_inv.hpp
     title: poly/fps_inv.hpp
   - icon: ':heavy_check_mark:'
+    path: poly/fps_log.hpp
+    title: poly/fps_log.hpp
+  - icon: ':heavy_check_mark:'
     path: poly/stirling1.hpp
     title: poly/stirling1.hpp
   - icon: ':heavy_check_mark:'
@@ -78,6 +81,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: poly/test/log_of_formal_power_series.test.cpp
     title: poly/test/log_of_formal_power_series.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: poly/test/log_of_formal_power_series_sparse.test.cpp
+    title: poly/test/log_of_formal_power_series_sparse.test.cpp
   - icon: ':heavy_check_mark:'
     path: poly/test/polynomial_taylor_shift.test.cpp
     title: poly/test/polynomial_taylor_shift.test.cpp
@@ -235,6 +241,7 @@ data:
   - poly/fft.hpp
   - poly/fps_div_at.hpp
   - poly/stirling1.hpp
+  - poly/fps_log.hpp
   timestamp: '2024-07-18 16:56:22+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
@@ -244,6 +251,7 @@ data:
   - data_structure/test/point_set_range_composite.test.cpp
   - data_structure/test/range_affine_range_sum.test.cpp
   - poly/test/polynomial_taylor_shift.test.cpp
+  - poly/test/log_of_formal_power_series_sparse.test.cpp
   - poly/test/inv_of_formal_power_series_sparse.test.cpp
   - poly/test/prod_of_polys.test.cpp
   - poly/test/exp_of_formal_power_series.test.cpp

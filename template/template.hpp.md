@@ -148,6 +148,9 @@ data:
     path: poly/test/log_of_formal_power_series.test.cpp
     title: poly/test/log_of_formal_power_series.test.cpp
   - icon: ':heavy_check_mark:'
+    path: poly/test/log_of_formal_power_series_sparse.test.cpp
+    title: poly/test/log_of_formal_power_series_sparse.test.cpp
+  - icon: ':heavy_check_mark:'
     path: poly/test/polynomial_taylor_shift.test.cpp
     title: poly/test/polynomial_taylor_shift.test.cpp
   - icon: ':heavy_check_mark:'
@@ -289,6 +292,7 @@ data:
   - data_structure/test/wavelet_matrix.test.cpp
   - data_structure/test/area_of_union_of_rectangles.test.cpp
   - poly/test/polynomial_taylor_shift.test.cpp
+  - poly/test/log_of_formal_power_series_sparse.test.cpp
   - poly/test/inv_of_formal_power_series_sparse.test.cpp
   - poly/test/prod_of_polys.test.cpp
   - poly/test/exp_of_formal_power_series.test.cpp

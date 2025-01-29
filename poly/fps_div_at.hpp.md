@@ -197,9 +197,10 @@ data:
     \ std::vector<M> &b) {\n    if (a.empty() || b.empty()) {\n        return std::vector<M>(0);\n\
     \    }\n    if (std::min(a.size(), b.size()) <= 60) {\n        return convolve_naive(a,\
     \ b);\n    } else {\n        return convolve_fft(a, b);\n    }\n}\n#line 4 \"\
-    poly/fps_inv.hpp\"\n// 10 FFT(n)\ntemplate <typename T>\nstd::vector<T> fps_inv(std::vector<T>\
-    \ f) {\n    assert(!f.empty() && f[0] != T(0));\n    std::vector<T> g(1, T(1)\
-    \ / f[0]);\n    while (g.size() < f.size()) {\n        int n = (int)g.size();\n\
+    poly/fps_inv.hpp\"\n// 10 FFT(n)\ntemplate <typename T>\nstd::vector<T> fps_inv(const\
+    \ std::vector<T> &f, int len = -1) {\n    if (len == -1) {\n        len = (int)f.size();\n\
+    \    }\n    assert(!f.empty() && f[0] != T(0) && len >= 0);\n    std::vector<T>\
+    \ g(1, T(1) / f[0]);\n    while ((int)g.size() < len) {\n        int n = (int)g.size();\n\
     \        std::vector<T> fft_f(2 * n), fft_g(2 * n);\n        std::copy(f.begin(),\
     \ f.begin() + std::min(2 * n, (int)f.size()),\n                  fft_f.begin());\n\
     \        std::copy(g.begin(), g.end(), fft_g.begin());\n        fft(fft_f);\n\
@@ -208,8 +209,8 @@ data:
     \ fft_f.begin() + n, T(0));\n        fft(fft_f);\n        for (int i = 0; i <\
     \ 2 * n; ++i) {\n            fft_f[i] *= fft_g[i];\n        }\n        ifft(fft_f);\n\
     \        g.resize(2 * n);\n        for (int i = n; i < 2 * n; ++i) {\n       \
-    \     g[i] = -fft_f[i];\n        }\n    }\n    g.resize(f.size());\n    return\
-    \ g;\n}\n#line 5 \"poly/fps_div_at.hpp\"\ntemplate <typename M>\nvoid extend_fft(std::vector<M>\
+    \     g[i] = -fft_f[i];\n        }\n    }\n    g.resize(len);\n    return g;\n\
+    }\n#line 5 \"poly/fps_div_at.hpp\"\ntemplate <typename M>\nvoid extend_fft(std::vector<M>\
     \ &a) {\n    static constexpr FFTRoot<M::get_mod()> fft_root;\n    int n = (int)a.size();\n\
     \    std::copy(a.begin(), a.begin() + n / 2, a.begin() + n / 2);\n    ifft(a.data()\
     \ + n / 2, n / 2);\n    M pw(1);\n    M r = fft_root.root[std::bit_width((unsigned)n)\
@@ -264,7 +265,7 @@ data:
   isVerificationFile: false
   path: poly/fps_div_at.hpp
   requiredBy: []
-  timestamp: '2024-07-18 16:56:22+09:00'
+  timestamp: '2025-01-29 16:22:53+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp

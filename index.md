@@ -185,6 +185,9 @@ data:
       path: poly/fps_inv_sparse.hpp
       title: poly/fps_inv_sparse.hpp
     - icon: ':heavy_check_mark:'
+      path: poly/fps_log.hpp
+      title: poly/fps_log.hpp
+    - icon: ':heavy_check_mark:'
       path: poly/fps_log_sparse.hpp
       title: poly/fps_log_sparse.hpp
     - icon: ':heavy_check_mark:'
@@ -385,6 +388,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: poly/test/log_of_formal_power_series.test.cpp
       title: poly/test/log_of_formal_power_series.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: poly/test/log_of_formal_power_series_sparse.test.cpp
+      title: poly/test/log_of_formal_power_series_sparse.test.cpp
     - icon: ':heavy_check_mark:'
       path: poly/test/polynomial_taylor_shift.test.cpp
       title: poly/test/polynomial_taylor_shift.test.cpp

@@ -6,6 +6,9 @@ data:
     path: poly/fps_exp_sparse.hpp
     title: poly/fps_exp_sparse.hpp
   - icon: ':heavy_check_mark:'
+    path: poly/fps_log.hpp
+    title: poly/fps_log.hpp
+  - icon: ':heavy_check_mark:'
     path: poly/fps_log_sparse.hpp
     title: poly/fps_log_sparse.hpp
   - icon: ':heavy_check_mark:'
@@ -27,6 +30,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: poly/test/log_of_formal_power_series.test.cpp
     title: poly/test/log_of_formal_power_series.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: poly/test/log_of_formal_power_series_sparse.test.cpp
+    title: poly/test/log_of_formal_power_series_sparse.test.cpp
   - icon: ':heavy_check_mark:'
     path: poly/test/polynomial_taylor_shift.test.cpp
     title: poly/test/polynomial_taylor_shift.test.cpp
@@ -90,10 +96,12 @@ data:
   - poly/fps_log_sparse.hpp
   - poly/stirling1.hpp
   - poly/fps_pow_sparse.hpp
+  - poly/fps_log.hpp
   timestamp: '2024-03-29 17:56:07+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - poly/test/polynomial_taylor_shift.test.cpp
+  - poly/test/log_of_formal_power_series_sparse.test.cpp
   - poly/test/exp_of_formal_power_series.test.cpp
   - poly/test/log_of_formal_power_series.test.cpp
   - poly/test/stirling_number_of_the_second_kind.test.cpp

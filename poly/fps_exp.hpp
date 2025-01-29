@@ -1,4 +1,5 @@
 #pragma once
+#include <algorithm>
 #include "../number_theory/factorial.hpp"
 #include "fft.hpp"
 

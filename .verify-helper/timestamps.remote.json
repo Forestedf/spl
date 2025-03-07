@@ -26,6 +26,7 @@
 "graph/test/biconnected_components.test.cpp": "2024-07-18 16:56:22 +0900",
 "graph/test/block_cut_tree.test.cpp": "2024-07-18 16:56:22 +0900",
 "graph/test/connected_components_of_complement_graph.test.cpp": "2024-07-18 16:56:22 +0900",
+"graph/test/enumerate_triangles.test.cpp": "2025-03-07 19:39:24 +0900",
 "graph/test/jump_on_tree.test.cpp": "2024-07-18 16:56:22 +0900",
 "graph/test/lca.test.cpp": "2024-07-18 16:56:22 +0900",
 "graph/test/scc.test.cpp": "2024-07-18 16:56:22 +0900",

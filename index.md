@@ -173,6 +173,9 @@ data:
       path: poly/fft.hpp
       title: poly/fft.hpp
     - icon: ':heavy_check_mark:'
+      path: poly/find_linear_recurrence.hpp
+      title: poly/find_linear_recurrence.hpp
+    - icon: ':heavy_check_mark:'
       path: poly/fps_div_at.hpp
       title: poly/fps_div_at.hpp
     - icon: ':heavy_check_mark:'
@@ -382,6 +385,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: poly/test/exp_of_formal_power_series_sparse.test.cpp
       title: poly/test/exp_of_formal_power_series_sparse.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: poly/test/find_linear_recurrence.test.cpp
+      title: poly/test/find_linear_recurrence.test.cpp
     - icon: ':heavy_check_mark:'
       path: poly/test/inv_of_formal_power_series.test.cpp
       title: poly/test/inv_of_formal_power_series.test.cpp

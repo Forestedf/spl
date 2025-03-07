@@ -130,8 +130,8 @@ data:
   timestamp: '2023-12-26 16:56:23+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - data_structure/test/range_affine_range_sum.test.cpp
   - data_structure/test/area_of_union_of_rectangles.test.cpp
+  - data_structure/test/range_affine_range_sum.test.cpp
 documentation_of: data_structure/lazy_segment_tree.hpp
 layout: document
 redirect_from:

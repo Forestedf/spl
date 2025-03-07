@@ -85,6 +85,9 @@ data:
     path: graph/test/connected_components_of_complement_graph.test.cpp
     title: graph/test/connected_components_of_complement_graph.test.cpp
   - icon: ':heavy_check_mark:'
+    path: graph/test/enumerate_triangles.test.cpp
+    title: graph/test/enumerate_triangles.test.cpp
+  - icon: ':heavy_check_mark:'
     path: graph/test/jump_on_tree.test.cpp
     title: graph/test/jump_on_tree.test.cpp
   - icon: ':heavy_check_mark:'
@@ -295,6 +298,7 @@ data:
   - number_theory/test/montgomery_64_stress.test.cpp
   - string/test/zalgorithm.test.cpp
   - graph/test/jump_on_tree.test.cpp
+  - graph/test/enumerate_triangles.test.cpp
   - graph/test/biconnected_components.test.cpp
   - graph/test/shortest_path.test.cpp
   - graph/test/two_edge_connected_components.test.cpp

@@ -21,6 +21,9 @@ data:
     path: graph/dijkstra.hpp
     title: graph/dijkstra.hpp
   - icon: ':heavy_check_mark:'
+    path: graph/enumerate_triangles.hpp
+    title: graph/enumerate_triangles.hpp
+  - icon: ':heavy_check_mark:'
     path: graph/heavy_light_decomposition.hpp
     title: graph/heavy_light_decomposition.hpp
   - icon: ':heavy_check_mark:'
@@ -42,6 +45,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/test/connected_components_of_complement_graph.test.cpp
     title: graph/test/connected_components_of_complement_graph.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: graph/test/enumerate_triangles.test.cpp
+    title: graph/test/enumerate_triangles.test.cpp
   - icon: ':heavy_check_mark:'
     path: graph/test/jump_on_tree.test.cpp
     title: graph/test/jump_on_tree.test.cpp
@@ -144,12 +150,14 @@ data:
   - graph/block_cut_tree.hpp
   - graph/biconnected_components.hpp
   - graph/dijkstra.hpp
+  - graph/enumerate_triangles.hpp
   - graph/strongly_connected_components.hpp
   - graph/complement_graph_connected_components.hpp
   timestamp: '2024-07-18 16:56:22+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - graph/test/jump_on_tree.test.cpp
+  - graph/test/enumerate_triangles.test.cpp
   - graph/test/biconnected_components.test.cpp
   - graph/test/shortest_path.test.cpp
   - graph/test/two_edge_connected_components.test.cpp

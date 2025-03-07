@@ -70,6 +70,9 @@ data:
     path: data_structure/test/range_affine_range_sum.test.cpp
     title: data_structure/test/range_affine_range_sum.test.cpp
   - icon: ':heavy_check_mark:'
+    path: graph/test/enumerate_triangles.test.cpp
+    title: graph/test/enumerate_triangles.test.cpp
+  - icon: ':heavy_check_mark:'
     path: number_theory/test/ax_by_c_stress.test.cpp
     title: number_theory/test/ax_by_c_stress.test.cpp
   - icon: ':heavy_check_mark:'
@@ -247,6 +250,7 @@ data:
   - number_theory/test/extgcd2_stress.test.cpp
   - number_theory/test/ax_by_c_stress.test.cpp
   - number_theory/test/inv_mod_stress.test.cpp
+  - graph/test/enumerate_triangles.test.cpp
   - data_structure/test/1891.test.cpp
   - data_structure/test/queue_operate_all_composite.test.cpp
   - data_structure/test/range_affine_range_sum.test.cpp

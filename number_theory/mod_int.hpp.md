@@ -67,6 +67,9 @@ data:
     path: data_structure/test/range_affine_range_sum.test.cpp
     title: data_structure/test/range_affine_range_sum.test.cpp
   - icon: ':heavy_check_mark:'
+    path: graph/test/enumerate_triangles.test.cpp
+    title: graph/test/enumerate_triangles.test.cpp
+  - icon: ':heavy_check_mark:'
     path: poly/test/convolution_mod.test.cpp
     title: poly/test/convolution_mod.test.cpp
   - icon: ':heavy_check_mark:'
@@ -270,6 +273,7 @@ data:
   - poly/test/convolution_mod.test.cpp
   - poly/test/exp_of_formal_power_series.test.cpp
   - convolution/test/mul_modp_convolution.test.cpp
+  - graph/test/enumerate_triangles.test.cpp
   - data_structure/test/1891.test.cpp
   - data_structure/test/queue_operate_all_composite.test.cpp
   - data_structure/test/range_affine_range_sum.test.cpp

@@ -22,6 +22,9 @@ data:
     path: convolution/test/mul_modp_convolution.test.cpp
     title: convolution/test/mul_modp_convolution.test.cpp
   - icon: ':heavy_check_mark:'
+    path: graph/test/enumerate_triangles.test.cpp
+    title: graph/test/enumerate_triangles.test.cpp
+  - icon: ':heavy_check_mark:'
     path: number_theory/test/factorize.test.cpp
     title: number_theory/test/factorize.test.cpp
   - icon: ':heavy_check_mark:'
@@ -258,6 +261,7 @@ data:
   - poly/test/exp_of_formal_power_series.test.cpp
   - convolution/test/mul_modp_convolution.test.cpp
   - number_theory/test/factorize.test.cpp
+  - graph/test/enumerate_triangles.test.cpp
   - algebra/test/matrix_product.test.cpp
   - algebra/test/system_of_linear_equations.test.cpp
   - algebra/test/matrix_rank.test.cpp

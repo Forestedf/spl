@@ -114,6 +114,9 @@ data:
       path: graph/dijkstra.hpp
       title: graph/dijkstra.hpp
     - icon: ':heavy_check_mark:'
+      path: graph/enumerate_triangles.hpp
+      title: graph/enumerate_triangles.hpp
+    - icon: ':heavy_check_mark:'
       path: graph/graph.hpp
       title: graph/graph.hpp
     - icon: ':heavy_check_mark:'
@@ -325,6 +328,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/test/connected_components_of_complement_graph.test.cpp
       title: graph/test/connected_components_of_complement_graph.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: graph/test/enumerate_triangles.test.cpp
+      title: graph/test/enumerate_triangles.test.cpp
     - icon: ':heavy_check_mark:'
       path: graph/test/jump_on_tree.test.cpp
       title: graph/test/jump_on_tree.test.cpp

@@ -116,7 +116,7 @@ public:
         return ret;
     }
 
-    // count i s.t. i \in [l, r) and a[i] = v
+    // count i s.t. i in [l, r) and a[i] = v
     int rank(int l, int r, T v) const {
         assert(0 <= l && l <= r && r <= n);
         if (v != 0 && floor_log2(v) >= ht) {
@@ -136,7 +136,7 @@ public:
         return r - l;
     }
 
-    // count i s.t. i \in [l, r) and a[i] < upper
+    // count i s.t. i in [l, r) and a[i] < upper
     int range_freq(int l, int r, T upper) const {
         assert(0 <= l && l <= r && r <= n);
         if (l == r) {
@@ -160,7 +160,7 @@ public:
         }
         return cnt;
     }
-    // count i s.t. i \in [l, r) and a[i] \in [lower, upper)
+    // count i s.t. i in [l, r) and a[i] in [lower, upper)
     int range_freq(int l, int r, T lower, T upper) const {
         if (lower >= upper) {
             return 0;
@@ -169,7 +169,7 @@ public:
         }
     }
 
-    // max v s.t. v \in a[l, r) and v < upper
+    // max v s.t. v in a[l, r) and v < upper
     int prev(int l, int r, T upper) const {
         int freq = range_freq(l, r, upper);
         if (freq == 0) {
@@ -179,7 +179,7 @@ public:
         }
     }
 
-    // min v s.t. v \in a[l, r) and v \geq lower
+    // min v s.t. v in a[l, r) and v geq lower
     int next(int l, int r, T lower) const {
         int freq = range_freq(l, r, lower);
         if (freq == r - l) {

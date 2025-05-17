@@ -1,3 +1,4 @@
+#pragma once
 #include <bits/stdc++.h>
 #define OVERRIDE(a, b, c, d, ...) d
 #define REP2(i, n) for (i32 i = 0; i < (i32)(n); ++i)

@@ -4,16 +4,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: algebra/matrix.hpp
     title: algebra/matrix.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/mod_int.hpp
     title: number_theory/mod_int.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/utils.hpp
     title: number_theory/utils.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/fastio.hpp
     title: template/fastio.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
   _extendedRequiredBy: []
@@ -27,7 +27,7 @@ data:
     links:
     - https://judge.yosupo.jp/problem/matrix_product
   bundledCode: "#line 1 \"algebra/test/matrix_product.test.cpp\"\n#define PROBLEM\
-    \ \"https://judge.yosupo.jp/problem/matrix_product\"\n#define FAST_IO\n#line 1\
+    \ \"https://judge.yosupo.jp/problem/matrix_product\"\n#define FAST_IO\n#line 2\
     \ \"template/template.hpp\"\n#include <bits/stdc++.h>\n#define OVERRIDE(a, b,\
     \ c, d, ...) d\n#define REP2(i, n) for (i32 i = 0; i < (i32)(n); ++i)\n#define\
     \ REP3(i, m, n) for (i32 i = (i32)(m); i < (i32)(n); ++i)\n#define REP(...) OVERRIDE(__VA_ARGS__,\
@@ -302,7 +302,7 @@ data:
   isVerificationFile: true
   path: algebra/test/matrix_product.test.cpp
   requiredBy: []
-  timestamp: '2024-11-23 22:57:41+09:00'
+  timestamp: '2025-05-17 23:14:32+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: algebra/test/matrix_product.test.cpp

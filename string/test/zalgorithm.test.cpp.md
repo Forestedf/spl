@@ -1,17 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: string/z_algorithm.hpp
     title: string/z_algorithm.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/zalgorithm
@@ -25,7 +25,7 @@ data:
     \ ++j;\n        }\n        z[i] = j;\n        if (j == 0) {\n            ++i;\n\
     \            continue;\n        }\n        int k = 1;\n        while (k < j &&\
     \ k + z[k] < j) {\n            z[i + k] = z[k];\n            ++k;\n        }\n\
-    \        i += k;\n        j -= k;\n    }\n    return z;\n}\n#line 1 \"template/template.hpp\"\
+    \        i += k;\n        j -= k;\n    }\n    return z;\n}\n#line 2 \"template/template.hpp\"\
     \n#include <bits/stdc++.h>\n#define OVERRIDE(a, b, c, d, ...) d\n#define REP2(i,\
     \ n) for (i32 i = 0; i < (i32)(n); ++i)\n#define REP3(i, m, n) for (i32 i = (i32)(m);\
     \ i < (i32)(n); ++i)\n#define REP(...) OVERRIDE(__VA_ARGS__, REP3, REP2)(__VA_ARGS__)\n\
@@ -82,8 +82,8 @@ data:
   isVerificationFile: true
   path: string/test/zalgorithm.test.cpp
   requiredBy: []
-  timestamp: '2024-07-18 16:56:22+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2025-05-17 23:14:32+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: string/test/zalgorithm.test.cpp
 layout: document

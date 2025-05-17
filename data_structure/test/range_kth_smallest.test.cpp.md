@@ -13,7 +13,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
   _extendedRequiredBy: []
@@ -100,15 +100,15 @@ data:
     \  for (auto &[l, r] : ranges) {\n                    l = vecs[i].all_zeros()\
     \ + vecs[i].rank1(l);\n                    r = vecs[i].all_zeros() + vecs[i].rank1(r);\n\
     \                }\n                k -= zs;\n            }\n        }\n     \
-    \   return ret;\n    }\n\n    // count i s.t. i \\in [l, r) and a[i] = v\n   \
-    \ int rank(int l, int r, T v) const {\n        assert(0 <= l && l <= r && r <=\
-    \ n);\n        if (v != 0 && floor_log2(v) >= ht) {\n            return 0;\n \
-    \       }\n        for (int i = 0; i < ht; ++i) {\n            int l0 = vecs[i].rank0(l);\n\
+    \   return ret;\n    }\n\n    // count i s.t. i in [l, r) and a[i] = v\n    int\
+    \ rank(int l, int r, T v) const {\n        assert(0 <= l && l <= r && r <= n);\n\
+    \        if (v != 0 && floor_log2(v) >= ht) {\n            return 0;\n       \
+    \ }\n        for (int i = 0; i < ht; ++i) {\n            int l0 = vecs[i].rank0(l);\n\
     \            int r0 = vecs[i].rank0(r);\n            if (ith_bit(v, ht - 1 - i))\
     \ {\n                l += vecs[i].all_zeros() - l0;\n                r += vecs[i].all_zeros()\
     \ - r0;\n            } else {\n                l = l0;\n                r = r0;\n\
     \            }\n        }\n        return r - l;\n    }\n\n    // count i s.t.\
-    \ i \\in [l, r) and a[i] < upper\n    int range_freq(int l, int r, T upper) const\
+    \ i in [l, r) and a[i] < upper\n    int range_freq(int l, int r, T upper) const\
     \ {\n        assert(0 <= l && l <= r && r <= n);\n        if (l == r) {\n    \
     \        return 0;\n        }\n        if (upper != 0 && floor_log2(upper) >=\
     \ ht) {\n            return r - l;\n        }\n        int cnt = 0;\n        for\
@@ -117,15 +117,15 @@ data:
     \ {\n                cnt += r0 - l0;\n                l += vecs[i].all_zeros()\
     \ - l0;\n                r += vecs[i].all_zeros() - r0;\n            } else {\n\
     \                l = l0;\n                r = r0;\n            }\n        }\n\
-    \        return cnt;\n    }\n    // count i s.t. i \\in [l, r) and a[i] \\in [lower,\
+    \        return cnt;\n    }\n    // count i s.t. i in [l, r) and a[i] in [lower,\
     \ upper)\n    int range_freq(int l, int r, T lower, T upper) const {\n       \
     \ if (lower >= upper) {\n            return 0;\n        } else {\n           \
     \ return range_freq(l, r, upper) - range_freq(l, r, lower);\n        }\n    }\n\
-    \n    // max v s.t. v \\in a[l, r) and v < upper\n    int prev(int l, int r, T\
-    \ upper) const {\n        int freq = range_freq(l, r, upper);\n        if (freq\
-    \ == 0) {\n            return T(-1);\n        } else {\n            return kth_smallest(l,\
-    \ r, freq - 1);\n        }\n    }\n\n    // min v s.t. v \\in a[l, r) and v \\\
-    geq lower\n    int next(int l, int r, T lower) const {\n        int freq = range_freq(l,\
+    \n    // max v s.t. v in a[l, r) and v < upper\n    int prev(int l, int r, T upper)\
+    \ const {\n        int freq = range_freq(l, r, upper);\n        if (freq == 0)\
+    \ {\n            return T(-1);\n        } else {\n            return kth_smallest(l,\
+    \ r, freq - 1);\n        }\n    }\n\n    // min v s.t. v in a[l, r) and v geq\
+    \ lower\n    int next(int l, int r, T lower) const {\n        int freq = range_freq(l,\
     \ r, lower);\n        if (freq == r - l) {\n            return T(-1);\n      \
     \  } else {\n            return kth_smallest(l, r, freq);\n        }\n    }\n\
     };\n#line 2 \"other/coordinate_compression.hpp\"\n\n#line 5 \"other/coordinate_compression.hpp\"\
@@ -147,7 +147,7 @@ data:
     \ }\n\n    bool contains(const T &ele) const {\n        auto it = std::lower_bound(data.begin(),\
     \ data.end(), ele);\n        return it != data.end() && *it == ele;\n    }\n\n\
     \    T cc(const T &ele) const {\n        return (T)(std::lower_bound(data.begin(),\
-    \ data.end(), ele) -\n                   data.begin());\n    }\n};\n#line 1 \"\
+    \ data.end(), ele) -\n                   data.begin());\n    }\n};\n#line 2 \"\
     template/template.hpp\"\n#include <bits/stdc++.h>\n#define OVERRIDE(a, b, c, d,\
     \ ...) d\n#define REP2(i, n) for (i32 i = 0; i < (i32)(n); ++i)\n#define REP3(i,\
     \ m, n) for (i32 i = (i32)(m); i < (i32)(n); ++i)\n#define REP(...) OVERRIDE(__VA_ARGS__,\
@@ -212,7 +212,7 @@ data:
   isVerificationFile: true
   path: data_structure/test/range_kth_smallest.test.cpp
   requiredBy: []
-  timestamp: '2025-01-27 10:52:49+09:00'
+  timestamp: '2025-05-17 23:14:32+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: data_structure/test/range_kth_smallest.test.cpp

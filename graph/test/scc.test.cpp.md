@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/graph.hpp
     title: graph/graph.hpp
   - icon: ':heavy_check_mark:'
     path: graph/strongly_connected_components.hpp
     title: graph/strongly_connected_components.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
   _extendedRequiredBy: []
@@ -68,7 +68,7 @@ data:
     \  comp[u] = cc;\n            }\n            ++cc;\n        }\n    };\n    for\
     \ (int i = 0; i < g.v(); ++i) {\n        if (ord[i] == -1) {\n            dfs(dfs,\
     \ i);\n        }\n    }\n    for (int i = 0; i < g.v(); ++i) {\n        comp[i]\
-    \ = cc - 1 - comp[i];\n    }\n    return comp;\n}\n#line 1 \"template/template.hpp\"\
+    \ = cc - 1 - comp[i];\n    }\n    return comp;\n}\n#line 2 \"template/template.hpp\"\
     \n#include <bits/stdc++.h>\n#define OVERRIDE(a, b, c, d, ...) d\n#define REP2(i,\
     \ n) for (i32 i = 0; i < (i32)(n); ++i)\n#define REP3(i, m, n) for (i32 i = (i32)(m);\
     \ i < (i32)(n); ++i)\n#define REP(...) OVERRIDE(__VA_ARGS__, REP3, REP2)(__VA_ARGS__)\n\
@@ -137,7 +137,7 @@ data:
   isVerificationFile: true
   path: graph/test/scc.test.cpp
   requiredBy: []
-  timestamp: '2024-07-18 16:56:22+09:00'
+  timestamp: '2025-05-17 23:14:32+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: graph/test/scc.test.cpp

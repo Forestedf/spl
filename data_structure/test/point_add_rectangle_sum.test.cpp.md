@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: data_structure/fenwick_tree.hpp
     title: data_structure/fenwick_tree.hpp
   - icon: ':heavy_check_mark:'
     path: data_structure/general_range_tree.hpp
     title: data_structure/general_range_tree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: data_structure/operations.hpp
     title: data_structure/operations.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
   _extendedRequiredBy: []
@@ -110,7 +110,7 @@ data:
     \ + l, arr.begin() + r,\n                                           std::pair<T,\
     \ int>(yr, 0),\n                                           compare_by_first) -\n\
     \                          arr.begin()));\n            }\n            xli /= 2;\n\
-    \            xri /= 2;\n        }\n        return ret;\n    }\n};\n#line 1 \"\
+    \            xri /= 2;\n        }\n        return ret;\n    }\n};\n#line 2 \"\
     template/template.hpp\"\n#include <bits/stdc++.h>\n#define OVERRIDE(a, b, c, d,\
     \ ...) d\n#define REP2(i, n) for (i32 i = 0; i < (i32)(n); ++i)\n#define REP3(i,\
     \ m, n) for (i32 i = (i32)(m); i < (i32)(n); ++i)\n#define REP(...) OVERRIDE(__VA_ARGS__,\
@@ -202,7 +202,7 @@ data:
   isVerificationFile: true
   path: data_structure/test/point_add_rectangle_sum.test.cpp
   requiredBy: []
-  timestamp: '2024-07-18 16:56:22+09:00'
+  timestamp: '2025-05-17 23:14:32+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: data_structure/test/point_add_rectangle_sum.test.cpp

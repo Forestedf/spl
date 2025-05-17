@@ -1,32 +1,32 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number_theory/factorial.hpp
     title: number_theory/factorial.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/mod_int.hpp
     title: number_theory/mod_int.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/utils.hpp
     title: number_theory/utils.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: poly/fft.hpp
     title: poly/fft.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/stirling1.hpp
     title: poly/stirling1.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/taylor_shift.hpp
     title: poly/taylor_shift.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/stirling_number_of_the_first_kind
@@ -244,7 +244,7 @@ data:
     \   }\n    }\n    return f;\n}\ntemplate <typename M>\nstd::vector<M> stirling_1_unsigned(int\
     \ n) {\n    assert(0 <= n);\n    std::vector<M> f = stirling_1_signed<M>(n);\n\
     \    for (int i = n - 1; i >= 0; i -= 2) {\n        f[i] = -f[i];\n    }\n   \
-    \ return f;\n}\n#line 1 \"template/template.hpp\"\n#include <bits/stdc++.h>\n\
+    \ return f;\n}\n#line 2 \"template/template.hpp\"\n#include <bits/stdc++.h>\n\
     #define OVERRIDE(a, b, c, d, ...) d\n#define REP2(i, n) for (i32 i = 0; i < (i32)(n);\
     \ ++i)\n#define REP3(i, m, n) for (i32 i = (i32)(m); i < (i32)(n); ++i)\n#define\
     \ REP(...) OVERRIDE(__VA_ARGS__, REP3, REP2)(__VA_ARGS__)\n#define PER2(i, n)\
@@ -305,8 +305,8 @@ data:
   isVerificationFile: true
   path: poly/test/stirling_number_of_the_first_kind.test.cpp
   requiredBy: []
-  timestamp: '2024-07-18 16:56:22+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2025-05-17 23:14:32+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: poly/test/stirling_number_of_the_first_kind.test.cpp
 layout: document

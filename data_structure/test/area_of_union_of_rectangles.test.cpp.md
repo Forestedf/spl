@@ -7,7 +7,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: data_structure/union_of_rectangles.hpp
     title: data_structure/union_of_rectangles.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
   _extendedRequiredBy: []
@@ -107,7 +107,7 @@ data:
     \ {\n            seg.apply(l, r, -1);\n        }\n        T dy = ys[i + 1] - ys[i];\n\
     \        std::pair<int, T> p = seg.all_prod();\n        if (p.first == 0) {\n\
     \            ans += (xlen - p.second) * dy;\n        } else {\n            ans\
-    \ += xlen * dy;\n        }\n    }\n    return ans;\n}\n#line 1 \"template/template.hpp\"\
+    \ += xlen * dy;\n        }\n    }\n    return ans;\n}\n#line 2 \"template/template.hpp\"\
     \n#include <bits/stdc++.h>\n#define OVERRIDE(a, b, c, d, ...) d\n#define REP2(i,\
     \ n) for (i32 i = 0; i < (i32)(n); ++i)\n#define REP3(i, m, n) for (i32 i = (i32)(m);\
     \ i < (i32)(n); ++i)\n#define REP(...) OVERRIDE(__VA_ARGS__, REP3, REP2)(__VA_ARGS__)\n\
@@ -166,7 +166,7 @@ data:
   isVerificationFile: true
   path: data_structure/test/area_of_union_of_rectangles.test.cpp
   requiredBy: []
-  timestamp: '2024-07-18 16:56:22+09:00'
+  timestamp: '2025-05-17 23:14:32+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: data_structure/test/area_of_union_of_rectangles.test.cpp

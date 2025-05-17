@@ -22,44 +22,47 @@ data:
     path: convolution/test/mul_modp_convolution.test.cpp
     title: convolution/test/mul_modp_convolution.test.cpp
   - icon: ':heavy_check_mark:'
+    path: data_structure/test/range_affine_point_get.test.cpp
+    title: data_structure/test/range_affine_point_get.test.cpp
+  - icon: ':heavy_check_mark:'
     path: graph/test/enumerate_triangles.test.cpp
     title: graph/test/enumerate_triangles.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number_theory/test/factorize.test.cpp
     title: number_theory/test/factorize.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/test/exp_of_formal_power_series.test.cpp
     title: poly/test/exp_of_formal_power_series.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/test/exp_of_formal_power_series_sparse.test.cpp
     title: poly/test/exp_of_formal_power_series_sparse.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/test/find_linear_recurrence.test.cpp
     title: poly/test/find_linear_recurrence.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/test/inv_of_formal_power_series.test.cpp
     title: poly/test/inv_of_formal_power_series.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/test/inv_of_formal_power_series_sparse.test.cpp
     title: poly/test/inv_of_formal_power_series_sparse.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
     title: poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/test/log_of_formal_power_series.test.cpp
     title: poly/test/log_of_formal_power_series.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/test/log_of_formal_power_series_sparse.test.cpp
     title: poly/test/log_of_formal_power_series_sparse.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/test/pow_of_formal_power_series.test.cpp
     title: poly/test/pow_of_formal_power_series.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/test/prod_of_polys.test.cpp
     title: poly/test/prod_of_polys.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 1 \"template/fastio.hpp\"\n#include <cstdio>\n#include <cstring>\n\
@@ -247,26 +250,27 @@ data:
   path: template/fastio.hpp
   requiredBy: []
   timestamp: '2024-11-23 22:57:41+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - poly/test/inv_of_formal_power_series_sparse.test.cpp
-  - poly/test/inv_of_formal_power_series.test.cpp
-  - poly/test/pow_of_formal_power_series.test.cpp
-  - poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - poly/test/exp_of_formal_power_series_sparse.test.cpp
-  - poly/test/log_of_formal_power_series.test.cpp
-  - poly/test/log_of_formal_power_series_sparse.test.cpp
-  - poly/test/prod_of_polys.test.cpp
-  - poly/test/find_linear_recurrence.test.cpp
-  - poly/test/exp_of_formal_power_series.test.cpp
-  - convolution/test/mul_modp_convolution.test.cpp
   - number_theory/test/factorize.test.cpp
+  - poly/test/prod_of_polys.test.cpp
+  - poly/test/log_of_formal_power_series.test.cpp
+  - poly/test/exp_of_formal_power_series_sparse.test.cpp
+  - poly/test/find_linear_recurrence.test.cpp
+  - poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
+  - poly/test/inv_of_formal_power_series_sparse.test.cpp
+  - poly/test/exp_of_formal_power_series.test.cpp
+  - poly/test/log_of_formal_power_series_sparse.test.cpp
+  - poly/test/pow_of_formal_power_series.test.cpp
+  - poly/test/inv_of_formal_power_series.test.cpp
+  - convolution/test/mul_modp_convolution.test.cpp
+  - data_structure/test/range_affine_point_get.test.cpp
   - graph/test/enumerate_triangles.test.cpp
-  - algebra/test/matrix_product.test.cpp
   - algebra/test/system_of_linear_equations.test.cpp
   - algebra/test/matrix_rank.test.cpp
   - algebra/test/matrix_det.test.cpp
   - algebra/test/inverse_matrix.test.cpp
+  - algebra/test/matrix_product.test.cpp
 documentation_of: template/fastio.hpp
 layout: document
 redirect_from:

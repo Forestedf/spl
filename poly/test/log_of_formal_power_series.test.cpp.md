@@ -1,35 +1,35 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number_theory/factorial.hpp
     title: number_theory/factorial.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/mod_int.hpp
     title: number_theory/mod_int.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/utils.hpp
     title: number_theory/utils.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: poly/fft.hpp
     title: poly/fft.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/fps_inv.hpp
     title: poly/fps_inv.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/fps_log.hpp
     title: poly/fps_log.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/fastio.hpp
     title: template/fastio.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/log_of_formal_power_series
@@ -249,7 +249,7 @@ data:
     \ {\n        df[i] = f[i + 1] * T(i + 1);\n    }\n    std::vector<T> invf = fps_inv(f,\
     \ len - 1);\n    std::vector<T> ret = convolve(df, invf);\n    ret.resize(len);\n\
     \    for (int i = len - 1; i >= 1; --i) {\n        ret[i] = ret[i - 1] * inv<T>(i);\n\
-    \    }\n    ret[0] = T(0);\n    return ret;\n}\n#line 1 \"template/template.hpp\"\
+    \    }\n    ret[0] = T(0);\n    return ret;\n}\n#line 2 \"template/template.hpp\"\
     \n#include <bits/stdc++.h>\n#define OVERRIDE(a, b, c, d, ...) d\n#define REP2(i,\
     \ n) for (i32 i = 0; i < (i32)(n); ++i)\n#define REP3(i, m, n) for (i32 i = (i32)(m);\
     \ i < (i32)(n); ++i)\n#define REP(...) OVERRIDE(__VA_ARGS__, REP3, REP2)(__VA_ARGS__)\n\
@@ -403,8 +403,8 @@ data:
   isVerificationFile: true
   path: poly/test/log_of_formal_power_series.test.cpp
   requiredBy: []
-  timestamp: '2025-01-29 16:33:50+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2025-05-17 23:14:32+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: poly/test/log_of_formal_power_series.test.cpp
 layout: document

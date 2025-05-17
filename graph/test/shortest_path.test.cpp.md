@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/dijkstra.hpp
     title: graph/dijkstra.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/graph.hpp
     title: graph/graph.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/shortest_path
@@ -66,7 +66,7 @@ data:
     \        }\n        for (const Edge<T> &e : g[v]) {\n            if (d + e.weight\
     \ < dist[e.to]) {\n                dist[e.to] = d + e.weight;\n              \
     \  par[e.to] = v;\n                pq.emplace(dist[e.to], e.to);\n           \
-    \ }\n        }\n    }\n    return std::make_pair(dist, par);\n}\n#line 1 \"template/template.hpp\"\
+    \ }\n        }\n    }\n    return std::make_pair(dist, par);\n}\n#line 2 \"template/template.hpp\"\
     \n#include <bits/stdc++.h>\n#define OVERRIDE(a, b, c, d, ...) d\n#define REP2(i,\
     \ n) for (i32 i = 0; i < (i32)(n); ++i)\n#define REP3(i, m, n) for (i32 i = (i32)(m);\
     \ i < (i32)(n); ++i)\n#define REP(...) OVERRIDE(__VA_ARGS__, REP3, REP2)(__VA_ARGS__)\n\
@@ -139,8 +139,8 @@ data:
   isVerificationFile: true
   path: graph/test/shortest_path.test.cpp
   requiredBy: []
-  timestamp: '2024-07-18 16:56:22+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2025-05-17 23:14:32+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: graph/test/shortest_path.test.cpp
 layout: document

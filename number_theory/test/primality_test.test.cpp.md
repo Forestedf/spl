@@ -1,17 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/primality.hpp
     title: number_theory/primality.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/primality_test
@@ -43,7 +43,7 @@ data:
     \       break;\n            }\n            t = mont.mulmr(t, t);\n        }\n\
     \        if (i == s) {\n            return false;\n        }\n    }\n    return\
     \ true;\n}\n\n}  // namespace primality\n\nbool is_prime(unsigned long long n)\
-    \ {\n    return primality::is_prime(n);\n}\n#line 1 \"template/template.hpp\"\n\
+    \ {\n    return primality::is_prime(n);\n}\n#line 2 \"template/template.hpp\"\n\
     #include <bits/stdc++.h>\n#define OVERRIDE(a, b, c, d, ...) d\n#define REP2(i,\
     \ n) for (i32 i = 0; i < (i32)(n); ++i)\n#define REP3(i, m, n) for (i32 i = (i32)(m);\
     \ i < (i32)(n); ++i)\n#define REP(...) OVERRIDE(__VA_ARGS__, REP3, REP2)(__VA_ARGS__)\n\
@@ -100,8 +100,8 @@ data:
   isVerificationFile: true
   path: number_theory/test/primality_test.test.cpp
   requiredBy: []
-  timestamp: '2025-01-27 10:50:19+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2025-05-17 23:14:32+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: number_theory/test/primality_test.test.cpp
 layout: document

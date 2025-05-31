@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: number_theory/frac_binsearch.hpp
     title: number_theory/frac_binsearch.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/random.hpp
     title: template/random.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/template.hpp
     title: template/template.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/lesson/2/ITP1/1/ITP1_1_A
@@ -182,7 +182,7 @@ data:
   path: number_theory/test/frac_binsearch_stress.test.cpp
   requiredBy: []
   timestamp: '2025-05-17 23:14:32+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: number_theory/test/frac_binsearch_stress.test.cpp
 layout: document

@@ -5,28 +5,28 @@ data:
   - icon: ':heavy_check_mark:'
     path: convolution/mul_mod_p_conv.hpp
     title: convolution/mul_mod_p_conv.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: number_theory/factorize.hpp
     title: number_theory/factorize.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: number_theory/primitive_root.hpp
     title: number_theory/primitive_root.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: convolution/test/mul_modp_convolution.test.cpp
     title: convolution/test/mul_modp_convolution.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: number_theory/test/factorize.test.cpp
     title: number_theory/test/factorize.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: number_theory/test/primality_test.test.cpp
     title: number_theory/test/primality_test.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: number_theory/test/primitive_root.test.cpp
     title: number_theory/test/primitive_root.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"number_theory/primality.hpp\"\n\nnamespace primality {\n\
@@ -87,7 +87,7 @@ data:
   - number_theory/primitive_root.hpp
   - convolution/mul_mod_p_conv.hpp
   timestamp: '2025-01-27 10:50:19+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - number_theory/test/factorize.test.cpp
   - number_theory/test/primality_test.test.cpp

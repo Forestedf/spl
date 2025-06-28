@@ -1,71 +1,71 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/mod_int.hpp
     title: number_theory/mod_int.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/utils.hpp
     title: number_theory/utils.hpp
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
     path: convolution/mul_mod_p_conv.hpp
     title: convolution/mul_mod_p_conv.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/fps_div_at.hpp
     title: poly/fps_div_at.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/fps_exp.hpp
     title: poly/fps_exp.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/fps_inv.hpp
     title: poly/fps_inv.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/fps_log.hpp
     title: poly/fps_log.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/stirling1.hpp
     title: poly/stirling1.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/stirling2.hpp
     title: poly/stirling2.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/taylor_shift.hpp
     title: poly/taylor_shift.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: convolution/test/mul_modp_convolution.test.cpp
     title: convolution/test/mul_modp_convolution.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/test/convolution_mod.test.cpp
     title: poly/test/convolution_mod.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/test/exp_of_formal_power_series.test.cpp
     title: poly/test/exp_of_formal_power_series.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/test/inv_of_formal_power_series.test.cpp
     title: poly/test/inv_of_formal_power_series.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
     title: poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/test/log_of_formal_power_series.test.cpp
     title: poly/test/log_of_formal_power_series.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/test/polynomial_taylor_shift.test.cpp
     title: poly/test/polynomial_taylor_shift.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/test/prod_of_polys.test.cpp
     title: poly/test/prod_of_polys.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/test/stirling_number_of_the_first_kind.test.cpp
     title: poly/test/stirling_number_of_the_first_kind.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/test/stirling_number_of_the_second_kind.test.cpp
     title: poly/test/stirling_number_of_the_second_kind.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"poly/fft.hpp\"\n#include <array>\n#include <vector>\n#line\
@@ -339,27 +339,27 @@ data:
   isVerificationFile: false
   path: poly/fft.hpp
   requiredBy:
-  - poly/fps_div_at.hpp
-  - poly/taylor_shift.hpp
-  - poly/stirling2.hpp
-  - poly/stirling1.hpp
-  - poly/fps_exp.hpp
-  - poly/fps_log.hpp
-  - poly/fps_inv.hpp
   - convolution/mul_mod_p_conv.hpp
+  - poly/fps_log.hpp
+  - poly/fps_exp.hpp
+  - poly/fps_div_at.hpp
+  - poly/fps_inv.hpp
+  - poly/taylor_shift.hpp
+  - poly/stirling1.hpp
+  - poly/stirling2.hpp
   timestamp: '2024-07-18 16:56:22+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - convolution/test/mul_modp_convolution.test.cpp
   - poly/test/prod_of_polys.test.cpp
+  - poly/test/inv_of_formal_power_series.test.cpp
+  - poly/test/stirling_number_of_the_second_kind.test.cpp
+  - poly/test/exp_of_formal_power_series.test.cpp
   - poly/test/stirling_number_of_the_first_kind.test.cpp
   - poly/test/polynomial_taylor_shift.test.cpp
-  - poly/test/stirling_number_of_the_second_kind.test.cpp
-  - poly/test/log_of_formal_power_series.test.cpp
   - poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - poly/test/exp_of_formal_power_series.test.cpp
-  - poly/test/inv_of_formal_power_series.test.cpp
   - poly/test/convolution_mod.test.cpp
-  - convolution/test/mul_modp_convolution.test.cpp
+  - poly/test/log_of_formal_power_series.test.cpp
 documentation_of: poly/fft.hpp
 layout: document
 redirect_from:

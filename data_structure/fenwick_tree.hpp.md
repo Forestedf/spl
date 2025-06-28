@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: data_structure/operations.hpp
     title: data_structure/operations.hpp
   _extendedRequiredBy:
@@ -27,12 +27,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: data_structure/test/rectangle_sum.test.cpp
     title: data_structure/test/rectangle_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/test/vertex_add_path_sum.test.cpp
     title: graph/test/vertex_add_path_sum.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"data_structure/fenwick_tree.hpp\"\n\n#include <cassert>\n\
@@ -90,15 +90,15 @@ data:
   isVerificationFile: false
   path: data_structure/fenwick_tree.hpp
   requiredBy:
-  - data_structure/range_add_point_get.hpp
-  - data_structure/range_add_range_sum.hpp
   - data_structure/rectangle_sum.hpp
+  - data_structure/range_add_range_sum.hpp
+  - data_structure/range_add_point_get.hpp
   timestamp: '2023-12-26 16:56:23+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - data_structure/test/point_add_rectangle_sum.test.cpp
-  - data_structure/test/rectangle_sum.test.cpp
   - data_structure/test/dsl_2_g.test.cpp
+  - data_structure/test/rectangle_sum.test.cpp
   - data_structure/test/point_add_range_sum.test.cpp
   - graph/test/vertex_add_path_sum.test.cpp
 documentation_of: data_structure/fenwick_tree.hpp

@@ -3,12 +3,12 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/test/find_linear_recurrence.test.cpp
     title: poly/test/find_linear_recurrence.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"poly/find_linear_recurrence.hpp\"\n#include <vector>\n//\
@@ -45,7 +45,7 @@ data:
   path: poly/find_linear_recurrence.hpp
   requiredBy: []
   timestamp: '2025-03-07 18:08:13+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - poly/test/find_linear_recurrence.test.cpp
 documentation_of: poly/find_linear_recurrence.hpp

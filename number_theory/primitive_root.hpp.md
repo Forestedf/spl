@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/factorize.hpp
     title: number_theory/factorize.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/montgomery_64.hpp
     title: number_theory/montgomery_64.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/primality.hpp
     title: number_theory/primality.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/random.hpp
     title: template/random.hpp
   _extendedRequiredBy:
@@ -21,12 +21,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: convolution/test/mul_modp_convolution.test.cpp
     title: convolution/test/mul_modp_convolution.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number_theory/test/primitive_root.test.cpp
     title: number_theory/test/primitive_root.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"number_theory/factorize.hpp\"\n#include <algorithm>\n#include\
@@ -147,10 +147,10 @@ data:
   requiredBy:
   - convolution/mul_mod_p_conv.hpp
   timestamp: '2025-01-29 16:01:19+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - number_theory/test/primitive_root.test.cpp
   - convolution/test/mul_modp_convolution.test.cpp
+  - number_theory/test/primitive_root.test.cpp
 documentation_of: number_theory/primitive_root.hpp
 layout: document
 redirect_from:

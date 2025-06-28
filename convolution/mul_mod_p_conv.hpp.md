@@ -1,28 +1,28 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/factorize.hpp
     title: number_theory/factorize.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/mod_int.hpp
     title: number_theory/mod_int.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/montgomery_64.hpp
     title: number_theory/montgomery_64.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/primality.hpp
     title: number_theory/primality.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/primitive_root.hpp
     title: number_theory/primitive_root.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/utils.hpp
     title: number_theory/utils.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: poly/fft.hpp
     title: poly/fft.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/random.hpp
     title: template/random.hpp
   _extendedRequiredBy: []

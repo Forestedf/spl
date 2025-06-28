@@ -102,90 +102,90 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/test/shortest_path.test.cpp
     title: graph/test/shortest_path.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/test/two_edge_connected_components.test.cpp
     title: graph/test/two_edge_connected_components.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/test/vertex_add_path_sum.test.cpp
     title: graph/test/vertex_add_path_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number_theory/test/ax_by_c_stress.test.cpp
     title: number_theory/test/ax_by_c_stress.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number_theory/test/binary_gcd_stress.test.cpp
     title: number_theory/test/binary_gcd_stress.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number_theory/test/extgcd2_stress.test.cpp
     title: number_theory/test/extgcd2_stress.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number_theory/test/factorize.test.cpp
     title: number_theory/test/factorize.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number_theory/test/frac_binsearch_stress.test.cpp
     title: number_theory/test/frac_binsearch_stress.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number_theory/test/inv_mod_stress.test.cpp
     title: number_theory/test/inv_mod_stress.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number_theory/test/montgomery_64_stress.test.cpp
     title: number_theory/test/montgomery_64_stress.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number_theory/test/primality_test.test.cpp
     title: number_theory/test/primality_test.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number_theory/test/primitive_root.test.cpp
     title: number_theory/test/primitive_root.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: opt/test/yuki_119.test.cpp
     title: opt/test/yuki_119.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/test/convolution_mod.test.cpp
     title: poly/test/convolution_mod.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/test/exp_of_formal_power_series.test.cpp
     title: poly/test/exp_of_formal_power_series.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/test/exp_of_formal_power_series_sparse.test.cpp
     title: poly/test/exp_of_formal_power_series_sparse.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/test/find_linear_recurrence.test.cpp
     title: poly/test/find_linear_recurrence.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/test/inv_of_formal_power_series.test.cpp
     title: poly/test/inv_of_formal_power_series.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/test/inv_of_formal_power_series_sparse.test.cpp
     title: poly/test/inv_of_formal_power_series_sparse.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
     title: poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/test/log_of_formal_power_series.test.cpp
     title: poly/test/log_of_formal_power_series.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/test/log_of_formal_power_series_sparse.test.cpp
     title: poly/test/log_of_formal_power_series_sparse.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/test/polynomial_taylor_shift.test.cpp
     title: poly/test/polynomial_taylor_shift.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/test/pow_of_formal_power_series.test.cpp
     title: poly/test/pow_of_formal_power_series.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/test/prod_of_polys.test.cpp
     title: poly/test/prod_of_polys.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/test/stirling_number_of_the_first_kind.test.cpp
     title: poly/test/stirling_number_of_the_first_kind.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/test/stirling_number_of_the_second_kind.test.cpp
     title: poly/test/stirling_number_of_the_second_kind.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: string/test/zalgorithm.test.cpp
     title: string/test/zalgorithm.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"template/template.hpp\"\n#include <bits/stdc++.h>\n#define\
@@ -218,18 +218,20 @@ data:
     \        cin.tie(nullptr);\n#endif\n        cout << fixed << setprecision(15);\n\
     \    }\n} set_up_io;\nvoid scan(char &x) { cin >> x; }\nvoid scan(u32 &x) { cin\
     \ >> x; }\nvoid scan(u64 &x) { cin >> x; }\nvoid scan(i32 &x) { cin >> x; }\n\
-    void scan(i64 &x) { cin >> x; }\nvoid scan(string &x) { cin >> x; }\ntemplate\
-    \ <typename T>\nvoid scan(V<T> &x) {\n    for (T &ele : x) {\n        scan(ele);\n\
-    \    }\n}\nvoid read() {}\ntemplate <typename Head, typename... Tail>\nvoid read(Head\
-    \ &head, Tail &...tail) {\n    scan(head);\n    read(tail...);\n}\n#define CHAR(...)\
-    \     \\\n    char __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define U32(...) \
-    \    \\\n    u32 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define U64(...)   \
-    \  \\\n    u64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define I32(...)     \\\
-    \n    i32 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define I64(...)     \\\n \
-    \   i64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define STR(...)        \\\n\
-    \    string __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define VEC(type, name, size)\
-    \ \\\n    V<type> name(size);       \\\n    read(name);\n#define VVEC(type, name,\
-    \ size1, size2)    \\\n    VV<type> name(size1, V<type>(size2)); \\\n    read(name);\n"
+    void scan(i64 &x) { cin >> x; }\nvoid scan(f64 &x) { cin >> x; }\nvoid scan(string\
+    \ &x) { cin >> x; }\ntemplate <typename T>\nvoid scan(V<T> &x) {\n    for (T &ele\
+    \ : x) {\n        scan(ele);\n    }\n}\nvoid read() {}\ntemplate <typename Head,\
+    \ typename... Tail>\nvoid read(Head &head, Tail &...tail) {\n    scan(head);\n\
+    \    read(tail...);\n}\n#define CHAR(...)     \\\n    char __VA_ARGS__; \\\n \
+    \   read(__VA_ARGS__);\n#define U32(...)     \\\n    u32 __VA_ARGS__; \\\n   \
+    \ read(__VA_ARGS__);\n#define U64(...)     \\\n    u64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n\
+    #define I32(...)     \\\n    i32 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define\
+    \ I64(...)     \\\n    i64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define F64(...)\
+    \     \\\n    f64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define STR(...)  \
+    \      \\\n    string __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define VEC(type,\
+    \ name, size) \\\n    V<type> name(size);       \\\n    read(name);\n#define VVEC(type,\
+    \ name, size1, size2)    \\\n    VV<type> name(size1, V<type>(size2)); \\\n  \
+    \  read(name);\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n#define OVERRIDE(a, b, c, d, ...)\
     \ d\n#define REP2(i, n) for (i32 i = 0; i < (i32)(n); ++i)\n#define REP3(i, m,\
     \ n) for (i32 i = (i32)(m); i < (i32)(n); ++i)\n#define REP(...) OVERRIDE(__VA_ARGS__,\
@@ -260,85 +262,86 @@ data:
     \        cout << fixed << setprecision(15);\n    }\n} set_up_io;\nvoid scan(char\
     \ &x) { cin >> x; }\nvoid scan(u32 &x) { cin >> x; }\nvoid scan(u64 &x) { cin\
     \ >> x; }\nvoid scan(i32 &x) { cin >> x; }\nvoid scan(i64 &x) { cin >> x; }\n\
-    void scan(string &x) { cin >> x; }\ntemplate <typename T>\nvoid scan(V<T> &x)\
-    \ {\n    for (T &ele : x) {\n        scan(ele);\n    }\n}\nvoid read() {}\ntemplate\
-    \ <typename Head, typename... Tail>\nvoid read(Head &head, Tail &...tail) {\n\
-    \    scan(head);\n    read(tail...);\n}\n#define CHAR(...)     \\\n    char __VA_ARGS__;\
-    \ \\\n    read(__VA_ARGS__);\n#define U32(...)     \\\n    u32 __VA_ARGS__; \\\
-    \n    read(__VA_ARGS__);\n#define U64(...)     \\\n    u64 __VA_ARGS__; \\\n \
-    \   read(__VA_ARGS__);\n#define I32(...)     \\\n    i32 __VA_ARGS__; \\\n   \
-    \ read(__VA_ARGS__);\n#define I64(...)     \\\n    i64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n\
-    #define STR(...)        \\\n    string __VA_ARGS__; \\\n    read(__VA_ARGS__);\n\
-    #define VEC(type, name, size) \\\n    V<type> name(size);       \\\n    read(name);\n\
-    #define VVEC(type, name, size1, size2)    \\\n    VV<type> name(size1, V<type>(size2));\
-    \ \\\n    read(name);\n"
+    void scan(f64 &x) { cin >> x; }\nvoid scan(string &x) { cin >> x; }\ntemplate\
+    \ <typename T>\nvoid scan(V<T> &x) {\n    for (T &ele : x) {\n        scan(ele);\n\
+    \    }\n}\nvoid read() {}\ntemplate <typename Head, typename... Tail>\nvoid read(Head\
+    \ &head, Tail &...tail) {\n    scan(head);\n    read(tail...);\n}\n#define CHAR(...)\
+    \     \\\n    char __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define U32(...) \
+    \    \\\n    u32 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define U64(...)   \
+    \  \\\n    u64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define I32(...)     \\\
+    \n    i32 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define I64(...)     \\\n \
+    \   i64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define F64(...)     \\\n   \
+    \ f64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define STR(...)        \\\n  \
+    \  string __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define VEC(type, name, size)\
+    \ \\\n    V<type> name(size);       \\\n    read(name);\n#define VVEC(type, name,\
+    \ size1, size2)    \\\n    VV<type> name(size1, V<type>(size2)); \\\n    read(name);\n"
   dependsOn: []
   isVerificationFile: false
   path: template/template.hpp
   requiredBy: []
-  timestamp: '2025-05-17 23:14:32+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2025-06-28 10:05:47+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - string/test/zalgorithm.test.cpp
-  - number_theory/test/factorize.test.cpp
-  - number_theory/test/extgcd2_stress.test.cpp
+  - convolution/test/mul_modp_convolution.test.cpp
+  - opt/test/yuki_119.test.cpp
   - number_theory/test/binary_gcd_stress.test.cpp
+  - number_theory/test/primitive_root.test.cpp
   - number_theory/test/frac_binsearch_stress.test.cpp
-  - number_theory/test/inv_mod_stress.test.cpp
+  - number_theory/test/primality_test.test.cpp
+  - number_theory/test/extgcd2_stress.test.cpp
   - number_theory/test/ax_by_c_stress.test.cpp
   - number_theory/test/montgomery_64_stress.test.cpp
-  - number_theory/test/primality_test.test.cpp
-  - number_theory/test/primitive_root.test.cpp
+  - number_theory/test/factorize.test.cpp
+  - number_theory/test/inv_mod_stress.test.cpp
   - poly/test/prod_of_polys.test.cpp
-  - poly/test/stirling_number_of_the_first_kind.test.cpp
-  - poly/test/polynomial_taylor_shift.test.cpp
+  - poly/test/inv_of_formal_power_series.test.cpp
   - poly/test/stirling_number_of_the_second_kind.test.cpp
-  - poly/test/log_of_formal_power_series.test.cpp
-  - poly/test/exp_of_formal_power_series_sparse.test.cpp
-  - poly/test/find_linear_recurrence.test.cpp
-  - poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - poly/test/inv_of_formal_power_series_sparse.test.cpp
   - poly/test/exp_of_formal_power_series.test.cpp
   - poly/test/log_of_formal_power_series_sparse.test.cpp
+  - poly/test/inv_of_formal_power_series_sparse.test.cpp
+  - poly/test/stirling_number_of_the_first_kind.test.cpp
+  - poly/test/find_linear_recurrence.test.cpp
+  - poly/test/polynomial_taylor_shift.test.cpp
+  - poly/test/exp_of_formal_power_series_sparse.test.cpp
   - poly/test/pow_of_formal_power_series.test.cpp
-  - poly/test/inv_of_formal_power_series.test.cpp
+  - poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
   - poly/test/convolution_mod.test.cpp
-  - convolution/test/mul_modp_convolution.test.cpp
+  - poly/test/log_of_formal_power_series.test.cpp
+  - algebra/test/system_of_linear_equations.test.cpp
+  - algebra/test/matrix_det.test.cpp
+  - algebra/test/matrix_product.test.cpp
+  - algebra/test/matrix_rank.test.cpp
+  - algebra/test/inverse_matrix.test.cpp
+  - string/test/zalgorithm.test.cpp
+  - data_structure/test/area_of_union_of_rectangles.test.cpp
   - data_structure/test/point_add_rectangle_sum.test.cpp
   - data_structure/test/range_affine_point_get.test.cpp
-  - data_structure/test/range_affine_range_sum.test.cpp
-  - data_structure/test/rectangle_sum.test.cpp
   - data_structure/test/dsl_2_g.test.cpp
-  - data_structure/test/staticrmq.test.cpp
-  - data_structure/test/point_add_range_sum.test.cpp
   - data_structure/test/cartesian_tree.test.cpp
   - data_structure/test/static_range_frequency.test.cpp
-  - data_structure/test/range_kth_smallest.test.cpp
-  - data_structure/test/rectangle_sum_range_tree.test.cpp
-  - data_structure/test/1891.test.cpp
-  - data_structure/test/point_set_range_composite.test.cpp
-  - data_structure/test/unionfind.test.cpp
   - data_structure/test/queue_operate_all_composite.test.cpp
-  - data_structure/test/area_of_union_of_rectangles.test.cpp
+  - data_structure/test/range_affine_range_sum.test.cpp
+  - data_structure/test/rectangle_sum_range_tree.test.cpp
+  - data_structure/test/unionfind.test.cpp
   - data_structure/test/wavelet_matrix.test.cpp
-  - graph/test/biconnected_components.test.cpp
-  - graph/test/block_cut_tree.test.cpp
-  - graph/test/two_edge_connected_components.test.cpp
-  - graph/test/shortest_path.test.cpp
+  - data_structure/test/staticrmq.test.cpp
+  - data_structure/test/rectangle_sum.test.cpp
+  - data_structure/test/range_kth_smallest.test.cpp
+  - data_structure/test/point_set_range_composite.test.cpp
+  - data_structure/test/1891.test.cpp
+  - data_structure/test/point_add_range_sum.test.cpp
   - graph/test/scc.test.cpp
-  - graph/test/lca.test.cpp
-  - graph/test/jump_on_tree.test.cpp
-  - graph/test/ALDS1_11_D.test.cpp
   - graph/test/enumerate_triangles.test.cpp
-  - graph/test/vertex_add_path_sum.test.cpp
+  - graph/test/ALDS1_11_D.test.cpp
+  - graph/test/block_cut_tree.test.cpp
   - graph/test/connected_components_of_complement_graph.test.cpp
+  - graph/test/shortest_path.test.cpp
+  - graph/test/two_edge_connected_components.test.cpp
+  - graph/test/lca.test.cpp
+  - graph/test/biconnected_components.test.cpp
+  - graph/test/jump_on_tree.test.cpp
+  - graph/test/vertex_add_path_sum.test.cpp
   - bit/test/bitwise_xor_convolution.test.cpp
-  - opt/test/yuki_119.test.cpp
-  - algebra/test/system_of_linear_equations.test.cpp
-  - algebra/test/matrix_rank.test.cpp
-  - algebra/test/matrix_det.test.cpp
-  - algebra/test/inverse_matrix.test.cpp
-  - algebra/test/matrix_product.test.cpp
 documentation_of: template/template.hpp
 layout: document
 redirect_from:

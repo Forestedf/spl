@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: data_structure/fenwick_tree.hpp
     title: data_structure/fenwick_tree.hpp
   - icon: ':heavy_check_mark:'
     path: data_structure/general_range_tree.hpp
     title: data_structure/general_range_tree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: data_structure/operations.hpp
     title: data_structure/operations.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
   _extendedRequiredBy: []
@@ -141,28 +141,30 @@ data:
     \        cout << fixed << setprecision(15);\n    }\n} set_up_io;\nvoid scan(char\
     \ &x) { cin >> x; }\nvoid scan(u32 &x) { cin >> x; }\nvoid scan(u64 &x) { cin\
     \ >> x; }\nvoid scan(i32 &x) { cin >> x; }\nvoid scan(i64 &x) { cin >> x; }\n\
-    void scan(string &x) { cin >> x; }\ntemplate <typename T>\nvoid scan(V<T> &x)\
-    \ {\n    for (T &ele : x) {\n        scan(ele);\n    }\n}\nvoid read() {}\ntemplate\
-    \ <typename Head, typename... Tail>\nvoid read(Head &head, Tail &...tail) {\n\
-    \    scan(head);\n    read(tail...);\n}\n#define CHAR(...)     \\\n    char __VA_ARGS__;\
-    \ \\\n    read(__VA_ARGS__);\n#define U32(...)     \\\n    u32 __VA_ARGS__; \\\
-    \n    read(__VA_ARGS__);\n#define U64(...)     \\\n    u64 __VA_ARGS__; \\\n \
-    \   read(__VA_ARGS__);\n#define I32(...)     \\\n    i32 __VA_ARGS__; \\\n   \
-    \ read(__VA_ARGS__);\n#define I64(...)     \\\n    i64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n\
-    #define STR(...)        \\\n    string __VA_ARGS__; \\\n    read(__VA_ARGS__);\n\
-    #define VEC(type, name, size) \\\n    V<type> name(size);       \\\n    read(name);\n\
-    #define VVEC(type, name, size1, size2)    \\\n    VV<type> name(size1, V<type>(size2));\
-    \ \\\n    read(name);\n#line 7 \"data_structure/test/point_add_rectangle_sum.test.cpp\"\
-    \n\nint main() {\n    i32 n, q;\n    cin >> n >> q;\n    V<i32> x(n), y(n), w(n);\n\
-    \    REP(i, n) { cin >> x[i] >> y[i] >> w[i]; }\n    V<tuple<i32, i32, i32, i32,\
-    \ i32>> queries(q);\n    for (auto &[type, a, b, c, d] : queries) {\n        cin\
-    \ >> type;\n        if (type == 0) {\n            cin >> a >> b >> c;\n      \
-    \      d = 0;\n        } else {\n            cin >> a >> b >> c >> d;\n      \
-    \  }\n    }\n    i32 pct = n;\n    for (const auto &[type, _a, _b, _c, _d] : queries)\
-    \ {\n        if (type == 0) {\n            ++pct;\n        }\n    }\n    V<pi>\
-    \ pts;\n    pts.reserve(pct);\n    REP(i, n) { pts.emplace_back(x[i], y[i]); }\n\
-    \    for (const auto &[type, a, b, c, d] : queries) {\n        if (type == 0)\
-    \ {\n            pts.emplace_back(a, b);\n        }\n    }\n    GRangeTree rt(pts);\n\
+    void scan(f64 &x) { cin >> x; }\nvoid scan(string &x) { cin >> x; }\ntemplate\
+    \ <typename T>\nvoid scan(V<T> &x) {\n    for (T &ele : x) {\n        scan(ele);\n\
+    \    }\n}\nvoid read() {}\ntemplate <typename Head, typename... Tail>\nvoid read(Head\
+    \ &head, Tail &...tail) {\n    scan(head);\n    read(tail...);\n}\n#define CHAR(...)\
+    \     \\\n    char __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define U32(...) \
+    \    \\\n    u32 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define U64(...)   \
+    \  \\\n    u64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define I32(...)     \\\
+    \n    i32 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define I64(...)     \\\n \
+    \   i64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define F64(...)     \\\n   \
+    \ f64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define STR(...)        \\\n  \
+    \  string __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define VEC(type, name, size)\
+    \ \\\n    V<type> name(size);       \\\n    read(name);\n#define VVEC(type, name,\
+    \ size1, size2)    \\\n    VV<type> name(size1, V<type>(size2)); \\\n    read(name);\n\
+    #line 7 \"data_structure/test/point_add_rectangle_sum.test.cpp\"\n\nint main()\
+    \ {\n    i32 n, q;\n    cin >> n >> q;\n    V<i32> x(n), y(n), w(n);\n    REP(i,\
+    \ n) { cin >> x[i] >> y[i] >> w[i]; }\n    V<tuple<i32, i32, i32, i32, i32>> queries(q);\n\
+    \    for (auto &[type, a, b, c, d] : queries) {\n        cin >> type;\n      \
+    \  if (type == 0) {\n            cin >> a >> b >> c;\n            d = 0;\n   \
+    \     } else {\n            cin >> a >> b >> c >> d;\n        }\n    }\n    i32\
+    \ pct = n;\n    for (const auto &[type, _a, _b, _c, _d] : queries) {\n       \
+    \ if (type == 0) {\n            ++pct;\n        }\n    }\n    V<pi> pts;\n   \
+    \ pts.reserve(pct);\n    REP(i, n) { pts.emplace_back(x[i], y[i]); }\n    for\
+    \ (const auto &[type, a, b, c, d] : queries) {\n        if (type == 0) {\n   \
+    \         pts.emplace_back(a, b);\n        }\n    }\n    GRangeTree rt(pts);\n\
     \    VV<i32> upd_pct(pct - n);\n    REP(i, rt.size()) {\n        if (rt[i] >=\
     \ n) {\n            upd_pct[rt[i] - n].push_back(i);\n        }\n    }\n    FenwickTree<Add<i64>>\
     \ ft(rt.size());\n    REP(i, rt.size()) {\n        if (rt[i] < n) {\n        \
@@ -202,7 +204,7 @@ data:
   isVerificationFile: true
   path: data_structure/test/point_add_rectangle_sum.test.cpp
   requiredBy: []
-  timestamp: '2025-05-17 23:14:32+09:00'
+  timestamp: '2025-06-28 10:05:47+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: data_structure/test/point_add_rectangle_sum.test.cpp

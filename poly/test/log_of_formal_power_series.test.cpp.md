@@ -1,35 +1,35 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number_theory/factorial.hpp
     title: number_theory/factorial.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/mod_int.hpp
     title: number_theory/mod_int.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/utils.hpp
     title: number_theory/utils.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: poly/fft.hpp
     title: poly/fft.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/fps_inv.hpp
     title: poly/fps_inv.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/fps_log.hpp
     title: poly/fps_log.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/fastio.hpp
     title: template/fastio.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/log_of_formal_power_series
@@ -279,25 +279,26 @@ data:
     \        cin.tie(nullptr);\n#endif\n        cout << fixed << setprecision(15);\n\
     \    }\n} set_up_io;\nvoid scan(char &x) { cin >> x; }\nvoid scan(u32 &x) { cin\
     \ >> x; }\nvoid scan(u64 &x) { cin >> x; }\nvoid scan(i32 &x) { cin >> x; }\n\
-    void scan(i64 &x) { cin >> x; }\nvoid scan(string &x) { cin >> x; }\ntemplate\
-    \ <typename T>\nvoid scan(V<T> &x) {\n    for (T &ele : x) {\n        scan(ele);\n\
-    \    }\n}\nvoid read() {}\ntemplate <typename Head, typename... Tail>\nvoid read(Head\
-    \ &head, Tail &...tail) {\n    scan(head);\n    read(tail...);\n}\n#define CHAR(...)\
-    \     \\\n    char __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define U32(...) \
-    \    \\\n    u32 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define U64(...)   \
-    \  \\\n    u64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define I32(...)     \\\
-    \n    i32 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define I64(...)     \\\n \
-    \   i64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define STR(...)        \\\n\
-    \    string __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define VEC(type, name, size)\
-    \ \\\n    V<type> name(size);       \\\n    read(name);\n#define VVEC(type, name,\
-    \ size1, size2)    \\\n    VV<type> name(size1, V<type>(size2)); \\\n    read(name);\n\
-    #line 5 \"template/fastio.hpp\"\n\n// unable to read INT_MIN (int), LLONG_MIN\
-    \ (long long)\nclass Reader {\n    FILE *fp;\n    static constexpr int BUF = 1\
-    \ << 18;\n    char buf[BUF];\n    char *pl, *pr;\n\n    void reread() {\n    \
-    \    int wd = pr - pl;\n        std::memcpy(buf, pl, wd);\n        pl = buf;\n\
-    \        pr = buf + wd;\n        pr += std::fread(pr, 1, BUF - wd, fp);\n    }\n\
-    \n    char skip() {\n        char ch = *pl++;\n        while (ch <= ' ') {\n \
-    \           ch = *pl++;\n        }\n        return ch;\n    }\n\n    template\
+    void scan(i64 &x) { cin >> x; }\nvoid scan(f64 &x) { cin >> x; }\nvoid scan(string\
+    \ &x) { cin >> x; }\ntemplate <typename T>\nvoid scan(V<T> &x) {\n    for (T &ele\
+    \ : x) {\n        scan(ele);\n    }\n}\nvoid read() {}\ntemplate <typename Head,\
+    \ typename... Tail>\nvoid read(Head &head, Tail &...tail) {\n    scan(head);\n\
+    \    read(tail...);\n}\n#define CHAR(...)     \\\n    char __VA_ARGS__; \\\n \
+    \   read(__VA_ARGS__);\n#define U32(...)     \\\n    u32 __VA_ARGS__; \\\n   \
+    \ read(__VA_ARGS__);\n#define U64(...)     \\\n    u64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n\
+    #define I32(...)     \\\n    i32 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define\
+    \ I64(...)     \\\n    i64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define F64(...)\
+    \     \\\n    f64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define STR(...)  \
+    \      \\\n    string __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define VEC(type,\
+    \ name, size) \\\n    V<type> name(size);       \\\n    read(name);\n#define VVEC(type,\
+    \ name, size1, size2)    \\\n    VV<type> name(size1, V<type>(size2)); \\\n  \
+    \  read(name);\n#line 5 \"template/fastio.hpp\"\n\n// unable to read INT_MIN (int),\
+    \ LLONG_MIN (long long)\nclass Reader {\n    FILE *fp;\n    static constexpr int\
+    \ BUF = 1 << 18;\n    char buf[BUF];\n    char *pl, *pr;\n\n    void reread()\
+    \ {\n        int wd = pr - pl;\n        std::memcpy(buf, pl, wd);\n        pl\
+    \ = buf;\n        pr = buf + wd;\n        pr += std::fread(pr, 1, BUF - wd, fp);\n\
+    \    }\n\n    char skip() {\n        char ch = *pl++;\n        while (ch <= '\
+    \ ') {\n            ch = *pl++;\n        }\n        return ch;\n    }\n\n    template\
     \ <typename T>\n    void read_unsigned(T &x) {\n        if (pr - pl < 64) {\n\
     \            reread();\n        }\n        x = 0;\n        char ch = skip();\n\
     \        while ('0' <= ch) {\n            x = 10 * x + (0xf & ch);\n         \
@@ -403,8 +404,8 @@ data:
   isVerificationFile: true
   path: poly/test/log_of_formal_power_series.test.cpp
   requiredBy: []
-  timestamp: '2025-05-17 23:14:32+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2025-06-28 10:05:47+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: poly/test/log_of_formal_power_series.test.cpp
 layout: document

@@ -1,26 +1,26 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: data_structure/fenwick_tree.hpp
     title: data_structure/fenwick_tree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: data_structure/operations.hpp
     title: data_structure/operations.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/graph.hpp
     title: graph/graph.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/heavy_light_decomposition.hpp
     title: graph/heavy_light_decomposition.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/vertex_add_path_sum
@@ -181,30 +181,31 @@ data:
     \        cin.tie(nullptr);\n#endif\n        cout << fixed << setprecision(15);\n\
     \    }\n} set_up_io;\nvoid scan(char &x) { cin >> x; }\nvoid scan(u32 &x) { cin\
     \ >> x; }\nvoid scan(u64 &x) { cin >> x; }\nvoid scan(i32 &x) { cin >> x; }\n\
-    void scan(i64 &x) { cin >> x; }\nvoid scan(string &x) { cin >> x; }\ntemplate\
-    \ <typename T>\nvoid scan(V<T> &x) {\n    for (T &ele : x) {\n        scan(ele);\n\
-    \    }\n}\nvoid read() {}\ntemplate <typename Head, typename... Tail>\nvoid read(Head\
-    \ &head, Tail &...tail) {\n    scan(head);\n    read(tail...);\n}\n#define CHAR(...)\
-    \     \\\n    char __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define U32(...) \
-    \    \\\n    u32 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define U64(...)   \
-    \  \\\n    u64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define I32(...)     \\\
-    \n    i32 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define I64(...)     \\\n \
-    \   i64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define STR(...)        \\\n\
-    \    string __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define VEC(type, name, size)\
-    \ \\\n    V<type> name(size);       \\\n    read(name);\n#define VVEC(type, name,\
-    \ size1, size2)    \\\n    VV<type> name(size1, V<type>(size2)); \\\n    read(name);\n\
-    #line 6 \"graph/test/vertex_add_path_sum.test.cpp\"\n\nvoid solve() {\n    I32(n,\
-    \ q);\n    VEC(i32, a, n);\n    Graph<> g(n);\n    REP(i, n - 1) {\n        I32(u,\
-    \ v);\n        g.add_edge(u, v);\n    }\n    g.build();\n    HeavyLightDecomposition\
-    \ hld(g);\n    FenwickTreeAdd<i64> fw(n);\n    REP(i, n) {\n        fw.add(hld.in[i],\
-    \ a[i]);\n    }\n    REP(qi, q) {\n        I32(type);\n        if (type == 0)\
-    \ {\n            I32(p, x);\n            fw.add(hld.in[p], x);\n        } else\
-    \ {\n            I32(u, v);\n            i64 ans = 0;\n            for (auto [x,\
-    \ y] : hld.path(u, v, false)) {\n                if (x > y) {\n              \
-    \      swap(x, y);\n                }\n                ans += fw.sum(x, y + 1);\n\
-    \            }\n            cout << ans << '\\n';\n        }\n    }\n}\n\nint\
-    \ main() {\n    i32 t = 1;\n    // cin >> t;\n    while (t--) {\n        solve();\n\
-    \    }\n}\n"
+    void scan(i64 &x) { cin >> x; }\nvoid scan(f64 &x) { cin >> x; }\nvoid scan(string\
+    \ &x) { cin >> x; }\ntemplate <typename T>\nvoid scan(V<T> &x) {\n    for (T &ele\
+    \ : x) {\n        scan(ele);\n    }\n}\nvoid read() {}\ntemplate <typename Head,\
+    \ typename... Tail>\nvoid read(Head &head, Tail &...tail) {\n    scan(head);\n\
+    \    read(tail...);\n}\n#define CHAR(...)     \\\n    char __VA_ARGS__; \\\n \
+    \   read(__VA_ARGS__);\n#define U32(...)     \\\n    u32 __VA_ARGS__; \\\n   \
+    \ read(__VA_ARGS__);\n#define U64(...)     \\\n    u64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n\
+    #define I32(...)     \\\n    i32 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define\
+    \ I64(...)     \\\n    i64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define F64(...)\
+    \     \\\n    f64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define STR(...)  \
+    \      \\\n    string __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define VEC(type,\
+    \ name, size) \\\n    V<type> name(size);       \\\n    read(name);\n#define VVEC(type,\
+    \ name, size1, size2)    \\\n    VV<type> name(size1, V<type>(size2)); \\\n  \
+    \  read(name);\n#line 6 \"graph/test/vertex_add_path_sum.test.cpp\"\n\nvoid solve()\
+    \ {\n    I32(n, q);\n    VEC(i32, a, n);\n    Graph<> g(n);\n    REP(i, n - 1)\
+    \ {\n        I32(u, v);\n        g.add_edge(u, v);\n    }\n    g.build();\n  \
+    \  HeavyLightDecomposition hld(g);\n    FenwickTreeAdd<i64> fw(n);\n    REP(i,\
+    \ n) {\n        fw.add(hld.in[i], a[i]);\n    }\n    REP(qi, q) {\n        I32(type);\n\
+    \        if (type == 0) {\n            I32(p, x);\n            fw.add(hld.in[p],\
+    \ x);\n        } else {\n            I32(u, v);\n            i64 ans = 0;\n  \
+    \          for (auto [x, y] : hld.path(u, v, false)) {\n                if (x\
+    \ > y) {\n                    swap(x, y);\n                }\n               \
+    \ ans += fw.sum(x, y + 1);\n            }\n            cout << ans << '\\n';\n\
+    \        }\n    }\n}\n\nint main() {\n    i32 t = 1;\n    // cin >> t;\n    while\
+    \ (t--) {\n        solve();\n    }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/vertex_add_path_sum\"\n\
     #define FAST_IO\n#include \"../../data_structure/fenwick_tree.hpp\"\n#include\
     \ \"../../graph/heavy_light_decomposition.hpp\"\n#include \"../../template/template.hpp\"\
@@ -228,8 +229,8 @@ data:
   isVerificationFile: true
   path: graph/test/vertex_add_path_sum.test.cpp
   requiredBy: []
-  timestamp: '2025-05-17 23:14:32+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2025-06-28 10:05:47+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: graph/test/vertex_add_path_sum.test.cpp
 layout: document

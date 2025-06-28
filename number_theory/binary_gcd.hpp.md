@@ -3,12 +3,12 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number_theory/test/binary_gcd_stress.test.cpp
     title: number_theory/test/binary_gcd_stress.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"number_theory/binary_gcd.hpp\"\n\nunsigned long long binary_gcd(unsigned\
@@ -30,7 +30,7 @@ data:
   path: number_theory/binary_gcd.hpp
   requiredBy: []
   timestamp: '2025-05-31 22:12:39+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - number_theory/test/binary_gcd_stress.test.cpp
 documentation_of: number_theory/binary_gcd.hpp

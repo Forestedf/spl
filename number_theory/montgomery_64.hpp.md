@@ -5,28 +5,28 @@ data:
   - icon: ':heavy_check_mark:'
     path: convolution/mul_mod_p_conv.hpp
     title: convolution/mul_mod_p_conv.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/factorize.hpp
     title: number_theory/factorize.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/primitive_root.hpp
     title: number_theory/primitive_root.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: convolution/test/mul_modp_convolution.test.cpp
     title: convolution/test/mul_modp_convolution.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number_theory/test/factorize.test.cpp
     title: number_theory/test/factorize.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number_theory/test/montgomery_64_stress.test.cpp
     title: number_theory/test/montgomery_64_stress.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number_theory/test/primitive_root.test.cpp
     title: number_theory/test/primitive_root.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"number_theory/montgomery_64.hpp\"\n#include <cassert>\n\n\
@@ -91,16 +91,16 @@ data:
   isVerificationFile: false
   path: number_theory/montgomery_64.hpp
   requiredBy:
-  - number_theory/factorize.hpp
-  - number_theory/primitive_root.hpp
   - convolution/mul_mod_p_conv.hpp
+  - number_theory/primitive_root.hpp
+  - number_theory/factorize.hpp
   timestamp: '2025-01-27 21:12:31+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - number_theory/test/factorize.test.cpp
-  - number_theory/test/montgomery_64_stress.test.cpp
-  - number_theory/test/primitive_root.test.cpp
   - convolution/test/mul_modp_convolution.test.cpp
+  - number_theory/test/primitive_root.test.cpp
+  - number_theory/test/montgomery_64_stress.test.cpp
+  - number_theory/test/factorize.test.cpp
 documentation_of: number_theory/montgomery_64.hpp
 layout: document
 redirect_from:

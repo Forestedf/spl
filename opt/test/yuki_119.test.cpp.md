@@ -1,17 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: opt/monge_min_cut.hpp
     title: opt/monge_min_cut.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://yukicoder.me/problems/no/119
@@ -87,26 +87,27 @@ data:
     \        cin.tie(nullptr);\n#endif\n        cout << fixed << setprecision(15);\n\
     \    }\n} set_up_io;\nvoid scan(char &x) { cin >> x; }\nvoid scan(u32 &x) { cin\
     \ >> x; }\nvoid scan(u64 &x) { cin >> x; }\nvoid scan(i32 &x) { cin >> x; }\n\
-    void scan(i64 &x) { cin >> x; }\nvoid scan(string &x) { cin >> x; }\ntemplate\
-    \ <typename T>\nvoid scan(V<T> &x) {\n    for (T &ele : x) {\n        scan(ele);\n\
-    \    }\n}\nvoid read() {}\ntemplate <typename Head, typename... Tail>\nvoid read(Head\
-    \ &head, Tail &...tail) {\n    scan(head);\n    read(tail...);\n}\n#define CHAR(...)\
-    \     \\\n    char __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define U32(...) \
-    \    \\\n    u32 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define U64(...)   \
-    \  \\\n    u64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define I32(...)     \\\
-    \n    i32 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define I64(...)     \\\n \
-    \   i64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define STR(...)        \\\n\
-    \    string __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define VEC(type, name, size)\
-    \ \\\n    V<type> name(size);       \\\n    read(name);\n#define VVEC(type, name,\
-    \ size1, size2)    \\\n    VV<type> name(size1, V<type>(size2)); \\\n    read(name);\n\
-    #line 4 \"opt/test/yuki_119.test.cpp\"\n\nint main() {\n    I32(n);\n    V<i32>\
-    \ b(n), c(n);\n    REP(i, n) {\n        read(b[i], c[i]);\n    }\n    I32(m)\n\
-    \    V<pi> edge(m);\n    for (auto &[u, v] : edge) {\n        read(u, v);\n  \
-    \  }\n    MongeMinCut<i32> mincut(V<i32>(n, 3), INF);\n    REP(i, n) {\n     \
-    \   V<i32> f(3, 0);\n        f[0] = -b[i];\n        f[2] = -c[i];\n        mincut.add_1(i,\
-    \ f);\n    }\n    for (auto [u, v] : edge) {\n        VV<i32> f(3, V<i32>(3, 0));\n\
-    \        f[0][2] = INF / m;\n        mincut.add_2(u, v, f);\n    }\n    cout <<\
-    \ -mincut.solve().first << '\\n';\n}\n"
+    void scan(i64 &x) { cin >> x; }\nvoid scan(f64 &x) { cin >> x; }\nvoid scan(string\
+    \ &x) { cin >> x; }\ntemplate <typename T>\nvoid scan(V<T> &x) {\n    for (T &ele\
+    \ : x) {\n        scan(ele);\n    }\n}\nvoid read() {}\ntemplate <typename Head,\
+    \ typename... Tail>\nvoid read(Head &head, Tail &...tail) {\n    scan(head);\n\
+    \    read(tail...);\n}\n#define CHAR(...)     \\\n    char __VA_ARGS__; \\\n \
+    \   read(__VA_ARGS__);\n#define U32(...)     \\\n    u32 __VA_ARGS__; \\\n   \
+    \ read(__VA_ARGS__);\n#define U64(...)     \\\n    u64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n\
+    #define I32(...)     \\\n    i32 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define\
+    \ I64(...)     \\\n    i64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define F64(...)\
+    \     \\\n    f64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define STR(...)  \
+    \      \\\n    string __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define VEC(type,\
+    \ name, size) \\\n    V<type> name(size);       \\\n    read(name);\n#define VVEC(type,\
+    \ name, size1, size2)    \\\n    VV<type> name(size1, V<type>(size2)); \\\n  \
+    \  read(name);\n#line 4 \"opt/test/yuki_119.test.cpp\"\n\nint main() {\n    I32(n);\n\
+    \    V<i32> b(n), c(n);\n    REP(i, n) {\n        read(b[i], c[i]);\n    }\n \
+    \   I32(m)\n    V<pi> edge(m);\n    for (auto &[u, v] : edge) {\n        read(u,\
+    \ v);\n    }\n    MongeMinCut<i32> mincut(V<i32>(n, 3), INF);\n    REP(i, n) {\n\
+    \        V<i32> f(3, 0);\n        f[0] = -b[i];\n        f[2] = -c[i];\n     \
+    \   mincut.add_1(i, f);\n    }\n    for (auto [u, v] : edge) {\n        VV<i32>\
+    \ f(3, V<i32>(3, 0));\n        f[0][2] = INF / m;\n        mincut.add_2(u, v,\
+    \ f);\n    }\n    cout << -mincut.solve().first << '\\n';\n}\n"
   code: "#define PROBLEM \"https://yukicoder.me/problems/no/119\"\n#include \"../../opt/monge_min_cut.hpp\"\
     \n#include \"../../template/template.hpp\"\n\nint main() {\n    I32(n);\n    V<i32>\
     \ b(n), c(n);\n    REP(i, n) {\n        read(b[i], c[i]);\n    }\n    I32(m)\n\
@@ -122,8 +123,8 @@ data:
   isVerificationFile: true
   path: opt/test/yuki_119.test.cpp
   requiredBy: []
-  timestamp: '2025-05-17 23:14:32+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2025-06-28 10:05:47+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: opt/test/yuki_119.test.cpp
 layout: document

@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: data_structure/cartesian_tree.hpp
     title: data_structure/cartesian_tree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
   _extendedRequiredBy: []
@@ -49,33 +49,35 @@ data:
     \        cout << fixed << setprecision(15);\n    }\n} set_up_io;\nvoid scan(char\
     \ &x) { cin >> x; }\nvoid scan(u32 &x) { cin >> x; }\nvoid scan(u64 &x) { cin\
     \ >> x; }\nvoid scan(i32 &x) { cin >> x; }\nvoid scan(i64 &x) { cin >> x; }\n\
-    void scan(string &x) { cin >> x; }\ntemplate <typename T>\nvoid scan(V<T> &x)\
-    \ {\n    for (T &ele : x) {\n        scan(ele);\n    }\n}\nvoid read() {}\ntemplate\
-    \ <typename Head, typename... Tail>\nvoid read(Head &head, Tail &...tail) {\n\
-    \    scan(head);\n    read(tail...);\n}\n#define CHAR(...)     \\\n    char __VA_ARGS__;\
-    \ \\\n    read(__VA_ARGS__);\n#define U32(...)     \\\n    u32 __VA_ARGS__; \\\
-    \n    read(__VA_ARGS__);\n#define U64(...)     \\\n    u64 __VA_ARGS__; \\\n \
-    \   read(__VA_ARGS__);\n#define I32(...)     \\\n    i32 __VA_ARGS__; \\\n   \
-    \ read(__VA_ARGS__);\n#define I64(...)     \\\n    i64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n\
-    #define STR(...)        \\\n    string __VA_ARGS__; \\\n    read(__VA_ARGS__);\n\
-    #define VEC(type, name, size) \\\n    V<type> name(size);       \\\n    read(name);\n\
-    #define VVEC(type, name, size1, size2)    \\\n    VV<type> name(size1, V<type>(size2));\
-    \ \\\n    read(name);\n#line 2 \"data_structure/cartesian_tree.hpp\"\n\n#line\
-    \ 4 \"data_structure/cartesian_tree.hpp\"\n\ntemplate <typename T, typename Compare\
-    \ = std::less<T>>\nstd::vector<int> cartesian_tree(const std::vector<T> &a, Compare\
-    \ comp = Compare()) {\n    std::vector<int> stc;\n    std::vector<int> par(a.size(),\
-    \ -1);\n    for (int i = 0; i < a.size(); ++i) {\n        while (stc.size() >=\
-    \ 2 && comp(a[i], a[stc.back()])) {\n            if (comp(a[i], a[stc[stc.size()\
-    \ - 2]])) {\n                par[stc.back()] = stc[stc.size() - 2];\n        \
-    \    } else {\n                par[stc.back()] = i;\n            }\n         \
-    \   stc.pop_back();\n        }\n        if (stc.size() == 1 && comp(a[i], a[stc.back()]))\
-    \ {\n            par[stc.back()] = i;\n            stc.pop_back();\n        }\n\
-    \        stc.push_back(i);\n    }\n    while (stc.size() >= 2) {\n        par[stc.back()]\
-    \ = stc[stc.size() - 2];\n        stc.pop_back();\n    }\n    return par;\n}\n\
-    #line 6 \"data_structure/test/cartesian_tree.test.cpp\"\n\nint main() {\n    i32\
-    \ n;\n    cin >> n;\n    V<i32> a(n);\n    REP(i, n) {\n        cin >> a[i];\n\
-    \    }\n    V<i32> p = cartesian_tree(a);\n    REP(i, n) {\n        cout << (p[i]\
-    \ == -1 ? i : p[i]) << \" \\n\"[i + 1 == n];\n    }\n}\n"
+    void scan(f64 &x) { cin >> x; }\nvoid scan(string &x) { cin >> x; }\ntemplate\
+    \ <typename T>\nvoid scan(V<T> &x) {\n    for (T &ele : x) {\n        scan(ele);\n\
+    \    }\n}\nvoid read() {}\ntemplate <typename Head, typename... Tail>\nvoid read(Head\
+    \ &head, Tail &...tail) {\n    scan(head);\n    read(tail...);\n}\n#define CHAR(...)\
+    \     \\\n    char __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define U32(...) \
+    \    \\\n    u32 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define U64(...)   \
+    \  \\\n    u64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define I32(...)     \\\
+    \n    i32 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define I64(...)     \\\n \
+    \   i64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define F64(...)     \\\n   \
+    \ f64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define STR(...)        \\\n  \
+    \  string __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define VEC(type, name, size)\
+    \ \\\n    V<type> name(size);       \\\n    read(name);\n#define VVEC(type, name,\
+    \ size1, size2)    \\\n    VV<type> name(size1, V<type>(size2)); \\\n    read(name);\n\
+    #line 2 \"data_structure/cartesian_tree.hpp\"\n\n#line 4 \"data_structure/cartesian_tree.hpp\"\
+    \n\ntemplate <typename T, typename Compare = std::less<T>>\nstd::vector<int> cartesian_tree(const\
+    \ std::vector<T> &a, Compare comp = Compare()) {\n    std::vector<int> stc;\n\
+    \    std::vector<int> par(a.size(), -1);\n    for (int i = 0; i < a.size(); ++i)\
+    \ {\n        while (stc.size() >= 2 && comp(a[i], a[stc.back()])) {\n        \
+    \    if (comp(a[i], a[stc[stc.size() - 2]])) {\n                par[stc.back()]\
+    \ = stc[stc.size() - 2];\n            } else {\n                par[stc.back()]\
+    \ = i;\n            }\n            stc.pop_back();\n        }\n        if (stc.size()\
+    \ == 1 && comp(a[i], a[stc.back()])) {\n            par[stc.back()] = i;\n   \
+    \         stc.pop_back();\n        }\n        stc.push_back(i);\n    }\n    while\
+    \ (stc.size() >= 2) {\n        par[stc.back()] = stc[stc.size() - 2];\n      \
+    \  stc.pop_back();\n    }\n    return par;\n}\n#line 6 \"data_structure/test/cartesian_tree.test.cpp\"\
+    \n\nint main() {\n    i32 n;\n    cin >> n;\n    V<i32> a(n);\n    REP(i, n) {\n\
+    \        cin >> a[i];\n    }\n    V<i32> p = cartesian_tree(a);\n    REP(i, n)\
+    \ {\n        cout << (p[i] == -1 ? i : p[i]) << \" \\n\"[i + 1 == n];\n    }\n\
+    }\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/cartesian_tree\"\n#define\
     \ FAST_IO\n\n#include \"../../template/template.hpp\"\n#include \"../../data_structure/cartesian_tree.hpp\"\
     \n\nint main() {\n    i32 n;\n    cin >> n;\n    V<i32> a(n);\n    REP(i, n) {\n\
@@ -88,7 +90,7 @@ data:
   isVerificationFile: true
   path: data_structure/test/cartesian_tree.test.cpp
   requiredBy: []
-  timestamp: '2025-05-17 23:14:32+09:00'
+  timestamp: '2025-06-28 10:05:47+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: data_structure/test/cartesian_tree.test.cpp

@@ -4,34 +4,34 @@ data:
   - icon: ':heavy_check_mark:'
     path: convolution/mul_mod_p_conv.hpp
     title: convolution/mul_mod_p_conv.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/factorize.hpp
     title: number_theory/factorize.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/mod_int.hpp
     title: number_theory/mod_int.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/montgomery_64.hpp
     title: number_theory/montgomery_64.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/primality.hpp
     title: number_theory/primality.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/primitive_root.hpp
     title: number_theory/primitive_root.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/utils.hpp
     title: number_theory/utils.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: poly/fft.hpp
     title: poly/fft.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/fastio.hpp
     title: template/fastio.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/random.hpp
     title: template/random.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
   _extendedRequiredBy: []
@@ -447,23 +447,25 @@ data:
     \        cout << fixed << setprecision(15);\n    }\n} set_up_io;\nvoid scan(char\
     \ &x) { cin >> x; }\nvoid scan(u32 &x) { cin >> x; }\nvoid scan(u64 &x) { cin\
     \ >> x; }\nvoid scan(i32 &x) { cin >> x; }\nvoid scan(i64 &x) { cin >> x; }\n\
-    void scan(string &x) { cin >> x; }\ntemplate <typename T>\nvoid scan(V<T> &x)\
-    \ {\n    for (T &ele : x) {\n        scan(ele);\n    }\n}\nvoid read() {}\ntemplate\
-    \ <typename Head, typename... Tail>\nvoid read(Head &head, Tail &...tail) {\n\
-    \    scan(head);\n    read(tail...);\n}\n#define CHAR(...)     \\\n    char __VA_ARGS__;\
-    \ \\\n    read(__VA_ARGS__);\n#define U32(...)     \\\n    u32 __VA_ARGS__; \\\
-    \n    read(__VA_ARGS__);\n#define U64(...)     \\\n    u64 __VA_ARGS__; \\\n \
-    \   read(__VA_ARGS__);\n#define I32(...)     \\\n    i32 __VA_ARGS__; \\\n   \
-    \ read(__VA_ARGS__);\n#define I64(...)     \\\n    i64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n\
-    #define STR(...)        \\\n    string __VA_ARGS__; \\\n    read(__VA_ARGS__);\n\
-    #define VEC(type, name, size) \\\n    V<type> name(size);       \\\n    read(name);\n\
-    #define VVEC(type, name, size1, size2)    \\\n    VV<type> name(size1, V<type>(size2));\
-    \ \\\n    read(name);\n#line 5 \"convolution/test/mul_modp_convolution.test.cpp\"\
-    \n\nvoid solve() {\n    using M = ModInt<998244353>;\n    i32 p;\n    rd.read(p);\n\
-    \    V<M> a(p), b(p);\n    REP(i, p) {\n        rd.read(a[i].val);\n    }\n  \
-    \  REP(i, p) {\n        rd.read(b[i].val);\n    }\n    V<M> c = mul_mod_p_convolution(a,\
-    \ b);\n    REP(i, p) {\n        wr.write(c[i].val);\n        if (i != p - 1) {\n\
-    \            wr.write(' ');\n        }\n    }\n    wr.writeln();\n}\n\nint main()\
+    void scan(f64 &x) { cin >> x; }\nvoid scan(string &x) { cin >> x; }\ntemplate\
+    \ <typename T>\nvoid scan(V<T> &x) {\n    for (T &ele : x) {\n        scan(ele);\n\
+    \    }\n}\nvoid read() {}\ntemplate <typename Head, typename... Tail>\nvoid read(Head\
+    \ &head, Tail &...tail) {\n    scan(head);\n    read(tail...);\n}\n#define CHAR(...)\
+    \     \\\n    char __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define U32(...) \
+    \    \\\n    u32 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define U64(...)   \
+    \  \\\n    u64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define I32(...)     \\\
+    \n    i32 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define I64(...)     \\\n \
+    \   i64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define F64(...)     \\\n   \
+    \ f64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define STR(...)        \\\n  \
+    \  string __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define VEC(type, name, size)\
+    \ \\\n    V<type> name(size);       \\\n    read(name);\n#define VVEC(type, name,\
+    \ size1, size2)    \\\n    VV<type> name(size1, V<type>(size2)); \\\n    read(name);\n\
+    #line 5 \"convolution/test/mul_modp_convolution.test.cpp\"\n\nvoid solve() {\n\
+    \    using M = ModInt<998244353>;\n    i32 p;\n    rd.read(p);\n    V<M> a(p),\
+    \ b(p);\n    REP(i, p) {\n        rd.read(a[i].val);\n    }\n    REP(i, p) {\n\
+    \        rd.read(b[i].val);\n    }\n    V<M> c = mul_mod_p_convolution(a, b);\n\
+    \    REP(i, p) {\n        wr.write(c[i].val);\n        if (i != p - 1) {\n   \
+    \         wr.write(' ');\n        }\n    }\n    wr.writeln();\n}\n\nint main()\
     \ {\n    i32 t = 1;\n    // cin >> t;\n    while (t--) {\n        solve();\n \
     \   }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/mul_modp_convolution\"\n\
@@ -490,7 +492,7 @@ data:
   isVerificationFile: true
   path: convolution/test/mul_modp_convolution.test.cpp
   requiredBy: []
-  timestamp: '2025-05-17 23:14:32+09:00'
+  timestamp: '2025-06-28 10:05:47+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: convolution/test/mul_modp_convolution.test.cpp

@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/montgomery_64.hpp
     title: number_theory/montgomery_64.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/random.hpp
     title: template/random.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/lesson/2/ITP1/1/ITP1_1_A
@@ -86,35 +86,36 @@ data:
     \        cin.tie(nullptr);\n#endif\n        cout << fixed << setprecision(15);\n\
     \    }\n} set_up_io;\nvoid scan(char &x) { cin >> x; }\nvoid scan(u32 &x) { cin\
     \ >> x; }\nvoid scan(u64 &x) { cin >> x; }\nvoid scan(i32 &x) { cin >> x; }\n\
-    void scan(i64 &x) { cin >> x; }\nvoid scan(string &x) { cin >> x; }\ntemplate\
-    \ <typename T>\nvoid scan(V<T> &x) {\n    for (T &ele : x) {\n        scan(ele);\n\
-    \    }\n}\nvoid read() {}\ntemplate <typename Head, typename... Tail>\nvoid read(Head\
-    \ &head, Tail &...tail) {\n    scan(head);\n    read(tail...);\n}\n#define CHAR(...)\
-    \     \\\n    char __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define U32(...) \
-    \    \\\n    u32 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define U64(...)   \
-    \  \\\n    u64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define I32(...)     \\\
-    \n    i32 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define I64(...)     \\\n \
-    \   i64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define STR(...)        \\\n\
-    \    string __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define VEC(type, name, size)\
-    \ \\\n    V<type> name(size);       \\\n    read(name);\n#define VVEC(type, name,\
-    \ size1, size2)    \\\n    VV<type> name(size1, V<type>(size2)); \\\n    read(name);\n\
-    #line 9 \"number_theory/test/montgomery_64_stress.test.cpp\"\n\nusing M = MontgomeryModInt64<0>;\n\
-    \nu64 add(u64 a, u64 b, u64 m) { return (a + b) % m; }\nu64 sub(u64 a, u64 b,\
-    \ u64 m) { return (m + a - b) % m; }\nu64 mul(u64 a, u64 b, u64 m) { return __uint128_t(a)\
-    \ * b % m; }\n\nvoid test_small_mod(i32 m) {\n    M::set_mod(m);\n    REP(i, m)\
-    \ REP(j, m) {\n        M x(i), y(j);\n        assert((x + y).val() == add(i, j,\
-    \ m));\n        assert((x - y).val() == sub(i, j, m));\n        assert((x * y).val()\
-    \ == mul(i, j, m));\n    }\n}\n\nvoid test_large_mod(u64 m) {\n    M::set_mod(m);\n\
-    \n    constexpr int ITER = 1'000'000;\n\n    for (int i = 0; i < ITER; ++i) {\n\
-    \        u64 x = uniform(m);\n        u64 y = uniform(m);\n        M x_(x), y_(y);\n\
-    \        assert((x_ + y_).val() == add(x, y, m));\n        assert((x_ - y_).val()\
-    \ == sub(x, y, m));\n        assert((x_ * y_).val() == mul(x, y, m));\n    }\n\
-    }\n\nvoid test() {\n    for (i32 m = 3; m <= 99; m += 2) {\n        test_small_mod(m);\n\
-    \    }\n\n    for (int i = 0; i < 10; ++i) {\n        u64 m = uniform<u64>(3,\
-    \ 1ULL << 63);\n        while (m % 2 == 0) {\n            m = uniform<u64>(3,\
-    \ 1ULL << 63);\n        }\n        test_large_mod(m);\n    }\n\n    test_large_mod((1ULL\
-    \ << 63) - 1);\n}\n\nint main() {\n    test();\n    cout << \"Hello World\\n\"\
-    ;\n}\n"
+    void scan(i64 &x) { cin >> x; }\nvoid scan(f64 &x) { cin >> x; }\nvoid scan(string\
+    \ &x) { cin >> x; }\ntemplate <typename T>\nvoid scan(V<T> &x) {\n    for (T &ele\
+    \ : x) {\n        scan(ele);\n    }\n}\nvoid read() {}\ntemplate <typename Head,\
+    \ typename... Tail>\nvoid read(Head &head, Tail &...tail) {\n    scan(head);\n\
+    \    read(tail...);\n}\n#define CHAR(...)     \\\n    char __VA_ARGS__; \\\n \
+    \   read(__VA_ARGS__);\n#define U32(...)     \\\n    u32 __VA_ARGS__; \\\n   \
+    \ read(__VA_ARGS__);\n#define U64(...)     \\\n    u64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n\
+    #define I32(...)     \\\n    i32 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define\
+    \ I64(...)     \\\n    i64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define F64(...)\
+    \     \\\n    f64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define STR(...)  \
+    \      \\\n    string __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define VEC(type,\
+    \ name, size) \\\n    V<type> name(size);       \\\n    read(name);\n#define VVEC(type,\
+    \ name, size1, size2)    \\\n    VV<type> name(size1, V<type>(size2)); \\\n  \
+    \  read(name);\n#line 9 \"number_theory/test/montgomery_64_stress.test.cpp\"\n\
+    \nusing M = MontgomeryModInt64<0>;\n\nu64 add(u64 a, u64 b, u64 m) { return (a\
+    \ + b) % m; }\nu64 sub(u64 a, u64 b, u64 m) { return (m + a - b) % m; }\nu64 mul(u64\
+    \ a, u64 b, u64 m) { return __uint128_t(a) * b % m; }\n\nvoid test_small_mod(i32\
+    \ m) {\n    M::set_mod(m);\n    REP(i, m) REP(j, m) {\n        M x(i), y(j);\n\
+    \        assert((x + y).val() == add(i, j, m));\n        assert((x - y).val()\
+    \ == sub(i, j, m));\n        assert((x * y).val() == mul(i, j, m));\n    }\n}\n\
+    \nvoid test_large_mod(u64 m) {\n    M::set_mod(m);\n\n    constexpr int ITER =\
+    \ 1'000'000;\n\n    for (int i = 0; i < ITER; ++i) {\n        u64 x = uniform(m);\n\
+    \        u64 y = uniform(m);\n        M x_(x), y_(y);\n        assert((x_ + y_).val()\
+    \ == add(x, y, m));\n        assert((x_ - y_).val() == sub(x, y, m));\n      \
+    \  assert((x_ * y_).val() == mul(x, y, m));\n    }\n}\n\nvoid test() {\n    for\
+    \ (i32 m = 3; m <= 99; m += 2) {\n        test_small_mod(m);\n    }\n\n    for\
+    \ (int i = 0; i < 10; ++i) {\n        u64 m = uniform<u64>(3, 1ULL << 63);\n \
+    \       while (m % 2 == 0) {\n            m = uniform<u64>(3, 1ULL << 63);\n \
+    \       }\n        test_large_mod(m);\n    }\n\n    test_large_mod((1ULL << 63)\
+    \ - 1);\n}\n\nint main() {\n    test();\n    cout << \"Hello World\\n\";\n}\n"
   code: "#define PROBLEM \\\n    \"https://onlinejudge.u-aizu.ac.jp/courses/lesson/2/ITP1/1/ITP1_1_A\"\
     \n#define FAST_IO\n#define FIX_SEED\n\n#include \"../../number_theory/montgomery_64.hpp\"\
     \n#include \"../../template/random.hpp\"\n#include \"../../template/template.hpp\"\
@@ -141,8 +142,8 @@ data:
   isVerificationFile: true
   path: number_theory/test/montgomery_64_stress.test.cpp
   requiredBy: []
-  timestamp: '2025-05-17 23:14:32+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2025-06-28 10:05:47+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: number_theory/test/montgomery_64_stress.test.cpp
 layout: document

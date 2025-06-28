@@ -2,58 +2,58 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/fps_exp.hpp
     title: poly/fps_exp.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/fps_exp_sparse.hpp
     title: poly/fps_exp_sparse.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/fps_log.hpp
     title: poly/fps_log.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/fps_log_sparse.hpp
     title: poly/fps_log_sparse.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/fps_pow_sparse.hpp
     title: poly/fps_pow_sparse.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/stirling1.hpp
     title: poly/stirling1.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/stirling2.hpp
     title: poly/stirling2.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/taylor_shift.hpp
     title: poly/taylor_shift.hpp
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/test/exp_of_formal_power_series.test.cpp
     title: poly/test/exp_of_formal_power_series.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/test/exp_of_formal_power_series_sparse.test.cpp
     title: poly/test/exp_of_formal_power_series_sparse.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/test/log_of_formal_power_series.test.cpp
     title: poly/test/log_of_formal_power_series.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/test/log_of_formal_power_series_sparse.test.cpp
     title: poly/test/log_of_formal_power_series_sparse.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/test/polynomial_taylor_shift.test.cpp
     title: poly/test/polynomial_taylor_shift.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/test/pow_of_formal_power_series.test.cpp
     title: poly/test/pow_of_formal_power_series.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/test/stirling_number_of_the_first_kind.test.cpp
     title: poly/test/stirling_number_of_the_first_kind.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/test/stirling_number_of_the_second_kind.test.cpp
     title: poly/test/stirling_number_of_the_second_kind.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"number_theory/factorial.hpp\"\n#include <cassert>\n#include\
@@ -96,25 +96,25 @@ data:
   isVerificationFile: false
   path: number_theory/factorial.hpp
   requiredBy:
-  - poly/fps_pow_sparse.hpp
-  - poly/taylor_shift.hpp
-  - poly/fps_exp_sparse.hpp
-  - poly/stirling2.hpp
-  - poly/stirling1.hpp
-  - poly/fps_log_sparse.hpp
-  - poly/fps_exp.hpp
   - poly/fps_log.hpp
+  - poly/fps_exp.hpp
+  - poly/fps_log_sparse.hpp
+  - poly/fps_exp_sparse.hpp
+  - poly/taylor_shift.hpp
+  - poly/stirling1.hpp
+  - poly/fps_pow_sparse.hpp
+  - poly/stirling2.hpp
   timestamp: '2024-03-29 17:56:07+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
-  - poly/test/stirling_number_of_the_first_kind.test.cpp
-  - poly/test/polynomial_taylor_shift.test.cpp
   - poly/test/stirling_number_of_the_second_kind.test.cpp
-  - poly/test/log_of_formal_power_series.test.cpp
-  - poly/test/exp_of_formal_power_series_sparse.test.cpp
   - poly/test/exp_of_formal_power_series.test.cpp
   - poly/test/log_of_formal_power_series_sparse.test.cpp
+  - poly/test/stirling_number_of_the_first_kind.test.cpp
+  - poly/test/polynomial_taylor_shift.test.cpp
+  - poly/test/exp_of_formal_power_series_sparse.test.cpp
   - poly/test/pow_of_formal_power_series.test.cpp
+  - poly/test/log_of_formal_power_series.test.cpp
 documentation_of: number_theory/factorial.hpp
 layout: document
 redirect_from:

@@ -2,80 +2,38 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
+    path: convolution/index_difference.hpp
+    title: convolution/index_difference.hpp
+  - icon: ':heavy_check_mark:'
     path: number_theory/mod_int.hpp
     title: number_theory/mod_int.hpp
   - icon: ':heavy_check_mark:'
     path: number_theory/utils.hpp
     title: number_theory/utils.hpp
-  _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
-    path: convolution/index_difference.hpp
-    title: convolution/index_difference.hpp
+    path: poly/fft.hpp
+    title: poly/fft.hpp
   - icon: ':heavy_check_mark:'
-    path: convolution/mul_mod_p_conv.hpp
-    title: convolution/mul_mod_p_conv.hpp
+    path: template/random.hpp
+    title: template/random.hpp
   - icon: ':heavy_check_mark:'
-    path: poly/fps_div_at.hpp
-    title: poly/fps_div_at.hpp
-  - icon: ':heavy_check_mark:'
-    path: poly/fps_exp.hpp
-    title: poly/fps_exp.hpp
-  - icon: ':heavy_check_mark:'
-    path: poly/fps_inv.hpp
-    title: poly/fps_inv.hpp
-  - icon: ':heavy_check_mark:'
-    path: poly/fps_log.hpp
-    title: poly/fps_log.hpp
-  - icon: ':heavy_check_mark:'
-    path: poly/stirling1.hpp
-    title: poly/stirling1.hpp
-  - icon: ':heavy_check_mark:'
-    path: poly/stirling2.hpp
-    title: poly/stirling2.hpp
-  - icon: ':heavy_check_mark:'
-    path: poly/taylor_shift.hpp
-    title: poly/taylor_shift.hpp
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: convolution/test/index_difference.test.cpp
-    title: convolution/test/index_difference.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: convolution/test/mul_modp_convolution.test.cpp
-    title: convolution/test/mul_modp_convolution.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: poly/test/convolution_mod.test.cpp
-    title: poly/test/convolution_mod.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: poly/test/exp_of_formal_power_series.test.cpp
-    title: poly/test/exp_of_formal_power_series.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: poly/test/inv_of_formal_power_series.test.cpp
-    title: poly/test/inv_of_formal_power_series.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
-    title: poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: poly/test/log_of_formal_power_series.test.cpp
-    title: poly/test/log_of_formal_power_series.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: poly/test/polynomial_taylor_shift.test.cpp
-    title: poly/test/polynomial_taylor_shift.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: poly/test/prod_of_polys.test.cpp
-    title: poly/test/prod_of_polys.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: poly/test/stirling_number_of_the_first_kind.test.cpp
-    title: poly/test/stirling_number_of_the_first_kind.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: poly/test/stirling_number_of_the_second_kind.test.cpp
-    title: poly/test/stirling_number_of_the_second_kind.test.cpp
+    path: template/template.hpp
+    title: template/template.hpp
+  _extendedRequiredBy: []
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
-  _pathExtension: hpp
+  _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    links: []
-  bundledCode: "#line 2 \"poly/fft.hpp\"\n#include <array>\n#include <vector>\n#line\
-    \ 2 \"number_theory/mod_int.hpp\"\n\n#include <cassert>\n#include <iostream>\n\
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/lesson/2/ITP1/1/ITP1_1_A
+    links:
+    - https://onlinejudge.u-aizu.ac.jp/courses/lesson/2/ITP1/1/ITP1_1_A
+  bundledCode: "#line 1 \"convolution/test/index_difference.test.cpp\"\n#define PROBLEM\
+    \ \"https://onlinejudge.u-aizu.ac.jp/courses/lesson/2/ITP1/1/ITP1_1_A\"\n#define\
+    \ FAST_IO\n#define FIX_SEED\n\n#line 2 \"convolution/index_difference.hpp\"\n\
+    #include <algorithm>\n#line 2 \"poly/fft.hpp\"\n#include <array>\n#include <vector>\n\
+    #line 2 \"number_theory/mod_int.hpp\"\n\n#include <cassert>\n#include <iostream>\n\
     #include <type_traits>\n#line 2 \"number_theory/utils.hpp\"\n\n#include <utility>\n\
     \nconstexpr bool is_prime(unsigned n) {\n    if (n == 0 || n == 1) {\n       \
     \ return false;\n    }\n    for (unsigned i = 2; i * i <= n; ++i) {\n        if\
@@ -247,131 +205,131 @@ data:
     template <typename M>\nstd::vector<M> convolve(const std::vector<M> &a, const\
     \ std::vector<M> &b) {\n    if (a.empty() || b.empty()) {\n        return std::vector<M>(0);\n\
     \    }\n    if (std::min(a.size(), b.size()) <= 60) {\n        return convolve_naive(a,\
-    \ b);\n    } else {\n        return convolve_fft(a, b);\n    }\n}\n"
-  code: "#pragma once\n#include <array>\n#include <vector>\n#include \"../number_theory/mod_int.hpp\"\
-    \n\nconstexpr int ctz_constexpr(unsigned n) {\n    int x = 0;\n    while (!(n\
-    \ & (1u << x))) {\n        ++x;\n    }\n    return x;\n}\n\ntemplate <unsigned\
-    \ MOD>\nstruct FFTRoot {\n    static constexpr unsigned R = ctz_constexpr(MOD\
-    \ - 1);\n    std::array<ModInt<MOD>, R + 1> root, iroot;\n    std::array<ModInt<MOD>,\
-    \ R> rate2, irate2;\n    std::array<ModInt<MOD>, R - 1> rate3, irate3;\n    std::array<ModInt<MOD>,\
-    \ R + 1> inv2;\n\n    constexpr FFTRoot() : root{}, iroot{}, rate2{}, irate2{},\
-    \ rate3{}, irate3{}, inv2{} {\n        unsigned pr = primitive_root<MOD>();\n\
-    \        root[R] = ModInt<MOD>(pr).pow(MOD >> R);\n        iroot[R] = root[R].inv();\n\
-    \        for (int i = R - 1; i >= 0; --i) {\n            root[i] = root[i + 1]\
-    \ * root[i + 1];\n            iroot[i] = iroot[i + 1] * iroot[i + 1];\n      \
-    \  }\n        ModInt<MOD> prod(1), iprod(1);\n        for (int i = 0; i < (int)R\
-    \ - 1; ++i) {\n            rate2[i] = prod * root[i + 2];\n            irate2[i]\
-    \ = iprod * iroot[i + 2];\n            prod *= iroot[i + 2];\n            iprod\
-    \ *= root[i + 2];\n        }\n        prod = ModInt<MOD>(1);\n        iprod =\
-    \ ModInt<MOD>(1);\n        for (int i = 0; i < (int)R - 2; ++i) {\n          \
-    \  rate3[i] = prod * root[i + 3];\n            irate3[i] = iprod * iroot[i + 3];\n\
-    \            prod *= iroot[i + 3];\n            iprod *= root[i + 3];\n      \
-    \  }\n        ModInt<MOD> i2 = ModInt<MOD>(2).inv();\n        inv2[0] = ModInt<MOD>(1);\n\
-    \        for (int i = 0; i < (int)R; ++i) {\n            inv2[i + 1] = inv2[i]\
-    \ * i2;\n        }\n    }\n};\n\ntemplate <typename M>\nvoid fft(M *a, int n)\
-    \ {\n    using ull = unsigned long long;\n    static_assert(M::get_mod() < (1u\
-    \ << 30));\n    static constexpr FFTRoot<M::get_mod()> fftroot;\n    static constexpr\
-    \ ull CEIL = 2ULL * M::get_mod() * M::get_mod();\n    int l = __builtin_ctz(n);\n\
-    \    int ph = 0;\n    while (ph < l) {\n        if (ph + 1 == l) {\n         \
-    \   int b = 1 << ph;\n            M z = M::raw(1);\n            for (int i = 0;\
-    \ i < b; ++i) {\n                int offset = i << 1;\n                M x = a[offset];\n\
-    \                M y = a[offset + 1] * z;\n                a[offset] = x + y;\n\
-    \                a[offset + 1] = x - y;\n                z *= fftroot.rate2[__builtin_ctz(~i)];\n\
-    \            }\n            ++ph;\n        } else {\n            int bl = 1 <<\
-    \ ph;\n            int wd = 1 << (l - 2 - ph);\n            M zeta = M::raw(1);\n\
-    \            for (int i = 0; i < bl; ++i) {\n                int offset = i <<\
-    \ (l - ph);\n                M zeta2 = zeta * zeta;\n                M zeta3 =\
-    \ zeta2 * zeta;\n                for (int j = 0; j < wd; ++j) {\n            \
-    \        ull w = a[offset + j].val;\n                    ull x = (ull)a[offset\
-    \ + j + wd].val * zeta.val;\n                    ull y = (ull)a[offset + j + 2\
-    \ * wd].val * zeta2.val;\n                    ull z = (ull)a[offset + j + 3 *\
-    \ wd].val * zeta3.val;\n                    ull ix_m_iz = (CEIL + x - z) % M::get_mod()\
-    \ * fftroot.root[2].val;\n                    a[offset + j] = M(w + x + y + z);\n\
-    \                    a[offset + j + wd] = M(CEIL + w - x + y - z);\n         \
-    \           a[offset + j + 2 * wd] = M(CEIL + w - y + ix_m_iz);\n            \
-    \        a[offset + j + 3 * wd] = M(CEIL + w - y - ix_m_iz);\n               \
-    \ }\n                zeta *= fftroot.rate3[__builtin_ctz(~i)];\n            }\n\
-    \            ph += 2;\n        }\n    }\n}\n\ntemplate <typename M>\nvoid ifft(M\
-    \ *a, int n) {\n    using ull = unsigned long long;\n    static_assert(M::get_mod()\
-    \ < (1u << 30));\n    static constexpr FFTRoot<M::get_mod()> fftroot;\n    int\
-    \ l = __builtin_ctz(n);\n    int ph = l;\n    while (ph > 0) {\n        if (ph\
-    \ == 1) {\n            --ph;\n            int wd = 1 << (l - 1);\n           \
-    \ for (int i = 0; i < wd; ++i) {\n                M x = a[i];\n              \
-    \  M y = a[i + wd];\n                a[i] = x + y;\n                a[i + wd]\
-    \ = x - y;\n            }\n        } else {\n            ph -= 2;\n          \
-    \  int bl = 1 << ph;\n            int wd = 1 << (l - 2 - ph);\n            M zeta\
-    \ = M::raw(1);\n            for (int i = 0; i < bl; ++i) {\n                int\
-    \ offset = i << (l - ph);\n                M zeta2 = zeta * zeta;\n          \
-    \      M zeta3 = zeta2 * zeta;\n                for (int j = 0; j < wd; ++j) {\n\
-    \                    unsigned w = a[offset + j].val;\n                    unsigned\
-    \ x = a[offset + j + wd].val;\n                    unsigned y = a[offset + j +\
-    \ 2 * wd].val;\n                    unsigned z = a[offset + j + 3 * wd].val;\n\
-    \                    unsigned iy_m_iz = (ull)(M::get_mod() + y - z) * fftroot.root[2].val\
-    \ % M::get_mod();\n                    a[offset + j] = M(w + x + y + z);\n   \
-    \                 a[offset + j + wd] = M((ull)zeta.val * (2 * M::get_mod() + w\
-    \ - x - iy_m_iz));\n                    a[offset + j + 2 * wd] = M((ull)zeta2.val\
-    \ * (2 * M::get_mod() + w + x - y - z));\n                    a[offset + j + 3\
-    \ * wd] = M((ull)zeta3.val * (M::get_mod() + w - x + iy_m_iz));\n            \
-    \    }\n                zeta *= fftroot.irate3[__builtin_ctz(~i)];\n         \
-    \   }\n        }\n    }\n    for (int i = 0; i < n; ++i) {\n        a[i] *= fftroot.inv2[l];\n\
-    \    }\n}\n\ntemplate <typename M>\nvoid fft(std::vector<M> &a) {\n    fft(a.data(),\
-    \ (int)a.size());\n}\ntemplate <typename M>\nvoid ifft(std::vector<M> &a) {\n\
-    \    ifft(a.data(), (int)a.size());\n}\n\ntemplate <typename M>\nstd::vector<M>\
-    \ convolve_naive(const std::vector<M> &a,\n                              const\
-    \ std::vector<M> &b) {\n    int n = (int)a.size();\n    int m = (int)b.size();\n\
-    \    std::vector<M> c(n + m - 1);\n    if (n < m) {\n        for (int j = 0; j\
-    \ < m; ++j) {\n            for (int i = 0; i < n; ++i) {\n                c[i\
-    \ + j] += a[i] * b[j];\n            }\n        }\n    } else {\n        for (int\
-    \ i = 0; i < n; ++i) {\n            for (int j = 0; j < m; ++j) {\n          \
-    \      c[i + j] += a[i] * b[j];\n            }\n        }\n    }\n    return c;\n\
-    }\n\ntemplate <typename M>\nstd::vector<M> convolve_fft(std::vector<M> a, std::vector<M>\
-    \ b) {\n    int n = (int)a.size() + (int)b.size() - 1;\n    int m = 1;\n    while\
-    \ (m < n) {\n        m <<= 1;\n    }\n    bool shr = false;\n    M last;\n   \
-    \ if (n >= 3 && n == m / 2 + 1) {\n        shr = true;\n        last = a.back()\
-    \ * b.back();\n        m /= 2;\n        while ((int)a.size() > m) {\n        \
-    \    a[(int)a.size() - 1 - m] += a.back();\n            a.pop_back();\n      \
-    \  }\n        while ((int)b.size() > m) {\n            b[(int)b.size() - 1 - m]\
-    \ += b.back();\n            b.pop_back();\n        }\n    }\n    a.resize(m);\n\
-    \    b.resize(m);\n    fft(a);\n    fft(b);\n    for (int i = 0; i < m; ++i) {\n\
-    \        a[i] *= b[i];\n    }\n    ifft(a);\n    a.resize(n);\n    if (shr) {\n\
-    \        a[0] -= last;\n        a[n - 1] = last;\n    }\n    return a;\n}\n\n\
-    template <typename M>\nstd::vector<M> convolve(const std::vector<M> &a, const\
-    \ std::vector<M> &b) {\n    if (a.empty() || b.empty()) {\n        return std::vector<M>(0);\n\
-    \    }\n    if (std::min(a.size(), b.size()) <= 60) {\n        return convolve_naive(a,\
-    \ b);\n    } else {\n        return convolve_fft(a, b);\n    }\n}\n"
+    \ b);\n    } else {\n        return convolve_fft(a, b);\n    }\n}\n#line 4 \"\
+    convolution/index_difference.hpp\"\n// c[i] = sum_{j - k = i} a[j] b[k]\ntemplate\
+    \ <typename T>\nstd::vector<T> convolve_diff(std::vector<T> a, std::vector<T>\
+    \ b) {\n    if (a.empty() || b.empty()) {\n        return std::vector<T>();\n\
+    \    }\n    int n = (int)a.size();\n    b.resize(n, T());\n    std::reverse(a.begin(),\
+    \ a.end());\n    std::vector<T> c = convolve(a, b);\n    c.resize(n);\n    std::reverse(c.begin(),\
+    \ c.end());\n    return c;\n}\n#line 2 \"template/random.hpp\"\n#include <chrono>\n\
+    #include <random>\n\n#if defined(LOCAL) || defined(FIX_SEED)\nstd::mt19937_64\
+    \ mt(123456789);\n#else\nstd::mt19937_64 mt(std::chrono::steady_clock::now().time_since_epoch().count());\n\
+    #endif\n\ntemplate <typename T>\nT uniform(T l, T r) {\n    return std::uniform_int_distribution<T>(l,\
+    \ r - 1)(mt);\n}\ntemplate <typename T>\nT uniform(T n) {\n    return std::uniform_int_distribution<T>(0,\
+    \ n - 1)(mt);\n}\n#line 2 \"template/template.hpp\"\n#include <bits/stdc++.h>\n\
+    #define OVERRIDE(a, b, c, d, ...) d\n#define REP2(i, n) for (i32 i = 0; i < (i32)(n);\
+    \ ++i)\n#define REP3(i, m, n) for (i32 i = (i32)(m); i < (i32)(n); ++i)\n#define\
+    \ REP(...) OVERRIDE(__VA_ARGS__, REP3, REP2)(__VA_ARGS__)\n#define PER2(i, n)\
+    \ for (i32 i = (i32)(n)-1; i >= 0; --i)\n#define PER3(i, m, n) for (i32 i = (i32)(n)-1;\
+    \ i >= (i32)(m); --i)\n#define PER(...) OVERRIDE(__VA_ARGS__, PER3, PER2)(__VA_ARGS__)\n\
+    #define ALL(x) begin(x), end(x)\n#define LEN(x) (i32)(x.size())\nusing namespace\
+    \ std;\nusing u32 = unsigned int;\nusing u64 = unsigned long long;\nusing i32\
+    \ = signed int;\nusing i64 = signed long long;\nusing f64 = double;\nusing f80\
+    \ = long double;\nusing pi = pair<i32, i32>;\nusing pl = pair<i64, i64>;\ntemplate\
+    \ <typename T>\nusing V = vector<T>;\ntemplate <typename T>\nusing VV = V<V<T>>;\n\
+    template <typename T>\nusing VVV = V<V<V<T>>>;\ntemplate <typename T>\nusing VVVV\
+    \ = V<V<V<V<T>>>>;\ntemplate <typename T>\nusing PQR = priority_queue<T, V<T>,\
+    \ greater<T>>;\ntemplate <typename T>\nbool chmin(T &x, const T &y) {\n    if\
+    \ (x > y) {\n        x = y;\n        return true;\n    }\n    return false;\n\
+    }\ntemplate <typename T>\nbool chmax(T &x, const T &y) {\n    if (x < y) {\n \
+    \       x = y;\n        return true;\n    }\n    return false;\n}\ntemplate <typename\
+    \ T>\ni32 lob(const V<T> &arr, const T &v) {\n    return (i32)(lower_bound(ALL(arr),\
+    \ v) - arr.begin());\n}\ntemplate <typename T>\ni32 upb(const V<T> &arr, const\
+    \ T &v) {\n    return (i32)(upper_bound(ALL(arr), v) - arr.begin());\n}\ntemplate\
+    \ <typename T>\nV<i32> argsort(const V<T> &arr) {\n    V<i32> ret(arr.size());\n\
+    \    iota(ALL(ret), 0);\n    sort(ALL(ret), [&](i32 i, i32 j) -> bool {\n    \
+    \    if (arr[i] == arr[j]) {\n            return i < j;\n        } else {\n  \
+    \          return arr[i] < arr[j];\n        }\n    });\n    return ret;\n}\n#ifdef\
+    \ INT128\nusing u128 = __uint128_t;\nusing i128 = __int128_t;\n#endif\n[[maybe_unused]]\
+    \ constexpr i32 INF = 1000000100;\n[[maybe_unused]] constexpr i64 INF64 = 3000000000000000100;\n\
+    struct SetUpIO {\n    SetUpIO() {\n#ifdef FAST_IO\n        ios::sync_with_stdio(false);\n\
+    \        cin.tie(nullptr);\n#endif\n        cout << fixed << setprecision(15);\n\
+    \    }\n} set_up_io;\nvoid scan(char &x) { cin >> x; }\nvoid scan(u32 &x) { cin\
+    \ >> x; }\nvoid scan(u64 &x) { cin >> x; }\nvoid scan(i32 &x) { cin >> x; }\n\
+    void scan(i64 &x) { cin >> x; }\nvoid scan(f64 &x) { cin >> x; }\nvoid scan(string\
+    \ &x) { cin >> x; }\ntemplate <typename T>\nvoid scan(V<T> &x) {\n    for (T &ele\
+    \ : x) {\n        scan(ele);\n    }\n}\nvoid read() {}\ntemplate <typename Head,\
+    \ typename... Tail>\nvoid read(Head &head, Tail &...tail) {\n    scan(head);\n\
+    \    read(tail...);\n}\n#define CHAR(...)     \\\n    char __VA_ARGS__; \\\n \
+    \   read(__VA_ARGS__);\n#define U32(...)     \\\n    u32 __VA_ARGS__; \\\n   \
+    \ read(__VA_ARGS__);\n#define U64(...)     \\\n    u64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n\
+    #define I32(...)     \\\n    i32 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define\
+    \ I64(...)     \\\n    i64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define F64(...)\
+    \     \\\n    f64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define STR(...)  \
+    \      \\\n    string __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define VEC(type,\
+    \ name, size) \\\n    V<type> name(size);       \\\n    read(name);\n#define VVEC(type,\
+    \ name, size1, size2)    \\\n    VV<type> name(size1, V<type>(size2)); \\\n  \
+    \  read(name);\n#line 8 \"convolution/test/index_difference.test.cpp\"\n\nusing\
+    \ M = ModInt<998244353>;\n\nvoid test() {\n    constexpr i32 NM_MAX = 500;\n \
+    \   i32 n = uniform(NM_MAX + 1);\n    i32 m = uniform(NM_MAX + 1);\n    V<M> a(n),\
+    \ b(m);\n    REP(i, n) { a[i].val = uniform(M::get_mod()); }\n    REP(i, m) {\
+    \ b[i].val = uniform(M::get_mod()); }\n    V<M> c(n && m ? n : 0);\n    REP(i,\
+    \ n) REP(j, m) {\n        if (i - j >= 0) {\n            c[i - j] += a[i] * b[j];\n\
+    \        }\n    }\n    V<M> d = convolve_diff(a, b);\n    assert(c == d);\n}\n\
+    \nvoid small_test() {\n    constexpr i32 NM_MAX = 10;\n    i32 n = uniform(NM_MAX\
+    \ + 1);\n    i32 m = uniform(NM_MAX + 1);\n    V<M> a(n), b(m);\n    REP(i, n)\
+    \ { a[i].val = uniform(M::get_mod()); }\n    REP(i, m) { b[i].val = uniform(M::get_mod());\
+    \ }\n    V<M> c(n && m ? n : 0);\n    REP(i, n) REP(j, m) {\n        if (i - j\
+    \ >= 0) {\n            c[i - j] += a[i] * b[j];\n        }\n    }\n    V<M> d\
+    \ = convolve_diff(a, b);\n    assert(c == d);\n}\n\nvoid zero_test() {\n    constexpr\
+    \ i32 NM_MAX = 5;\n    REP(n, NM_MAX + 1) {\n        i32 m = 0;\n        V<M>\
+    \ a(n), b(m);\n        REP(i, n) { a[i].val = uniform(M::get_mod()); }\n     \
+    \   REP(i, m) { b[i].val = uniform(M::get_mod()); }\n        V<M> c(n && m ? n\
+    \ : 0);\n        REP(i, n) REP(j, m) {\n            if (i - j >= 0) {\n      \
+    \          c[i - j] += a[i] * b[j];\n            }\n        }\n        V<M> d\
+    \ = convolve_diff(a, b);\n    }\n    REP(m, NM_MAX + 1) {\n        i32 n = 0;\n\
+    \        V<M> a(n), b(m);\n        REP(i, n) { a[i].val = uniform(M::get_mod());\
+    \ }\n        REP(i, m) { b[i].val = uniform(M::get_mod()); }\n        V<M> c(n\
+    \ && m ? n : 0);\n        REP(i, n) REP(j, m) {\n            if (i - j >= 0) {\n\
+    \                c[i - j] += a[i] * b[j];\n            }\n        }\n        V<M>\
+    \ d = convolve_diff(a, b);\n    }\n}\n\nint main() {\n    constexpr i32 ITER =\
+    \ 1000;\n    REP(i, ITER) {\n        test();\n        small_test();\n    }\n \
+    \   zero_test();\n    cout << \"Hello World\\n\";\n}\n"
+  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/lesson/2/ITP1/1/ITP1_1_A\"\
+    \n#define FAST_IO\n#define FIX_SEED\n\n#include \"../../convolution/index_difference.hpp\"\
+    \n#include \"../../template/random.hpp\"\n#include \"../../template/template.hpp\"\
+    \n\nusing M = ModInt<998244353>;\n\nvoid test() {\n    constexpr i32 NM_MAX =\
+    \ 500;\n    i32 n = uniform(NM_MAX + 1);\n    i32 m = uniform(NM_MAX + 1);\n \
+    \   V<M> a(n), b(m);\n    REP(i, n) { a[i].val = uniform(M::get_mod()); }\n  \
+    \  REP(i, m) { b[i].val = uniform(M::get_mod()); }\n    V<M> c(n && m ? n : 0);\n\
+    \    REP(i, n) REP(j, m) {\n        if (i - j >= 0) {\n            c[i - j] +=\
+    \ a[i] * b[j];\n        }\n    }\n    V<M> d = convolve_diff(a, b);\n    assert(c\
+    \ == d);\n}\n\nvoid small_test() {\n    constexpr i32 NM_MAX = 10;\n    i32 n\
+    \ = uniform(NM_MAX + 1);\n    i32 m = uniform(NM_MAX + 1);\n    V<M> a(n), b(m);\n\
+    \    REP(i, n) { a[i].val = uniform(M::get_mod()); }\n    REP(i, m) { b[i].val\
+    \ = uniform(M::get_mod()); }\n    V<M> c(n && m ? n : 0);\n    REP(i, n) REP(j,\
+    \ m) {\n        if (i - j >= 0) {\n            c[i - j] += a[i] * b[j];\n    \
+    \    }\n    }\n    V<M> d = convolve_diff(a, b);\n    assert(c == d);\n}\n\nvoid\
+    \ zero_test() {\n    constexpr i32 NM_MAX = 5;\n    REP(n, NM_MAX + 1) {\n   \
+    \     i32 m = 0;\n        V<M> a(n), b(m);\n        REP(i, n) { a[i].val = uniform(M::get_mod());\
+    \ }\n        REP(i, m) { b[i].val = uniform(M::get_mod()); }\n        V<M> c(n\
+    \ && m ? n : 0);\n        REP(i, n) REP(j, m) {\n            if (i - j >= 0) {\n\
+    \                c[i - j] += a[i] * b[j];\n            }\n        }\n        V<M>\
+    \ d = convolve_diff(a, b);\n    }\n    REP(m, NM_MAX + 1) {\n        i32 n = 0;\n\
+    \        V<M> a(n), b(m);\n        REP(i, n) { a[i].val = uniform(M::get_mod());\
+    \ }\n        REP(i, m) { b[i].val = uniform(M::get_mod()); }\n        V<M> c(n\
+    \ && m ? n : 0);\n        REP(i, n) REP(j, m) {\n            if (i - j >= 0) {\n\
+    \                c[i - j] += a[i] * b[j];\n            }\n        }\n        V<M>\
+    \ d = convolve_diff(a, b);\n    }\n}\n\nint main() {\n    constexpr i32 ITER =\
+    \ 1000;\n    REP(i, ITER) {\n        test();\n        small_test();\n    }\n \
+    \   zero_test();\n    cout << \"Hello World\\n\";\n}\n"
   dependsOn:
+  - convolution/index_difference.hpp
+  - poly/fft.hpp
   - number_theory/mod_int.hpp
   - number_theory/utils.hpp
-  isVerificationFile: false
-  path: poly/fft.hpp
-  requiredBy:
-  - convolution/mul_mod_p_conv.hpp
-  - convolution/index_difference.hpp
-  - poly/fps_log.hpp
-  - poly/fps_exp.hpp
-  - poly/fps_div_at.hpp
-  - poly/fps_inv.hpp
-  - poly/taylor_shift.hpp
-  - poly/stirling1.hpp
-  - poly/stirling2.hpp
-  timestamp: '2024-07-18 16:56:22+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - convolution/test/mul_modp_convolution.test.cpp
-  - convolution/test/index_difference.test.cpp
-  - poly/test/prod_of_polys.test.cpp
-  - poly/test/inv_of_formal_power_series.test.cpp
-  - poly/test/stirling_number_of_the_second_kind.test.cpp
-  - poly/test/exp_of_formal_power_series.test.cpp
-  - poly/test/stirling_number_of_the_first_kind.test.cpp
-  - poly/test/polynomial_taylor_shift.test.cpp
-  - poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - poly/test/convolution_mod.test.cpp
-  - poly/test/log_of_formal_power_series.test.cpp
-documentation_of: poly/fft.hpp
+  - template/random.hpp
+  - template/template.hpp
+  isVerificationFile: true
+  path: convolution/test/index_difference.test.cpp
+  requiredBy: []
+  timestamp: '2025-06-28 13:39:14+09:00'
+  verificationStatus: TEST_ACCEPTED
+  verifiedWith: []
+documentation_of: convolution/test/index_difference.test.cpp
 layout: document
 redirect_from:
-- /library/poly/fft.hpp
-- /library/poly/fft.hpp.html
-title: poly/fft.hpp
+- /verify/convolution/test/index_difference.test.cpp
+- /verify/convolution/test/index_difference.test.cpp.html
+title: convolution/test/index_difference.test.cpp
 ---

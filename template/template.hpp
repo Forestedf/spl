@@ -85,6 +85,7 @@ void scan(u32 &x) { cin >> x; }
 void scan(u64 &x) { cin >> x; }
 void scan(i32 &x) { cin >> x; }
 void scan(i64 &x) { cin >> x; }
+void scan(f64 &x) { cin >> x; }
 void scan(string &x) { cin >> x; }
 template <typename T>
 void scan(V<T> &x) {
@@ -112,6 +113,9 @@ void read(Head &head, Tail &...tail) {
     read(__VA_ARGS__);
 #define I64(...)     \
     i64 __VA_ARGS__; \
+    read(__VA_ARGS__);
+#define F64(...)     \
+    f64 __VA_ARGS__; \
     read(__VA_ARGS__);
 #define STR(...)        \
     string __VA_ARGS__; \

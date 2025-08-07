@@ -94,4 +94,17 @@ public:
         ret.dat = dat;
         return ret;
     }
+    Matrix<T> pow(unsigned long long t) const {
+        assert(_h == _w);
+        Matrix<T> ret = Matrix<T>::ident(_h);
+        Matrix<T> self = *this;
+        while (t > 0) {
+            if (t & 1) {
+                ret *= self;
+            }
+            self *= self;
+            t >>= 1;
+        }
+        return ret;
+    }
 };

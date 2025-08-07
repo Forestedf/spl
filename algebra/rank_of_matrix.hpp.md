@@ -52,7 +52,11 @@ data:
     \ (int k = 0; k < lhs._w; ++k) {\n                    dat[i][j] += lhs.dat[i][k]\
     \ * rhs.dat[k][j];\n                }\n            }\n        }\n        Matrix<T>\
     \ ret;\n        ret._h = lhs._h;\n        ret._w = rhs._w;\n        ret.dat =\
-    \ dat;\n        return ret;\n    }\n};\n#line 3 \"algebra/rank_of_matrix.hpp\"\
+    \ dat;\n        return ret;\n    }\n    Matrix<T> pow(unsigned long long t) const\
+    \ {\n        assert(_h == _w);\n        Matrix<T> ret = Matrix<T>::ident(_h);\n\
+    \        Matrix<T> self = *this;\n        while (t > 0) {\n            if (t &\
+    \ 1) {\n                ret *= self;\n            }\n            self *= self;\n\
+    \            t >>= 1;\n        }\n        return ret;\n    }\n};\n#line 3 \"algebra/rank_of_matrix.hpp\"\
     \n// O(HW min(H,W))\ntemplate <typename T>\nint rank_of_matrix(Matrix<T> a) {\n\
     \    if (a.h() > a.w()) {\n        a = a.trans();\n    }\n    if (a.h() == 0)\
     \ {\n        return 0;\n    }\n    int rank = 0;\n    for (int i = 0; i < a.w();\
@@ -83,7 +87,7 @@ data:
   isVerificationFile: false
   path: algebra/rank_of_matrix.hpp
   requiredBy: []
-  timestamp: '2024-07-18 16:56:22+09:00'
+  timestamp: '2025-08-07 23:11:18+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - algebra/test/matrix_rank.test.cpp

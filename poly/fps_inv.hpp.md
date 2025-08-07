@@ -246,9 +246,9 @@ data:
   timestamp: '2025-01-29 16:22:53+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - poly/test/inv_of_formal_power_series.test.cpp
   - poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
   - poly/test/log_of_formal_power_series.test.cpp
+  - poly/test/inv_of_formal_power_series.test.cpp
 documentation_of: poly/fps_inv.hpp
 layout: document
 redirect_from:

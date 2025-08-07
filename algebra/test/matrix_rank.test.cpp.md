@@ -201,67 +201,71 @@ data:
     \                    dat[i][j] += lhs.dat[i][k] * rhs.dat[k][j];\n           \
     \     }\n            }\n        }\n        Matrix<T> ret;\n        ret._h = lhs._h;\n\
     \        ret._w = rhs._w;\n        ret.dat = dat;\n        return ret;\n    }\n\
-    };\n#line 3 \"algebra/rank_of_matrix.hpp\"\n// O(HW min(H,W))\ntemplate <typename\
-    \ T>\nint rank_of_matrix(Matrix<T> a) {\n    if (a.h() > a.w()) {\n        a =\
-    \ a.trans();\n    }\n    if (a.h() == 0) {\n        return 0;\n    }\n    int\
-    \ rank = 0;\n    for (int i = 0; i < a.w(); ++i) {\n        int row = -1;\n  \
-    \      for (int j = rank; j < a.h(); ++j) {\n            if (a(j, i) != T()) {\n\
-    \                row = j;\n                break;\n            }\n        }\n\
-    \        if (row == -1) {\n            continue;\n        }\n        a.swap_row(rank,\
-    \ row);\n        T inv = T(1) / a(rank, i);\n        for (int j = i; j < a.w();\
-    \ ++j) {\n            a(rank, j) *= inv;\n        }\n        for (int j = rank\
-    \ + 1; j < a.h(); ++j) {\n            T cf = a(j, i);\n            for (int k\
-    \ = i + 1; k < a.w(); ++k) {\n                a(j, k) -= a(rank, k) * cf;\n  \
-    \          }\n        }\n        if (++rank == a.h()) {\n            break;\n\
-    \        }\n    }\n    return rank;\n}\n#line 2 \"number_theory/mod_int.hpp\"\n\
-    \n#line 2 \"number_theory/utils.hpp\"\n\n#line 4 \"number_theory/utils.hpp\"\n\
-    \nconstexpr bool is_prime(unsigned n) {\n    if (n == 0 || n == 1) {\n       \
-    \ return false;\n    }\n    for (unsigned i = 2; i * i <= n; ++i) {\n        if\
-    \ (n % i == 0) {\n            return false;\n        }\n    }\n    return true;\n\
-    }\n\nconstexpr unsigned mod_pow(unsigned x, unsigned y, unsigned mod) {\n    unsigned\
-    \ ret = 1, self = x;\n    while (y != 0) {\n        if (y & 1) {\n           \
-    \ ret = (unsigned)((unsigned long long)ret * self % mod);\n        }\n       \
-    \ self = (unsigned)((unsigned long long)self * self % mod);\n        y /= 2;\n\
-    \    }\n    return ret;\n}\n\ntemplate <unsigned mod>\nconstexpr unsigned primitive_root()\
-    \ {\n    static_assert(is_prime(mod), \"`mod` must be a prime number.\");\n  \
-    \  if (mod == 2) {\n        return 1;\n    }\n\n    unsigned primes[32] = {};\n\
-    \    int it = 0;\n    {\n        unsigned m = mod - 1;\n        for (unsigned\
-    \ i = 2; i * i <= m; ++i) {\n            if (m % i == 0) {\n                primes[it++]\
-    \ = i;\n                while (m % i == 0) {\n                    m /= i;\n  \
-    \              }\n            }\n        }\n        if (m != 1) {\n          \
-    \  primes[it++] = m;\n        }\n    }\n    for (unsigned i = 2; i < mod; ++i)\
-    \ {\n        bool ok = true;\n        for (int j = 0; j < it; ++j) {\n       \
-    \     if (mod_pow(i, (mod - 1) / primes[j], mod) == 1) {\n                ok =\
-    \ false;\n                break;\n            }\n        }\n        if (ok) return\
-    \ i;\n    }\n    return 0;\n}\n\n// y >= 1\ntemplate <typename T>\nconstexpr T\
-    \ safe_mod(T x, T y) {\n    x %= y;\n    if (x < 0) {\n        x += y;\n    }\n\
-    \    return x;\n}\n\n// y != 0\ntemplate <typename T>\nconstexpr T floor_div(T\
-    \ x, T y) {\n    if (y < 0) {\n        x *= -1;\n        y *= -1;\n    }\n   \
-    \ if (x >= 0) {\n        return x / y;\n    } else {\n        return -((-x + y\
-    \ - 1) / y);\n    }\n}\n\n// y != 0\ntemplate <typename T>\nconstexpr T ceil_div(T\
-    \ x, T y) {\n    if (y < 0) {\n        x *= -1;\n        y *= -1;\n    }\n   \
-    \ if (x >= 0) {\n        return (x + y - 1) / y;\n    } else {\n        return\
-    \ -(-x / y);\n    }\n}\n\n// b >= 1\n// returns (g, x) s.t. g = gcd(a, b), a *\
-    \ x = g (mod b), 0 <= x < b / g\n// from ACL\ntemplate <typename T>\nstd::pair<T,\
-    \ T> extgcd(T a, T b) {\n    a = safe_mod(a, b);\n    T s = b, t = a, m0 = 0,\
-    \ m1 = 1;\n    while (t) {\n        T u = s / t;\n        s -= t * u;\n      \
-    \  m0 -= m1 * u;\n        std::swap(s, t);\n        std::swap(m0, m1);\n    }\n\
-    \    if (m0 < 0) {\n        m0 += b / s;\n    }\n    return std::pair<T, T>(s,\
-    \ m0);\n}\n\n// b >= 1\n// returns (g, x, y) s.t. g = gcd(a, b), a * x + b * y\
-    \ = g, 0 <= x < b / g, |y| < max(2, |a| / g)\ntemplate <typename T>\nstd::tuple<T,\
-    \ T, T> extgcd2(T a, T b) {\n    T _a = safe_mod(a, b);\n    T quot = (a - _a)\
-    \ / b;\n    T x00 = 0, x01 = 1, y0 = b;\n    T x10 = 1, x11 = -quot, y1 = _a;\n\
-    \    while (y1) {\n        T u = y0 / y1;\n        x00 -= u * x10;\n        x01\
-    \ -= u * x11;\n        y0 -= u * y1;\n        std::swap(x00, x10);\n        std::swap(x01,\
-    \ x11);\n        std::swap(y0, y1);\n    }\n    if (x00 < 0) {\n        x00 +=\
-    \ b / y0;\n        x01 -= a / y0;\n    }\n    return std::tuple<T, T, T>(y0, x00,\
-    \ x01);\n}\n\n// gcd(x, m) == 1\ntemplate <typename T>\nT inv_mod(T x, T m) {\n\
-    \    return extgcd(x, m).second;\n}\n#line 7 \"number_theory/mod_int.hpp\"\n\n\
-    template <unsigned mod>\nstruct ModInt {\n    static_assert(mod != 0, \"`mod`\
-    \ must not be equal to 0.\");\n    static_assert(mod < (1u << 31),\n         \
-    \         \"`mod` must be less than (1u << 31) = 2147483648.\");\n\n    unsigned\
-    \ val;\n\n    static constexpr unsigned get_mod() { return mod; }\n\n    constexpr\
-    \ ModInt() : val(0) {}\n    template <typename T, std::enable_if_t<std::is_signed_v<T>>\
+    \    Matrix<T> pow(unsigned long long t) const {\n        assert(_h == _w);\n\
+    \        Matrix<T> ret = Matrix<T>::ident(_h);\n        Matrix<T> self = *this;\n\
+    \        while (t > 0) {\n            if (t & 1) {\n                ret *= self;\n\
+    \            }\n            self *= self;\n            t >>= 1;\n        }\n \
+    \       return ret;\n    }\n};\n#line 3 \"algebra/rank_of_matrix.hpp\"\n// O(HW\
+    \ min(H,W))\ntemplate <typename T>\nint rank_of_matrix(Matrix<T> a) {\n    if\
+    \ (a.h() > a.w()) {\n        a = a.trans();\n    }\n    if (a.h() == 0) {\n  \
+    \      return 0;\n    }\n    int rank = 0;\n    for (int i = 0; i < a.w(); ++i)\
+    \ {\n        int row = -1;\n        for (int j = rank; j < a.h(); ++j) {\n   \
+    \         if (a(j, i) != T()) {\n                row = j;\n                break;\n\
+    \            }\n        }\n        if (row == -1) {\n            continue;\n \
+    \       }\n        a.swap_row(rank, row);\n        T inv = T(1) / a(rank, i);\n\
+    \        for (int j = i; j < a.w(); ++j) {\n            a(rank, j) *= inv;\n \
+    \       }\n        for (int j = rank + 1; j < a.h(); ++j) {\n            T cf\
+    \ = a(j, i);\n            for (int k = i + 1; k < a.w(); ++k) {\n            \
+    \    a(j, k) -= a(rank, k) * cf;\n            }\n        }\n        if (++rank\
+    \ == a.h()) {\n            break;\n        }\n    }\n    return rank;\n}\n#line\
+    \ 2 \"number_theory/mod_int.hpp\"\n\n#line 2 \"number_theory/utils.hpp\"\n\n#line\
+    \ 4 \"number_theory/utils.hpp\"\n\nconstexpr bool is_prime(unsigned n) {\n   \
+    \ if (n == 0 || n == 1) {\n        return false;\n    }\n    for (unsigned i =\
+    \ 2; i * i <= n; ++i) {\n        if (n % i == 0) {\n            return false;\n\
+    \        }\n    }\n    return true;\n}\n\nconstexpr unsigned mod_pow(unsigned\
+    \ x, unsigned y, unsigned mod) {\n    unsigned ret = 1, self = x;\n    while (y\
+    \ != 0) {\n        if (y & 1) {\n            ret = (unsigned)((unsigned long long)ret\
+    \ * self % mod);\n        }\n        self = (unsigned)((unsigned long long)self\
+    \ * self % mod);\n        y /= 2;\n    }\n    return ret;\n}\n\ntemplate <unsigned\
+    \ mod>\nconstexpr unsigned primitive_root() {\n    static_assert(is_prime(mod),\
+    \ \"`mod` must be a prime number.\");\n    if (mod == 2) {\n        return 1;\n\
+    \    }\n\n    unsigned primes[32] = {};\n    int it = 0;\n    {\n        unsigned\
+    \ m = mod - 1;\n        for (unsigned i = 2; i * i <= m; ++i) {\n            if\
+    \ (m % i == 0) {\n                primes[it++] = i;\n                while (m\
+    \ % i == 0) {\n                    m /= i;\n                }\n            }\n\
+    \        }\n        if (m != 1) {\n            primes[it++] = m;\n        }\n\
+    \    }\n    for (unsigned i = 2; i < mod; ++i) {\n        bool ok = true;\n  \
+    \      for (int j = 0; j < it; ++j) {\n            if (mod_pow(i, (mod - 1) /\
+    \ primes[j], mod) == 1) {\n                ok = false;\n                break;\n\
+    \            }\n        }\n        if (ok) return i;\n    }\n    return 0;\n}\n\
+    \n// y >= 1\ntemplate <typename T>\nconstexpr T safe_mod(T x, T y) {\n    x %=\
+    \ y;\n    if (x < 0) {\n        x += y;\n    }\n    return x;\n}\n\n// y != 0\n\
+    template <typename T>\nconstexpr T floor_div(T x, T y) {\n    if (y < 0) {\n \
+    \       x *= -1;\n        y *= -1;\n    }\n    if (x >= 0) {\n        return x\
+    \ / y;\n    } else {\n        return -((-x + y - 1) / y);\n    }\n}\n\n// y !=\
+    \ 0\ntemplate <typename T>\nconstexpr T ceil_div(T x, T y) {\n    if (y < 0) {\n\
+    \        x *= -1;\n        y *= -1;\n    }\n    if (x >= 0) {\n        return\
+    \ (x + y - 1) / y;\n    } else {\n        return -(-x / y);\n    }\n}\n\n// b\
+    \ >= 1\n// returns (g, x) s.t. g = gcd(a, b), a * x = g (mod b), 0 <= x < b /\
+    \ g\n// from ACL\ntemplate <typename T>\nstd::pair<T, T> extgcd(T a, T b) {\n\
+    \    a = safe_mod(a, b);\n    T s = b, t = a, m0 = 0, m1 = 1;\n    while (t) {\n\
+    \        T u = s / t;\n        s -= t * u;\n        m0 -= m1 * u;\n        std::swap(s,\
+    \ t);\n        std::swap(m0, m1);\n    }\n    if (m0 < 0) {\n        m0 += b /\
+    \ s;\n    }\n    return std::pair<T, T>(s, m0);\n}\n\n// b >= 1\n// returns (g,\
+    \ x, y) s.t. g = gcd(a, b), a * x + b * y = g, 0 <= x < b / g, |y| < max(2, |a|\
+    \ / g)\ntemplate <typename T>\nstd::tuple<T, T, T> extgcd2(T a, T b) {\n    T\
+    \ _a = safe_mod(a, b);\n    T quot = (a - _a) / b;\n    T x00 = 0, x01 = 1, y0\
+    \ = b;\n    T x10 = 1, x11 = -quot, y1 = _a;\n    while (y1) {\n        T u =\
+    \ y0 / y1;\n        x00 -= u * x10;\n        x01 -= u * x11;\n        y0 -= u\
+    \ * y1;\n        std::swap(x00, x10);\n        std::swap(x01, x11);\n        std::swap(y0,\
+    \ y1);\n    }\n    if (x00 < 0) {\n        x00 += b / y0;\n        x01 -= a /\
+    \ y0;\n    }\n    return std::tuple<T, T, T>(y0, x00, x01);\n}\n\n// gcd(x, m)\
+    \ == 1\ntemplate <typename T>\nT inv_mod(T x, T m) {\n    return extgcd(x, m).second;\n\
+    }\n#line 7 \"number_theory/mod_int.hpp\"\n\ntemplate <unsigned mod>\nstruct ModInt\
+    \ {\n    static_assert(mod != 0, \"`mod` must not be equal to 0.\");\n    static_assert(mod\
+    \ < (1u << 31),\n                  \"`mod` must be less than (1u << 31) = 2147483648.\"\
+    );\n\n    unsigned val;\n\n    static constexpr unsigned get_mod() { return mod;\
+    \ }\n\n    constexpr ModInt() : val(0) {}\n    template <typename T, std::enable_if_t<std::is_signed_v<T>>\
     \ * = nullptr>\n    constexpr ModInt(T x)\n        : val((unsigned)((long long)x\
     \ % (long long)mod + (x < 0 ? mod : 0))) {}\n    template <typename T, std::enable_if_t<std::is_unsigned_v<T>>\
     \ * = nullptr>\n    constexpr ModInt(T x) : val((unsigned)(x % mod)) {}\n\n  \
@@ -316,7 +320,7 @@ data:
   isVerificationFile: true
   path: algebra/test/matrix_rank.test.cpp
   requiredBy: []
-  timestamp: '2025-06-28 10:05:47+09:00'
+  timestamp: '2025-08-07 23:11:18+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: algebra/test/matrix_rank.test.cpp

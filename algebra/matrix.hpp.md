@@ -67,7 +67,11 @@ data:
     \ (int k = 0; k < lhs._w; ++k) {\n                    dat[i][j] += lhs.dat[i][k]\
     \ * rhs.dat[k][j];\n                }\n            }\n        }\n        Matrix<T>\
     \ ret;\n        ret._h = lhs._h;\n        ret._w = rhs._w;\n        ret.dat =\
-    \ dat;\n        return ret;\n    }\n};\n"
+    \ dat;\n        return ret;\n    }\n    Matrix<T> pow(unsigned long long t) const\
+    \ {\n        assert(_h == _w);\n        Matrix<T> ret = Matrix<T>::ident(_h);\n\
+    \        Matrix<T> self = *this;\n        while (t > 0) {\n            if (t &\
+    \ 1) {\n                ret *= self;\n            }\n            self *= self;\n\
+    \            t >>= 1;\n        }\n        return ret;\n    }\n};\n"
   code: "#pragma once\n#include <cassert>\n#include <utility>\n#include <vector>\n\
     template <typename T>\nclass Matrix {\n    int _h, _w;\n    std::vector<std::vector<T>>\
     \ dat;\n\npublic:\n    Matrix() : dat() {}\n    Matrix(int n) : _h(n), _w(n),\
@@ -106,21 +110,25 @@ data:
     \ 0; k < lhs._w; ++k) {\n                    dat[i][j] += lhs.dat[i][k] * rhs.dat[k][j];\n\
     \                }\n            }\n        }\n        Matrix<T> ret;\n       \
     \ ret._h = lhs._h;\n        ret._w = rhs._w;\n        ret.dat = dat;\n       \
-    \ return ret;\n    }\n};\n"
+    \ return ret;\n    }\n    Matrix<T> pow(unsigned long long t) const {\n      \
+    \  assert(_h == _w);\n        Matrix<T> ret = Matrix<T>::ident(_h);\n        Matrix<T>\
+    \ self = *this;\n        while (t > 0) {\n            if (t & 1) {\n         \
+    \       ret *= self;\n            }\n            self *= self;\n            t\
+    \ >>= 1;\n        }\n        return ret;\n    }\n};\n"
   dependsOn: []
   isVerificationFile: false
   path: algebra/matrix.hpp
   requiredBy:
-  - algebra/rank_of_matrix.hpp
   - algebra/determinant.hpp
   - algebra/inverse_matrix.hpp
-  timestamp: '2024-07-18 16:56:22+09:00'
+  - algebra/rank_of_matrix.hpp
+  timestamp: '2025-08-07 23:11:18+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - algebra/test/matrix_det.test.cpp
   - algebra/test/matrix_product.test.cpp
-  - algebra/test/matrix_rank.test.cpp
+  - algebra/test/matrix_det.test.cpp
   - algebra/test/inverse_matrix.test.cpp
+  - algebra/test/matrix_rank.test.cpp
 documentation_of: algebra/matrix.hpp
 layout: document
 redirect_from:

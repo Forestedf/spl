@@ -65,8 +65,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - data_structure/test/static_range_frequency.test.cpp
-  - data_structure/test/wavelet_matrix.test.cpp
   - data_structure/test/range_kth_smallest.test.cpp
+  - data_structure/test/wavelet_matrix.test.cpp
 documentation_of: template/bitop.hpp
 layout: document
 redirect_from:

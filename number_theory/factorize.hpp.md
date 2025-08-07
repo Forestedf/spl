@@ -163,8 +163,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - convolution/test/mul_modp_convolution.test.cpp
-  - number_theory/test/primitive_root.test.cpp
   - number_theory/test/factorize.test.cpp
+  - number_theory/test/primitive_root.test.cpp
 documentation_of: number_theory/factorize.hpp
 layout: document
 redirect_from:

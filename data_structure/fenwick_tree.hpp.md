@@ -90,17 +90,17 @@ data:
   isVerificationFile: false
   path: data_structure/fenwick_tree.hpp
   requiredBy:
-  - data_structure/rectangle_sum.hpp
-  - data_structure/range_add_range_sum.hpp
   - data_structure/range_add_point_get.hpp
+  - data_structure/range_add_range_sum.hpp
+  - data_structure/rectangle_sum.hpp
   timestamp: '2023-12-26 16:56:23+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - data_structure/test/point_add_rectangle_sum.test.cpp
-  - data_structure/test/dsl_2_g.test.cpp
-  - data_structure/test/rectangle_sum.test.cpp
-  - data_structure/test/point_add_range_sum.test.cpp
   - graph/test/vertex_add_path_sum.test.cpp
+  - data_structure/test/point_add_range_sum.test.cpp
+  - data_structure/test/dsl_2_g.test.cpp
+  - data_structure/test/point_add_rectangle_sum.test.cpp
+  - data_structure/test/rectangle_sum.test.cpp
 documentation_of: data_structure/fenwick_tree.hpp
 layout: document
 redirect_from:

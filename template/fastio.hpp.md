@@ -19,6 +19,9 @@ data:
     path: algebra/test/system_of_linear_equations.test.cpp
     title: algebra/test/system_of_linear_equations.test.cpp
   - icon: ':heavy_check_mark:'
+    path: convolution/test/gcd_convolution.test.cpp
+    title: convolution/test/gcd_convolution.test.cpp
+  - icon: ':heavy_check_mark:'
     path: convolution/test/mul_modp_convolution.test.cpp
     title: convolution/test/mul_modp_convolution.test.cpp
   - icon: ':heavy_check_mark:'
@@ -271,6 +274,7 @@ data:
   - poly/test/inv_of_formal_power_series_sparse.test.cpp
   - poly/test/pow_of_formal_power_series.test.cpp
   - convolution/test/mul_modp_convolution.test.cpp
+  - convolution/test/gcd_convolution.test.cpp
 documentation_of: template/fastio.hpp
 layout: document
 redirect_from:

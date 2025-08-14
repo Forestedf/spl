@@ -13,6 +13,9 @@ data:
     title: number_theory/primitive_root.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: convolution/test/gcd_convolution.stress.test.cpp
+    title: convolution/test/gcd_convolution.stress.test.cpp
+  - icon: ':heavy_check_mark:'
     path: convolution/test/index_difference.test.cpp
     title: convolution/test/index_difference.test.cpp
   - icon: ':heavy_check_mark:'
@@ -83,6 +86,7 @@ data:
   - data_structure/test/wavelet_matrix.test.cpp
   - convolution/test/index_difference.test.cpp
   - convolution/test/mul_modp_convolution.test.cpp
+  - convolution/test/gcd_convolution.stress.test.cpp
 documentation_of: template/random.hpp
 layout: document
 redirect_from:

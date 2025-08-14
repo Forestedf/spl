@@ -26,6 +26,9 @@ data:
   - name: convolution
     pages:
     - icon: ':heavy_check_mark:'
+      path: convolution/gcd_convolution.hpp
+      title: convolution/gcd_convolution.hpp
+    - icon: ':heavy_check_mark:'
       path: convolution/index_difference.hpp
       title: convolution/index_difference.hpp
     - icon: ':heavy_check_mark:'
@@ -276,6 +279,12 @@ data:
       title: bit/test/bitwise_xor_convolution.test.cpp
   - name: convolution/test
     pages:
+    - icon: ':heavy_check_mark:'
+      path: convolution/test/gcd_convolution.stress.test.cpp
+      title: convolution/test/gcd_convolution.stress.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: convolution/test/gcd_convolution.test.cpp
+      title: convolution/test/gcd_convolution.test.cpp
     - icon: ':heavy_check_mark:'
       path: convolution/test/index_difference.test.cpp
       title: convolution/test/index_difference.test.cpp

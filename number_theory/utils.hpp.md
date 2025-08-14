@@ -58,6 +58,12 @@ data:
     path: bit/test/bitwise_xor_convolution.test.cpp
     title: bit/test/bitwise_xor_convolution.test.cpp
   - icon: ':heavy_check_mark:'
+    path: convolution/test/gcd_convolution.stress.test.cpp
+    title: convolution/test/gcd_convolution.stress.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: convolution/test/gcd_convolution.test.cpp
+    title: convolution/test/gcd_convolution.test.cpp
+  - icon: ':heavy_check_mark:'
     path: convolution/test/index_difference.test.cpp
     title: convolution/test/index_difference.test.cpp
   - icon: ':heavy_check_mark:'
@@ -273,6 +279,8 @@ data:
   - poly/test/pow_of_formal_power_series.test.cpp
   - convolution/test/index_difference.test.cpp
   - convolution/test/mul_modp_convolution.test.cpp
+  - convolution/test/gcd_convolution.test.cpp
+  - convolution/test/gcd_convolution.stress.test.cpp
 documentation_of: number_theory/utils.hpp
 layout: document
 redirect_from:

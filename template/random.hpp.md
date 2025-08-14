@@ -19,6 +19,9 @@ data:
     path: convolution/test/index_difference.test.cpp
     title: convolution/test/index_difference.test.cpp
   - icon: ':heavy_check_mark:'
+    path: convolution/test/lcm_convolution.stress.test.cpp
+    title: convolution/test/lcm_convolution.stress.test.cpp
+  - icon: ':heavy_check_mark:'
     path: convolution/test/mul_modp_convolution.test.cpp
     title: convolution/test/mul_modp_convolution.test.cpp
   - icon: ':heavy_check_mark:'
@@ -84,6 +87,7 @@ data:
   - number_theory/test/primitive_root.test.cpp
   - number_theory/test/extgcd2_stress.test.cpp
   - data_structure/test/wavelet_matrix.test.cpp
+  - convolution/test/lcm_convolution.stress.test.cpp
   - convolution/test/index_difference.test.cpp
   - convolution/test/mul_modp_convolution.test.cpp
   - convolution/test/gcd_convolution.stress.test.cpp

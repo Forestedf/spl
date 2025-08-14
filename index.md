@@ -32,6 +32,9 @@ data:
       path: convolution/index_difference.hpp
       title: convolution/index_difference.hpp
     - icon: ':heavy_check_mark:'
+      path: convolution/lcm_convolution.hpp
+      title: convolution/lcm_convolution.hpp
+    - icon: ':heavy_check_mark:'
       path: convolution/mul_mod_p_conv.hpp
       title: convolution/mul_mod_p_conv.hpp
   - name: data_structure
@@ -288,10 +291,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: convolution/test/index_difference.test.cpp
       title: convolution/test/index_difference.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: convolution/test/lcm_convolution.stress.test.cpp
       title: convolution/test/lcm_convolution.stress.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: convolution/test/lcm_convolution.test.cpp
       title: convolution/test/lcm_convolution.test.cpp
     - icon: ':heavy_check_mark:'

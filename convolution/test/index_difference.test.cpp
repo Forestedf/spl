@@ -56,6 +56,7 @@ void zero_test() {
             }
         }
         V<M> d = convolve_diff(a, b);
+        assert(c == d);
     }
     REP(m, NM_MAX + 1) {
         i32 n = 0;
@@ -69,6 +70,7 @@ void zero_test() {
             }
         }
         V<M> d = convolve_diff(a, b);
+        assert(c == d);
     }
 }
 

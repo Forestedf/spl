@@ -288,6 +288,12 @@ data:
     - icon: ':heavy_check_mark:'
       path: convolution/test/index_difference.test.cpp
       title: convolution/test/index_difference.test.cpp
+    - icon: ':x:'
+      path: convolution/test/lcm_convolution.stress.test.cpp
+      title: convolution/test/lcm_convolution.stress.test.cpp
+    - icon: ':x:'
+      path: convolution/test/lcm_convolution.test.cpp
+      title: convolution/test/lcm_convolution.test.cpp
     - icon: ':heavy_check_mark:'
       path: convolution/test/mul_modp_convolution.test.cpp
       title: convolution/test/mul_modp_convolution.test.cpp

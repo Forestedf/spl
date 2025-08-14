@@ -277,14 +277,15 @@ data:
     \   REP(i, m) { b[i].val = uniform(M::get_mod()); }\n        V<M> c(n && m ? n\
     \ : 0);\n        REP(i, n) REP(j, m) {\n            if (i - j >= 0) {\n      \
     \          c[i - j] += a[i] * b[j];\n            }\n        }\n        V<M> d\
-    \ = convolve_diff(a, b);\n    }\n    REP(m, NM_MAX + 1) {\n        i32 n = 0;\n\
-    \        V<M> a(n), b(m);\n        REP(i, n) { a[i].val = uniform(M::get_mod());\
-    \ }\n        REP(i, m) { b[i].val = uniform(M::get_mod()); }\n        V<M> c(n\
-    \ && m ? n : 0);\n        REP(i, n) REP(j, m) {\n            if (i - j >= 0) {\n\
-    \                c[i - j] += a[i] * b[j];\n            }\n        }\n        V<M>\
-    \ d = convolve_diff(a, b);\n    }\n}\n\nint main() {\n    constexpr i32 ITER =\
-    \ 1000;\n    REP(i, ITER) {\n        test();\n        small_test();\n    }\n \
-    \   zero_test();\n    cout << \"Hello World\\n\";\n}\n"
+    \ = convolve_diff(a, b);\n        assert(c == d);\n    }\n    REP(m, NM_MAX +\
+    \ 1) {\n        i32 n = 0;\n        V<M> a(n), b(m);\n        REP(i, n) { a[i].val\
+    \ = uniform(M::get_mod()); }\n        REP(i, m) { b[i].val = uniform(M::get_mod());\
+    \ }\n        V<M> c(n && m ? n : 0);\n        REP(i, n) REP(j, m) {\n        \
+    \    if (i - j >= 0) {\n                c[i - j] += a[i] * b[j];\n           \
+    \ }\n        }\n        V<M> d = convolve_diff(a, b);\n        assert(c == d);\n\
+    \    }\n}\n\nint main() {\n    constexpr i32 ITER = 1000;\n    REP(i, ITER) {\n\
+    \        test();\n        small_test();\n    }\n    zero_test();\n    cout <<\
+    \ \"Hello World\\n\";\n}\n"
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/lesson/2/ITP1/1/ITP1_1_A\"\
     \n#define FAST_IO\n#define FIX_SEED\n\n#include \"../../convolution/index_difference.hpp\"\
     \n#include \"../../template/random.hpp\"\n#include \"../../template/template.hpp\"\
@@ -305,14 +306,15 @@ data:
     \ }\n        REP(i, m) { b[i].val = uniform(M::get_mod()); }\n        V<M> c(n\
     \ && m ? n : 0);\n        REP(i, n) REP(j, m) {\n            if (i - j >= 0) {\n\
     \                c[i - j] += a[i] * b[j];\n            }\n        }\n        V<M>\
-    \ d = convolve_diff(a, b);\n    }\n    REP(m, NM_MAX + 1) {\n        i32 n = 0;\n\
-    \        V<M> a(n), b(m);\n        REP(i, n) { a[i].val = uniform(M::get_mod());\
-    \ }\n        REP(i, m) { b[i].val = uniform(M::get_mod()); }\n        V<M> c(n\
-    \ && m ? n : 0);\n        REP(i, n) REP(j, m) {\n            if (i - j >= 0) {\n\
-    \                c[i - j] += a[i] * b[j];\n            }\n        }\n        V<M>\
-    \ d = convolve_diff(a, b);\n    }\n}\n\nint main() {\n    constexpr i32 ITER =\
-    \ 1000;\n    REP(i, ITER) {\n        test();\n        small_test();\n    }\n \
-    \   zero_test();\n    cout << \"Hello World\\n\";\n}\n"
+    \ d = convolve_diff(a, b);\n        assert(c == d);\n    }\n    REP(m, NM_MAX\
+    \ + 1) {\n        i32 n = 0;\n        V<M> a(n), b(m);\n        REP(i, n) { a[i].val\
+    \ = uniform(M::get_mod()); }\n        REP(i, m) { b[i].val = uniform(M::get_mod());\
+    \ }\n        V<M> c(n && m ? n : 0);\n        REP(i, n) REP(j, m) {\n        \
+    \    if (i - j >= 0) {\n                c[i - j] += a[i] * b[j];\n           \
+    \ }\n        }\n        V<M> d = convolve_diff(a, b);\n        assert(c == d);\n\
+    \    }\n}\n\nint main() {\n    constexpr i32 ITER = 1000;\n    REP(i, ITER) {\n\
+    \        test();\n        small_test();\n    }\n    zero_test();\n    cout <<\
+    \ \"Hello World\\n\";\n}\n"
   dependsOn:
   - convolution/index_difference.hpp
   - poly/fft.hpp
@@ -323,7 +325,7 @@ data:
   isVerificationFile: true
   path: convolution/test/index_difference.test.cpp
   requiredBy: []
-  timestamp: '2025-06-28 13:39:14+09:00'
+  timestamp: '2025-08-14 14:37:59+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: convolution/test/index_difference.test.cpp

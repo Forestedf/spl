@@ -36,6 +36,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: convolution/test/lcm_convolution.test.cpp
     title: convolution/test/lcm_convolution.test.cpp
+  - icon: ':x:'
+    path: convolution/test/min_plus_convolution_convex_arbitrary.test.cpp
+    title: convolution/test/min_plus_convolution_convex_arbitrary.test.cpp
+  - icon: ':x:'
+    path: convolution/test/min_plus_convolution_convex_convex.test.cpp
+    title: convolution/test/min_plus_convolution_convex_convex.test.cpp
   - icon: ':heavy_check_mark:'
     path: convolution/test/mul_modp_convolution.test.cpp
     title: convolution/test/mul_modp_convolution.test.cpp
@@ -198,9 +204,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: string/test/zalgorithm.test.cpp
     title: string/test/zalgorithm.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"template/template.hpp\"\n#include <bits/stdc++.h>\n#define\
@@ -295,7 +301,7 @@ data:
   path: template/template.hpp
   requiredBy: []
   timestamp: '2025-06-28 10:05:47+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - graph/test/jump_on_tree.test.cpp
   - graph/test/lca.test.cpp
@@ -359,8 +365,10 @@ data:
   - convolution/test/lcm_convolution.test.cpp
   - convolution/test/lcm_convolution.stress.test.cpp
   - convolution/test/index_difference.test.cpp
+  - convolution/test/min_plus_convolution_convex_convex.test.cpp
   - convolution/test/mul_modp_convolution.test.cpp
   - convolution/test/gcd_convolution.test.cpp
+  - convolution/test/min_plus_convolution_convex_arbitrary.test.cpp
   - convolution/test/gcd_convolution.stress.test.cpp
 documentation_of: template/template.hpp
 layout: document

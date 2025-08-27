@@ -13,7 +13,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: number_theory/utils.hpp
     title: number_theory/utils.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
   _extendedRequiredBy: []

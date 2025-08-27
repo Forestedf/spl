@@ -24,6 +24,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: convolution/test/lcm_convolution.test.cpp
     title: convolution/test/lcm_convolution.test.cpp
+  - icon: ':x:'
+    path: convolution/test/min_plus_convolution_convex_arbitrary.test.cpp
+    title: convolution/test/min_plus_convolution_convex_arbitrary.test.cpp
+  - icon: ':x:'
+    path: convolution/test/min_plus_convolution_convex_convex.test.cpp
+    title: convolution/test/min_plus_convolution_convex_convex.test.cpp
   - icon: ':heavy_check_mark:'
     path: convolution/test/mul_modp_convolution.test.cpp
     title: convolution/test/mul_modp_convolution.test.cpp
@@ -66,9 +72,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: poly/test/prod_of_polys.test.cpp
     title: poly/test/prod_of_polys.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 1 \"template/fastio.hpp\"\n#include <cstdio>\n#include <cstring>\n\
@@ -256,7 +262,7 @@ data:
   path: template/fastio.hpp
   requiredBy: []
   timestamp: '2024-11-23 22:57:41+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - graph/test/enumerate_triangles.test.cpp
   - number_theory/test/factorize.test.cpp
@@ -277,8 +283,10 @@ data:
   - poly/test/inv_of_formal_power_series_sparse.test.cpp
   - poly/test/pow_of_formal_power_series.test.cpp
   - convolution/test/lcm_convolution.test.cpp
+  - convolution/test/min_plus_convolution_convex_convex.test.cpp
   - convolution/test/mul_modp_convolution.test.cpp
   - convolution/test/gcd_convolution.test.cpp
+  - convolution/test/min_plus_convolution_convex_arbitrary.test.cpp
 documentation_of: template/fastio.hpp
 layout: document
 redirect_from:

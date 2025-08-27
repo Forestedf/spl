@@ -34,6 +34,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: convolution/lcm_convolution.hpp
       title: convolution/lcm_convolution.hpp
+    - icon: ':x:'
+      path: convolution/min_plus_convolution.hpp
+      title: convolution/min_plus_convolution.hpp
     - icon: ':heavy_check_mark:'
       path: convolution/mul_mod_p_conv.hpp
       title: convolution/mul_mod_p_conv.hpp
@@ -180,6 +183,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: opt/monge_min_cut.hpp
       title: opt/monge_min_cut.hpp
+    - icon: ':x:'
+      path: opt/monotone_minima.hpp
+      title: opt/monotone_minima.hpp
   - name: other
     pages:
     - icon: ':heavy_check_mark:'
@@ -248,13 +254,13 @@ data:
     - icon: ':warning:'
       path: template/debug.hpp
       title: template/debug.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/fastio.hpp
       title: template/fastio.hpp
     - icon: ':heavy_check_mark:'
       path: template/random.hpp
       title: template/random.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/template.hpp
       title: template/template.hpp
   verificationCategories:
@@ -297,6 +303,12 @@ data:
     - icon: ':heavy_check_mark:'
       path: convolution/test/lcm_convolution.test.cpp
       title: convolution/test/lcm_convolution.test.cpp
+    - icon: ':x:'
+      path: convolution/test/min_plus_convolution_convex_arbitrary.test.cpp
+      title: convolution/test/min_plus_convolution_convex_arbitrary.test.cpp
+    - icon: ':x:'
+      path: convolution/test/min_plus_convolution_convex_convex.test.cpp
+      title: convolution/test/min_plus_convolution_convex_convex.test.cpp
     - icon: ':heavy_check_mark:'
       path: convolution/test/mul_modp_convolution.test.cpp
       title: convolution/test/mul_modp_convolution.test.cpp

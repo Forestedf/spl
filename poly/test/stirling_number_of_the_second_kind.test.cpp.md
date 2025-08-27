@@ -16,7 +16,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: poly/stirling2.hpp
     title: poly/stirling2.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
   _extendedRequiredBy: []

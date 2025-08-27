@@ -1,15 +1,12 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: convolution/lcm_convolution.hpp
-    title: convolution/lcm_convolution.hpp
-  - icon: ':heavy_check_mark:'
-    path: number_theory/mod_int.hpp
-    title: number_theory/mod_int.hpp
-  - icon: ':heavy_check_mark:'
-    path: number_theory/utils.hpp
-    title: number_theory/utils.hpp
+  - icon: ':x:'
+    path: convolution/min_plus_convolution.hpp
+    title: convolution/min_plus_convolution.hpp
+  - icon: ':x:'
+    path: opt/monotone_minima.hpp
+    title: opt/monotone_minima.hpp
   - icon: ':question:'
     path: template/fastio.hpp
     title: template/fastio.hpp
@@ -18,118 +15,58 @@ data:
     title: template/template.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/lcm_convolution
+    PROBLEM: https://judge.yosupo.jp/problem/min_plus_convolution_convex_arbitrary
     links:
-    - https://judge.yosupo.jp/problem/lcm_convolution
-  bundledCode: "#line 1 \"convolution/test/lcm_convolution.test.cpp\"\n#define PROBLEM\
-    \ \"https://judge.yosupo.jp/problem/lcm_convolution\"\n#line 2 \"convolution/lcm_convolution.hpp\"\
-    \n#include <cassert>\n#include <vector>\n// length: max(a.size(), b.size())\n\
-    // ignore index 0\ntemplate <typename T>\nstd::vector<T> lcm_convolution(std::vector<T>\
-    \ a, std::vector<T> b) {\n    if (a.size() <= 1 || b.size() <= 1) {\n        return\
-    \ std::vector<T>(std::max(a.size(), b.size()), T(0));\n    }\n    if (a.size()\
-    \ > b.size()) {\n        a.swap(b);\n    }\n    int n = (int)b.size();\n    a.resize(n,\
-    \ T(0));\n    std::vector<int> is_prime(n, 1);\n    for (int i = 2; i < n; ++i)\
-    \ {\n        if (!is_prime[i]) {\n            continue;\n        }\n        for\
-    \ (int j = 1, k = i; k < n; ++j, k += i) {\n            a[k] += a[j];\n      \
-    \      b[k] += b[j];\n            is_prime[k] = 0;\n        }\n        is_prime[i]\
-    \ = 1;\n    }\n    for (int i = 1; i < n; ++i) {\n        b[i] *= a[i];\n    }\n\
-    \    for (int i = 2; i < n; ++i) {\n        if (!is_prime[i]) {\n            continue;\n\
-    \        }\n        for (int j = (n - 1) / i, k = j * i; j >= 1; --j, k -= i)\
-    \ {\n            b[k] -= b[j];\n        }\n    }\n    b[0] = T(0);\n    return\
-    \ b;\n}\n#line 2 \"number_theory/mod_int.hpp\"\n\n#line 4 \"number_theory/mod_int.hpp\"\
-    \n#include <iostream>\n#include <type_traits>\n#line 2 \"number_theory/utils.hpp\"\
-    \n\n#include <utility>\n\nconstexpr bool is_prime(unsigned n) {\n    if (n ==\
-    \ 0 || n == 1) {\n        return false;\n    }\n    for (unsigned i = 2; i * i\
-    \ <= n; ++i) {\n        if (n % i == 0) {\n            return false;\n       \
-    \ }\n    }\n    return true;\n}\n\nconstexpr unsigned mod_pow(unsigned x, unsigned\
-    \ y, unsigned mod) {\n    unsigned ret = 1, self = x;\n    while (y != 0) {\n\
-    \        if (y & 1) {\n            ret = (unsigned)((unsigned long long)ret *\
-    \ self % mod);\n        }\n        self = (unsigned)((unsigned long long)self\
-    \ * self % mod);\n        y /= 2;\n    }\n    return ret;\n}\n\ntemplate <unsigned\
-    \ mod>\nconstexpr unsigned primitive_root() {\n    static_assert(is_prime(mod),\
-    \ \"`mod` must be a prime number.\");\n    if (mod == 2) {\n        return 1;\n\
-    \    }\n\n    unsigned primes[32] = {};\n    int it = 0;\n    {\n        unsigned\
-    \ m = mod - 1;\n        for (unsigned i = 2; i * i <= m; ++i) {\n            if\
-    \ (m % i == 0) {\n                primes[it++] = i;\n                while (m\
-    \ % i == 0) {\n                    m /= i;\n                }\n            }\n\
-    \        }\n        if (m != 1) {\n            primes[it++] = m;\n        }\n\
-    \    }\n    for (unsigned i = 2; i < mod; ++i) {\n        bool ok = true;\n  \
-    \      for (int j = 0; j < it; ++j) {\n            if (mod_pow(i, (mod - 1) /\
-    \ primes[j], mod) == 1) {\n                ok = false;\n                break;\n\
-    \            }\n        }\n        if (ok) return i;\n    }\n    return 0;\n}\n\
-    \n// y >= 1\ntemplate <typename T>\nconstexpr T safe_mod(T x, T y) {\n    x %=\
-    \ y;\n    if (x < 0) {\n        x += y;\n    }\n    return x;\n}\n\n// y != 0\n\
-    template <typename T>\nconstexpr T floor_div(T x, T y) {\n    if (y < 0) {\n \
-    \       x *= -1;\n        y *= -1;\n    }\n    if (x >= 0) {\n        return x\
-    \ / y;\n    } else {\n        return -((-x + y - 1) / y);\n    }\n}\n\n// y !=\
-    \ 0\ntemplate <typename T>\nconstexpr T ceil_div(T x, T y) {\n    if (y < 0) {\n\
-    \        x *= -1;\n        y *= -1;\n    }\n    if (x >= 0) {\n        return\
-    \ (x + y - 1) / y;\n    } else {\n        return -(-x / y);\n    }\n}\n\n// b\
-    \ >= 1\n// returns (g, x) s.t. g = gcd(a, b), a * x = g (mod b), 0 <= x < b /\
-    \ g\n// from ACL\ntemplate <typename T>\nstd::pair<T, T> extgcd(T a, T b) {\n\
-    \    a = safe_mod(a, b);\n    T s = b, t = a, m0 = 0, m1 = 1;\n    while (t) {\n\
-    \        T u = s / t;\n        s -= t * u;\n        m0 -= m1 * u;\n        std::swap(s,\
-    \ t);\n        std::swap(m0, m1);\n    }\n    if (m0 < 0) {\n        m0 += b /\
-    \ s;\n    }\n    return std::pair<T, T>(s, m0);\n}\n\n// b >= 1\n// returns (g,\
-    \ x, y) s.t. g = gcd(a, b), a * x + b * y = g, 0 <= x < b / g, |y| < max(2, |a|\
-    \ / g)\ntemplate <typename T>\nstd::tuple<T, T, T> extgcd2(T a, T b) {\n    T\
-    \ _a = safe_mod(a, b);\n    T quot = (a - _a) / b;\n    T x00 = 0, x01 = 1, y0\
-    \ = b;\n    T x10 = 1, x11 = -quot, y1 = _a;\n    while (y1) {\n        T u =\
-    \ y0 / y1;\n        x00 -= u * x10;\n        x01 -= u * x11;\n        y0 -= u\
-    \ * y1;\n        std::swap(x00, x10);\n        std::swap(x01, x11);\n        std::swap(y0,\
-    \ y1);\n    }\n    if (x00 < 0) {\n        x00 += b / y0;\n        x01 -= a /\
-    \ y0;\n    }\n    return std::tuple<T, T, T>(y0, x00, x01);\n}\n\n// gcd(x, m)\
-    \ == 1\ntemplate <typename T>\nT inv_mod(T x, T m) {\n    return extgcd(x, m).second;\n\
-    }\n#line 7 \"number_theory/mod_int.hpp\"\n\ntemplate <unsigned mod>\nstruct ModInt\
-    \ {\n    static_assert(mod != 0, \"`mod` must not be equal to 0.\");\n    static_assert(mod\
-    \ < (1u << 31),\n                  \"`mod` must be less than (1u << 31) = 2147483648.\"\
-    );\n\n    unsigned val;\n\n    static constexpr unsigned get_mod() { return mod;\
-    \ }\n\n    constexpr ModInt() : val(0) {}\n    template <typename T, std::enable_if_t<std::is_signed_v<T>>\
-    \ * = nullptr>\n    constexpr ModInt(T x)\n        : val((unsigned)((long long)x\
-    \ % (long long)mod + (x < 0 ? mod : 0))) {}\n    template <typename T, std::enable_if_t<std::is_unsigned_v<T>>\
-    \ * = nullptr>\n    constexpr ModInt(T x) : val((unsigned)(x % mod)) {}\n\n  \
-    \  static constexpr ModInt raw(unsigned x) {\n        ModInt<mod> ret;\n     \
-    \   ret.val = x;\n        return ret;\n    }\n\n    constexpr unsigned get_val()\
-    \ const { return val; }\n\n    constexpr ModInt operator+() const { return *this;\
-    \ }\n    constexpr ModInt operator-() const { return ModInt<mod>(0u) - *this;\
-    \ }\n\n    constexpr ModInt &operator+=(const ModInt &rhs) {\n        val += rhs.val;\n\
-    \        if (val >= mod) val -= mod;\n        return *this;\n    }\n    constexpr\
-    \ ModInt &operator-=(const ModInt &rhs) {\n        val -= rhs.val;\n        if\
-    \ (val >= mod) val += mod;\n        return *this;\n    }\n    constexpr ModInt\
-    \ &operator*=(const ModInt &rhs) {\n        val = (unsigned long long)val * rhs.val\
-    \ % mod;\n        return *this;\n    }\n    constexpr ModInt &operator/=(const\
-    \ ModInt &rhs) {\n        val = (unsigned long long)val * rhs.inv().val % mod;\n\
-    \        return *this;\n    }\n\n    friend constexpr ModInt operator+(const ModInt\
-    \ &lhs, const ModInt &rhs) {\n        return ModInt<mod>(lhs) += rhs;\n    }\n\
-    \    friend constexpr ModInt operator-(const ModInt &lhs, const ModInt &rhs) {\n\
-    \        return ModInt<mod>(lhs) -= rhs;\n    }\n    friend constexpr ModInt operator*(const\
-    \ ModInt &lhs, const ModInt &rhs) {\n        return ModInt<mod>(lhs) *= rhs;\n\
-    \    }\n    friend constexpr ModInt operator/(const ModInt &lhs, const ModInt\
-    \ &rhs) {\n        return ModInt<mod>(lhs) /= rhs;\n    }\n\n    constexpr ModInt\
-    \ pow(unsigned long long x) const {\n        ModInt<mod> ret = ModInt<mod>::raw(1);\n\
-    \        ModInt<mod> self = *this;\n        while (x != 0) {\n            if (x\
-    \ & 1) ret *= self;\n            self *= self;\n            x >>= 1;\n       \
-    \ }\n        return ret;\n    }\n    constexpr ModInt inv() const {\n        static_assert(is_prime(mod),\
-    \ \"`mod` must be a prime number.\");\n        assert(val != 0);\n        return\
-    \ this->pow(mod - 2);\n    }\n\n    friend std::istream &operator>>(std::istream\
-    \ &is, ModInt<mod> &x) {\n        long long val;\n        is >> val;\n       \
-    \ x.val = val % mod + (val < 0 ? mod : 0);\n        return is;\n    }\n\n    friend\
-    \ std::ostream &operator<<(std::ostream &os, const ModInt<mod> &x) {\n       \
-    \ os << x.val;\n        return os;\n    }\n\n    friend bool operator==(const\
-    \ ModInt &lhs, const ModInt &rhs) {\n        return lhs.val == rhs.val;\n    }\n\
-    \n    friend bool operator!=(const ModInt &lhs, const ModInt &rhs) {\n       \
-    \ return lhs.val != rhs.val;\n    }\n};\n\ntemplate <unsigned mod>\nvoid debug(ModInt<mod>\
-    \ x) {\n    std::cerr << x.val;\n}\n#line 1 \"template/fastio.hpp\"\n#include\
-    \ <cstdio>\n#include <cstring>\n#line 5 \"template/fastio.hpp\"\n\n// unable to\
-    \ read INT_MIN (int), LLONG_MIN (long long)\nclass Reader {\n    FILE *fp;\n \
-    \   static constexpr int BUF = 1 << 18;\n    char buf[BUF];\n    char *pl, *pr;\n\
-    \n    void reread() {\n        int wd = pr - pl;\n        std::memcpy(buf, pl,\
-    \ wd);\n        pl = buf;\n        pr = buf + wd;\n        pr += std::fread(pr,\
+    - https://judge.yosupo.jp/problem/min_plus_convolution_convex_arbitrary
+  bundledCode: "#line 1 \"convolution/test/min_plus_convolution_convex_arbitrary.test.cpp\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/min_plus_convolution_convex_arbitrary\"\
+    \n#line 2 \"opt/monotone_minima.hpp\"\n#include <vector>\n\n// f(i, j, k) = true\
+    \ <=> (i, j) -> (i, k)\n// j < k.\ntemplate <typename F>\nstd::vector<int> monotone_minima(int\
+    \ h, int w, F f) {\n    std::vector<int> argmin(h);\n    auto rec = [&](auto rec,\
+    \ int xl, int xr, int yl, int yr) -> void {\n        if (xl == xr) {\n       \
+    \     return;\n        }\n        int xm = (xl + xr) / 2;\n        argmin[xm]\
+    \ = yl;\n        for (int i = yl + 1; i < yr; ++i) {\n            if (f(xm, argmin[xm],\
+    \ i)) {\n                argmin[xm] = i;\n            }\n        }\n        rec(rec,\
+    \ xl, xm, yl, argmin[xm] + 1);\n        rec(rec, xm + 1, xr, argmin[xm], yr);\n\
+    \    };\n    rec(rec, 0, h, 0, w);\n    return argmin;\n}\n#line 3 \"convolution/min_plus_convolution.hpp\"\
+    \n#include <cassert>\n\ntemplate <typename T>\nstd::vector<T> min_plus_convolution_convex_convex(const\
+    \ std::vector<T> &a, const std::vector<T> &b) {\n    if (a.empty() || b.empty())\
+    \ {\n        return std::vector<T>(0);\n    }\n    int n = (int)a.size();\n  \
+    \  int m = (int)b.size();\n    std::vector<T> c(n + m - 1);\n    c[0] = a[0] +\
+    \ b[0];\n    int ita = 0, itb = 0;\n    for (int i = 0; i < n + m - 2; ++i) {\n\
+    \        if (itb == m - 1 || (ita != n - 1 && a[ita + 1] - a[ita] < b[itb + 1]\
+    \ - b[itb])) {\n            c[i + 1] = c[i] + (a[ita + 1] - a[ita]);\n       \
+    \     ++ita;\n        } else {\n            c[i + 1] = c[i] + (b[itb + 1] - b[itb]);\n\
+    \            ++itb;\n        }\n    }\n    return c;\n}\n\ntemplate <typename\
+    \ T>\nstd::vector<T> min_plus_convolution_convex_arbitrary(const std::vector<T>\
+    \ &a, const std::vector<T> &b) {\n    if (a.empty() || b.empty()) {\n        return\
+    \ std::vector<T>(0);\n    }\n    int n = (int)a.size();\n    int m = (int)b.size();\n\
+    \    auto select = [&](int i, int j, int k) -> bool {\n        if (i < k) {\n\
+    \            return false;\n        }\n        if (i - j >= n) {\n           \
+    \ return true;\n        }\n        return a[i - j] + b[j] > a[i - k] + b[k];\n\
+    \    };\n    std::vector<T> argmin = monotone_minima(n + m - 1, m, select);\n\
+    \    std::vector<T> c(n + m - 1);\n    for (int i = 0; i < n + m - 1; ++i) {\n\
+    \        c[i] = a[i - argmin[i]] + b[argmin[i]];\n    }\n    return c;\n}\n\n\
+    template <typename T>\nbool is_convex(const std::vector<T> &a) {\n    int n =\
+    \ (int)a.size();\n    for (int i = 0; i < n - 2; ++i) {\n        if (a[i + 1]\
+    \ - a[i] > a[i + 2] - a[i + 1]) {\n            return false;\n        }\n    }\n\
+    \    return true;\n}\n\n// is_convex(a) || is_convex(b)\ntemplate <typename T>\n\
+    std::vector<T> min_plus_convolution(const std::vector<T> &a, const std::vector<T>\
+    \ &b) {\n    bool ica = is_convex(a);\n    bool icb = is_convex(b);\n    if (ica\
+    \ && icb) {\n        return min_plus_convolution_convex_convex(a, b);\n    } else\
+    \ if (ica) {\n        return min_plus_convolution_convex_arbitrary(a, b);\n  \
+    \  } else if (icb) {\n        return min_plus_convolution_convex_arbitrary(b,\
+    \ a);\n    } else {\n        assert(false);\n    }\n}\n#line 1 \"template/fastio.hpp\"\
+    \n#include <cstdio>\n#include <cstring>\n#include <type_traits>\n#include <utility>\n\
+    \n// unable to read INT_MIN (int), LLONG_MIN (long long)\nclass Reader {\n   \
+    \ FILE *fp;\n    static constexpr int BUF = 1 << 18;\n    char buf[BUF];\n   \
+    \ char *pl, *pr;\n\n    void reread() {\n        int wd = pr - pl;\n        std::memcpy(buf,\
+    \ pl, wd);\n        pl = buf;\n        pr = buf + wd;\n        pr += std::fread(pr,\
     \ 1, BUF - wd, fp);\n    }\n\n    char skip() {\n        char ch = *pl++;\n  \
     \      while (ch <= ' ') {\n            ch = *pl++;\n        }\n        return\
     \ ch;\n    }\n\n    template <typename T>\n    void read_unsigned(T &x) {\n  \
@@ -258,40 +195,38 @@ data:
     \  string __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define VEC(type, name, size)\
     \ \\\n    V<type> name(size);       \\\n    read(name);\n#define VVEC(type, name,\
     \ size1, size2)    \\\n    VV<type> name(size1, V<type>(size2)); \\\n    read(name);\n\
-    #line 6 \"convolution/test/lcm_convolution.test.cpp\"\n\nvoid solve() {\n    using\
-    \ M = ModInt<998244353>;\n    i32 n;\n    rd.read(n);\n    V<M> a(n + 1), b(n\
-    \ + 1);\n    REP(i, 1, n + 1) {\n        rd.read(a[i].val);\n    }\n    REP(i,\
-    \ 1, n + 1) {\n        rd.read(b[i].val);\n    }\n    V<M> c = lcm_convolution(a,\
-    \ b);\n    REP(i, 1, n + 1) {\n        wr.write(c[i].val);\n        if (i != n)\
-    \ {\n            wr.write(' ');\n        }\n    }\n    wr.writeln();\n}\n\nint\
-    \ main() {\n    i32 t = 1;\n    // cin >> t;\n    while (t--) {\n        solve();\n\
-    \    }\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/lcm_convolution\"\n#include\
-    \ \"../../convolution/lcm_convolution.hpp\"\n#include \"../../number_theory/mod_int.hpp\"\
-    \n#include \"../../template/fastio.hpp\"\n#include \"../../template/template.hpp\"\
-    \n\nvoid solve() {\n    using M = ModInt<998244353>;\n    i32 n;\n    rd.read(n);\n\
-    \    V<M> a(n + 1), b(n + 1);\n    REP(i, 1, n + 1) {\n        rd.read(a[i].val);\n\
-    \    }\n    REP(i, 1, n + 1) {\n        rd.read(b[i].val);\n    }\n    V<M> c\
-    \ = lcm_convolution(a, b);\n    REP(i, 1, n + 1) {\n        wr.write(c[i].val);\n\
-    \        if (i != n) {\n            wr.write(' ');\n        }\n    }\n    wr.writeln();\n\
-    }\n\nint main() {\n    i32 t = 1;\n    // cin >> t;\n    while (t--) {\n     \
-    \   solve();\n    }\n}\n"
+    #line 5 \"convolution/test/min_plus_convolution_convex_arbitrary.test.cpp\"\n\n\
+    void solve() {\n    i32 n, m;\n    rd.read(n, m);\n    V<i32> a(n), b(m);\n  \
+    \  REP(i, n) {\n        rd.read(a[i]);\n    }\n    REP(i, m) {\n        rd.read(b[i]);\n\
+    \    }\n    V<i32> c = min_plus_convolution(a, b);\n    REP(i, n + m - 1) {\n\
+    \        wr.write(c[i]);\n        if (i == n + m - 2) {\n            wr.writeln();\n\
+    \        } else {\n            wr.write(' ');\n        }\n    }\n}\n\nint main()\
+    \ {\n    i32 t = 1;\n    // cin >> t;\n    while (t--) {\n        solve();\n \
+    \   }\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/min_plus_convolution_convex_arbitrary\"\
+    \n#include \"../min_plus_convolution.hpp\"\n#include \"../../template/fastio.hpp\"\
+    \n#include \"../../template/template.hpp\"\n\nvoid solve() {\n    i32 n, m;\n\
+    \    rd.read(n, m);\n    V<i32> a(n), b(m);\n    REP(i, n) {\n        rd.read(a[i]);\n\
+    \    }\n    REP(i, m) {\n        rd.read(b[i]);\n    }\n    V<i32> c = min_plus_convolution(a,\
+    \ b);\n    REP(i, n + m - 1) {\n        wr.write(c[i]);\n        if (i == n +\
+    \ m - 2) {\n            wr.writeln();\n        } else {\n            wr.write('\
+    \ ');\n        }\n    }\n}\n\nint main() {\n    i32 t = 1;\n    // cin >> t;\n\
+    \    while (t--) {\n        solve();\n    }\n}\n"
   dependsOn:
-  - convolution/lcm_convolution.hpp
-  - number_theory/mod_int.hpp
-  - number_theory/utils.hpp
+  - convolution/min_plus_convolution.hpp
+  - opt/monotone_minima.hpp
   - template/fastio.hpp
   - template/template.hpp
   isVerificationFile: true
-  path: convolution/test/lcm_convolution.test.cpp
+  path: convolution/test/min_plus_convolution_convex_arbitrary.test.cpp
   requiredBy: []
-  timestamp: '2025-08-14 15:17:26+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2025-08-27 11:36:50+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: convolution/test/lcm_convolution.test.cpp
+documentation_of: convolution/test/min_plus_convolution_convex_arbitrary.test.cpp
 layout: document
 redirect_from:
-- /verify/convolution/test/lcm_convolution.test.cpp
-- /verify/convolution/test/lcm_convolution.test.cpp.html
-title: convolution/test/lcm_convolution.test.cpp
+- /verify/convolution/test/min_plus_convolution_convex_arbitrary.test.cpp
+- /verify/convolution/test/min_plus_convolution_convex_arbitrary.test.cpp.html
+title: convolution/test/min_plus_convolution_convex_arbitrary.test.cpp
 ---

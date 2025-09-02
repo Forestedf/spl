@@ -49,7 +49,7 @@ data:
     \    auto select = [&](int i, int j, int k) -> bool {\n        if (i < k) {\n\
     \            return false;\n        }\n        if (i - j >= n) {\n           \
     \ return true;\n        }\n        return a[i - j] + b[j] > a[i - k] + b[k];\n\
-    \    };\n    std::vector<T> argmin = monotone_minima(n + m - 1, m, select);\n\
+    \    };\n    std::vector<int> argmin = monotone_minima(n + m - 1, m, select);\n\
     \    std::vector<T> c(n + m - 1);\n    for (int i = 0; i < n + m - 1; ++i) {\n\
     \        c[i] = a[i - argmin[i]] + b[argmin[i]];\n    }\n    return c;\n}\n\n\
     template <typename T>\nbool is_convex(const std::vector<T> &a) {\n    int n =\
@@ -220,7 +220,7 @@ data:
   isVerificationFile: true
   path: convolution/test/min_plus_convolution_convex_arbitrary.test.cpp
   requiredBy: []
-  timestamp: '2025-08-27 11:36:50+09:00'
+  timestamp: '2025-09-02 16:52:07+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: convolution/test/min_plus_convolution_convex_arbitrary.test.cpp

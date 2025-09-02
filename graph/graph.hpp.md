@@ -24,6 +24,9 @@ data:
     path: graph/enumerate_triangles.hpp
     title: graph/enumerate_triangles.hpp
   - icon: ':heavy_check_mark:'
+    path: graph/eulerian_trail.hpp
+    title: graph/eulerian_trail.hpp
+  - icon: ':heavy_check_mark:'
     path: graph/heavy_light_decomposition.hpp
     title: graph/heavy_light_decomposition.hpp
   - icon: ':heavy_check_mark:'
@@ -48,6 +51,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/test/enumerate_triangles.test.cpp
     title: graph/test/enumerate_triangles.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: graph/test/eulerian_trail_directed.test.cpp
+    title: graph/test/eulerian_trail_directed.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: graph/test/eulerian_trail_undirected.test.cpp
+    title: graph/test/eulerian_trail_undirected.test.cpp
   - icon: ':heavy_check_mark:'
     path: graph/test/jump_on_tree.test.cpp
     title: graph/test/jump_on_tree.test.cpp
@@ -145,6 +154,7 @@ data:
   requiredBy:
   - graph/two_edge_connected_components.hpp
   - graph/block_cut_tree.hpp
+  - graph/eulerian_trail.hpp
   - graph/biconnected_components.hpp
   - graph/dense_dijkstra.hpp
   - graph/dijkstra.hpp
@@ -166,7 +176,9 @@ data:
   - graph/test/connected_components_of_complement_graph.test.cpp
   - graph/test/scc.test.cpp
   - graph/test/jump_on_tree.test.cpp
+  - graph/test/eulerian_trail_directed.test.cpp
   - graph/test/ALDS1_11_D.test.cpp
+  - graph/test/eulerian_trail_undirected.test.cpp
 documentation_of: graph/graph.hpp
 layout: document
 redirect_from:

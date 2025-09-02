@@ -115,6 +115,12 @@ data:
     path: graph/test/enumerate_triangles.test.cpp
     title: graph/test/enumerate_triangles.test.cpp
   - icon: ':heavy_check_mark:'
+    path: graph/test/eulerian_trail_directed.test.cpp
+    title: graph/test/eulerian_trail_directed.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: graph/test/eulerian_trail_undirected.test.cpp
+    title: graph/test/eulerian_trail_undirected.test.cpp
+  - icon: ':heavy_check_mark:'
     path: graph/test/jump_on_tree.test.cpp
     title: graph/test/jump_on_tree.test.cpp
   - icon: ':heavy_check_mark:'
@@ -375,7 +381,9 @@ data:
   - graph/test/connected_components_of_complement_graph.test.cpp
   - graph/test/scc.test.cpp
   - graph/test/jump_on_tree.test.cpp
+  - graph/test/eulerian_trail_directed.test.cpp
   - graph/test/ALDS1_11_D.test.cpp
+  - graph/test/eulerian_trail_undirected.test.cpp
   - string/test/zalgorithm.test.cpp
   - bit/test/bitwise_xor_convolution.test.cpp
 documentation_of: template/template.hpp

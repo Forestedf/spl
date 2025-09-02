@@ -43,6 +43,12 @@ data:
     path: graph/test/enumerate_triangles.test.cpp
     title: graph/test/enumerate_triangles.test.cpp
   - icon: ':heavy_check_mark:'
+    path: graph/test/eulerian_trail_directed.test.cpp
+    title: graph/test/eulerian_trail_directed.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: graph/test/eulerian_trail_undirected.test.cpp
+    title: graph/test/eulerian_trail_undirected.test.cpp
+  - icon: ':heavy_check_mark:'
     path: graph/test/nazo_bipartitematching.test.cpp
     title: graph/test/nazo_bipartitematching.test.cpp
   - icon: ':heavy_check_mark:'
@@ -295,6 +301,8 @@ data:
   - graph/test/enumerate_triangles.test.cpp
   - graph/test/nazo_bipartitematching.test.cpp
   - graph/test/bipartitematching.test.cpp
+  - graph/test/eulerian_trail_directed.test.cpp
+  - graph/test/eulerian_trail_undirected.test.cpp
 documentation_of: template/fastio.hpp
 layout: document
 redirect_from:

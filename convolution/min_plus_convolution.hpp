@@ -40,7 +40,7 @@ std::vector<T> min_plus_convolution_convex_arbitrary(const std::vector<T> &a, co
         }
         return a[i - j] + b[j] > a[i - k] + b[k];
     };
-    std::vector<T> argmin = monotone_minima(n + m - 1, m, select);
+    std::vector<int> argmin = monotone_minima(n + m - 1, m, select);
     std::vector<T> c(n + m - 1);
     for (int i = 0; i < n + m - 1; ++i) {
         c[i] = a[i - argmin[i]] + b[argmin[i]];

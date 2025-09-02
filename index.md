@@ -117,6 +117,9 @@ data:
       path: graph/biconnected_components.hpp
       title: graph/biconnected_components.hpp
     - icon: ':heavy_check_mark:'
+      path: graph/bipartite_matching.hpp
+      title: graph/bipartite_matching.hpp
+    - icon: ':heavy_check_mark:'
       path: graph/block_cut_tree.hpp
       title: graph/block_cut_tree.hpp
     - icon: ':heavy_check_mark:'
@@ -140,6 +143,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/heavy_light_decomposition.hpp
       title: graph/heavy_light_decomposition.hpp
+    - icon: ':heavy_check_mark:'
+      path: graph/nazo_bipartite_matching.hpp
+      title: graph/nazo_bipartite_matching.hpp
     - icon: ':heavy_check_mark:'
       path: graph/strongly_connected_components.hpp
       title: graph/strongly_connected_components.hpp
@@ -374,6 +380,9 @@ data:
       path: graph/test/biconnected_components.test.cpp
       title: graph/test/biconnected_components.test.cpp
     - icon: ':heavy_check_mark:'
+      path: graph/test/bipartitematching.test.cpp
+      title: graph/test/bipartitematching.test.cpp
+    - icon: ':heavy_check_mark:'
       path: graph/test/block_cut_tree.test.cpp
       title: graph/test/block_cut_tree.test.cpp
     - icon: ':heavy_check_mark:'
@@ -388,6 +397,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/test/lca.test.cpp
       title: graph/test/lca.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: graph/test/nazo_bipartitematching.test.cpp
+      title: graph/test/nazo_bipartitematching.test.cpp
     - icon: ':heavy_check_mark:'
       path: graph/test/scc.test.cpp
       title: graph/test/scc.test.cpp

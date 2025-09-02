@@ -37,8 +37,14 @@ data:
     path: data_structure/test/range_affine_point_get.test.cpp
     title: data_structure/test/range_affine_point_get.test.cpp
   - icon: ':heavy_check_mark:'
+    path: graph/test/bipartitematching.test.cpp
+    title: graph/test/bipartitematching.test.cpp
+  - icon: ':heavy_check_mark:'
     path: graph/test/enumerate_triangles.test.cpp
     title: graph/test/enumerate_triangles.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: graph/test/nazo_bipartitematching.test.cpp
+    title: graph/test/nazo_bipartitematching.test.cpp
   - icon: ':heavy_check_mark:'
     path: number_theory/test/factorize.test.cpp
     title: number_theory/test/factorize.test.cpp
@@ -264,29 +270,31 @@ data:
   timestamp: '2024-11-23 22:57:41+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - graph/test/enumerate_triangles.test.cpp
-  - number_theory/test/factorize.test.cpp
-  - algebra/test/inverse_matrix.test.cpp
   - algebra/test/system_of_linear_equations.test.cpp
+  - algebra/test/matrix_rank.test.cpp
   - algebra/test/matrix_product.test.cpp
   - algebra/test/matrix_det.test.cpp
-  - algebra/test/matrix_rank.test.cpp
-  - data_structure/test/range_affine_point_get.test.cpp
-  - poly/test/log_of_formal_power_series_sparse.test.cpp
-  - poly/test/inv_of_formal_power_series.test.cpp
-  - poly/test/prod_of_polys.test.cpp
-  - poly/test/find_linear_recurrence.test.cpp
-  - poly/test/exp_of_formal_power_series.test.cpp
-  - poly/test/log_of_formal_power_series.test.cpp
-  - poly/test/exp_of_formal_power_series_sparse.test.cpp
-  - poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - poly/test/inv_of_formal_power_series_sparse.test.cpp
-  - poly/test/pow_of_formal_power_series.test.cpp
-  - convolution/test/lcm_convolution.test.cpp
-  - convolution/test/min_plus_convolution_convex_convex.test.cpp
+  - algebra/test/inverse_matrix.test.cpp
   - convolution/test/mul_modp_convolution.test.cpp
   - convolution/test/gcd_convolution.test.cpp
   - convolution/test/min_plus_convolution_convex_arbitrary.test.cpp
+  - convolution/test/lcm_convolution.test.cpp
+  - convolution/test/min_plus_convolution_convex_convex.test.cpp
+  - data_structure/test/range_affine_point_get.test.cpp
+  - number_theory/test/factorize.test.cpp
+  - poly/test/inv_of_formal_power_series.test.cpp
+  - poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
+  - poly/test/find_linear_recurrence.test.cpp
+  - poly/test/inv_of_formal_power_series_sparse.test.cpp
+  - poly/test/exp_of_formal_power_series_sparse.test.cpp
+  - poly/test/log_of_formal_power_series.test.cpp
+  - poly/test/exp_of_formal_power_series.test.cpp
+  - poly/test/log_of_formal_power_series_sparse.test.cpp
+  - poly/test/prod_of_polys.test.cpp
+  - poly/test/pow_of_formal_power_series.test.cpp
+  - graph/test/enumerate_triangles.test.cpp
+  - graph/test/nazo_bipartitematching.test.cpp
+  - graph/test/bipartitematching.test.cpp
 documentation_of: template/fastio.hpp
 layout: document
 redirect_from:

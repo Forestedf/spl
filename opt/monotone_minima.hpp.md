@@ -44,8 +44,8 @@ data:
   timestamp: '2025-08-27 11:36:50+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
-  - convolution/test/min_plus_convolution_convex_convex.test.cpp
   - convolution/test/min_plus_convolution_convex_arbitrary.test.cpp
+  - convolution/test/min_plus_convolution_convex_convex.test.cpp
 documentation_of: opt/monotone_minima.hpp
 layout: document
 redirect_from:

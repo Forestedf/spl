@@ -103,6 +103,9 @@ data:
     path: graph/test/biconnected_components.test.cpp
     title: graph/test/biconnected_components.test.cpp
   - icon: ':heavy_check_mark:'
+    path: graph/test/bipartitematching.test.cpp
+    title: graph/test/bipartitematching.test.cpp
+  - icon: ':heavy_check_mark:'
     path: graph/test/block_cut_tree.test.cpp
     title: graph/test/block_cut_tree.test.cpp
   - icon: ':heavy_check_mark:'
@@ -117,6 +120,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/test/lca.test.cpp
     title: graph/test/lca.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: graph/test/nazo_bipartitematching.test.cpp
+    title: graph/test/nazo_bipartitematching.test.cpp
   - icon: ':heavy_check_mark:'
     path: graph/test/scc.test.cpp
     title: graph/test/scc.test.cpp
@@ -303,73 +309,75 @@ data:
   timestamp: '2025-06-28 10:05:47+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - graph/test/jump_on_tree.test.cpp
-  - graph/test/lca.test.cpp
-  - graph/test/block_cut_tree.test.cpp
-  - graph/test/connected_components_of_complement_graph.test.cpp
-  - graph/test/biconnected_components.test.cpp
-  - graph/test/ALDS1_11_D.test.cpp
-  - graph/test/enumerate_triangles.test.cpp
-  - graph/test/vertex_add_path_sum.test.cpp
-  - graph/test/two_edge_connected_components.test.cpp
-  - graph/test/shortest_path.test.cpp
-  - graph/test/scc.test.cpp
-  - number_theory/test/binary_gcd_stress.test.cpp
-  - number_theory/test/primality_test.test.cpp
-  - number_theory/test/frac_binsearch_stress.test.cpp
-  - number_theory/test/ax_by_c_stress.test.cpp
-  - number_theory/test/factorize.test.cpp
-  - number_theory/test/montgomery_64_stress.test.cpp
-  - number_theory/test/inv_mod_stress.test.cpp
-  - number_theory/test/primitive_root.test.cpp
-  - number_theory/test/extgcd2_stress.test.cpp
-  - bit/test/bitwise_xor_convolution.test.cpp
-  - algebra/test/inverse_matrix.test.cpp
   - algebra/test/system_of_linear_equations.test.cpp
+  - algebra/test/matrix_rank.test.cpp
   - algebra/test/matrix_product.test.cpp
   - algebra/test/matrix_det.test.cpp
-  - algebra/test/matrix_rank.test.cpp
-  - string/test/zalgorithm.test.cpp
-  - data_structure/test/point_set_range_composite.test.cpp
-  - data_structure/test/rectangle_sum_range_tree.test.cpp
-  - data_structure/test/dsl_2_g.test.cpp
-  - data_structure/test/cartesian_tree.test.cpp
-  - data_structure/test/range_affine_range_sum.test.cpp
-  - data_structure/test/range_affine_point_get.test.cpp
-  - data_structure/test/range_kth_smallest.test.cpp
-  - data_structure/test/point_add_range_sum.test.cpp
-  - data_structure/test/static_range_frequency.test.cpp
-  - data_structure/test/unionfind.test.cpp
-  - data_structure/test/1891.test.cpp
-  - data_structure/test/rectangle_sum.test.cpp
-  - data_structure/test/point_add_rectangle_sum.test.cpp
-  - data_structure/test/wavelet_matrix.test.cpp
-  - data_structure/test/area_of_union_of_rectangles.test.cpp
-  - data_structure/test/staticrmq.test.cpp
-  - data_structure/test/queue_operate_all_composite.test.cpp
-  - opt/test/yuki_119.test.cpp
-  - poly/test/log_of_formal_power_series_sparse.test.cpp
-  - poly/test/inv_of_formal_power_series.test.cpp
-  - poly/test/prod_of_polys.test.cpp
-  - poly/test/find_linear_recurrence.test.cpp
-  - poly/test/exp_of_formal_power_series.test.cpp
-  - poly/test/log_of_formal_power_series.test.cpp
-  - poly/test/stirling_number_of_the_second_kind.test.cpp
-  - poly/test/exp_of_formal_power_series_sparse.test.cpp
-  - poly/test/stirling_number_of_the_first_kind.test.cpp
-  - poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - poly/test/polynomial_taylor_shift.test.cpp
-  - poly/test/convolution_mod.test.cpp
-  - poly/test/inv_of_formal_power_series_sparse.test.cpp
-  - poly/test/pow_of_formal_power_series.test.cpp
-  - convolution/test/lcm_convolution.test.cpp
-  - convolution/test/lcm_convolution.stress.test.cpp
-  - convolution/test/index_difference.test.cpp
-  - convolution/test/min_plus_convolution_convex_convex.test.cpp
+  - algebra/test/inverse_matrix.test.cpp
   - convolution/test/mul_modp_convolution.test.cpp
+  - convolution/test/index_difference.test.cpp
   - convolution/test/gcd_convolution.test.cpp
   - convolution/test/min_plus_convolution_convex_arbitrary.test.cpp
   - convolution/test/gcd_convolution.stress.test.cpp
+  - convolution/test/lcm_convolution.stress.test.cpp
+  - convolution/test/lcm_convolution.test.cpp
+  - convolution/test/min_plus_convolution_convex_convex.test.cpp
+  - data_structure/test/rectangle_sum_range_tree.test.cpp
+  - data_structure/test/range_affine_range_sum.test.cpp
+  - data_structure/test/area_of_union_of_rectangles.test.cpp
+  - data_structure/test/dsl_2_g.test.cpp
+  - data_structure/test/range_kth_smallest.test.cpp
+  - data_structure/test/cartesian_tree.test.cpp
+  - data_structure/test/wavelet_matrix.test.cpp
+  - data_structure/test/point_set_range_composite.test.cpp
+  - data_structure/test/staticrmq.test.cpp
+  - data_structure/test/queue_operate_all_composite.test.cpp
+  - data_structure/test/1891.test.cpp
+  - data_structure/test/point_add_rectangle_sum.test.cpp
+  - data_structure/test/point_add_range_sum.test.cpp
+  - data_structure/test/range_affine_point_get.test.cpp
+  - data_structure/test/static_range_frequency.test.cpp
+  - data_structure/test/unionfind.test.cpp
+  - data_structure/test/rectangle_sum.test.cpp
+  - number_theory/test/inv_mod_stress.test.cpp
+  - number_theory/test/primitive_root.test.cpp
+  - number_theory/test/primality_test.test.cpp
+  - number_theory/test/ax_by_c_stress.test.cpp
+  - number_theory/test/frac_binsearch_stress.test.cpp
+  - number_theory/test/binary_gcd_stress.test.cpp
+  - number_theory/test/factorize.test.cpp
+  - number_theory/test/montgomery_64_stress.test.cpp
+  - number_theory/test/extgcd2_stress.test.cpp
+  - poly/test/stirling_number_of_the_second_kind.test.cpp
+  - poly/test/inv_of_formal_power_series.test.cpp
+  - poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
+  - poly/test/find_linear_recurrence.test.cpp
+  - poly/test/convolution_mod.test.cpp
+  - poly/test/stirling_number_of_the_first_kind.test.cpp
+  - poly/test/inv_of_formal_power_series_sparse.test.cpp
+  - poly/test/exp_of_formal_power_series_sparse.test.cpp
+  - poly/test/log_of_formal_power_series.test.cpp
+  - poly/test/exp_of_formal_power_series.test.cpp
+  - poly/test/log_of_formal_power_series_sparse.test.cpp
+  - poly/test/prod_of_polys.test.cpp
+  - poly/test/polynomial_taylor_shift.test.cpp
+  - poly/test/pow_of_formal_power_series.test.cpp
+  - opt/test/yuki_119.test.cpp
+  - graph/test/biconnected_components.test.cpp
+  - graph/test/block_cut_tree.test.cpp
+  - graph/test/enumerate_triangles.test.cpp
+  - graph/test/lca.test.cpp
+  - graph/test/two_edge_connected_components.test.cpp
+  - graph/test/nazo_bipartitematching.test.cpp
+  - graph/test/shortest_path.test.cpp
+  - graph/test/vertex_add_path_sum.test.cpp
+  - graph/test/bipartitematching.test.cpp
+  - graph/test/connected_components_of_complement_graph.test.cpp
+  - graph/test/scc.test.cpp
+  - graph/test/jump_on_tree.test.cpp
+  - graph/test/ALDS1_11_D.test.cpp
+  - string/test/zalgorithm.test.cpp
+  - bit/test/bitwise_xor_convolution.test.cpp
 documentation_of: template/template.hpp
 layout: document
 redirect_from:

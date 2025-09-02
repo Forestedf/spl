@@ -6,6 +6,12 @@ data:
     path: convolution/mul_mod_p_conv.hpp
     title: convolution/mul_mod_p_conv.hpp
   - icon: ':heavy_check_mark:'
+    path: graph/bipartite_matching.hpp
+    title: graph/bipartite_matching.hpp
+  - icon: ':heavy_check_mark:'
+    path: graph/nazo_bipartite_matching.hpp
+    title: graph/nazo_bipartite_matching.hpp
+  - icon: ':heavy_check_mark:'
     path: number_theory/factorize.hpp
     title: number_theory/factorize.hpp
   - icon: ':heavy_check_mark:'
@@ -27,6 +33,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: data_structure/test/wavelet_matrix.test.cpp
     title: data_structure/test/wavelet_matrix.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: graph/test/bipartitematching.test.cpp
+    title: graph/test/bipartitematching.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: graph/test/nazo_bipartitematching.test.cpp
+    title: graph/test/nazo_bipartitematching.test.cpp
   - icon: ':heavy_check_mark:'
     path: number_theory/test/ax_by_c_stress.test.cpp
     title: number_theory/test/ax_by_c_stress.test.cpp
@@ -72,25 +84,29 @@ data:
   isVerificationFile: false
   path: template/random.hpp
   requiredBy:
-  - number_theory/primitive_root.hpp
-  - number_theory/factorize.hpp
   - convolution/mul_mod_p_conv.hpp
+  - number_theory/factorize.hpp
+  - number_theory/primitive_root.hpp
+  - graph/nazo_bipartite_matching.hpp
+  - graph/bipartite_matching.hpp
   timestamp: '2024-07-18 16:56:22+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - number_theory/test/binary_gcd_stress.test.cpp
-  - number_theory/test/frac_binsearch_stress.test.cpp
-  - number_theory/test/ax_by_c_stress.test.cpp
-  - number_theory/test/factorize.test.cpp
-  - number_theory/test/montgomery_64_stress.test.cpp
+  - convolution/test/mul_modp_convolution.test.cpp
+  - convolution/test/index_difference.test.cpp
+  - convolution/test/gcd_convolution.stress.test.cpp
+  - convolution/test/lcm_convolution.stress.test.cpp
+  - data_structure/test/wavelet_matrix.test.cpp
   - number_theory/test/inv_mod_stress.test.cpp
   - number_theory/test/primitive_root.test.cpp
+  - number_theory/test/ax_by_c_stress.test.cpp
+  - number_theory/test/frac_binsearch_stress.test.cpp
+  - number_theory/test/binary_gcd_stress.test.cpp
+  - number_theory/test/factorize.test.cpp
+  - number_theory/test/montgomery_64_stress.test.cpp
   - number_theory/test/extgcd2_stress.test.cpp
-  - data_structure/test/wavelet_matrix.test.cpp
-  - convolution/test/lcm_convolution.stress.test.cpp
-  - convolution/test/index_difference.test.cpp
-  - convolution/test/mul_modp_convolution.test.cpp
-  - convolution/test/gcd_convolution.stress.test.cpp
+  - graph/test/nazo_bipartitematching.test.cpp
+  - graph/test/bipartitematching.test.cpp
 documentation_of: template/random.hpp
 layout: document
 redirect_from:

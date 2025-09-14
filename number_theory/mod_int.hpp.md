@@ -27,6 +27,12 @@ data:
     path: poly/fps_log.hpp
     title: poly/fps_log.hpp
   - icon: ':heavy_check_mark:'
+    path: poly/middle_product.hpp
+    title: poly/middle_product.hpp
+  - icon: ':heavy_check_mark:'
+    path: poly/multieval_geometric.hpp
+    title: poly/multieval_geometric.hpp
+  - icon: ':heavy_check_mark:'
     path: poly/stirling1.hpp
     title: poly/stirling1.hpp
   - icon: ':heavy_check_mark:'
@@ -117,6 +123,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: poly/test/log_of_formal_power_series_sparse.test.cpp
     title: poly/test/log_of_formal_power_series_sparse.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: poly/test/multipoint_evaluation_on_geometric_sequence.test.cpp
+    title: poly/test/multipoint_evaluation_on_geometric_sequence.test.cpp
   - icon: ':heavy_check_mark:'
     path: poly/test/polynomial_taylor_shift.test.cpp
     title: poly/test/polynomial_taylor_shift.test.cpp
@@ -273,8 +282,10 @@ data:
   - poly/fps_div_at.hpp
   - poly/taylor_shift.hpp
   - poly/fps_exp.hpp
+  - poly/middle_product.hpp
   - poly/stirling1.hpp
   - poly/stirling2.hpp
+  - poly/multieval_geometric.hpp
   - poly/fft.hpp
   - poly/fps_inv.hpp
   timestamp: '2024-07-18 16:56:22+09:00'
@@ -301,6 +312,7 @@ data:
   - poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
   - poly/test/find_linear_recurrence.test.cpp
   - poly/test/convolution_mod.test.cpp
+  - poly/test/multipoint_evaluation_on_geometric_sequence.test.cpp
   - poly/test/stirling_number_of_the_first_kind.test.cpp
   - poly/test/inv_of_formal_power_series_sparse.test.cpp
   - poly/test/exp_of_formal_power_series_sparse.test.cpp

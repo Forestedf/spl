@@ -199,6 +199,9 @@ data:
     path: poly/test/log_of_formal_power_series_sparse.test.cpp
     title: poly/test/log_of_formal_power_series_sparse.test.cpp
   - icon: ':heavy_check_mark:'
+    path: poly/test/multipoint_evaluation_on_geometric_sequence.test.cpp
+    title: poly/test/multipoint_evaluation_on_geometric_sequence.test.cpp
+  - icon: ':heavy_check_mark:'
     path: poly/test/polynomial_taylor_shift.test.cpp
     title: poly/test/polynomial_taylor_shift.test.cpp
   - icon: ':heavy_check_mark:'
@@ -359,6 +362,7 @@ data:
   - poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
   - poly/test/find_linear_recurrence.test.cpp
   - poly/test/convolution_mod.test.cpp
+  - poly/test/multipoint_evaluation_on_geometric_sequence.test.cpp
   - poly/test/stirling_number_of_the_first_kind.test.cpp
   - poly/test/inv_of_formal_power_series_sparse.test.cpp
   - poly/test/exp_of_formal_power_series_sparse.test.cpp

@@ -239,6 +239,12 @@ data:
       path: poly/fps_pow_sparse.hpp
       title: poly/fps_pow_sparse.hpp
     - icon: ':heavy_check_mark:'
+      path: poly/middle_product.hpp
+      title: poly/middle_product.hpp
+    - icon: ':heavy_check_mark:'
+      path: poly/multieval_geometric.hpp
+      title: poly/multieval_geometric.hpp
+    - icon: ':heavy_check_mark:'
       path: poly/stirling1.hpp
       title: poly/stirling1.hpp
     - icon: ':heavy_check_mark:'
@@ -484,6 +490,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: poly/test/log_of_formal_power_series_sparse.test.cpp
       title: poly/test/log_of_formal_power_series_sparse.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: poly/test/multipoint_evaluation_on_geometric_sequence.test.cpp
+      title: poly/test/multipoint_evaluation_on_geometric_sequence.test.cpp
     - icon: ':heavy_check_mark:'
       path: poly/test/polynomial_taylor_shift.test.cpp
       title: poly/test/polynomial_taylor_shift.test.cpp

@@ -79,6 +79,9 @@ data:
     path: poly/test/log_of_formal_power_series_sparse.test.cpp
     title: poly/test/log_of_formal_power_series_sparse.test.cpp
   - icon: ':heavy_check_mark:'
+    path: poly/test/multipoint_evaluation_on_geometric_sequence.test.cpp
+    title: poly/test/multipoint_evaluation_on_geometric_sequence.test.cpp
+  - icon: ':heavy_check_mark:'
     path: poly/test/pow_of_formal_power_series.test.cpp
     title: poly/test/pow_of_formal_power_series.test.cpp
   - icon: ':heavy_check_mark:'
@@ -291,6 +294,7 @@ data:
   - poly/test/inv_of_formal_power_series.test.cpp
   - poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
   - poly/test/find_linear_recurrence.test.cpp
+  - poly/test/multipoint_evaluation_on_geometric_sequence.test.cpp
   - poly/test/inv_of_formal_power_series_sparse.test.cpp
   - poly/test/exp_of_formal_power_series_sparse.test.cpp
   - poly/test/log_of_formal_power_series.test.cpp

@@ -2,19 +2,19 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: convolution/min_plus_convolution.hpp
     title: convolution/min_plus_convolution.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: convolution/test/min_plus_convolution_convex_arbitrary.test.cpp
     title: convolution/test/min_plus_convolution_convex_arbitrary.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: convolution/test/min_plus_convolution_convex_convex.test.cpp
     title: convolution/test/min_plus_convolution_convex_convex.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"opt/monotone_minima.hpp\"\n#include <vector>\n\n// f(i,\
@@ -42,7 +42,7 @@ data:
   requiredBy:
   - convolution/min_plus_convolution.hpp
   timestamp: '2025-08-27 11:36:50+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - convolution/test/min_plus_convolution_convex_arbitrary.test.cpp
   - convolution/test/min_plus_convolution_convex_convex.test.cpp

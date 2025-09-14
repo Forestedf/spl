@@ -1,17 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/factorial.hpp
     title: number_theory/factorial.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/test/pow_of_formal_power_series.test.cpp
     title: poly/test/pow_of_formal_power_series.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"poly/fps_pow_sparse.hpp\"\n#include <algorithm>\n#include\
@@ -85,7 +85,7 @@ data:
   path: poly/fps_pow_sparse.hpp
   requiredBy: []
   timestamp: '2024-04-29 14:44:15+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - poly/test/pow_of_formal_power_series.test.cpp
 documentation_of: poly/fps_pow_sparse.hpp

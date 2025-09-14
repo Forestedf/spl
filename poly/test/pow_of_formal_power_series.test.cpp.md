@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/factorial.hpp
     title: number_theory/factorial.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/mod_int.hpp
     title: number_theory/mod_int.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/utils.hpp
     title: number_theory/utils.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/fps_pow_sparse.hpp
     title: poly/fps_pow_sparse.hpp
   - icon: ':question:'
@@ -21,9 +21,9 @@ data:
     title: template/template.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/pow_of_formal_power_series_sparse
@@ -198,7 +198,7 @@ data:
     \      \\\n    string __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define VEC(type,\
     \ name, size) \\\n    V<type> name(size);       \\\n    read(name);\n#define VVEC(type,\
     \ name, size1, size2)    \\\n    VV<type> name(size1, V<type>(size2)); \\\n  \
-    \  read(name);\n#line 5 \"template/fastio.hpp\"\n\n// unable to read INT_MIN (int),\
+    \  read(name);\n#line 6 \"template/fastio.hpp\"\n\n// unable to read INT_MIN (int),\
     \ LLONG_MIN (long long)\nclass Reader {\n    FILE *fp;\n    static constexpr int\
     \ BUF = 1 << 18;\n    char buf[BUF];\n    char *pl, *pr;\n\n    void reread()\
     \ {\n        int wd = pr - pl;\n        std::memcpy(buf, pl, wd);\n        pl\
@@ -311,8 +311,8 @@ data:
   isVerificationFile: true
   path: poly/test/pow_of_formal_power_series.test.cpp
   requiredBy: []
-  timestamp: '2025-06-28 10:05:47+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2025-09-14 09:21:44+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: poly/test/pow_of_formal_power_series.test.cpp
 layout: document

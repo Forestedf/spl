@@ -118,25 +118,25 @@ data:
     \    if (n <= 1) {\n        return std::vector<unsigned long long>();\n    }\n\
     \    std::vector<unsigned long long> ps;\n    factorize_impl::factor_inner(n,\
     \ ps);\n    std::sort(ps.begin(), ps.end());\n    return ps;\n}\n#line 1 \"template/fastio.hpp\"\
-    \n#include <cstdio>\n#include <cstring>\n#include <type_traits>\n#include <utility>\n\
-    \n// unable to read INT_MIN (int), LLONG_MIN (long long)\nclass Reader {\n   \
-    \ FILE *fp;\n    static constexpr int BUF = 1 << 18;\n    char buf[BUF];\n   \
-    \ char *pl, *pr;\n\n    void reread() {\n        int wd = pr - pl;\n        std::memcpy(buf,\
-    \ pl, wd);\n        pl = buf;\n        pr = buf + wd;\n        pr += std::fread(pr,\
-    \ 1, BUF - wd, fp);\n    }\n\n    char skip() {\n        char ch = *pl++;\n  \
-    \      while (ch <= ' ') {\n            ch = *pl++;\n        }\n        return\
-    \ ch;\n    }\n\n    template <typename T>\n    void read_unsigned(T &x) {\n  \
-    \      if (pr - pl < 64) {\n            reread();\n        }\n        x = 0;\n\
-    \        char ch = skip();\n        while ('0' <= ch) {\n            x = 10 *\
-    \ x + (0xf & ch);\n            ch = *pl++;\n        }\n    }\n    template <typename\
-    \ T>\n    void read_signed(T &x) {\n        if (pr - pl < 64) {\n            reread();\n\
-    \        }\n        x = 0;\n        bool neg = false;\n        char ch = skip();\n\
-    \        if (ch == '-') {\n            ch = *pl++;\n            neg = true;\n\
-    \        }\n        while ('0' <= ch) {\n            x = 10 * x + (0xf & ch);\n\
-    \            ch = *pl++;\n        }\n        if (neg) {\n            x = -x;\n\
-    \        }\n    }\n\n    void read_single(int &x) { read_signed(x); }\n    void\
-    \ read_single(unsigned &x) { read_unsigned(x); }\n    void read_single(long &x)\
-    \ { read_signed(x); }\n    void read_single(unsigned long &x) { read_signed(x);\
+    \n#include <cstdio>\n#include <cstring>\n#include <string>\n#include <type_traits>\n\
+    #include <utility>\n\n// unable to read INT_MIN (int), LLONG_MIN (long long)\n\
+    class Reader {\n    FILE *fp;\n    static constexpr int BUF = 1 << 18;\n    char\
+    \ buf[BUF];\n    char *pl, *pr;\n\n    void reread() {\n        int wd = pr -\
+    \ pl;\n        std::memcpy(buf, pl, wd);\n        pl = buf;\n        pr = buf\
+    \ + wd;\n        pr += std::fread(pr, 1, BUF - wd, fp);\n    }\n\n    char skip()\
+    \ {\n        char ch = *pl++;\n        while (ch <= ' ') {\n            ch = *pl++;\n\
+    \        }\n        return ch;\n    }\n\n    template <typename T>\n    void read_unsigned(T\
+    \ &x) {\n        if (pr - pl < 64) {\n            reread();\n        }\n     \
+    \   x = 0;\n        char ch = skip();\n        while ('0' <= ch) {\n         \
+    \   x = 10 * x + (0xf & ch);\n            ch = *pl++;\n        }\n    }\n    template\
+    \ <typename T>\n    void read_signed(T &x) {\n        if (pr - pl < 64) {\n  \
+    \          reread();\n        }\n        x = 0;\n        bool neg = false;\n \
+    \       char ch = skip();\n        if (ch == '-') {\n            ch = *pl++;\n\
+    \            neg = true;\n        }\n        while ('0' <= ch) {\n           \
+    \ x = 10 * x + (0xf & ch);\n            ch = *pl++;\n        }\n        if (neg)\
+    \ {\n            x = -x;\n        }\n    }\n\n    void read_single(int &x) { read_signed(x);\
+    \ }\n    void read_single(unsigned &x) { read_unsigned(x); }\n    void read_single(long\
+    \ &x) { read_signed(x); }\n    void read_single(unsigned long &x) { read_signed(x);\
     \ }\n    void read_single(long long &x) { read_signed(x); }\n    void read_single(unsigned\
     \ long long &x) { read_unsigned(x); }\n\npublic:\n    Reader(FILE *fp) : fp(fp),\
     \ pl(buf), pr(buf) { reread(); }\n\n    void read() {}\n    template <typename\
@@ -273,7 +273,7 @@ data:
   isVerificationFile: true
   path: number_theory/test/factorize.test.cpp
   requiredBy: []
-  timestamp: '2025-06-28 10:05:47+09:00'
+  timestamp: '2025-09-14 09:21:44+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: number_theory/test/factorize.test.cpp

@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: number_theory/ax_by_c.hpp
     title: number_theory/ax_by_c.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/utils.hpp
     title: number_theory/utils.hpp
   - icon: ':heavy_check_mark:'

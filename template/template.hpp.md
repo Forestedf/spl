@@ -36,10 +36,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: convolution/test/lcm_convolution.test.cpp
     title: convolution/test/lcm_convolution.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: convolution/test/min_plus_convolution_convex_arbitrary.test.cpp
     title: convolution/test/min_plus_convolution_convex_arbitrary.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: convolution/test/min_plus_convolution_convex_convex.test.cpp
     title: convolution/test/min_plus_convolution_convex_convex.test.cpp
   - icon: ':heavy_check_mark:'
@@ -204,10 +204,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: poly/test/polynomial_taylor_shift.test.cpp
     title: poly/test/polynomial_taylor_shift.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/test/pow_of_formal_power_series.test.cpp
     title: poly/test/pow_of_formal_power_series.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/test/prod_of_polys.test.cpp
     title: poly/test/prod_of_polys.test.cpp
   - icon: ':heavy_check_mark:'

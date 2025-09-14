@@ -34,7 +34,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: convolution/lcm_convolution.hpp
       title: convolution/lcm_convolution.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: convolution/min_plus_convolution.hpp
       title: convolution/min_plus_convolution.hpp
     - icon: ':heavy_check_mark:'
@@ -163,7 +163,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: number_theory/binary_gcd.hpp
       title: number_theory/binary_gcd.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: number_theory/factorial.hpp
       title: number_theory/factorial.hpp
     - icon: ':heavy_check_mark:'
@@ -172,7 +172,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: number_theory/frac_binsearch.hpp
       title: number_theory/frac_binsearch.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: number_theory/mod_int.hpp
       title: number_theory/mod_int.hpp
     - icon: ':heavy_check_mark:'
@@ -184,7 +184,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: number_theory/primitive_root.hpp
       title: number_theory/primitive_root.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: number_theory/utils.hpp
       title: number_theory/utils.hpp
   - name: opt
@@ -192,7 +192,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: opt/monge_min_cut.hpp
       title: opt/monge_min_cut.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: opt/monotone_minima.hpp
       title: opt/monotone_minima.hpp
   - name: other
@@ -208,7 +208,7 @@ data:
       title: other/rational.hpp
   - name: poly
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: poly/fft.hpp
       title: poly/fft.hpp
     - icon: ':heavy_check_mark:'
@@ -235,7 +235,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: poly/fps_log_sparse.hpp
       title: poly/fps_log_sparse.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: poly/fps_pow_sparse.hpp
       title: poly/fps_pow_sparse.hpp
     - icon: ':heavy_check_mark:'
@@ -318,10 +318,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: convolution/test/lcm_convolution.test.cpp
       title: convolution/test/lcm_convolution.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: convolution/test/min_plus_convolution_convex_arbitrary.test.cpp
       title: convolution/test/min_plus_convolution_convex_arbitrary.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: convolution/test/min_plus_convolution_convex_convex.test.cpp
       title: convolution/test/min_plus_convolution_convex_convex.test.cpp
     - icon: ':heavy_check_mark:'
@@ -496,10 +496,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: poly/test/polynomial_taylor_shift.test.cpp
       title: poly/test/polynomial_taylor_shift.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: poly/test/pow_of_formal_power_series.test.cpp
       title: poly/test/pow_of_formal_power_series.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: poly/test/prod_of_polys.test.cpp
       title: poly/test/prod_of_polys.test.cpp
     - icon: ':heavy_check_mark:'

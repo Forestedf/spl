@@ -7,10 +7,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: algebra/matrix.hpp
     title: algebra/matrix.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/mod_int.hpp
     title: number_theory/mod_int.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/utils.hpp
     title: number_theory/utils.hpp
   - icon: ':question:'
@@ -73,7 +73,7 @@ data:
     \  string __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define VEC(type, name, size)\
     \ \\\n    V<type> name(size);       \\\n    read(name);\n#define VVEC(type, name,\
     \ size1, size2)    \\\n    VV<type> name(size1, V<type>(size2)); \\\n    read(name);\n\
-    #line 3 \"template/fastio.hpp\"\n#include <type_traits>\n#line 5 \"template/fastio.hpp\"\
+    #line 4 \"template/fastio.hpp\"\n#include <type_traits>\n#line 6 \"template/fastio.hpp\"\
     \n\n// unable to read INT_MIN (int), LLONG_MIN (long long)\nclass Reader {\n \
     \   FILE *fp;\n    static constexpr int BUF = 1 << 18;\n    char buf[BUF];\n \
     \   char *pl, *pr;\n\n    void reread() {\n        int wd = pr - pl;\n       \
@@ -319,7 +319,7 @@ data:
   isVerificationFile: true
   path: algebra/test/matrix_det.test.cpp
   requiredBy: []
-  timestamp: '2025-08-07 23:11:18+09:00'
+  timestamp: '2025-09-14 09:21:44+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: algebra/test/matrix_det.test.cpp

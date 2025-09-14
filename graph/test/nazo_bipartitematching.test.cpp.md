@@ -52,91 +52,92 @@ data:
     \                    que.push(u_);\n                }\n            }\n       \
     \ }\n        if (!upd) {\n            break;\n        }\n    }\n    return std::make_pair(p,\
     \ q);\n}\n#line 1 \"template/fastio.hpp\"\n#include <cstdio>\n#include <cstring>\n\
-    #include <type_traits>\n#line 5 \"template/fastio.hpp\"\n\n// unable to read INT_MIN\
-    \ (int), LLONG_MIN (long long)\nclass Reader {\n    FILE *fp;\n    static constexpr\
-    \ int BUF = 1 << 18;\n    char buf[BUF];\n    char *pl, *pr;\n\n    void reread()\
-    \ {\n        int wd = pr - pl;\n        std::memcpy(buf, pl, wd);\n        pl\
-    \ = buf;\n        pr = buf + wd;\n        pr += std::fread(pr, 1, BUF - wd, fp);\n\
-    \    }\n\n    char skip() {\n        char ch = *pl++;\n        while (ch <= '\
-    \ ') {\n            ch = *pl++;\n        }\n        return ch;\n    }\n\n    template\
-    \ <typename T>\n    void read_unsigned(T &x) {\n        if (pr - pl < 64) {\n\
-    \            reread();\n        }\n        x = 0;\n        char ch = skip();\n\
-    \        while ('0' <= ch) {\n            x = 10 * x + (0xf & ch);\n         \
-    \   ch = *pl++;\n        }\n    }\n    template <typename T>\n    void read_signed(T\
-    \ &x) {\n        if (pr - pl < 64) {\n            reread();\n        }\n     \
-    \   x = 0;\n        bool neg = false;\n        char ch = skip();\n        if (ch\
-    \ == '-') {\n            ch = *pl++;\n            neg = true;\n        }\n   \
-    \     while ('0' <= ch) {\n            x = 10 * x + (0xf & ch);\n            ch\
-    \ = *pl++;\n        }\n        if (neg) {\n            x = -x;\n        }\n  \
-    \  }\n\n    void read_single(int &x) { read_signed(x); }\n    void read_single(unsigned\
-    \ &x) { read_unsigned(x); }\n    void read_single(long &x) { read_signed(x); }\n\
-    \    void read_single(unsigned long &x) { read_signed(x); }\n    void read_single(long\
-    \ long &x) { read_signed(x); }\n    void read_single(unsigned long long &x) {\
-    \ read_unsigned(x); }\n\npublic:\n    Reader(FILE *fp) : fp(fp), pl(buf), pr(buf)\
-    \ { reread(); }\n\n    void read() {}\n    template <typename Head, typename...\
-    \ Tail>\n    void read(Head &head, Tail &...tail) {\n        read_single(head);\n\
-    \        read(tail...);\n    }\n};\n\nstruct NumberToString {\n    char buf[10000][4];\n\
-    \    constexpr NumberToString() : buf() {\n        for (int i = 0; i < 10000;\
-    \ ++i) {\n            int n = i;\n            for (int j = 3; j >= 0; --j) {\n\
-    \                buf[i][j] = '0' + n % 10;\n                n /= 10;\n       \
-    \     }\n        }\n    }\n} constexpr number_to_string_precalc;\n\nclass Writer\
-    \ {\n    FILE *fp;\n    static constexpr int BUF = 1 << 18;\n    char buf[BUF];\n\
-    \    char *ptr;\n\n    void write_u32(unsigned x) {\n        if ((buf + BUF -\
-    \ ptr) < 32) {\n            flush();\n        }\n        static char sml[12];\n\
-    \        int t = 8;\n        while (x >= 10000) {\n            unsigned n = x\
-    \ % 10000;\n            x /= 10000;\n            std::memcpy(sml + t, number_to_string_precalc.buf[n],\
-    \ 4);\n            t -= 4;\n        }\n        if (x >= 1000) {\n            std::memcpy(ptr,\
-    \ number_to_string_precalc.buf[x], 4);\n            ptr += 4;\n        } else\
-    \ if (x >= 100) {\n            std::memcpy(ptr, number_to_string_precalc.buf[x]\
-    \ + 1, 3);\n            ptr += 3;\n        } else if (x >= 10) {\n           \
-    \ unsigned q = (x * 103) >> 10;\n            *ptr++ = q | '0';\n            *ptr++\
-    \ = (x - 10 * q) | '0';\n        } else {\n            *ptr++ = '0' | x;\n   \
-    \     }\n        std::memcpy(ptr, sml + (t + 4), 8 - t);\n        ptr += 8 - t;\n\
-    \    }\n\n    void write_u64(unsigned long long x) {\n        if ((buf + BUF -\
-    \ ptr) < 32) {\n            flush();\n        }\n        if (x >= 10000000000000000)\
-    \ {\n            unsigned long long z = x % 100000000;\n            x /= 100000000;\n\
-    \            unsigned long long y = x % 100000000;\n            x /= 100000000;\n\
-    \            if (x >= 1000) {\n                std::memcpy(ptr, number_to_string_precalc.buf[x],\
+    #include <string>\n#include <type_traits>\n#line 6 \"template/fastio.hpp\"\n\n\
+    // unable to read INT_MIN (int), LLONG_MIN (long long)\nclass Reader {\n    FILE\
+    \ *fp;\n    static constexpr int BUF = 1 << 18;\n    char buf[BUF];\n    char\
+    \ *pl, *pr;\n\n    void reread() {\n        int wd = pr - pl;\n        std::memcpy(buf,\
+    \ pl, wd);\n        pl = buf;\n        pr = buf + wd;\n        pr += std::fread(pr,\
+    \ 1, BUF - wd, fp);\n    }\n\n    char skip() {\n        char ch = *pl++;\n  \
+    \      while (ch <= ' ') {\n            ch = *pl++;\n        }\n        return\
+    \ ch;\n    }\n\n    template <typename T>\n    void read_unsigned(T &x) {\n  \
+    \      if (pr - pl < 64) {\n            reread();\n        }\n        x = 0;\n\
+    \        char ch = skip();\n        while ('0' <= ch) {\n            x = 10 *\
+    \ x + (0xf & ch);\n            ch = *pl++;\n        }\n    }\n    template <typename\
+    \ T>\n    void read_signed(T &x) {\n        if (pr - pl < 64) {\n            reread();\n\
+    \        }\n        x = 0;\n        bool neg = false;\n        char ch = skip();\n\
+    \        if (ch == '-') {\n            ch = *pl++;\n            neg = true;\n\
+    \        }\n        while ('0' <= ch) {\n            x = 10 * x + (0xf & ch);\n\
+    \            ch = *pl++;\n        }\n        if (neg) {\n            x = -x;\n\
+    \        }\n    }\n\n    void read_single(int &x) { read_signed(x); }\n    void\
+    \ read_single(unsigned &x) { read_unsigned(x); }\n    void read_single(long &x)\
+    \ { read_signed(x); }\n    void read_single(unsigned long &x) { read_signed(x);\
+    \ }\n    void read_single(long long &x) { read_signed(x); }\n    void read_single(unsigned\
+    \ long long &x) { read_unsigned(x); }\n\npublic:\n    Reader(FILE *fp) : fp(fp),\
+    \ pl(buf), pr(buf) { reread(); }\n\n    void read() {}\n    template <typename\
+    \ Head, typename... Tail>\n    void read(Head &head, Tail &...tail) {\n      \
+    \  read_single(head);\n        read(tail...);\n    }\n};\n\nstruct NumberToString\
+    \ {\n    char buf[10000][4];\n    constexpr NumberToString() : buf() {\n     \
+    \   for (int i = 0; i < 10000; ++i) {\n            int n = i;\n            for\
+    \ (int j = 3; j >= 0; --j) {\n                buf[i][j] = '0' + n % 10;\n    \
+    \            n /= 10;\n            }\n        }\n    }\n} constexpr number_to_string_precalc;\n\
+    \nclass Writer {\n    FILE *fp;\n    static constexpr int BUF = 1 << 18;\n   \
+    \ char buf[BUF];\n    char *ptr;\n\n    void write_u32(unsigned x) {\n       \
+    \ if ((buf + BUF - ptr) < 32) {\n            flush();\n        }\n        static\
+    \ char sml[12];\n        int t = 8;\n        while (x >= 10000) {\n          \
+    \  unsigned n = x % 10000;\n            x /= 10000;\n            std::memcpy(sml\
+    \ + t, number_to_string_precalc.buf[n], 4);\n            t -= 4;\n        }\n\
+    \        if (x >= 1000) {\n            std::memcpy(ptr, number_to_string_precalc.buf[x],\
+    \ 4);\n            ptr += 4;\n        } else if (x >= 100) {\n            std::memcpy(ptr,\
+    \ number_to_string_precalc.buf[x] + 1, 3);\n            ptr += 3;\n        } else\
+    \ if (x >= 10) {\n            unsigned q = (x * 103) >> 10;\n            *ptr++\
+    \ = q | '0';\n            *ptr++ = (x - 10 * q) | '0';\n        } else {\n   \
+    \         *ptr++ = '0' | x;\n        }\n        std::memcpy(ptr, sml + (t + 4),\
+    \ 8 - t);\n        ptr += 8 - t;\n    }\n\n    void write_u64(unsigned long long\
+    \ x) {\n        if ((buf + BUF - ptr) < 32) {\n            flush();\n        }\n\
+    \        if (x >= 10000000000000000) {\n            unsigned long long z = x %\
+    \ 100000000;\n            x /= 100000000;\n            unsigned long long y =\
+    \ x % 100000000;\n            x /= 100000000;\n            if (x >= 1000) {\n\
+    \                std::memcpy(ptr, number_to_string_precalc.buf[x], 4);\n     \
+    \           ptr += 4;\n            } else if (x >= 100) {\n                std::memcpy(ptr,\
+    \ number_to_string_precalc.buf[x] + 1, 3);\n                ptr += 3;\n      \
+    \      } else if (x >= 10) {\n                unsigned q = (x * 103) >> 10;\n\
+    \                *ptr++ = q | '0';\n                *ptr++ = (x - 10 * q) | '0';\n\
+    \            } else {\n                *ptr++ = '0' | x;\n            }\n    \
+    \        std::memcpy(ptr, number_to_string_precalc.buf[y / 10000], 4);\n     \
+    \       std::memcpy(ptr + 4, number_to_string_precalc.buf[y % 10000], 4);\n  \
+    \          std::memcpy(ptr + 8, number_to_string_precalc.buf[z / 10000], 4);\n\
+    \            std::memcpy(ptr + 12, number_to_string_precalc.buf[z % 10000], 4);\n\
+    \            ptr += 16;\n        } else {\n            static char sml[12];\n\
+    \            int t = 8;\n            while (x >= 10000) {\n                unsigned\
+    \ long long n = x % 10000;\n                x /= 10000;\n                std::memcpy(sml\
+    \ + t, number_to_string_precalc.buf[n], 4);\n                t -= 4;\n       \
+    \     }\n            if (x >= 1000) {\n                std::memcpy(ptr, number_to_string_precalc.buf[x],\
     \ 4);\n                ptr += 4;\n            } else if (x >= 100) {\n       \
     \         std::memcpy(ptr, number_to_string_precalc.buf[x] + 1, 3);\n        \
     \        ptr += 3;\n            } else if (x >= 10) {\n                unsigned\
     \ q = (x * 103) >> 10;\n                *ptr++ = q | '0';\n                *ptr++\
     \ = (x - 10 * q) | '0';\n            } else {\n                *ptr++ = '0' |\
-    \ x;\n            }\n            std::memcpy(ptr, number_to_string_precalc.buf[y\
-    \ / 10000], 4);\n            std::memcpy(ptr + 4, number_to_string_precalc.buf[y\
-    \ % 10000], 4);\n            std::memcpy(ptr + 8, number_to_string_precalc.buf[z\
-    \ / 10000], 4);\n            std::memcpy(ptr + 12, number_to_string_precalc.buf[z\
-    \ % 10000], 4);\n            ptr += 16;\n        } else {\n            static\
-    \ char sml[12];\n            int t = 8;\n            while (x >= 10000) {\n  \
-    \              unsigned long long n = x % 10000;\n                x /= 10000;\n\
-    \                std::memcpy(sml + t, number_to_string_precalc.buf[n], 4);\n \
-    \               t -= 4;\n            }\n            if (x >= 1000) {\n       \
-    \         std::memcpy(ptr, number_to_string_precalc.buf[x], 4);\n            \
-    \    ptr += 4;\n            } else if (x >= 100) {\n                std::memcpy(ptr,\
-    \ number_to_string_precalc.buf[x] + 1, 3);\n                ptr += 3;\n      \
-    \      } else if (x >= 10) {\n                unsigned q = (x * 103) >> 10;\n\
-    \                *ptr++ = q | '0';\n                *ptr++ = (x - 10 * q) | '0';\n\
-    \            } else {\n                *ptr++ = '0' | x;\n            }\n    \
-    \        std::memcpy(ptr, sml + (t + 4), 8 - t);\n            ptr += 8 - t;\n\
-    \        }\n    }\n\n    void write_char(char c) {\n        if (ptr == buf + BUF)\
-    \ {\n            flush();\n        }\n        *ptr++ = c;\n    }\n\n    template\
-    \ <typename T>\n    void write_unsigned(T x) {\n        if constexpr (std::is_same_v<T,\
-    \ unsigned long long> ||\n                      std::is_same_v<T, unsigned long>)\
-    \ {\n            write_u64(x);\n        } else {\n            write_u32(x);\n\
-    \        }\n    }\n\n    template <typename T>\n    void write_signed(T x) {\n\
-    \        std::make_unsigned_t<T> y = x;\n        if (x < 0) {\n            write_char('-');\n\
-    \            y = -y;\n        }\n        write_unsigned(y);\n    }\n    \n   \
-    \ void write_string(const std::string &s) {\n        for (char c : s) {\n    \
-    \        write_char(c);\n        }\n    }\n\n    void write_single(int x) { write_signed(x);\
-    \ }\n    void write_single(unsigned x) { write_unsigned(x); }\n    void write_single(long\
-    \ x) { write_signed(x); }\n    void write_single(unsigned long x) { write_unsigned(x);\
-    \ }\n    void write_single(long long x) { write_signed(x); }\n    void write_single(unsigned\
-    \ long long x) { write_unsigned(x); }\n    void write_single(char c) { write_char(c);\
-    \ }\n    void write_single(const std::string &s) { write_string(s); }\n\npublic:\n\
-    \    Writer(FILE *fp) : fp(fp), ptr(buf) {}\n    ~Writer() { flush(); }\n\n  \
-    \  void flush() {\n        std::fwrite(buf, 1, ptr - buf, fp);\n        ptr =\
-    \ buf;\n    }\n\n    void write() {}\n    template <typename Head, typename...\
-    \ Tail>\n    void write(Head &&head, Tail &&...tail) {\n        write_single(head);\n\
+    \ x;\n            }\n            std::memcpy(ptr, sml + (t + 4), 8 - t);\n   \
+    \         ptr += 8 - t;\n        }\n    }\n\n    void write_char(char c) {\n \
+    \       if (ptr == buf + BUF) {\n            flush();\n        }\n        *ptr++\
+    \ = c;\n    }\n\n    template <typename T>\n    void write_unsigned(T x) {\n \
+    \       if constexpr (std::is_same_v<T, unsigned long long> ||\n             \
+    \         std::is_same_v<T, unsigned long>) {\n            write_u64(x);\n   \
+    \     } else {\n            write_u32(x);\n        }\n    }\n\n    template <typename\
+    \ T>\n    void write_signed(T x) {\n        std::make_unsigned_t<T> y = x;\n \
+    \       if (x < 0) {\n            write_char('-');\n            y = -y;\n    \
+    \    }\n        write_unsigned(y);\n    }\n    \n    void write_string(const std::string\
+    \ &s) {\n        for (char c : s) {\n            write_char(c);\n        }\n \
+    \   }\n\n    void write_single(int x) { write_signed(x); }\n    void write_single(unsigned\
+    \ x) { write_unsigned(x); }\n    void write_single(long x) { write_signed(x);\
+    \ }\n    void write_single(unsigned long x) { write_unsigned(x); }\n    void write_single(long\
+    \ long x) { write_signed(x); }\n    void write_single(unsigned long long x) {\
+    \ write_unsigned(x); }\n    void write_single(char c) { write_char(c); }\n   \
+    \ void write_single(const std::string &s) { write_string(s); }\n\npublic:\n  \
+    \  Writer(FILE *fp) : fp(fp), ptr(buf) {}\n    ~Writer() { flush(); }\n\n    void\
+    \ flush() {\n        std::fwrite(buf, 1, ptr - buf, fp);\n        ptr = buf;\n\
+    \    }\n\n    void write() {}\n    template <typename Head, typename... Tail>\n\
+    \    void write(Head &&head, Tail &&...tail) {\n        write_single(head);\n\
     \        if (sizeof...(Tail)) {\n            write_char(' ');\n        }\n   \
     \     write(std::forward<Tail>(tail)...);\n    }\n\n    template <typename...\
     \ T>\n    void writeln(T &&...t) {\n        write(std::forward<T>(t)...);\n  \
@@ -208,7 +209,7 @@ data:
   isVerificationFile: true
   path: graph/test/nazo_bipartitematching.test.cpp
   requiredBy: []
-  timestamp: '2025-09-02 15:29:11+09:00'
+  timestamp: '2025-09-14 09:21:44+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: graph/test/nazo_bipartitematching.test.cpp

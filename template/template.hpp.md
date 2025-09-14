@@ -199,15 +199,18 @@ data:
     path: poly/test/log_of_formal_power_series_sparse.test.cpp
     title: poly/test/log_of_formal_power_series_sparse.test.cpp
   - icon: ':heavy_check_mark:'
+    path: poly/test/multipoint_evaluation.test.cpp
+    title: poly/test/multipoint_evaluation.test.cpp
+  - icon: ':heavy_check_mark:'
     path: poly/test/multipoint_evaluation_on_geometric_sequence.test.cpp
     title: poly/test/multipoint_evaluation_on_geometric_sequence.test.cpp
   - icon: ':heavy_check_mark:'
     path: poly/test/polynomial_taylor_shift.test.cpp
     title: poly/test/polynomial_taylor_shift.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: poly/test/pow_of_formal_power_series.test.cpp
     title: poly/test/pow_of_formal_power_series.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: poly/test/prod_of_polys.test.cpp
     title: poly/test/prod_of_polys.test.cpp
   - icon: ':heavy_check_mark:'
@@ -219,9 +222,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: string/test/zalgorithm.test.cpp
     title: string/test/zalgorithm.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"template/template.hpp\"\n#include <bits/stdc++.h>\n#define\
@@ -316,7 +319,7 @@ data:
   path: template/template.hpp
   requiredBy: []
   timestamp: '2025-06-28 10:05:47+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - algebra/test/system_of_linear_equations.test.cpp
   - algebra/test/matrix_rank.test.cpp
@@ -362,6 +365,7 @@ data:
   - poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
   - poly/test/find_linear_recurrence.test.cpp
   - poly/test/convolution_mod.test.cpp
+  - poly/test/multipoint_evaluation.test.cpp
   - poly/test/multipoint_evaluation_on_geometric_sequence.test.cpp
   - poly/test/stirling_number_of_the_first_kind.test.cpp
   - poly/test/inv_of_formal_power_series_sparse.test.cpp

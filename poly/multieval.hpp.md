@@ -10,26 +10,11 @@ data:
   - icon: ':heavy_check_mark:'
     path: poly/fft.hpp
     title: poly/fft.hpp
-  _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
-    path: poly/fps_div_at.hpp
-    title: poly/fps_div_at.hpp
-  - icon: ':heavy_check_mark:'
-    path: poly/fps_log.hpp
-    title: poly/fps_log.hpp
-  - icon: ':heavy_check_mark:'
-    path: poly/multieval.hpp
-    title: poly/multieval.hpp
+    path: poly/fps_inv.hpp
+    title: poly/fps_inv.hpp
+  _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: poly/test/inv_of_formal_power_series.test.cpp
-    title: poly/test/inv_of_formal_power_series.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
-    title: poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: poly/test/log_of_formal_power_series.test.cpp
-    title: poly/test/log_of_formal_power_series.test.cpp
   - icon: ':heavy_check_mark:'
     path: poly/test/multipoint_evaluation.test.cpp
     title: poly/test/multipoint_evaluation.test.cpp
@@ -225,42 +210,67 @@ data:
     \ 2 * n; ++i) {\n            fft_f[i] *= fft_g[i];\n        }\n        ifft(fft_f);\n\
     \        g.resize(2 * n);\n        for (int i = n; i < 2 * n; ++i) {\n       \
     \     g[i] = -fft_f[i];\n        }\n    }\n    g.resize(len);\n    return g;\n\
-    }\n"
-  code: "#pragma once\n#include <algorithm>\n#include \"fft.hpp\"\n// 10 FFT(n)\n\
-    template <typename T>\nstd::vector<T> fps_inv(const std::vector<T> &f, int len\
-    \ = -1) {\n    if (len == -1) {\n        len = (int)f.size();\n    }\n    assert(!f.empty()\
-    \ && f[0] != T(0) && len >= 0);\n    std::vector<T> g(1, T(1) / f[0]);\n    while\
-    \ ((int)g.size() < len) {\n        int n = (int)g.size();\n        std::vector<T>\
-    \ fft_f(2 * n), fft_g(2 * n);\n        std::copy(f.begin(), f.begin() + std::min(2\
-    \ * n, (int)f.size()),\n                  fft_f.begin());\n        std::copy(g.begin(),\
-    \ g.end(), fft_g.begin());\n        fft(fft_f);\n        fft(fft_g);\n       \
-    \ for (int i = 0; i < 2 * n; ++i) {\n            fft_f[i] *= fft_g[i];\n     \
-    \   }\n        ifft(fft_f);\n        std::fill(fft_f.begin(), fft_f.begin() +\
-    \ n, T(0));\n        fft(fft_f);\n        for (int i = 0; i < 2 * n; ++i) {\n\
-    \            fft_f[i] *= fft_g[i];\n        }\n        ifft(fft_f);\n        g.resize(2\
-    \ * n);\n        for (int i = n; i < 2 * n; ++i) {\n            g[i] = -fft_f[i];\n\
-    \        }\n    }\n    g.resize(len);\n    return g;\n}\n"
+    }\n#line 3 \"poly/multieval.hpp\"\n\ntemplate <typename M>\nstd::vector<M> multieval(std::vector<M>\
+    \ f, const std::vector<M> &p) {\n    int n = (int)f.size();\n    int m = (int)p.size();\n\
+    \n    if (n == 0) {\n        return std::vector<M>(m);\n    }\n    if (m == 0)\
+    \ {\n        return std::vector<M>();\n    }\n\n    int l = 1;\n    int k = 0;\n\
+    \    while (l < m) {\n        l *= 2;\n        ++k;\n    }\n\n    std::vector<std::vector<M>>\
+    \ prod(2 * l);\n    for (int i = 0; i < m; ++i) {\n        prod[l + i] = std::vector<M>({-p[i],\
+    \ M(1)});\n    }\n    for (int i = m; i < l; ++i) {\n        prod[l + i] = std::vector<M>({M(1)});\n\
+    \    }\n    for (int i = l - 1; i >= 1; --i) {\n        prod[i] = convolve(prod[2\
+    \ * i], prod[2 * i + 1]);\n    }\n\n    std::vector<M> pr = prod[1];\n    std::reverse(pr.begin(),\
+    \ pr.end());\n    pr = fps_inv(pr, n);\n    std::reverse(f.begin(), f.end());\n\
+    \    pr = convolve(f, pr);\n    pr.resize(n);\n    std::reverse(pr.begin(), pr.end());\n\
+    \    pr.resize(m, M());\n\n    std::vector<std::vector<M>> fs(2 * l);\n    fs[1]\
+    \ = pr;\n    for (int i = 1; i < l; ++i) {\n        if (prod[i].size() == 1) {\n\
+    \            continue;\n        }\n        int lc = (int)prod[2 * i].size() -\
+    \ 1;\n        int rc = (int)prod[2 * i + 1].size() - 1;\n        assert((int)fs[i].size()\
+    \ == lc + rc);\n        fs[2 * i] = convolve(fs[i], prod[2 * i + 1]);\n      \
+    \  fs[2 * i] =\n            std::vector(fs[2 * i].begin() + rc, fs[2 * i].begin()\
+    \ + (lc + rc));\n        fs[2 * i + 1] = convolve(fs[i], prod[2 * i]);\n     \
+    \   fs[2 * i + 1] = std::vector(fs[2 * i + 1].begin() + lc,\n                \
+    \                    fs[2 * i + 1].begin() + (lc + rc));\n    }\n\n    std::vector<M>\
+    \ ans(m);\n    for (int i = 0; i < m; ++i) {\n        ans[i] = fs[l + i][0];\n\
+    \    }\n    return ans;\n}\n"
+  code: "#pragma once\n#include \"fps_inv.hpp\"\n\ntemplate <typename M>\nstd::vector<M>\
+    \ multieval(std::vector<M> f, const std::vector<M> &p) {\n    int n = (int)f.size();\n\
+    \    int m = (int)p.size();\n\n    if (n == 0) {\n        return std::vector<M>(m);\n\
+    \    }\n    if (m == 0) {\n        return std::vector<M>();\n    }\n\n    int\
+    \ l = 1;\n    int k = 0;\n    while (l < m) {\n        l *= 2;\n        ++k;\n\
+    \    }\n\n    std::vector<std::vector<M>> prod(2 * l);\n    for (int i = 0; i\
+    \ < m; ++i) {\n        prod[l + i] = std::vector<M>({-p[i], M(1)});\n    }\n \
+    \   for (int i = m; i < l; ++i) {\n        prod[l + i] = std::vector<M>({M(1)});\n\
+    \    }\n    for (int i = l - 1; i >= 1; --i) {\n        prod[i] = convolve(prod[2\
+    \ * i], prod[2 * i + 1]);\n    }\n\n    std::vector<M> pr = prod[1];\n    std::reverse(pr.begin(),\
+    \ pr.end());\n    pr = fps_inv(pr, n);\n    std::reverse(f.begin(), f.end());\n\
+    \    pr = convolve(f, pr);\n    pr.resize(n);\n    std::reverse(pr.begin(), pr.end());\n\
+    \    pr.resize(m, M());\n\n    std::vector<std::vector<M>> fs(2 * l);\n    fs[1]\
+    \ = pr;\n    for (int i = 1; i < l; ++i) {\n        if (prod[i].size() == 1) {\n\
+    \            continue;\n        }\n        int lc = (int)prod[2 * i].size() -\
+    \ 1;\n        int rc = (int)prod[2 * i + 1].size() - 1;\n        assert((int)fs[i].size()\
+    \ == lc + rc);\n        fs[2 * i] = convolve(fs[i], prod[2 * i + 1]);\n      \
+    \  fs[2 * i] =\n            std::vector(fs[2 * i].begin() + rc, fs[2 * i].begin()\
+    \ + (lc + rc));\n        fs[2 * i + 1] = convolve(fs[i], prod[2 * i]);\n     \
+    \   fs[2 * i + 1] = std::vector(fs[2 * i + 1].begin() + lc,\n                \
+    \                    fs[2 * i + 1].begin() + (lc + rc));\n    }\n\n    std::vector<M>\
+    \ ans(m);\n    for (int i = 0; i < m; ++i) {\n        ans[i] = fs[l + i][0];\n\
+    \    }\n    return ans;\n}\n"
   dependsOn:
+  - poly/fps_inv.hpp
   - poly/fft.hpp
   - number_theory/mod_int.hpp
   - number_theory/utils.hpp
   isVerificationFile: false
-  path: poly/fps_inv.hpp
-  requiredBy:
-  - poly/fps_log.hpp
-  - poly/fps_div_at.hpp
-  - poly/multieval.hpp
-  timestamp: '2025-01-29 16:22:53+09:00'
+  path: poly/multieval.hpp
+  requiredBy: []
+  timestamp: '2025-09-14 16:55:46+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - poly/test/inv_of_formal_power_series.test.cpp
-  - poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
   - poly/test/multipoint_evaluation.test.cpp
-  - poly/test/log_of_formal_power_series.test.cpp
-documentation_of: poly/fps_inv.hpp
+documentation_of: poly/multieval.hpp
 layout: document
 redirect_from:
-- /library/poly/fps_inv.hpp
-- /library/poly/fps_inv.hpp.html
-title: poly/fps_inv.hpp
+- /library/poly/multieval.hpp
+- /library/poly/multieval.hpp.html
+title: poly/multieval.hpp
 ---

@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: number_theory/utils.hpp
     title: number_theory/utils.hpp
   _extendedRequiredBy:
@@ -11,7 +11,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: convolution/mul_mod_p_conv.hpp
     title: convolution/mul_mod_p_conv.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: poly/fft.hpp
     title: poly/fft.hpp
   - icon: ':heavy_check_mark:'
@@ -29,6 +29,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: poly/middle_product.hpp
     title: poly/middle_product.hpp
+  - icon: ':heavy_check_mark:'
+    path: poly/multieval.hpp
+    title: poly/multieval.hpp
   - icon: ':heavy_check_mark:'
     path: poly/multieval_geometric.hpp
     title: poly/multieval_geometric.hpp
@@ -124,15 +127,18 @@ data:
     path: poly/test/log_of_formal_power_series_sparse.test.cpp
     title: poly/test/log_of_formal_power_series_sparse.test.cpp
   - icon: ':heavy_check_mark:'
+    path: poly/test/multipoint_evaluation.test.cpp
+    title: poly/test/multipoint_evaluation.test.cpp
+  - icon: ':heavy_check_mark:'
     path: poly/test/multipoint_evaluation_on_geometric_sequence.test.cpp
     title: poly/test/multipoint_evaluation_on_geometric_sequence.test.cpp
   - icon: ':heavy_check_mark:'
     path: poly/test/polynomial_taylor_shift.test.cpp
     title: poly/test/polynomial_taylor_shift.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: poly/test/pow_of_formal_power_series.test.cpp
     title: poly/test/pow_of_formal_power_series.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: poly/test/prod_of_polys.test.cpp
     title: poly/test/prod_of_polys.test.cpp
   - icon: ':heavy_check_mark:'
@@ -141,9 +147,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: poly/test/stirling_number_of_the_second_kind.test.cpp
     title: poly/test/stirling_number_of_the_second_kind.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"number_theory/mod_int.hpp\"\n\n#include <cassert>\n#include\
@@ -286,10 +292,11 @@ data:
   - poly/stirling1.hpp
   - poly/stirling2.hpp
   - poly/multieval_geometric.hpp
+  - poly/multieval.hpp
   - poly/fft.hpp
   - poly/fps_inv.hpp
   timestamp: '2024-07-18 16:56:22+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - algebra/test/system_of_linear_equations.test.cpp
   - algebra/test/matrix_rank.test.cpp
@@ -312,6 +319,7 @@ data:
   - poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
   - poly/test/find_linear_recurrence.test.cpp
   - poly/test/convolution_mod.test.cpp
+  - poly/test/multipoint_evaluation.test.cpp
   - poly/test/multipoint_evaluation_on_geometric_sequence.test.cpp
   - poly/test/stirling_number_of_the_first_kind.test.cpp
   - poly/test/inv_of_formal_power_series_sparse.test.cpp

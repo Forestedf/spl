@@ -163,7 +163,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: number_theory/binary_gcd.hpp
       title: number_theory/binary_gcd.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: number_theory/factorial.hpp
       title: number_theory/factorial.hpp
     - icon: ':heavy_check_mark:'
@@ -172,7 +172,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: number_theory/frac_binsearch.hpp
       title: number_theory/frac_binsearch.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: number_theory/mod_int.hpp
       title: number_theory/mod_int.hpp
     - icon: ':heavy_check_mark:'
@@ -184,7 +184,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: number_theory/primitive_root.hpp
       title: number_theory/primitive_root.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: number_theory/utils.hpp
       title: number_theory/utils.hpp
   - name: opt
@@ -208,7 +208,7 @@ data:
       title: other/rational.hpp
   - name: poly
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: poly/fft.hpp
       title: poly/fft.hpp
     - icon: ':heavy_check_mark:'
@@ -235,12 +235,15 @@ data:
     - icon: ':heavy_check_mark:'
       path: poly/fps_log_sparse.hpp
       title: poly/fps_log_sparse.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: poly/fps_pow_sparse.hpp
       title: poly/fps_pow_sparse.hpp
     - icon: ':heavy_check_mark:'
       path: poly/middle_product.hpp
       title: poly/middle_product.hpp
+    - icon: ':heavy_check_mark:'
+      path: poly/multieval.hpp
+      title: poly/multieval.hpp
     - icon: ':heavy_check_mark:'
       path: poly/multieval_geometric.hpp
       title: poly/multieval_geometric.hpp
@@ -269,13 +272,13 @@ data:
     - icon: ':warning:'
       path: template/debug.hpp
       title: template/debug.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/fastio.hpp
       title: template/fastio.hpp
     - icon: ':heavy_check_mark:'
       path: template/random.hpp
       title: template/random.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/template.hpp
       title: template/template.hpp
   verificationCategories:
@@ -491,15 +494,18 @@ data:
       path: poly/test/log_of_formal_power_series_sparse.test.cpp
       title: poly/test/log_of_formal_power_series_sparse.test.cpp
     - icon: ':heavy_check_mark:'
+      path: poly/test/multipoint_evaluation.test.cpp
+      title: poly/test/multipoint_evaluation.test.cpp
+    - icon: ':heavy_check_mark:'
       path: poly/test/multipoint_evaluation_on_geometric_sequence.test.cpp
       title: poly/test/multipoint_evaluation_on_geometric_sequence.test.cpp
     - icon: ':heavy_check_mark:'
       path: poly/test/polynomial_taylor_shift.test.cpp
       title: poly/test/polynomial_taylor_shift.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: poly/test/pow_of_formal_power_series.test.cpp
       title: poly/test/pow_of_formal_power_series.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: poly/test/prod_of_polys.test.cpp
       title: poly/test/prod_of_polys.test.cpp
     - icon: ':heavy_check_mark:'

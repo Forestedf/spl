@@ -254,61 +254,61 @@ data:
   isVerificationFile: false
   path: number_theory/utils.hpp
   requiredBy:
+  - poly/fps_exp.hpp
+  - poly/stirling2.hpp
+  - poly/fps_div_at.hpp
+  - poly/multieval.hpp
+  - poly/taylor_shift.hpp
+  - poly/middle_product.hpp
+  - poly/stirling1.hpp
+  - poly/fft.hpp
+  - poly/fps_inv.hpp
+  - poly/fps_log.hpp
+  - poly/multieval_geometric.hpp
   - convolution/index_difference.hpp
   - convolution/mul_mod_p_conv.hpp
   - number_theory/ax_by_c.hpp
   - number_theory/mod_int.hpp
-  - poly/fps_log.hpp
-  - poly/fps_div_at.hpp
-  - poly/taylor_shift.hpp
-  - poly/fps_exp.hpp
-  - poly/middle_product.hpp
-  - poly/stirling1.hpp
-  - poly/stirling2.hpp
-  - poly/multieval_geometric.hpp
-  - poly/multieval.hpp
-  - poly/fft.hpp
-  - poly/fps_inv.hpp
   timestamp: '2024-07-18 16:56:22+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - algebra/test/system_of_linear_equations.test.cpp
-  - algebra/test/matrix_rank.test.cpp
-  - algebra/test/matrix_product.test.cpp
-  - algebra/test/matrix_det.test.cpp
-  - algebra/test/inverse_matrix.test.cpp
-  - convolution/test/mul_modp_convolution.test.cpp
-  - convolution/test/index_difference.test.cpp
-  - convolution/test/gcd_convolution.test.cpp
-  - convolution/test/gcd_convolution.stress.test.cpp
-  - convolution/test/lcm_convolution.stress.test.cpp
-  - convolution/test/lcm_convolution.test.cpp
-  - data_structure/test/range_affine_range_sum.test.cpp
+  - bit/test/bitwise_xor_convolution.test.cpp
   - data_structure/test/point_set_range_composite.test.cpp
+  - data_structure/test/range_affine_range_sum.test.cpp
   - data_structure/test/queue_operate_all_composite.test.cpp
   - data_structure/test/1891.test.cpp
   - data_structure/test/range_affine_point_get.test.cpp
-  - number_theory/test/inv_mod_stress.test.cpp
-  - number_theory/test/ax_by_c_stress.test.cpp
-  - number_theory/test/extgcd2_stress.test.cpp
+  - algebra/test/matrix_rank.test.cpp
+  - algebra/test/matrix_det.test.cpp
+  - algebra/test/system_of_linear_equations.test.cpp
+  - algebra/test/inverse_matrix.test.cpp
+  - algebra/test/matrix_product.test.cpp
+  - poly/test/exp_of_formal_power_series.test.cpp
+  - poly/test/convolution_mod.test.cpp
+  - poly/test/log_of_formal_power_series.test.cpp
+  - poly/test/pow_of_formal_power_series.test.cpp
   - poly/test/stirling_number_of_the_second_kind.test.cpp
-  - poly/test/inv_of_formal_power_series.test.cpp
+  - poly/test/exp_of_formal_power_series_sparse.test.cpp
+  - poly/test/multipoint_evaluation.test.cpp
   - poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
   - poly/test/find_linear_recurrence.test.cpp
-  - poly/test/convolution_mod.test.cpp
-  - poly/test/multipoint_evaluation.test.cpp
-  - poly/test/multipoint_evaluation_on_geometric_sequence.test.cpp
+  - poly/test/inv_of_formal_power_series.test.cpp
+  - poly/test/log_of_formal_power_series_sparse.test.cpp
   - poly/test/stirling_number_of_the_first_kind.test.cpp
   - poly/test/inv_of_formal_power_series_sparse.test.cpp
-  - poly/test/exp_of_formal_power_series_sparse.test.cpp
-  - poly/test/log_of_formal_power_series.test.cpp
-  - poly/test/exp_of_formal_power_series.test.cpp
-  - poly/test/log_of_formal_power_series_sparse.test.cpp
-  - poly/test/prod_of_polys.test.cpp
+  - poly/test/multipoint_evaluation_on_geometric_sequence.test.cpp
   - poly/test/polynomial_taylor_shift.test.cpp
-  - poly/test/pow_of_formal_power_series.test.cpp
+  - poly/test/prod_of_polys.test.cpp
   - graph/test/enumerate_triangles.test.cpp
-  - bit/test/bitwise_xor_convolution.test.cpp
+  - convolution/test/mul_modp_convolution.test.cpp
+  - convolution/test/gcd_convolution.stress.test.cpp
+  - convolution/test/lcm_convolution.test.cpp
+  - convolution/test/index_difference.test.cpp
+  - convolution/test/lcm_convolution.stress.test.cpp
+  - convolution/test/gcd_convolution.test.cpp
+  - number_theory/test/extgcd2_stress.test.cpp
+  - number_theory/test/ax_by_c_stress.test.cpp
+  - number_theory/test/inv_mod_stress.test.cpp
 documentation_of: number_theory/utils.hpp
 layout: document
 redirect_from:

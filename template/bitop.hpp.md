@@ -64,9 +64,9 @@ data:
   timestamp: '2024-07-18 16:56:22+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - data_structure/test/static_range_frequency.test.cpp
   - data_structure/test/range_kth_smallest.test.cpp
   - data_structure/test/wavelet_matrix.test.cpp
-  - data_structure/test/static_range_frequency.test.cpp
 documentation_of: template/bitop.hpp
 layout: document
 redirect_from:

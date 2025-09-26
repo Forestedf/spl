@@ -205,9 +205,9 @@ data:
   timestamp: '2025-05-10 22:14:21+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - data_structure/test/static_range_frequency.test.cpp
   - data_structure/test/range_kth_smallest.test.cpp
   - data_structure/test/wavelet_matrix.test.cpp
-  - data_structure/test/static_range_frequency.test.cpp
 documentation_of: data_structure/wavelet_matrix.hpp
 layout: document
 redirect_from:

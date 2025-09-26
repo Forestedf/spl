@@ -59,8 +59,8 @@ data:
   timestamp: '2025-08-14 14:47:43+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - convolution/test/gcd_convolution.test.cpp
   - convolution/test/gcd_convolution.stress.test.cpp
+  - convolution/test/gcd_convolution.test.cpp
 documentation_of: convolution/gcd_convolution.hpp
 layout: document
 redirect_from:

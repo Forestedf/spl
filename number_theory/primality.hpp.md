@@ -90,8 +90,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - convolution/test/mul_modp_convolution.test.cpp
-  - number_theory/test/primitive_root.test.cpp
   - number_theory/test/primality_test.test.cpp
+  - number_theory/test/primitive_root.test.cpp
   - number_theory/test/factorize.test.cpp
 documentation_of: number_theory/primality.hpp
 layout: document

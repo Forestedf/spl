@@ -170,6 +170,9 @@ data:
       path: number_theory/factorize.hpp
       title: number_theory/factorize.hpp
     - icon: ':heavy_check_mark:'
+      path: number_theory/floor_sum.hpp
+      title: number_theory/floor_sum.hpp
+    - icon: ':heavy_check_mark:'
       path: number_theory/frac_binsearch.hpp
       title: number_theory/frac_binsearch.hpp
     - icon: ':heavy_check_mark:'
@@ -459,6 +462,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: number_theory/test/primitive_root.test.cpp
       title: number_theory/test/primitive_root.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: number_theory/test/sum_of_floor_of_linear.test.cpp
+      title: number_theory/test/sum_of_floor_of_linear.test.cpp
   - name: opt/test
     pages:
     - icon: ':heavy_check_mark:'

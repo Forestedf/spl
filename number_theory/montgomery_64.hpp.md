@@ -99,8 +99,8 @@ data:
   verifiedWith:
   - convolution/test/mul_modp_convolution.test.cpp
   - number_theory/test/primitive_root.test.cpp
-  - number_theory/test/factorize.test.cpp
   - number_theory/test/montgomery_64_stress.test.cpp
+  - number_theory/test/factorize.test.cpp
 documentation_of: number_theory/montgomery_64.hpp
 layout: document
 redirect_from:

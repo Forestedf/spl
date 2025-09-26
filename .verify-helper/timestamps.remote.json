@@ -54,6 +54,7 @@
 "number_theory/test/montgomery_64_stress.test.cpp": "2025-06-28 10:05:47 +0900",
 "number_theory/test/primality_test.test.cpp": "2025-06-28 10:05:47 +0900",
 "number_theory/test/primitive_root.test.cpp": "2025-06-28 10:05:47 +0900",
+"number_theory/test/sum_of_floor_of_linear.test.cpp": "2025-09-26 20:38:48 +0900",
 "opt/test/yuki_119.test.cpp": "2025-06-28 10:05:47 +0900",
 "poly/test/convolution_mod.test.cpp": "2025-06-28 10:05:47 +0900",
 "poly/test/exp_of_formal_power_series.test.cpp": "2025-09-14 09:21:44 +0900",

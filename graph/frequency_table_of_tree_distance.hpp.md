@@ -2,8 +2,11 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: number_theory/factorial.hpp
-    title: number_theory/factorial.hpp
+    path: graph/centroid_decomposition.hpp
+    title: graph/centroid_decomposition.hpp
+  - icon: ':heavy_check_mark:'
+    path: graph/graph.hpp
+    title: graph/graph.hpp
   - icon: ':heavy_check_mark:'
     path: number_theory/mod_int.hpp
     title: number_theory/mod_int.hpp
@@ -13,29 +16,80 @@ data:
   - icon: ':heavy_check_mark:'
     path: poly/fft.hpp
     title: poly/fft.hpp
-  _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
-    path: poly/stirling1.hpp
-    title: poly/stirling1.hpp
+  _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: poly/test/polynomial_taylor_shift.test.cpp
-    title: poly/test/polynomial_taylor_shift.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: poly/test/stirling_number_of_the_first_kind.test.cpp
-    title: poly/test/stirling_number_of_the_first_kind.test.cpp
+    path: graph/test/frequency_table_of_tree_distance.test.cpp
+    title: graph/test/frequency_table_of_tree_distance.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"poly/fft.hpp\"\n#include <array>\n#include <vector>\n#line\
-    \ 2 \"number_theory/mod_int.hpp\"\n\n#include <cassert>\n#include <iostream>\n\
-    #include <type_traits>\n#line 2 \"number_theory/utils.hpp\"\n\n#include <utility>\n\
-    \nconstexpr bool is_prime(unsigned n) {\n    if (n == 0 || n == 1) {\n       \
-    \ return false;\n    }\n    for (unsigned i = 2; i * i <= n; ++i) {\n        if\
-    \ (n % i == 0) {\n            return false;\n        }\n    }\n    return true;\n\
-    }\n\nconstexpr unsigned mod_pow(unsigned x, unsigned y, unsigned mod) {\n    unsigned\
+  bundledCode: "#line 2 \"graph/graph.hpp\"\n#include <iostream>\n#include <cassert>\n\
+    #include <vector>\ntemplate <typename T>\nstruct Edge {\n    using W = T;\n  \
+    \  int from, to, id;\n    W weight;\n    Edge<T> rev() const {\n        return\
+    \ Edge<T>{to, from, id, weight};\n    }\n};\ntemplate <typename T>\nvoid debug(const\
+    \ Edge<T> &e) {\n    std::cerr << e.from << \" -> \" << e.to << \" id = \" <<\
+    \ e.id << std::cerr << \" weight = \";\n    debug(e.weight);\n}\ntemplate <typename\
+    \ T = int, bool DIR = false>\nclass Graph {\npublic:\n    using E = Edge<T>;\n\
+    \    using W = T;\n    static constexpr bool DIRECTED = DIR;\n    struct Adjacency\
+    \ {\n        using Iter = typename std::vector<E>::iterator;\n        Iter be,\
+    \ en;\n        Iter begin() const { return be; }\n        Iter end() const { return\
+    \ en; }\n        int size() const { return (int)std::distance(be, en); }\n   \
+    \     E &operator[](int idx) const { return be[idx]; }\n    };\n    struct ConstAdjacency\
+    \ {\n        using Iter = typename std::vector<E>::const_iterator;\n        Iter\
+    \ be, en;\n        Iter begin() const { return be; }\n        Iter end() const\
+    \ { return en; }\n        int size() const { return (int)std::distance(be, en);\
+    \ }\n        const E &operator[](int idx) const { return be[idx]; }\n    };\n\n\
+    private:\n    int n, m;\n    std::vector<E> edges, csr;\n    std::vector<int>\
+    \ sep;\n    bool built;\n\npublic:\n    Graph(int n) : n(n), m(0), built(false)\
+    \ {}\n    int v() const { return n; }\n    int e() const { return m; }\n    int\
+    \ add_vertex() {\n        return n++;\n    }\n    void add_edge(int from, int\
+    \ to, W weight = 1) {\n        assert(0 <= from && from < n && 0 <= to && to <\
+    \ n);\n        edges.emplace_back(E{from, to, m++, weight});\n    }\n    void\
+    \ build() {\n        sep.assign(n + 1, 0);\n        csr.resize(DIRECTED ? m :\
+    \ 2 * m);\n        for (const E &e : edges) {\n            ++sep[e.from + 1];\n\
+    \            if (!DIRECTED) {\n                ++sep[e.to + 1];\n            }\n\
+    \        }\n        for (int i = 0; i < n; ++i) {\n            sep[i + 1] += sep[i];\n\
+    \        }\n        std::vector<int> c = sep;\n        for (const E &e : edges)\
+    \ {\n            csr[c[e.from]++] = e;\n            if (!DIRECTED) {\n       \
+    \         csr[c[e.to]++] = e.rev();\n            }\n        }\n        built =\
+    \ true;\n    }\n    Adjacency operator[](int v) {\n        assert(built && 0 <=\
+    \ v && v < n);\n        return Adjacency{csr.begin() + sep[v], csr.begin() + sep[v\
+    \ + 1]};\n    }\n    ConstAdjacency operator[](int v) const {\n        assert(built\
+    \ && 0 <= v && v < n);\n        return ConstAdjacency{csr.begin() + sep[v], csr.begin()\
+    \ + sep[v + 1]};\n    }\n};\n#line 3 \"graph/centroid_decomposition.hpp\"\nclass\
+    \ CentroidDecomposition {\n    Graph<int, true> to;\n    std::vector<bool> used;\n\
+    \    std::vector<int> size;\n    int first;\n    \n    template <typename T>\n\
+    \    void dfs(const Graph<T> &g, int v, int p) {\n        size[v] = 1;\n     \
+    \   for (const Edge<T> &e : g[v]) {\n            if (e.to != p && !used[e.to])\
+    \ {\n                dfs(g, e.to, v);\n                size[v] += size[e.to];\n\
+    \            }\n        }\n    }\n    \n    template <typename T>\n    int find_centroid(const\
+    \ Graph<T> &g, int v) {\n        dfs(g, v, -1);\n        int sz = size[v];\n \
+    \       int p = -1;\n        while (true) {\n            bool ok = true;\n   \
+    \         for (const Edge<T> &e : g[v]) {\n                if (e.to == p || used[e.to])\
+    \ {\n                    continue;\n                }\n                if (size[e.to]\
+    \ > sz / 2) {\n                    p = v;\n                    v = e.to;\n   \
+    \                 ok = false;\n                    break;\n                }\n\
+    \            }\n            if (ok) {\n                break;\n            }\n\
+    \        }\n        return v;\n    }\n    \n    template <typename T>\n    int\
+    \ decompose(const Graph<T> &g, int v) {\n        int cent = find_centroid(g, v);\n\
+    \        used[cent] = true;\n        for (const Edge<T> &e : g[cent]) {\n    \
+    \        if (!used[e.to]) {\n                to.add_edge(cent, decompose(g, e.to));\n\
+    \            }\n        }\n        return cent;\n    }\n    \npublic:\n    template\
+    \ <typename T>\n    CentroidDecomposition(const Graph<T> &g) : to(g.v()), used(g.v(),\
+    \ false), size(g.v(), 0) {\n        first = decompose(g, 0);\n        to.build();\n\
+    \    }\n    \n    int first_centroid() const {\n        return first;\n    }\n\
+    \    typename Graph<int, true>::ConstAdjacency operator[](int v) const {\n   \
+    \     return to[v];\n    }\n    const Graph<int, true> &get_tree() const {\n \
+    \       return to;\n    }\n};\n#line 2 \"poly/fft.hpp\"\n#include <array>\n#line\
+    \ 2 \"number_theory/mod_int.hpp\"\n\n#line 5 \"number_theory/mod_int.hpp\"\n#include\
+    \ <type_traits>\n#line 2 \"number_theory/utils.hpp\"\n\n#include <utility>\n\n\
+    constexpr bool is_prime(unsigned n) {\n    if (n == 0 || n == 1) {\n        return\
+    \ false;\n    }\n    for (unsigned i = 2; i * i <= n; ++i) {\n        if (n %\
+    \ i == 0) {\n            return false;\n        }\n    }\n    return true;\n}\n\
+    \nconstexpr unsigned mod_pow(unsigned x, unsigned y, unsigned mod) {\n    unsigned\
     \ ret = 1, self = x;\n    while (y != 0) {\n        if (y & 1) {\n           \
     \ ret = (unsigned)((unsigned long long)ret * self % mod);\n        }\n       \
     \ self = (unsigned)((unsigned long long)self * self % mod);\n        y /= 2;\n\
@@ -214,60 +268,88 @@ data:
     \   a[n - 1] = last;\n    }\n    return a;\n}\n\ntemplate <typename M>\nstd::vector<M>\
     \ convolve_square(const std::vector<M> &a) {\n    if (a.empty()) {\n        return\
     \ std::vector<M>(0);\n    }\n    if ((int)a.size() <= 60) {\n        return convolve_naive(a,\
-    \ a);\n    } else {\n        return convolve_square_fft(a);\n    }\n}\n#line 4\
-    \ \"number_theory/factorial.hpp\"\n\ntemplate <typename M>\nM inv(int n) {\n \
-    \   static std::vector<M> data{M::raw(0), M::raw(1)};\n    static constexpr unsigned\
-    \ MOD = M::get_mod();\n    assert(0 < n);\n    while ((int)data.size() <= n) {\n\
-    \        unsigned k = (unsigned)data.size();\n        unsigned r = MOD / k + 1;\n\
-    \        data.push_back(M::raw(r) * data[k * r - MOD]);\n    }\n    return data[n];\n\
-    }\n\ntemplate <typename M>\nM fact(int n) {\n    static std::vector<M> data{M::raw(1),\
-    \ M::raw(1)};\n    assert(0 <= n);\n    while ((int)data.size() <= n) {\n    \
-    \    unsigned k = (unsigned)data.size();\n        data.push_back(M::raw(k) * data.back());\n\
-    \    }\n    return data[n];\n}\n\ntemplate <typename M>\nM inv_fact(int n) {\n\
-    \    static std::vector<M> data{M::raw(1), M::raw(1)};\n    assert(0 <= n);\n\
-    \    while ((int)data.size() <= n) {\n        unsigned k = (unsigned)data.size();\n\
-    \        data.push_back(inv<M>(k) * data.back());\n    }\n    return data[n];\n\
-    }\n\ntemplate <typename M>\nM binom(int n, int k) {\n    assert(0 <= n);\n   \
-    \ if (k < 0 || n < k) {\n        return M::raw(0);\n    }\n    return fact<M>(n)\
-    \ * inv_fact<M>(k) * inv_fact<M>(n - k);\n}\n\ntemplate <typename M>\nM n_terms_sum_k(int\
-    \ n, int k) {\n    assert(0 <= n && 0 <= k);\n    if (n == 0) {\n        return\
-    \ (k == 0 ? M::raw(1) : M::raw(0));\n    }\n    return binom<M>(n + k - 1, n -\
-    \ 1);\n}\n#line 4 \"poly/taylor_shift.hpp\"\n#include <algorithm>\n// f(x) ->\
-    \ f(x+c)\ntemplate <typename M>\nstd::vector<M> taylor_shift(std::vector<M> f,\
-    \ M c) {\n    for (int i = 0; i < (int)f.size(); ++i) {\n        f[i] *= fact<M>(i);\n\
-    \    }\n    std::reverse(f.begin(), f.end());\n    M cp(1);\n    std::vector<M>\
-    \ g(f.size());\n    for (int i = 0; i < (int)f.size(); ++i) {\n        g[i] =\
-    \ cp * inv_fact<M>(i);\n        cp *= c;\n    }\n    std::vector<M> h = convolve(f,\
-    \ g);\n    h.resize(f.size());\n    std::reverse(h.begin(), h.end());\n    for\
-    \ (int i = 0; i < (int)f.size(); ++i) {\n        h[i] *= inv_fact<M>(i);\n   \
-    \ }\n    return h;\n}\n"
-  code: "#pragma once\n#include \"fft.hpp\"\n#include \"../number_theory/factorial.hpp\"\
-    \n#include <algorithm>\n// f(x) -> f(x+c)\ntemplate <typename M>\nstd::vector<M>\
-    \ taylor_shift(std::vector<M> f, M c) {\n    for (int i = 0; i < (int)f.size();\
-    \ ++i) {\n        f[i] *= fact<M>(i);\n    }\n    std::reverse(f.begin(), f.end());\n\
-    \    M cp(1);\n    std::vector<M> g(f.size());\n    for (int i = 0; i < (int)f.size();\
-    \ ++i) {\n        g[i] = cp * inv_fact<M>(i);\n        cp *= c;\n    }\n    std::vector<M>\
-    \ h = convolve(f, g);\n    h.resize(f.size());\n    std::reverse(h.begin(), h.end());\n\
-    \    for (int i = 0; i < (int)f.size(); ++i) {\n        h[i] *= inv_fact<M>(i);\n\
-    \    }\n    return h;\n}\n"
+    \ a);\n    } else {\n        return convolve_square_fft(a);\n    }\n}\n#line 3\
+    \ \"graph/frequency_table_of_tree_distance.hpp\"\n#include <queue>\ntemplate <typename\
+    \ T>\nstd::vector<long long> frequency_table_of_tree_distance(const Graph<T, false>\
+    \ &g) {\n    CentroidDecomposition cd(g);\n    using M0 = ModInt<998244353>;\n\
+    \    using M1 = ModInt<924844033>;\n    std::vector<M0> cnt0(2 * g.v());\n   \
+    \ std::vector<M1> cnt1(2 * g.v());\n    std::vector<bool> used(g.v(), false);\n\
+    \    auto tree = cd.get_tree();\n    auto rec = [&](auto rec, int cent) -> void\
+    \ {\n        used[cent] = true;\n        std::vector<M0> prod0(2);\n        std::vector<M1>\
+    \ prod1(2);\n        for (const Edge<T> &e : g[cent]) {\n            if (used[e.to])\
+    \ {\n                continue;\n            }\n            std::queue<std::tuple<int,\
+    \ int, int>> que;\n            std::vector<M0> f0(2);\n            std::vector<M1>\
+    \ f1(2);\n            que.emplace(e.to, cent, 1);\n            while (!que.empty())\
+    \ {\n                auto [v, p, d] = que.front();\n                que.pop();\n\
+    \                if (d == (int)f0.size()) {\n                    f0.push_back(M0());\n\
+    \                    f1.push_back(M1());\n                }\n                f0[d]\
+    \ += M0(1);\n                f1[d] += M1(1);\n                cnt0[d] += M0(2);\n\
+    \                cnt1[d] += M1(2);\n                if (d == (int)prod0.size())\
+    \ {\n                    prod0.push_back(M0());\n                    prod1.push_back(M1());\n\
+    \                }\n                prod0[d] += M0(1);\n                prod1[d]\
+    \ += M1(1);\n                for (const Edge<T> &e : g[v]) {\n               \
+    \     if (e.to != p && !used[e.to]) {\n                        que.emplace(e.to,\
+    \ v, d + 1);\n                    }\n                }\n            }\n      \
+    \      f0 = convolve_square(f0);\n            f1 = convolve_square(f1);\n    \
+    \        for (int i = 0; i < (int)f0.size(); ++i) {\n                cnt0[i] -=\
+    \ f0[i];\n                cnt1[i] -= f1[i];\n            }\n        }\n      \
+    \  prod0 = convolve_square(prod0);\n        prod1 = convolve_square(prod1);\n\
+    \        for (int i = 0; i < (int)prod0.size(); ++i) {\n            cnt0[i] +=\
+    \ prod0[i];\n            cnt1[i] += prod1[i];\n        }\n        for (const Edge<int>\
+    \ &e : cd[cent]) {\n            rec(rec, e.to);\n        }\n    };\n    rec(rec,\
+    \ cd.first_centroid());\n    std::vector<long long> ret(g.v());\n    constexpr\
+    \ M1 INV = M1(M0::get_mod()).inv();\n    for (int i = 0; i < g.v(); ++i) {\n \
+    \       M1 cf = INV * (cnt1[i] - M1(cnt0[i].val));\n        ret[i] = (cnt0[i].val\
+    \ + 1LL * M0::get_mod() * cf.val) / 2;\n    }\n    return ret;\n}\n"
+  code: "#include \"centroid_decomposition.hpp\"\n#include \"../poly/fft.hpp\"\n#include\
+    \ <queue>\ntemplate <typename T>\nstd::vector<long long> frequency_table_of_tree_distance(const\
+    \ Graph<T, false> &g) {\n    CentroidDecomposition cd(g);\n    using M0 = ModInt<998244353>;\n\
+    \    using M1 = ModInt<924844033>;\n    std::vector<M0> cnt0(2 * g.v());\n   \
+    \ std::vector<M1> cnt1(2 * g.v());\n    std::vector<bool> used(g.v(), false);\n\
+    \    auto tree = cd.get_tree();\n    auto rec = [&](auto rec, int cent) -> void\
+    \ {\n        used[cent] = true;\n        std::vector<M0> prod0(2);\n        std::vector<M1>\
+    \ prod1(2);\n        for (const Edge<T> &e : g[cent]) {\n            if (used[e.to])\
+    \ {\n                continue;\n            }\n            std::queue<std::tuple<int,\
+    \ int, int>> que;\n            std::vector<M0> f0(2);\n            std::vector<M1>\
+    \ f1(2);\n            que.emplace(e.to, cent, 1);\n            while (!que.empty())\
+    \ {\n                auto [v, p, d] = que.front();\n                que.pop();\n\
+    \                if (d == (int)f0.size()) {\n                    f0.push_back(M0());\n\
+    \                    f1.push_back(M1());\n                }\n                f0[d]\
+    \ += M0(1);\n                f1[d] += M1(1);\n                cnt0[d] += M0(2);\n\
+    \                cnt1[d] += M1(2);\n                if (d == (int)prod0.size())\
+    \ {\n                    prod0.push_back(M0());\n                    prod1.push_back(M1());\n\
+    \                }\n                prod0[d] += M0(1);\n                prod1[d]\
+    \ += M1(1);\n                for (const Edge<T> &e : g[v]) {\n               \
+    \     if (e.to != p && !used[e.to]) {\n                        que.emplace(e.to,\
+    \ v, d + 1);\n                    }\n                }\n            }\n      \
+    \      f0 = convolve_square(f0);\n            f1 = convolve_square(f1);\n    \
+    \        for (int i = 0; i < (int)f0.size(); ++i) {\n                cnt0[i] -=\
+    \ f0[i];\n                cnt1[i] -= f1[i];\n            }\n        }\n      \
+    \  prod0 = convolve_square(prod0);\n        prod1 = convolve_square(prod1);\n\
+    \        for (int i = 0; i < (int)prod0.size(); ++i) {\n            cnt0[i] +=\
+    \ prod0[i];\n            cnt1[i] += prod1[i];\n        }\n        for (const Edge<int>\
+    \ &e : cd[cent]) {\n            rec(rec, e.to);\n        }\n    };\n    rec(rec,\
+    \ cd.first_centroid());\n    std::vector<long long> ret(g.v());\n    constexpr\
+    \ M1 INV = M1(M0::get_mod()).inv();\n    for (int i = 0; i < g.v(); ++i) {\n \
+    \       M1 cf = INV * (cnt1[i] - M1(cnt0[i].val));\n        ret[i] = (cnt0[i].val\
+    \ + 1LL * M0::get_mod() * cf.val) / 2;\n    }\n    return ret;\n}\n"
   dependsOn:
+  - graph/centroid_decomposition.hpp
+  - graph/graph.hpp
   - poly/fft.hpp
   - number_theory/mod_int.hpp
   - number_theory/utils.hpp
-  - number_theory/factorial.hpp
   isVerificationFile: false
-  path: poly/taylor_shift.hpp
-  requiredBy:
-  - poly/stirling1.hpp
+  path: graph/frequency_table_of_tree_distance.hpp
+  requiredBy: []
   timestamp: '2025-12-31 19:12:41+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - poly/test/stirling_number_of_the_first_kind.test.cpp
-  - poly/test/polynomial_taylor_shift.test.cpp
-documentation_of: poly/taylor_shift.hpp
+  - graph/test/frequency_table_of_tree_distance.test.cpp
+documentation_of: graph/frequency_table_of_tree_distance.hpp
 layout: document
 redirect_from:
-- /library/poly/taylor_shift.hpp
-- /library/poly/taylor_shift.hpp.html
-title: poly/taylor_shift.hpp
+- /library/graph/frequency_table_of_tree_distance.hpp
+- /library/graph/frequency_table_of_tree_distance.hpp.html
+title: graph/frequency_table_of_tree_distance.hpp
 ---

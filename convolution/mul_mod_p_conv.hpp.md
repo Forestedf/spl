@@ -304,19 +304,31 @@ data:
     template <typename M>\nstd::vector<M> convolve(const std::vector<M> &a, const\
     \ std::vector<M> &b) {\n    if (a.empty() || b.empty()) {\n        return std::vector<M>(0);\n\
     \    }\n    if (std::min(a.size(), b.size()) <= 60) {\n        return convolve_naive(a,\
-    \ b);\n    } else {\n        return convolve_fft(a, b);\n    }\n}\n#line 4 \"\
-    convolution/mul_mod_p_conv.hpp\"\n\ntemplate <typename T>\nstd::vector<T> mul_mod_p_convolution(const\
-    \ std::vector<T> &a,\n                                     const std::vector<T>\
-    \ &b, int g = -1) {\n    int p = (int)a.size();\n    if (g == -1) {\n        g\
-    \ = find_primitive_root(p);\n    }\n\n    std::vector<int> pw(p - 1);\n    pw[0]\
-    \ = 1;\n    for (int i = 1; i < p - 1; ++i) {\n        pw[i] = (long long)pw[i\
-    \ - 1] * g % p;\n    }\n\n    std::vector<T> at(p - 1), bt(p - 1);\n    for (int\
-    \ i = 0; i < p - 1; ++i) {\n        at[i] = a[pw[i]];\n        bt[i] = b[pw[i]];\n\
-    \    }\n    std::vector<T> ct = convolve(at, bt);\n\n    std::vector<T> c(p, T(0));\n\
-    \    for (int i = 0; i < p; ++i) {\n        c[0] += a[i] * b[0];\n    }\n    for\
-    \ (int i = 1; i < p; ++i) {\n        c[0] += a[0] * b[i];\n    }\n    for (int\
-    \ i = 0; i < (int)ct.size(); ++i) {\n        c[pw[i % (p - 1)]] += ct[i];\n  \
-    \  }\n    return c;\n}\n"
+    \ b);\n    } else {\n        return convolve_fft(a, b);\n    }\n}\n\ntemplate\
+    \ <typename M>\nstd::vector<M> convolve_square_fft(std::vector<M> a) {\n    int\
+    \ n = (int)2 * a.size() - 1;\n    int m = 1;\n    while (m < n) {\n        m <<=\
+    \ 1;\n    }\n    bool shr = false;\n    M last;\n    if (n >= 3 && n == m / 2\
+    \ + 1) {\n        shr = true;\n        last = a.back() * a.back();\n        m\
+    \ /= 2;\n        while ((int)a.size() > m) {\n            a[(int)a.size() - 1\
+    \ - m] += a.back();\n            a.pop_back();\n        }\n    }\n    a.resize(m);\n\
+    \    fft(a);\n    for (int i = 0; i < m; ++i) {\n        a[i] *= a[i];\n    }\n\
+    \    ifft(a);\n    a.resize(n);\n    if (shr) {\n        a[0] -= last;\n     \
+    \   a[n - 1] = last;\n    }\n    return a;\n}\n\ntemplate <typename M>\nstd::vector<M>\
+    \ convolve_square(const std::vector<M> &a) {\n    if (a.empty()) {\n        return\
+    \ std::vector<M>(0);\n    }\n    if ((int)a.size() <= 60) {\n        return convolve_naive(a,\
+    \ a);\n    } else {\n        return convolve_square_fft(a);\n    }\n}\n#line 4\
+    \ \"convolution/mul_mod_p_conv.hpp\"\n\ntemplate <typename T>\nstd::vector<T>\
+    \ mul_mod_p_convolution(const std::vector<T> &a,\n                           \
+    \          const std::vector<T> &b, int g = -1) {\n    int p = (int)a.size();\n\
+    \    if (g == -1) {\n        g = find_primitive_root(p);\n    }\n\n    std::vector<int>\
+    \ pw(p - 1);\n    pw[0] = 1;\n    for (int i = 1; i < p - 1; ++i) {\n        pw[i]\
+    \ = (long long)pw[i - 1] * g % p;\n    }\n\n    std::vector<T> at(p - 1), bt(p\
+    \ - 1);\n    for (int i = 0; i < p - 1; ++i) {\n        at[i] = a[pw[i]];\n  \
+    \      bt[i] = b[pw[i]];\n    }\n    std::vector<T> ct = convolve(at, bt);\n\n\
+    \    std::vector<T> c(p, T(0));\n    for (int i = 0; i < p; ++i) {\n        c[0]\
+    \ += a[i] * b[0];\n    }\n    for (int i = 1; i < p; ++i) {\n        c[0] += a[0]\
+    \ * b[i];\n    }\n    for (int i = 0; i < (int)ct.size(); ++i) {\n        c[pw[i\
+    \ % (p - 1)]] += ct[i];\n    }\n    return c;\n}\n"
   code: "#pragma once\n#include \"../number_theory/primitive_root.hpp\"\n#include\
     \ \"../poly/fft.hpp\"\n\ntemplate <typename T>\nstd::vector<T> mul_mod_p_convolution(const\
     \ std::vector<T> &a,\n                                     const std::vector<T>\
@@ -342,7 +354,7 @@ data:
   isVerificationFile: false
   path: convolution/mul_mod_p_conv.hpp
   requiredBy: []
-  timestamp: '2025-01-29 16:15:05+09:00'
+  timestamp: '2025-12-31 19:12:41+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - convolution/test/mul_modp_convolution.test.cpp

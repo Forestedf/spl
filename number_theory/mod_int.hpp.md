@@ -12,6 +12,9 @@ data:
     path: convolution/mul_mod_p_conv.hpp
     title: convolution/mul_mod_p_conv.hpp
   - icon: ':heavy_check_mark:'
+    path: graph/frequency_table_of_tree_distance.hpp
+    title: graph/frequency_table_of_tree_distance.hpp
+  - icon: ':heavy_check_mark:'
     path: poly/fft.hpp
     title: poly/fft.hpp
   - icon: ':heavy_check_mark:'
@@ -99,6 +102,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/test/enumerate_triangles.test.cpp
     title: graph/test/enumerate_triangles.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: graph/test/frequency_table_of_tree_distance.test.cpp
+    title: graph/test/frequency_table_of_tree_distance.test.cpp
   - icon: ':heavy_check_mark:'
     path: poly/test/convolution_mod.test.cpp
     title: poly/test/convolution_mod.test.cpp
@@ -293,6 +299,7 @@ data:
   - poly/fps_inv.hpp
   - poly/fps_log.hpp
   - poly/multieval_geometric.hpp
+  - graph/frequency_table_of_tree_distance.hpp
   - convolution/index_difference.hpp
   - convolution/mul_mod_p_conv.hpp
   timestamp: '2024-07-18 16:56:22+09:00'
@@ -325,6 +332,7 @@ data:
   - poly/test/multipoint_evaluation_on_geometric_sequence.test.cpp
   - poly/test/polynomial_taylor_shift.test.cpp
   - poly/test/prod_of_polys.test.cpp
+  - graph/test/frequency_table_of_tree_distance.test.cpp
   - graph/test/enumerate_triangles.test.cpp
   - convolution/test/mul_modp_convolution.test.cpp
   - convolution/test/gcd_convolution.stress.test.cpp

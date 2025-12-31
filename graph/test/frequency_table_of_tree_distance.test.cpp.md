@@ -2,6 +2,15 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
+    path: graph/centroid_decomposition.hpp
+    title: graph/centroid_decomposition.hpp
+  - icon: ':heavy_check_mark:'
+    path: graph/frequency_table_of_tree_distance.hpp
+    title: graph/frequency_table_of_tree_distance.hpp
+  - icon: ':heavy_check_mark:'
+    path: graph/graph.hpp
+    title: graph/graph.hpp
+  - icon: ':heavy_check_mark:'
     path: number_theory/mod_int.hpp
     title: number_theory/mod_int.hpp
   - icon: ':heavy_check_mark:'
@@ -20,60 +29,118 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/convolution_mod
+    PROBLEM: https://judge.yosupo.jp/problem/frequency_table_of_tree_distance
     links:
-    - https://judge.yosupo.jp/problem/convolution_mod
-  bundledCode: "#line 1 \"poly/test/convolution_mod.test.cpp\"\n#define PROBLEM \"\
-    https://judge.yosupo.jp/problem/convolution_mod\"\n#define FAST_IO\n#line 2 \"\
-    poly/fft.hpp\"\n#include <array>\n#include <vector>\n#line 2 \"number_theory/mod_int.hpp\"\
-    \n\n#include <cassert>\n#include <iostream>\n#include <type_traits>\n#line 2 \"\
-    number_theory/utils.hpp\"\n\n#include <utility>\n\nconstexpr bool is_prime(unsigned\
-    \ n) {\n    if (n == 0 || n == 1) {\n        return false;\n    }\n    for (unsigned\
-    \ i = 2; i * i <= n; ++i) {\n        if (n % i == 0) {\n            return false;\n\
-    \        }\n    }\n    return true;\n}\n\nconstexpr unsigned mod_pow(unsigned\
-    \ x, unsigned y, unsigned mod) {\n    unsigned ret = 1, self = x;\n    while (y\
-    \ != 0) {\n        if (y & 1) {\n            ret = (unsigned)((unsigned long long)ret\
-    \ * self % mod);\n        }\n        self = (unsigned)((unsigned long long)self\
-    \ * self % mod);\n        y /= 2;\n    }\n    return ret;\n}\n\ntemplate <unsigned\
-    \ mod>\nconstexpr unsigned primitive_root() {\n    static_assert(is_prime(mod),\
-    \ \"`mod` must be a prime number.\");\n    if (mod == 2) {\n        return 1;\n\
-    \    }\n\n    unsigned primes[32] = {};\n    int it = 0;\n    {\n        unsigned\
-    \ m = mod - 1;\n        for (unsigned i = 2; i * i <= m; ++i) {\n            if\
-    \ (m % i == 0) {\n                primes[it++] = i;\n                while (m\
-    \ % i == 0) {\n                    m /= i;\n                }\n            }\n\
-    \        }\n        if (m != 1) {\n            primes[it++] = m;\n        }\n\
-    \    }\n    for (unsigned i = 2; i < mod; ++i) {\n        bool ok = true;\n  \
-    \      for (int j = 0; j < it; ++j) {\n            if (mod_pow(i, (mod - 1) /\
-    \ primes[j], mod) == 1) {\n                ok = false;\n                break;\n\
-    \            }\n        }\n        if (ok) return i;\n    }\n    return 0;\n}\n\
-    \n// y >= 1\ntemplate <typename T>\nconstexpr T safe_mod(T x, T y) {\n    x %=\
-    \ y;\n    if (x < 0) {\n        x += y;\n    }\n    return x;\n}\n\n// y != 0\n\
-    template <typename T>\nconstexpr T floor_div(T x, T y) {\n    if (y < 0) {\n \
-    \       x *= -1;\n        y *= -1;\n    }\n    if (x >= 0) {\n        return x\
-    \ / y;\n    } else {\n        return -((-x + y - 1) / y);\n    }\n}\n\n// y !=\
-    \ 0\ntemplate <typename T>\nconstexpr T ceil_div(T x, T y) {\n    if (y < 0) {\n\
-    \        x *= -1;\n        y *= -1;\n    }\n    if (x >= 0) {\n        return\
-    \ (x + y - 1) / y;\n    } else {\n        return -(-x / y);\n    }\n}\n\n// b\
-    \ >= 1\n// returns (g, x) s.t. g = gcd(a, b), a * x = g (mod b), 0 <= x < b /\
-    \ g\n// from ACL\ntemplate <typename T>\nstd::pair<T, T> extgcd(T a, T b) {\n\
-    \    a = safe_mod(a, b);\n    T s = b, t = a, m0 = 0, m1 = 1;\n    while (t) {\n\
-    \        T u = s / t;\n        s -= t * u;\n        m0 -= m1 * u;\n        std::swap(s,\
-    \ t);\n        std::swap(m0, m1);\n    }\n    if (m0 < 0) {\n        m0 += b /\
-    \ s;\n    }\n    return std::pair<T, T>(s, m0);\n}\n\n// b >= 1\n// returns (g,\
-    \ x, y) s.t. g = gcd(a, b), a * x + b * y = g, 0 <= x < b / g, |y| < max(2, |a|\
-    \ / g)\ntemplate <typename T>\nstd::tuple<T, T, T> extgcd2(T a, T b) {\n    T\
-    \ _a = safe_mod(a, b);\n    T quot = (a - _a) / b;\n    T x00 = 0, x01 = 1, y0\
-    \ = b;\n    T x10 = 1, x11 = -quot, y1 = _a;\n    while (y1) {\n        T u =\
-    \ y0 / y1;\n        x00 -= u * x10;\n        x01 -= u * x11;\n        y0 -= u\
-    \ * y1;\n        std::swap(x00, x10);\n        std::swap(x01, x11);\n        std::swap(y0,\
-    \ y1);\n    }\n    if (x00 < 0) {\n        x00 += b / y0;\n        x01 -= a /\
-    \ y0;\n    }\n    return std::tuple<T, T, T>(y0, x00, x01);\n}\n\n// gcd(x, m)\
-    \ == 1\ntemplate <typename T>\nT inv_mod(T x, T m) {\n    return extgcd(x, m).second;\n\
-    }\n#line 7 \"number_theory/mod_int.hpp\"\n\ntemplate <unsigned mod>\nstruct ModInt\
-    \ {\n    static_assert(mod != 0, \"`mod` must not be equal to 0.\");\n    static_assert(mod\
-    \ < (1u << 31),\n                  \"`mod` must be less than (1u << 31) = 2147483648.\"\
-    );\n\n    unsigned val;\n\n    static constexpr unsigned get_mod() { return mod;\
-    \ }\n\n    constexpr ModInt() : val(0) {}\n    template <typename T, std::enable_if_t<std::is_signed_v<T>>\
+    - https://judge.yosupo.jp/problem/frequency_table_of_tree_distance
+  bundledCode: "#line 1 \"graph/test/frequency_table_of_tree_distance.test.cpp\"\n\
+    #define PROBLEM \"https://judge.yosupo.jp/problem/frequency_table_of_tree_distance\"\
+    \n#define FAST_IO\n#line 2 \"graph/graph.hpp\"\n#include <iostream>\n#include\
+    \ <cassert>\n#include <vector>\ntemplate <typename T>\nstruct Edge {\n    using\
+    \ W = T;\n    int from, to, id;\n    W weight;\n    Edge<T> rev() const {\n  \
+    \      return Edge<T>{to, from, id, weight};\n    }\n};\ntemplate <typename T>\n\
+    void debug(const Edge<T> &e) {\n    std::cerr << e.from << \" -> \" << e.to <<\
+    \ \" id = \" << e.id << std::cerr << \" weight = \";\n    debug(e.weight);\n}\n\
+    template <typename T = int, bool DIR = false>\nclass Graph {\npublic:\n    using\
+    \ E = Edge<T>;\n    using W = T;\n    static constexpr bool DIRECTED = DIR;\n\
+    \    struct Adjacency {\n        using Iter = typename std::vector<E>::iterator;\n\
+    \        Iter be, en;\n        Iter begin() const { return be; }\n        Iter\
+    \ end() const { return en; }\n        int size() const { return (int)std::distance(be,\
+    \ en); }\n        E &operator[](int idx) const { return be[idx]; }\n    };\n \
+    \   struct ConstAdjacency {\n        using Iter = typename std::vector<E>::const_iterator;\n\
+    \        Iter be, en;\n        Iter begin() const { return be; }\n        Iter\
+    \ end() const { return en; }\n        int size() const { return (int)std::distance(be,\
+    \ en); }\n        const E &operator[](int idx) const { return be[idx]; }\n   \
+    \ };\n\nprivate:\n    int n, m;\n    std::vector<E> edges, csr;\n    std::vector<int>\
+    \ sep;\n    bool built;\n\npublic:\n    Graph(int n) : n(n), m(0), built(false)\
+    \ {}\n    int v() const { return n; }\n    int e() const { return m; }\n    int\
+    \ add_vertex() {\n        return n++;\n    }\n    void add_edge(int from, int\
+    \ to, W weight = 1) {\n        assert(0 <= from && from < n && 0 <= to && to <\
+    \ n);\n        edges.emplace_back(E{from, to, m++, weight});\n    }\n    void\
+    \ build() {\n        sep.assign(n + 1, 0);\n        csr.resize(DIRECTED ? m :\
+    \ 2 * m);\n        for (const E &e : edges) {\n            ++sep[e.from + 1];\n\
+    \            if (!DIRECTED) {\n                ++sep[e.to + 1];\n            }\n\
+    \        }\n        for (int i = 0; i < n; ++i) {\n            sep[i + 1] += sep[i];\n\
+    \        }\n        std::vector<int> c = sep;\n        for (const E &e : edges)\
+    \ {\n            csr[c[e.from]++] = e;\n            if (!DIRECTED) {\n       \
+    \         csr[c[e.to]++] = e.rev();\n            }\n        }\n        built =\
+    \ true;\n    }\n    Adjacency operator[](int v) {\n        assert(built && 0 <=\
+    \ v && v < n);\n        return Adjacency{csr.begin() + sep[v], csr.begin() + sep[v\
+    \ + 1]};\n    }\n    ConstAdjacency operator[](int v) const {\n        assert(built\
+    \ && 0 <= v && v < n);\n        return ConstAdjacency{csr.begin() + sep[v], csr.begin()\
+    \ + sep[v + 1]};\n    }\n};\n#line 3 \"graph/centroid_decomposition.hpp\"\nclass\
+    \ CentroidDecomposition {\n    Graph<int, true> to;\n    std::vector<bool> used;\n\
+    \    std::vector<int> size;\n    int first;\n    \n    template <typename T>\n\
+    \    void dfs(const Graph<T> &g, int v, int p) {\n        size[v] = 1;\n     \
+    \   for (const Edge<T> &e : g[v]) {\n            if (e.to != p && !used[e.to])\
+    \ {\n                dfs(g, e.to, v);\n                size[v] += size[e.to];\n\
+    \            }\n        }\n    }\n    \n    template <typename T>\n    int find_centroid(const\
+    \ Graph<T> &g, int v) {\n        dfs(g, v, -1);\n        int sz = size[v];\n \
+    \       int p = -1;\n        while (true) {\n            bool ok = true;\n   \
+    \         for (const Edge<T> &e : g[v]) {\n                if (e.to == p || used[e.to])\
+    \ {\n                    continue;\n                }\n                if (size[e.to]\
+    \ > sz / 2) {\n                    p = v;\n                    v = e.to;\n   \
+    \                 ok = false;\n                    break;\n                }\n\
+    \            }\n            if (ok) {\n                break;\n            }\n\
+    \        }\n        return v;\n    }\n    \n    template <typename T>\n    int\
+    \ decompose(const Graph<T> &g, int v) {\n        int cent = find_centroid(g, v);\n\
+    \        used[cent] = true;\n        for (const Edge<T> &e : g[cent]) {\n    \
+    \        if (!used[e.to]) {\n                to.add_edge(cent, decompose(g, e.to));\n\
+    \            }\n        }\n        return cent;\n    }\n    \npublic:\n    template\
+    \ <typename T>\n    CentroidDecomposition(const Graph<T> &g) : to(g.v()), used(g.v(),\
+    \ false), size(g.v(), 0) {\n        first = decompose(g, 0);\n        to.build();\n\
+    \    }\n    \n    int first_centroid() const {\n        return first;\n    }\n\
+    \    typename Graph<int, true>::ConstAdjacency operator[](int v) const {\n   \
+    \     return to[v];\n    }\n    const Graph<int, true> &get_tree() const {\n \
+    \       return to;\n    }\n};\n#line 2 \"poly/fft.hpp\"\n#include <array>\n#line\
+    \ 2 \"number_theory/mod_int.hpp\"\n\n#line 5 \"number_theory/mod_int.hpp\"\n#include\
+    \ <type_traits>\n#line 2 \"number_theory/utils.hpp\"\n\n#include <utility>\n\n\
+    constexpr bool is_prime(unsigned n) {\n    if (n == 0 || n == 1) {\n        return\
+    \ false;\n    }\n    for (unsigned i = 2; i * i <= n; ++i) {\n        if (n %\
+    \ i == 0) {\n            return false;\n        }\n    }\n    return true;\n}\n\
+    \nconstexpr unsigned mod_pow(unsigned x, unsigned y, unsigned mod) {\n    unsigned\
+    \ ret = 1, self = x;\n    while (y != 0) {\n        if (y & 1) {\n           \
+    \ ret = (unsigned)((unsigned long long)ret * self % mod);\n        }\n       \
+    \ self = (unsigned)((unsigned long long)self * self % mod);\n        y /= 2;\n\
+    \    }\n    return ret;\n}\n\ntemplate <unsigned mod>\nconstexpr unsigned primitive_root()\
+    \ {\n    static_assert(is_prime(mod), \"`mod` must be a prime number.\");\n  \
+    \  if (mod == 2) {\n        return 1;\n    }\n\n    unsigned primes[32] = {};\n\
+    \    int it = 0;\n    {\n        unsigned m = mod - 1;\n        for (unsigned\
+    \ i = 2; i * i <= m; ++i) {\n            if (m % i == 0) {\n                primes[it++]\
+    \ = i;\n                while (m % i == 0) {\n                    m /= i;\n  \
+    \              }\n            }\n        }\n        if (m != 1) {\n          \
+    \  primes[it++] = m;\n        }\n    }\n    for (unsigned i = 2; i < mod; ++i)\
+    \ {\n        bool ok = true;\n        for (int j = 0; j < it; ++j) {\n       \
+    \     if (mod_pow(i, (mod - 1) / primes[j], mod) == 1) {\n                ok =\
+    \ false;\n                break;\n            }\n        }\n        if (ok) return\
+    \ i;\n    }\n    return 0;\n}\n\n// y >= 1\ntemplate <typename T>\nconstexpr T\
+    \ safe_mod(T x, T y) {\n    x %= y;\n    if (x < 0) {\n        x += y;\n    }\n\
+    \    return x;\n}\n\n// y != 0\ntemplate <typename T>\nconstexpr T floor_div(T\
+    \ x, T y) {\n    if (y < 0) {\n        x *= -1;\n        y *= -1;\n    }\n   \
+    \ if (x >= 0) {\n        return x / y;\n    } else {\n        return -((-x + y\
+    \ - 1) / y);\n    }\n}\n\n// y != 0\ntemplate <typename T>\nconstexpr T ceil_div(T\
+    \ x, T y) {\n    if (y < 0) {\n        x *= -1;\n        y *= -1;\n    }\n   \
+    \ if (x >= 0) {\n        return (x + y - 1) / y;\n    } else {\n        return\
+    \ -(-x / y);\n    }\n}\n\n// b >= 1\n// returns (g, x) s.t. g = gcd(a, b), a *\
+    \ x = g (mod b), 0 <= x < b / g\n// from ACL\ntemplate <typename T>\nstd::pair<T,\
+    \ T> extgcd(T a, T b) {\n    a = safe_mod(a, b);\n    T s = b, t = a, m0 = 0,\
+    \ m1 = 1;\n    while (t) {\n        T u = s / t;\n        s -= t * u;\n      \
+    \  m0 -= m1 * u;\n        std::swap(s, t);\n        std::swap(m0, m1);\n    }\n\
+    \    if (m0 < 0) {\n        m0 += b / s;\n    }\n    return std::pair<T, T>(s,\
+    \ m0);\n}\n\n// b >= 1\n// returns (g, x, y) s.t. g = gcd(a, b), a * x + b * y\
+    \ = g, 0 <= x < b / g, |y| < max(2, |a| / g)\ntemplate <typename T>\nstd::tuple<T,\
+    \ T, T> extgcd2(T a, T b) {\n    T _a = safe_mod(a, b);\n    T quot = (a - _a)\
+    \ / b;\n    T x00 = 0, x01 = 1, y0 = b;\n    T x10 = 1, x11 = -quot, y1 = _a;\n\
+    \    while (y1) {\n        T u = y0 / y1;\n        x00 -= u * x10;\n        x01\
+    \ -= u * x11;\n        y0 -= u * y1;\n        std::swap(x00, x10);\n        std::swap(x01,\
+    \ x11);\n        std::swap(y0, y1);\n    }\n    if (x00 < 0) {\n        x00 +=\
+    \ b / y0;\n        x01 -= a / y0;\n    }\n    return std::tuple<T, T, T>(y0, x00,\
+    \ x01);\n}\n\n// gcd(x, m) == 1\ntemplate <typename T>\nT inv_mod(T x, T m) {\n\
+    \    return extgcd(x, m).second;\n}\n#line 7 \"number_theory/mod_int.hpp\"\n\n\
+    template <unsigned mod>\nstruct ModInt {\n    static_assert(mod != 0, \"`mod`\
+    \ must not be equal to 0.\");\n    static_assert(mod < (1u << 31),\n         \
+    \         \"`mod` must be less than (1u << 31) = 2147483648.\");\n\n    unsigned\
+    \ val;\n\n    static constexpr unsigned get_mod() { return mod; }\n\n    constexpr\
+    \ ModInt() : val(0) {}\n    template <typename T, std::enable_if_t<std::is_signed_v<T>>\
     \ * = nullptr>\n    constexpr ModInt(T x)\n        : val((unsigned)((long long)x\
     \ % (long long)mod + (x < 0 ? mod : 0))) {}\n    template <typename T, std::enable_if_t<std::is_unsigned_v<T>>\
     \ * = nullptr>\n    constexpr ModInt(T x) : val((unsigned)(x % mod)) {}\n\n  \
@@ -209,10 +276,42 @@ data:
     \   a[n - 1] = last;\n    }\n    return a;\n}\n\ntemplate <typename M>\nstd::vector<M>\
     \ convolve_square(const std::vector<M> &a) {\n    if (a.empty()) {\n        return\
     \ std::vector<M>(0);\n    }\n    if ((int)a.size() <= 60) {\n        return convolve_naive(a,\
-    \ a);\n    } else {\n        return convolve_square_fft(a);\n    }\n}\n#line 2\
-    \ \"template/template.hpp\"\n#include <bits/stdc++.h>\n#define OVERRIDE(a, b,\
-    \ c, d, ...) d\n#define REP2(i, n) for (i32 i = 0; i < (i32)(n); ++i)\n#define\
-    \ REP3(i, m, n) for (i32 i = (i32)(m); i < (i32)(n); ++i)\n#define REP(...) OVERRIDE(__VA_ARGS__,\
+    \ a);\n    } else {\n        return convolve_square_fft(a);\n    }\n}\n#line 3\
+    \ \"graph/frequency_table_of_tree_distance.hpp\"\n#include <queue>\ntemplate <typename\
+    \ T>\nstd::vector<long long> frequency_table_of_tree_distance(const Graph<T, false>\
+    \ &g) {\n    CentroidDecomposition cd(g);\n    using M0 = ModInt<998244353>;\n\
+    \    using M1 = ModInt<924844033>;\n    std::vector<M0> cnt0(2 * g.v());\n   \
+    \ std::vector<M1> cnt1(2 * g.v());\n    std::vector<bool> used(g.v(), false);\n\
+    \    auto tree = cd.get_tree();\n    auto rec = [&](auto rec, int cent) -> void\
+    \ {\n        used[cent] = true;\n        std::vector<M0> prod0(2);\n        std::vector<M1>\
+    \ prod1(2);\n        for (const Edge<T> &e : g[cent]) {\n            if (used[e.to])\
+    \ {\n                continue;\n            }\n            std::queue<std::tuple<int,\
+    \ int, int>> que;\n            std::vector<M0> f0(2);\n            std::vector<M1>\
+    \ f1(2);\n            que.emplace(e.to, cent, 1);\n            while (!que.empty())\
+    \ {\n                auto [v, p, d] = que.front();\n                que.pop();\n\
+    \                if (d == (int)f0.size()) {\n                    f0.push_back(M0());\n\
+    \                    f1.push_back(M1());\n                }\n                f0[d]\
+    \ += M0(1);\n                f1[d] += M1(1);\n                cnt0[d] += M0(2);\n\
+    \                cnt1[d] += M1(2);\n                if (d == (int)prod0.size())\
+    \ {\n                    prod0.push_back(M0());\n                    prod1.push_back(M1());\n\
+    \                }\n                prod0[d] += M0(1);\n                prod1[d]\
+    \ += M1(1);\n                for (const Edge<T> &e : g[v]) {\n               \
+    \     if (e.to != p && !used[e.to]) {\n                        que.emplace(e.to,\
+    \ v, d + 1);\n                    }\n                }\n            }\n      \
+    \      f0 = convolve_square(f0);\n            f1 = convolve_square(f1);\n    \
+    \        for (int i = 0; i < (int)f0.size(); ++i) {\n                cnt0[i] -=\
+    \ f0[i];\n                cnt1[i] -= f1[i];\n            }\n        }\n      \
+    \  prod0 = convolve_square(prod0);\n        prod1 = convolve_square(prod1);\n\
+    \        for (int i = 0; i < (int)prod0.size(); ++i) {\n            cnt0[i] +=\
+    \ prod0[i];\n            cnt1[i] += prod1[i];\n        }\n        for (const Edge<int>\
+    \ &e : cd[cent]) {\n            rec(rec, e.to);\n        }\n    };\n    rec(rec,\
+    \ cd.first_centroid());\n    std::vector<long long> ret(g.v());\n    constexpr\
+    \ M1 INV = M1(M0::get_mod()).inv();\n    for (int i = 0; i < g.v(); ++i) {\n \
+    \       M1 cf = INV * (cnt1[i] - M1(cnt0[i].val));\n        ret[i] = (cnt0[i].val\
+    \ + 1LL * M0::get_mod() * cf.val) / 2;\n    }\n    return ret;\n}\n#line 2 \"\
+    template/template.hpp\"\n#include <bits/stdc++.h>\n#define OVERRIDE(a, b, c, d,\
+    \ ...) d\n#define REP2(i, n) for (i32 i = 0; i < (i32)(n); ++i)\n#define REP3(i,\
+    \ m, n) for (i32 i = (i32)(m); i < (i32)(n); ++i)\n#define REP(...) OVERRIDE(__VA_ARGS__,\
     \ REP3, REP2)(__VA_ARGS__)\n#define PER2(i, n) for (i32 i = (i32)(n)-1; i >= 0;\
     \ --i)\n#define PER3(i, m, n) for (i32 i = (i32)(n)-1; i >= (i32)(m); --i)\n#define\
     \ PER(...) OVERRIDE(__VA_ARGS__, PER3, PER2)(__VA_ARGS__)\n#define ALL(x) begin(x),\
@@ -253,32 +352,38 @@ data:
     \  string __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define VEC(type, name, size)\
     \ \\\n    V<type> name(size);       \\\n    read(name);\n#define VVEC(type, name,\
     \ size1, size2)    \\\n    VV<type> name(size1, V<type>(size2)); \\\n    read(name);\n\
-    #line 5 \"poly/test/convolution_mod.test.cpp\"\n\nint main() {\n    using M =\
-    \ ModInt<998244353>;\n    I32(n, m);\n    V<M> a(n), b(m);\n    REP(i, n) {\n\
-    \        cin >> a[i];\n    }\n    REP(i, m) {\n        cin >> b[i];\n    }\n \
-    \   V<M> c = convolve(a, b);\n    REP(i, n + m - 1) {\n        cout << c[i] <<\
-    \ \" \\n\"[i + 1 == n + m - 1];\n    }\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/convolution_mod\"\n#define\
-    \ FAST_IO\n#include \"../../poly/fft.hpp\"\n#include \"../../template/template.hpp\"\
-    \n\nint main() {\n    using M = ModInt<998244353>;\n    I32(n, m);\n    V<M> a(n),\
-    \ b(m);\n    REP(i, n) {\n        cin >> a[i];\n    }\n    REP(i, m) {\n     \
-    \   cin >> b[i];\n    }\n    V<M> c = convolve(a, b);\n    REP(i, n + m - 1) {\n\
-    \        cout << c[i] << \" \\n\"[i + 1 == n + m - 1];\n    }\n}\n"
+    #line 5 \"graph/test/frequency_table_of_tree_distance.test.cpp\"\n\nvoid solve()\
+    \ {\n    I32(n);\n    Graph<> g(n);\n    REP(i, n - 1) {\n        I32(u, v);\n\
+    \        g.add_edge(u, v);\n    }\n    g.build();\n    V<i64> cnt = frequency_table_of_tree_distance(g);\n\
+    \    REP(i, 1, n) {\n        cout << cnt[i] << \" \\n\"[i + 1 == n];\n    }\n\
+    }\n\nint main() {\n    i32 t = 1;\n    // cin >> t;\n    while (t--) {\n     \
+    \   solve();\n    }\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/frequency_table_of_tree_distance\"\
+    \n#define FAST_IO\n#include \"../../graph/frequency_table_of_tree_distance.hpp\"\
+    \n#include \"../../template/template.hpp\"\n\nvoid solve() {\n    I32(n);\n  \
+    \  Graph<> g(n);\n    REP(i, n - 1) {\n        I32(u, v);\n        g.add_edge(u,\
+    \ v);\n    }\n    g.build();\n    V<i64> cnt = frequency_table_of_tree_distance(g);\n\
+    \    REP(i, 1, n) {\n        cout << cnt[i] << \" \\n\"[i + 1 == n];\n    }\n\
+    }\n\nint main() {\n    i32 t = 1;\n    // cin >> t;\n    while (t--) {\n     \
+    \   solve();\n    }\n}\n"
   dependsOn:
+  - graph/frequency_table_of_tree_distance.hpp
+  - graph/centroid_decomposition.hpp
+  - graph/graph.hpp
   - poly/fft.hpp
   - number_theory/mod_int.hpp
   - number_theory/utils.hpp
   - template/template.hpp
   isVerificationFile: true
-  path: poly/test/convolution_mod.test.cpp
+  path: graph/test/frequency_table_of_tree_distance.test.cpp
   requiredBy: []
   timestamp: '2025-12-31 19:12:41+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: poly/test/convolution_mod.test.cpp
+documentation_of: graph/test/frequency_table_of_tree_distance.test.cpp
 layout: document
 redirect_from:
-- /verify/poly/test/convolution_mod.test.cpp
-- /verify/poly/test/convolution_mod.test.cpp.html
-title: poly/test/convolution_mod.test.cpp
+- /verify/graph/test/frequency_table_of_tree_distance.test.cpp
+- /verify/graph/test/frequency_table_of_tree_distance.test.cpp.html
+title: graph/test/frequency_table_of_tree_distance.test.cpp
 ---

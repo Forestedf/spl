@@ -123,6 +123,9 @@ data:
       path: graph/block_cut_tree.hpp
       title: graph/block_cut_tree.hpp
     - icon: ':heavy_check_mark:'
+      path: graph/centroid_decomposition.hpp
+      title: graph/centroid_decomposition.hpp
+    - icon: ':heavy_check_mark:'
       path: graph/complement_graph_connected_components.hpp
       title: graph/complement_graph_connected_components.hpp
     - icon: ':heavy_check_mark:'
@@ -140,6 +143,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/eulerian_trail.hpp
       title: graph/eulerian_trail.hpp
+    - icon: ':heavy_check_mark:'
+      path: graph/frequency_table_of_tree_distance.hpp
+      title: graph/frequency_table_of_tree_distance.hpp
     - icon: ':heavy_check_mark:'
       path: graph/graph.hpp
       title: graph/graph.hpp
@@ -264,6 +270,9 @@ data:
     - icon: ':warning:'
       path: string/sa_lcp.hpp
       title: string/sa_lcp.hpp
+    - icon: ':heavy_check_mark:'
+      path: string/suffix_automaton.hpp
+      title: string/suffix_automaton.hpp
     - icon: ':heavy_check_mark:'
       path: string/z_algorithm.hpp
       title: string/z_algorithm.hpp
@@ -413,6 +422,9 @@ data:
       path: graph/test/eulerian_trail_undirected.test.cpp
       title: graph/test/eulerian_trail_undirected.test.cpp
     - icon: ':heavy_check_mark:'
+      path: graph/test/frequency_table_of_tree_distance.test.cpp
+      title: graph/test/frequency_table_of_tree_distance.test.cpp
+    - icon: ':heavy_check_mark:'
       path: graph/test/jump_on_tree.test.cpp
       title: graph/test/jump_on_tree.test.cpp
     - icon: ':heavy_check_mark:'
@@ -522,6 +534,9 @@ data:
       title: poly/test/stirling_number_of_the_second_kind.test.cpp
   - name: string/test
     pages:
+    - icon: ':heavy_check_mark:'
+      path: string/test/number_of_substrings.test.cpp
+      title: string/test/number_of_substrings.test.cpp
     - icon: ':heavy_check_mark:'
       path: string/test/zalgorithm.test.cpp
       title: string/test/zalgorithm.test.cpp

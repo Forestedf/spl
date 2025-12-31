@@ -121,6 +121,9 @@ data:
     path: graph/test/eulerian_trail_undirected.test.cpp
     title: graph/test/eulerian_trail_undirected.test.cpp
   - icon: ':heavy_check_mark:'
+    path: graph/test/frequency_table_of_tree_distance.test.cpp
+    title: graph/test/frequency_table_of_tree_distance.test.cpp
+  - icon: ':heavy_check_mark:'
     path: graph/test/jump_on_tree.test.cpp
     title: graph/test/jump_on_tree.test.cpp
   - icon: ':heavy_check_mark:'
@@ -223,6 +226,9 @@ data:
     path: poly/test/stirling_number_of_the_second_kind.test.cpp
     title: poly/test/stirling_number_of_the_second_kind.test.cpp
   - icon: ':heavy_check_mark:'
+    path: string/test/number_of_substrings.test.cpp
+    title: string/test/number_of_substrings.test.cpp
+  - icon: ':heavy_check_mark:'
     path: string/test/zalgorithm.test.cpp
     title: string/test/zalgorithm.test.cpp
   _isVerificationFailed: false
@@ -324,6 +330,7 @@ data:
   timestamp: '2025-06-28 10:05:47+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - string/test/number_of_substrings.test.cpp
   - string/test/zalgorithm.test.cpp
   - bit/test/bitwise_xor_convolution.test.cpp
   - data_structure/test/area_of_union_of_rectangles.test.cpp
@@ -369,6 +376,7 @@ data:
   - graph/test/ALDS1_11_D.test.cpp
   - graph/test/lca.test.cpp
   - graph/test/connected_components_of_complement_graph.test.cpp
+  - graph/test/frequency_table_of_tree_distance.test.cpp
   - graph/test/two_edge_connected_components.test.cpp
   - graph/test/eulerian_trail_undirected.test.cpp
   - graph/test/scc.test.cpp

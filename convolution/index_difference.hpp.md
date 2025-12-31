@@ -193,9 +193,21 @@ data:
     template <typename M>\nstd::vector<M> convolve(const std::vector<M> &a, const\
     \ std::vector<M> &b) {\n    if (a.empty() || b.empty()) {\n        return std::vector<M>(0);\n\
     \    }\n    if (std::min(a.size(), b.size()) <= 60) {\n        return convolve_naive(a,\
-    \ b);\n    } else {\n        return convolve_fft(a, b);\n    }\n}\n#line 4 \"\
-    convolution/index_difference.hpp\"\n// c[i] = sum_{j - k = i} a[j] b[k]\ntemplate\
-    \ <typename T>\nstd::vector<T> convolve_diff(std::vector<T> a, std::vector<T>\
+    \ b);\n    } else {\n        return convolve_fft(a, b);\n    }\n}\n\ntemplate\
+    \ <typename M>\nstd::vector<M> convolve_square_fft(std::vector<M> a) {\n    int\
+    \ n = (int)2 * a.size() - 1;\n    int m = 1;\n    while (m < n) {\n        m <<=\
+    \ 1;\n    }\n    bool shr = false;\n    M last;\n    if (n >= 3 && n == m / 2\
+    \ + 1) {\n        shr = true;\n        last = a.back() * a.back();\n        m\
+    \ /= 2;\n        while ((int)a.size() > m) {\n            a[(int)a.size() - 1\
+    \ - m] += a.back();\n            a.pop_back();\n        }\n    }\n    a.resize(m);\n\
+    \    fft(a);\n    for (int i = 0; i < m; ++i) {\n        a[i] *= a[i];\n    }\n\
+    \    ifft(a);\n    a.resize(n);\n    if (shr) {\n        a[0] -= last;\n     \
+    \   a[n - 1] = last;\n    }\n    return a;\n}\n\ntemplate <typename M>\nstd::vector<M>\
+    \ convolve_square(const std::vector<M> &a) {\n    if (a.empty()) {\n        return\
+    \ std::vector<M>(0);\n    }\n    if ((int)a.size() <= 60) {\n        return convolve_naive(a,\
+    \ a);\n    } else {\n        return convolve_square_fft(a);\n    }\n}\n#line 4\
+    \ \"convolution/index_difference.hpp\"\n// c[i] = sum_{j - k = i} a[j] b[k]\n\
+    template <typename T>\nstd::vector<T> convolve_diff(std::vector<T> a, std::vector<T>\
     \ b) {\n    if (a.empty() || b.empty()) {\n        return std::vector<T>();\n\
     \    }\n    int n = (int)a.size();\n    b.resize(n, T());\n    std::reverse(a.begin(),\
     \ a.end());\n    std::vector<T> c = convolve(a, b);\n    c.resize(n);\n    std::reverse(c.begin(),\
@@ -213,7 +225,7 @@ data:
   isVerificationFile: false
   path: convolution/index_difference.hpp
   requiredBy: []
-  timestamp: '2025-06-28 13:39:14+09:00'
+  timestamp: '2025-12-31 19:12:41+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - convolution/test/index_difference.test.cpp

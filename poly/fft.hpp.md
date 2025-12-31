@@ -15,6 +15,9 @@ data:
     path: convolution/mul_mod_p_conv.hpp
     title: convolution/mul_mod_p_conv.hpp
   - icon: ':heavy_check_mark:'
+    path: graph/frequency_table_of_tree_distance.hpp
+    title: graph/frequency_table_of_tree_distance.hpp
+  - icon: ':heavy_check_mark:'
     path: poly/fps_div_at.hpp
     title: poly/fps_div_at.hpp
   - icon: ':heavy_check_mark:'
@@ -51,6 +54,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: convolution/test/mul_modp_convolution.test.cpp
     title: convolution/test/mul_modp_convolution.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: graph/test/frequency_table_of_tree_distance.test.cpp
+    title: graph/test/frequency_table_of_tree_distance.test.cpp
   - icon: ':heavy_check_mark:'
     path: poly/test/convolution_mod.test.cpp
     title: poly/test/convolution_mod.test.cpp
@@ -262,7 +268,19 @@ data:
     template <typename M>\nstd::vector<M> convolve(const std::vector<M> &a, const\
     \ std::vector<M> &b) {\n    if (a.empty() || b.empty()) {\n        return std::vector<M>(0);\n\
     \    }\n    if (std::min(a.size(), b.size()) <= 60) {\n        return convolve_naive(a,\
-    \ b);\n    } else {\n        return convolve_fft(a, b);\n    }\n}\n"
+    \ b);\n    } else {\n        return convolve_fft(a, b);\n    }\n}\n\ntemplate\
+    \ <typename M>\nstd::vector<M> convolve_square_fft(std::vector<M> a) {\n    int\
+    \ n = (int)2 * a.size() - 1;\n    int m = 1;\n    while (m < n) {\n        m <<=\
+    \ 1;\n    }\n    bool shr = false;\n    M last;\n    if (n >= 3 && n == m / 2\
+    \ + 1) {\n        shr = true;\n        last = a.back() * a.back();\n        m\
+    \ /= 2;\n        while ((int)a.size() > m) {\n            a[(int)a.size() - 1\
+    \ - m] += a.back();\n            a.pop_back();\n        }\n    }\n    a.resize(m);\n\
+    \    fft(a);\n    for (int i = 0; i < m; ++i) {\n        a[i] *= a[i];\n    }\n\
+    \    ifft(a);\n    a.resize(n);\n    if (shr) {\n        a[0] -= last;\n     \
+    \   a[n - 1] = last;\n    }\n    return a;\n}\n\ntemplate <typename M>\nstd::vector<M>\
+    \ convolve_square(const std::vector<M> &a) {\n    if (a.empty()) {\n        return\
+    \ std::vector<M>(0);\n    }\n    if ((int)a.size() <= 60) {\n        return convolve_naive(a,\
+    \ a);\n    } else {\n        return convolve_square_fft(a);\n    }\n}\n"
   code: "#pragma once\n#include <array>\n#include <vector>\n#include \"../number_theory/mod_int.hpp\"\
     \n\nconstexpr int ctz_constexpr(unsigned n) {\n    int x = 0;\n    while (!(n\
     \ & (1u << x))) {\n        ++x;\n    }\n    return x;\n}\n\ntemplate <unsigned\
@@ -353,7 +371,19 @@ data:
     template <typename M>\nstd::vector<M> convolve(const std::vector<M> &a, const\
     \ std::vector<M> &b) {\n    if (a.empty() || b.empty()) {\n        return std::vector<M>(0);\n\
     \    }\n    if (std::min(a.size(), b.size()) <= 60) {\n        return convolve_naive(a,\
-    \ b);\n    } else {\n        return convolve_fft(a, b);\n    }\n}\n"
+    \ b);\n    } else {\n        return convolve_fft(a, b);\n    }\n}\n\ntemplate\
+    \ <typename M>\nstd::vector<M> convolve_square_fft(std::vector<M> a) {\n    int\
+    \ n = (int)2 * a.size() - 1;\n    int m = 1;\n    while (m < n) {\n        m <<=\
+    \ 1;\n    }\n    bool shr = false;\n    M last;\n    if (n >= 3 && n == m / 2\
+    \ + 1) {\n        shr = true;\n        last = a.back() * a.back();\n        m\
+    \ /= 2;\n        while ((int)a.size() > m) {\n            a[(int)a.size() - 1\
+    \ - m] += a.back();\n            a.pop_back();\n        }\n    }\n    a.resize(m);\n\
+    \    fft(a);\n    for (int i = 0; i < m; ++i) {\n        a[i] *= a[i];\n    }\n\
+    \    ifft(a);\n    a.resize(n);\n    if (shr) {\n        a[0] -= last;\n     \
+    \   a[n - 1] = last;\n    }\n    return a;\n}\n\ntemplate <typename M>\nstd::vector<M>\
+    \ convolve_square(const std::vector<M> &a) {\n    if (a.empty()) {\n        return\
+    \ std::vector<M>(0);\n    }\n    if ((int)a.size() <= 60) {\n        return convolve_naive(a,\
+    \ a);\n    } else {\n        return convolve_square_fft(a);\n    }\n}\n"
   dependsOn:
   - number_theory/mod_int.hpp
   - number_theory/utils.hpp
@@ -370,9 +400,10 @@ data:
   - poly/fps_inv.hpp
   - poly/fps_log.hpp
   - poly/multieval_geometric.hpp
+  - graph/frequency_table_of_tree_distance.hpp
   - convolution/index_difference.hpp
   - convolution/mul_mod_p_conv.hpp
-  timestamp: '2024-07-18 16:56:22+09:00'
+  timestamp: '2025-12-31 19:12:41+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - poly/test/exp_of_formal_power_series.test.cpp
@@ -386,6 +417,7 @@ data:
   - poly/test/multipoint_evaluation_on_geometric_sequence.test.cpp
   - poly/test/polynomial_taylor_shift.test.cpp
   - poly/test/prod_of_polys.test.cpp
+  - graph/test/frequency_table_of_tree_distance.test.cpp
   - convolution/test/mul_modp_convolution.test.cpp
   - convolution/test/index_difference.test.cpp
 documentation_of: poly/fft.hpp

@@ -315,38 +315,50 @@ data:
     template <typename M>\nstd::vector<M> convolve(const std::vector<M> &a, const\
     \ std::vector<M> &b) {\n    if (a.empty() || b.empty()) {\n        return std::vector<M>(0);\n\
     \    }\n    if (std::min(a.size(), b.size()) <= 60) {\n        return convolve_naive(a,\
-    \ b);\n    } else {\n        return convolve_fft(a, b);\n    }\n}\n#line 4 \"\
-    convolution/mul_mod_p_conv.hpp\"\n\ntemplate <typename T>\nstd::vector<T> mul_mod_p_convolution(const\
-    \ std::vector<T> &a,\n                                     const std::vector<T>\
-    \ &b, int g = -1) {\n    int p = (int)a.size();\n    if (g == -1) {\n        g\
-    \ = find_primitive_root(p);\n    }\n\n    std::vector<int> pw(p - 1);\n    pw[0]\
-    \ = 1;\n    for (int i = 1; i < p - 1; ++i) {\n        pw[i] = (long long)pw[i\
-    \ - 1] * g % p;\n    }\n\n    std::vector<T> at(p - 1), bt(p - 1);\n    for (int\
-    \ i = 0; i < p - 1; ++i) {\n        at[i] = a[pw[i]];\n        bt[i] = b[pw[i]];\n\
-    \    }\n    std::vector<T> ct = convolve(at, bt);\n\n    std::vector<T> c(p, T(0));\n\
-    \    for (int i = 0; i < p; ++i) {\n        c[0] += a[i] * b[0];\n    }\n    for\
-    \ (int i = 1; i < p; ++i) {\n        c[0] += a[0] * b[i];\n    }\n    for (int\
-    \ i = 0; i < (int)ct.size(); ++i) {\n        c[pw[i % (p - 1)]] += ct[i];\n  \
-    \  }\n    return c;\n}\n#line 1 \"template/fastio.hpp\"\n#include <cstdio>\n#include\
-    \ <cstring>\n#include <string>\n#line 6 \"template/fastio.hpp\"\n\n// unable to\
-    \ read INT_MIN (int), LLONG_MIN (long long)\nclass Reader {\n    FILE *fp;\n \
-    \   static constexpr int BUF = 1 << 18;\n    char buf[BUF];\n    char *pl, *pr;\n\
-    \n    void reread() {\n        int wd = pr - pl;\n        std::memcpy(buf, pl,\
-    \ wd);\n        pl = buf;\n        pr = buf + wd;\n        pr += std::fread(pr,\
-    \ 1, BUF - wd, fp);\n    }\n\n    char skip() {\n        char ch = *pl++;\n  \
-    \      while (ch <= ' ') {\n            ch = *pl++;\n        }\n        return\
-    \ ch;\n    }\n\n    template <typename T>\n    void read_unsigned(T &x) {\n  \
-    \      if (pr - pl < 64) {\n            reread();\n        }\n        x = 0;\n\
-    \        char ch = skip();\n        while ('0' <= ch) {\n            x = 10 *\
-    \ x + (0xf & ch);\n            ch = *pl++;\n        }\n    }\n    template <typename\
-    \ T>\n    void read_signed(T &x) {\n        if (pr - pl < 64) {\n            reread();\n\
-    \        }\n        x = 0;\n        bool neg = false;\n        char ch = skip();\n\
-    \        if (ch == '-') {\n            ch = *pl++;\n            neg = true;\n\
-    \        }\n        while ('0' <= ch) {\n            x = 10 * x + (0xf & ch);\n\
-    \            ch = *pl++;\n        }\n        if (neg) {\n            x = -x;\n\
-    \        }\n    }\n\n    void read_single(int &x) { read_signed(x); }\n    void\
-    \ read_single(unsigned &x) { read_unsigned(x); }\n    void read_single(long &x)\
-    \ { read_signed(x); }\n    void read_single(unsigned long &x) { read_signed(x);\
+    \ b);\n    } else {\n        return convolve_fft(a, b);\n    }\n}\n\ntemplate\
+    \ <typename M>\nstd::vector<M> convolve_square_fft(std::vector<M> a) {\n    int\
+    \ n = (int)2 * a.size() - 1;\n    int m = 1;\n    while (m < n) {\n        m <<=\
+    \ 1;\n    }\n    bool shr = false;\n    M last;\n    if (n >= 3 && n == m / 2\
+    \ + 1) {\n        shr = true;\n        last = a.back() * a.back();\n        m\
+    \ /= 2;\n        while ((int)a.size() > m) {\n            a[(int)a.size() - 1\
+    \ - m] += a.back();\n            a.pop_back();\n        }\n    }\n    a.resize(m);\n\
+    \    fft(a);\n    for (int i = 0; i < m; ++i) {\n        a[i] *= a[i];\n    }\n\
+    \    ifft(a);\n    a.resize(n);\n    if (shr) {\n        a[0] -= last;\n     \
+    \   a[n - 1] = last;\n    }\n    return a;\n}\n\ntemplate <typename M>\nstd::vector<M>\
+    \ convolve_square(const std::vector<M> &a) {\n    if (a.empty()) {\n        return\
+    \ std::vector<M>(0);\n    }\n    if ((int)a.size() <= 60) {\n        return convolve_naive(a,\
+    \ a);\n    } else {\n        return convolve_square_fft(a);\n    }\n}\n#line 4\
+    \ \"convolution/mul_mod_p_conv.hpp\"\n\ntemplate <typename T>\nstd::vector<T>\
+    \ mul_mod_p_convolution(const std::vector<T> &a,\n                           \
+    \          const std::vector<T> &b, int g = -1) {\n    int p = (int)a.size();\n\
+    \    if (g == -1) {\n        g = find_primitive_root(p);\n    }\n\n    std::vector<int>\
+    \ pw(p - 1);\n    pw[0] = 1;\n    for (int i = 1; i < p - 1; ++i) {\n        pw[i]\
+    \ = (long long)pw[i - 1] * g % p;\n    }\n\n    std::vector<T> at(p - 1), bt(p\
+    \ - 1);\n    for (int i = 0; i < p - 1; ++i) {\n        at[i] = a[pw[i]];\n  \
+    \      bt[i] = b[pw[i]];\n    }\n    std::vector<T> ct = convolve(at, bt);\n\n\
+    \    std::vector<T> c(p, T(0));\n    for (int i = 0; i < p; ++i) {\n        c[0]\
+    \ += a[i] * b[0];\n    }\n    for (int i = 1; i < p; ++i) {\n        c[0] += a[0]\
+    \ * b[i];\n    }\n    for (int i = 0; i < (int)ct.size(); ++i) {\n        c[pw[i\
+    \ % (p - 1)]] += ct[i];\n    }\n    return c;\n}\n#line 1 \"template/fastio.hpp\"\
+    \n#include <cstdio>\n#include <cstring>\n#include <string>\n#line 6 \"template/fastio.hpp\"\
+    \n\n// unable to read INT_MIN (int), LLONG_MIN (long long)\nclass Reader {\n \
+    \   FILE *fp;\n    static constexpr int BUF = 1 << 18;\n    char buf[BUF];\n \
+    \   char *pl, *pr;\n\n    void reread() {\n        int wd = pr - pl;\n       \
+    \ std::memcpy(buf, pl, wd);\n        pl = buf;\n        pr = buf + wd;\n     \
+    \   pr += std::fread(pr, 1, BUF - wd, fp);\n    }\n\n    char skip() {\n     \
+    \   char ch = *pl++;\n        while (ch <= ' ') {\n            ch = *pl++;\n \
+    \       }\n        return ch;\n    }\n\n    template <typename T>\n    void read_unsigned(T\
+    \ &x) {\n        if (pr - pl < 64) {\n            reread();\n        }\n     \
+    \   x = 0;\n        char ch = skip();\n        while ('0' <= ch) {\n         \
+    \   x = 10 * x + (0xf & ch);\n            ch = *pl++;\n        }\n    }\n    template\
+    \ <typename T>\n    void read_signed(T &x) {\n        if (pr - pl < 64) {\n  \
+    \          reread();\n        }\n        x = 0;\n        bool neg = false;\n \
+    \       char ch = skip();\n        if (ch == '-') {\n            ch = *pl++;\n\
+    \            neg = true;\n        }\n        while ('0' <= ch) {\n           \
+    \ x = 10 * x + (0xf & ch);\n            ch = *pl++;\n        }\n        if (neg)\
+    \ {\n            x = -x;\n        }\n    }\n\n    void read_single(int &x) { read_signed(x);\
+    \ }\n    void read_single(unsigned &x) { read_unsigned(x); }\n    void read_single(long\
+    \ &x) { read_signed(x); }\n    void read_single(unsigned long &x) { read_signed(x);\
     \ }\n    void read_single(long long &x) { read_signed(x); }\n    void read_single(unsigned\
     \ long long &x) { read_unsigned(x); }\n\npublic:\n    Reader(FILE *fp) : fp(fp),\
     \ pl(buf), pr(buf) { reread(); }\n\n    void read() {}\n    template <typename\
@@ -493,7 +505,7 @@ data:
   isVerificationFile: true
   path: convolution/test/mul_modp_convolution.test.cpp
   requiredBy: []
-  timestamp: '2025-09-14 09:21:44+09:00'
+  timestamp: '2025-12-31 19:12:41+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: convolution/test/mul_modp_convolution.test.cpp

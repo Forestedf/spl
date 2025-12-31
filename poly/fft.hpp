@@ -223,3 +223,47 @@ std::vector<M> convolve(const std::vector<M> &a, const std::vector<M> &b) {
         return convolve_fft(a, b);
     }
 }
+
+template <typename M>
+std::vector<M> convolve_square_fft(std::vector<M> a) {
+    int n = (int)2 * a.size() - 1;
+    int m = 1;
+    while (m < n) {
+        m <<= 1;
+    }
+    bool shr = false;
+    M last;
+    if (n >= 3 && n == m / 2 + 1) {
+        shr = true;
+        last = a.back() * a.back();
+        m /= 2;
+        while ((int)a.size() > m) {
+            a[(int)a.size() - 1 - m] += a.back();
+            a.pop_back();
+        }
+    }
+    a.resize(m);
+    fft(a);
+    for (int i = 0; i < m; ++i) {
+        a[i] *= a[i];
+    }
+    ifft(a);
+    a.resize(n);
+    if (shr) {
+        a[0] -= last;
+        a[n - 1] = last;
+    }
+    return a;
+}
+
+template <typename M>
+std::vector<M> convolve_square(const std::vector<M> &a) {
+    if (a.empty()) {
+        return std::vector<M>(0);
+    }
+    if ((int)a.size() <= 60) {
+        return convolve_naive(a, a);
+    } else {
+        return convolve_square_fft(a);
+    }
+}

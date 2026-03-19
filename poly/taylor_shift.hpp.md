@@ -15,9 +15,15 @@ data:
     title: poly/fft.hpp
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
+    path: poly/composition.hpp
+    title: poly/composition.hpp
+  - icon: ':heavy_check_mark:'
     path: poly/stirling1.hpp
     title: poly/stirling1.hpp
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: poly/test/composition_of_formal_power_series_large.test.cpp
+    title: poly/test/composition_of_formal_power_series_large.test.cpp
   - icon: ':heavy_check_mark:'
     path: poly/test/polynomial_taylor_shift.test.cpp
     title: poly/test/polynomial_taylor_shift.test.cpp
@@ -258,12 +264,14 @@ data:
   isVerificationFile: false
   path: poly/taylor_shift.hpp
   requiredBy:
+  - poly/composition.hpp
   - poly/stirling1.hpp
   timestamp: '2025-12-31 19:12:41+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - poly/test/polynomial_taylor_shift.test.cpp
   - poly/test/stirling_number_of_the_first_kind.test.cpp
+  - poly/test/composition_of_formal_power_series_large.test.cpp
 documentation_of: poly/taylor_shift.hpp
 layout: document
 redirect_from:

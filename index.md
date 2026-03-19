@@ -218,6 +218,9 @@ data:
   - name: poly
     pages:
     - icon: ':heavy_check_mark:'
+      path: poly/composition.hpp
+      title: poly/composition.hpp
+    - icon: ':heavy_check_mark:'
       path: poly/compositional_inverse.hpp
       title: poly/compositional_inverse.hpp
     - icon: ':heavy_check_mark:'
@@ -496,6 +499,9 @@ data:
       title: opt/test/yuki_119.test.cpp
   - name: poly/test
     pages:
+    - icon: ':heavy_check_mark:'
+      path: poly/test/composition_of_formal_power_series_large.test.cpp
+      title: poly/test/composition_of_formal_power_series_large.test.cpp
     - icon: ':heavy_check_mark:'
       path: poly/test/compositional_inverse_of_formal_power_series_large.test.cpp
       title: poly/test/compositional_inverse_of_formal_power_series_large.test.cpp

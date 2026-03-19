@@ -15,6 +15,9 @@ data:
     path: graph/frequency_table_of_tree_distance.hpp
     title: graph/frequency_table_of_tree_distance.hpp
   - icon: ':heavy_check_mark:'
+    path: poly/composition.hpp
+    title: poly/composition.hpp
+  - icon: ':heavy_check_mark:'
     path: poly/compositional_inverse.hpp
     title: poly/compositional_inverse.hpp
   - icon: ':heavy_check_mark:'
@@ -117,6 +120,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/test/frequency_table_of_tree_distance.test.cpp
     title: graph/test/frequency_table_of_tree_distance.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: poly/test/composition_of_formal_power_series_large.test.cpp
+    title: poly/test/composition_of_formal_power_series_large.test.cpp
   - icon: ':heavy_check_mark:'
     path: poly/test/compositional_inverse_of_formal_power_series_large.test.cpp
     title: poly/test/compositional_inverse_of_formal_power_series_large.test.cpp
@@ -311,6 +317,7 @@ data:
   requiredBy:
   - graph/frequency_table_of_tree_distance.hpp
   - poly/fps_pow.hpp
+  - poly/composition.hpp
   - poly/power_projection.hpp
   - poly/fps_exp.hpp
   - poly/compositional_inverse.hpp
@@ -356,6 +363,7 @@ data:
   - poly/test/stirling_number_of_the_first_kind.test.cpp
   - poly/test/find_linear_recurrence.test.cpp
   - poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
+  - poly/test/composition_of_formal_power_series_large.test.cpp
   - poly/test/stirling_number_of_the_second_kind.test.cpp
   - data_structure/test/1891.test.cpp
   - data_structure/test/range_affine_range_sum.test.cpp

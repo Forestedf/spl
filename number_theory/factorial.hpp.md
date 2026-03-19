@@ -3,6 +3,9 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
+    path: poly/composition.hpp
+    title: poly/composition.hpp
+  - icon: ':heavy_check_mark:'
     path: poly/compositional_inverse.hpp
     title: poly/compositional_inverse.hpp
   - icon: ':heavy_check_mark:'
@@ -36,6 +39,9 @@ data:
     path: poly/taylor_shift.hpp
     title: poly/taylor_shift.hpp
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: poly/test/composition_of_formal_power_series_large.test.cpp
+    title: poly/test/composition_of_formal_power_series_large.test.cpp
   - icon: ':heavy_check_mark:'
     path: poly/test/compositional_inverse_of_formal_power_series_large.test.cpp
     title: poly/test/compositional_inverse_of_formal_power_series_large.test.cpp
@@ -112,6 +118,7 @@ data:
   path: number_theory/factorial.hpp
   requiredBy:
   - poly/fps_pow.hpp
+  - poly/composition.hpp
   - poly/power_projection.hpp
   - poly/fps_exp.hpp
   - poly/compositional_inverse.hpp
@@ -134,6 +141,7 @@ data:
   - poly/test/log_of_formal_power_series_sparse.test.cpp
   - poly/test/exp_of_formal_power_series.test.cpp
   - poly/test/stirling_number_of_the_first_kind.test.cpp
+  - poly/test/composition_of_formal_power_series_large.test.cpp
   - poly/test/stirling_number_of_the_second_kind.test.cpp
 documentation_of: number_theory/factorial.hpp
 layout: document

@@ -178,6 +178,9 @@ data:
     path: opt/test/yuki_119.test.cpp
     title: opt/test/yuki_119.test.cpp
   - icon: ':heavy_check_mark:'
+    path: poly/test/composition_of_formal_power_series_large.test.cpp
+    title: poly/test/composition_of_formal_power_series_large.test.cpp
+  - icon: ':heavy_check_mark:'
     path: poly/test/compositional_inverse_of_formal_power_series_large.test.cpp
     title: poly/test/compositional_inverse_of_formal_power_series_large.test.cpp
   - icon: ':heavy_check_mark:'
@@ -391,6 +394,7 @@ data:
   - poly/test/stirling_number_of_the_first_kind.test.cpp
   - poly/test/find_linear_recurrence.test.cpp
   - poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
+  - poly/test/composition_of_formal_power_series_large.test.cpp
   - poly/test/stirling_number_of_the_second_kind.test.cpp
   - data_structure/test/dsl_2_g.test.cpp
   - data_structure/test/cartesian_tree.test.cpp

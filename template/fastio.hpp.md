@@ -58,6 +58,9 @@ data:
     path: number_theory/test/sum_of_floor_of_linear.test.cpp
     title: number_theory/test/sum_of_floor_of_linear.test.cpp
   - icon: ':heavy_check_mark:'
+    path: poly/test/composition_of_formal_power_series_large.test.cpp
+    title: poly/test/composition_of_formal_power_series_large.test.cpp
+  - icon: ':heavy_check_mark:'
     path: poly/test/compositional_inverse_of_formal_power_series_large.test.cpp
     title: poly/test/compositional_inverse_of_formal_power_series_large.test.cpp
   - icon: ':heavy_check_mark:'
@@ -322,6 +325,7 @@ data:
   - poly/test/multipoint_evaluation_on_geometric_sequence.test.cpp
   - poly/test/find_linear_recurrence.test.cpp
   - poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
+  - poly/test/composition_of_formal_power_series_large.test.cpp
   - data_structure/test/range_affine_point_get.test.cpp
   - convolution/test/min_plus_convolution_convex_arbitrary.test.cpp
   - convolution/test/mul_modp_convolution.test.cpp

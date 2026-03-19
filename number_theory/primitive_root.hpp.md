@@ -149,8 +149,8 @@ data:
   timestamp: '2025-01-29 16:01:19+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - convolution/test/mul_modp_convolution.test.cpp
   - number_theory/test/primitive_root.test.cpp
+  - convolution/test/mul_modp_convolution.test.cpp
 documentation_of: number_theory/primitive_root.hpp
 layout: document
 redirect_from:

@@ -26,24 +26,19 @@ data:
     path: poly/fps_pow.hpp
     title: poly/fps_pow.hpp
   - icon: ':heavy_check_mark:'
-    path: template/fastio.hpp
-    title: template/fastio.hpp
-  - icon: ':heavy_check_mark:'
-    path: template/template.hpp
-    title: template/template.hpp
+    path: poly/power_projection.hpp
+    title: poly/power_projection.hpp
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: poly/test/compositional_inverse_of_formal_power_series_large.test.cpp
+    title: poly/test/compositional_inverse_of_formal_power_series_large.test.cpp
   _isVerificationFailed: false
-  _pathExtension: cpp
+  _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/pow_of_formal_power_series
-    links:
-    - https://judge.yosupo.jp/problem/pow_of_formal_power_series
-  bundledCode: "#line 1 \"poly/test/pow_of_formal_power_series.test.cpp\"\n#define\
-    \ PROBLEM \"https://judge.yosupo.jp/problem/pow_of_formal_power_series\"\n#line\
-    \ 2 \"poly/fps_exp.hpp\"\n#include <algorithm>\n#line 2 \"number_theory/factorial.hpp\"\
+    links: []
+  bundledCode: "#line 2 \"poly/fps_exp.hpp\"\n#include <algorithm>\n#line 2 \"number_theory/factorial.hpp\"\
     \n#include <cassert>\n#include <vector>\n\ntemplate <typename M>\nM inv(int n)\
     \ {\n    static std::vector<M> data{M::raw(0), M::raw(1)};\n    static constexpr\
     \ unsigned MOD = M::get_mod();\n    assert(0 < n);\n    while ((int)data.size()\
@@ -327,150 +322,77 @@ data:
     \ T c = g[0];\n    T c_inv = T(1) / c;\n    for (T &elem : g) {\n        elem\
     \ *= c_inv;\n    }\n    g = fps_pow_constant_1(g, T(m), len - off);\n    c = c.pow(m);\n\
     \    std::vector<T> h(len);\n    for (int i = 0; i < (int)g.size(); ++i) {\n \
-    \       h[off + i] = g[i] * c;\n    }\n    return h;\n}\n#line 2 \"template/template.hpp\"\
-    \n#include <bits/stdc++.h>\n#define OVERRIDE(a, b, c, d, ...) d\n#define REP2(i,\
-    \ n) for (i32 i = 0; i < (i32)(n); ++i)\n#define REP3(i, m, n) for (i32 i = (i32)(m);\
-    \ i < (i32)(n); ++i)\n#define REP(...) OVERRIDE(__VA_ARGS__, REP3, REP2)(__VA_ARGS__)\n\
-    #define PER2(i, n) for (i32 i = (i32)(n)-1; i >= 0; --i)\n#define PER3(i, m, n)\
-    \ for (i32 i = (i32)(n)-1; i >= (i32)(m); --i)\n#define PER(...) OVERRIDE(__VA_ARGS__,\
-    \ PER3, PER2)(__VA_ARGS__)\n#define ALL(x) begin(x), end(x)\n#define LEN(x) (i32)(x.size())\n\
-    using namespace std;\nusing u32 = unsigned int;\nusing u64 = unsigned long long;\n\
-    using i32 = signed int;\nusing i64 = signed long long;\nusing f64 = double;\n\
-    using f80 = long double;\nusing pi = pair<i32, i32>;\nusing pl = pair<i64, i64>;\n\
-    template <typename T>\nusing V = vector<T>;\ntemplate <typename T>\nusing VV =\
-    \ V<V<T>>;\ntemplate <typename T>\nusing VVV = V<V<V<T>>>;\ntemplate <typename\
-    \ T>\nusing VVVV = V<V<V<V<T>>>>;\ntemplate <typename T>\nusing PQR = priority_queue<T,\
-    \ V<T>, greater<T>>;\ntemplate <typename T>\nbool chmin(T &x, const T &y) {\n\
-    \    if (x > y) {\n        x = y;\n        return true;\n    }\n    return false;\n\
-    }\ntemplate <typename T>\nbool chmax(T &x, const T &y) {\n    if (x < y) {\n \
-    \       x = y;\n        return true;\n    }\n    return false;\n}\ntemplate <typename\
-    \ T>\ni32 lob(const V<T> &arr, const T &v) {\n    return (i32)(lower_bound(ALL(arr),\
-    \ v) - arr.begin());\n}\ntemplate <typename T>\ni32 upb(const V<T> &arr, const\
-    \ T &v) {\n    return (i32)(upper_bound(ALL(arr), v) - arr.begin());\n}\ntemplate\
-    \ <typename T>\nV<i32> argsort(const V<T> &arr) {\n    V<i32> ret(arr.size());\n\
-    \    iota(ALL(ret), 0);\n    sort(ALL(ret), [&](i32 i, i32 j) -> bool {\n    \
-    \    if (arr[i] == arr[j]) {\n            return i < j;\n        } else {\n  \
-    \          return arr[i] < arr[j];\n        }\n    });\n    return ret;\n}\n#ifdef\
-    \ INT128\nusing u128 = __uint128_t;\nusing i128 = __int128_t;\n#endif\n[[maybe_unused]]\
-    \ constexpr i32 INF = 1000000100;\n[[maybe_unused]] constexpr i64 INF64 = 3000000000000000100;\n\
-    struct SetUpIO {\n    SetUpIO() {\n#ifdef FAST_IO\n        ios::sync_with_stdio(false);\n\
-    \        cin.tie(nullptr);\n#endif\n        cout << fixed << setprecision(15);\n\
-    \    }\n} set_up_io;\nvoid scan(char &x) { cin >> x; }\nvoid scan(u32 &x) { cin\
-    \ >> x; }\nvoid scan(u64 &x) { cin >> x; }\nvoid scan(i32 &x) { cin >> x; }\n\
-    void scan(i64 &x) { cin >> x; }\nvoid scan(f64 &x) { cin >> x; }\nvoid scan(string\
-    \ &x) { cin >> x; }\ntemplate <typename T>\nvoid scan(V<T> &x) {\n    for (T &ele\
-    \ : x) {\n        scan(ele);\n    }\n}\nvoid read() {}\ntemplate <typename Head,\
-    \ typename... Tail>\nvoid read(Head &head, Tail &...tail) {\n    scan(head);\n\
-    \    read(tail...);\n}\n#define CHAR(...)     \\\n    char __VA_ARGS__; \\\n \
-    \   read(__VA_ARGS__);\n#define U32(...)     \\\n    u32 __VA_ARGS__; \\\n   \
-    \ read(__VA_ARGS__);\n#define U64(...)     \\\n    u64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n\
-    #define I32(...)     \\\n    i32 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define\
-    \ I64(...)     \\\n    i64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define F64(...)\
-    \     \\\n    f64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define STR(...)  \
-    \      \\\n    string __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define VEC(type,\
-    \ name, size) \\\n    V<type> name(size);       \\\n    read(name);\n#define VVEC(type,\
-    \ name, size1, size2)    \\\n    VV<type> name(size1, V<type>(size2)); \\\n  \
-    \  read(name);\n#line 6 \"template/fastio.hpp\"\n\n// unable to read INT_MIN (int),\
-    \ LLONG_MIN (long long)\nclass Reader {\n    FILE *fp;\n    static constexpr int\
-    \ BUF = 1 << 18;\n    char buf[BUF];\n    char *pl, *pr;\n\n    void reread()\
-    \ {\n        int wd = pr - pl;\n        std::memcpy(buf, pl, wd);\n        pl\
-    \ = buf;\n        pr = buf + wd;\n        pr += std::fread(pr, 1, BUF - wd, fp);\n\
-    \    }\n\n    char skip() {\n        char ch = *pl++;\n        while (ch <= '\
-    \ ') {\n            ch = *pl++;\n        }\n        return ch;\n    }\n\n    template\
-    \ <typename T>\n    void read_unsigned(T &x) {\n        if (pr - pl < 64) {\n\
-    \            reread();\n        }\n        x = 0;\n        char ch = skip();\n\
-    \        while ('0' <= ch) {\n            x = 10 * x + (0xf & ch);\n         \
-    \   ch = *pl++;\n        }\n    }\n    template <typename T>\n    void read_signed(T\
-    \ &x) {\n        if (pr - pl < 64) {\n            reread();\n        }\n     \
-    \   x = 0;\n        bool neg = false;\n        char ch = skip();\n        if (ch\
-    \ == '-') {\n            ch = *pl++;\n            neg = true;\n        }\n   \
-    \     while ('0' <= ch) {\n            x = 10 * x + (0xf & ch);\n            ch\
-    \ = *pl++;\n        }\n        if (neg) {\n            x = -x;\n        }\n  \
-    \  }\n\n    void read_single(int &x) { read_signed(x); }\n    void read_single(unsigned\
-    \ &x) { read_unsigned(x); }\n    void read_single(long &x) { read_signed(x); }\n\
-    \    void read_single(unsigned long &x) { read_signed(x); }\n    void read_single(long\
-    \ long &x) { read_signed(x); }\n    void read_single(unsigned long long &x) {\
-    \ read_unsigned(x); }\n\npublic:\n    Reader(FILE *fp) : fp(fp), pl(buf), pr(buf)\
-    \ { reread(); }\n\n    void read() {}\n    template <typename Head, typename...\
-    \ Tail>\n    void read(Head &head, Tail &...tail) {\n        read_single(head);\n\
-    \        read(tail...);\n    }\n};\n\nstruct NumberToString {\n    char buf[10000][4];\n\
-    \    constexpr NumberToString() : buf() {\n        for (int i = 0; i < 10000;\
-    \ ++i) {\n            int n = i;\n            for (int j = 3; j >= 0; --j) {\n\
-    \                buf[i][j] = '0' + n % 10;\n                n /= 10;\n       \
-    \     }\n        }\n    }\n} constexpr number_to_string_precalc;\n\nclass Writer\
-    \ {\n    FILE *fp;\n    static constexpr int BUF = 1 << 18;\n    char buf[BUF];\n\
-    \    char *ptr;\n\n    void write_u32(unsigned x) {\n        if ((buf + BUF -\
-    \ ptr) < 32) {\n            flush();\n        }\n        static char sml[12];\n\
-    \        int t = 8;\n        while (x >= 10000) {\n            unsigned n = x\
-    \ % 10000;\n            x /= 10000;\n            std::memcpy(sml + t, number_to_string_precalc.buf[n],\
-    \ 4);\n            t -= 4;\n        }\n        if (x >= 1000) {\n            std::memcpy(ptr,\
-    \ number_to_string_precalc.buf[x], 4);\n            ptr += 4;\n        } else\
-    \ if (x >= 100) {\n            std::memcpy(ptr, number_to_string_precalc.buf[x]\
-    \ + 1, 3);\n            ptr += 3;\n        } else if (x >= 10) {\n           \
-    \ unsigned q = (x * 103) >> 10;\n            *ptr++ = q | '0';\n            *ptr++\
-    \ = (x - 10 * q) | '0';\n        } else {\n            *ptr++ = '0' | x;\n   \
-    \     }\n        std::memcpy(ptr, sml + (t + 4), 8 - t);\n        ptr += 8 - t;\n\
-    \    }\n\n    void write_u64(unsigned long long x) {\n        if ((buf + BUF -\
-    \ ptr) < 32) {\n            flush();\n        }\n        if (x >= 10000000000000000)\
-    \ {\n            unsigned long long z = x % 100000000;\n            x /= 100000000;\n\
-    \            unsigned long long y = x % 100000000;\n            x /= 100000000;\n\
-    \            if (x >= 1000) {\n                std::memcpy(ptr, number_to_string_precalc.buf[x],\
-    \ 4);\n                ptr += 4;\n            } else if (x >= 100) {\n       \
-    \         std::memcpy(ptr, number_to_string_precalc.buf[x] + 1, 3);\n        \
-    \        ptr += 3;\n            } else if (x >= 10) {\n                unsigned\
-    \ q = (x * 103) >> 10;\n                *ptr++ = q | '0';\n                *ptr++\
-    \ = (x - 10 * q) | '0';\n            } else {\n                *ptr++ = '0' |\
-    \ x;\n            }\n            std::memcpy(ptr, number_to_string_precalc.buf[y\
-    \ / 10000], 4);\n            std::memcpy(ptr + 4, number_to_string_precalc.buf[y\
-    \ % 10000], 4);\n            std::memcpy(ptr + 8, number_to_string_precalc.buf[z\
-    \ / 10000], 4);\n            std::memcpy(ptr + 12, number_to_string_precalc.buf[z\
-    \ % 10000], 4);\n            ptr += 16;\n        } else {\n            static\
-    \ char sml[12];\n            int t = 8;\n            while (x >= 10000) {\n  \
-    \              unsigned long long n = x % 10000;\n                x /= 10000;\n\
-    \                std::memcpy(sml + t, number_to_string_precalc.buf[n], 4);\n \
-    \               t -= 4;\n            }\n            if (x >= 1000) {\n       \
-    \         std::memcpy(ptr, number_to_string_precalc.buf[x], 4);\n            \
-    \    ptr += 4;\n            } else if (x >= 100) {\n                std::memcpy(ptr,\
-    \ number_to_string_precalc.buf[x] + 1, 3);\n                ptr += 3;\n      \
-    \      } else if (x >= 10) {\n                unsigned q = (x * 103) >> 10;\n\
-    \                *ptr++ = q | '0';\n                *ptr++ = (x - 10 * q) | '0';\n\
-    \            } else {\n                *ptr++ = '0' | x;\n            }\n    \
-    \        std::memcpy(ptr, sml + (t + 4), 8 - t);\n            ptr += 8 - t;\n\
-    \        }\n    }\n\n    void write_char(char c) {\n        if (ptr == buf + BUF)\
-    \ {\n            flush();\n        }\n        *ptr++ = c;\n    }\n\n    template\
-    \ <typename T>\n    void write_unsigned(T x) {\n        if constexpr (std::is_same_v<T,\
-    \ unsigned long long> ||\n                      std::is_same_v<T, unsigned long>)\
-    \ {\n            write_u64(x);\n        } else {\n            write_u32(x);\n\
-    \        }\n    }\n\n    template <typename T>\n    void write_signed(T x) {\n\
-    \        std::make_unsigned_t<T> y = x;\n        if (x < 0) {\n            write_char('-');\n\
-    \            y = -y;\n        }\n        write_unsigned(y);\n    }\n    \n   \
-    \ void write_string(const std::string &s) {\n        for (char c : s) {\n    \
-    \        write_char(c);\n        }\n    }\n\n    void write_single(int x) { write_signed(x);\
-    \ }\n    void write_single(unsigned x) { write_unsigned(x); }\n    void write_single(long\
-    \ x) { write_signed(x); }\n    void write_single(unsigned long x) { write_unsigned(x);\
-    \ }\n    void write_single(long long x) { write_signed(x); }\n    void write_single(unsigned\
-    \ long long x) { write_unsigned(x); }\n    void write_single(char c) { write_char(c);\
-    \ }\n    void write_single(const std::string &s) { write_string(s); }\n\npublic:\n\
-    \    Writer(FILE *fp) : fp(fp), ptr(buf) {}\n    ~Writer() { flush(); }\n\n  \
-    \  void flush() {\n        std::fwrite(buf, 1, ptr - buf, fp);\n        ptr =\
-    \ buf;\n    }\n\n    void write() {}\n    template <typename Head, typename...\
-    \ Tail>\n    void write(Head &&head, Tail &&...tail) {\n        write_single(head);\n\
-    \        if (sizeof...(Tail)) {\n            write_char(' ');\n        }\n   \
-    \     write(std::forward<Tail>(tail)...);\n    }\n\n    template <typename...\
-    \ T>\n    void writeln(T &&...t) {\n        write(std::forward<T>(t)...);\n  \
-    \      write_char('\\n');\n    }\n};\n\nReader rd(stdin);\nWriter wr(stdout);\n\
-    #line 6 \"poly/test/pow_of_formal_power_series.test.cpp\"\n\nint main() {\n  \
-    \  using M = ModInt<998244353>;\n    i32 n;\n    i64 m;\n    rd.read(n, m);\n\
-    \    V<M> f(n);\n    REP(i, n) {\n        rd.read(f[i].val);\n    }\n    V<M>\
-    \ g = fps_pow(f, m);\n    REP(i, n) {\n        wr.write(g[i].val);\n        wr.write(\"\
-    \ \\n\"[i + 1 == n]);\n    }\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/pow_of_formal_power_series\"\
-    \n#include \"../../poly/fps_pow.hpp\"\n#include \"../../number_theory/mod_int.hpp\"\
-    \n#include \"../../template/template.hpp\"\n#include \"../../template/fastio.hpp\"\
-    \n\nint main() {\n    using M = ModInt<998244353>;\n    i32 n;\n    i64 m;\n \
-    \   rd.read(n, m);\n    V<M> f(n);\n    REP(i, n) {\n        rd.read(f[i].val);\n\
-    \    }\n    V<M> g = fps_pow(f, m);\n    REP(i, n) {\n        wr.write(g[i].val);\n\
-    \        wr.write(\" \\n\"[i + 1 == n]);\n    }\n}\n"
+    \       h[off + i] = g[i] * c;\n    }\n    return h;\n}\n#line 4 \"poly/power_projection.hpp\"\
+    \n\ntemplate <typename M>\nstd::pair<std::vector<M>, std::vector<M>> power_projection_recurrence(\n\
+    \    int n, const std::vector<M> &f, const std::vector<M> &g) {\n    static constexpr\
+    \ FFTRoot<M::get_mod()> roots;\n    static constexpr M INV2 = M(2).inv();\n  \
+    \  int lg = __builtin_ctz(n);\n    std::vector<int> btr(n, 0);\n    for (int i\
+    \ = 1; i < n; ++i) {\n        btr[i] = (btr[i >> 1] >> 1) | ((i & 1) << (lg -\
+    \ 1));\n    }\n    M omega = roots.iroot[lg + 1];\n    M pw(1);\n    std::vector<M>\
+    \ invs(n);\n    for (int idx : btr) {\n        invs[idx] = pw;\n        pw *=\
+    \ omega;\n    }\n    std::vector<M> p(2 * n), q(2 * n);\n    for (int i = 0; i\
+    \ < n; ++i) {\n        p[2 * i] = g[i];\n        q[2 * i] = -f[i];\n    }\n  \
+    \  q[0] += M(1);\n    std::vector<M> rp(2 * n), rq(2 * n);\n    for (int h = n,\
+    \ w = 1; h > 1; h >>= 1, w <<= 1) {\n        omega = roots.root[__builtin_ctz(w)\
+    \ + 1];\n        for (int i = 0; i < 2 * n; i += 2 * w) {\n            std::copy(p.begin()\
+    \ + i, p.begin() + i + w, p.begin() + i + w);\n            ifft(p.data() + i +\
+    \ w, w);\n            pw = M(1);\n            for (int j = i + w; j < i + 2 *\
+    \ w; ++j) {\n                p[j] *= pw;\n                pw *= omega;\n     \
+    \       }\n            fft(p.data() + i + w, w);\n        }\n        for (int\
+    \ i = 0; i < 2 * n; i += 2 * w) {\n            std::copy(q.begin() + i, q.begin()\
+    \ + i + w, q.begin() + i + w);\n            ifft(q.data() + i + w, w);\n     \
+    \       if (i == 0) {\n                q[w] -= M(2);\n            }\n        \
+    \    pw = M(1);\n            for (int j = i + w; j < i + 2 * w; ++j) {\n     \
+    \           q[j] *= pw;\n                pw *= omega;\n            }\n       \
+    \     fft(q.data() + i + w, w);\n        }\n        for (int j = 0; j < 2 * w;\
+    \ ++j) {\n            for (int i = 0; i < h; ++i) {\n                rp[i] = p[2\
+    \ * w * i + j];\n                rq[i] = q[2 * w * i + j];\n            }\n  \
+    \          std::fill(rp.begin() + h, rp.begin() + 2 * h, M());\n            fft(rp.data(),\
+    \ 2 * h);\n            std::fill(rq.begin() + h, rq.begin() + 2 * h, M());\n \
+    \           fft(rq.data(), 2 * h);\n            for (int i = 0; i < h; ++i) {\n\
+    \                rp[i] = (rp[2 * i] * rq[2 * i + 1] - rp[2 * i + 1] * rq[2 * i])\
+    \ *\n                        INV2 * invs[i];\n                rq[i] = rq[2 * i]\
+    \ * rq[2 * i + 1];\n            }\n            ifft(rp.data(), h);\n         \
+    \   ifft(rq.data(), h);\n            for (int i = 0; i < h / 2; ++i) {\n     \
+    \           p[4 * w * i + j] = rp[i];\n                p[4 * w * i + 2 * w + j]\
+    \ = M();\n                q[4 * w * i + j] = rq[i];\n                q[4 * w *\
+    \ i + 2 * w + j] = M();\n            }\n        }\n    }\n    p.resize(n);\n \
+    \   ifft(p);\n    q.resize(n + 1);\n    ifft(q.data(), n);\n    q[0] -= M(1);\n\
+    \    q[n] = M(1);\n    std::reverse(p.begin(), p.end());\n    std::reverse(q.begin(),\
+    \ q.end());\n    return std::make_pair(p, q);\n}\n\ntemplate <typename M>\nstd::vector<M>\
+    \ power_projection(std::vector<M> wt, std::vector<M> f, int m) {\n    assert(wt.size()\
+    \ == f.size());\n    int n = 1;\n    while (n < (int)f.size()) {\n        n *=\
+    \ 2;\n    }\n    wt.resize(n);\n    f.resize(n);\n    std::reverse(wt.begin(),\
+    \ wt.end());\n    M c = std::exchange(f[0], M());\n    std::vector<M> b = power_projection_recurrence(n,\
+    \ f, wt).first;\n    if (c == M()) {\n        return b;\n    }\n    b.resize(m);\n\
+    \    for (int i = 0; i < m; ++i) {\n        b[i] *= inv_fact<M>(i);\n    }\n \
+    \   std::vector<M> cf(m);\n    M pw(1);\n    for (int i = 0; i < m; ++i) {\n \
+    \       cf[i] = pw * inv_fact<M>(i);\n        pw *= c;\n    }\n    std::vector<M>\
+    \ ret = convolve(b, cf);\n    ret.resize(m);\n    for (int i = 0; i < m; ++i)\
+    \ {\n        ret[i] *= fact<M>(i);\n    }\n    return ret;\n}\n#line 4 \"poly/compositional_inverse.hpp\"\
+    \n\ntemplate <typename M>\nstd::vector<M> compositional_inverse(std::vector<M>\
+    \ f) {\n    if (f.empty()) {\n        return std::vector<M>(0);\n    }\n    assert(f[0]\
+    \ == M());\n    if (f.size() == 1) {\n        return std::vector<M>(1, M());\n\
+    \    }\n    assert(f[1] != M());\n    int n = (int)f.size();\n    M c = f[1];\n\
+    \    M c_inv = c.inv();\n    for (M &elem : f) {\n        elem *= c_inv;\n   \
+    \ }\n    std::vector<M> wt(n);\n    wt[n - 1] = M(1);\n    std::vector<M> pp =\
+    \ power_projection(wt, f, n);\n    std::vector<M> h(n - 1);\n    for (int i =\
+    \ 0; i < n - 1; ++i) {\n        h[i] = pp[n - 1 - i] * M(n - 1) * inv<M>(n - 1\
+    \ - i);\n    }\n    std::vector<M> g = fps_pow_constant_1(h, -inv<M>(n - 1));\n\
+    \    M pw(1);\n    for (M &elem : g) {\n        pw *= c_inv;\n        elem *=\
+    \ pw;\n    }\n    g.insert(g.begin(), M());\n    return g;\n}\n"
+  code: "#pragma once\n#include \"fps_pow.hpp\"\n#include \"power_projection.hpp\"\
+    \n\ntemplate <typename M>\nstd::vector<M> compositional_inverse(std::vector<M>\
+    \ f) {\n    if (f.empty()) {\n        return std::vector<M>(0);\n    }\n    assert(f[0]\
+    \ == M());\n    if (f.size() == 1) {\n        return std::vector<M>(1, M());\n\
+    \    }\n    assert(f[1] != M());\n    int n = (int)f.size();\n    M c = f[1];\n\
+    \    M c_inv = c.inv();\n    for (M &elem : f) {\n        elem *= c_inv;\n   \
+    \ }\n    std::vector<M> wt(n);\n    wt[n - 1] = M(1);\n    std::vector<M> pp =\
+    \ power_projection(wt, f, n);\n    std::vector<M> h(n - 1);\n    for (int i =\
+    \ 0; i < n - 1; ++i) {\n        h[i] = pp[n - 1 - i] * M(n - 1) * inv<M>(n - 1\
+    \ - i);\n    }\n    std::vector<M> g = fps_pow_constant_1(h, -inv<M>(n - 1));\n\
+    \    M pw(1);\n    for (M &elem : g) {\n        pw *= c_inv;\n        elem *=\
+    \ pw;\n    }\n    g.insert(g.begin(), M());\n    return g;\n}\n"
   dependsOn:
   - poly/fps_pow.hpp
   - poly/fps_exp.hpp
@@ -480,18 +402,18 @@ data:
   - number_theory/utils.hpp
   - poly/fps_log.hpp
   - poly/fps_inv.hpp
-  - template/template.hpp
-  - template/fastio.hpp
-  isVerificationFile: true
-  path: poly/test/pow_of_formal_power_series.test.cpp
+  - poly/power_projection.hpp
+  isVerificationFile: false
+  path: poly/compositional_inverse.hpp
   requiredBy: []
-  timestamp: '2026-03-16 16:42:33+09:00'
-  verificationStatus: TEST_ACCEPTED
-  verifiedWith: []
-documentation_of: poly/test/pow_of_formal_power_series.test.cpp
+  timestamp: '2026-03-19 11:11:21+09:00'
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - poly/test/compositional_inverse_of_formal_power_series_large.test.cpp
+documentation_of: poly/compositional_inverse.hpp
 layout: document
 redirect_from:
-- /verify/poly/test/pow_of_formal_power_series.test.cpp
-- /verify/poly/test/pow_of_formal_power_series.test.cpp.html
-title: poly/test/pow_of_formal_power_series.test.cpp
+- /library/poly/compositional_inverse.hpp
+- /library/poly/compositional_inverse.hpp.html
+title: poly/compositional_inverse.hpp
 ---

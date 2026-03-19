@@ -13,11 +13,17 @@ data:
   - icon: ':heavy_check_mark:'
     path: poly/middle_product.hpp
     title: poly/middle_product.hpp
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: poly/polynomial_interpolation_geometric.hpp
+    title: poly/polynomial_interpolation_geometric.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: poly/test/multipoint_evaluation_on_geometric_sequence.test.cpp
     title: poly/test/multipoint_evaluation_on_geometric_sequence.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: poly/test/polynomial_interpolation_on_geometric_sequence.test.cpp
+    title: poly/test/polynomial_interpolation_on_geometric_sequence.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -250,10 +256,12 @@ data:
   - number_theory/utils.hpp
   isVerificationFile: false
   path: poly/multieval_geometric.hpp
-  requiredBy: []
+  requiredBy:
+  - poly/polynomial_interpolation_geometric.hpp
   timestamp: '2025-12-31 19:12:41+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - poly/test/polynomial_interpolation_on_geometric_sequence.test.cpp
   - poly/test/multipoint_evaluation_on_geometric_sequence.test.cpp
 documentation_of: poly/multieval_geometric.hpp
 layout: document

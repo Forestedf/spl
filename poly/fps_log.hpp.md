@@ -16,11 +16,23 @@ data:
   - icon: ':heavy_check_mark:'
     path: poly/fps_inv.hpp
     title: poly/fps_inv.hpp
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: poly/compositional_inverse.hpp
+    title: poly/compositional_inverse.hpp
+  - icon: ':heavy_check_mark:'
+    path: poly/fps_pow.hpp
+    title: poly/fps_pow.hpp
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: poly/test/compositional_inverse_of_formal_power_series_large.test.cpp
+    title: poly/test/compositional_inverse_of_formal_power_series_large.test.cpp
   - icon: ':heavy_check_mark:'
     path: poly/test/log_of_formal_power_series.test.cpp
     title: poly/test/log_of_formal_power_series.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: poly/test/pow_of_formal_power_series.test.cpp
+    title: poly/test/pow_of_formal_power_series.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -269,11 +281,15 @@ data:
   - number_theory/utils.hpp
   isVerificationFile: false
   path: poly/fps_log.hpp
-  requiredBy: []
+  requiredBy:
+  - poly/fps_pow.hpp
+  - poly/compositional_inverse.hpp
   timestamp: '2025-12-31 19:12:41+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - poly/test/pow_of_formal_power_series.test.cpp
   - poly/test/log_of_formal_power_series.test.cpp
+  - poly/test/compositional_inverse_of_formal_power_series_large.test.cpp
 documentation_of: poly/fps_log.hpp
 layout: document
 redirect_from:

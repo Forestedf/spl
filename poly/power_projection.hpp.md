@@ -2,6 +2,9 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
+    path: number_theory/factorial.hpp
+    title: number_theory/factorial.hpp
+  - icon: ':heavy_check_mark:'
     path: number_theory/mod_int.hpp
     title: number_theory/mod_int.hpp
   - icon: ':heavy_check_mark:'
@@ -12,33 +15,44 @@ data:
     title: poly/fft.hpp
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
-    path: poly/multieval_geometric.hpp
-    title: poly/multieval_geometric.hpp
-  - icon: ':heavy_check_mark:'
-    path: poly/polynomial_interpolation_geometric.hpp
-    title: poly/polynomial_interpolation_geometric.hpp
+    path: poly/compositional_inverse.hpp
+    title: poly/compositional_inverse.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: poly/test/multipoint_evaluation_on_geometric_sequence.test.cpp
-    title: poly/test/multipoint_evaluation_on_geometric_sequence.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: poly/test/polynomial_interpolation_on_geometric_sequence.test.cpp
-    title: poly/test/polynomial_interpolation_on_geometric_sequence.test.cpp
+    path: poly/test/compositional_inverse_of_formal_power_series_large.test.cpp
+    title: poly/test/compositional_inverse_of_formal_power_series_large.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"poly/middle_product.hpp\"\n#include <algorithm>\n#line 2\
-    \ \"poly/fft.hpp\"\n#include <array>\n#include <vector>\n#line 2 \"number_theory/mod_int.hpp\"\
-    \n\n#include <cassert>\n#include <iostream>\n#include <type_traits>\n#line 2 \"\
-    number_theory/utils.hpp\"\n\n#include <utility>\n\nconstexpr bool is_prime(unsigned\
-    \ n) {\n    if (n == 0 || n == 1) {\n        return false;\n    }\n    for (unsigned\
-    \ i = 2; i * i <= n; ++i) {\n        if (n % i == 0) {\n            return false;\n\
-    \        }\n    }\n    return true;\n}\n\nconstexpr unsigned mod_pow(unsigned\
-    \ x, unsigned y, unsigned mod) {\n    unsigned ret = 1, self = x;\n    while (y\
-    \ != 0) {\n        if (y & 1) {\n            ret = (unsigned)((unsigned long long)ret\
-    \ * self % mod);\n        }\n        self = (unsigned)((unsigned long long)self\
+  bundledCode: "#line 2 \"number_theory/factorial.hpp\"\n#include <cassert>\n#include\
+    \ <vector>\n\ntemplate <typename M>\nM inv(int n) {\n    static std::vector<M>\
+    \ data{M::raw(0), M::raw(1)};\n    static constexpr unsigned MOD = M::get_mod();\n\
+    \    assert(0 < n);\n    while ((int)data.size() <= n) {\n        unsigned k =\
+    \ (unsigned)data.size();\n        unsigned r = MOD / k + 1;\n        data.push_back(M::raw(r)\
+    \ * data[k * r - MOD]);\n    }\n    return data[n];\n}\n\ntemplate <typename M>\n\
+    M fact(int n) {\n    static std::vector<M> data{M::raw(1), M::raw(1)};\n    assert(0\
+    \ <= n);\n    while ((int)data.size() <= n) {\n        unsigned k = (unsigned)data.size();\n\
+    \        data.push_back(M::raw(k) * data.back());\n    }\n    return data[n];\n\
+    }\n\ntemplate <typename M>\nM inv_fact(int n) {\n    static std::vector<M> data{M::raw(1),\
+    \ M::raw(1)};\n    assert(0 <= n);\n    while ((int)data.size() <= n) {\n    \
+    \    unsigned k = (unsigned)data.size();\n        data.push_back(inv<M>(k) * data.back());\n\
+    \    }\n    return data[n];\n}\n\ntemplate <typename M>\nM binom(int n, int k)\
+    \ {\n    assert(0 <= n);\n    if (k < 0 || n < k) {\n        return M::raw(0);\n\
+    \    }\n    return fact<M>(n) * inv_fact<M>(k) * inv_fact<M>(n - k);\n}\n\ntemplate\
+    \ <typename M>\nM n_terms_sum_k(int n, int k) {\n    assert(0 <= n && 0 <= k);\n\
+    \    if (n == 0) {\n        return (k == 0 ? M::raw(1) : M::raw(0));\n    }\n\
+    \    return binom<M>(n + k - 1, n - 1);\n}\n#line 2 \"poly/fft.hpp\"\n#include\
+    \ <array>\n#line 2 \"number_theory/mod_int.hpp\"\n\n#line 4 \"number_theory/mod_int.hpp\"\
+    \n#include <iostream>\n#include <type_traits>\n#line 2 \"number_theory/utils.hpp\"\
+    \n\n#include <utility>\n\nconstexpr bool is_prime(unsigned n) {\n    if (n ==\
+    \ 0 || n == 1) {\n        return false;\n    }\n    for (unsigned i = 2; i * i\
+    \ <= n; ++i) {\n        if (n % i == 0) {\n            return false;\n       \
+    \ }\n    }\n    return true;\n}\n\nconstexpr unsigned mod_pow(unsigned x, unsigned\
+    \ y, unsigned mod) {\n    unsigned ret = 1, self = x;\n    while (y != 0) {\n\
+    \        if (y & 1) {\n            ret = (unsigned)((unsigned long long)ret *\
+    \ self % mod);\n        }\n        self = (unsigned)((unsigned long long)self\
     \ * self % mod);\n        y /= 2;\n    }\n    return ret;\n}\n\ntemplate <unsigned\
     \ mod>\nconstexpr unsigned primitive_root() {\n    static_assert(is_prime(mod),\
     \ \"`mod` must be a prime number.\");\n    if (mod == 2) {\n        return 1;\n\
@@ -215,39 +229,119 @@ data:
     \ convolve_square(const std::vector<M> &a) {\n    if (a.empty()) {\n        return\
     \ std::vector<M>(0);\n    }\n    if ((int)a.size() <= 60) {\n        return convolve_naive(a,\
     \ a);\n    } else {\n        return convolve_square_fft(a);\n    }\n}\n#line 4\
-    \ \"poly/middle_product.hpp\"\n\n// a.size() <= b.size()\ntemplate <typename M>\n\
-    std::vector<M> middle_product(std::vector<M> a, std::vector<M> b) {\n    int n\
-    \ = (int)a.size();\n    int m = (int)b.size();\n    std::reverse(a.begin(), a.end());\n\
-    \    int l = 1;\n    while (l < m) {\n        l *= 2;\n    }\n    a.resize(l,\
-    \ M());\n    b.resize(l, M());\n    fft(a);\n    fft(b);\n    for (int i = 0;\
-    \ i < l; ++i) {\n        b[i] *= a[i];\n    }\n    ifft(b);\n    return std::vector<M>(b.begin()\
-    \ + (n - 1), b.begin() + m);\n}\n"
-  code: "#pragma once\n#include <algorithm>\n#include \"fft.hpp\"\n\n// a.size() <=\
-    \ b.size()\ntemplate <typename M>\nstd::vector<M> middle_product(std::vector<M>\
-    \ a, std::vector<M> b) {\n    int n = (int)a.size();\n    int m = (int)b.size();\n\
-    \    std::reverse(a.begin(), a.end());\n    int l = 1;\n    while (l < m) {\n\
-    \        l *= 2;\n    }\n    a.resize(l, M());\n    b.resize(l, M());\n    fft(a);\n\
-    \    fft(b);\n    for (int i = 0; i < l; ++i) {\n        b[i] *= a[i];\n    }\n\
-    \    ifft(b);\n    return std::vector<M>(b.begin() + (n - 1), b.begin() + m);\n\
-    }\n"
+    \ \"poly/power_projection.hpp\"\n\ntemplate <typename M>\nstd::pair<std::vector<M>,\
+    \ std::vector<M>> power_projection_recurrence(\n    int n, const std::vector<M>\
+    \ &f, const std::vector<M> &g) {\n    static constexpr FFTRoot<M::get_mod()> roots;\n\
+    \    static constexpr M INV2 = M(2).inv();\n    int lg = __builtin_ctz(n);\n \
+    \   std::vector<int> btr(n, 0);\n    for (int i = 1; i < n; ++i) {\n        btr[i]\
+    \ = (btr[i >> 1] >> 1) | ((i & 1) << (lg - 1));\n    }\n    M omega = roots.iroot[lg\
+    \ + 1];\n    M pw(1);\n    std::vector<M> invs(n);\n    for (int idx : btr) {\n\
+    \        invs[idx] = pw;\n        pw *= omega;\n    }\n    std::vector<M> p(2\
+    \ * n), q(2 * n);\n    for (int i = 0; i < n; ++i) {\n        p[2 * i] = g[i];\n\
+    \        q[2 * i] = -f[i];\n    }\n    q[0] += M(1);\n    std::vector<M> rp(2\
+    \ * n), rq(2 * n);\n    for (int h = n, w = 1; h > 1; h >>= 1, w <<= 1) {\n  \
+    \      omega = roots.root[__builtin_ctz(w) + 1];\n        for (int i = 0; i <\
+    \ 2 * n; i += 2 * w) {\n            std::copy(p.begin() + i, p.begin() + i + w,\
+    \ p.begin() + i + w);\n            ifft(p.data() + i + w, w);\n            pw\
+    \ = M(1);\n            for (int j = i + w; j < i + 2 * w; ++j) {\n           \
+    \     p[j] *= pw;\n                pw *= omega;\n            }\n            fft(p.data()\
+    \ + i + w, w);\n        }\n        for (int i = 0; i < 2 * n; i += 2 * w) {\n\
+    \            std::copy(q.begin() + i, q.begin() + i + w, q.begin() + i + w);\n\
+    \            ifft(q.data() + i + w, w);\n            if (i == 0) {\n         \
+    \       q[w] -= M(2);\n            }\n            pw = M(1);\n            for\
+    \ (int j = i + w; j < i + 2 * w; ++j) {\n                q[j] *= pw;\n       \
+    \         pw *= omega;\n            }\n            fft(q.data() + i + w, w);\n\
+    \        }\n        for (int j = 0; j < 2 * w; ++j) {\n            for (int i\
+    \ = 0; i < h; ++i) {\n                rp[i] = p[2 * w * i + j];\n            \
+    \    rq[i] = q[2 * w * i + j];\n            }\n            std::fill(rp.begin()\
+    \ + h, rp.begin() + 2 * h, M());\n            fft(rp.data(), 2 * h);\n       \
+    \     std::fill(rq.begin() + h, rq.begin() + 2 * h, M());\n            fft(rq.data(),\
+    \ 2 * h);\n            for (int i = 0; i < h; ++i) {\n                rp[i] =\
+    \ (rp[2 * i] * rq[2 * i + 1] - rp[2 * i + 1] * rq[2 * i]) *\n                \
+    \        INV2 * invs[i];\n                rq[i] = rq[2 * i] * rq[2 * i + 1];\n\
+    \            }\n            ifft(rp.data(), h);\n            ifft(rq.data(), h);\n\
+    \            for (int i = 0; i < h / 2; ++i) {\n                p[4 * w * i +\
+    \ j] = rp[i];\n                p[4 * w * i + 2 * w + j] = M();\n             \
+    \   q[4 * w * i + j] = rq[i];\n                q[4 * w * i + 2 * w + j] = M();\n\
+    \            }\n        }\n    }\n    p.resize(n);\n    ifft(p);\n    q.resize(n\
+    \ + 1);\n    ifft(q.data(), n);\n    q[0] -= M(1);\n    q[n] = M(1);\n    std::reverse(p.begin(),\
+    \ p.end());\n    std::reverse(q.begin(), q.end());\n    return std::make_pair(p,\
+    \ q);\n}\n\ntemplate <typename M>\nstd::vector<M> power_projection(std::vector<M>\
+    \ wt, std::vector<M> f, int m) {\n    assert(wt.size() == f.size());\n    int\
+    \ n = 1;\n    while (n < (int)f.size()) {\n        n *= 2;\n    }\n    wt.resize(n);\n\
+    \    f.resize(n);\n    std::reverse(wt.begin(), wt.end());\n    M c = std::exchange(f[0],\
+    \ M());\n    std::vector<M> b = power_projection_recurrence(n, f, wt).first;\n\
+    \    if (c == M()) {\n        return b;\n    }\n    b.resize(m);\n    for (int\
+    \ i = 0; i < m; ++i) {\n        b[i] *= inv_fact<M>(i);\n    }\n    std::vector<M>\
+    \ cf(m);\n    M pw(1);\n    for (int i = 0; i < m; ++i) {\n        cf[i] = pw\
+    \ * inv_fact<M>(i);\n        pw *= c;\n    }\n    std::vector<M> ret = convolve(b,\
+    \ cf);\n    ret.resize(m);\n    for (int i = 0; i < m; ++i) {\n        ret[i]\
+    \ *= fact<M>(i);\n    }\n    return ret;\n}\n"
+  code: "#pragma once\n#include \"../number_theory/factorial.hpp\"\n#include \"fft.hpp\"\
+    \n\ntemplate <typename M>\nstd::pair<std::vector<M>, std::vector<M>> power_projection_recurrence(\n\
+    \    int n, const std::vector<M> &f, const std::vector<M> &g) {\n    static constexpr\
+    \ FFTRoot<M::get_mod()> roots;\n    static constexpr M INV2 = M(2).inv();\n  \
+    \  int lg = __builtin_ctz(n);\n    std::vector<int> btr(n, 0);\n    for (int i\
+    \ = 1; i < n; ++i) {\n        btr[i] = (btr[i >> 1] >> 1) | ((i & 1) << (lg -\
+    \ 1));\n    }\n    M omega = roots.iroot[lg + 1];\n    M pw(1);\n    std::vector<M>\
+    \ invs(n);\n    for (int idx : btr) {\n        invs[idx] = pw;\n        pw *=\
+    \ omega;\n    }\n    std::vector<M> p(2 * n), q(2 * n);\n    for (int i = 0; i\
+    \ < n; ++i) {\n        p[2 * i] = g[i];\n        q[2 * i] = -f[i];\n    }\n  \
+    \  q[0] += M(1);\n    std::vector<M> rp(2 * n), rq(2 * n);\n    for (int h = n,\
+    \ w = 1; h > 1; h >>= 1, w <<= 1) {\n        omega = roots.root[__builtin_ctz(w)\
+    \ + 1];\n        for (int i = 0; i < 2 * n; i += 2 * w) {\n            std::copy(p.begin()\
+    \ + i, p.begin() + i + w, p.begin() + i + w);\n            ifft(p.data() + i +\
+    \ w, w);\n            pw = M(1);\n            for (int j = i + w; j < i + 2 *\
+    \ w; ++j) {\n                p[j] *= pw;\n                pw *= omega;\n     \
+    \       }\n            fft(p.data() + i + w, w);\n        }\n        for (int\
+    \ i = 0; i < 2 * n; i += 2 * w) {\n            std::copy(q.begin() + i, q.begin()\
+    \ + i + w, q.begin() + i + w);\n            ifft(q.data() + i + w, w);\n     \
+    \       if (i == 0) {\n                q[w] -= M(2);\n            }\n        \
+    \    pw = M(1);\n            for (int j = i + w; j < i + 2 * w; ++j) {\n     \
+    \           q[j] *= pw;\n                pw *= omega;\n            }\n       \
+    \     fft(q.data() + i + w, w);\n        }\n        for (int j = 0; j < 2 * w;\
+    \ ++j) {\n            for (int i = 0; i < h; ++i) {\n                rp[i] = p[2\
+    \ * w * i + j];\n                rq[i] = q[2 * w * i + j];\n            }\n  \
+    \          std::fill(rp.begin() + h, rp.begin() + 2 * h, M());\n            fft(rp.data(),\
+    \ 2 * h);\n            std::fill(rq.begin() + h, rq.begin() + 2 * h, M());\n \
+    \           fft(rq.data(), 2 * h);\n            for (int i = 0; i < h; ++i) {\n\
+    \                rp[i] = (rp[2 * i] * rq[2 * i + 1] - rp[2 * i + 1] * rq[2 * i])\
+    \ *\n                        INV2 * invs[i];\n                rq[i] = rq[2 * i]\
+    \ * rq[2 * i + 1];\n            }\n            ifft(rp.data(), h);\n         \
+    \   ifft(rq.data(), h);\n            for (int i = 0; i < h / 2; ++i) {\n     \
+    \           p[4 * w * i + j] = rp[i];\n                p[4 * w * i + 2 * w + j]\
+    \ = M();\n                q[4 * w * i + j] = rq[i];\n                q[4 * w *\
+    \ i + 2 * w + j] = M();\n            }\n        }\n    }\n    p.resize(n);\n \
+    \   ifft(p);\n    q.resize(n + 1);\n    ifft(q.data(), n);\n    q[0] -= M(1);\n\
+    \    q[n] = M(1);\n    std::reverse(p.begin(), p.end());\n    std::reverse(q.begin(),\
+    \ q.end());\n    return std::make_pair(p, q);\n}\n\ntemplate <typename M>\nstd::vector<M>\
+    \ power_projection(std::vector<M> wt, std::vector<M> f, int m) {\n    assert(wt.size()\
+    \ == f.size());\n    int n = 1;\n    while (n < (int)f.size()) {\n        n *=\
+    \ 2;\n    }\n    wt.resize(n);\n    f.resize(n);\n    std::reverse(wt.begin(),\
+    \ wt.end());\n    M c = std::exchange(f[0], M());\n    std::vector<M> b = power_projection_recurrence(n,\
+    \ f, wt).first;\n    if (c == M()) {\n        return b;\n    }\n    b.resize(m);\n\
+    \    for (int i = 0; i < m; ++i) {\n        b[i] *= inv_fact<M>(i);\n    }\n \
+    \   std::vector<M> cf(m);\n    M pw(1);\n    for (int i = 0; i < m; ++i) {\n \
+    \       cf[i] = pw * inv_fact<M>(i);\n        pw *= c;\n    }\n    std::vector<M>\
+    \ ret = convolve(b, cf);\n    ret.resize(m);\n    for (int i = 0; i < m; ++i)\
+    \ {\n        ret[i] *= fact<M>(i);\n    }\n    return ret;\n}\n"
   dependsOn:
+  - number_theory/factorial.hpp
   - poly/fft.hpp
   - number_theory/mod_int.hpp
   - number_theory/utils.hpp
   isVerificationFile: false
-  path: poly/middle_product.hpp
+  path: poly/power_projection.hpp
   requiredBy:
-  - poly/polynomial_interpolation_geometric.hpp
-  - poly/multieval_geometric.hpp
-  timestamp: '2025-12-31 19:12:41+09:00'
+  - poly/compositional_inverse.hpp
+  timestamp: '2026-03-19 11:11:21+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - poly/test/polynomial_interpolation_on_geometric_sequence.test.cpp
-  - poly/test/multipoint_evaluation_on_geometric_sequence.test.cpp
-documentation_of: poly/middle_product.hpp
+  - poly/test/compositional_inverse_of_formal_power_series_large.test.cpp
+documentation_of: poly/power_projection.hpp
 layout: document
 redirect_from:
-- /library/poly/middle_product.hpp
-- /library/poly/middle_product.hpp.html
-title: poly/middle_product.hpp
+- /library/poly/power_projection.hpp
+- /library/poly/power_projection.hpp.html
+title: poly/power_projection.hpp
 ---

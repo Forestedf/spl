@@ -11,6 +11,9 @@ data:
     path: number_theory/utils.hpp
     title: number_theory/utils.hpp
   - icon: ':heavy_check_mark:'
+    path: poly/compositional_inverse.hpp
+    title: poly/compositional_inverse.hpp
+  - icon: ':heavy_check_mark:'
     path: poly/fft.hpp
     title: poly/fft.hpp
   - icon: ':heavy_check_mark:'
@@ -26,6 +29,9 @@ data:
     path: poly/fps_pow.hpp
     title: poly/fps_pow.hpp
   - icon: ':heavy_check_mark:'
+    path: poly/power_projection.hpp
+    title: poly/power_projection.hpp
+  - icon: ':heavy_check_mark:'
     path: template/fastio.hpp
     title: template/fastio.hpp
   - icon: ':heavy_check_mark:'
@@ -38,12 +44,12 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/pow_of_formal_power_series
+    PROBLEM: https://judge.yosupo.jp/problem/compositional_inverse_of_formal_power_series_large
     links:
-    - https://judge.yosupo.jp/problem/pow_of_formal_power_series
-  bundledCode: "#line 1 \"poly/test/pow_of_formal_power_series.test.cpp\"\n#define\
-    \ PROBLEM \"https://judge.yosupo.jp/problem/pow_of_formal_power_series\"\n#line\
-    \ 2 \"poly/fps_exp.hpp\"\n#include <algorithm>\n#line 2 \"number_theory/factorial.hpp\"\
+    - https://judge.yosupo.jp/problem/compositional_inverse_of_formal_power_series_large
+  bundledCode: "#line 1 \"poly/test/compositional_inverse_of_formal_power_series_large.test.cpp\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/compositional_inverse_of_formal_power_series_large\"\
+    \n#line 2 \"poly/fps_exp.hpp\"\n#include <algorithm>\n#line 2 \"number_theory/factorial.hpp\"\
     \n#include <cassert>\n#include <vector>\n\ntemplate <typename M>\nM inv(int n)\
     \ {\n    static std::vector<M> data{M::raw(0), M::raw(1)};\n    static constexpr\
     \ unsigned MOD = M::get_mod();\n    assert(0 < n);\n    while ((int)data.size()\
@@ -327,7 +333,65 @@ data:
     \ T c = g[0];\n    T c_inv = T(1) / c;\n    for (T &elem : g) {\n        elem\
     \ *= c_inv;\n    }\n    g = fps_pow_constant_1(g, T(m), len - off);\n    c = c.pow(m);\n\
     \    std::vector<T> h(len);\n    for (int i = 0; i < (int)g.size(); ++i) {\n \
-    \       h[off + i] = g[i] * c;\n    }\n    return h;\n}\n#line 2 \"template/template.hpp\"\
+    \       h[off + i] = g[i] * c;\n    }\n    return h;\n}\n#line 4 \"poly/power_projection.hpp\"\
+    \n\ntemplate <typename M>\nstd::pair<std::vector<M>, std::vector<M>> power_projection_recurrence(\n\
+    \    int n, const std::vector<M> &f, const std::vector<M> &g) {\n    static constexpr\
+    \ FFTRoot<M::get_mod()> roots;\n    static constexpr M INV2 = M(2).inv();\n  \
+    \  int lg = __builtin_ctz(n);\n    std::vector<int> btr(n, 0);\n    for (int i\
+    \ = 1; i < n; ++i) {\n        btr[i] = (btr[i >> 1] >> 1) | ((i & 1) << (lg -\
+    \ 1));\n    }\n    M omega = roots.iroot[lg + 1];\n    M pw(1);\n    std::vector<M>\
+    \ invs(n);\n    for (int idx : btr) {\n        invs[idx] = pw;\n        pw *=\
+    \ omega;\n    }\n    std::vector<M> p(2 * n), q(2 * n);\n    for (int i = 0; i\
+    \ < n; ++i) {\n        p[2 * i] = g[i];\n        q[2 * i] = -f[i];\n    }\n  \
+    \  q[0] += M(1);\n    std::vector<M> rp(2 * n), rq(2 * n);\n    for (int h = n,\
+    \ w = 1; h > 1; h >>= 1, w <<= 1) {\n        omega = roots.root[__builtin_ctz(w)\
+    \ + 1];\n        for (int i = 0; i < 2 * n; i += 2 * w) {\n            std::copy(p.begin()\
+    \ + i, p.begin() + i + w, p.begin() + i + w);\n            ifft(p.data() + i +\
+    \ w, w);\n            pw = M(1);\n            for (int j = i + w; j < i + 2 *\
+    \ w; ++j) {\n                p[j] *= pw;\n                pw *= omega;\n     \
+    \       }\n            fft(p.data() + i + w, w);\n        }\n        for (int\
+    \ i = 0; i < 2 * n; i += 2 * w) {\n            std::copy(q.begin() + i, q.begin()\
+    \ + i + w, q.begin() + i + w);\n            ifft(q.data() + i + w, w);\n     \
+    \       if (i == 0) {\n                q[w] -= M(2);\n            }\n        \
+    \    pw = M(1);\n            for (int j = i + w; j < i + 2 * w; ++j) {\n     \
+    \           q[j] *= pw;\n                pw *= omega;\n            }\n       \
+    \     fft(q.data() + i + w, w);\n        }\n        for (int j = 0; j < 2 * w;\
+    \ ++j) {\n            for (int i = 0; i < h; ++i) {\n                rp[i] = p[2\
+    \ * w * i + j];\n                rq[i] = q[2 * w * i + j];\n            }\n  \
+    \          std::fill(rp.begin() + h, rp.begin() + 2 * h, M());\n            fft(rp.data(),\
+    \ 2 * h);\n            std::fill(rq.begin() + h, rq.begin() + 2 * h, M());\n \
+    \           fft(rq.data(), 2 * h);\n            for (int i = 0; i < h; ++i) {\n\
+    \                rp[i] = (rp[2 * i] * rq[2 * i + 1] - rp[2 * i + 1] * rq[2 * i])\
+    \ *\n                        INV2 * invs[i];\n                rq[i] = rq[2 * i]\
+    \ * rq[2 * i + 1];\n            }\n            ifft(rp.data(), h);\n         \
+    \   ifft(rq.data(), h);\n            for (int i = 0; i < h / 2; ++i) {\n     \
+    \           p[4 * w * i + j] = rp[i];\n                p[4 * w * i + 2 * w + j]\
+    \ = M();\n                q[4 * w * i + j] = rq[i];\n                q[4 * w *\
+    \ i + 2 * w + j] = M();\n            }\n        }\n    }\n    p.resize(n);\n \
+    \   ifft(p);\n    q.resize(n + 1);\n    ifft(q.data(), n);\n    q[0] -= M(1);\n\
+    \    q[n] = M(1);\n    std::reverse(p.begin(), p.end());\n    std::reverse(q.begin(),\
+    \ q.end());\n    return std::make_pair(p, q);\n}\n\ntemplate <typename M>\nstd::vector<M>\
+    \ power_projection(std::vector<M> wt, std::vector<M> f, int m) {\n    assert(wt.size()\
+    \ == f.size());\n    int n = 1;\n    while (n < (int)f.size()) {\n        n *=\
+    \ 2;\n    }\n    wt.resize(n);\n    f.resize(n);\n    std::reverse(wt.begin(),\
+    \ wt.end());\n    M c = std::exchange(f[0], M());\n    std::vector<M> b = power_projection_recurrence(n,\
+    \ f, wt).first;\n    if (c == M()) {\n        return b;\n    }\n    b.resize(m);\n\
+    \    for (int i = 0; i < m; ++i) {\n        b[i] *= inv_fact<M>(i);\n    }\n \
+    \   std::vector<M> cf(m);\n    M pw(1);\n    for (int i = 0; i < m; ++i) {\n \
+    \       cf[i] = pw * inv_fact<M>(i);\n        pw *= c;\n    }\n    std::vector<M>\
+    \ ret = convolve(b, cf);\n    ret.resize(m);\n    for (int i = 0; i < m; ++i)\
+    \ {\n        ret[i] *= fact<M>(i);\n    }\n    return ret;\n}\n#line 4 \"poly/compositional_inverse.hpp\"\
+    \n\ntemplate <typename M>\nstd::vector<M> compositional_inverse(std::vector<M>\
+    \ f) {\n    if (f.empty()) {\n        return std::vector<M>(0);\n    }\n    assert(f[0]\
+    \ == M());\n    if (f.size() == 1) {\n        return std::vector<M>(1, M());\n\
+    \    }\n    assert(f[1] != M());\n    int n = (int)f.size();\n    M c = f[1];\n\
+    \    M c_inv = c.inv();\n    for (M &elem : f) {\n        elem *= c_inv;\n   \
+    \ }\n    std::vector<M> wt(n);\n    wt[n - 1] = M(1);\n    std::vector<M> pp =\
+    \ power_projection(wt, f, n);\n    std::vector<M> h(n - 1);\n    for (int i =\
+    \ 0; i < n - 1; ++i) {\n        h[i] = pp[n - 1 - i] * M(n - 1) * inv<M>(n - 1\
+    \ - i);\n    }\n    std::vector<M> g = fps_pow_constant_1(h, -inv<M>(n - 1));\n\
+    \    M pw(1);\n    for (M &elem : g) {\n        pw *= c_inv;\n        elem *=\
+    \ pw;\n    }\n    g.insert(g.begin(), M());\n    return g;\n}\n#line 2 \"template/template.hpp\"\
     \n#include <bits/stdc++.h>\n#define OVERRIDE(a, b, c, d, ...) d\n#define REP2(i,\
     \ n) for (i32 i = 0; i < (i32)(n); ++i)\n#define REP3(i, m, n) for (i32 i = (i32)(m);\
     \ i < (i32)(n); ++i)\n#define REP(...) OVERRIDE(__VA_ARGS__, REP3, REP2)(__VA_ARGS__)\n\
@@ -459,19 +523,19 @@ data:
     \     write(std::forward<Tail>(tail)...);\n    }\n\n    template <typename...\
     \ T>\n    void writeln(T &&...t) {\n        write(std::forward<T>(t)...);\n  \
     \      write_char('\\n');\n    }\n};\n\nReader rd(stdin);\nWriter wr(stdout);\n\
-    #line 6 \"poly/test/pow_of_formal_power_series.test.cpp\"\n\nint main() {\n  \
-    \  using M = ModInt<998244353>;\n    i32 n;\n    i64 m;\n    rd.read(n, m);\n\
-    \    V<M> f(n);\n    REP(i, n) {\n        rd.read(f[i].val);\n    }\n    V<M>\
-    \ g = fps_pow(f, m);\n    REP(i, n) {\n        wr.write(g[i].val);\n        wr.write(\"\
-    \ \\n\"[i + 1 == n]);\n    }\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/pow_of_formal_power_series\"\
-    \n#include \"../../poly/fps_pow.hpp\"\n#include \"../../number_theory/mod_int.hpp\"\
-    \n#include \"../../template/template.hpp\"\n#include \"../../template/fastio.hpp\"\
-    \n\nint main() {\n    using M = ModInt<998244353>;\n    i32 n;\n    i64 m;\n \
-    \   rd.read(n, m);\n    V<M> f(n);\n    REP(i, n) {\n        rd.read(f[i].val);\n\
-    \    }\n    V<M> g = fps_pow(f, m);\n    REP(i, n) {\n        wr.write(g[i].val);\n\
-    \        wr.write(\" \\n\"[i + 1 == n]);\n    }\n}\n"
+    #line 5 \"poly/test/compositional_inverse_of_formal_power_series_large.test.cpp\"\
+    \n\nint main() {\n    using M = ModInt<998244353>;\n    i32 n;\n    rd.read(n);\n\
+    \    std::vector<M> f(n);\n    REP(i, n) {\n        rd.read(f[i].val);   \n  \
+    \  }\n    std::vector<M> g = compositional_inverse(f);\n    REP(i, n) {\n    \
+    \    wr.writeln(g[i].val);\n    }\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/compositional_inverse_of_formal_power_series_large\"\
+    \n#include \"../../poly/compositional_inverse.hpp\"\n#include \"../../template/template.hpp\"\
+    \n#include \"../../template/fastio.hpp\"\n\nint main() {\n    using M = ModInt<998244353>;\n\
+    \    i32 n;\n    rd.read(n);\n    std::vector<M> f(n);\n    REP(i, n) {\n    \
+    \    rd.read(f[i].val);   \n    }\n    std::vector<M> g = compositional_inverse(f);\n\
+    \    REP(i, n) {\n        wr.writeln(g[i].val);\n    }\n}\n"
   dependsOn:
+  - poly/compositional_inverse.hpp
   - poly/fps_pow.hpp
   - poly/fps_exp.hpp
   - number_theory/factorial.hpp
@@ -480,18 +544,19 @@ data:
   - number_theory/utils.hpp
   - poly/fps_log.hpp
   - poly/fps_inv.hpp
+  - poly/power_projection.hpp
   - template/template.hpp
   - template/fastio.hpp
   isVerificationFile: true
-  path: poly/test/pow_of_formal_power_series.test.cpp
+  path: poly/test/compositional_inverse_of_formal_power_series_large.test.cpp
   requiredBy: []
-  timestamp: '2026-03-16 16:42:33+09:00'
+  timestamp: '2026-03-19 11:11:21+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: poly/test/pow_of_formal_power_series.test.cpp
+documentation_of: poly/test/compositional_inverse_of_formal_power_series_large.test.cpp
 layout: document
 redirect_from:
-- /verify/poly/test/pow_of_formal_power_series.test.cpp
-- /verify/poly/test/pow_of_formal_power_series.test.cpp.html
-title: poly/test/pow_of_formal_power_series.test.cpp
+- /verify/poly/test/compositional_inverse_of_formal_power_series_large.test.cpp
+- /verify/poly/test/compositional_inverse_of_formal_power_series_large.test.cpp.html
+title: poly/test/compositional_inverse_of_formal_power_series_large.test.cpp
 ---

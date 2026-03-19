@@ -2,9 +2,6 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: number_theory/factorial.hpp
-    title: number_theory/factorial.hpp
-  - icon: ':heavy_check_mark:'
     path: number_theory/mod_int.hpp
     title: number_theory/mod_int.hpp
   - icon: ':heavy_check_mark:'
@@ -14,17 +11,14 @@ data:
     path: poly/fft.hpp
     title: poly/fft.hpp
   - icon: ':heavy_check_mark:'
-    path: poly/fps_exp.hpp
-    title: poly/fps_exp.hpp
+    path: poly/middle_product.hpp
+    title: poly/middle_product.hpp
   - icon: ':heavy_check_mark:'
-    path: poly/fps_inv.hpp
-    title: poly/fps_inv.hpp
+    path: poly/multieval_geometric.hpp
+    title: poly/multieval_geometric.hpp
   - icon: ':heavy_check_mark:'
-    path: poly/fps_log.hpp
-    title: poly/fps_log.hpp
-  - icon: ':heavy_check_mark:'
-    path: poly/fps_pow.hpp
-    title: poly/fps_pow.hpp
+    path: poly/polynomial_interpolation_geometric.hpp
+    title: poly/polynomial_interpolation_geometric.hpp
   - icon: ':heavy_check_mark:'
     path: template/fastio.hpp
     title: template/fastio.hpp
@@ -38,32 +32,15 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/pow_of_formal_power_series
+    PROBLEM: https://judge.yosupo.jp/problem/polynomial_interpolation_on_geometric_sequence
     links:
-    - https://judge.yosupo.jp/problem/pow_of_formal_power_series
-  bundledCode: "#line 1 \"poly/test/pow_of_formal_power_series.test.cpp\"\n#define\
-    \ PROBLEM \"https://judge.yosupo.jp/problem/pow_of_formal_power_series\"\n#line\
-    \ 2 \"poly/fps_exp.hpp\"\n#include <algorithm>\n#line 2 \"number_theory/factorial.hpp\"\
-    \n#include <cassert>\n#include <vector>\n\ntemplate <typename M>\nM inv(int n)\
-    \ {\n    static std::vector<M> data{M::raw(0), M::raw(1)};\n    static constexpr\
-    \ unsigned MOD = M::get_mod();\n    assert(0 < n);\n    while ((int)data.size()\
-    \ <= n) {\n        unsigned k = (unsigned)data.size();\n        unsigned r = MOD\
-    \ / k + 1;\n        data.push_back(M::raw(r) * data[k * r - MOD]);\n    }\n  \
-    \  return data[n];\n}\n\ntemplate <typename M>\nM fact(int n) {\n    static std::vector<M>\
-    \ data{M::raw(1), M::raw(1)};\n    assert(0 <= n);\n    while ((int)data.size()\
-    \ <= n) {\n        unsigned k = (unsigned)data.size();\n        data.push_back(M::raw(k)\
-    \ * data.back());\n    }\n    return data[n];\n}\n\ntemplate <typename M>\nM inv_fact(int\
-    \ n) {\n    static std::vector<M> data{M::raw(1), M::raw(1)};\n    assert(0 <=\
-    \ n);\n    while ((int)data.size() <= n) {\n        unsigned k = (unsigned)data.size();\n\
-    \        data.push_back(inv<M>(k) * data.back());\n    }\n    return data[n];\n\
-    }\n\ntemplate <typename M>\nM binom(int n, int k) {\n    assert(0 <= n);\n   \
-    \ if (k < 0 || n < k) {\n        return M::raw(0);\n    }\n    return fact<M>(n)\
-    \ * inv_fact<M>(k) * inv_fact<M>(n - k);\n}\n\ntemplate <typename M>\nM n_terms_sum_k(int\
-    \ n, int k) {\n    assert(0 <= n && 0 <= k);\n    if (n == 0) {\n        return\
-    \ (k == 0 ? M::raw(1) : M::raw(0));\n    }\n    return binom<M>(n + k - 1, n -\
-    \ 1);\n}\n#line 2 \"poly/fft.hpp\"\n#include <array>\n#line 2 \"number_theory/mod_int.hpp\"\
-    \n\n#line 4 \"number_theory/mod_int.hpp\"\n#include <iostream>\n#include <type_traits>\n\
-    #line 2 \"number_theory/utils.hpp\"\n\n#include <utility>\n\nconstexpr bool is_prime(unsigned\
+    - https://judge.yosupo.jp/problem/polynomial_interpolation_on_geometric_sequence
+  bundledCode: "#line 1 \"poly/test/polynomial_interpolation_on_geometric_sequence.test.cpp\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/polynomial_interpolation_on_geometric_sequence\"\
+    \n#line 2 \"poly/middle_product.hpp\"\n#include <algorithm>\n#line 2 \"poly/fft.hpp\"\
+    \n#include <array>\n#include <vector>\n#line 2 \"number_theory/mod_int.hpp\"\n\
+    \n#include <cassert>\n#include <iostream>\n#include <type_traits>\n#line 2 \"\
+    number_theory/utils.hpp\"\n\n#include <utility>\n\nconstexpr bool is_prime(unsigned\
     \ n) {\n    if (n == 0 || n == 1) {\n        return false;\n    }\n    for (unsigned\
     \ i = 2; i * i <= n; ++i) {\n        if (n % i == 0) {\n            return false;\n\
     \        }\n    }\n    return true;\n}\n\nconstexpr unsigned mod_pow(unsigned\
@@ -245,138 +222,103 @@ data:
     \   a[n - 1] = last;\n    }\n    return a;\n}\n\ntemplate <typename M>\nstd::vector<M>\
     \ convolve_square(const std::vector<M> &a) {\n    if (a.empty()) {\n        return\
     \ std::vector<M>(0);\n    }\n    if ((int)a.size() <= 60) {\n        return convolve_naive(a,\
-    \ a);\n    } else {\n        return convolve_square_fft(a);\n    }\n}\n#line 5\
-    \ \"poly/fps_exp.hpp\"\n\ntemplate <typename M>\nstd::vector<M> fps_exp(const\
-    \ std::vector<M> &h, int len = -1) {\n    static constexpr FFTRoot<M::get_mod()>\
-    \ fftroot;\n    if (len == -1) {\n        len = (int)h.size();\n    }\n    assert((int)h.size()\
-    \ >= 1 && h[0] == M(0) && len >= 0);\n    if (len == 0) {\n        return std::vector<M>();\n\
-    \    }\n    std::vector<M> f(1, M(1)), g(1, M(1));\n    std::vector<M> fft_f(1,\
-    \ M(1));\n    while ((int)f.size() < len) {\n        int n = (int)f.size();\n\
-    \        f.resize(2 * n, M());\n        g.resize(2 * n, M());\n\n        std::vector<M>\
-    \ fft_g = g;\n        fft(fft_g);\n        fft_f.resize(2 * n);\n        {\n \
-    \           M cur(1);\n            M zeta = fftroot.root[__builtin_ctz(n) + 1];\n\
-    \            for (int i = 0; i < n; ++i) {\n                fft_f[n + i] = f[i]\
-    \ * cur;\n                cur *= zeta;\n            }\n        }\n        fft(fft_f.data()\
-    \ + n, n);\n\n        std::vector<M> delta(n);\n        for (int i = 0; i < n;\
-    \ ++i) {\n            delta[i] = fft_f[i] * fft_g[i];\n        }\n        ifft(delta);\n\
-    \        delta.resize(2 * n, M());\n        std::rotate(delta.begin(), delta.begin()\
-    \ + n, delta.end());\n        delta[n] -= M(1);\n\n        std::vector<M> eps(n,\
-    \ M());\n        for (int i = 0; i < n - 1; ++i) {\n            eps[i] = f[i +\
-    \ 1] * M(i + 1);\n        }\n        fft(eps);\n        for (int i = 0; i < n;\
-    \ ++i) {\n            eps[i] *= fft_g[i];\n        }\n        ifft(eps);\n   \
-    \     eps.resize(2 * n, M());\n        for (int i = 0; i < n - 1; ++i) {\n   \
-    \         M tmp = (i + 1 < (int)h.size() ? h[i + 1] * M(i + 1) : M());\n     \
-    \       eps[n + i] = eps[i] - tmp;\n            eps[i] = tmp;\n        }\n   \
-    \     std::vector<M> fft_dh(2 * n);\n        for (int i = 0; i < n; ++i) {\n \
-    \           M tmp = (i + 1 < (int)h.size() ? h[i + 1] * M(i + 1) : M());\n   \
-    \         fft_dh[i] = tmp;\n        }\n        fft(fft_dh);\n        fft(delta);\n\
-    \        for (int i = 0; i < 2 * n; ++i) {\n            delta[i] *= fft_dh[i];\n\
-    \        }\n        ifft(delta);\n        for (int i = n; i < 2 * n; ++i) {\n\
-    \            eps[i] -= delta[i];\n        }\n        for (int i = 0; i < 2 * n\
-    \ - 1; ++i) {\n            M tmp = (i + 1 < (int)h.size() ? h[i + 1] * M(i + 1)\
-    \ : M());\n            eps[i] -= tmp;\n        }\n        for (int i = 2 * n -\
-    \ 1; i >= 1; --i) {\n            eps[i] = eps[i - 1] * inv<M>(i);\n        }\n\
-    \        eps[0] = M(0);\n\n        fft(eps);\n        for (int i = 0; i < 2 *\
-    \ n; ++i) {\n            eps[i] *= fft_f[i];\n        }\n        ifft(eps);\n\
-    \        for (int i = n; i < 2 * n; ++i) {\n            f[i] = -eps[i];\n    \
-    \    }\n        if (2 * n >= len) {\n            break;\n        }\n\n       \
-    \ fft_f = f;\n        fft(fft_f);\n        for (int i = 0; i < 2 * n; ++i) {\n\
-    \            eps[i] = fft_f[i] * fft_g[i];\n        }\n        ifft(eps);\n  \
-    \      std::fill(eps.begin(), eps.begin() + n, M(0));\n        fft(eps);\n   \
-    \     for (int i = 0; i < 2 * n; ++i) {\n            eps[i] *= fft_g[i];\n   \
-    \     }\n        ifft(eps);\n        for (int i = n; i < 2 * n; ++i) {\n     \
-    \       g[i] = -eps[i];\n        }\n    }\n    f.resize(len);\n    return f;\n\
-    }\n#line 4 \"poly/fps_inv.hpp\"\n// 10 FFT(n)\ntemplate <typename T>\nstd::vector<T>\
-    \ fps_inv(const std::vector<T> &f, int len = -1) {\n    if (len == -1) {\n   \
-    \     len = (int)f.size();\n    }\n    assert(!f.empty() && f[0] != T(0) && len\
-    \ >= 0);\n    std::vector<T> g(1, T(1) / f[0]);\n    while ((int)g.size() < len)\
-    \ {\n        int n = (int)g.size();\n        std::vector<T> fft_f(2 * n), fft_g(2\
-    \ * n);\n        std::copy(f.begin(), f.begin() + std::min(2 * n, (int)f.size()),\n\
-    \                  fft_f.begin());\n        std::copy(g.begin(), g.end(), fft_g.begin());\n\
-    \        fft(fft_f);\n        fft(fft_g);\n        for (int i = 0; i < 2 * n;\
-    \ ++i) {\n            fft_f[i] *= fft_g[i];\n        }\n        ifft(fft_f);\n\
-    \        std::fill(fft_f.begin(), fft_f.begin() + n, T(0));\n        fft(fft_f);\n\
-    \        for (int i = 0; i < 2 * n; ++i) {\n            fft_f[i] *= fft_g[i];\n\
-    \        }\n        ifft(fft_f);\n        g.resize(2 * n);\n        for (int i\
-    \ = n; i < 2 * n; ++i) {\n            g[i] = -fft_f[i];\n        }\n    }\n  \
-    \  g.resize(len);\n    return g;\n}\n#line 4 \"poly/fps_log.hpp\"\n\ntemplate\
-    \ <typename T>\nstd::vector<T> fps_log(const std::vector<T> &f, int len = -1)\
-    \ {\n    if (len == -1) {\n        len = (int)f.size();\n    }\n    int n = (int)f.size();\n\
-    \    assert(n >= 1 && f[0] == T(1) && len >= 0);\n    if (len == 0) {\n      \
-    \  return std::vector<T>();\n    }\n    std::vector<T> df(std::min(n - 1, len\
-    \ - 1));\n    for (int i = 0; i < (int)df.size(); ++i) {\n        df[i] = f[i\
-    \ + 1] * T(i + 1);\n    }\n    std::vector<T> invf = fps_inv(f, len - 1);\n  \
-    \  std::vector<T> ret = convolve(df, invf);\n    ret.resize(len);\n    for (int\
-    \ i = len - 1; i >= 1; --i) {\n        ret[i] = ret[i - 1] * inv<T>(i);\n    }\n\
-    \    ret[0] = T(0);\n    return ret;\n}\n#line 4 \"poly/fps_pow.hpp\"\ntemplate\
-    \ <typename T>\nstd::vector<T> fps_pow_constant_1(const std::vector<T> &f, T m,\
-    \ int len = -1) {\n    if (len == -1) {\n        len = (int)f.size();\n    }\n\
-    \    assert(!f.empty() && f[0] == T(1) && 0 <= len);\n    if (len == 0) {\n  \
-    \      return std::vector<T>();\n    }\n    std::vector<T> g = fps_log(f, len);\n\
-    \    for (T &elem : g) {\n        elem *= m;\n    }\n    return fps_exp(g);\n\
-    }\ntemplate <typename T>\nstd::vector<T> fps_pow(const std::vector<T> &f, long\
-    \ long m, int len = -1) {\n    if (len == -1) {\n        len = (int)f.size();\n\
-    \    }\n    assert(0 <= m && 0 <= len);\n    int n = (int)f.size();\n    if (m\
-    \ == 0) {\n        std::vector<T> g(len);\n        if (len) {\n            g[0]\
-    \ = T(1);\n        }\n        return g;\n    }\n    if (n == 0) {\n        return\
-    \ std::vector<T>(len);\n    }\n    int ord = -1;\n    for (int i = 0; i < n; ++i)\
-    \ {\n        if (f[i] != T()) {\n            ord = i;\n            break;\n  \
-    \      }\n    }\n    // ord * m >= len\n    if (ord == -1 || (long long)ord >=\
-    \ ((long long)len + m - 1) / m) {\n        return std::vector<T>(len);\n    }\n\
-    \    int off = ord * m;\n    std::vector<T> g(f.begin() + ord, f.end());\n   \
-    \ T c = g[0];\n    T c_inv = T(1) / c;\n    for (T &elem : g) {\n        elem\
-    \ *= c_inv;\n    }\n    g = fps_pow_constant_1(g, T(m), len - off);\n    c = c.pow(m);\n\
-    \    std::vector<T> h(len);\n    for (int i = 0; i < (int)g.size(); ++i) {\n \
-    \       h[off + i] = g[i] * c;\n    }\n    return h;\n}\n#line 2 \"template/template.hpp\"\
-    \n#include <bits/stdc++.h>\n#define OVERRIDE(a, b, c, d, ...) d\n#define REP2(i,\
-    \ n) for (i32 i = 0; i < (i32)(n); ++i)\n#define REP3(i, m, n) for (i32 i = (i32)(m);\
-    \ i < (i32)(n); ++i)\n#define REP(...) OVERRIDE(__VA_ARGS__, REP3, REP2)(__VA_ARGS__)\n\
-    #define PER2(i, n) for (i32 i = (i32)(n)-1; i >= 0; --i)\n#define PER3(i, m, n)\
-    \ for (i32 i = (i32)(n)-1; i >= (i32)(m); --i)\n#define PER(...) OVERRIDE(__VA_ARGS__,\
-    \ PER3, PER2)(__VA_ARGS__)\n#define ALL(x) begin(x), end(x)\n#define LEN(x) (i32)(x.size())\n\
-    using namespace std;\nusing u32 = unsigned int;\nusing u64 = unsigned long long;\n\
-    using i32 = signed int;\nusing i64 = signed long long;\nusing f64 = double;\n\
-    using f80 = long double;\nusing pi = pair<i32, i32>;\nusing pl = pair<i64, i64>;\n\
-    template <typename T>\nusing V = vector<T>;\ntemplate <typename T>\nusing VV =\
-    \ V<V<T>>;\ntemplate <typename T>\nusing VVV = V<V<V<T>>>;\ntemplate <typename\
-    \ T>\nusing VVVV = V<V<V<V<T>>>>;\ntemplate <typename T>\nusing PQR = priority_queue<T,\
-    \ V<T>, greater<T>>;\ntemplate <typename T>\nbool chmin(T &x, const T &y) {\n\
-    \    if (x > y) {\n        x = y;\n        return true;\n    }\n    return false;\n\
-    }\ntemplate <typename T>\nbool chmax(T &x, const T &y) {\n    if (x < y) {\n \
-    \       x = y;\n        return true;\n    }\n    return false;\n}\ntemplate <typename\
-    \ T>\ni32 lob(const V<T> &arr, const T &v) {\n    return (i32)(lower_bound(ALL(arr),\
-    \ v) - arr.begin());\n}\ntemplate <typename T>\ni32 upb(const V<T> &arr, const\
-    \ T &v) {\n    return (i32)(upper_bound(ALL(arr), v) - arr.begin());\n}\ntemplate\
-    \ <typename T>\nV<i32> argsort(const V<T> &arr) {\n    V<i32> ret(arr.size());\n\
-    \    iota(ALL(ret), 0);\n    sort(ALL(ret), [&](i32 i, i32 j) -> bool {\n    \
-    \    if (arr[i] == arr[j]) {\n            return i < j;\n        } else {\n  \
-    \          return arr[i] < arr[j];\n        }\n    });\n    return ret;\n}\n#ifdef\
-    \ INT128\nusing u128 = __uint128_t;\nusing i128 = __int128_t;\n#endif\n[[maybe_unused]]\
-    \ constexpr i32 INF = 1000000100;\n[[maybe_unused]] constexpr i64 INF64 = 3000000000000000100;\n\
-    struct SetUpIO {\n    SetUpIO() {\n#ifdef FAST_IO\n        ios::sync_with_stdio(false);\n\
-    \        cin.tie(nullptr);\n#endif\n        cout << fixed << setprecision(15);\n\
-    \    }\n} set_up_io;\nvoid scan(char &x) { cin >> x; }\nvoid scan(u32 &x) { cin\
-    \ >> x; }\nvoid scan(u64 &x) { cin >> x; }\nvoid scan(i32 &x) { cin >> x; }\n\
-    void scan(i64 &x) { cin >> x; }\nvoid scan(f64 &x) { cin >> x; }\nvoid scan(string\
-    \ &x) { cin >> x; }\ntemplate <typename T>\nvoid scan(V<T> &x) {\n    for (T &ele\
-    \ : x) {\n        scan(ele);\n    }\n}\nvoid read() {}\ntemplate <typename Head,\
-    \ typename... Tail>\nvoid read(Head &head, Tail &...tail) {\n    scan(head);\n\
-    \    read(tail...);\n}\n#define CHAR(...)     \\\n    char __VA_ARGS__; \\\n \
-    \   read(__VA_ARGS__);\n#define U32(...)     \\\n    u32 __VA_ARGS__; \\\n   \
-    \ read(__VA_ARGS__);\n#define U64(...)     \\\n    u64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n\
-    #define I32(...)     \\\n    i32 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define\
-    \ I64(...)     \\\n    i64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define F64(...)\
-    \     \\\n    f64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define STR(...)  \
-    \      \\\n    string __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define VEC(type,\
-    \ name, size) \\\n    V<type> name(size);       \\\n    read(name);\n#define VVEC(type,\
-    \ name, size1, size2)    \\\n    VV<type> name(size1, V<type>(size2)); \\\n  \
-    \  read(name);\n#line 6 \"template/fastio.hpp\"\n\n// unable to read INT_MIN (int),\
-    \ LLONG_MIN (long long)\nclass Reader {\n    FILE *fp;\n    static constexpr int\
-    \ BUF = 1 << 18;\n    char buf[BUF];\n    char *pl, *pr;\n\n    void reread()\
-    \ {\n        int wd = pr - pl;\n        std::memcpy(buf, pl, wd);\n        pl\
-    \ = buf;\n        pr = buf + wd;\n        pr += std::fread(pr, 1, BUF - wd, fp);\n\
-    \    }\n\n    char skip() {\n        char ch = *pl++;\n        while (ch <= '\
-    \ ') {\n            ch = *pl++;\n        }\n        return ch;\n    }\n\n    template\
+    \ a);\n    } else {\n        return convolve_square_fft(a);\n    }\n}\n#line 4\
+    \ \"poly/middle_product.hpp\"\n\n// a.size() <= b.size()\ntemplate <typename M>\n\
+    std::vector<M> middle_product(std::vector<M> a, std::vector<M> b) {\n    int n\
+    \ = (int)a.size();\n    int m = (int)b.size();\n    std::reverse(a.begin(), a.end());\n\
+    \    int l = 1;\n    while (l < m) {\n        l *= 2;\n    }\n    a.resize(l,\
+    \ M());\n    b.resize(l, M());\n    fft(a);\n    fft(b);\n    for (int i = 0;\
+    \ i < l; ++i) {\n        b[i] *= a[i];\n    }\n    ifft(b);\n    return std::vector<M>(b.begin()\
+    \ + (n - 1), b.begin() + m);\n}\n#line 3 \"poly/multieval_geometric.hpp\"\n\n\
+    template <typename M>\nstd::vector<M> multieval_geometric(std::vector<M> f, int\
+    \ m, M a, M r) {\n    int n = (int)f.size();\n    if (n == 0) {\n        return\
+    \ std::vector<M>(m, 0);\n    }\n    if (m == 0) {\n        return std::vector<M>();\n\
+    \    }\n    if (r == M()) {\n        std::vector<M> ret(m, f[0]);\n        M ev,\
+    \ pw(1);\n        for (int i = 0; i < n; ++i) {\n            ev += f[i] * pw;\n\
+    \            pw *= a;\n        }\n        ret[0] = ev;\n        return ret;\n\
+    \    }\n    std::vector<M> w(n + m - 1);\n    M val(1), pw(1);\n    for (int i\
+    \ = 0; i < n + m - 1; ++i) {\n        w[i] = val;\n        val *= pw;\n      \
+    \  pw *= r;\n    }\n    val = pw = M(1);\n    M invr = r.inv();\n    for (int\
+    \ i = 0; i < n; ++i) {\n        f[i] *= val;\n        val *= a * pw;\n       \
+    \ pw *= invr;\n    }\n    std::vector<M> ret = middle_product(f, w);\n    val\
+    \ = pw = M(1);\n    for (int i = 0; i < m; ++i) {\n        ret[i] *= val;\n  \
+    \      val *= pw;\n        pw *= invr;\n    }\n    return ret;\n}\n#line 3 \"\
+    poly/polynomial_interpolation_geometric.hpp\"\n\ntemplate <typename M>\nstd::vector<M>\
+    \ polynomial_interpolation_geometric_a1(const std::vector<M> &y, M r) {\n    int\
+    \ n = (int)y.size();\n    if (n == 0) {\n        return std::vector<M>(0);\n \
+    \   }\n    if (n == 1) {\n        return std::vector<M>(1, y[0]);\n    }\n   \
+    \ std::vector<M> pw(n + 1), invpw(n + 1);\n    pw[0] = M(1);\n    for (int i =\
+    \ 0; i < n; ++i) {\n        pw[i + 1] = pw[i] * r;\n    }\n    invpw[n] = pw[n].inv();\n\
+    \    for (int i = n - 1; i >= 0; --i) {\n        invpw[i] = invpw[i + 1] * r;\n\
+    \    }\n    std::vector<M> qfac(n + 1), invqfac(n);\n    qfac[0] = M(1);\n   \
+    \ for (int i = 0; i < n; ++i) {\n        qfac[i + 1] = qfac[i] * (M(1) - pw[i\
+    \ + 1]);\n    }\n    invqfac[n - 1] = qfac[n - 1].inv();\n    for (int i = n -\
+    \ 2; i >= 0; --i) {\n        invqfac[i] = invqfac[i + 1] * (M(1) - pw[i + 1]);\n\
+    \    }\n    std::vector<M> w = y;\n    {\n        M t(1);\n        w[0] *= invqfac[n\
+    \ - 1];\n        for (int i = 0; i < n - 1; ++i) {\n            t *= -invpw[n\
+    \ - 2 - i];\n            w[i + 1] *= invqfac[i + 1] * invqfac[n - 2 - i] * t;\n\
+    \        }\n    }\n    std::vector<M> f(n);\n    {\n        M t(1);\n        f[0]\
+    \ = t;\n        for (int i = 0; i < n - 1; ++i) {\n            t *= -pw[i];\n\
+    \            f[i + 1] = qfac[n] * invqfac[i + 1] * invqfac[n - 1 - i] * t;\n \
+    \       }\n    }\n    std::vector<M> ev = multieval_geometric(w, n, M(1), r);\n\
+    \    std::vector<M> ans = convolve(f, ev);\n    ans.resize(n);\n    std::reverse(ans.begin(),\
+    \ ans.end());\n    return ans;\n}\n\ntemplate <typename M>\nstd::vector<M> polynomial_interpolation_geometric(const\
+    \ std::vector<M> &y, M a,\n                                                  M\
+    \ r) {\n    int n = (int)y.size();\n    if (n == 0) {\n        return std::vector<M>(0);\n\
+    \    }\n    if (n == 1) {\n        return std::vector<M>(1, y[0]);\n    }\n  \
+    \  // a != 0, r != 0\n    std::vector<M> f = polynomial_interpolation_geometric_a1(y,\
+    \ r);\n    M inv = a.inv();\n    M pw(1);\n    for (int i = 0; i < n; ++i) {\n\
+    \        f[i] *= pw;\n        pw *= inv;\n    }\n    return f;\n}\n#line 2 \"\
+    template/template.hpp\"\n#include <bits/stdc++.h>\n#define OVERRIDE(a, b, c, d,\
+    \ ...) d\n#define REP2(i, n) for (i32 i = 0; i < (i32)(n); ++i)\n#define REP3(i,\
+    \ m, n) for (i32 i = (i32)(m); i < (i32)(n); ++i)\n#define REP(...) OVERRIDE(__VA_ARGS__,\
+    \ REP3, REP2)(__VA_ARGS__)\n#define PER2(i, n) for (i32 i = (i32)(n)-1; i >= 0;\
+    \ --i)\n#define PER3(i, m, n) for (i32 i = (i32)(n)-1; i >= (i32)(m); --i)\n#define\
+    \ PER(...) OVERRIDE(__VA_ARGS__, PER3, PER2)(__VA_ARGS__)\n#define ALL(x) begin(x),\
+    \ end(x)\n#define LEN(x) (i32)(x.size())\nusing namespace std;\nusing u32 = unsigned\
+    \ int;\nusing u64 = unsigned long long;\nusing i32 = signed int;\nusing i64 =\
+    \ signed long long;\nusing f64 = double;\nusing f80 = long double;\nusing pi =\
+    \ pair<i32, i32>;\nusing pl = pair<i64, i64>;\ntemplate <typename T>\nusing V\
+    \ = vector<T>;\ntemplate <typename T>\nusing VV = V<V<T>>;\ntemplate <typename\
+    \ T>\nusing VVV = V<V<V<T>>>;\ntemplate <typename T>\nusing VVVV = V<V<V<V<T>>>>;\n\
+    template <typename T>\nusing PQR = priority_queue<T, V<T>, greater<T>>;\ntemplate\
+    \ <typename T>\nbool chmin(T &x, const T &y) {\n    if (x > y) {\n        x =\
+    \ y;\n        return true;\n    }\n    return false;\n}\ntemplate <typename T>\n\
+    bool chmax(T &x, const T &y) {\n    if (x < y) {\n        x = y;\n        return\
+    \ true;\n    }\n    return false;\n}\ntemplate <typename T>\ni32 lob(const V<T>\
+    \ &arr, const T &v) {\n    return (i32)(lower_bound(ALL(arr), v) - arr.begin());\n\
+    }\ntemplate <typename T>\ni32 upb(const V<T> &arr, const T &v) {\n    return (i32)(upper_bound(ALL(arr),\
+    \ v) - arr.begin());\n}\ntemplate <typename T>\nV<i32> argsort(const V<T> &arr)\
+    \ {\n    V<i32> ret(arr.size());\n    iota(ALL(ret), 0);\n    sort(ALL(ret), [&](i32\
+    \ i, i32 j) -> bool {\n        if (arr[i] == arr[j]) {\n            return i <\
+    \ j;\n        } else {\n            return arr[i] < arr[j];\n        }\n    });\n\
+    \    return ret;\n}\n#ifdef INT128\nusing u128 = __uint128_t;\nusing i128 = __int128_t;\n\
+    #endif\n[[maybe_unused]] constexpr i32 INF = 1000000100;\n[[maybe_unused]] constexpr\
+    \ i64 INF64 = 3000000000000000100;\nstruct SetUpIO {\n    SetUpIO() {\n#ifdef\
+    \ FAST_IO\n        ios::sync_with_stdio(false);\n        cin.tie(nullptr);\n#endif\n\
+    \        cout << fixed << setprecision(15);\n    }\n} set_up_io;\nvoid scan(char\
+    \ &x) { cin >> x; }\nvoid scan(u32 &x) { cin >> x; }\nvoid scan(u64 &x) { cin\
+    \ >> x; }\nvoid scan(i32 &x) { cin >> x; }\nvoid scan(i64 &x) { cin >> x; }\n\
+    void scan(f64 &x) { cin >> x; }\nvoid scan(string &x) { cin >> x; }\ntemplate\
+    \ <typename T>\nvoid scan(V<T> &x) {\n    for (T &ele : x) {\n        scan(ele);\n\
+    \    }\n}\nvoid read() {}\ntemplate <typename Head, typename... Tail>\nvoid read(Head\
+    \ &head, Tail &...tail) {\n    scan(head);\n    read(tail...);\n}\n#define CHAR(...)\
+    \     \\\n    char __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define U32(...) \
+    \    \\\n    u32 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define U64(...)   \
+    \  \\\n    u64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define I32(...)     \\\
+    \n    i32 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define I64(...)     \\\n \
+    \   i64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define F64(...)     \\\n   \
+    \ f64 __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define STR(...)        \\\n  \
+    \  string __VA_ARGS__; \\\n    read(__VA_ARGS__);\n#define VEC(type, name, size)\
+    \ \\\n    V<type> name(size);       \\\n    read(name);\n#define VVEC(type, name,\
+    \ size1, size2)    \\\n    VV<type> name(size1, V<type>(size2)); \\\n    read(name);\n\
+    #line 6 \"template/fastio.hpp\"\n\n// unable to read INT_MIN (int), LLONG_MIN\
+    \ (long long)\nclass Reader {\n    FILE *fp;\n    static constexpr int BUF = 1\
+    \ << 18;\n    char buf[BUF];\n    char *pl, *pr;\n\n    void reread() {\n    \
+    \    int wd = pr - pl;\n        std::memcpy(buf, pl, wd);\n        pl = buf;\n\
+    \        pr = buf + wd;\n        pr += std::fread(pr, 1, BUF - wd, fp);\n    }\n\
+    \n    char skip() {\n        char ch = *pl++;\n        while (ch <= ' ') {\n \
+    \           ch = *pl++;\n        }\n        return ch;\n    }\n\n    template\
     \ <typename T>\n    void read_unsigned(T &x) {\n        if (pr - pl < 64) {\n\
     \            reread();\n        }\n        x = 0;\n        char ch = skip();\n\
     \        while ('0' <= ch) {\n            x = 10 * x + (0xf & ch);\n         \
@@ -459,39 +401,37 @@ data:
     \     write(std::forward<Tail>(tail)...);\n    }\n\n    template <typename...\
     \ T>\n    void writeln(T &&...t) {\n        write(std::forward<T>(t)...);\n  \
     \      write_char('\\n');\n    }\n};\n\nReader rd(stdin);\nWriter wr(stdout);\n\
-    #line 6 \"poly/test/pow_of_formal_power_series.test.cpp\"\n\nint main() {\n  \
-    \  using M = ModInt<998244353>;\n    i32 n;\n    i64 m;\n    rd.read(n, m);\n\
-    \    V<M> f(n);\n    REP(i, n) {\n        rd.read(f[i].val);\n    }\n    V<M>\
-    \ g = fps_pow(f, m);\n    REP(i, n) {\n        wr.write(g[i].val);\n        wr.write(\"\
-    \ \\n\"[i + 1 == n]);\n    }\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/pow_of_formal_power_series\"\
-    \n#include \"../../poly/fps_pow.hpp\"\n#include \"../../number_theory/mod_int.hpp\"\
-    \n#include \"../../template/template.hpp\"\n#include \"../../template/fastio.hpp\"\
-    \n\nint main() {\n    using M = ModInt<998244353>;\n    i32 n;\n    i64 m;\n \
-    \   rd.read(n, m);\n    V<M> f(n);\n    REP(i, n) {\n        rd.read(f[i].val);\n\
-    \    }\n    V<M> g = fps_pow(f, m);\n    REP(i, n) {\n        wr.write(g[i].val);\n\
-    \        wr.write(\" \\n\"[i + 1 == n]);\n    }\n}\n"
+    #line 5 \"poly/test/polynomial_interpolation_on_geometric_sequence.test.cpp\"\n\
+    \nint main() {\n    using M = ModInt<998244353>;\n    i32 n;\n    M a, r;\n  \
+    \  rd.read(n, a.val, r.val);\n    V<M> y(n);\n    REP(i, n) {\n        rd.read(y[i].val);\n\
+    \    }\n    V<M> f = polynomial_interpolation_geometric(y, a, r);\n    REP(i,\
+    \ n) {\n        wr.writeln(f[i].val);\n    }\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/polynomial_interpolation_on_geometric_sequence\"\
+    \n#include \"../../poly/polynomial_interpolation_geometric.hpp\"\n#include \"\
+    ../../template/template.hpp\"\n#include \"../../template/fastio.hpp\"\n\nint main()\
+    \ {\n    using M = ModInt<998244353>;\n    i32 n;\n    M a, r;\n    rd.read(n,\
+    \ a.val, r.val);\n    V<M> y(n);\n    REP(i, n) {\n        rd.read(y[i].val);\n\
+    \    }\n    V<M> f = polynomial_interpolation_geometric(y, a, r);\n    REP(i,\
+    \ n) {\n        wr.writeln(f[i].val);\n    }\n}\n"
   dependsOn:
-  - poly/fps_pow.hpp
-  - poly/fps_exp.hpp
-  - number_theory/factorial.hpp
+  - poly/polynomial_interpolation_geometric.hpp
+  - poly/multieval_geometric.hpp
+  - poly/middle_product.hpp
   - poly/fft.hpp
   - number_theory/mod_int.hpp
   - number_theory/utils.hpp
-  - poly/fps_log.hpp
-  - poly/fps_inv.hpp
   - template/template.hpp
   - template/fastio.hpp
   isVerificationFile: true
-  path: poly/test/pow_of_formal_power_series.test.cpp
+  path: poly/test/polynomial_interpolation_on_geometric_sequence.test.cpp
   requiredBy: []
-  timestamp: '2026-03-16 16:42:33+09:00'
+  timestamp: '2026-02-02 21:51:43+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: poly/test/pow_of_formal_power_series.test.cpp
+documentation_of: poly/test/polynomial_interpolation_on_geometric_sequence.test.cpp
 layout: document
 redirect_from:
-- /verify/poly/test/pow_of_formal_power_series.test.cpp
-- /verify/poly/test/pow_of_formal_power_series.test.cpp.html
-title: poly/test/pow_of_formal_power_series.test.cpp
+- /verify/poly/test/polynomial_interpolation_on_geometric_sequence.test.cpp
+- /verify/poly/test/polynomial_interpolation_on_geometric_sequence.test.cpp.html
+title: poly/test/polynomial_interpolation_on_geometric_sequence.test.cpp
 ---

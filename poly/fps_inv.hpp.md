@@ -12,15 +12,24 @@ data:
     title: poly/fft.hpp
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
+    path: poly/compositional_inverse.hpp
+    title: poly/compositional_inverse.hpp
+  - icon: ':heavy_check_mark:'
     path: poly/fps_div_at.hpp
     title: poly/fps_div_at.hpp
   - icon: ':heavy_check_mark:'
     path: poly/fps_log.hpp
     title: poly/fps_log.hpp
   - icon: ':heavy_check_mark:'
+    path: poly/fps_pow.hpp
+    title: poly/fps_pow.hpp
+  - icon: ':heavy_check_mark:'
     path: poly/multieval.hpp
     title: poly/multieval.hpp
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: poly/test/compositional_inverse_of_formal_power_series_large.test.cpp
+    title: poly/test/compositional_inverse_of_formal_power_series_large.test.cpp
   - icon: ':heavy_check_mark:'
     path: poly/test/inv_of_formal_power_series.test.cpp
     title: poly/test/inv_of_formal_power_series.test.cpp
@@ -33,6 +42,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: poly/test/multipoint_evaluation.test.cpp
     title: poly/test/multipoint_evaluation.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: poly/test/pow_of_formal_power_series.test.cpp
+    title: poly/test/pow_of_formal_power_series.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -259,16 +271,20 @@ data:
   isVerificationFile: false
   path: poly/fps_inv.hpp
   requiredBy:
-  - poly/fps_div_at.hpp
-  - poly/multieval.hpp
+  - poly/fps_pow.hpp
+  - poly/compositional_inverse.hpp
   - poly/fps_log.hpp
+  - poly/multieval.hpp
+  - poly/fps_div_at.hpp
   timestamp: '2025-12-31 19:12:41+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - poly/test/log_of_formal_power_series.test.cpp
   - poly/test/multipoint_evaluation.test.cpp
-  - poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
   - poly/test/inv_of_formal_power_series.test.cpp
+  - poly/test/pow_of_formal_power_series.test.cpp
+  - poly/test/log_of_formal_power_series.test.cpp
+  - poly/test/compositional_inverse_of_formal_power_series_large.test.cpp
+  - poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
 documentation_of: poly/fps_inv.hpp
 layout: document
 redirect_from:

@@ -218,6 +218,9 @@ data:
   - name: poly
     pages:
     - icon: ':heavy_check_mark:'
+      path: poly/compositional_inverse.hpp
+      title: poly/compositional_inverse.hpp
+    - icon: ':heavy_check_mark:'
       path: poly/fft.hpp
       title: poly/fft.hpp
     - icon: ':heavy_check_mark:'
@@ -245,6 +248,9 @@ data:
       path: poly/fps_log_sparse.hpp
       title: poly/fps_log_sparse.hpp
     - icon: ':heavy_check_mark:'
+      path: poly/fps_pow.hpp
+      title: poly/fps_pow.hpp
+    - icon: ':heavy_check_mark:'
       path: poly/fps_pow_sparse.hpp
       title: poly/fps_pow_sparse.hpp
     - icon: ':heavy_check_mark:'
@@ -256,6 +262,12 @@ data:
     - icon: ':heavy_check_mark:'
       path: poly/multieval_geometric.hpp
       title: poly/multieval_geometric.hpp
+    - icon: ':heavy_check_mark:'
+      path: poly/polynomial_interpolation_geometric.hpp
+      title: poly/polynomial_interpolation_geometric.hpp
+    - icon: ':heavy_check_mark:'
+      path: poly/power_projection.hpp
+      title: poly/power_projection.hpp
     - icon: ':heavy_check_mark:'
       path: poly/stirling1.hpp
       title: poly/stirling1.hpp
@@ -485,6 +497,9 @@ data:
   - name: poly/test
     pages:
     - icon: ':heavy_check_mark:'
+      path: poly/test/compositional_inverse_of_formal_power_series_large.test.cpp
+      title: poly/test/compositional_inverse_of_formal_power_series_large.test.cpp
+    - icon: ':heavy_check_mark:'
       path: poly/test/convolution_mod.test.cpp
       title: poly/test/convolution_mod.test.cpp
     - icon: ':heavy_check_mark:'
@@ -518,11 +533,17 @@ data:
       path: poly/test/multipoint_evaluation_on_geometric_sequence.test.cpp
       title: poly/test/multipoint_evaluation_on_geometric_sequence.test.cpp
     - icon: ':heavy_check_mark:'
+      path: poly/test/polynomial_interpolation_on_geometric_sequence.test.cpp
+      title: poly/test/polynomial_interpolation_on_geometric_sequence.test.cpp
+    - icon: ':heavy_check_mark:'
       path: poly/test/polynomial_taylor_shift.test.cpp
       title: poly/test/polynomial_taylor_shift.test.cpp
     - icon: ':heavy_check_mark:'
       path: poly/test/pow_of_formal_power_series.test.cpp
       title: poly/test/pow_of_formal_power_series.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: poly/test/pow_of_formal_power_series_sparse.test.cpp
+      title: poly/test/pow_of_formal_power_series_sparse.test.cpp
     - icon: ':heavy_check_mark:'
       path: poly/test/prod_of_polys.test.cpp
       title: poly/test/prod_of_polys.test.cpp

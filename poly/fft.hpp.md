@@ -18,6 +18,9 @@ data:
     path: graph/frequency_table_of_tree_distance.hpp
     title: graph/frequency_table_of_tree_distance.hpp
   - icon: ':heavy_check_mark:'
+    path: poly/compositional_inverse.hpp
+    title: poly/compositional_inverse.hpp
+  - icon: ':heavy_check_mark:'
     path: poly/fps_div_at.hpp
     title: poly/fps_div_at.hpp
   - icon: ':heavy_check_mark:'
@@ -30,6 +33,9 @@ data:
     path: poly/fps_log.hpp
     title: poly/fps_log.hpp
   - icon: ':heavy_check_mark:'
+    path: poly/fps_pow.hpp
+    title: poly/fps_pow.hpp
+  - icon: ':heavy_check_mark:'
     path: poly/middle_product.hpp
     title: poly/middle_product.hpp
   - icon: ':heavy_check_mark:'
@@ -38,6 +44,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: poly/multieval_geometric.hpp
     title: poly/multieval_geometric.hpp
+  - icon: ':heavy_check_mark:'
+    path: poly/polynomial_interpolation_geometric.hpp
+    title: poly/polynomial_interpolation_geometric.hpp
+  - icon: ':heavy_check_mark:'
+    path: poly/power_projection.hpp
+    title: poly/power_projection.hpp
   - icon: ':heavy_check_mark:'
     path: poly/stirling1.hpp
     title: poly/stirling1.hpp
@@ -57,6 +69,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/test/frequency_table_of_tree_distance.test.cpp
     title: graph/test/frequency_table_of_tree_distance.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: poly/test/compositional_inverse_of_formal_power_series_large.test.cpp
+    title: poly/test/compositional_inverse_of_formal_power_series_large.test.cpp
   - icon: ':heavy_check_mark:'
     path: poly/test/convolution_mod.test.cpp
     title: poly/test/convolution_mod.test.cpp
@@ -79,8 +94,14 @@ data:
     path: poly/test/multipoint_evaluation_on_geometric_sequence.test.cpp
     title: poly/test/multipoint_evaluation_on_geometric_sequence.test.cpp
   - icon: ':heavy_check_mark:'
+    path: poly/test/polynomial_interpolation_on_geometric_sequence.test.cpp
+    title: poly/test/polynomial_interpolation_on_geometric_sequence.test.cpp
+  - icon: ':heavy_check_mark:'
     path: poly/test/polynomial_taylor_shift.test.cpp
     title: poly/test/polynomial_taylor_shift.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: poly/test/pow_of_formal_power_series.test.cpp
+    title: poly/test/pow_of_formal_power_series.test.cpp
   - icon: ':heavy_check_mark:'
     path: poly/test/prod_of_polys.test.cpp
     title: poly/test/prod_of_polys.test.cpp
@@ -390,36 +411,43 @@ data:
   isVerificationFile: false
   path: poly/fft.hpp
   requiredBy:
+  - graph/frequency_table_of_tree_distance.hpp
+  - poly/fps_pow.hpp
+  - poly/power_projection.hpp
   - poly/fps_exp.hpp
-  - poly/stirling2.hpp
-  - poly/fps_div_at.hpp
+  - poly/compositional_inverse.hpp
+  - poly/fps_log.hpp
+  - poly/polynomial_interpolation_geometric.hpp
   - poly/multieval.hpp
   - poly/taylor_shift.hpp
-  - poly/middle_product.hpp
-  - poly/stirling1.hpp
-  - poly/fps_inv.hpp
-  - poly/fps_log.hpp
   - poly/multieval_geometric.hpp
-  - graph/frequency_table_of_tree_distance.hpp
+  - poly/stirling1.hpp
+  - poly/fps_div_at.hpp
+  - poly/middle_product.hpp
+  - poly/stirling2.hpp
+  - poly/fps_inv.hpp
   - convolution/index_difference.hpp
   - convolution/mul_mod_p_conv.hpp
   timestamp: '2025-12-31 19:12:41+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - poly/test/exp_of_formal_power_series.test.cpp
-  - poly/test/convolution_mod.test.cpp
-  - poly/test/log_of_formal_power_series.test.cpp
-  - poly/test/stirling_number_of_the_second_kind.test.cpp
-  - poly/test/multipoint_evaluation.test.cpp
-  - poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - poly/test/inv_of_formal_power_series.test.cpp
-  - poly/test/stirling_number_of_the_first_kind.test.cpp
-  - poly/test/multipoint_evaluation_on_geometric_sequence.test.cpp
-  - poly/test/polynomial_taylor_shift.test.cpp
-  - poly/test/prod_of_polys.test.cpp
   - graph/test/frequency_table_of_tree_distance.test.cpp
-  - convolution/test/mul_modp_convolution.test.cpp
+  - poly/test/polynomial_interpolation_on_geometric_sequence.test.cpp
+  - poly/test/multipoint_evaluation.test.cpp
+  - poly/test/inv_of_formal_power_series.test.cpp
+  - poly/test/polynomial_taylor_shift.test.cpp
+  - poly/test/pow_of_formal_power_series.test.cpp
+  - poly/test/log_of_formal_power_series.test.cpp
+  - poly/test/prod_of_polys.test.cpp
+  - poly/test/convolution_mod.test.cpp
+  - poly/test/compositional_inverse_of_formal_power_series_large.test.cpp
+  - poly/test/exp_of_formal_power_series.test.cpp
+  - poly/test/multipoint_evaluation_on_geometric_sequence.test.cpp
+  - poly/test/stirling_number_of_the_first_kind.test.cpp
+  - poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
+  - poly/test/stirling_number_of_the_second_kind.test.cpp
   - convolution/test/index_difference.test.cpp
+  - convolution/test/mul_modp_convolution.test.cpp
 documentation_of: poly/fft.hpp
 layout: document
 redirect_from:

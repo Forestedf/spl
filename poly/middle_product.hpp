@@ -1,5 +1,6 @@
 #pragma once
 #include <algorithm>
+#include <cassert>
 #include "fft.hpp"
 
 // a.size() <= b.size()
@@ -7,6 +8,7 @@ template <typename M>
 std::vector<M> middle_product(std::vector<M> a, std::vector<M> b) {
     int n = (int)a.size();
     int m = (int)b.size();
+    assert(n <= m);
     std::reverse(a.begin(), a.end());
     int l = 1;
     while (l < m) {

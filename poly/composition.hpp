@@ -4,35 +4,6 @@
 #include "taylor_shift.hpp"
 
 template <typename M>
-void transposed_fft(M *a, int n) {
-    ifft(a, n);
-    std::reverse(a + 1, a + n);
-    M c(n);
-    for (int i = 0; i < n; ++i) {
-        a[i] *= c;
-    }
-}
-template <typename M>
-void transposed_fft(std::vector<M> &a) {
-    transposed_fft(a.data(), (int)a.size());
-}
-
-template <typename M>
-void transposed_ifft(M *a, int n) {
-    static constexpr FFTRoot<M::get_mod()> roots;
-    std::reverse(a + 1, a + n);
-    fft(a, n);
-    M c = roots.inv2[__builtin_ctz(n)];
-    for (int i = 0; i < n; ++i) {
-        a[i] *= c;
-    }
-}
-template <typename M>
-void transposed_ifft(std::vector<M> &a) {
-    transposed_ifft(a.data(), (int)a.size());
-}
-
-template <typename M>
 std::vector<M> transposed_power_projection(int n, const std::vector<M> &f, const std::vector<M> &g) {
     static constexpr FFTRoot<M::get_mod()> roots;
     static constexpr M INV2 = M(2).inv();

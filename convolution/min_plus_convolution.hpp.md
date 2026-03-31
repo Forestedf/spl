@@ -92,8 +92,8 @@ data:
   timestamp: '2025-09-02 16:52:07+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - convolution/test/min_plus_convolution_convex_arbitrary.test.cpp
   - convolution/test/min_plus_convolution_convex_convex.test.cpp
+  - convolution/test/min_plus_convolution_convex_arbitrary.test.cpp
 documentation_of: convolution/min_plus_convolution.hpp
 layout: document
 redirect_from:

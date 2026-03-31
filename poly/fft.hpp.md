@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/mod_int.hpp
     title: number_theory/mod_int.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/utils.hpp
     title: number_theory/utils.hpp
   _extendedRequiredBy:
@@ -14,10 +14,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: convolution/mul_mod_p_conv.hpp
     title: convolution/mul_mod_p_conv.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/frequency_table_of_tree_distance.hpp
     title: graph/frequency_table_of_tree_distance.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/composition.hpp
     title: poly/composition.hpp
   - icon: ':heavy_check_mark:'
@@ -53,13 +53,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: poly/power_projection.hpp
     title: poly/power_projection.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/stirling1.hpp
     title: poly/stirling1.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/stirling2.hpp
     title: poly/stirling2.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/taylor_shift.hpp
     title: poly/taylor_shift.hpp
   _extendedVerifiedWith:
@@ -69,16 +69,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: convolution/test/mul_modp_convolution.test.cpp
     title: convolution/test/mul_modp_convolution.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/test/frequency_table_of_tree_distance.test.cpp
     title: graph/test/frequency_table_of_tree_distance.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/test/composition_of_formal_power_series_large.test.cpp
     title: poly/test/composition_of_formal_power_series_large.test.cpp
   - icon: ':heavy_check_mark:'
     path: poly/test/compositional_inverse_of_formal_power_series_large.test.cpp
     title: poly/test/compositional_inverse_of_formal_power_series_large.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/test/convolution_mod.test.cpp
     title: poly/test/convolution_mod.test.cpp
   - icon: ':heavy_check_mark:'
@@ -102,24 +102,24 @@ data:
   - icon: ':heavy_check_mark:'
     path: poly/test/polynomial_interpolation_on_geometric_sequence.test.cpp
     title: poly/test/polynomial_interpolation_on_geometric_sequence.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/test/polynomial_taylor_shift.test.cpp
     title: poly/test/polynomial_taylor_shift.test.cpp
   - icon: ':heavy_check_mark:'
     path: poly/test/pow_of_formal_power_series.test.cpp
     title: poly/test/pow_of_formal_power_series.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/test/prod_of_polys.test.cpp
     title: poly/test/prod_of_polys.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/test/stirling_number_of_the_first_kind.test.cpp
     title: poly/test/stirling_number_of_the_first_kind.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/test/stirling_number_of_the_second_kind.test.cpp
     title: poly/test/stirling_number_of_the_second_kind.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"poly/fft.hpp\"\n#include <array>\n#include <vector>\n#line\
@@ -307,7 +307,16 @@ data:
     \   a[n - 1] = last;\n    }\n    return a;\n}\n\ntemplate <typename M>\nstd::vector<M>\
     \ convolve_square(const std::vector<M> &a) {\n    if (a.empty()) {\n        return\
     \ std::vector<M>(0);\n    }\n    if ((int)a.size() <= 60) {\n        return convolve_naive(a,\
-    \ a);\n    } else {\n        return convolve_square_fft(a);\n    }\n}\n"
+    \ a);\n    } else {\n        return convolve_square_fft(a);\n    }\n}\n\ntemplate\
+    \ <typename M>\nvoid transposed_fft(M *a, int n) {\n    ifft(a, n);\n    std::reverse(a\
+    \ + 1, a + n);\n    M c(n);\n    for (int i = 0; i < n; ++i) {\n        a[i] *=\
+    \ c;\n    }\n}\ntemplate <typename M>\nvoid transposed_fft(std::vector<M> &a)\
+    \ {\n    transposed_fft(a.data(), (int)a.size());\n}\n\ntemplate <typename M>\n\
+    void transposed_ifft(M *a, int n) {\n    static constexpr FFTRoot<M::get_mod()>\
+    \ roots;\n    std::reverse(a + 1, a + n);\n    fft(a, n);\n    M c = roots.inv2[__builtin_ctz(n)];\n\
+    \    for (int i = 0; i < n; ++i) {\n        a[i] *= c;\n    }\n}\ntemplate <typename\
+    \ M>\nvoid transposed_ifft(std::vector<M> &a) {\n    transposed_ifft(a.data(),\
+    \ (int)a.size());\n}\n"
   code: "#pragma once\n#include <array>\n#include <vector>\n#include \"../number_theory/mod_int.hpp\"\
     \n\nconstexpr int ctz_constexpr(unsigned n) {\n    int x = 0;\n    while (!(n\
     \ & (1u << x))) {\n        ++x;\n    }\n    return x;\n}\n\ntemplate <unsigned\
@@ -410,7 +419,16 @@ data:
     \   a[n - 1] = last;\n    }\n    return a;\n}\n\ntemplate <typename M>\nstd::vector<M>\
     \ convolve_square(const std::vector<M> &a) {\n    if (a.empty()) {\n        return\
     \ std::vector<M>(0);\n    }\n    if ((int)a.size() <= 60) {\n        return convolve_naive(a,\
-    \ a);\n    } else {\n        return convolve_square_fft(a);\n    }\n}\n"
+    \ a);\n    } else {\n        return convolve_square_fft(a);\n    }\n}\n\ntemplate\
+    \ <typename M>\nvoid transposed_fft(M *a, int n) {\n    ifft(a, n);\n    std::reverse(a\
+    \ + 1, a + n);\n    M c(n);\n    for (int i = 0; i < n; ++i) {\n        a[i] *=\
+    \ c;\n    }\n}\ntemplate <typename M>\nvoid transposed_fft(std::vector<M> &a)\
+    \ {\n    transposed_fft(a.data(), (int)a.size());\n}\n\ntemplate <typename M>\n\
+    void transposed_ifft(M *a, int n) {\n    static constexpr FFTRoot<M::get_mod()>\
+    \ roots;\n    std::reverse(a + 1, a + n);\n    fft(a, n);\n    M c = roots.inv2[__builtin_ctz(n)];\n\
+    \    for (int i = 0; i < n; ++i) {\n        a[i] *= c;\n    }\n}\ntemplate <typename\
+    \ M>\nvoid transposed_ifft(std::vector<M> &a) {\n    transposed_ifft(a.data(),\
+    \ (int)a.size());\n}\n"
   dependsOn:
   - number_theory/mod_int.hpp
   - number_theory/utils.hpp
@@ -418,44 +436,44 @@ data:
   path: poly/fft.hpp
   requiredBy:
   - graph/frequency_table_of_tree_distance.hpp
-  - poly/fps_pow.hpp
-  - poly/composition.hpp
-  - poly/power_projection.hpp
-  - poly/fps_exp.hpp
-  - poly/compositional_inverse.hpp
-  - poly/fps_log.hpp
-  - poly/polynomial_interpolation_geometric.hpp
-  - poly/multieval.hpp
-  - poly/taylor_shift.hpp
-  - poly/multieval_geometric.hpp
-  - poly/stirling1.hpp
-  - poly/fps_div_at.hpp
-  - poly/middle_product.hpp
-  - poly/stirling2.hpp
-  - poly/fps_inv.hpp
   - convolution/index_difference.hpp
   - convolution/mul_mod_p_conv.hpp
-  timestamp: '2025-12-31 19:12:41+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  - poly/power_projection.hpp
+  - poly/stirling2.hpp
+  - poly/multieval.hpp
+  - poly/middle_product.hpp
+  - poly/taylor_shift.hpp
+  - poly/fps_pow.hpp
+  - poly/polynomial_interpolation_geometric.hpp
+  - poly/fps_inv.hpp
+  - poly/multieval_geometric.hpp
+  - poly/composition.hpp
+  - poly/fps_log.hpp
+  - poly/compositional_inverse.hpp
+  - poly/stirling1.hpp
+  - poly/fps_exp.hpp
+  - poly/fps_div_at.hpp
+  timestamp: '2026-03-31 19:03:53+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - graph/test/frequency_table_of_tree_distance.test.cpp
-  - poly/test/polynomial_interpolation_on_geometric_sequence.test.cpp
-  - poly/test/multipoint_evaluation.test.cpp
-  - poly/test/inv_of_formal_power_series.test.cpp
-  - poly/test/polynomial_taylor_shift.test.cpp
-  - poly/test/pow_of_formal_power_series.test.cpp
-  - poly/test/log_of_formal_power_series.test.cpp
-  - poly/test/prod_of_polys.test.cpp
-  - poly/test/convolution_mod.test.cpp
-  - poly/test/compositional_inverse_of_formal_power_series_large.test.cpp
-  - poly/test/exp_of_formal_power_series.test.cpp
-  - poly/test/multipoint_evaluation_on_geometric_sequence.test.cpp
-  - poly/test/stirling_number_of_the_first_kind.test.cpp
-  - poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - poly/test/composition_of_formal_power_series_large.test.cpp
-  - poly/test/stirling_number_of_the_second_kind.test.cpp
   - convolution/test/index_difference.test.cpp
   - convolution/test/mul_modp_convolution.test.cpp
+  - poly/test/multipoint_evaluation_on_geometric_sequence.test.cpp
+  - poly/test/polynomial_taylor_shift.test.cpp
+  - poly/test/compositional_inverse_of_formal_power_series_large.test.cpp
+  - poly/test/inv_of_formal_power_series.test.cpp
+  - poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
+  - poly/test/multipoint_evaluation.test.cpp
+  - poly/test/composition_of_formal_power_series_large.test.cpp
+  - poly/test/prod_of_polys.test.cpp
+  - poly/test/pow_of_formal_power_series.test.cpp
+  - poly/test/convolution_mod.test.cpp
+  - poly/test/log_of_formal_power_series.test.cpp
+  - poly/test/exp_of_formal_power_series.test.cpp
+  - poly/test/stirling_number_of_the_first_kind.test.cpp
+  - poly/test/polynomial_interpolation_on_geometric_sequence.test.cpp
+  - poly/test/stirling_number_of_the_second_kind.test.cpp
 documentation_of: poly/fft.hpp
 layout: document
 redirect_from:

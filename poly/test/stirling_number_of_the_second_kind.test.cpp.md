@@ -1,29 +1,29 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/factorial.hpp
     title: number_theory/factorial.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/mod_int.hpp
     title: number_theory/mod_int.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/utils.hpp
     title: number_theory/utils.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: poly/fft.hpp
     title: poly/fft.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/stirling2.hpp
     title: poly/stirling2.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/stirling_number_of_the_second_kind
@@ -216,44 +216,52 @@ data:
     \   a[n - 1] = last;\n    }\n    return a;\n}\n\ntemplate <typename M>\nstd::vector<M>\
     \ convolve_square(const std::vector<M> &a) {\n    if (a.empty()) {\n        return\
     \ std::vector<M>(0);\n    }\n    if ((int)a.size() <= 60) {\n        return convolve_naive(a,\
-    \ a);\n    } else {\n        return convolve_square_fft(a);\n    }\n}\n#line 4\
-    \ \"number_theory/factorial.hpp\"\n\ntemplate <typename M>\nM inv(int n) {\n \
-    \   static std::vector<M> data{M::raw(0), M::raw(1)};\n    static constexpr unsigned\
-    \ MOD = M::get_mod();\n    assert(0 < n);\n    while ((int)data.size() <= n) {\n\
-    \        unsigned k = (unsigned)data.size();\n        unsigned r = MOD / k + 1;\n\
-    \        data.push_back(M::raw(r) * data[k * r - MOD]);\n    }\n    return data[n];\n\
-    }\n\ntemplate <typename M>\nM fact(int n) {\n    static std::vector<M> data{M::raw(1),\
+    \ a);\n    } else {\n        return convolve_square_fft(a);\n    }\n}\n\ntemplate\
+    \ <typename M>\nvoid transposed_fft(M *a, int n) {\n    ifft(a, n);\n    std::reverse(a\
+    \ + 1, a + n);\n    M c(n);\n    for (int i = 0; i < n; ++i) {\n        a[i] *=\
+    \ c;\n    }\n}\ntemplate <typename M>\nvoid transposed_fft(std::vector<M> &a)\
+    \ {\n    transposed_fft(a.data(), (int)a.size());\n}\n\ntemplate <typename M>\n\
+    void transposed_ifft(M *a, int n) {\n    static constexpr FFTRoot<M::get_mod()>\
+    \ roots;\n    std::reverse(a + 1, a + n);\n    fft(a, n);\n    M c = roots.inv2[__builtin_ctz(n)];\n\
+    \    for (int i = 0; i < n; ++i) {\n        a[i] *= c;\n    }\n}\ntemplate <typename\
+    \ M>\nvoid transposed_ifft(std::vector<M> &a) {\n    transposed_ifft(a.data(),\
+    \ (int)a.size());\n}\n#line 4 \"number_theory/factorial.hpp\"\n\ntemplate <typename\
+    \ M>\nM inv(int n) {\n    static std::vector<M> data{M::raw(0), M::raw(1)};\n\
+    \    static constexpr unsigned MOD = M::get_mod();\n    assert(0 < n);\n    while\
+    \ ((int)data.size() <= n) {\n        unsigned k = (unsigned)data.size();\n   \
+    \     unsigned r = MOD / k + 1;\n        data.push_back(M::raw(r) * data[k * r\
+    \ - MOD]);\n    }\n    return data[n];\n}\n\ntemplate <typename M>\nM fact(int\
+    \ n) {\n    static std::vector<M> data{M::raw(1), M::raw(1)};\n    assert(0 <=\
+    \ n);\n    while ((int)data.size() <= n) {\n        unsigned k = (unsigned)data.size();\n\
+    \        data.push_back(M::raw(k) * data.back());\n    }\n    return data[n];\n\
+    }\n\ntemplate <typename M>\nM inv_fact(int n) {\n    static std::vector<M> data{M::raw(1),\
     \ M::raw(1)};\n    assert(0 <= n);\n    while ((int)data.size() <= n) {\n    \
-    \    unsigned k = (unsigned)data.size();\n        data.push_back(M::raw(k) * data.back());\n\
-    \    }\n    return data[n];\n}\n\ntemplate <typename M>\nM inv_fact(int n) {\n\
-    \    static std::vector<M> data{M::raw(1), M::raw(1)};\n    assert(0 <= n);\n\
-    \    while ((int)data.size() <= n) {\n        unsigned k = (unsigned)data.size();\n\
-    \        data.push_back(inv<M>(k) * data.back());\n    }\n    return data[n];\n\
-    }\n\ntemplate <typename M>\nM binom(int n, int k) {\n    assert(0 <= n);\n   \
-    \ if (k < 0 || n < k) {\n        return M::raw(0);\n    }\n    return fact<M>(n)\
-    \ * inv_fact<M>(k) * inv_fact<M>(n - k);\n}\n\ntemplate <typename M>\nM n_terms_sum_k(int\
-    \ n, int k) {\n    assert(0 <= n && 0 <= k);\n    if (n == 0) {\n        return\
-    \ (k == 0 ? M::raw(1) : M::raw(0));\n    }\n    return binom<M>(n + k - 1, n -\
-    \ 1);\n}\n#line 4 \"poly/stirling2.hpp\"\ntemplate <typename M>\nstd::vector<M>\
-    \ stirling_2(int n) {\n    assert(0 <= n);\n    std::vector<M> f(n + 1), g(n +\
-    \ 1);\n    for (int i = 0; i <= n; ++i) {\n        f[i] = M::raw(i).pow(n) * inv_fact<M>(i);\n\
-    \        g[i] = inv_fact<M>(i);\n        if (i % 2 == 1) {\n            g[i] =\
-    \ -g[i];\n        }\n    }\n    std::vector<M> h = convolve(f, g);\n    h.resize(n\
-    \ + 1);\n    return h;\n}\n#line 2 \"template/template.hpp\"\n#include <bits/stdc++.h>\n\
-    #define OVERRIDE(a, b, c, d, ...) d\n#define REP2(i, n) for (i32 i = 0; i < (i32)(n);\
-    \ ++i)\n#define REP3(i, m, n) for (i32 i = (i32)(m); i < (i32)(n); ++i)\n#define\
-    \ REP(...) OVERRIDE(__VA_ARGS__, REP3, REP2)(__VA_ARGS__)\n#define PER2(i, n)\
-    \ for (i32 i = (i32)(n)-1; i >= 0; --i)\n#define PER3(i, m, n) for (i32 i = (i32)(n)-1;\
-    \ i >= (i32)(m); --i)\n#define PER(...) OVERRIDE(__VA_ARGS__, PER3, PER2)(__VA_ARGS__)\n\
-    #define ALL(x) begin(x), end(x)\n#define LEN(x) (i32)(x.size())\nusing namespace\
-    \ std;\nusing u32 = unsigned int;\nusing u64 = unsigned long long;\nusing i32\
-    \ = signed int;\nusing i64 = signed long long;\nusing f64 = double;\nusing f80\
-    \ = long double;\nusing pi = pair<i32, i32>;\nusing pl = pair<i64, i64>;\ntemplate\
-    \ <typename T>\nusing V = vector<T>;\ntemplate <typename T>\nusing VV = V<V<T>>;\n\
-    template <typename T>\nusing VVV = V<V<V<T>>>;\ntemplate <typename T>\nusing VVVV\
-    \ = V<V<V<V<T>>>>;\ntemplate <typename T>\nusing PQR = priority_queue<T, V<T>,\
-    \ greater<T>>;\ntemplate <typename T>\nbool chmin(T &x, const T &y) {\n    if\
-    \ (x > y) {\n        x = y;\n        return true;\n    }\n    return false;\n\
+    \    unsigned k = (unsigned)data.size();\n        data.push_back(inv<M>(k) * data.back());\n\
+    \    }\n    return data[n];\n}\n\ntemplate <typename M>\nM binom(int n, int k)\
+    \ {\n    assert(0 <= n);\n    if (k < 0 || n < k) {\n        return M::raw(0);\n\
+    \    }\n    return fact<M>(n) * inv_fact<M>(k) * inv_fact<M>(n - k);\n}\n\ntemplate\
+    \ <typename M>\nM n_terms_sum_k(int n, int k) {\n    assert(0 <= n && 0 <= k);\n\
+    \    if (n == 0) {\n        return (k == 0 ? M::raw(1) : M::raw(0));\n    }\n\
+    \    return binom<M>(n + k - 1, n - 1);\n}\n#line 4 \"poly/stirling2.hpp\"\ntemplate\
+    \ <typename M>\nstd::vector<M> stirling_2(int n) {\n    assert(0 <= n);\n    std::vector<M>\
+    \ f(n + 1), g(n + 1);\n    for (int i = 0; i <= n; ++i) {\n        f[i] = M::raw(i).pow(n)\
+    \ * inv_fact<M>(i);\n        g[i] = inv_fact<M>(i);\n        if (i % 2 == 1) {\n\
+    \            g[i] = -g[i];\n        }\n    }\n    std::vector<M> h = convolve(f,\
+    \ g);\n    h.resize(n + 1);\n    return h;\n}\n#line 2 \"template/template.hpp\"\
+    \n#include <bits/stdc++.h>\n#define OVERRIDE(a, b, c, d, ...) d\n#define REP2(i,\
+    \ n) for (i32 i = 0; i < (i32)(n); ++i)\n#define REP3(i, m, n) for (i32 i = (i32)(m);\
+    \ i < (i32)(n); ++i)\n#define REP(...) OVERRIDE(__VA_ARGS__, REP3, REP2)(__VA_ARGS__)\n\
+    #define PER2(i, n) for (i32 i = (i32)(n)-1; i >= 0; --i)\n#define PER3(i, m, n)\
+    \ for (i32 i = (i32)(n)-1; i >= (i32)(m); --i)\n#define PER(...) OVERRIDE(__VA_ARGS__,\
+    \ PER3, PER2)(__VA_ARGS__)\n#define ALL(x) begin(x), end(x)\n#define LEN(x) (i32)(x.size())\n\
+    using namespace std;\nusing u32 = unsigned int;\nusing u64 = unsigned long long;\n\
+    using i32 = signed int;\nusing i64 = signed long long;\nusing f64 = double;\n\
+    using f80 = long double;\nusing pi = pair<i32, i32>;\nusing pl = pair<i64, i64>;\n\
+    template <typename T>\nusing V = vector<T>;\ntemplate <typename T>\nusing VV =\
+    \ V<V<T>>;\ntemplate <typename T>\nusing VVV = V<V<V<T>>>;\ntemplate <typename\
+    \ T>\nusing VVVV = V<V<V<V<T>>>>;\ntemplate <typename T>\nusing PQR = priority_queue<T,\
+    \ V<T>, greater<T>>;\ntemplate <typename T>\nbool chmin(T &x, const T &y) {\n\
+    \    if (x > y) {\n        x = y;\n        return true;\n    }\n    return false;\n\
     }\ntemplate <typename T>\nbool chmax(T &x, const T &y) {\n    if (x < y) {\n \
     \       x = y;\n        return true;\n    }\n    return false;\n}\ntemplate <typename\
     \ T>\ni32 lob(const V<T> &arr, const T &v) {\n    return (i32)(lower_bound(ALL(arr),\
@@ -301,8 +309,8 @@ data:
   isVerificationFile: true
   path: poly/test/stirling_number_of_the_second_kind.test.cpp
   requiredBy: []
-  timestamp: '2025-12-31 19:12:41+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2026-03-31 19:03:53+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: poly/test/stirling_number_of_the_second_kind.test.cpp
 layout: document

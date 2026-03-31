@@ -8,7 +8,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/block_cut_tree.hpp
     title: graph/block_cut_tree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/centroid_decomposition.hpp
     title: graph/centroid_decomposition.hpp
   - icon: ':heavy_check_mark:'
@@ -29,7 +29,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/eulerian_trail.hpp
     title: graph/eulerian_trail.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/frequency_table_of_tree_distance.hpp
     title: graph/frequency_table_of_tree_distance.hpp
   - icon: ':heavy_check_mark:'
@@ -63,7 +63,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/test/eulerian_trail_undirected.test.cpp
     title: graph/test/eulerian_trail_undirected.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/test/frequency_table_of_tree_distance.test.cpp
     title: graph/test/frequency_table_of_tree_distance.test.cpp
   - icon: ':heavy_check_mark:'
@@ -84,9 +84,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/test/vertex_add_path_sum.test.cpp
     title: graph/test/vertex_add_path_sum.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"graph/graph.hpp\"\n#include <iostream>\n#include <cassert>\n\
@@ -161,36 +161,36 @@ data:
   isVerificationFile: false
   path: graph/graph.hpp
   requiredBy:
-  - graph/frequency_table_of_tree_distance.hpp
-  - graph/heavy_light_decomposition.hpp
-  - graph/connected_components.hpp
-  - graph/strongly_connected_components.hpp
-  - graph/two_edge_connected_components.hpp
   - graph/dense_dijkstra.hpp
   - graph/dijkstra.hpp
-  - graph/biconnected_components.hpp
-  - graph/block_cut_tree.hpp
-  - graph/enumerate_triangles.hpp
   - graph/complement_graph_connected_components.hpp
+  - graph/heavy_light_decomposition.hpp
+  - graph/enumerate_triangles.hpp
+  - graph/strongly_connected_components.hpp
+  - graph/block_cut_tree.hpp
   - graph/centroid_decomposition.hpp
+  - graph/biconnected_components.hpp
+  - graph/frequency_table_of_tree_distance.hpp
   - graph/eulerian_trail.hpp
+  - graph/connected_components.hpp
+  - graph/two_edge_connected_components.hpp
   timestamp: '2024-07-18 16:56:22+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - graph/test/ALDS1_11_D.test.cpp
   - graph/test/enumerate_triangles.test.cpp
-  - graph/test/biconnected_components.test.cpp
-  - graph/test/eulerian_trail_directed.test.cpp
-  - graph/test/block_cut_tree.test.cpp
-  - graph/test/vertex_add_path_sum.test.cpp
-  - graph/test/connected_components_of_complement_graph.test.cpp
-  - graph/test/two_edge_connected_components.test.cpp
-  - graph/test/scc.test.cpp
-  - graph/test/lca.test.cpp
-  - graph/test/jump_on_tree.test.cpp
-  - graph/test/shortest_path.test.cpp
-  - graph/test/eulerian_trail_undirected.test.cpp
   - graph/test/frequency_table_of_tree_distance.test.cpp
+  - graph/test/eulerian_trail_directed.test.cpp
+  - graph/test/ALDS1_11_D.test.cpp
+  - graph/test/block_cut_tree.test.cpp
+  - graph/test/biconnected_components.test.cpp
+  - graph/test/scc.test.cpp
+  - graph/test/connected_components_of_complement_graph.test.cpp
+  - graph/test/eulerian_trail_undirected.test.cpp
+  - graph/test/jump_on_tree.test.cpp
+  - graph/test/two_edge_connected_components.test.cpp
+  - graph/test/lca.test.cpp
+  - graph/test/shortest_path.test.cpp
+  - graph/test/vertex_add_path_sum.test.cpp
 documentation_of: graph/graph.hpp
 layout: document
 redirect_from:

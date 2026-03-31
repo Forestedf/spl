@@ -4,10 +4,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: number_theory/floor_sum.hpp
     title: number_theory/floor_sum.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/fastio.hpp
     title: template/fastio.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
   _extendedRequiredBy: []

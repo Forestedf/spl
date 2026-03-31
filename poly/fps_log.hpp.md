@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/factorial.hpp
     title: number_theory/factorial.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/mod_int.hpp
     title: number_theory/mod_int.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/utils.hpp
     title: number_theory/utils.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: poly/fft.hpp
     title: poly/fft.hpp
   - icon: ':heavy_check_mark:'
@@ -240,24 +240,33 @@ data:
     \   a[n - 1] = last;\n    }\n    return a;\n}\n\ntemplate <typename M>\nstd::vector<M>\
     \ convolve_square(const std::vector<M> &a) {\n    if (a.empty()) {\n        return\
     \ std::vector<M>(0);\n    }\n    if ((int)a.size() <= 60) {\n        return convolve_naive(a,\
-    \ a);\n    } else {\n        return convolve_square_fft(a);\n    }\n}\n#line 4\
-    \ \"poly/fps_inv.hpp\"\n// 10 FFT(n)\ntemplate <typename T>\nstd::vector<T> fps_inv(const\
-    \ std::vector<T> &f, int len = -1) {\n    if (len == -1) {\n        len = (int)f.size();\n\
-    \    }\n    assert(!f.empty() && f[0] != T(0) && len >= 0);\n    std::vector<T>\
-    \ g(1, T(1) / f[0]);\n    while ((int)g.size() < len) {\n        int n = (int)g.size();\n\
-    \        std::vector<T> fft_f(2 * n), fft_g(2 * n);\n        std::copy(f.begin(),\
-    \ f.begin() + std::min(2 * n, (int)f.size()),\n                  fft_f.begin());\n\
-    \        std::copy(g.begin(), g.end(), fft_g.begin());\n        fft(fft_f);\n\
-    \        fft(fft_g);\n        for (int i = 0; i < 2 * n; ++i) {\n            fft_f[i]\
-    \ *= fft_g[i];\n        }\n        ifft(fft_f);\n        std::fill(fft_f.begin(),\
-    \ fft_f.begin() + n, T(0));\n        fft(fft_f);\n        for (int i = 0; i <\
-    \ 2 * n; ++i) {\n            fft_f[i] *= fft_g[i];\n        }\n        ifft(fft_f);\n\
-    \        g.resize(2 * n);\n        for (int i = n; i < 2 * n; ++i) {\n       \
-    \     g[i] = -fft_f[i];\n        }\n    }\n    g.resize(len);\n    return g;\n\
-    }\n#line 4 \"poly/fps_log.hpp\"\n\ntemplate <typename T>\nstd::vector<T> fps_log(const\
-    \ std::vector<T> &f, int len = -1) {\n    if (len == -1) {\n        len = (int)f.size();\n\
-    \    }\n    int n = (int)f.size();\n    assert(n >= 1 && f[0] == T(1) && len >=\
-    \ 0);\n    if (len == 0) {\n        return std::vector<T>();\n    }\n    std::vector<T>\
+    \ a);\n    } else {\n        return convolve_square_fft(a);\n    }\n}\n\ntemplate\
+    \ <typename M>\nvoid transposed_fft(M *a, int n) {\n    ifft(a, n);\n    std::reverse(a\
+    \ + 1, a + n);\n    M c(n);\n    for (int i = 0; i < n; ++i) {\n        a[i] *=\
+    \ c;\n    }\n}\ntemplate <typename M>\nvoid transposed_fft(std::vector<M> &a)\
+    \ {\n    transposed_fft(a.data(), (int)a.size());\n}\n\ntemplate <typename M>\n\
+    void transposed_ifft(M *a, int n) {\n    static constexpr FFTRoot<M::get_mod()>\
+    \ roots;\n    std::reverse(a + 1, a + n);\n    fft(a, n);\n    M c = roots.inv2[__builtin_ctz(n)];\n\
+    \    for (int i = 0; i < n; ++i) {\n        a[i] *= c;\n    }\n}\ntemplate <typename\
+    \ M>\nvoid transposed_ifft(std::vector<M> &a) {\n    transposed_ifft(a.data(),\
+    \ (int)a.size());\n}\n#line 4 \"poly/fps_inv.hpp\"\n// 10 FFT(n)\ntemplate <typename\
+    \ T>\nstd::vector<T> fps_inv(const std::vector<T> &f, int len = -1) {\n    if\
+    \ (len == -1) {\n        len = (int)f.size();\n    }\n    assert(!f.empty() &&\
+    \ f[0] != T(0) && len >= 0);\n    std::vector<T> g(1, T(1) / f[0]);\n    while\
+    \ ((int)g.size() < len) {\n        int n = (int)g.size();\n        std::vector<T>\
+    \ fft_f(2 * n), fft_g(2 * n);\n        std::copy(f.begin(), f.begin() + std::min(2\
+    \ * n, (int)f.size()),\n                  fft_f.begin());\n        std::copy(g.begin(),\
+    \ g.end(), fft_g.begin());\n        fft(fft_f);\n        fft(fft_g);\n       \
+    \ for (int i = 0; i < 2 * n; ++i) {\n            fft_f[i] *= fft_g[i];\n     \
+    \   }\n        ifft(fft_f);\n        std::fill(fft_f.begin(), fft_f.begin() +\
+    \ n, T(0));\n        fft(fft_f);\n        for (int i = 0; i < 2 * n; ++i) {\n\
+    \            fft_f[i] *= fft_g[i];\n        }\n        ifft(fft_f);\n        g.resize(2\
+    \ * n);\n        for (int i = n; i < 2 * n; ++i) {\n            g[i] = -fft_f[i];\n\
+    \        }\n    }\n    g.resize(len);\n    return g;\n}\n#line 4 \"poly/fps_log.hpp\"\
+    \n\ntemplate <typename T>\nstd::vector<T> fps_log(const std::vector<T> &f, int\
+    \ len = -1) {\n    if (len == -1) {\n        len = (int)f.size();\n    }\n   \
+    \ int n = (int)f.size();\n    assert(n >= 1 && f[0] == T(1) && len >= 0);\n  \
+    \  if (len == 0) {\n        return std::vector<T>();\n    }\n    std::vector<T>\
     \ df(std::min(n - 1, len - 1));\n    for (int i = 0; i < (int)df.size(); ++i)\
     \ {\n        df[i] = f[i + 1] * T(i + 1);\n    }\n    std::vector<T> invf = fps_inv(f,\
     \ len - 1);\n    std::vector<T> ret = convolve(df, invf);\n    ret.resize(len);\n\
@@ -284,12 +293,12 @@ data:
   requiredBy:
   - poly/fps_pow.hpp
   - poly/compositional_inverse.hpp
-  timestamp: '2025-12-31 19:12:41+09:00'
+  timestamp: '2026-03-31 19:03:53+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - poly/test/compositional_inverse_of_formal_power_series_large.test.cpp
   - poly/test/pow_of_formal_power_series.test.cpp
   - poly/test/log_of_formal_power_series.test.cpp
-  - poly/test/compositional_inverse_of_formal_power_series_large.test.cpp
 documentation_of: poly/fps_log.hpp
 layout: document
 redirect_from:

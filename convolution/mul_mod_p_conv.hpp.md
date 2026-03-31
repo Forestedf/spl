@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: number_theory/factorize.hpp
     title: number_theory/factorize.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/mod_int.hpp
     title: number_theory/mod_int.hpp
   - icon: ':heavy_check_mark:'
@@ -16,10 +16,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: number_theory/primitive_root.hpp
     title: number_theory/primitive_root.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/utils.hpp
     title: number_theory/utils.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: poly/fft.hpp
     title: poly/fft.hpp
   - icon: ':heavy_check_mark:'
@@ -316,19 +316,27 @@ data:
     \   a[n - 1] = last;\n    }\n    return a;\n}\n\ntemplate <typename M>\nstd::vector<M>\
     \ convolve_square(const std::vector<M> &a) {\n    if (a.empty()) {\n        return\
     \ std::vector<M>(0);\n    }\n    if ((int)a.size() <= 60) {\n        return convolve_naive(a,\
-    \ a);\n    } else {\n        return convolve_square_fft(a);\n    }\n}\n#line 4\
-    \ \"convolution/mul_mod_p_conv.hpp\"\n\ntemplate <typename T>\nstd::vector<T>\
-    \ mul_mod_p_convolution(const std::vector<T> &a,\n                           \
-    \          const std::vector<T> &b, int g = -1) {\n    int p = (int)a.size();\n\
-    \    if (g == -1) {\n        g = find_primitive_root(p);\n    }\n\n    std::vector<int>\
-    \ pw(p - 1);\n    pw[0] = 1;\n    for (int i = 1; i < p - 1; ++i) {\n        pw[i]\
-    \ = (long long)pw[i - 1] * g % p;\n    }\n\n    std::vector<T> at(p - 1), bt(p\
-    \ - 1);\n    for (int i = 0; i < p - 1; ++i) {\n        at[i] = a[pw[i]];\n  \
-    \      bt[i] = b[pw[i]];\n    }\n    std::vector<T> ct = convolve(at, bt);\n\n\
-    \    std::vector<T> c(p, T(0));\n    for (int i = 0; i < p; ++i) {\n        c[0]\
-    \ += a[i] * b[0];\n    }\n    for (int i = 1; i < p; ++i) {\n        c[0] += a[0]\
-    \ * b[i];\n    }\n    for (int i = 0; i < (int)ct.size(); ++i) {\n        c[pw[i\
-    \ % (p - 1)]] += ct[i];\n    }\n    return c;\n}\n"
+    \ a);\n    } else {\n        return convolve_square_fft(a);\n    }\n}\n\ntemplate\
+    \ <typename M>\nvoid transposed_fft(M *a, int n) {\n    ifft(a, n);\n    std::reverse(a\
+    \ + 1, a + n);\n    M c(n);\n    for (int i = 0; i < n; ++i) {\n        a[i] *=\
+    \ c;\n    }\n}\ntemplate <typename M>\nvoid transposed_fft(std::vector<M> &a)\
+    \ {\n    transposed_fft(a.data(), (int)a.size());\n}\n\ntemplate <typename M>\n\
+    void transposed_ifft(M *a, int n) {\n    static constexpr FFTRoot<M::get_mod()>\
+    \ roots;\n    std::reverse(a + 1, a + n);\n    fft(a, n);\n    M c = roots.inv2[__builtin_ctz(n)];\n\
+    \    for (int i = 0; i < n; ++i) {\n        a[i] *= c;\n    }\n}\ntemplate <typename\
+    \ M>\nvoid transposed_ifft(std::vector<M> &a) {\n    transposed_ifft(a.data(),\
+    \ (int)a.size());\n}\n#line 4 \"convolution/mul_mod_p_conv.hpp\"\n\ntemplate <typename\
+    \ T>\nstd::vector<T> mul_mod_p_convolution(const std::vector<T> &a,\n        \
+    \                             const std::vector<T> &b, int g = -1) {\n    int\
+    \ p = (int)a.size();\n    if (g == -1) {\n        g = find_primitive_root(p);\n\
+    \    }\n\n    std::vector<int> pw(p - 1);\n    pw[0] = 1;\n    for (int i = 1;\
+    \ i < p - 1; ++i) {\n        pw[i] = (long long)pw[i - 1] * g % p;\n    }\n\n\
+    \    std::vector<T> at(p - 1), bt(p - 1);\n    for (int i = 0; i < p - 1; ++i)\
+    \ {\n        at[i] = a[pw[i]];\n        bt[i] = b[pw[i]];\n    }\n    std::vector<T>\
+    \ ct = convolve(at, bt);\n\n    std::vector<T> c(p, T(0));\n    for (int i = 0;\
+    \ i < p; ++i) {\n        c[0] += a[i] * b[0];\n    }\n    for (int i = 1; i <\
+    \ p; ++i) {\n        c[0] += a[0] * b[i];\n    }\n    for (int i = 0; i < (int)ct.size();\
+    \ ++i) {\n        c[pw[i % (p - 1)]] += ct[i];\n    }\n    return c;\n}\n"
   code: "#pragma once\n#include \"../number_theory/primitive_root.hpp\"\n#include\
     \ \"../poly/fft.hpp\"\n\ntemplate <typename T>\nstd::vector<T> mul_mod_p_convolution(const\
     \ std::vector<T> &a,\n                                     const std::vector<T>\
@@ -354,7 +362,7 @@ data:
   isVerificationFile: false
   path: convolution/mul_mod_p_conv.hpp
   requiredBy: []
-  timestamp: '2025-12-31 19:12:41+09:00'
+  timestamp: '2026-03-31 19:03:53+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - convolution/test/mul_modp_convolution.test.cpp

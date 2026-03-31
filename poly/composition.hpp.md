@@ -1,29 +1,29 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/factorial.hpp
     title: number_theory/factorial.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/mod_int.hpp
     title: number_theory/mod_int.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/utils.hpp
     title: number_theory/utils.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: poly/fft.hpp
     title: poly/fft.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/taylor_shift.hpp
     title: poly/taylor_shift.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/test/composition_of_formal_power_series_large.test.cpp
     title: poly/test/composition_of_formal_power_series_large.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"number_theory/factorial.hpp\"\n#include <cassert>\n#include\
@@ -228,24 +228,24 @@ data:
     \   a[n - 1] = last;\n    }\n    return a;\n}\n\ntemplate <typename M>\nstd::vector<M>\
     \ convolve_square(const std::vector<M> &a) {\n    if (a.empty()) {\n        return\
     \ std::vector<M>(0);\n    }\n    if ((int)a.size() <= 60) {\n        return convolve_naive(a,\
-    \ a);\n    } else {\n        return convolve_square_fft(a);\n    }\n}\n#line 4\
-    \ \"poly/taylor_shift.hpp\"\n#include <algorithm>\n// f(x) -> f(x+c)\ntemplate\
-    \ <typename M>\nstd::vector<M> taylor_shift(std::vector<M> f, M c) {\n    for\
-    \ (int i = 0; i < (int)f.size(); ++i) {\n        f[i] *= fact<M>(i);\n    }\n\
-    \    std::reverse(f.begin(), f.end());\n    M cp(1);\n    std::vector<M> g(f.size());\n\
-    \    for (int i = 0; i < (int)f.size(); ++i) {\n        g[i] = cp * inv_fact<M>(i);\n\
-    \        cp *= c;\n    }\n    std::vector<M> h = convolve(f, g);\n    h.resize(f.size());\n\
-    \    std::reverse(h.begin(), h.end());\n    for (int i = 0; i < (int)f.size();\
-    \ ++i) {\n        h[i] *= inv_fact<M>(i);\n    }\n    return h;\n}\n#line 5 \"\
-    poly/composition.hpp\"\n\ntemplate <typename M>\nvoid transposed_fft(M *a, int\
-    \ n) {\n    ifft(a, n);\n    std::reverse(a + 1, a + n);\n    M c(n);\n    for\
-    \ (int i = 0; i < n; ++i) {\n        a[i] *= c;\n    }\n}\ntemplate <typename\
-    \ M>\nvoid transposed_fft(std::vector<M> &a) {\n    transposed_fft(a.data(), (int)a.size());\n\
-    }\n\ntemplate <typename M>\nvoid transposed_ifft(M *a, int n) {\n    static constexpr\
-    \ FFTRoot<M::get_mod()> roots;\n    std::reverse(a + 1, a + n);\n    fft(a, n);\n\
-    \    M c = roots.inv2[__builtin_ctz(n)];\n    for (int i = 0; i < n; ++i) {\n\
-    \        a[i] *= c;\n    }\n}\ntemplate <typename M>\nvoid transposed_ifft(std::vector<M>\
-    \ &a) {\n    transposed_ifft(a.data(), (int)a.size());\n}\n\ntemplate <typename\
+    \ a);\n    } else {\n        return convolve_square_fft(a);\n    }\n}\n\ntemplate\
+    \ <typename M>\nvoid transposed_fft(M *a, int n) {\n    ifft(a, n);\n    std::reverse(a\
+    \ + 1, a + n);\n    M c(n);\n    for (int i = 0; i < n; ++i) {\n        a[i] *=\
+    \ c;\n    }\n}\ntemplate <typename M>\nvoid transposed_fft(std::vector<M> &a)\
+    \ {\n    transposed_fft(a.data(), (int)a.size());\n}\n\ntemplate <typename M>\n\
+    void transposed_ifft(M *a, int n) {\n    static constexpr FFTRoot<M::get_mod()>\
+    \ roots;\n    std::reverse(a + 1, a + n);\n    fft(a, n);\n    M c = roots.inv2[__builtin_ctz(n)];\n\
+    \    for (int i = 0; i < n; ++i) {\n        a[i] *= c;\n    }\n}\ntemplate <typename\
+    \ M>\nvoid transposed_ifft(std::vector<M> &a) {\n    transposed_ifft(a.data(),\
+    \ (int)a.size());\n}\n#line 4 \"poly/taylor_shift.hpp\"\n#include <algorithm>\n\
+    // f(x) -> f(x+c)\ntemplate <typename M>\nstd::vector<M> taylor_shift(std::vector<M>\
+    \ f, M c) {\n    for (int i = 0; i < (int)f.size(); ++i) {\n        f[i] *= fact<M>(i);\n\
+    \    }\n    std::reverse(f.begin(), f.end());\n    M cp(1);\n    std::vector<M>\
+    \ g(f.size());\n    for (int i = 0; i < (int)f.size(); ++i) {\n        g[i] =\
+    \ cp * inv_fact<M>(i);\n        cp *= c;\n    }\n    std::vector<M> h = convolve(f,\
+    \ g);\n    h.resize(f.size());\n    std::reverse(h.begin(), h.end());\n    for\
+    \ (int i = 0; i < (int)f.size(); ++i) {\n        h[i] *= inv_fact<M>(i);\n   \
+    \ }\n    return h;\n}\n#line 5 \"poly/composition.hpp\"\n\ntemplate <typename\
     \ M>\nstd::vector<M> transposed_power_projection(int n, const std::vector<M> &f,\
     \ const std::vector<M> &g) {\n    static constexpr FFTRoot<M::get_mod()> roots;\n\
     \    static constexpr M INV2 = M(2).inv();\n    int lg = __builtin_ctz(n);\n \
@@ -296,33 +296,24 @@ data:
     \   }\n    std::vector<M> h = transposed_power_projection(n, g, f);\n    h.resize(m);\n\
     \    return h;\n}\n"
   code: "#pragma once\n#include \"../number_theory/factorial.hpp\"\n#include \"fft.hpp\"\
-    \n#include \"taylor_shift.hpp\"\n\ntemplate <typename M>\nvoid transposed_fft(M\
-    \ *a, int n) {\n    ifft(a, n);\n    std::reverse(a + 1, a + n);\n    M c(n);\n\
-    \    for (int i = 0; i < n; ++i) {\n        a[i] *= c;\n    }\n}\ntemplate <typename\
-    \ M>\nvoid transposed_fft(std::vector<M> &a) {\n    transposed_fft(a.data(), (int)a.size());\n\
-    }\n\ntemplate <typename M>\nvoid transposed_ifft(M *a, int n) {\n    static constexpr\
-    \ FFTRoot<M::get_mod()> roots;\n    std::reverse(a + 1, a + n);\n    fft(a, n);\n\
-    \    M c = roots.inv2[__builtin_ctz(n)];\n    for (int i = 0; i < n; ++i) {\n\
-    \        a[i] *= c;\n    }\n}\ntemplate <typename M>\nvoid transposed_ifft(std::vector<M>\
-    \ &a) {\n    transposed_ifft(a.data(), (int)a.size());\n}\n\ntemplate <typename\
-    \ M>\nstd::vector<M> transposed_power_projection(int n, const std::vector<M> &f,\
-    \ const std::vector<M> &g) {\n    static constexpr FFTRoot<M::get_mod()> roots;\n\
-    \    static constexpr M INV2 = M(2).inv();\n    int lg = __builtin_ctz(n);\n \
-    \   std::vector<int> btr(n, 0);\n    for (int i = 1; i < n; ++i) {\n        btr[i]\
-    \ = (btr[i >> 1] >> 1) | ((i & 1) << (lg - 1));\n    }\n    M omega = roots.iroot[lg\
-    \ + 1];\n    M pw(1);\n    std::vector<M> invs(n);\n    for (int idx : btr) {\n\
-    \        invs[idx] = pw;\n        pw *= omega;\n    }\n    std::vector<M> p =\
-    \ g;\n    std::reverse(p.begin(), p.end());\n    transposed_ifft(p);\n    p.resize(2\
-    \ * n);\n    std::vector<M> q(2 * n);\n    for (int i = 0; i < n; ++i) {\n   \
-    \     q[2 * i] = -f[i];\n    }\n    q[0] += M(1);\n    auto rec = [&](auto rec,\
-    \ int h, int w) -> void {\n        if (h == 1) {\n            return;\n      \
-    \  }\n        M omega = roots.root[__builtin_ctz(w) + 1];\n        for (int i\
-    \ = 0; i < 2 * n; i += 2 * w) {\n            std::copy(q.begin() + i, q.begin()\
-    \ + i + w, q.begin() + i + w);\n            ifft(q.data() + i + w, w);\n     \
-    \       if (i == 0) {\n                q[i + w] -= M(2);\n            }\n    \
-    \        M pw(1);\n            for (int j = i + w; j < i + 2 * w; ++j) {\n   \
-    \             q[j] *= pw;\n                pw *= omega;\n            }\n     \
-    \       fft(q.data() + i + w, w);\n        }\n        std::vector<std::vector<M>>\
+    \n#include \"taylor_shift.hpp\"\n\ntemplate <typename M>\nstd::vector<M> transposed_power_projection(int\
+    \ n, const std::vector<M> &f, const std::vector<M> &g) {\n    static constexpr\
+    \ FFTRoot<M::get_mod()> roots;\n    static constexpr M INV2 = M(2).inv();\n  \
+    \  int lg = __builtin_ctz(n);\n    std::vector<int> btr(n, 0);\n    for (int i\
+    \ = 1; i < n; ++i) {\n        btr[i] = (btr[i >> 1] >> 1) | ((i & 1) << (lg -\
+    \ 1));\n    }\n    M omega = roots.iroot[lg + 1];\n    M pw(1);\n    std::vector<M>\
+    \ invs(n);\n    for (int idx : btr) {\n        invs[idx] = pw;\n        pw *=\
+    \ omega;\n    }\n    std::vector<M> p = g;\n    std::reverse(p.begin(), p.end());\n\
+    \    transposed_ifft(p);\n    p.resize(2 * n);\n    std::vector<M> q(2 * n);\n\
+    \    for (int i = 0; i < n; ++i) {\n        q[2 * i] = -f[i];\n    }\n    q[0]\
+    \ += M(1);\n    auto rec = [&](auto rec, int h, int w) -> void {\n        if (h\
+    \ == 1) {\n            return;\n        }\n        M omega = roots.root[__builtin_ctz(w)\
+    \ + 1];\n        for (int i = 0; i < 2 * n; i += 2 * w) {\n            std::copy(q.begin()\
+    \ + i, q.begin() + i + w, q.begin() + i + w);\n            ifft(q.data() + i +\
+    \ w, w);\n            if (i == 0) {\n                q[i + w] -= M(2);\n     \
+    \       }\n            M pw(1);\n            for (int j = i + w; j < i + 2 * w;\
+    \ ++j) {\n                q[j] *= pw;\n                pw *= omega;\n        \
+    \    }\n            fft(q.data() + i + w, w);\n        }\n        std::vector<std::vector<M>>\
     \ rq(2 * w, std::vector<M>(2 * h));\n        std::vector<M> wq(h);\n        for\
     \ (int j = 0; j < 2 * w; ++j) {\n            for (int i = 0; i < h; ++i) {\n \
     \               rq[j][i] = q[2 * w * i + j];\n            }\n            fft(rq[j]);\n\
@@ -363,8 +354,8 @@ data:
   isVerificationFile: false
   path: poly/composition.hpp
   requiredBy: []
-  timestamp: '2026-03-19 23:07:33+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2026-03-31 19:03:53+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - poly/test/composition_of_formal_power_series_large.test.cpp
 documentation_of: poly/composition.hpp

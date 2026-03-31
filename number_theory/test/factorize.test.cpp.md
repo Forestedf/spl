@@ -10,13 +10,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: number_theory/primality.hpp
     title: number_theory/primality.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/fastio.hpp
     title: template/fastio.hpp
   - icon: ':heavy_check_mark:'
     path: template/random.hpp
     title: template/random.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
   _extendedRequiredBy: []

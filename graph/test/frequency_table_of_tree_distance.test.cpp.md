@@ -1,32 +1,32 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/centroid_decomposition.hpp
     title: graph/centroid_decomposition.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/frequency_table_of_tree_distance.hpp
     title: graph/frequency_table_of_tree_distance.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/graph.hpp
     title: graph/graph.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/mod_int.hpp
     title: number_theory/mod_int.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/utils.hpp
     title: number_theory/utils.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: poly/fft.hpp
     title: poly/fft.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/frequency_table_of_tree_distance
@@ -276,10 +276,18 @@ data:
     \   a[n - 1] = last;\n    }\n    return a;\n}\n\ntemplate <typename M>\nstd::vector<M>\
     \ convolve_square(const std::vector<M> &a) {\n    if (a.empty()) {\n        return\
     \ std::vector<M>(0);\n    }\n    if ((int)a.size() <= 60) {\n        return convolve_naive(a,\
-    \ a);\n    } else {\n        return convolve_square_fft(a);\n    }\n}\n#line 3\
-    \ \"graph/frequency_table_of_tree_distance.hpp\"\n#include <queue>\ntemplate <typename\
-    \ T>\nstd::vector<long long> frequency_table_of_tree_distance(const Graph<T, false>\
-    \ &g) {\n    CentroidDecomposition cd(g);\n    using M0 = ModInt<998244353>;\n\
+    \ a);\n    } else {\n        return convolve_square_fft(a);\n    }\n}\n\ntemplate\
+    \ <typename M>\nvoid transposed_fft(M *a, int n) {\n    ifft(a, n);\n    std::reverse(a\
+    \ + 1, a + n);\n    M c(n);\n    for (int i = 0; i < n; ++i) {\n        a[i] *=\
+    \ c;\n    }\n}\ntemplate <typename M>\nvoid transposed_fft(std::vector<M> &a)\
+    \ {\n    transposed_fft(a.data(), (int)a.size());\n}\n\ntemplate <typename M>\n\
+    void transposed_ifft(M *a, int n) {\n    static constexpr FFTRoot<M::get_mod()>\
+    \ roots;\n    std::reverse(a + 1, a + n);\n    fft(a, n);\n    M c = roots.inv2[__builtin_ctz(n)];\n\
+    \    for (int i = 0; i < n; ++i) {\n        a[i] *= c;\n    }\n}\ntemplate <typename\
+    \ M>\nvoid transposed_ifft(std::vector<M> &a) {\n    transposed_ifft(a.data(),\
+    \ (int)a.size());\n}\n#line 3 \"graph/frequency_table_of_tree_distance.hpp\"\n\
+    #include <queue>\ntemplate <typename T>\nstd::vector<long long> frequency_table_of_tree_distance(const\
+    \ Graph<T, false> &g) {\n    CentroidDecomposition cd(g);\n    using M0 = ModInt<998244353>;\n\
     \    using M1 = ModInt<924844033>;\n    std::vector<M0> cnt0(2 * g.v());\n   \
     \ std::vector<M1> cnt1(2 * g.v());\n    std::vector<bool> used(g.v(), false);\n\
     \    auto tree = cd.get_tree();\n    auto rec = [&](auto rec, int cent) -> void\
@@ -377,8 +385,8 @@ data:
   isVerificationFile: true
   path: graph/test/frequency_table_of_tree_distance.test.cpp
   requiredBy: []
-  timestamp: '2025-12-31 19:12:41+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2026-03-31 19:03:53+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: graph/test/frequency_table_of_tree_distance.test.cpp
 layout: document

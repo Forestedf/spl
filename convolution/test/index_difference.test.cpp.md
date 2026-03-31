@@ -4,19 +4,19 @@ data:
   - icon: ':heavy_check_mark:'
     path: convolution/index_difference.hpp
     title: convolution/index_difference.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/mod_int.hpp
     title: number_theory/mod_int.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/utils.hpp
     title: number_theory/utils.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: poly/fft.hpp
     title: poly/fft.hpp
   - icon: ':heavy_check_mark:'
     path: template/random.hpp
     title: template/random.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
   _extendedRequiredBy: []
@@ -217,10 +217,18 @@ data:
     \   a[n - 1] = last;\n    }\n    return a;\n}\n\ntemplate <typename M>\nstd::vector<M>\
     \ convolve_square(const std::vector<M> &a) {\n    if (a.empty()) {\n        return\
     \ std::vector<M>(0);\n    }\n    if ((int)a.size() <= 60) {\n        return convolve_naive(a,\
-    \ a);\n    } else {\n        return convolve_square_fft(a);\n    }\n}\n#line 4\
-    \ \"convolution/index_difference.hpp\"\n// c[i] = sum_{j - k = i} a[j] b[k]\n\
-    template <typename T>\nstd::vector<T> convolve_diff(std::vector<T> a, std::vector<T>\
-    \ b) {\n    if (a.empty() || b.empty()) {\n        return std::vector<T>();\n\
+    \ a);\n    } else {\n        return convolve_square_fft(a);\n    }\n}\n\ntemplate\
+    \ <typename M>\nvoid transposed_fft(M *a, int n) {\n    ifft(a, n);\n    std::reverse(a\
+    \ + 1, a + n);\n    M c(n);\n    for (int i = 0; i < n; ++i) {\n        a[i] *=\
+    \ c;\n    }\n}\ntemplate <typename M>\nvoid transposed_fft(std::vector<M> &a)\
+    \ {\n    transposed_fft(a.data(), (int)a.size());\n}\n\ntemplate <typename M>\n\
+    void transposed_ifft(M *a, int n) {\n    static constexpr FFTRoot<M::get_mod()>\
+    \ roots;\n    std::reverse(a + 1, a + n);\n    fft(a, n);\n    M c = roots.inv2[__builtin_ctz(n)];\n\
+    \    for (int i = 0; i < n; ++i) {\n        a[i] *= c;\n    }\n}\ntemplate <typename\
+    \ M>\nvoid transposed_ifft(std::vector<M> &a) {\n    transposed_ifft(a.data(),\
+    \ (int)a.size());\n}\n#line 4 \"convolution/index_difference.hpp\"\n// c[i] =\
+    \ sum_{j - k = i} a[j] b[k]\ntemplate <typename T>\nstd::vector<T> convolve_diff(std::vector<T>\
+    \ a, std::vector<T> b) {\n    if (a.empty() || b.empty()) {\n        return std::vector<T>();\n\
     \    }\n    int n = (int)a.size();\n    b.resize(n, T());\n    std::reverse(a.begin(),\
     \ a.end());\n    std::vector<T> c = convolve(a, b);\n    c.resize(n);\n    std::reverse(c.begin(),\
     \ c.end());\n    return c;\n}\n#line 2 \"template/random.hpp\"\n#include <chrono>\n\
@@ -337,7 +345,7 @@ data:
   isVerificationFile: true
   path: convolution/test/index_difference.test.cpp
   requiredBy: []
-  timestamp: '2025-12-31 19:12:41+09:00'
+  timestamp: '2026-03-31 19:03:53+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: convolution/test/index_difference.test.cpp

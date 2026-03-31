@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/mod_int.hpp
     title: number_theory/mod_int.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/utils.hpp
     title: number_theory/utils.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: poly/fft.hpp
     title: poly/fft.hpp
   - icon: ':heavy_check_mark:'
@@ -16,10 +16,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: poly/fps_inv.hpp
     title: poly/fps_inv.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/fastio.hpp
     title: template/fastio.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
   _extendedRequiredBy: []
@@ -219,27 +219,36 @@ data:
     \   a[n - 1] = last;\n    }\n    return a;\n}\n\ntemplate <typename M>\nstd::vector<M>\
     \ convolve_square(const std::vector<M> &a) {\n    if (a.empty()) {\n        return\
     \ std::vector<M>(0);\n    }\n    if ((int)a.size() <= 60) {\n        return convolve_naive(a,\
-    \ a);\n    } else {\n        return convolve_square_fft(a);\n    }\n}\n#line 4\
-    \ \"poly/fps_inv.hpp\"\n// 10 FFT(n)\ntemplate <typename T>\nstd::vector<T> fps_inv(const\
-    \ std::vector<T> &f, int len = -1) {\n    if (len == -1) {\n        len = (int)f.size();\n\
-    \    }\n    assert(!f.empty() && f[0] != T(0) && len >= 0);\n    std::vector<T>\
-    \ g(1, T(1) / f[0]);\n    while ((int)g.size() < len) {\n        int n = (int)g.size();\n\
-    \        std::vector<T> fft_f(2 * n), fft_g(2 * n);\n        std::copy(f.begin(),\
-    \ f.begin() + std::min(2 * n, (int)f.size()),\n                  fft_f.begin());\n\
-    \        std::copy(g.begin(), g.end(), fft_g.begin());\n        fft(fft_f);\n\
-    \        fft(fft_g);\n        for (int i = 0; i < 2 * n; ++i) {\n            fft_f[i]\
-    \ *= fft_g[i];\n        }\n        ifft(fft_f);\n        std::fill(fft_f.begin(),\
-    \ fft_f.begin() + n, T(0));\n        fft(fft_f);\n        for (int i = 0; i <\
-    \ 2 * n; ++i) {\n            fft_f[i] *= fft_g[i];\n        }\n        ifft(fft_f);\n\
-    \        g.resize(2 * n);\n        for (int i = n; i < 2 * n; ++i) {\n       \
-    \     g[i] = -fft_f[i];\n        }\n    }\n    g.resize(len);\n    return g;\n\
-    }\n#line 5 \"poly/fps_div_at.hpp\"\ntemplate <typename M>\nvoid extend_fft(std::vector<M>\
-    \ &a) {\n    static constexpr FFTRoot<M::get_mod()> fft_root;\n    int n = (int)a.size();\n\
-    \    std::copy(a.begin(), a.begin() + n / 2, a.begin() + n / 2);\n    ifft(a.data()\
-    \ + n / 2, n / 2);\n    M pw(1);\n    M r = fft_root.root[std::bit_width((unsigned)n)\
-    \ - 1];\n    for (int i = n / 2; i < n; ++i) {\n        a[i] *= pw;\n        pw\
-    \ *= r;\n    }\n    fft(a.data() + n / 2, n / 2);\n}\n// returns [x^k] f(x) /\
-    \ g(x)\n// requires LEN(f) < LEN(g) and g[0] != 0\ntemplate <typename T>\nT fps_div_at(std::vector<T>\
+    \ a);\n    } else {\n        return convolve_square_fft(a);\n    }\n}\n\ntemplate\
+    \ <typename M>\nvoid transposed_fft(M *a, int n) {\n    ifft(a, n);\n    std::reverse(a\
+    \ + 1, a + n);\n    M c(n);\n    for (int i = 0; i < n; ++i) {\n        a[i] *=\
+    \ c;\n    }\n}\ntemplate <typename M>\nvoid transposed_fft(std::vector<M> &a)\
+    \ {\n    transposed_fft(a.data(), (int)a.size());\n}\n\ntemplate <typename M>\n\
+    void transposed_ifft(M *a, int n) {\n    static constexpr FFTRoot<M::get_mod()>\
+    \ roots;\n    std::reverse(a + 1, a + n);\n    fft(a, n);\n    M c = roots.inv2[__builtin_ctz(n)];\n\
+    \    for (int i = 0; i < n; ++i) {\n        a[i] *= c;\n    }\n}\ntemplate <typename\
+    \ M>\nvoid transposed_ifft(std::vector<M> &a) {\n    transposed_ifft(a.data(),\
+    \ (int)a.size());\n}\n#line 4 \"poly/fps_inv.hpp\"\n// 10 FFT(n)\ntemplate <typename\
+    \ T>\nstd::vector<T> fps_inv(const std::vector<T> &f, int len = -1) {\n    if\
+    \ (len == -1) {\n        len = (int)f.size();\n    }\n    assert(!f.empty() &&\
+    \ f[0] != T(0) && len >= 0);\n    std::vector<T> g(1, T(1) / f[0]);\n    while\
+    \ ((int)g.size() < len) {\n        int n = (int)g.size();\n        std::vector<T>\
+    \ fft_f(2 * n), fft_g(2 * n);\n        std::copy(f.begin(), f.begin() + std::min(2\
+    \ * n, (int)f.size()),\n                  fft_f.begin());\n        std::copy(g.begin(),\
+    \ g.end(), fft_g.begin());\n        fft(fft_f);\n        fft(fft_g);\n       \
+    \ for (int i = 0; i < 2 * n; ++i) {\n            fft_f[i] *= fft_g[i];\n     \
+    \   }\n        ifft(fft_f);\n        std::fill(fft_f.begin(), fft_f.begin() +\
+    \ n, T(0));\n        fft(fft_f);\n        for (int i = 0; i < 2 * n; ++i) {\n\
+    \            fft_f[i] *= fft_g[i];\n        }\n        ifft(fft_f);\n        g.resize(2\
+    \ * n);\n        for (int i = n; i < 2 * n; ++i) {\n            g[i] = -fft_f[i];\n\
+    \        }\n    }\n    g.resize(len);\n    return g;\n}\n#line 5 \"poly/fps_div_at.hpp\"\
+    \ntemplate <typename M>\nvoid extend_fft(std::vector<M> &a) {\n    static constexpr\
+    \ FFTRoot<M::get_mod()> fft_root;\n    int n = (int)a.size();\n    std::copy(a.begin(),\
+    \ a.begin() + n / 2, a.begin() + n / 2);\n    ifft(a.data() + n / 2, n / 2);\n\
+    \    M pw(1);\n    M r = fft_root.root[std::bit_width((unsigned)n) - 1];\n   \
+    \ for (int i = n / 2; i < n; ++i) {\n        a[i] *= pw;\n        pw *= r;\n \
+    \   }\n    fft(a.data() + n / 2, n / 2);\n}\n// returns [x^k] f(x) / g(x)\n//\
+    \ requires LEN(f) < LEN(g) and g[0] != 0\ntemplate <typename T>\nT fps_div_at(std::vector<T>\
     \ f, std::vector<T> g, long long k) {\n    static constexpr FFTRoot<T::get_mod()>\
     \ fft_root;\n    static constexpr T INV2 = T(2).inv();\n    assert(f.size() <\
     \ g.size() && g[0] != T(0));\n    if (g.size() == 1) {\n        return T(0);\n\
@@ -413,7 +422,7 @@ data:
   isVerificationFile: true
   path: poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
   requiredBy: []
-  timestamp: '2025-12-31 19:12:41+09:00'
+  timestamp: '2026-03-31 19:03:53+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp

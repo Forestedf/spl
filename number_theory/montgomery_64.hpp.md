@@ -97,9 +97,9 @@ data:
   timestamp: '2025-01-27 21:12:31+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - number_theory/test/montgomery_64_stress.test.cpp
   - number_theory/test/primitive_root.test.cpp
   - number_theory/test/factorize.test.cpp
+  - number_theory/test/montgomery_64_stress.test.cpp
   - convolution/test/mul_modp_convolution.test.cpp
 documentation_of: number_theory/montgomery_64.hpp
 layout: document

@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/factorial.hpp
     title: number_theory/factorial.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/mod_int.hpp
     title: number_theory/mod_int.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/utils.hpp
     title: number_theory/utils.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: poly/fft.hpp
     title: poly/fft.hpp
   _extendedRequiredBy:
@@ -237,21 +237,30 @@ data:
     \   a[n - 1] = last;\n    }\n    return a;\n}\n\ntemplate <typename M>\nstd::vector<M>\
     \ convolve_square(const std::vector<M> &a) {\n    if (a.empty()) {\n        return\
     \ std::vector<M>(0);\n    }\n    if ((int)a.size() <= 60) {\n        return convolve_naive(a,\
-    \ a);\n    } else {\n        return convolve_square_fft(a);\n    }\n}\n#line 5\
-    \ \"poly/fps_exp.hpp\"\n\ntemplate <typename M>\nstd::vector<M> fps_exp(const\
-    \ std::vector<M> &h, int len = -1) {\n    static constexpr FFTRoot<M::get_mod()>\
-    \ fftroot;\n    if (len == -1) {\n        len = (int)h.size();\n    }\n    assert((int)h.size()\
-    \ >= 1 && h[0] == M(0) && len >= 0);\n    if (len == 0) {\n        return std::vector<M>();\n\
-    \    }\n    std::vector<M> f(1, M(1)), g(1, M(1));\n    std::vector<M> fft_f(1,\
-    \ M(1));\n    while ((int)f.size() < len) {\n        int n = (int)f.size();\n\
-    \        f.resize(2 * n, M());\n        g.resize(2 * n, M());\n\n        std::vector<M>\
-    \ fft_g = g;\n        fft(fft_g);\n        fft_f.resize(2 * n);\n        {\n \
-    \           M cur(1);\n            M zeta = fftroot.root[__builtin_ctz(n) + 1];\n\
-    \            for (int i = 0; i < n; ++i) {\n                fft_f[n + i] = f[i]\
-    \ * cur;\n                cur *= zeta;\n            }\n        }\n        fft(fft_f.data()\
-    \ + n, n);\n\n        std::vector<M> delta(n);\n        for (int i = 0; i < n;\
-    \ ++i) {\n            delta[i] = fft_f[i] * fft_g[i];\n        }\n        ifft(delta);\n\
-    \        delta.resize(2 * n, M());\n        std::rotate(delta.begin(), delta.begin()\
+    \ a);\n    } else {\n        return convolve_square_fft(a);\n    }\n}\n\ntemplate\
+    \ <typename M>\nvoid transposed_fft(M *a, int n) {\n    ifft(a, n);\n    std::reverse(a\
+    \ + 1, a + n);\n    M c(n);\n    for (int i = 0; i < n; ++i) {\n        a[i] *=\
+    \ c;\n    }\n}\ntemplate <typename M>\nvoid transposed_fft(std::vector<M> &a)\
+    \ {\n    transposed_fft(a.data(), (int)a.size());\n}\n\ntemplate <typename M>\n\
+    void transposed_ifft(M *a, int n) {\n    static constexpr FFTRoot<M::get_mod()>\
+    \ roots;\n    std::reverse(a + 1, a + n);\n    fft(a, n);\n    M c = roots.inv2[__builtin_ctz(n)];\n\
+    \    for (int i = 0; i < n; ++i) {\n        a[i] *= c;\n    }\n}\ntemplate <typename\
+    \ M>\nvoid transposed_ifft(std::vector<M> &a) {\n    transposed_ifft(a.data(),\
+    \ (int)a.size());\n}\n#line 5 \"poly/fps_exp.hpp\"\n\ntemplate <typename M>\n\
+    std::vector<M> fps_exp(const std::vector<M> &h, int len = -1) {\n    static constexpr\
+    \ FFTRoot<M::get_mod()> fftroot;\n    if (len == -1) {\n        len = (int)h.size();\n\
+    \    }\n    assert((int)h.size() >= 1 && h[0] == M(0) && len >= 0);\n    if (len\
+    \ == 0) {\n        return std::vector<M>();\n    }\n    std::vector<M> f(1, M(1)),\
+    \ g(1, M(1));\n    std::vector<M> fft_f(1, M(1));\n    while ((int)f.size() <\
+    \ len) {\n        int n = (int)f.size();\n        f.resize(2 * n, M());\n    \
+    \    g.resize(2 * n, M());\n\n        std::vector<M> fft_g = g;\n        fft(fft_g);\n\
+    \        fft_f.resize(2 * n);\n        {\n            M cur(1);\n            M\
+    \ zeta = fftroot.root[__builtin_ctz(n) + 1];\n            for (int i = 0; i <\
+    \ n; ++i) {\n                fft_f[n + i] = f[i] * cur;\n                cur *=\
+    \ zeta;\n            }\n        }\n        fft(fft_f.data() + n, n);\n\n     \
+    \   std::vector<M> delta(n);\n        for (int i = 0; i < n; ++i) {\n        \
+    \    delta[i] = fft_f[i] * fft_g[i];\n        }\n        ifft(delta);\n      \
+    \  delta.resize(2 * n, M());\n        std::rotate(delta.begin(), delta.begin()\
     \ + n, delta.end());\n        delta[n] -= M(1);\n\n        std::vector<M> eps(n,\
     \ M());\n        for (int i = 0; i < n - 1; ++i) {\n            eps[i] = f[i +\
     \ 1] * M(i + 1);\n        }\n        fft(eps);\n        for (int i = 0; i < n;\
@@ -331,11 +340,11 @@ data:
   requiredBy:
   - poly/fps_pow.hpp
   - poly/compositional_inverse.hpp
-  timestamp: '2025-12-31 19:12:41+09:00'
+  timestamp: '2026-03-31 19:03:53+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - poly/test/pow_of_formal_power_series.test.cpp
   - poly/test/compositional_inverse_of_formal_power_series_large.test.cpp
+  - poly/test/pow_of_formal_power_series.test.cpp
   - poly/test/exp_of_formal_power_series.test.cpp
 documentation_of: poly/fps_exp.hpp
 layout: document

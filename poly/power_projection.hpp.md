@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/factorial.hpp
     title: number_theory/factorial.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/mod_int.hpp
     title: number_theory/mod_int.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/utils.hpp
     title: number_theory/utils.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: poly/fft.hpp
     title: poly/fft.hpp
   _extendedRequiredBy:
@@ -228,55 +228,63 @@ data:
     \   a[n - 1] = last;\n    }\n    return a;\n}\n\ntemplate <typename M>\nstd::vector<M>\
     \ convolve_square(const std::vector<M> &a) {\n    if (a.empty()) {\n        return\
     \ std::vector<M>(0);\n    }\n    if ((int)a.size() <= 60) {\n        return convolve_naive(a,\
-    \ a);\n    } else {\n        return convolve_square_fft(a);\n    }\n}\n#line 4\
-    \ \"poly/power_projection.hpp\"\n\ntemplate <typename M>\nstd::pair<std::vector<M>,\
-    \ std::vector<M>> power_projection_recurrence(\n    int n, const std::vector<M>\
-    \ &f, const std::vector<M> &g) {\n    static constexpr FFTRoot<M::get_mod()> roots;\n\
-    \    static constexpr M INV2 = M(2).inv();\n    int lg = __builtin_ctz(n);\n \
-    \   std::vector<int> btr(n, 0);\n    for (int i = 1; i < n; ++i) {\n        btr[i]\
-    \ = (btr[i >> 1] >> 1) | ((i & 1) << (lg - 1));\n    }\n    M omega = roots.iroot[lg\
-    \ + 1];\n    M pw(1);\n    std::vector<M> invs(n);\n    for (int idx : btr) {\n\
-    \        invs[idx] = pw;\n        pw *= omega;\n    }\n    std::vector<M> p(2\
-    \ * n), q(2 * n);\n    for (int i = 0; i < n; ++i) {\n        p[2 * i] = g[i];\n\
-    \        q[2 * i] = -f[i];\n    }\n    q[0] += M(1);\n    std::vector<M> rp(2\
-    \ * n), rq(2 * n);\n    for (int h = n, w = 1; h > 1; h >>= 1, w <<= 1) {\n  \
-    \      omega = roots.root[__builtin_ctz(w) + 1];\n        for (int i = 0; i <\
-    \ 2 * n; i += 2 * w) {\n            std::copy(p.begin() + i, p.begin() + i + w,\
-    \ p.begin() + i + w);\n            ifft(p.data() + i + w, w);\n            pw\
-    \ = M(1);\n            for (int j = i + w; j < i + 2 * w; ++j) {\n           \
-    \     p[j] *= pw;\n                pw *= omega;\n            }\n            fft(p.data()\
-    \ + i + w, w);\n        }\n        for (int i = 0; i < 2 * n; i += 2 * w) {\n\
-    \            std::copy(q.begin() + i, q.begin() + i + w, q.begin() + i + w);\n\
-    \            ifft(q.data() + i + w, w);\n            if (i == 0) {\n         \
-    \       q[w] -= M(2);\n            }\n            pw = M(1);\n            for\
-    \ (int j = i + w; j < i + 2 * w; ++j) {\n                q[j] *= pw;\n       \
-    \         pw *= omega;\n            }\n            fft(q.data() + i + w, w);\n\
-    \        }\n        for (int j = 0; j < 2 * w; ++j) {\n            for (int i\
-    \ = 0; i < h; ++i) {\n                rp[i] = p[2 * w * i + j];\n            \
-    \    rq[i] = q[2 * w * i + j];\n            }\n            std::fill(rp.begin()\
-    \ + h, rp.begin() + 2 * h, M());\n            fft(rp.data(), 2 * h);\n       \
-    \     std::fill(rq.begin() + h, rq.begin() + 2 * h, M());\n            fft(rq.data(),\
-    \ 2 * h);\n            for (int i = 0; i < h; ++i) {\n                rp[i] =\
-    \ (rp[2 * i] * rq[2 * i + 1] - rp[2 * i + 1] * rq[2 * i]) *\n                \
-    \        INV2 * invs[i];\n                rq[i] = rq[2 * i] * rq[2 * i + 1];\n\
-    \            }\n            ifft(rp.data(), h);\n            ifft(rq.data(), h);\n\
-    \            for (int i = 0; i < h / 2; ++i) {\n                p[4 * w * i +\
-    \ j] = rp[i];\n                p[4 * w * i + 2 * w + j] = M();\n             \
-    \   q[4 * w * i + j] = rq[i];\n                q[4 * w * i + 2 * w + j] = M();\n\
-    \            }\n        }\n    }\n    p.resize(n);\n    ifft(p);\n    q.resize(n\
-    \ + 1);\n    ifft(q.data(), n);\n    q[0] -= M(1);\n    q[n] = M(1);\n    std::reverse(p.begin(),\
-    \ p.end());\n    std::reverse(q.begin(), q.end());\n    return std::make_pair(p,\
-    \ q);\n}\n\ntemplate <typename M>\nstd::vector<M> power_projection(std::vector<M>\
-    \ wt, std::vector<M> f, int m) {\n    assert(wt.size() == f.size());\n    int\
-    \ n = 1;\n    while (n < (int)f.size()) {\n        n *= 2;\n    }\n    wt.resize(n);\n\
-    \    f.resize(n);\n    std::reverse(wt.begin(), wt.end());\n    M c = std::exchange(f[0],\
-    \ M());\n    std::vector<M> b = power_projection_recurrence(n, f, wt).first;\n\
-    \    if (c == M()) {\n        return b;\n    }\n    b.resize(m);\n    for (int\
-    \ i = 0; i < m; ++i) {\n        b[i] *= inv_fact<M>(i);\n    }\n    std::vector<M>\
-    \ cf(m);\n    M pw(1);\n    for (int i = 0; i < m; ++i) {\n        cf[i] = pw\
-    \ * inv_fact<M>(i);\n        pw *= c;\n    }\n    std::vector<M> ret = convolve(b,\
-    \ cf);\n    ret.resize(m);\n    for (int i = 0; i < m; ++i) {\n        ret[i]\
-    \ *= fact<M>(i);\n    }\n    return ret;\n}\n"
+    \ a);\n    } else {\n        return convolve_square_fft(a);\n    }\n}\n\ntemplate\
+    \ <typename M>\nvoid transposed_fft(M *a, int n) {\n    ifft(a, n);\n    std::reverse(a\
+    \ + 1, a + n);\n    M c(n);\n    for (int i = 0; i < n; ++i) {\n        a[i] *=\
+    \ c;\n    }\n}\ntemplate <typename M>\nvoid transposed_fft(std::vector<M> &a)\
+    \ {\n    transposed_fft(a.data(), (int)a.size());\n}\n\ntemplate <typename M>\n\
+    void transposed_ifft(M *a, int n) {\n    static constexpr FFTRoot<M::get_mod()>\
+    \ roots;\n    std::reverse(a + 1, a + n);\n    fft(a, n);\n    M c = roots.inv2[__builtin_ctz(n)];\n\
+    \    for (int i = 0; i < n; ++i) {\n        a[i] *= c;\n    }\n}\ntemplate <typename\
+    \ M>\nvoid transposed_ifft(std::vector<M> &a) {\n    transposed_ifft(a.data(),\
+    \ (int)a.size());\n}\n#line 4 \"poly/power_projection.hpp\"\n\ntemplate <typename\
+    \ M>\nstd::pair<std::vector<M>, std::vector<M>> power_projection_recurrence(\n\
+    \    int n, const std::vector<M> &f, const std::vector<M> &g) {\n    static constexpr\
+    \ FFTRoot<M::get_mod()> roots;\n    static constexpr M INV2 = M(2).inv();\n  \
+    \  int lg = __builtin_ctz(n);\n    std::vector<int> btr(n, 0);\n    for (int i\
+    \ = 1; i < n; ++i) {\n        btr[i] = (btr[i >> 1] >> 1) | ((i & 1) << (lg -\
+    \ 1));\n    }\n    M omega = roots.iroot[lg + 1];\n    M pw(1);\n    std::vector<M>\
+    \ invs(n);\n    for (int idx : btr) {\n        invs[idx] = pw;\n        pw *=\
+    \ omega;\n    }\n    std::vector<M> p(2 * n), q(2 * n);\n    for (int i = 0; i\
+    \ < n; ++i) {\n        p[2 * i] = g[i];\n        q[2 * i] = -f[i];\n    }\n  \
+    \  q[0] += M(1);\n    std::vector<M> rp(2 * n), rq(2 * n);\n    for (int h = n,\
+    \ w = 1; h > 1; h >>= 1, w <<= 1) {\n        omega = roots.root[__builtin_ctz(w)\
+    \ + 1];\n        for (int i = 0; i < 2 * n; i += 2 * w) {\n            std::copy(p.begin()\
+    \ + i, p.begin() + i + w, p.begin() + i + w);\n            ifft(p.data() + i +\
+    \ w, w);\n            pw = M(1);\n            for (int j = i + w; j < i + 2 *\
+    \ w; ++j) {\n                p[j] *= pw;\n                pw *= omega;\n     \
+    \       }\n            fft(p.data() + i + w, w);\n        }\n        for (int\
+    \ i = 0; i < 2 * n; i += 2 * w) {\n            std::copy(q.begin() + i, q.begin()\
+    \ + i + w, q.begin() + i + w);\n            ifft(q.data() + i + w, w);\n     \
+    \       if (i == 0) {\n                q[w] -= M(2);\n            }\n        \
+    \    pw = M(1);\n            for (int j = i + w; j < i + 2 * w; ++j) {\n     \
+    \           q[j] *= pw;\n                pw *= omega;\n            }\n       \
+    \     fft(q.data() + i + w, w);\n        }\n        for (int j = 0; j < 2 * w;\
+    \ ++j) {\n            for (int i = 0; i < h; ++i) {\n                rp[i] = p[2\
+    \ * w * i + j];\n                rq[i] = q[2 * w * i + j];\n            }\n  \
+    \          std::fill(rp.begin() + h, rp.begin() + 2 * h, M());\n            fft(rp.data(),\
+    \ 2 * h);\n            std::fill(rq.begin() + h, rq.begin() + 2 * h, M());\n \
+    \           fft(rq.data(), 2 * h);\n            for (int i = 0; i < h; ++i) {\n\
+    \                rp[i] = (rp[2 * i] * rq[2 * i + 1] - rp[2 * i + 1] * rq[2 * i])\
+    \ *\n                        INV2 * invs[i];\n                rq[i] = rq[2 * i]\
+    \ * rq[2 * i + 1];\n            }\n            ifft(rp.data(), h);\n         \
+    \   ifft(rq.data(), h);\n            for (int i = 0; i < h / 2; ++i) {\n     \
+    \           p[4 * w * i + j] = rp[i];\n                p[4 * w * i + 2 * w + j]\
+    \ = M();\n                q[4 * w * i + j] = rq[i];\n                q[4 * w *\
+    \ i + 2 * w + j] = M();\n            }\n        }\n    }\n    p.resize(n);\n \
+    \   ifft(p);\n    q.resize(n + 1);\n    ifft(q.data(), n);\n    q[0] -= M(1);\n\
+    \    q[n] = M(1);\n    std::reverse(p.begin(), p.end());\n    std::reverse(q.begin(),\
+    \ q.end());\n    return std::make_pair(p, q);\n}\n\ntemplate <typename M>\nstd::vector<M>\
+    \ power_projection(std::vector<M> wt, std::vector<M> f, int m) {\n    assert(wt.size()\
+    \ == f.size());\n    int n = 1;\n    while (n < (int)f.size()) {\n        n *=\
+    \ 2;\n    }\n    wt.resize(n);\n    f.resize(n);\n    std::reverse(wt.begin(),\
+    \ wt.end());\n    M c = std::exchange(f[0], M());\n    std::vector<M> b = power_projection_recurrence(n,\
+    \ f, wt).first;\n    if (c == M()) {\n        return b;\n    }\n    b.resize(m);\n\
+    \    for (int i = 0; i < m; ++i) {\n        b[i] *= inv_fact<M>(i);\n    }\n \
+    \   std::vector<M> cf(m);\n    M pw(1);\n    for (int i = 0; i < m; ++i) {\n \
+    \       cf[i] = pw * inv_fact<M>(i);\n        pw *= c;\n    }\n    std::vector<M>\
+    \ ret = convolve(b, cf);\n    ret.resize(m);\n    for (int i = 0; i < m; ++i)\
+    \ {\n        ret[i] *= fact<M>(i);\n    }\n    return ret;\n}\n"
   code: "#pragma once\n#include \"../number_theory/factorial.hpp\"\n#include \"fft.hpp\"\
     \n\ntemplate <typename M>\nstd::pair<std::vector<M>, std::vector<M>> power_projection_recurrence(\n\
     \    int n, const std::vector<M> &f, const std::vector<M> &g) {\n    static constexpr\
@@ -334,7 +342,7 @@ data:
   path: poly/power_projection.hpp
   requiredBy:
   - poly/compositional_inverse.hpp
-  timestamp: '2026-03-19 11:11:21+09:00'
+  timestamp: '2026-03-31 19:03:53+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - poly/test/compositional_inverse_of_formal_power_series_large.test.cpp

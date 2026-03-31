@@ -8,22 +8,22 @@ data:
   - icon: ':heavy_check_mark:'
     path: convolution/mul_mod_p_conv.hpp
     title: convolution/mul_mod_p_conv.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/frequency_table_of_tree_distance.hpp
     title: graph/frequency_table_of_tree_distance.hpp
   - icon: ':heavy_check_mark:'
     path: number_theory/ax_by_c.hpp
     title: number_theory/ax_by_c.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/mod_int.hpp
     title: number_theory/mod_int.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/composition.hpp
     title: poly/composition.hpp
   - icon: ':heavy_check_mark:'
     path: poly/compositional_inverse.hpp
     title: poly/compositional_inverse.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: poly/fft.hpp
     title: poly/fft.hpp
   - icon: ':heavy_check_mark:'
@@ -56,13 +56,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: poly/power_projection.hpp
     title: poly/power_projection.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/stirling1.hpp
     title: poly/stirling1.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/stirling2.hpp
     title: poly/stirling2.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/taylor_shift.hpp
     title: poly/taylor_shift.hpp
   _extendedVerifiedWith:
@@ -120,7 +120,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/test/enumerate_triangles.test.cpp
     title: graph/test/enumerate_triangles.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/test/frequency_table_of_tree_distance.test.cpp
     title: graph/test/frequency_table_of_tree_distance.test.cpp
   - icon: ':heavy_check_mark:'
@@ -132,13 +132,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: number_theory/test/inv_mod_stress.test.cpp
     title: number_theory/test/inv_mod_stress.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/test/composition_of_formal_power_series_large.test.cpp
     title: poly/test/composition_of_formal_power_series_large.test.cpp
   - icon: ':heavy_check_mark:'
     path: poly/test/compositional_inverse_of_formal_power_series_large.test.cpp
     title: poly/test/compositional_inverse_of_formal_power_series_large.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/test/convolution_mod.test.cpp
     title: poly/test/convolution_mod.test.cpp
   - icon: ':heavy_check_mark:'
@@ -174,7 +174,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: poly/test/polynomial_interpolation_on_geometric_sequence.test.cpp
     title: poly/test/polynomial_interpolation_on_geometric_sequence.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/test/polynomial_taylor_shift.test.cpp
     title: poly/test/polynomial_taylor_shift.test.cpp
   - icon: ':heavy_check_mark:'
@@ -183,18 +183,18 @@ data:
   - icon: ':heavy_check_mark:'
     path: poly/test/pow_of_formal_power_series_sparse.test.cpp
     title: poly/test/pow_of_formal_power_series_sparse.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/test/prod_of_polys.test.cpp
     title: poly/test/prod_of_polys.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/test/stirling_number_of_the_first_kind.test.cpp
     title: poly/test/stirling_number_of_the_first_kind.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/test/stirling_number_of_the_second_kind.test.cpp
     title: poly/test/stirling_number_of_the_second_kind.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"number_theory/utils.hpp\"\n\n#include <utility>\n\nconstexpr\
@@ -287,72 +287,72 @@ data:
   isVerificationFile: false
   path: number_theory/utils.hpp
   requiredBy:
-  - graph/frequency_table_of_tree_distance.hpp
   - number_theory/ax_by_c.hpp
   - number_theory/mod_int.hpp
-  - poly/fps_pow.hpp
-  - poly/composition.hpp
-  - poly/power_projection.hpp
-  - poly/fps_exp.hpp
-  - poly/compositional_inverse.hpp
-  - poly/fps_log.hpp
-  - poly/fft.hpp
-  - poly/polynomial_interpolation_geometric.hpp
-  - poly/multieval.hpp
-  - poly/taylor_shift.hpp
-  - poly/multieval_geometric.hpp
-  - poly/stirling1.hpp
-  - poly/fps_div_at.hpp
-  - poly/middle_product.hpp
-  - poly/stirling2.hpp
-  - poly/fps_inv.hpp
+  - graph/frequency_table_of_tree_distance.hpp
   - convolution/index_difference.hpp
   - convolution/mul_mod_p_conv.hpp
+  - poly/power_projection.hpp
+  - poly/stirling2.hpp
+  - poly/multieval.hpp
+  - poly/middle_product.hpp
+  - poly/taylor_shift.hpp
+  - poly/fps_pow.hpp
+  - poly/polynomial_interpolation_geometric.hpp
+  - poly/fps_inv.hpp
+  - poly/fft.hpp
+  - poly/multieval_geometric.hpp
+  - poly/composition.hpp
+  - poly/fps_log.hpp
+  - poly/compositional_inverse.hpp
+  - poly/stirling1.hpp
+  - poly/fps_exp.hpp
+  - poly/fps_div_at.hpp
   timestamp: '2024-07-18 16:56:22+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - bit/test/bitwise_xor_convolution.test.cpp
-  - graph/test/enumerate_triangles.test.cpp
-  - graph/test/frequency_table_of_tree_distance.test.cpp
   - number_theory/test/extgcd2_stress.test.cpp
   - number_theory/test/inv_mod_stress.test.cpp
   - number_theory/test/ax_by_c_stress.test.cpp
-  - algebra/test/system_of_linear_equations.test.cpp
-  - algebra/test/inverse_matrix.test.cpp
-  - algebra/test/matrix_det.test.cpp
-  - algebra/test/matrix_product.test.cpp
-  - algebra/test/matrix_rank.test.cpp
-  - poly/test/polynomial_interpolation_on_geometric_sequence.test.cpp
-  - poly/test/multipoint_evaluation.test.cpp
-  - poly/test/inv_of_formal_power_series_sparse.test.cpp
-  - poly/test/exp_of_formal_power_series_sparse.test.cpp
-  - poly/test/inv_of_formal_power_series.test.cpp
-  - poly/test/polynomial_taylor_shift.test.cpp
-  - poly/test/pow_of_formal_power_series.test.cpp
-  - poly/test/log_of_formal_power_series.test.cpp
-  - poly/test/prod_of_polys.test.cpp
-  - poly/test/convolution_mod.test.cpp
-  - poly/test/pow_of_formal_power_series_sparse.test.cpp
-  - poly/test/compositional_inverse_of_formal_power_series_large.test.cpp
-  - poly/test/log_of_formal_power_series_sparse.test.cpp
-  - poly/test/exp_of_formal_power_series.test.cpp
-  - poly/test/multipoint_evaluation_on_geometric_sequence.test.cpp
-  - poly/test/stirling_number_of_the_first_kind.test.cpp
-  - poly/test/find_linear_recurrence.test.cpp
-  - poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - poly/test/composition_of_formal_power_series_large.test.cpp
-  - poly/test/stirling_number_of_the_second_kind.test.cpp
-  - data_structure/test/1891.test.cpp
-  - data_structure/test/range_affine_range_sum.test.cpp
-  - data_structure/test/queue_operate_all_composite.test.cpp
-  - data_structure/test/point_set_range_composite.test.cpp
-  - data_structure/test/range_affine_point_get.test.cpp
-  - convolution/test/lcm_convolution.stress.test.cpp
-  - convolution/test/index_difference.test.cpp
-  - convolution/test/mul_modp_convolution.test.cpp
-  - convolution/test/gcd_convolution.stress.test.cpp
+  - graph/test/enumerate_triangles.test.cpp
+  - graph/test/frequency_table_of_tree_distance.test.cpp
   - convolution/test/lcm_convolution.test.cpp
   - convolution/test/gcd_convolution.test.cpp
+  - convolution/test/index_difference.test.cpp
+  - convolution/test/gcd_convolution.stress.test.cpp
+  - convolution/test/mul_modp_convolution.test.cpp
+  - convolution/test/lcm_convolution.stress.test.cpp
+  - poly/test/log_of_formal_power_series_sparse.test.cpp
+  - poly/test/multipoint_evaluation_on_geometric_sequence.test.cpp
+  - poly/test/polynomial_taylor_shift.test.cpp
+  - poly/test/exp_of_formal_power_series_sparse.test.cpp
+  - poly/test/compositional_inverse_of_formal_power_series_large.test.cpp
+  - poly/test/inv_of_formal_power_series.test.cpp
+  - poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
+  - poly/test/multipoint_evaluation.test.cpp
+  - poly/test/composition_of_formal_power_series_large.test.cpp
+  - poly/test/pow_of_formal_power_series_sparse.test.cpp
+  - poly/test/prod_of_polys.test.cpp
+  - poly/test/pow_of_formal_power_series.test.cpp
+  - poly/test/find_linear_recurrence.test.cpp
+  - poly/test/convolution_mod.test.cpp
+  - poly/test/log_of_formal_power_series.test.cpp
+  - poly/test/exp_of_formal_power_series.test.cpp
+  - poly/test/stirling_number_of_the_first_kind.test.cpp
+  - poly/test/inv_of_formal_power_series_sparse.test.cpp
+  - poly/test/polynomial_interpolation_on_geometric_sequence.test.cpp
+  - poly/test/stirling_number_of_the_second_kind.test.cpp
+  - bit/test/bitwise_xor_convolution.test.cpp
+  - algebra/test/matrix_product.test.cpp
+  - algebra/test/matrix_det.test.cpp
+  - algebra/test/inverse_matrix.test.cpp
+  - algebra/test/system_of_linear_equations.test.cpp
+  - algebra/test/matrix_rank.test.cpp
+  - data_structure/test/point_set_range_composite.test.cpp
+  - data_structure/test/range_affine_range_sum.test.cpp
+  - data_structure/test/range_affine_point_get.test.cpp
+  - data_structure/test/queue_operate_all_composite.test.cpp
+  - data_structure/test/1891.test.cpp
 documentation_of: number_theory/utils.hpp
 layout: document
 redirect_from:

@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/mod_int.hpp
     title: number_theory/mod_int.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number_theory/utils.hpp
     title: number_theory/utils.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: poly/fft.hpp
     title: poly/fft.hpp
   - icon: ':heavy_check_mark:'
@@ -26,56 +26,57 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"poly/middle_product.hpp\"\n#include <algorithm>\n#line 2\
-    \ \"poly/fft.hpp\"\n#include <array>\n#include <vector>\n#line 2 \"number_theory/mod_int.hpp\"\
-    \n\n#include <cassert>\n#include <iostream>\n#include <type_traits>\n#line 2 \"\
-    number_theory/utils.hpp\"\n\n#include <utility>\n\nconstexpr bool is_prime(unsigned\
-    \ n) {\n    if (n == 0 || n == 1) {\n        return false;\n    }\n    for (unsigned\
-    \ i = 2; i * i <= n; ++i) {\n        if (n % i == 0) {\n            return false;\n\
-    \        }\n    }\n    return true;\n}\n\nconstexpr unsigned mod_pow(unsigned\
-    \ x, unsigned y, unsigned mod) {\n    unsigned ret = 1, self = x;\n    while (y\
-    \ != 0) {\n        if (y & 1) {\n            ret = (unsigned)((unsigned long long)ret\
-    \ * self % mod);\n        }\n        self = (unsigned)((unsigned long long)self\
-    \ * self % mod);\n        y /= 2;\n    }\n    return ret;\n}\n\ntemplate <unsigned\
-    \ mod>\nconstexpr unsigned primitive_root() {\n    static_assert(is_prime(mod),\
-    \ \"`mod` must be a prime number.\");\n    if (mod == 2) {\n        return 1;\n\
-    \    }\n\n    unsigned primes[32] = {};\n    int it = 0;\n    {\n        unsigned\
-    \ m = mod - 1;\n        for (unsigned i = 2; i * i <= m; ++i) {\n            if\
-    \ (m % i == 0) {\n                primes[it++] = i;\n                while (m\
-    \ % i == 0) {\n                    m /= i;\n                }\n            }\n\
-    \        }\n        if (m != 1) {\n            primes[it++] = m;\n        }\n\
-    \    }\n    for (unsigned i = 2; i < mod; ++i) {\n        bool ok = true;\n  \
-    \      for (int j = 0; j < it; ++j) {\n            if (mod_pow(i, (mod - 1) /\
-    \ primes[j], mod) == 1) {\n                ok = false;\n                break;\n\
-    \            }\n        }\n        if (ok) return i;\n    }\n    return 0;\n}\n\
-    \n// y >= 1\ntemplate <typename T>\nconstexpr T safe_mod(T x, T y) {\n    x %=\
-    \ y;\n    if (x < 0) {\n        x += y;\n    }\n    return x;\n}\n\n// y != 0\n\
-    template <typename T>\nconstexpr T floor_div(T x, T y) {\n    if (y < 0) {\n \
-    \       x *= -1;\n        y *= -1;\n    }\n    if (x >= 0) {\n        return x\
-    \ / y;\n    } else {\n        return -((-x + y - 1) / y);\n    }\n}\n\n// y !=\
-    \ 0\ntemplate <typename T>\nconstexpr T ceil_div(T x, T y) {\n    if (y < 0) {\n\
-    \        x *= -1;\n        y *= -1;\n    }\n    if (x >= 0) {\n        return\
-    \ (x + y - 1) / y;\n    } else {\n        return -(-x / y);\n    }\n}\n\n// b\
-    \ >= 1\n// returns (g, x) s.t. g = gcd(a, b), a * x = g (mod b), 0 <= x < b /\
-    \ g\n// from ACL\ntemplate <typename T>\nstd::pair<T, T> extgcd(T a, T b) {\n\
-    \    a = safe_mod(a, b);\n    T s = b, t = a, m0 = 0, m1 = 1;\n    while (t) {\n\
-    \        T u = s / t;\n        s -= t * u;\n        m0 -= m1 * u;\n        std::swap(s,\
-    \ t);\n        std::swap(m0, m1);\n    }\n    if (m0 < 0) {\n        m0 += b /\
-    \ s;\n    }\n    return std::pair<T, T>(s, m0);\n}\n\n// b >= 1\n// returns (g,\
-    \ x, y) s.t. g = gcd(a, b), a * x + b * y = g, 0 <= x < b / g, |y| < max(2, |a|\
-    \ / g)\ntemplate <typename T>\nstd::tuple<T, T, T> extgcd2(T a, T b) {\n    T\
-    \ _a = safe_mod(a, b);\n    T quot = (a - _a) / b;\n    T x00 = 0, x01 = 1, y0\
-    \ = b;\n    T x10 = 1, x11 = -quot, y1 = _a;\n    while (y1) {\n        T u =\
-    \ y0 / y1;\n        x00 -= u * x10;\n        x01 -= u * x11;\n        y0 -= u\
-    \ * y1;\n        std::swap(x00, x10);\n        std::swap(x01, x11);\n        std::swap(y0,\
-    \ y1);\n    }\n    if (x00 < 0) {\n        x00 += b / y0;\n        x01 -= a /\
-    \ y0;\n    }\n    return std::tuple<T, T, T>(y0, x00, x01);\n}\n\n// gcd(x, m)\
-    \ == 1\ntemplate <typename T>\nT inv_mod(T x, T m) {\n    return extgcd(x, m).second;\n\
-    }\n#line 7 \"number_theory/mod_int.hpp\"\n\ntemplate <unsigned mod>\nstruct ModInt\
-    \ {\n    static_assert(mod != 0, \"`mod` must not be equal to 0.\");\n    static_assert(mod\
-    \ < (1u << 31),\n                  \"`mod` must be less than (1u << 31) = 2147483648.\"\
-    );\n\n    unsigned val;\n\n    static constexpr unsigned get_mod() { return mod;\
-    \ }\n\n    constexpr ModInt() : val(0) {}\n    template <typename T, std::enable_if_t<std::is_signed_v<T>>\
+  bundledCode: "#line 2 \"poly/middle_product.hpp\"\n#include <algorithm>\n#include\
+    \ <cassert>\n#line 2 \"poly/fft.hpp\"\n#include <array>\n#include <vector>\n#line\
+    \ 2 \"number_theory/mod_int.hpp\"\n\n#line 4 \"number_theory/mod_int.hpp\"\n#include\
+    \ <iostream>\n#include <type_traits>\n#line 2 \"number_theory/utils.hpp\"\n\n\
+    #include <utility>\n\nconstexpr bool is_prime(unsigned n) {\n    if (n == 0 ||\
+    \ n == 1) {\n        return false;\n    }\n    for (unsigned i = 2; i * i <= n;\
+    \ ++i) {\n        if (n % i == 0) {\n            return false;\n        }\n  \
+    \  }\n    return true;\n}\n\nconstexpr unsigned mod_pow(unsigned x, unsigned y,\
+    \ unsigned mod) {\n    unsigned ret = 1, self = x;\n    while (y != 0) {\n   \
+    \     if (y & 1) {\n            ret = (unsigned)((unsigned long long)ret * self\
+    \ % mod);\n        }\n        self = (unsigned)((unsigned long long)self * self\
+    \ % mod);\n        y /= 2;\n    }\n    return ret;\n}\n\ntemplate <unsigned mod>\n\
+    constexpr unsigned primitive_root() {\n    static_assert(is_prime(mod), \"`mod`\
+    \ must be a prime number.\");\n    if (mod == 2) {\n        return 1;\n    }\n\
+    \n    unsigned primes[32] = {};\n    int it = 0;\n    {\n        unsigned m =\
+    \ mod - 1;\n        for (unsigned i = 2; i * i <= m; ++i) {\n            if (m\
+    \ % i == 0) {\n                primes[it++] = i;\n                while (m % i\
+    \ == 0) {\n                    m /= i;\n                }\n            }\n   \
+    \     }\n        if (m != 1) {\n            primes[it++] = m;\n        }\n   \
+    \ }\n    for (unsigned i = 2; i < mod; ++i) {\n        bool ok = true;\n     \
+    \   for (int j = 0; j < it; ++j) {\n            if (mod_pow(i, (mod - 1) / primes[j],\
+    \ mod) == 1) {\n                ok = false;\n                break;\n        \
+    \    }\n        }\n        if (ok) return i;\n    }\n    return 0;\n}\n\n// y\
+    \ >= 1\ntemplate <typename T>\nconstexpr T safe_mod(T x, T y) {\n    x %= y;\n\
+    \    if (x < 0) {\n        x += y;\n    }\n    return x;\n}\n\n// y != 0\ntemplate\
+    \ <typename T>\nconstexpr T floor_div(T x, T y) {\n    if (y < 0) {\n        x\
+    \ *= -1;\n        y *= -1;\n    }\n    if (x >= 0) {\n        return x / y;\n\
+    \    } else {\n        return -((-x + y - 1) / y);\n    }\n}\n\n// y != 0\ntemplate\
+    \ <typename T>\nconstexpr T ceil_div(T x, T y) {\n    if (y < 0) {\n        x\
+    \ *= -1;\n        y *= -1;\n    }\n    if (x >= 0) {\n        return (x + y -\
+    \ 1) / y;\n    } else {\n        return -(-x / y);\n    }\n}\n\n// b >= 1\n//\
+    \ returns (g, x) s.t. g = gcd(a, b), a * x = g (mod b), 0 <= x < b / g\n// from\
+    \ ACL\ntemplate <typename T>\nstd::pair<T, T> extgcd(T a, T b) {\n    a = safe_mod(a,\
+    \ b);\n    T s = b, t = a, m0 = 0, m1 = 1;\n    while (t) {\n        T u = s /\
+    \ t;\n        s -= t * u;\n        m0 -= m1 * u;\n        std::swap(s, t);\n \
+    \       std::swap(m0, m1);\n    }\n    if (m0 < 0) {\n        m0 += b / s;\n \
+    \   }\n    return std::pair<T, T>(s, m0);\n}\n\n// b >= 1\n// returns (g, x, y)\
+    \ s.t. g = gcd(a, b), a * x + b * y = g, 0 <= x < b / g, |y| < max(2, |a| / g)\n\
+    template <typename T>\nstd::tuple<T, T, T> extgcd2(T a, T b) {\n    T _a = safe_mod(a,\
+    \ b);\n    T quot = (a - _a) / b;\n    T x00 = 0, x01 = 1, y0 = b;\n    T x10\
+    \ = 1, x11 = -quot, y1 = _a;\n    while (y1) {\n        T u = y0 / y1;\n     \
+    \   x00 -= u * x10;\n        x01 -= u * x11;\n        y0 -= u * y1;\n        std::swap(x00,\
+    \ x10);\n        std::swap(x01, x11);\n        std::swap(y0, y1);\n    }\n   \
+    \ if (x00 < 0) {\n        x00 += b / y0;\n        x01 -= a / y0;\n    }\n    return\
+    \ std::tuple<T, T, T>(y0, x00, x01);\n}\n\n// gcd(x, m) == 1\ntemplate <typename\
+    \ T>\nT inv_mod(T x, T m) {\n    return extgcd(x, m).second;\n}\n#line 7 \"number_theory/mod_int.hpp\"\
+    \n\ntemplate <unsigned mod>\nstruct ModInt {\n    static_assert(mod != 0, \"`mod`\
+    \ must not be equal to 0.\");\n    static_assert(mod < (1u << 31),\n         \
+    \         \"`mod` must be less than (1u << 31) = 2147483648.\");\n\n    unsigned\
+    \ val;\n\n    static constexpr unsigned get_mod() { return mod; }\n\n    constexpr\
+    \ ModInt() : val(0) {}\n    template <typename T, std::enable_if_t<std::is_signed_v<T>>\
     \ * = nullptr>\n    constexpr ModInt(T x)\n        : val((unsigned)((long long)x\
     \ % (long long)mod + (x < 0 ? mod : 0))) {}\n    template <typename T, std::enable_if_t<std::is_unsigned_v<T>>\
     \ * = nullptr>\n    constexpr ModInt(T x) : val((unsigned)(x % mod)) {}\n\n  \
@@ -211,53 +212,62 @@ data:
     \   a[n - 1] = last;\n    }\n    return a;\n}\n\ntemplate <typename M>\nstd::vector<M>\
     \ convolve_square(const std::vector<M> &a) {\n    if (a.empty()) {\n        return\
     \ std::vector<M>(0);\n    }\n    if ((int)a.size() <= 60) {\n        return convolve_naive(a,\
-    \ a);\n    } else {\n        return convolve_square_fft(a);\n    }\n}\n#line 4\
-    \ \"poly/middle_product.hpp\"\n\n// a.size() <= b.size()\ntemplate <typename M>\n\
-    std::vector<M> middle_product(std::vector<M> a, std::vector<M> b) {\n    int n\
-    \ = (int)a.size();\n    int m = (int)b.size();\n    std::reverse(a.begin(), a.end());\n\
-    \    int l = 1;\n    while (l < m) {\n        l *= 2;\n    }\n    a.resize(l,\
-    \ M());\n    b.resize(l, M());\n    fft(a);\n    fft(b);\n    for (int i = 0;\
-    \ i < l; ++i) {\n        b[i] *= a[i];\n    }\n    ifft(b);\n    return std::vector<M>(b.begin()\
-    \ + (n - 1), b.begin() + m);\n}\n#line 3 \"poly/multieval_geometric.hpp\"\n\n\
-    template <typename M>\nstd::vector<M> multieval_geometric(std::vector<M> f, int\
-    \ m, M a, M r) {\n    int n = (int)f.size();\n    if (n == 0) {\n        return\
-    \ std::vector<M>(m, 0);\n    }\n    if (m == 0) {\n        return std::vector<M>();\n\
-    \    }\n    if (r == M()) {\n        std::vector<M> ret(m, f[0]);\n        M ev,\
-    \ pw(1);\n        for (int i = 0; i < n; ++i) {\n            ev += f[i] * pw;\n\
-    \            pw *= a;\n        }\n        ret[0] = ev;\n        return ret;\n\
-    \    }\n    std::vector<M> w(n + m - 1);\n    M val(1), pw(1);\n    for (int i\
-    \ = 0; i < n + m - 1; ++i) {\n        w[i] = val;\n        val *= pw;\n      \
-    \  pw *= r;\n    }\n    val = pw = M(1);\n    M invr = r.inv();\n    for (int\
-    \ i = 0; i < n; ++i) {\n        f[i] *= val;\n        val *= a * pw;\n       \
-    \ pw *= invr;\n    }\n    std::vector<M> ret = middle_product(f, w);\n    val\
-    \ = pw = M(1);\n    for (int i = 0; i < m; ++i) {\n        ret[i] *= val;\n  \
-    \      val *= pw;\n        pw *= invr;\n    }\n    return ret;\n}\n#line 3 \"\
-    poly/polynomial_interpolation_geometric.hpp\"\n\ntemplate <typename M>\nstd::vector<M>\
-    \ polynomial_interpolation_geometric_a1(const std::vector<M> &y, M r) {\n    int\
-    \ n = (int)y.size();\n    if (n == 0) {\n        return std::vector<M>(0);\n \
-    \   }\n    if (n == 1) {\n        return std::vector<M>(1, y[0]);\n    }\n   \
-    \ std::vector<M> pw(n + 1), invpw(n + 1);\n    pw[0] = M(1);\n    for (int i =\
-    \ 0; i < n; ++i) {\n        pw[i + 1] = pw[i] * r;\n    }\n    invpw[n] = pw[n].inv();\n\
-    \    for (int i = n - 1; i >= 0; --i) {\n        invpw[i] = invpw[i + 1] * r;\n\
-    \    }\n    std::vector<M> qfac(n + 1), invqfac(n);\n    qfac[0] = M(1);\n   \
-    \ for (int i = 0; i < n; ++i) {\n        qfac[i + 1] = qfac[i] * (M(1) - pw[i\
-    \ + 1]);\n    }\n    invqfac[n - 1] = qfac[n - 1].inv();\n    for (int i = n -\
-    \ 2; i >= 0; --i) {\n        invqfac[i] = invqfac[i + 1] * (M(1) - pw[i + 1]);\n\
-    \    }\n    std::vector<M> w = y;\n    {\n        M t(1);\n        w[0] *= invqfac[n\
-    \ - 1];\n        for (int i = 0; i < n - 1; ++i) {\n            t *= -invpw[n\
-    \ - 2 - i];\n            w[i + 1] *= invqfac[i + 1] * invqfac[n - 2 - i] * t;\n\
-    \        }\n    }\n    std::vector<M> f(n);\n    {\n        M t(1);\n        f[0]\
-    \ = t;\n        for (int i = 0; i < n - 1; ++i) {\n            t *= -pw[i];\n\
-    \            f[i + 1] = qfac[n] * invqfac[i + 1] * invqfac[n - 1 - i] * t;\n \
-    \       }\n    }\n    std::vector<M> ev = multieval_geometric(w, n, M(1), r);\n\
-    \    std::vector<M> ans = convolve(f, ev);\n    ans.resize(n);\n    std::reverse(ans.begin(),\
-    \ ans.end());\n    return ans;\n}\n\ntemplate <typename M>\nstd::vector<M> polynomial_interpolation_geometric(const\
-    \ std::vector<M> &y, M a,\n                                                  M\
-    \ r) {\n    int n = (int)y.size();\n    if (n == 0) {\n        return std::vector<M>(0);\n\
-    \    }\n    if (n == 1) {\n        return std::vector<M>(1, y[0]);\n    }\n  \
-    \  // a != 0, r != 0\n    std::vector<M> f = polynomial_interpolation_geometric_a1(y,\
-    \ r);\n    M inv = a.inv();\n    M pw(1);\n    for (int i = 0; i < n; ++i) {\n\
-    \        f[i] *= pw;\n        pw *= inv;\n    }\n    return f;\n}\n"
+    \ a);\n    } else {\n        return convolve_square_fft(a);\n    }\n}\n\ntemplate\
+    \ <typename M>\nvoid transposed_fft(M *a, int n) {\n    ifft(a, n);\n    std::reverse(a\
+    \ + 1, a + n);\n    M c(n);\n    for (int i = 0; i < n; ++i) {\n        a[i] *=\
+    \ c;\n    }\n}\ntemplate <typename M>\nvoid transposed_fft(std::vector<M> &a)\
+    \ {\n    transposed_fft(a.data(), (int)a.size());\n}\n\ntemplate <typename M>\n\
+    void transposed_ifft(M *a, int n) {\n    static constexpr FFTRoot<M::get_mod()>\
+    \ roots;\n    std::reverse(a + 1, a + n);\n    fft(a, n);\n    M c = roots.inv2[__builtin_ctz(n)];\n\
+    \    for (int i = 0; i < n; ++i) {\n        a[i] *= c;\n    }\n}\ntemplate <typename\
+    \ M>\nvoid transposed_ifft(std::vector<M> &a) {\n    transposed_ifft(a.data(),\
+    \ (int)a.size());\n}\n#line 5 \"poly/middle_product.hpp\"\n\n// a.size() <= b.size()\n\
+    template <typename M>\nstd::vector<M> middle_product(std::vector<M> a, std::vector<M>\
+    \ b) {\n    int n = (int)a.size();\n    int m = (int)b.size();\n    assert(n <=\
+    \ m);\n    std::reverse(a.begin(), a.end());\n    int l = 1;\n    while (l < m)\
+    \ {\n        l *= 2;\n    }\n    a.resize(l, M());\n    b.resize(l, M());\n  \
+    \  fft(a);\n    fft(b);\n    for (int i = 0; i < l; ++i) {\n        b[i] *= a[i];\n\
+    \    }\n    ifft(b);\n    return std::vector<M>(b.begin() + (n - 1), b.begin()\
+    \ + m);\n}\n#line 3 \"poly/multieval_geometric.hpp\"\n\ntemplate <typename M>\n\
+    std::vector<M> multieval_geometric(std::vector<M> f, int m, M a, M r) {\n    int\
+    \ n = (int)f.size();\n    if (n == 0) {\n        return std::vector<M>(m, 0);\n\
+    \    }\n    if (m == 0) {\n        return std::vector<M>();\n    }\n    if (r\
+    \ == M()) {\n        std::vector<M> ret(m, f[0]);\n        M ev, pw(1);\n    \
+    \    for (int i = 0; i < n; ++i) {\n            ev += f[i] * pw;\n           \
+    \ pw *= a;\n        }\n        ret[0] = ev;\n        return ret;\n    }\n    std::vector<M>\
+    \ w(n + m - 1);\n    M val(1), pw(1);\n    for (int i = 0; i < n + m - 1; ++i)\
+    \ {\n        w[i] = val;\n        val *= pw;\n        pw *= r;\n    }\n    val\
+    \ = pw = M(1);\n    M invr = r.inv();\n    for (int i = 0; i < n; ++i) {\n   \
+    \     f[i] *= val;\n        val *= a * pw;\n        pw *= invr;\n    }\n    std::vector<M>\
+    \ ret = middle_product(f, w);\n    val = pw = M(1);\n    for (int i = 0; i < m;\
+    \ ++i) {\n        ret[i] *= val;\n        val *= pw;\n        pw *= invr;\n  \
+    \  }\n    return ret;\n}\n#line 3 \"poly/polynomial_interpolation_geometric.hpp\"\
+    \n\ntemplate <typename M>\nstd::vector<M> polynomial_interpolation_geometric_a1(const\
+    \ std::vector<M> &y, M r) {\n    int n = (int)y.size();\n    if (n == 0) {\n \
+    \       return std::vector<M>(0);\n    }\n    if (n == 1) {\n        return std::vector<M>(1,\
+    \ y[0]);\n    }\n    std::vector<M> pw(n + 1), invpw(n + 1);\n    pw[0] = M(1);\n\
+    \    for (int i = 0; i < n; ++i) {\n        pw[i + 1] = pw[i] * r;\n    }\n  \
+    \  invpw[n] = pw[n].inv();\n    for (int i = n - 1; i >= 0; --i) {\n        invpw[i]\
+    \ = invpw[i + 1] * r;\n    }\n    std::vector<M> qfac(n + 1), invqfac(n);\n  \
+    \  qfac[0] = M(1);\n    for (int i = 0; i < n; ++i) {\n        qfac[i + 1] = qfac[i]\
+    \ * (M(1) - pw[i + 1]);\n    }\n    invqfac[n - 1] = qfac[n - 1].inv();\n    for\
+    \ (int i = n - 2; i >= 0; --i) {\n        invqfac[i] = invqfac[i + 1] * (M(1)\
+    \ - pw[i + 1]);\n    }\n    std::vector<M> w = y;\n    {\n        M t(1);\n  \
+    \      w[0] *= invqfac[n - 1];\n        for (int i = 0; i < n - 1; ++i) {\n  \
+    \          t *= -invpw[n - 2 - i];\n            w[i + 1] *= invqfac[i + 1] * invqfac[n\
+    \ - 2 - i] * t;\n        }\n    }\n    std::vector<M> f(n);\n    {\n        M\
+    \ t(1);\n        f[0] = t;\n        for (int i = 0; i < n - 1; ++i) {\n      \
+    \      t *= -pw[i];\n            f[i + 1] = qfac[n] * invqfac[i + 1] * invqfac[n\
+    \ - 1 - i] * t;\n        }\n    }\n    std::vector<M> ev = multieval_geometric(w,\
+    \ n, M(1), r);\n    std::vector<M> ans = convolve(f, ev);\n    ans.resize(n);\n\
+    \    std::reverse(ans.begin(), ans.end());\n    return ans;\n}\n\ntemplate <typename\
+    \ M>\nstd::vector<M> polynomial_interpolation_geometric(const std::vector<M> &y,\
+    \ M a,\n                                                  M r) {\n    int n =\
+    \ (int)y.size();\n    if (n == 0) {\n        return std::vector<M>(0);\n    }\n\
+    \    if (n == 1) {\n        return std::vector<M>(1, y[0]);\n    }\n    // a !=\
+    \ 0, r != 0\n    std::vector<M> f = polynomial_interpolation_geometric_a1(y, r);\n\
+    \    M inv = a.inv();\n    M pw(1);\n    for (int i = 0; i < n; ++i) {\n     \
+    \   f[i] *= pw;\n        pw *= inv;\n    }\n    return f;\n}\n"
   code: "#pragma once\n#include \"multieval_geometric.hpp\"\n\ntemplate <typename\
     \ M>\nstd::vector<M> polynomial_interpolation_geometric_a1(const std::vector<M>\
     \ &y, M r) {\n    int n = (int)y.size();\n    if (n == 0) {\n        return std::vector<M>(0);\n\
@@ -293,7 +303,7 @@ data:
   isVerificationFile: false
   path: poly/polynomial_interpolation_geometric.hpp
   requiredBy: []
-  timestamp: '2026-02-02 21:51:43+09:00'
+  timestamp: '2026-03-31 19:03:53+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - poly/test/polynomial_interpolation_on_geometric_sequence.test.cpp

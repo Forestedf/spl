@@ -275,6 +275,9 @@ data:
       path: poly/power_projection.hpp
       title: poly/power_projection.hpp
     - icon: ':heavy_check_mark:'
+      path: poly/rational_sum_1.hpp
+      title: poly/rational_sum_1.hpp
+    - icon: ':heavy_check_mark:'
       path: poly/stirling1.hpp
       title: poly/stirling1.hpp
     - icon: ':heavy_check_mark:'
@@ -562,6 +565,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: poly/test/stirling_number_of_the_second_kind.test.cpp
       title: poly/test/stirling_number_of_the_second_kind.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: poly/test/yuki_1145.test.cpp
+      title: poly/test/yuki_1145.test.cpp
   - name: string/test
     pages:
     - icon: ':heavy_check_mark:'

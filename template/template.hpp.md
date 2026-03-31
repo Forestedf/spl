@@ -238,6 +238,9 @@ data:
     path: poly/test/stirling_number_of_the_second_kind.test.cpp
     title: poly/test/stirling_number_of_the_second_kind.test.cpp
   - icon: ':heavy_check_mark:'
+    path: poly/test/yuki_1145.test.cpp
+    title: poly/test/yuki_1145.test.cpp
+  - icon: ':heavy_check_mark:'
     path: string/test/number_of_substrings.test.cpp
     title: string/test/number_of_substrings.test.cpp
   - icon: ':heavy_check_mark:'
@@ -390,6 +393,7 @@ data:
   - poly/test/pow_of_formal_power_series.test.cpp
   - poly/test/find_linear_recurrence.test.cpp
   - poly/test/convolution_mod.test.cpp
+  - poly/test/yuki_1145.test.cpp
   - poly/test/log_of_formal_power_series.test.cpp
   - poly/test/exp_of_formal_power_series.test.cpp
   - poly/test/stirling_number_of_the_first_kind.test.cpp

@@ -54,6 +54,9 @@ data:
     path: poly/power_projection.hpp
     title: poly/power_projection.hpp
   - icon: ':heavy_check_mark:'
+    path: poly/rational_sum_1.hpp
+    title: poly/rational_sum_1.hpp
+  - icon: ':heavy_check_mark:'
     path: poly/stirling1.hpp
     title: poly/stirling1.hpp
   - icon: ':heavy_check_mark:'
@@ -180,6 +183,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: poly/test/stirling_number_of_the_second_kind.test.cpp
     title: poly/test/stirling_number_of_the_second_kind.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: poly/test/yuki_1145.test.cpp
+    title: poly/test/yuki_1145.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -326,6 +332,7 @@ data:
   - poly/fps_pow.hpp
   - poly/polynomial_interpolation_geometric.hpp
   - poly/fps_inv.hpp
+  - poly/rational_sum_1.hpp
   - poly/fft.hpp
   - poly/multieval_geometric.hpp
   - poly/composition.hpp
@@ -359,6 +366,7 @@ data:
   - poly/test/pow_of_formal_power_series.test.cpp
   - poly/test/find_linear_recurrence.test.cpp
   - poly/test/convolution_mod.test.cpp
+  - poly/test/yuki_1145.test.cpp
   - poly/test/log_of_formal_power_series.test.cpp
   - poly/test/exp_of_formal_power_series.test.cpp
   - poly/test/stirling_number_of_the_first_kind.test.cpp

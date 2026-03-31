@@ -7,119 +7,14 @@ data:
   - icon: ':heavy_check_mark:'
     path: number_theory/utils.hpp
     title: number_theory/utils.hpp
-  _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
-    path: convolution/index_difference.hpp
-    title: convolution/index_difference.hpp
-  - icon: ':heavy_check_mark:'
-    path: convolution/mul_mod_p_conv.hpp
-    title: convolution/mul_mod_p_conv.hpp
-  - icon: ':heavy_check_mark:'
-    path: graph/frequency_table_of_tree_distance.hpp
-    title: graph/frequency_table_of_tree_distance.hpp
-  - icon: ':heavy_check_mark:'
-    path: poly/composition.hpp
-    title: poly/composition.hpp
-  - icon: ':heavy_check_mark:'
-    path: poly/compositional_inverse.hpp
-    title: poly/compositional_inverse.hpp
-  - icon: ':heavy_check_mark:'
-    path: poly/fps_div_at.hpp
-    title: poly/fps_div_at.hpp
-  - icon: ':heavy_check_mark:'
-    path: poly/fps_exp.hpp
-    title: poly/fps_exp.hpp
+    path: poly/fft.hpp
+    title: poly/fft.hpp
   - icon: ':heavy_check_mark:'
     path: poly/fps_inv.hpp
     title: poly/fps_inv.hpp
-  - icon: ':heavy_check_mark:'
-    path: poly/fps_log.hpp
-    title: poly/fps_log.hpp
-  - icon: ':heavy_check_mark:'
-    path: poly/fps_pow.hpp
-    title: poly/fps_pow.hpp
-  - icon: ':heavy_check_mark:'
-    path: poly/middle_product.hpp
-    title: poly/middle_product.hpp
-  - icon: ':heavy_check_mark:'
-    path: poly/multieval.hpp
-    title: poly/multieval.hpp
-  - icon: ':heavy_check_mark:'
-    path: poly/multieval_geometric.hpp
-    title: poly/multieval_geometric.hpp
-  - icon: ':heavy_check_mark:'
-    path: poly/polynomial_interpolation_geometric.hpp
-    title: poly/polynomial_interpolation_geometric.hpp
-  - icon: ':heavy_check_mark:'
-    path: poly/power_projection.hpp
-    title: poly/power_projection.hpp
-  - icon: ':heavy_check_mark:'
-    path: poly/rational_sum_1.hpp
-    title: poly/rational_sum_1.hpp
-  - icon: ':heavy_check_mark:'
-    path: poly/stirling1.hpp
-    title: poly/stirling1.hpp
-  - icon: ':heavy_check_mark:'
-    path: poly/stirling2.hpp
-    title: poly/stirling2.hpp
-  - icon: ':heavy_check_mark:'
-    path: poly/taylor_shift.hpp
-    title: poly/taylor_shift.hpp
+  _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: convolution/test/index_difference.test.cpp
-    title: convolution/test/index_difference.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: convolution/test/mul_modp_convolution.test.cpp
-    title: convolution/test/mul_modp_convolution.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: graph/test/frequency_table_of_tree_distance.test.cpp
-    title: graph/test/frequency_table_of_tree_distance.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: poly/test/composition_of_formal_power_series_large.test.cpp
-    title: poly/test/composition_of_formal_power_series_large.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: poly/test/compositional_inverse_of_formal_power_series_large.test.cpp
-    title: poly/test/compositional_inverse_of_formal_power_series_large.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: poly/test/convolution_mod.test.cpp
-    title: poly/test/convolution_mod.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: poly/test/exp_of_formal_power_series.test.cpp
-    title: poly/test/exp_of_formal_power_series.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: poly/test/inv_of_formal_power_series.test.cpp
-    title: poly/test/inv_of_formal_power_series.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
-    title: poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: poly/test/log_of_formal_power_series.test.cpp
-    title: poly/test/log_of_formal_power_series.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: poly/test/multipoint_evaluation.test.cpp
-    title: poly/test/multipoint_evaluation.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: poly/test/multipoint_evaluation_on_geometric_sequence.test.cpp
-    title: poly/test/multipoint_evaluation_on_geometric_sequence.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: poly/test/polynomial_interpolation_on_geometric_sequence.test.cpp
-    title: poly/test/polynomial_interpolation_on_geometric_sequence.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: poly/test/polynomial_taylor_shift.test.cpp
-    title: poly/test/polynomial_taylor_shift.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: poly/test/pow_of_formal_power_series.test.cpp
-    title: poly/test/pow_of_formal_power_series.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: poly/test/prod_of_polys.test.cpp
-    title: poly/test/prod_of_polys.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: poly/test/stirling_number_of_the_first_kind.test.cpp
-    title: poly/test/stirling_number_of_the_first_kind.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: poly/test/stirling_number_of_the_second_kind.test.cpp
-    title: poly/test/stirling_number_of_the_second_kind.test.cpp
   - icon: ':heavy_check_mark:'
     path: poly/test/yuki_1145.test.cpp
     title: poly/test/yuki_1145.test.cpp
@@ -128,16 +23,17 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"poly/fft.hpp\"\n#include <algorithm>\n#include <array>\n\
+  bundledCode: "#line 2 \"poly/rational_sum_1.hpp\"\n#include <utility>\n#line 2 \"\
+    poly/fps_inv.hpp\"\n#include <algorithm>\n#line 3 \"poly/fft.hpp\"\n#include <array>\n\
     #include <vector>\n#line 2 \"number_theory/mod_int.hpp\"\n\n#include <cassert>\n\
     #include <iostream>\n#include <type_traits>\n#line 2 \"number_theory/utils.hpp\"\
-    \n\n#include <utility>\n\nconstexpr bool is_prime(unsigned n) {\n    if (n ==\
-    \ 0 || n == 1) {\n        return false;\n    }\n    for (unsigned i = 2; i * i\
-    \ <= n; ++i) {\n        if (n % i == 0) {\n            return false;\n       \
-    \ }\n    }\n    return true;\n}\n\nconstexpr unsigned mod_pow(unsigned x, unsigned\
-    \ y, unsigned mod) {\n    unsigned ret = 1, self = x;\n    while (y != 0) {\n\
-    \        if (y & 1) {\n            ret = (unsigned)((unsigned long long)ret *\
-    \ self % mod);\n        }\n        self = (unsigned)((unsigned long long)self\
+    \n\n#line 4 \"number_theory/utils.hpp\"\n\nconstexpr bool is_prime(unsigned n)\
+    \ {\n    if (n == 0 || n == 1) {\n        return false;\n    }\n    for (unsigned\
+    \ i = 2; i * i <= n; ++i) {\n        if (n % i == 0) {\n            return false;\n\
+    \        }\n    }\n    return true;\n}\n\nconstexpr unsigned mod_pow(unsigned\
+    \ x, unsigned y, unsigned mod) {\n    unsigned ret = 1, self = x;\n    while (y\
+    \ != 0) {\n        if (y & 1) {\n            ret = (unsigned)((unsigned long long)ret\
+    \ * self % mod);\n        }\n        self = (unsigned)((unsigned long long)self\
     \ * self % mod);\n        y /= 2;\n    }\n    return ret;\n}\n\ntemplate <unsigned\
     \ mod>\nconstexpr unsigned primitive_root() {\n    static_assert(is_prime(mod),\
     \ \"`mod` must be a prime number.\");\n    if (mod == 2) {\n        return 1;\n\
@@ -322,170 +218,86 @@ data:
     \ roots;\n    std::reverse(a + 1, a + n);\n    fft(a, n);\n    M c = roots.inv2[__builtin_ctz(n)];\n\
     \    for (int i = 0; i < n; ++i) {\n        a[i] *= c;\n    }\n}\ntemplate <typename\
     \ M>\nvoid transposed_ifft(std::vector<M> &a) {\n    transposed_ifft(a.data(),\
-    \ (int)a.size());\n}\n"
-  code: "#pragma once\n#include <algorithm>\n#include <array>\n#include <vector>\n\
-    #include \"../number_theory/mod_int.hpp\"\n\nconstexpr int ctz_constexpr(unsigned\
-    \ n) {\n    int x = 0;\n    while (!(n & (1u << x))) {\n        ++x;\n    }\n\
-    \    return x;\n}\n\ntemplate <unsigned MOD>\nstruct FFTRoot {\n    static constexpr\
-    \ unsigned R = ctz_constexpr(MOD - 1);\n    std::array<ModInt<MOD>, R + 1> root,\
-    \ iroot;\n    std::array<ModInt<MOD>, R> rate2, irate2;\n    std::array<ModInt<MOD>,\
-    \ R - 1> rate3, irate3;\n    std::array<ModInt<MOD>, R + 1> inv2;\n\n    constexpr\
-    \ FFTRoot() : root{}, iroot{}, rate2{}, irate2{}, rate3{}, irate3{}, inv2{} {\n\
-    \        unsigned pr = primitive_root<MOD>();\n        root[R] = ModInt<MOD>(pr).pow(MOD\
-    \ >> R);\n        iroot[R] = root[R].inv();\n        for (int i = R - 1; i >=\
-    \ 0; --i) {\n            root[i] = root[i + 1] * root[i + 1];\n            iroot[i]\
-    \ = iroot[i + 1] * iroot[i + 1];\n        }\n        ModInt<MOD> prod(1), iprod(1);\n\
-    \        for (int i = 0; i < (int)R - 1; ++i) {\n            rate2[i] = prod *\
-    \ root[i + 2];\n            irate2[i] = iprod * iroot[i + 2];\n            prod\
-    \ *= iroot[i + 2];\n            iprod *= root[i + 2];\n        }\n        prod\
-    \ = ModInt<MOD>(1);\n        iprod = ModInt<MOD>(1);\n        for (int i = 0;\
-    \ i < (int)R - 2; ++i) {\n            rate3[i] = prod * root[i + 3];\n       \
-    \     irate3[i] = iprod * iroot[i + 3];\n            prod *= iroot[i + 3];\n \
-    \           iprod *= root[i + 3];\n        }\n        ModInt<MOD> i2 = ModInt<MOD>(2).inv();\n\
-    \        inv2[0] = ModInt<MOD>(1);\n        for (int i = 0; i < (int)R; ++i) {\n\
-    \            inv2[i + 1] = inv2[i] * i2;\n        }\n    }\n};\n\ntemplate <typename\
-    \ M>\nvoid fft(M *a, int n) {\n    using ull = unsigned long long;\n    static_assert(M::get_mod()\
-    \ < (1u << 30));\n    static constexpr FFTRoot<M::get_mod()> fftroot;\n    static\
-    \ constexpr ull CEIL = 2ULL * M::get_mod() * M::get_mod();\n    int l = __builtin_ctz(n);\n\
-    \    int ph = 0;\n    while (ph < l) {\n        if (ph + 1 == l) {\n         \
-    \   int b = 1 << ph;\n            M z = M::raw(1);\n            for (int i = 0;\
-    \ i < b; ++i) {\n                int offset = i << 1;\n                M x = a[offset];\n\
-    \                M y = a[offset + 1] * z;\n                a[offset] = x + y;\n\
-    \                a[offset + 1] = x - y;\n                z *= fftroot.rate2[__builtin_ctz(~i)];\n\
-    \            }\n            ++ph;\n        } else {\n            int bl = 1 <<\
-    \ ph;\n            int wd = 1 << (l - 2 - ph);\n            M zeta = M::raw(1);\n\
-    \            for (int i = 0; i < bl; ++i) {\n                int offset = i <<\
-    \ (l - ph);\n                M zeta2 = zeta * zeta;\n                M zeta3 =\
-    \ zeta2 * zeta;\n                for (int j = 0; j < wd; ++j) {\n            \
-    \        ull w = a[offset + j].val;\n                    ull x = (ull)a[offset\
-    \ + j + wd].val * zeta.val;\n                    ull y = (ull)a[offset + j + 2\
-    \ * wd].val * zeta2.val;\n                    ull z = (ull)a[offset + j + 3 *\
-    \ wd].val * zeta3.val;\n                    ull ix_m_iz = (CEIL + x - z) % M::get_mod()\
-    \ * fftroot.root[2].val;\n                    a[offset + j] = M(w + x + y + z);\n\
-    \                    a[offset + j + wd] = M(CEIL + w - x + y - z);\n         \
-    \           a[offset + j + 2 * wd] = M(CEIL + w - y + ix_m_iz);\n            \
-    \        a[offset + j + 3 * wd] = M(CEIL + w - y - ix_m_iz);\n               \
-    \ }\n                zeta *= fftroot.rate3[__builtin_ctz(~i)];\n            }\n\
-    \            ph += 2;\n        }\n    }\n}\n\ntemplate <typename M>\nvoid ifft(M\
-    \ *a, int n) {\n    using ull = unsigned long long;\n    static_assert(M::get_mod()\
-    \ < (1u << 30));\n    static constexpr FFTRoot<M::get_mod()> fftroot;\n    int\
-    \ l = __builtin_ctz(n);\n    int ph = l;\n    while (ph > 0) {\n        if (ph\
-    \ == 1) {\n            --ph;\n            int wd = 1 << (l - 1);\n           \
-    \ for (int i = 0; i < wd; ++i) {\n                M x = a[i];\n              \
-    \  M y = a[i + wd];\n                a[i] = x + y;\n                a[i + wd]\
-    \ = x - y;\n            }\n        } else {\n            ph -= 2;\n          \
-    \  int bl = 1 << ph;\n            int wd = 1 << (l - 2 - ph);\n            M zeta\
-    \ = M::raw(1);\n            for (int i = 0; i < bl; ++i) {\n                int\
-    \ offset = i << (l - ph);\n                M zeta2 = zeta * zeta;\n          \
-    \      M zeta3 = zeta2 * zeta;\n                for (int j = 0; j < wd; ++j) {\n\
-    \                    unsigned w = a[offset + j].val;\n                    unsigned\
-    \ x = a[offset + j + wd].val;\n                    unsigned y = a[offset + j +\
-    \ 2 * wd].val;\n                    unsigned z = a[offset + j + 3 * wd].val;\n\
-    \                    unsigned iy_m_iz = (ull)(M::get_mod() + y - z) * fftroot.root[2].val\
-    \ % M::get_mod();\n                    a[offset + j] = M(w + x + y + z);\n   \
-    \                 a[offset + j + wd] = M((ull)zeta.val * (2 * M::get_mod() + w\
-    \ - x - iy_m_iz));\n                    a[offset + j + 2 * wd] = M((ull)zeta2.val\
-    \ * (2 * M::get_mod() + w + x - y - z));\n                    a[offset + j + 3\
-    \ * wd] = M((ull)zeta3.val * (M::get_mod() + w - x + iy_m_iz));\n            \
-    \    }\n                zeta *= fftroot.irate3[__builtin_ctz(~i)];\n         \
-    \   }\n        }\n    }\n    for (int i = 0; i < n; ++i) {\n        a[i] *= fftroot.inv2[l];\n\
-    \    }\n}\n\ntemplate <typename M>\nvoid fft(std::vector<M> &a) {\n    fft(a.data(),\
-    \ (int)a.size());\n}\ntemplate <typename M>\nvoid ifft(std::vector<M> &a) {\n\
-    \    ifft(a.data(), (int)a.size());\n}\n\ntemplate <typename M>\nstd::vector<M>\
-    \ convolve_naive(const std::vector<M> &a,\n                              const\
-    \ std::vector<M> &b) {\n    int n = (int)a.size();\n    int m = (int)b.size();\n\
-    \    std::vector<M> c(n + m - 1);\n    if (n < m) {\n        for (int j = 0; j\
-    \ < m; ++j) {\n            for (int i = 0; i < n; ++i) {\n                c[i\
-    \ + j] += a[i] * b[j];\n            }\n        }\n    } else {\n        for (int\
-    \ i = 0; i < n; ++i) {\n            for (int j = 0; j < m; ++j) {\n          \
-    \      c[i + j] += a[i] * b[j];\n            }\n        }\n    }\n    return c;\n\
-    }\n\ntemplate <typename M>\nstd::vector<M> convolve_fft(std::vector<M> a, std::vector<M>\
-    \ b) {\n    int n = (int)a.size() + (int)b.size() - 1;\n    int m = 1;\n    while\
-    \ (m < n) {\n        m <<= 1;\n    }\n    bool shr = false;\n    M last;\n   \
-    \ if (n >= 3 && n == m / 2 + 1) {\n        shr = true;\n        last = a.back()\
-    \ * b.back();\n        m /= 2;\n        while ((int)a.size() > m) {\n        \
-    \    a[(int)a.size() - 1 - m] += a.back();\n            a.pop_back();\n      \
-    \  }\n        while ((int)b.size() > m) {\n            b[(int)b.size() - 1 - m]\
-    \ += b.back();\n            b.pop_back();\n        }\n    }\n    a.resize(m);\n\
-    \    b.resize(m);\n    fft(a);\n    fft(b);\n    for (int i = 0; i < m; ++i) {\n\
-    \        a[i] *= b[i];\n    }\n    ifft(a);\n    a.resize(n);\n    if (shr) {\n\
-    \        a[0] -= last;\n        a[n - 1] = last;\n    }\n    return a;\n}\n\n\
-    template <typename M>\nstd::vector<M> convolve(const std::vector<M> &a, const\
-    \ std::vector<M> &b) {\n    if (a.empty() || b.empty()) {\n        return std::vector<M>(0);\n\
-    \    }\n    if (std::min(a.size(), b.size()) <= 60) {\n        return convolve_naive(a,\
-    \ b);\n    } else {\n        return convolve_fft(a, b);\n    }\n}\n\ntemplate\
-    \ <typename M>\nstd::vector<M> convolve_square_fft(std::vector<M> a) {\n    int\
-    \ n = (int)2 * a.size() - 1;\n    int m = 1;\n    while (m < n) {\n        m <<=\
-    \ 1;\n    }\n    bool shr = false;\n    M last;\n    if (n >= 3 && n == m / 2\
-    \ + 1) {\n        shr = true;\n        last = a.back() * a.back();\n        m\
-    \ /= 2;\n        while ((int)a.size() > m) {\n            a[(int)a.size() - 1\
-    \ - m] += a.back();\n            a.pop_back();\n        }\n    }\n    a.resize(m);\n\
-    \    fft(a);\n    for (int i = 0; i < m; ++i) {\n        a[i] *= a[i];\n    }\n\
-    \    ifft(a);\n    a.resize(n);\n    if (shr) {\n        a[0] -= last;\n     \
-    \   a[n - 1] = last;\n    }\n    return a;\n}\n\ntemplate <typename M>\nstd::vector<M>\
-    \ convolve_square(const std::vector<M> &a) {\n    if (a.empty()) {\n        return\
-    \ std::vector<M>(0);\n    }\n    if ((int)a.size() <= 60) {\n        return convolve_naive(a,\
-    \ a);\n    } else {\n        return convolve_square_fft(a);\n    }\n}\n\ntemplate\
-    \ <typename M>\nvoid transposed_fft(M *a, int n) {\n    ifft(a, n);\n    std::reverse(a\
-    \ + 1, a + n);\n    M c(n);\n    for (int i = 0; i < n; ++i) {\n        a[i] *=\
-    \ c;\n    }\n}\ntemplate <typename M>\nvoid transposed_fft(std::vector<M> &a)\
-    \ {\n    transposed_fft(a.data(), (int)a.size());\n}\n\ntemplate <typename M>\n\
-    void transposed_ifft(M *a, int n) {\n    static constexpr FFTRoot<M::get_mod()>\
-    \ roots;\n    std::reverse(a + 1, a + n);\n    fft(a, n);\n    M c = roots.inv2[__builtin_ctz(n)];\n\
-    \    for (int i = 0; i < n; ++i) {\n        a[i] *= c;\n    }\n}\ntemplate <typename\
-    \ M>\nvoid transposed_ifft(std::vector<M> &a) {\n    transposed_ifft(a.data(),\
-    \ (int)a.size());\n}\n"
+    \ (int)a.size());\n}\n#line 4 \"poly/fps_inv.hpp\"\n// 10 FFT(n)\ntemplate <typename\
+    \ T>\nstd::vector<T> fps_inv(const std::vector<T> &f, int len = -1) {\n    if\
+    \ (len == -1) {\n        len = (int)f.size();\n    }\n    assert(!f.empty() &&\
+    \ f[0] != T(0) && len >= 0);\n    std::vector<T> g(1, T(1) / f[0]);\n    while\
+    \ ((int)g.size() < len) {\n        int n = (int)g.size();\n        std::vector<T>\
+    \ fft_f(2 * n), fft_g(2 * n);\n        std::copy(f.begin(), f.begin() + std::min(2\
+    \ * n, (int)f.size()),\n                  fft_f.begin());\n        std::copy(g.begin(),\
+    \ g.end(), fft_g.begin());\n        fft(fft_f);\n        fft(fft_g);\n       \
+    \ for (int i = 0; i < 2 * n; ++i) {\n            fft_f[i] *= fft_g[i];\n     \
+    \   }\n        ifft(fft_f);\n        std::fill(fft_f.begin(), fft_f.begin() +\
+    \ n, T(0));\n        fft(fft_f);\n        for (int i = 0; i < 2 * n; ++i) {\n\
+    \            fft_f[i] *= fft_g[i];\n        }\n        ifft(fft_f);\n        g.resize(2\
+    \ * n);\n        for (int i = n; i < 2 * n; ++i) {\n            g[i] = -fft_f[i];\n\
+    \        }\n    }\n    g.resize(len);\n    return g;\n}\n#line 4 \"poly/rational_sum_1.hpp\"\
+    \n\n// sum_i a[i] / (1 - b[i] x)\ntemplate <typename M>\nstd::pair<std::vector<M>,\
+    \ std::vector<M>> rational_sum_1_frac(const std::vector<M> &a, const std::vector<M>\
+    \ &b) {\n    static constexpr FFTRoot<M::get_mod()> root{};\n    assert(a.size()\
+    \ == b.size());\n    const int old = (int)a.size();\n    const int lg = (old <=\
+    \ 1 ? 0 : 32 - __builtin_clz(old - 1));\n    const int n = 1 << lg;\n    const\
+    \ int n2 = n * 2;\n    std::vector<M> c(n2), d(n2);\n    for (int i = 0; i < old;\
+    \ ++i) {\n        c[2 * i] = c[2 * i + 1] = a[i];\n        d[2 * i] = M::raw(1)\
+    \ - b[i];\n        d[2 * i + 1] = M::raw(1) + b[i];\n    }\n    std::fill(d.begin()\
+    \ + 2 * old, d.end(), M::raw(1));\n    for (int ph = 0; ph < lg; ++ph) {\n   \
+    \     const int w = 1 << (ph + 1), w2 = w * 2;\n        M omega = root.root[ph\
+    \ + 2];\n        for (int i = 0; i < n2; i += w2) {\n            const int ti\
+    \ = i + w;\n            for (int j = 0; j < w; ++j) {\n                c[ti +\
+    \ j] = c[i + j] = c[i + j] * d[ti + j] + c[ti + j] * d[i + j];\n             \
+    \   d[ti + j] = d[i + j] *= d[ti + j];\n            }\n            ifft(c.data()\
+    \ + ti, w);\n            ifft(d.data() + ti, w);\n            d[ti] = M::raw(2)\
+    \ - d[ti];\n            M pw = M::raw(1);\n            for (int j = 0; j < w;\
+    \ ++j) {\n                c[ti + j] *= pw;\n                d[ti + j] *= pw;\n\
+    \                pw *= omega;\n            }\n            fft(c.data() + ti, w);\n\
+    \            fft(d.data() + ti, w);\n        }\n    }\n    ifft(c);\n    ifft(d);\n\
+    \    c.resize(old);\n    d.resize(old + 1);\n    return std::make_pair(c, d);\n\
+    }\n\n// sum_i a[i] / (1 - b[i] x), first m terms\ntemplate <typename M>\nstd::vector<M>\
+    \ rational_sum_1(const std::vector<M> &a, const std::vector<M> &b, int m) {\n\
+    \    auto [num, den] = rational_sum_1_frac(a, b);\n    num.resize(m);\n    den\
+    \ = fps_inv(den, m);\n    std::vector<M> c = convolve(num, den);\n    c.resize(m);\n\
+    \    return c;\n}\n"
+  code: "#pragma once\n#include <utility>\n#include \"fps_inv.hpp\"\n\n// sum_i a[i]\
+    \ / (1 - b[i] x)\ntemplate <typename M>\nstd::pair<std::vector<M>, std::vector<M>>\
+    \ rational_sum_1_frac(const std::vector<M> &a, const std::vector<M> &b) {\n  \
+    \  static constexpr FFTRoot<M::get_mod()> root{};\n    assert(a.size() == b.size());\n\
+    \    const int old = (int)a.size();\n    const int lg = (old <= 1 ? 0 : 32 - __builtin_clz(old\
+    \ - 1));\n    const int n = 1 << lg;\n    const int n2 = n * 2;\n    std::vector<M>\
+    \ c(n2), d(n2);\n    for (int i = 0; i < old; ++i) {\n        c[2 * i] = c[2 *\
+    \ i + 1] = a[i];\n        d[2 * i] = M::raw(1) - b[i];\n        d[2 * i + 1] =\
+    \ M::raw(1) + b[i];\n    }\n    std::fill(d.begin() + 2 * old, d.end(), M::raw(1));\n\
+    \    for (int ph = 0; ph < lg; ++ph) {\n        const int w = 1 << (ph + 1), w2\
+    \ = w * 2;\n        M omega = root.root[ph + 2];\n        for (int i = 0; i <\
+    \ n2; i += w2) {\n            const int ti = i + w;\n            for (int j =\
+    \ 0; j < w; ++j) {\n                c[ti + j] = c[i + j] = c[i + j] * d[ti + j]\
+    \ + c[ti + j] * d[i + j];\n                d[ti + j] = d[i + j] *= d[ti + j];\n\
+    \            }\n            ifft(c.data() + ti, w);\n            ifft(d.data()\
+    \ + ti, w);\n            d[ti] = M::raw(2) - d[ti];\n            M pw = M::raw(1);\n\
+    \            for (int j = 0; j < w; ++j) {\n                c[ti + j] *= pw;\n\
+    \                d[ti + j] *= pw;\n                pw *= omega;\n            }\n\
+    \            fft(c.data() + ti, w);\n            fft(d.data() + ti, w);\n    \
+    \    }\n    }\n    ifft(c);\n    ifft(d);\n    c.resize(old);\n    d.resize(old\
+    \ + 1);\n    return std::make_pair(c, d);\n}\n\n// sum_i a[i] / (1 - b[i] x),\
+    \ first m terms\ntemplate <typename M>\nstd::vector<M> rational_sum_1(const std::vector<M>\
+    \ &a, const std::vector<M> &b, int m) {\n    auto [num, den] = rational_sum_1_frac(a,\
+    \ b);\n    num.resize(m);\n    den = fps_inv(den, m);\n    std::vector<M> c =\
+    \ convolve(num, den);\n    c.resize(m);\n    return c;\n}\n"
   dependsOn:
+  - poly/fps_inv.hpp
+  - poly/fft.hpp
   - number_theory/mod_int.hpp
   - number_theory/utils.hpp
   isVerificationFile: false
-  path: poly/fft.hpp
-  requiredBy:
-  - graph/frequency_table_of_tree_distance.hpp
-  - convolution/index_difference.hpp
-  - convolution/mul_mod_p_conv.hpp
-  - poly/power_projection.hpp
-  - poly/stirling2.hpp
-  - poly/multieval.hpp
-  - poly/middle_product.hpp
-  - poly/taylor_shift.hpp
-  - poly/fps_pow.hpp
-  - poly/polynomial_interpolation_geometric.hpp
-  - poly/fps_inv.hpp
-  - poly/rational_sum_1.hpp
-  - poly/multieval_geometric.hpp
-  - poly/composition.hpp
-  - poly/fps_log.hpp
-  - poly/compositional_inverse.hpp
-  - poly/stirling1.hpp
-  - poly/fps_exp.hpp
-  - poly/fps_div_at.hpp
-  timestamp: '2026-03-31 19:28:56+09:00'
+  path: poly/rational_sum_1.hpp
+  requiredBy: []
+  timestamp: '2026-03-31 20:25:45+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - graph/test/frequency_table_of_tree_distance.test.cpp
-  - convolution/test/index_difference.test.cpp
-  - convolution/test/mul_modp_convolution.test.cpp
-  - poly/test/multipoint_evaluation_on_geometric_sequence.test.cpp
-  - poly/test/polynomial_taylor_shift.test.cpp
-  - poly/test/compositional_inverse_of_formal_power_series_large.test.cpp
-  - poly/test/inv_of_formal_power_series.test.cpp
-  - poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - poly/test/multipoint_evaluation.test.cpp
-  - poly/test/composition_of_formal_power_series_large.test.cpp
-  - poly/test/prod_of_polys.test.cpp
-  - poly/test/pow_of_formal_power_series.test.cpp
-  - poly/test/convolution_mod.test.cpp
   - poly/test/yuki_1145.test.cpp
-  - poly/test/log_of_formal_power_series.test.cpp
-  - poly/test/exp_of_formal_power_series.test.cpp
-  - poly/test/stirling_number_of_the_first_kind.test.cpp
-  - poly/test/polynomial_interpolation_on_geometric_sequence.test.cpp
-  - poly/test/stirling_number_of_the_second_kind.test.cpp
-documentation_of: poly/fft.hpp
+documentation_of: poly/rational_sum_1.hpp
 layout: document
 redirect_from:
-- /library/poly/fft.hpp
-- /library/poly/fft.hpp.html
-title: poly/fft.hpp
+- /library/poly/rational_sum_1.hpp
+- /library/poly/rational_sum_1.hpp.html
+title: poly/rational_sum_1.hpp
 ---

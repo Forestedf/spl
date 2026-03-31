@@ -122,7 +122,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/block_cut_tree.hpp
       title: graph/block_cut_tree.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: graph/centroid_decomposition.hpp
       title: graph/centroid_decomposition.hpp
     - icon: ':heavy_check_mark:'
@@ -143,10 +143,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/eulerian_trail.hpp
       title: graph/eulerian_trail.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: graph/frequency_table_of_tree_distance.hpp
       title: graph/frequency_table_of_tree_distance.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: graph/graph.hpp
       title: graph/graph.hpp
     - icon: ':heavy_check_mark:'
@@ -169,7 +169,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: number_theory/binary_gcd.hpp
       title: number_theory/binary_gcd.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: number_theory/factorial.hpp
       title: number_theory/factorial.hpp
     - icon: ':heavy_check_mark:'
@@ -181,7 +181,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: number_theory/frac_binsearch.hpp
       title: number_theory/frac_binsearch.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: number_theory/mod_int.hpp
       title: number_theory/mod_int.hpp
     - icon: ':heavy_check_mark:'
@@ -193,7 +193,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: number_theory/primitive_root.hpp
       title: number_theory/primitive_root.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: number_theory/utils.hpp
       title: number_theory/utils.hpp
   - name: opt
@@ -220,13 +220,13 @@ data:
       title: other/rational.hpp
   - name: poly
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: poly/composition.hpp
       title: poly/composition.hpp
     - icon: ':heavy_check_mark:'
       path: poly/compositional_inverse.hpp
       title: poly/compositional_inverse.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: poly/fft.hpp
       title: poly/fft.hpp
     - icon: ':heavy_check_mark:'
@@ -274,13 +274,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: poly/power_projection.hpp
       title: poly/power_projection.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: poly/stirling1.hpp
       title: poly/stirling1.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: poly/stirling2.hpp
       title: poly/stirling2.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: poly/taylor_shift.hpp
       title: poly/taylor_shift.hpp
   - name: string
@@ -302,13 +302,13 @@ data:
     - icon: ':warning:'
       path: template/debug.hpp
       title: template/debug.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/fastio.hpp
       title: template/fastio.hpp
     - icon: ':heavy_check_mark:'
       path: template/random.hpp
       title: template/random.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/template.hpp
       title: template/template.hpp
   verificationCategories:
@@ -439,7 +439,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/test/eulerian_trail_undirected.test.cpp
       title: graph/test/eulerian_trail_undirected.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: graph/test/frequency_table_of_tree_distance.test.cpp
       title: graph/test/frequency_table_of_tree_distance.test.cpp
     - icon: ':heavy_check_mark:'
@@ -502,13 +502,13 @@ data:
       title: opt/test/yuki_119.test.cpp
   - name: poly/test
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: poly/test/composition_of_formal_power_series_large.test.cpp
       title: poly/test/composition_of_formal_power_series_large.test.cpp
     - icon: ':heavy_check_mark:'
       path: poly/test/compositional_inverse_of_formal_power_series_large.test.cpp
       title: poly/test/compositional_inverse_of_formal_power_series_large.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: poly/test/convolution_mod.test.cpp
       title: poly/test/convolution_mod.test.cpp
     - icon: ':heavy_check_mark:'
@@ -544,7 +544,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: poly/test/polynomial_interpolation_on_geometric_sequence.test.cpp
       title: poly/test/polynomial_interpolation_on_geometric_sequence.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: poly/test/polynomial_taylor_shift.test.cpp
       title: poly/test/polynomial_taylor_shift.test.cpp
     - icon: ':heavy_check_mark:'
@@ -553,13 +553,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: poly/test/pow_of_formal_power_series_sparse.test.cpp
       title: poly/test/pow_of_formal_power_series_sparse.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: poly/test/prod_of_polys.test.cpp
       title: poly/test/prod_of_polys.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: poly/test/stirling_number_of_the_first_kind.test.cpp
       title: poly/test/stirling_number_of_the_first_kind.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: poly/test/stirling_number_of_the_second_kind.test.cpp
       title: poly/test/stirling_number_of_the_second_kind.test.cpp
   - name: string/test

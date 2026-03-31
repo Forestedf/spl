@@ -57,7 +57,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: number_theory/test/sum_of_floor_of_linear.test.cpp
     title: number_theory/test/sum_of_floor_of_linear.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: poly/test/composition_of_formal_power_series_large.test.cpp
     title: poly/test/composition_of_formal_power_series_large.test.cpp
   - icon: ':heavy_check_mark:'
@@ -102,12 +102,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: poly/test/pow_of_formal_power_series_sparse.test.cpp
     title: poly/test/pow_of_formal_power_series_sparse.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: poly/test/prod_of_polys.test.cpp
     title: poly/test/prod_of_polys.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 1 \"template/fastio.hpp\"\n#include <cstdio>\n#include <cstring>\n\
@@ -296,7 +296,7 @@ data:
   path: template/fastio.hpp
   requiredBy: []
   timestamp: '2025-09-14 09:21:44+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - number_theory/test/factorize.test.cpp
   - number_theory/test/sum_of_floor_of_linear.test.cpp

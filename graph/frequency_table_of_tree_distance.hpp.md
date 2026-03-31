@@ -1,29 +1,29 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/centroid_decomposition.hpp
     title: graph/centroid_decomposition.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph/graph.hpp
     title: graph/graph.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: number_theory/mod_int.hpp
     title: number_theory/mod_int.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: number_theory/utils.hpp
     title: number_theory/utils.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: poly/fft.hpp
     title: poly/fft.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/test/frequency_table_of_tree_distance.test.cpp
     title: graph/test/frequency_table_of_tree_distance.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"graph/graph.hpp\"\n#include <iostream>\n#include <cassert>\n\
@@ -83,13 +83,13 @@ data:
     \    }\n    \n    int first_centroid() const {\n        return first;\n    }\n\
     \    typename Graph<int, true>::ConstAdjacency operator[](int v) const {\n   \
     \     return to[v];\n    }\n    const Graph<int, true> &get_tree() const {\n \
-    \       return to;\n    }\n};\n#line 2 \"poly/fft.hpp\"\n#include <array>\n#line\
-    \ 2 \"number_theory/mod_int.hpp\"\n\n#line 5 \"number_theory/mod_int.hpp\"\n#include\
-    \ <type_traits>\n#line 2 \"number_theory/utils.hpp\"\n\n#include <utility>\n\n\
-    constexpr bool is_prime(unsigned n) {\n    if (n == 0 || n == 1) {\n        return\
-    \ false;\n    }\n    for (unsigned i = 2; i * i <= n; ++i) {\n        if (n %\
-    \ i == 0) {\n            return false;\n        }\n    }\n    return true;\n}\n\
-    \nconstexpr unsigned mod_pow(unsigned x, unsigned y, unsigned mod) {\n    unsigned\
+    \       return to;\n    }\n};\n#line 2 \"poly/fft.hpp\"\n#include <algorithm>\n\
+    #include <array>\n#line 2 \"number_theory/mod_int.hpp\"\n\n#line 5 \"number_theory/mod_int.hpp\"\
+    \n#include <type_traits>\n#line 2 \"number_theory/utils.hpp\"\n\n#include <utility>\n\
+    \nconstexpr bool is_prime(unsigned n) {\n    if (n == 0 || n == 1) {\n       \
+    \ return false;\n    }\n    for (unsigned i = 2; i * i <= n; ++i) {\n        if\
+    \ (n % i == 0) {\n            return false;\n        }\n    }\n    return true;\n\
+    }\n\nconstexpr unsigned mod_pow(unsigned x, unsigned y, unsigned mod) {\n    unsigned\
     \ ret = 1, self = x;\n    while (y != 0) {\n        if (y & 1) {\n           \
     \ ret = (unsigned)((unsigned long long)ret * self % mod);\n        }\n       \
     \ self = (unsigned)((unsigned long long)self * self % mod);\n        y /= 2;\n\
@@ -167,7 +167,7 @@ data:
     \ ModInt &lhs, const ModInt &rhs) {\n        return lhs.val == rhs.val;\n    }\n\
     \n    friend bool operator!=(const ModInt &lhs, const ModInt &rhs) {\n       \
     \ return lhs.val != rhs.val;\n    }\n};\n\ntemplate <unsigned mod>\nvoid debug(ModInt<mod>\
-    \ x) {\n    std::cerr << x.val;\n}\n#line 5 \"poly/fft.hpp\"\n\nconstexpr int\
+    \ x) {\n    std::cerr << x.val;\n}\n#line 6 \"poly/fft.hpp\"\n\nconstexpr int\
     \ ctz_constexpr(unsigned n) {\n    int x = 0;\n    while (!(n & (1u << x))) {\n\
     \        ++x;\n    }\n    return x;\n}\n\ntemplate <unsigned MOD>\nstruct FFTRoot\
     \ {\n    static constexpr unsigned R = ctz_constexpr(MOD - 1);\n    std::array<ModInt<MOD>,\
@@ -350,8 +350,8 @@ data:
   isVerificationFile: false
   path: graph/frequency_table_of_tree_distance.hpp
   requiredBy: []
-  timestamp: '2026-03-31 19:03:53+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2026-03-31 19:28:56+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - graph/test/frequency_table_of_tree_distance.test.cpp
 documentation_of: graph/frequency_table_of_tree_distance.hpp

@@ -1,35 +1,35 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: number_theory/factorial.hpp
     title: number_theory/factorial.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: number_theory/mod_int.hpp
     title: number_theory/mod_int.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: number_theory/utils.hpp
     title: number_theory/utils.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: poly/composition.hpp
     title: poly/composition.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: poly/fft.hpp
     title: poly/fft.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: poly/taylor_shift.hpp
     title: poly/taylor_shift.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/fastio.hpp
     title: template/fastio.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/template.hpp
     title: template/template.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/composition_of_formal_power_series_large
@@ -55,15 +55,15 @@ data:
     \ <typename M>\nM n_terms_sum_k(int n, int k) {\n    assert(0 <= n && 0 <= k);\n\
     \    if (n == 0) {\n        return (k == 0 ? M::raw(1) : M::raw(0));\n    }\n\
     \    return binom<M>(n + k - 1, n - 1);\n}\n#line 2 \"poly/fft.hpp\"\n#include\
-    \ <array>\n#line 2 \"number_theory/mod_int.hpp\"\n\n#line 4 \"number_theory/mod_int.hpp\"\
-    \n#include <iostream>\n#include <type_traits>\n#line 2 \"number_theory/utils.hpp\"\
-    \n\n#include <utility>\n\nconstexpr bool is_prime(unsigned n) {\n    if (n ==\
-    \ 0 || n == 1) {\n        return false;\n    }\n    for (unsigned i = 2; i * i\
-    \ <= n; ++i) {\n        if (n % i == 0) {\n            return false;\n       \
-    \ }\n    }\n    return true;\n}\n\nconstexpr unsigned mod_pow(unsigned x, unsigned\
-    \ y, unsigned mod) {\n    unsigned ret = 1, self = x;\n    while (y != 0) {\n\
-    \        if (y & 1) {\n            ret = (unsigned)((unsigned long long)ret *\
-    \ self % mod);\n        }\n        self = (unsigned)((unsigned long long)self\
+    \ <algorithm>\n#include <array>\n#line 2 \"number_theory/mod_int.hpp\"\n\n#line\
+    \ 4 \"number_theory/mod_int.hpp\"\n#include <iostream>\n#include <type_traits>\n\
+    #line 2 \"number_theory/utils.hpp\"\n\n#include <utility>\n\nconstexpr bool is_prime(unsigned\
+    \ n) {\n    if (n == 0 || n == 1) {\n        return false;\n    }\n    for (unsigned\
+    \ i = 2; i * i <= n; ++i) {\n        if (n % i == 0) {\n            return false;\n\
+    \        }\n    }\n    return true;\n}\n\nconstexpr unsigned mod_pow(unsigned\
+    \ x, unsigned y, unsigned mod) {\n    unsigned ret = 1, self = x;\n    while (y\
+    \ != 0) {\n        if (y & 1) {\n            ret = (unsigned)((unsigned long long)ret\
+    \ * self % mod);\n        }\n        self = (unsigned)((unsigned long long)self\
     \ * self % mod);\n        y /= 2;\n    }\n    return ret;\n}\n\ntemplate <unsigned\
     \ mod>\nconstexpr unsigned primitive_root() {\n    static_assert(is_prime(mod),\
     \ \"`mod` must be a prime number.\");\n    if (mod == 2) {\n        return 1;\n\
@@ -138,7 +138,7 @@ data:
     \ ModInt &lhs, const ModInt &rhs) {\n        return lhs.val == rhs.val;\n    }\n\
     \n    friend bool operator!=(const ModInt &lhs, const ModInt &rhs) {\n       \
     \ return lhs.val != rhs.val;\n    }\n};\n\ntemplate <unsigned mod>\nvoid debug(ModInt<mod>\
-    \ x) {\n    std::cerr << x.val;\n}\n#line 5 \"poly/fft.hpp\"\n\nconstexpr int\
+    \ x) {\n    std::cerr << x.val;\n}\n#line 6 \"poly/fft.hpp\"\n\nconstexpr int\
     \ ctz_constexpr(unsigned n) {\n    int x = 0;\n    while (!(n & (1u << x))) {\n\
     \        ++x;\n    }\n    return x;\n}\n\ntemplate <unsigned MOD>\nstruct FFTRoot\
     \ {\n    static constexpr unsigned R = ctz_constexpr(MOD - 1);\n    std::array<ModInt<MOD>,\
@@ -248,33 +248,32 @@ data:
     \ roots;\n    std::reverse(a + 1, a + n);\n    fft(a, n);\n    M c = roots.inv2[__builtin_ctz(n)];\n\
     \    for (int i = 0; i < n; ++i) {\n        a[i] *= c;\n    }\n}\ntemplate <typename\
     \ M>\nvoid transposed_ifft(std::vector<M> &a) {\n    transposed_ifft(a.data(),\
-    \ (int)a.size());\n}\n#line 4 \"poly/taylor_shift.hpp\"\n#include <algorithm>\n\
-    // f(x) -> f(x+c)\ntemplate <typename M>\nstd::vector<M> taylor_shift(std::vector<M>\
-    \ f, M c) {\n    for (int i = 0; i < (int)f.size(); ++i) {\n        f[i] *= fact<M>(i);\n\
-    \    }\n    std::reverse(f.begin(), f.end());\n    M cp(1);\n    std::vector<M>\
-    \ g(f.size());\n    for (int i = 0; i < (int)f.size(); ++i) {\n        g[i] =\
-    \ cp * inv_fact<M>(i);\n        cp *= c;\n    }\n    std::vector<M> h = convolve(f,\
-    \ g);\n    h.resize(f.size());\n    std::reverse(h.begin(), h.end());\n    for\
-    \ (int i = 0; i < (int)f.size(); ++i) {\n        h[i] *= inv_fact<M>(i);\n   \
-    \ }\n    return h;\n}\n#line 5 \"poly/composition.hpp\"\n\ntemplate <typename\
-    \ M>\nstd::vector<M> transposed_power_projection(int n, const std::vector<M> &f,\
-    \ const std::vector<M> &g) {\n    static constexpr FFTRoot<M::get_mod()> roots;\n\
-    \    static constexpr M INV2 = M(2).inv();\n    int lg = __builtin_ctz(n);\n \
-    \   std::vector<int> btr(n, 0);\n    for (int i = 1; i < n; ++i) {\n        btr[i]\
-    \ = (btr[i >> 1] >> 1) | ((i & 1) << (lg - 1));\n    }\n    M omega = roots.iroot[lg\
-    \ + 1];\n    M pw(1);\n    std::vector<M> invs(n);\n    for (int idx : btr) {\n\
-    \        invs[idx] = pw;\n        pw *= omega;\n    }\n    std::vector<M> p =\
-    \ g;\n    std::reverse(p.begin(), p.end());\n    transposed_ifft(p);\n    p.resize(2\
-    \ * n);\n    std::vector<M> q(2 * n);\n    for (int i = 0; i < n; ++i) {\n   \
-    \     q[2 * i] = -f[i];\n    }\n    q[0] += M(1);\n    auto rec = [&](auto rec,\
-    \ int h, int w) -> void {\n        if (h == 1) {\n            return;\n      \
-    \  }\n        M omega = roots.root[__builtin_ctz(w) + 1];\n        for (int i\
-    \ = 0; i < 2 * n; i += 2 * w) {\n            std::copy(q.begin() + i, q.begin()\
-    \ + i + w, q.begin() + i + w);\n            ifft(q.data() + i + w, w);\n     \
-    \       if (i == 0) {\n                q[i + w] -= M(2);\n            }\n    \
-    \        M pw(1);\n            for (int j = i + w; j < i + 2 * w; ++j) {\n   \
-    \             q[j] *= pw;\n                pw *= omega;\n            }\n     \
-    \       fft(q.data() + i + w, w);\n        }\n        std::vector<std::vector<M>>\
+    \ (int)a.size());\n}\n#line 5 \"poly/taylor_shift.hpp\"\n// f(x) -> f(x+c)\ntemplate\
+    \ <typename M>\nstd::vector<M> taylor_shift(std::vector<M> f, M c) {\n    for\
+    \ (int i = 0; i < (int)f.size(); ++i) {\n        f[i] *= fact<M>(i);\n    }\n\
+    \    std::reverse(f.begin(), f.end());\n    M cp(1);\n    std::vector<M> g(f.size());\n\
+    \    for (int i = 0; i < (int)f.size(); ++i) {\n        g[i] = cp * inv_fact<M>(i);\n\
+    \        cp *= c;\n    }\n    std::vector<M> h = convolve(f, g);\n    h.resize(f.size());\n\
+    \    std::reverse(h.begin(), h.end());\n    for (int i = 0; i < (int)f.size();\
+    \ ++i) {\n        h[i] *= inv_fact<M>(i);\n    }\n    return h;\n}\n#line 5 \"\
+    poly/composition.hpp\"\n\ntemplate <typename M>\nstd::vector<M> transposed_power_projection(int\
+    \ n, const std::vector<M> &f, const std::vector<M> &g) {\n    static constexpr\
+    \ FFTRoot<M::get_mod()> roots;\n    static constexpr M INV2 = M(2).inv();\n  \
+    \  int lg = __builtin_ctz(n);\n    std::vector<int> btr(n, 0);\n    for (int i\
+    \ = 1; i < n; ++i) {\n        btr[i] = (btr[i >> 1] >> 1) | ((i & 1) << (lg -\
+    \ 1));\n    }\n    M omega = roots.iroot[lg + 1];\n    M pw(1);\n    std::vector<M>\
+    \ invs(n);\n    for (int idx : btr) {\n        invs[idx] = pw;\n        pw *=\
+    \ omega;\n    }\n    std::vector<M> p = g;\n    std::reverse(p.begin(), p.end());\n\
+    \    transposed_ifft(p);\n    p.resize(2 * n);\n    std::vector<M> q(2 * n);\n\
+    \    for (int i = 0; i < n; ++i) {\n        q[2 * i] = -f[i];\n    }\n    q[0]\
+    \ += M(1);\n    auto rec = [&](auto rec, int h, int w) -> void {\n        if (h\
+    \ == 1) {\n            return;\n        }\n        M omega = roots.root[__builtin_ctz(w)\
+    \ + 1];\n        for (int i = 0; i < 2 * n; i += 2 * w) {\n            std::copy(q.begin()\
+    \ + i, q.begin() + i + w, q.begin() + i + w);\n            ifft(q.data() + i +\
+    \ w, w);\n            if (i == 0) {\n                q[i + w] -= M(2);\n     \
+    \       }\n            M pw(1);\n            for (int j = i + w; j < i + 2 * w;\
+    \ ++j) {\n                q[j] *= pw;\n                pw *= omega;\n        \
+    \    }\n            fft(q.data() + i + w, w);\n        }\n        std::vector<std::vector<M>>\
     \ rq(2 * w, std::vector<M>(2 * h));\n        std::vector<M> wq(h);\n        for\
     \ (int j = 0; j < 2 * w; ++j) {\n            for (int i = 0; i < h; ++i) {\n \
     \               rq[j][i] = q[2 * w * i + j];\n            }\n            fft(rq[j]);\n\
@@ -463,8 +462,8 @@ data:
   isVerificationFile: true
   path: poly/test/composition_of_formal_power_series_large.test.cpp
   requiredBy: []
-  timestamp: '2026-03-31 19:03:53+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2026-03-31 19:28:56+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: poly/test/composition_of_formal_power_series_large.test.cpp
 layout: document

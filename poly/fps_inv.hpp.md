@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: number_theory/mod_int.hpp
     title: number_theory/mod_int.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: number_theory/utils.hpp
     title: number_theory/utils.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: poly/fft.hpp
     title: poly/fft.hpp
   _extendedRequiredBy:
@@ -50,7 +50,7 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"poly/fps_inv.hpp\"\n#include <algorithm>\n#line 2 \"poly/fft.hpp\"\
+  bundledCode: "#line 2 \"poly/fps_inv.hpp\"\n#include <algorithm>\n#line 3 \"poly/fft.hpp\"\
     \n#include <array>\n#include <vector>\n#line 2 \"number_theory/mod_int.hpp\"\n\
     \n#include <cassert>\n#include <iostream>\n#include <type_traits>\n#line 2 \"\
     number_theory/utils.hpp\"\n\n#include <utility>\n\nconstexpr bool is_prime(unsigned\
@@ -134,7 +134,7 @@ data:
     \ ModInt &lhs, const ModInt &rhs) {\n        return lhs.val == rhs.val;\n    }\n\
     \n    friend bool operator!=(const ModInt &lhs, const ModInt &rhs) {\n       \
     \ return lhs.val != rhs.val;\n    }\n};\n\ntemplate <unsigned mod>\nvoid debug(ModInt<mod>\
-    \ x) {\n    std::cerr << x.val;\n}\n#line 5 \"poly/fft.hpp\"\n\nconstexpr int\
+    \ x) {\n    std::cerr << x.val;\n}\n#line 6 \"poly/fft.hpp\"\n\nconstexpr int\
     \ ctz_constexpr(unsigned n) {\n    int x = 0;\n    while (!(n & (1u << x))) {\n\
     \        ++x;\n    }\n    return x;\n}\n\ntemplate <unsigned MOD>\nstruct FFTRoot\
     \ {\n    static constexpr unsigned R = ctz_constexpr(MOD - 1);\n    std::array<ModInt<MOD>,\
@@ -284,7 +284,7 @@ data:
   - poly/fps_log.hpp
   - poly/compositional_inverse.hpp
   - poly/fps_div_at.hpp
-  timestamp: '2026-03-31 19:03:53+09:00'
+  timestamp: '2026-03-31 19:28:56+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - poly/test/compositional_inverse_of_formal_power_series_large.test.cpp

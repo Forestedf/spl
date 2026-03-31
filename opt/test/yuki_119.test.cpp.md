@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: opt/monge_min_cut.hpp
     title: opt/monge_min_cut.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/template.hpp
     title: template/template.hpp
   _extendedRequiredBy: []

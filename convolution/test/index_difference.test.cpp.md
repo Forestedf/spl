@@ -4,19 +4,19 @@ data:
   - icon: ':heavy_check_mark:'
     path: convolution/index_difference.hpp
     title: convolution/index_difference.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: number_theory/mod_int.hpp
     title: number_theory/mod_int.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: number_theory/utils.hpp
     title: number_theory/utils.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: poly/fft.hpp
     title: poly/fft.hpp
   - icon: ':heavy_check_mark:'
     path: template/random.hpp
     title: template/random.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/template.hpp
     title: template/template.hpp
   _extendedRequiredBy: []
@@ -32,7 +32,7 @@ data:
   bundledCode: "#line 1 \"convolution/test/index_difference.test.cpp\"\n#define PROBLEM\
     \ \"https://onlinejudge.u-aizu.ac.jp/courses/lesson/2/ITP1/1/ITP1_1_A\"\n#define\
     \ FAST_IO\n#define FIX_SEED\n\n#line 2 \"convolution/index_difference.hpp\"\n\
-    #include <algorithm>\n#line 2 \"poly/fft.hpp\"\n#include <array>\n#include <vector>\n\
+    #include <algorithm>\n#line 3 \"poly/fft.hpp\"\n#include <array>\n#include <vector>\n\
     #line 2 \"number_theory/mod_int.hpp\"\n\n#include <cassert>\n#include <iostream>\n\
     #include <type_traits>\n#line 2 \"number_theory/utils.hpp\"\n\n#include <utility>\n\
     \nconstexpr bool is_prime(unsigned n) {\n    if (n == 0 || n == 1) {\n       \
@@ -116,7 +116,7 @@ data:
     \ ModInt &lhs, const ModInt &rhs) {\n        return lhs.val == rhs.val;\n    }\n\
     \n    friend bool operator!=(const ModInt &lhs, const ModInt &rhs) {\n       \
     \ return lhs.val != rhs.val;\n    }\n};\n\ntemplate <unsigned mod>\nvoid debug(ModInt<mod>\
-    \ x) {\n    std::cerr << x.val;\n}\n#line 5 \"poly/fft.hpp\"\n\nconstexpr int\
+    \ x) {\n    std::cerr << x.val;\n}\n#line 6 \"poly/fft.hpp\"\n\nconstexpr int\
     \ ctz_constexpr(unsigned n) {\n    int x = 0;\n    while (!(n & (1u << x))) {\n\
     \        ++x;\n    }\n    return x;\n}\n\ntemplate <unsigned MOD>\nstruct FFTRoot\
     \ {\n    static constexpr unsigned R = ctz_constexpr(MOD - 1);\n    std::array<ModInt<MOD>,\
@@ -345,7 +345,7 @@ data:
   isVerificationFile: true
   path: convolution/test/index_difference.test.cpp
   requiredBy: []
-  timestamp: '2026-03-31 19:03:53+09:00'
+  timestamp: '2026-03-31 19:28:56+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: convolution/test/index_difference.test.cpp

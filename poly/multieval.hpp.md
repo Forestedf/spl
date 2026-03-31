@@ -13,6 +13,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: poly/fps_inv.hpp
     title: poly/fps_inv.hpp
+  - icon: ':heavy_check_mark:'
+    path: poly/middle_product.hpp
+    title: poly/middle_product.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
@@ -230,61 +233,85 @@ data:
     \ n, T(0));\n        fft(fft_f);\n        for (int i = 0; i < 2 * n; ++i) {\n\
     \            fft_f[i] *= fft_g[i];\n        }\n        ifft(fft_f);\n        g.resize(2\
     \ * n);\n        for (int i = n; i < 2 * n; ++i) {\n            g[i] = -fft_f[i];\n\
-    \        }\n    }\n    g.resize(len);\n    return g;\n}\n#line 3 \"poly/multieval.hpp\"\
-    \n\ntemplate <typename M>\nstd::vector<M> multieval(std::vector<M> f, const std::vector<M>\
-    \ &p) {\n    int n = (int)f.size();\n    int m = (int)p.size();\n\n    if (n ==\
-    \ 0) {\n        return std::vector<M>(m);\n    }\n    if (m == 0) {\n        return\
-    \ std::vector<M>();\n    }\n\n    int l = 1;\n    int k = 0;\n    while (l < m)\
-    \ {\n        l *= 2;\n        ++k;\n    }\n\n    std::vector<std::vector<M>> prod(2\
-    \ * l);\n    for (int i = 0; i < m; ++i) {\n        prod[l + i] = std::vector<M>({-p[i],\
-    \ M(1)});\n    }\n    for (int i = m; i < l; ++i) {\n        prod[l + i] = std::vector<M>({M(1)});\n\
-    \    }\n    for (int i = l - 1; i >= 1; --i) {\n        prod[i] = convolve(prod[2\
-    \ * i], prod[2 * i + 1]);\n    }\n\n    std::vector<M> pr = prod[1];\n    std::reverse(pr.begin(),\
-    \ pr.end());\n    pr = fps_inv(pr, n);\n    std::reverse(f.begin(), f.end());\n\
-    \    pr = convolve(f, pr);\n    pr.resize(n);\n    std::reverse(pr.begin(), pr.end());\n\
-    \    pr.resize(m, M());\n\n    std::vector<std::vector<M>> fs(2 * l);\n    fs[1]\
-    \ = pr;\n    for (int i = 1; i < l; ++i) {\n        if (prod[i].size() == 1) {\n\
-    \            continue;\n        }\n        int lc = (int)prod[2 * i].size() -\
-    \ 1;\n        int rc = (int)prod[2 * i + 1].size() - 1;\n        assert((int)fs[i].size()\
-    \ == lc + rc);\n        fs[2 * i] = convolve(fs[i], prod[2 * i + 1]);\n      \
-    \  fs[2 * i] =\n            std::vector(fs[2 * i].begin() + rc, fs[2 * i].begin()\
-    \ + (lc + rc));\n        fs[2 * i + 1] = convolve(fs[i], prod[2 * i]);\n     \
-    \   fs[2 * i + 1] = std::vector(fs[2 * i + 1].begin() + lc,\n                \
-    \                    fs[2 * i + 1].begin() + (lc + rc));\n    }\n\n    std::vector<M>\
-    \ ans(m);\n    for (int i = 0; i < m; ++i) {\n        ans[i] = fs[l + i][0];\n\
-    \    }\n    return ans;\n}\n"
-  code: "#pragma once\n#include \"fps_inv.hpp\"\n\ntemplate <typename M>\nstd::vector<M>\
-    \ multieval(std::vector<M> f, const std::vector<M> &p) {\n    int n = (int)f.size();\n\
-    \    int m = (int)p.size();\n\n    if (n == 0) {\n        return std::vector<M>(m);\n\
-    \    }\n    if (m == 0) {\n        return std::vector<M>();\n    }\n\n    int\
-    \ l = 1;\n    int k = 0;\n    while (l < m) {\n        l *= 2;\n        ++k;\n\
-    \    }\n\n    std::vector<std::vector<M>> prod(2 * l);\n    for (int i = 0; i\
-    \ < m; ++i) {\n        prod[l + i] = std::vector<M>({-p[i], M(1)});\n    }\n \
-    \   for (int i = m; i < l; ++i) {\n        prod[l + i] = std::vector<M>({M(1)});\n\
-    \    }\n    for (int i = l - 1; i >= 1; --i) {\n        prod[i] = convolve(prod[2\
-    \ * i], prod[2 * i + 1]);\n    }\n\n    std::vector<M> pr = prod[1];\n    std::reverse(pr.begin(),\
-    \ pr.end());\n    pr = fps_inv(pr, n);\n    std::reverse(f.begin(), f.end());\n\
-    \    pr = convolve(f, pr);\n    pr.resize(n);\n    std::reverse(pr.begin(), pr.end());\n\
-    \    pr.resize(m, M());\n\n    std::vector<std::vector<M>> fs(2 * l);\n    fs[1]\
-    \ = pr;\n    for (int i = 1; i < l; ++i) {\n        if (prod[i].size() == 1) {\n\
-    \            continue;\n        }\n        int lc = (int)prod[2 * i].size() -\
-    \ 1;\n        int rc = (int)prod[2 * i + 1].size() - 1;\n        assert((int)fs[i].size()\
-    \ == lc + rc);\n        fs[2 * i] = convolve(fs[i], prod[2 * i + 1]);\n      \
-    \  fs[2 * i] =\n            std::vector(fs[2 * i].begin() + rc, fs[2 * i].begin()\
-    \ + (lc + rc));\n        fs[2 * i + 1] = convolve(fs[i], prod[2 * i]);\n     \
-    \   fs[2 * i + 1] = std::vector(fs[2 * i + 1].begin() + lc,\n                \
-    \                    fs[2 * i + 1].begin() + (lc + rc));\n    }\n\n    std::vector<M>\
-    \ ans(m);\n    for (int i = 0; i < m; ++i) {\n        ans[i] = fs[l + i][0];\n\
-    \    }\n    return ans;\n}\n"
+    \        }\n    }\n    g.resize(len);\n    return g;\n}\n#line 5 \"poly/middle_product.hpp\"\
+    \n\n// a.size() <= b.size()\ntemplate <typename M>\nstd::vector<M> middle_product(std::vector<M>\
+    \ a, std::vector<M> b) {\n    int n = (int)a.size();\n    int m = (int)b.size();\n\
+    \    assert(n <= m);\n    std::reverse(a.begin(), a.end());\n    int l = 1;\n\
+    \    while (l < m) {\n        l *= 2;\n    }\n    a.resize(l, M());\n    b.resize(l,\
+    \ M());\n    fft(a);\n    fft(b);\n    for (int i = 0; i < l; ++i) {\n       \
+    \ b[i] *= a[i];\n    }\n    ifft(b);\n    return std::vector<M>(b.begin() + (n\
+    \ - 1), b.begin() + m);\n}\n#line 4 \"poly/multieval.hpp\"\n\nint ceil_log2(int\
+    \ n) {\n    return n <= 1 ? 0 : 32 - __builtin_clz(n - 1);\n}\n\ntemplate <typename\
+    \ M>\nstd::vector<M> multieval(std::vector<M> f, const std::vector<M> &p) {\n\
+    \    static constexpr FFTRoot<M::get_mod()> root{};\n    const int m = (int)f.size();\n\
+    \    const int _n = (int)p.size();\n    const int lg = ceil_log2(_n);\n    const\
+    \ int n = 1 << lg;\n    const int n2 = n * 2;\n    std::vector<std::vector<M>>\
+    \ tree(lg + 1, std::vector<M>(n2));\n    for (int i = 0; i < _n; ++i) {\n    \
+    \    tree[0][2 * i] = M::raw(1) - p[i];\n        tree[0][2 * i + 1] = M::raw(1)\
+    \ + p[i];\n    }\n    std::fill(tree[0].begin() + 2 * _n, tree[0].end(), M::raw(1));\n\
+    \    for (int ph = 0; ph < lg; ++ph) {\n        const int w = 1 << (ph + 1), w2\
+    \ = w * 2;\n        M omega = root.root[ph + 2];\n        std::vector<M> &d =\
+    \ tree[ph + 1];\n        d = tree[ph];\n        for (int i = 0; i < n2; i += w2)\
+    \ {\n            const int ti = i + w;\n            for (int j = 0; j < w; ++j)\
+    \ {\n                d[ti + j] = d[i + j] *= d[ti + j];\n            }\n     \
+    \       ifft(d.data() + ti, w);\n            d[ti] = M::raw(2) - d[ti];\n    \
+    \        M pw(1);\n            for (int j = 0; j < w; ++j) {\n               \
+    \ d[ti + j] *= pw;\n                pw *= omega;\n            }\n            fft(d.data()\
+    \ + ti, w);\n        }\n    }\n    ifft(tree[lg]);\n    tree[lg] = fps_inv(tree[lg],\
+    \ m);\n    f.resize(2 * m - 1);\n    std::vector<M> c = middle_product(tree[lg],\
+    \ f);\n    c.resize(n2);\n    transposed_ifft(c);\n    for (int ph = lg - 1; ph\
+    \ >= 0; --ph) {\n        const int w = 1 << (ph + 1), w2 = w * 2;\n        M omega\
+    \ = root.root[ph + 2];\n        for (int i = 0; i < n2; i += w2) {\n         \
+    \   const int ti = i + w;\n            transposed_fft(c.data() + ti, w);\n   \
+    \         M pw(1);\n            for (int j = 0; j < w; ++j) {\n              \
+    \  c[ti + j] *= pw;\n                pw *= omega;\n            }\n           \
+    \ transposed_ifft(c.data() + ti, w);\n            for (int j = 0; j < w; ++j)\
+    \ {\n                M t = c[i + j] + c[ti + j];\n                c[i + j] = t\
+    \ * tree[ph][ti + j];\n                c[ti + j] = t * tree[ph][i + j];\n    \
+    \        }\n        }\n    }\n    std::vector<M> ans(_n);\n    for (int i = 0;\
+    \ i < _n; ++i) {\n        ans[i] = c[2 * i] + c[2 * i + 1];\n    }\n    return\
+    \ ans;\n}\n"
+  code: "#pragma once\n#include \"fps_inv.hpp\"\n#include \"middle_product.hpp\"\n\
+    \nint ceil_log2(int n) {\n    return n <= 1 ? 0 : 32 - __builtin_clz(n - 1);\n\
+    }\n\ntemplate <typename M>\nstd::vector<M> multieval(std::vector<M> f, const std::vector<M>\
+    \ &p) {\n    static constexpr FFTRoot<M::get_mod()> root{};\n    const int m =\
+    \ (int)f.size();\n    const int _n = (int)p.size();\n    const int lg = ceil_log2(_n);\n\
+    \    const int n = 1 << lg;\n    const int n2 = n * 2;\n    std::vector<std::vector<M>>\
+    \ tree(lg + 1, std::vector<M>(n2));\n    for (int i = 0; i < _n; ++i) {\n    \
+    \    tree[0][2 * i] = M::raw(1) - p[i];\n        tree[0][2 * i + 1] = M::raw(1)\
+    \ + p[i];\n    }\n    std::fill(tree[0].begin() + 2 * _n, tree[0].end(), M::raw(1));\n\
+    \    for (int ph = 0; ph < lg; ++ph) {\n        const int w = 1 << (ph + 1), w2\
+    \ = w * 2;\n        M omega = root.root[ph + 2];\n        std::vector<M> &d =\
+    \ tree[ph + 1];\n        d = tree[ph];\n        for (int i = 0; i < n2; i += w2)\
+    \ {\n            const int ti = i + w;\n            for (int j = 0; j < w; ++j)\
+    \ {\n                d[ti + j] = d[i + j] *= d[ti + j];\n            }\n     \
+    \       ifft(d.data() + ti, w);\n            d[ti] = M::raw(2) - d[ti];\n    \
+    \        M pw(1);\n            for (int j = 0; j < w; ++j) {\n               \
+    \ d[ti + j] *= pw;\n                pw *= omega;\n            }\n            fft(d.data()\
+    \ + ti, w);\n        }\n    }\n    ifft(tree[lg]);\n    tree[lg] = fps_inv(tree[lg],\
+    \ m);\n    f.resize(2 * m - 1);\n    std::vector<M> c = middle_product(tree[lg],\
+    \ f);\n    c.resize(n2);\n    transposed_ifft(c);\n    for (int ph = lg - 1; ph\
+    \ >= 0; --ph) {\n        const int w = 1 << (ph + 1), w2 = w * 2;\n        M omega\
+    \ = root.root[ph + 2];\n        for (int i = 0; i < n2; i += w2) {\n         \
+    \   const int ti = i + w;\n            transposed_fft(c.data() + ti, w);\n   \
+    \         M pw(1);\n            for (int j = 0; j < w; ++j) {\n              \
+    \  c[ti + j] *= pw;\n                pw *= omega;\n            }\n           \
+    \ transposed_ifft(c.data() + ti, w);\n            for (int j = 0; j < w; ++j)\
+    \ {\n                M t = c[i + j] + c[ti + j];\n                c[i + j] = t\
+    \ * tree[ph][ti + j];\n                c[ti + j] = t * tree[ph][i + j];\n    \
+    \        }\n        }\n    }\n    std::vector<M> ans(_n);\n    for (int i = 0;\
+    \ i < _n; ++i) {\n        ans[i] = c[2 * i] + c[2 * i + 1];\n    }\n    return\
+    \ ans;\n}\n"
   dependsOn:
   - poly/fps_inv.hpp
   - poly/fft.hpp
   - number_theory/mod_int.hpp
   - number_theory/utils.hpp
+  - poly/middle_product.hpp
   isVerificationFile: false
   path: poly/multieval.hpp
   requiredBy: []
-  timestamp: '2026-03-31 19:03:53+09:00'
+  timestamp: '2026-03-31 19:16:18+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - poly/test/multipoint_evaluation.test.cpp

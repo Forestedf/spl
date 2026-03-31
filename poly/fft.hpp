@@ -1,4 +1,5 @@
 #pragma once
+#include <algorithm>
 #include <array>
 #include <vector>
 #include "../number_theory/mod_int.hpp"

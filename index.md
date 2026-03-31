@@ -198,6 +198,9 @@ data:
       title: number_theory/utils.hpp
   - name: opt
     pages:
+    - icon: ':warning:'
+      path: opt/golden_search.hpp
+      title: opt/golden_search.hpp
     - icon: ':heavy_check_mark:'
       path: opt/monge_min_cut.hpp
       title: opt/monge_min_cut.hpp

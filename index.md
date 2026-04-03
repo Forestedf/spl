@@ -51,6 +51,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: data_structure/cartesian_tree.hpp
       title: data_structure/cartesian_tree.hpp
+    - icon: ':warning:'
+      path: data_structure/clamp.hpp
+      title: data_structure/clamp.hpp
     - icon: ':heavy_check_mark:'
       path: data_structure/dual_segment_tree.hpp
       title: data_structure/dual_segment_tree.hpp

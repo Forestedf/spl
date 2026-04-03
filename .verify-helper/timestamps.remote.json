@@ -48,6 +48,7 @@
 "graph/test/vertex_add_path_sum.test.cpp": "2025-06-28 10:05:47 +0900",
 "number_theory/test/ax_by_c_stress.test.cpp": "2025-06-28 10:05:47 +0900",
 "number_theory/test/binary_gcd_stress.test.cpp": "2025-06-28 10:05:47 +0900",
+"number_theory/test/dynamic_modint_stress.test.cpp": "2026-04-03 09:13:19 +0900",
 "number_theory/test/extgcd2_stress.test.cpp": "2025-06-28 10:05:47 +0900",
 "number_theory/test/factorize.test.cpp": "2025-09-14 09:21:44 +0900",
 "number_theory/test/frac_binsearch_stress.test.cpp": "2025-06-28 10:05:47 +0900",

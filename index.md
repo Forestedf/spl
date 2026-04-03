@@ -167,8 +167,14 @@ data:
       path: number_theory/ax_by_c.hpp
       title: number_theory/ax_by_c.hpp
     - icon: ':heavy_check_mark:'
+      path: number_theory/barrett.hpp
+      title: number_theory/barrett.hpp
+    - icon: ':heavy_check_mark:'
       path: number_theory/binary_gcd.hpp
       title: number_theory/binary_gcd.hpp
+    - icon: ':heavy_check_mark:'
+      path: number_theory/dynamic_mod_int.hpp
+      title: number_theory/dynamic_mod_int.hpp
     - icon: ':heavy_check_mark:'
       path: number_theory/factorial.hpp
       title: number_theory/factorial.hpp
@@ -474,6 +480,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: number_theory/test/binary_gcd_stress.test.cpp
       title: number_theory/test/binary_gcd_stress.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: number_theory/test/dynamic_modint_stress.test.cpp
+      title: number_theory/test/dynamic_modint_stress.test.cpp
     - icon: ':heavy_check_mark:'
       path: number_theory/test/extgcd2_stress.test.cpp
       title: number_theory/test/extgcd2_stress.test.cpp

@@ -15,6 +15,9 @@ data:
     path: number_theory/ax_by_c.hpp
     title: number_theory/ax_by_c.hpp
   - icon: ':heavy_check_mark:'
+    path: number_theory/dynamic_mod_int.hpp
+    title: number_theory/dynamic_mod_int.hpp
+  - icon: ':heavy_check_mark:'
     path: number_theory/mod_int.hpp
     title: number_theory/mod_int.hpp
   - icon: ':heavy_check_mark:'
@@ -129,6 +132,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: number_theory/test/ax_by_c_stress.test.cpp
     title: number_theory/test/ax_by_c_stress.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: number_theory/test/dynamic_modint_stress.test.cpp
+    title: number_theory/test/dynamic_modint_stress.test.cpp
   - icon: ':heavy_check_mark:'
     path: number_theory/test/extgcd2_stress.test.cpp
     title: number_theory/test/extgcd2_stress.test.cpp
@@ -293,6 +299,7 @@ data:
   isVerificationFile: false
   path: number_theory/utils.hpp
   requiredBy:
+  - number_theory/dynamic_mod_int.hpp
   - number_theory/ax_by_c.hpp
   - number_theory/mod_int.hpp
   - graph/frequency_table_of_tree_distance.hpp
@@ -319,6 +326,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - number_theory/test/extgcd2_stress.test.cpp
+  - number_theory/test/dynamic_modint_stress.test.cpp
   - number_theory/test/inv_mod_stress.test.cpp
   - number_theory/test/ax_by_c_stress.test.cpp
   - graph/test/enumerate_triangles.test.cpp

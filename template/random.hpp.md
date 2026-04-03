@@ -46,6 +46,9 @@ data:
     path: number_theory/test/binary_gcd_stress.test.cpp
     title: number_theory/test/binary_gcd_stress.test.cpp
   - icon: ':heavy_check_mark:'
+    path: number_theory/test/dynamic_modint_stress.test.cpp
+    title: number_theory/test/dynamic_modint_stress.test.cpp
+  - icon: ':heavy_check_mark:'
     path: number_theory/test/extgcd2_stress.test.cpp
     title: number_theory/test/extgcd2_stress.test.cpp
   - icon: ':heavy_check_mark:'
@@ -96,6 +99,7 @@ data:
   - number_theory/test/primitive_root.test.cpp
   - number_theory/test/factorize.test.cpp
   - number_theory/test/binary_gcd_stress.test.cpp
+  - number_theory/test/dynamic_modint_stress.test.cpp
   - number_theory/test/frac_binsearch_stress.test.cpp
   - number_theory/test/inv_mod_stress.test.cpp
   - number_theory/test/montgomery_64_stress.test.cpp

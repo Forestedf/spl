@@ -24,7 +24,7 @@ Clamp<T> composite_clamps(const Clamp<T> &f, const Clamp<T> &g) {
 }
 template <typename T>
 struct ClampMonoid {
-    using Value = T;
+    using Value = Clamp<T>;
     static Value id() {
         return Clamp<T>();
     }

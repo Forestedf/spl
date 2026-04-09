@@ -42,6 +42,7 @@
 "graph/test/jump_on_tree.test.cpp": "2025-06-28 10:05:47 +0900",
 "graph/test/lca.test.cpp": "2025-06-28 10:05:47 +0900",
 "graph/test/nazo_bipartitematching.test.cpp": "2025-09-14 09:21:44 +0900",
+"graph/test/point_set_tree_path_composite_sum_fixed_root.test.cpp": "2026-04-09 11:45:48 +0900",
 "graph/test/scc.test.cpp": "2025-06-28 10:05:47 +0900",
 "graph/test/shortest_path.test.cpp": "2025-06-28 10:05:47 +0900",
 "graph/test/two_edge_connected_components.test.cpp": "2025-06-28 10:05:47 +0900",

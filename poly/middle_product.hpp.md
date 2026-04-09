@@ -254,14 +254,14 @@ data:
   path: poly/middle_product.hpp
   requiredBy:
   - poly/multieval.hpp
-  - poly/polynomial_interpolation_geometric.hpp
   - poly/multieval_geometric.hpp
+  - poly/polynomial_interpolation_geometric.hpp
   timestamp: '2026-03-31 19:28:56+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - poly/test/multipoint_evaluation_on_geometric_sequence.test.cpp
-  - poly/test/multipoint_evaluation.test.cpp
   - poly/test/polynomial_interpolation_on_geometric_sequence.test.cpp
+  - poly/test/multipoint_evaluation.test.cpp
 documentation_of: poly/middle_product.hpp
 layout: document
 redirect_from:

@@ -24,6 +24,9 @@ data:
     path: graph/dijkstra.hpp
     title: graph/dijkstra.hpp
   - icon: ':heavy_check_mark:'
+    path: graph/dynamic_tree_dp.hpp
+    title: graph/dynamic_tree_dp.hpp
+  - icon: ':heavy_check_mark:'
     path: graph/enumerate_triangles.hpp
     title: graph/enumerate_triangles.hpp
   - icon: ':heavy_check_mark:'
@@ -35,6 +38,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/heavy_light_decomposition.hpp
     title: graph/heavy_light_decomposition.hpp
+  - icon: ':heavy_check_mark:'
+    path: graph/static_top_tree.hpp
+    title: graph/static_top_tree.hpp
   - icon: ':heavy_check_mark:'
     path: graph/strongly_connected_components.hpp
     title: graph/strongly_connected_components.hpp
@@ -72,6 +78,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/test/lca.test.cpp
     title: graph/test/lca.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: graph/test/point_set_tree_path_composite_sum_fixed_root.test.cpp
+    title: graph/test/point_set_tree_path_composite_sum_fixed_root.test.cpp
   - icon: ':heavy_check_mark:'
     path: graph/test/scc.test.cpp
     title: graph/test/scc.test.cpp
@@ -161,36 +170,39 @@ data:
   isVerificationFile: false
   path: graph/graph.hpp
   requiredBy:
-  - graph/dense_dijkstra.hpp
-  - graph/dijkstra.hpp
-  - graph/complement_graph_connected_components.hpp
-  - graph/heavy_light_decomposition.hpp
   - graph/enumerate_triangles.hpp
-  - graph/strongly_connected_components.hpp
-  - graph/block_cut_tree.hpp
-  - graph/centroid_decomposition.hpp
-  - graph/biconnected_components.hpp
-  - graph/frequency_table_of_tree_distance.hpp
-  - graph/eulerian_trail.hpp
-  - graph/connected_components.hpp
+  - graph/dijkstra.hpp
   - graph/two_edge_connected_components.hpp
+  - graph/biconnected_components.hpp
+  - graph/connected_components.hpp
+  - graph/frequency_table_of_tree_distance.hpp
+  - graph/complement_graph_connected_components.hpp
+  - graph/strongly_connected_components.hpp
+  - graph/dynamic_tree_dp.hpp
+  - graph/dense_dijkstra.hpp
+  - graph/static_top_tree.hpp
+  - graph/centroid_decomposition.hpp
+  - graph/heavy_light_decomposition.hpp
+  - graph/eulerian_trail.hpp
+  - graph/block_cut_tree.hpp
   timestamp: '2024-07-18 16:56:22+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - graph/test/enumerate_triangles.test.cpp
-  - graph/test/frequency_table_of_tree_distance.test.cpp
-  - graph/test/eulerian_trail_directed.test.cpp
-  - graph/test/ALDS1_11_D.test.cpp
-  - graph/test/block_cut_tree.test.cpp
   - graph/test/biconnected_components.test.cpp
-  - graph/test/scc.test.cpp
-  - graph/test/connected_components_of_complement_graph.test.cpp
-  - graph/test/eulerian_trail_undirected.test.cpp
-  - graph/test/jump_on_tree.test.cpp
-  - graph/test/two_edge_connected_components.test.cpp
-  - graph/test/lca.test.cpp
-  - graph/test/shortest_path.test.cpp
+  - graph/test/eulerian_trail_directed.test.cpp
+  - graph/test/point_set_tree_path_composite_sum_fixed_root.test.cpp
   - graph/test/vertex_add_path_sum.test.cpp
+  - graph/test/frequency_table_of_tree_distance.test.cpp
+  - graph/test/scc.test.cpp
+  - graph/test/lca.test.cpp
+  - graph/test/eulerian_trail_undirected.test.cpp
+  - graph/test/ALDS1_11_D.test.cpp
+  - graph/test/shortest_path.test.cpp
+  - graph/test/jump_on_tree.test.cpp
+  - graph/test/connected_components_of_complement_graph.test.cpp
+  - graph/test/two_edge_connected_components.test.cpp
+  - graph/test/block_cut_tree.test.cpp
 documentation_of: graph/graph.hpp
 layout: document
 redirect_from:

@@ -277,8 +277,8 @@ data:
   timestamp: '2026-03-31 19:28:56+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - poly/test/polynomial_taylor_shift.test.cpp
   - poly/test/composition_of_formal_power_series_large.test.cpp
+  - poly/test/polynomial_taylor_shift.test.cpp
   - poly/test/stirling_number_of_the_first_kind.test.cpp
 documentation_of: poly/taylor_shift.hpp
 layout: document

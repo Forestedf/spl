@@ -19,6 +19,9 @@ data:
     path: algebra/test/system_of_linear_equations.test.cpp
     title: algebra/test/system_of_linear_equations.test.cpp
   - icon: ':heavy_check_mark:'
+    path: bit/test/bitwise_xor_convolution.test.cpp
+    title: bit/test/bitwise_xor_convolution.test.cpp
+  - icon: ':heavy_check_mark:'
     path: convolution/test/gcd_convolution.test.cpp
     title: convolution/test/gcd_convolution.test.cpp
   - icon: ':heavy_check_mark:'
@@ -301,6 +304,7 @@ data:
   timestamp: '2025-09-14 09:21:44+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - bit/test/bitwise_xor_convolution.test.cpp
   - poly/test/inv_of_formal_power_series.test.cpp
   - poly/test/pow_of_formal_power_series.test.cpp
   - poly/test/exp_of_formal_power_series.test.cpp

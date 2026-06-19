@@ -367,8 +367,8 @@ data:
   timestamp: '2026-03-31 19:28:56+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - poly/test/compositional_inverse_of_formal_power_series_large.test.cpp
   - poly/test/pow_of_formal_power_series.test.cpp
+  - poly/test/compositional_inverse_of_formal_power_series_large.test.cpp
 documentation_of: poly/fps_pow.hpp
 layout: document
 redirect_from:

@@ -271,8 +271,8 @@ data:
   timestamp: '2026-03-31 19:28:56+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - poly/test/multipoint_evaluation_on_geometric_sequence.test.cpp
   - poly/test/polynomial_interpolation_on_geometric_sequence.test.cpp
+  - poly/test/multipoint_evaluation_on_geometric_sequence.test.cpp
 documentation_of: poly/multieval_geometric.hpp
 layout: document
 redirect_from:

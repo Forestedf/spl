@@ -147,8 +147,8 @@ data:
   timestamp: '2025-09-02 16:51:47+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - graph/test/eulerian_trail_directed.test.cpp
   - graph/test/eulerian_trail_undirected.test.cpp
+  - graph/test/eulerian_trail_directed.test.cpp
 documentation_of: graph/eulerian_trail.hpp
 layout: document
 redirect_from:

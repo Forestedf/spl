@@ -49,8 +49,8 @@ data:
   timestamp: '2025-08-14 15:17:26+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - convolution/test/lcm_convolution.stress.test.cpp
   - convolution/test/lcm_convolution.test.cpp
+  - convolution/test/lcm_convolution.stress.test.cpp
 documentation_of: convolution/lcm_convolution.hpp
 layout: document
 redirect_from:

@@ -9,19 +9,17 @@ data:
   - icon: ':heavy_check_mark:'
     path: algebra/test/division_free_determinant.test.cpp
     title: algebra/test/division_free_determinant.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: algebra/test/matrix_det.test.cpp
-    title: algebra/test/matrix_det.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"algebra/matrix.hpp\"\n#include <cassert>\n#include <utility>\n\
-    #include <vector>\ntemplate <typename T>\nclass Matrix {\n    int _h, _w;\n  \
-    \  std::vector<std::vector<T>> dat;\n\npublic:\n    Matrix() : dat() {}\n    Matrix(int\
-    \ n) : _h(n), _w(n), dat(n, std::vector<T>(n, T())) {\n        assert(0 <= n);\n\
-    \    }\n    Matrix(int _h, int _w) : _h(_h), _w(_w), dat(_h, std::vector<T>(_w,\
+  bundledCode: "#line 2 \"algebra/division_free_determinant.hpp\"\n#include <utility>\n\
+    #line 2 \"algebra/matrix.hpp\"\n#include <cassert>\n#line 4 \"algebra/matrix.hpp\"\
+    \n#include <vector>\ntemplate <typename T>\nclass Matrix {\n    int _h, _w;\n\
+    \    std::vector<std::vector<T>> dat;\n\npublic:\n    Matrix() : dat() {}\n  \
+    \  Matrix(int n) : _h(n), _w(n), dat(n, std::vector<T>(n, T())) {\n        assert(0\
+    \ <= n);\n    }\n    Matrix(int _h, int _w) : _h(_h), _w(_w), dat(_h, std::vector<T>(_w,\
     \ T())) {\n        assert(0 <= _h && 0 <= _w);\n    }\n    static Matrix<T> ident(int\
     \ n) {\n        assert(0 <= n);\n        Matrix<T> ret(n);\n        for (int i\
     \ = 0; i < n; ++i) {\n            ret.dat[i][i] = T(1);\n        }\n        return\
@@ -59,45 +57,49 @@ data:
     \ {\n        assert(_h == _w);\n        Matrix<T> ret = Matrix<T>::ident(_h);\n\
     \        Matrix<T> self = *this;\n        while (t > 0) {\n            if (t &\
     \ 1) {\n                ret *= self;\n            }\n            self *= self;\n\
-    \            t >>= 1;\n        }\n        return ret;\n    }\n};\n#line 3 \"algebra/determinant.hpp\"\
-    \ntemplate <typename T>\nT determinant(Matrix<T> a) {\n    assert(a.h() == a.w());\n\
-    \    int n = a.h();\n    T det(1);\n    for (int i = 0; i < n; ++i) {\n      \
-    \  int row = -1;\n        for (int j = i; j < n; ++j) {\n            if (a(j,\
-    \ i) != T()) {\n                row = j;\n                break;\n           \
-    \ }\n        }\n        if (row == -1) {\n            det = T(0);\n          \
-    \  break;\n        }\n        if (row != i) {\n            a.swap_row(i, row);\n\
-    \            det = -det;\n        }\n        det *= a(i, i);\n        T inv =\
-    \ T(1) / a(i, i);\n        for (int j = i; j < n; ++j) {\n            a(i, j)\
-    \ *= inv;\n        }\n        for (int j = i + 1; j < n; ++j) {\n            T\
-    \ cf = a(j, i);\n            for (int k = i + 1; k < n; ++k) {\n             \
-    \   a(j, k) -= cf * a(i, k);\n            }\n        }\n    }\n    return det;\n\
-    }\n"
-  code: "#pragma once\n#include \"matrix.hpp\"\ntemplate <typename T>\nT determinant(Matrix<T>\
-    \ a) {\n    assert(a.h() == a.w());\n    int n = a.h();\n    T det(1);\n    for\
-    \ (int i = 0; i < n; ++i) {\n        int row = -1;\n        for (int j = i; j\
-    \ < n; ++j) {\n            if (a(j, i) != T()) {\n                row = j;\n \
-    \               break;\n            }\n        }\n        if (row == -1) {\n \
-    \           det = T(0);\n            break;\n        }\n        if (row != i)\
-    \ {\n            a.swap_row(i, row);\n            det = -det;\n        }\n   \
-    \     det *= a(i, i);\n        T inv = T(1) / a(i, i);\n        for (int j = i;\
-    \ j < n; ++j) {\n            a(i, j) *= inv;\n        }\n        for (int j =\
-    \ i + 1; j < n; ++j) {\n            T cf = a(j, i);\n            for (int k =\
-    \ i + 1; k < n; ++k) {\n                a(j, k) -= cf * a(i, k);\n           \
-    \ }\n        }\n    }\n    return det;\n}\n"
+    \            t >>= 1;\n        }\n        return ret;\n    }\n};\n#line 4 \"algebra/division_free_determinant.hpp\"\
+    \ntemplate <typename T>\nT division_free_determinant(Matrix<T> a) {\n    int n\
+    \ = a.h();\n    assert(a.w() == n);\n    if (n == 0) {\n        return T(1);\n\
+    \    }\n    Matrix<T> t(n);\n    Matrix<T> x = a;\n    for (int i = 0; i < n;\
+    \ ++i) {\n        for (int j = i + 1; j < n; ++j) {\n            swap(a(i, j),\
+    \ a(j, i));\n        }\n    }\n    for (int i = 0; i < n - 1; ++i) {\n       \
+    \ T sum(0);\n        for (int j = n - i - 1; j >= 0; --j) {\n            sum +=\
+    \ std::exchange(x(j, j), -sum);\n        }\n        for (int j = 0; j < n - i\
+    \ - 1; ++j) {\n            for (int k = 0; k < n; ++k) {\n                t(j,\
+    \ k) = T();\n            }\n        }\n        for (int j = 0; j < n - i - 1;\
+    \ ++j) {\n            for (int k = 0; k < n; ++k) {\n                T sum(0);\n\
+    \                for (int l = j; l < n; ++l) {\n                    sum += x(j,\
+    \ l) * a(k, l);\n                }\n                t(j, k) = sum;\n         \
+    \   }\n        }\n        x = t;\n    }\n    T ans = x(0, 0);\n    if (n % 2 ==\
+    \ 0) {\n        ans = -ans;\n    }\n    return ans;\n}\n"
+  code: "#pragma once\n#include <utility>\n#include \"matrix.hpp\"\ntemplate <typename\
+    \ T>\nT division_free_determinant(Matrix<T> a) {\n    int n = a.h();\n    assert(a.w()\
+    \ == n);\n    if (n == 0) {\n        return T(1);\n    }\n    Matrix<T> t(n);\n\
+    \    Matrix<T> x = a;\n    for (int i = 0; i < n; ++i) {\n        for (int j =\
+    \ i + 1; j < n; ++j) {\n            swap(a(i, j), a(j, i));\n        }\n    }\n\
+    \    for (int i = 0; i < n - 1; ++i) {\n        T sum(0);\n        for (int j\
+    \ = n - i - 1; j >= 0; --j) {\n            sum += std::exchange(x(j, j), -sum);\n\
+    \        }\n        for (int j = 0; j < n - i - 1; ++j) {\n            for (int\
+    \ k = 0; k < n; ++k) {\n                t(j, k) = T();\n            }\n      \
+    \  }\n        for (int j = 0; j < n - i - 1; ++j) {\n            for (int k =\
+    \ 0; k < n; ++k) {\n                T sum(0);\n                for (int l = j;\
+    \ l < n; ++l) {\n                    sum += x(j, l) * a(k, l);\n             \
+    \   }\n                t(j, k) = sum;\n            }\n        }\n        x = t;\n\
+    \    }\n    T ans = x(0, 0);\n    if (n % 2 == 0) {\n        ans = -ans;\n   \
+    \ }\n    return ans;\n}\n"
   dependsOn:
   - algebra/matrix.hpp
   isVerificationFile: false
-  path: algebra/determinant.hpp
+  path: algebra/division_free_determinant.hpp
   requiredBy: []
-  timestamp: '2025-08-07 23:11:18+09:00'
+  timestamp: '2026-06-19 12:45:09+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - algebra/test/division_free_determinant.test.cpp
-  - algebra/test/matrix_det.test.cpp
-documentation_of: algebra/determinant.hpp
+documentation_of: algebra/division_free_determinant.hpp
 layout: document
 redirect_from:
-- /library/algebra/determinant.hpp
-- /library/algebra/determinant.hpp.html
-title: algebra/determinant.hpp
+- /library/algebra/division_free_determinant.hpp
+- /library/algebra/division_free_determinant.hpp.html
+title: algebra/division_free_determinant.hpp
 ---

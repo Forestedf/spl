@@ -24,6 +24,9 @@ data:
   - name: bit
     pages:
     - icon: ':heavy_check_mark:'
+      path: bit/subset_range_add_point_get.hpp
+      title: bit/subset_range_add_point_get.hpp
+    - icon: ':heavy_check_mark:'
       path: bit/xor_convolution.hpp
       title: bit/xor_convolution.hpp
   - name: convolution
@@ -358,6 +361,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: bit/test/bitwise_xor_convolution.test.cpp
       title: bit/test/bitwise_xor_convolution.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: bit/test/subset_range_add_point_get.test.cpp
+      title: bit/test/subset_range_add_point_get.test.cpp
   - name: convolution/test
     pages:
     - icon: ':heavy_check_mark:'

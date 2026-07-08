@@ -88,6 +88,9 @@ data:
     path: bit/test/bitwise_xor_convolution.test.cpp
     title: bit/test/bitwise_xor_convolution.test.cpp
   - icon: ':heavy_check_mark:'
+    path: bit/test/subset_range_add_point_get.test.cpp
+    title: bit/test/subset_range_add_point_get.test.cpp
+  - icon: ':heavy_check_mark:'
     path: convolution/test/gcd_convolution.stress.test.cpp
     title: convolution/test/gcd_convolution.stress.test.cpp
   - icon: ':heavy_check_mark:'
@@ -350,6 +353,7 @@ data:
   timestamp: '2024-07-18 16:56:22+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - bit/test/subset_range_add_point_get.test.cpp
   - bit/test/bitwise_xor_convolution.test.cpp
   - poly/test/inv_of_formal_power_series.test.cpp
   - poly/test/pow_of_formal_power_series.test.cpp

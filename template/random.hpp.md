@@ -3,6 +3,9 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
+    path: bit/subset_range_add_point_get.hpp
+    title: bit/subset_range_add_point_get.hpp
+  - icon: ':heavy_check_mark:'
     path: convolution/mul_mod_p_conv.hpp
     title: convolution/mul_mod_p_conv.hpp
   - icon: ':heavy_check_mark:'
@@ -21,6 +24,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: algebra/test/division_free_determinant.test.cpp
     title: algebra/test/division_free_determinant.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: bit/test/subset_range_add_point_get.test.cpp
+    title: bit/test/subset_range_add_point_get.test.cpp
   - icon: ':heavy_check_mark:'
     path: convolution/test/gcd_convolution.stress.test.cpp
     title: convolution/test/gcd_convolution.stress.test.cpp
@@ -90,6 +96,7 @@ data:
   isVerificationFile: false
   path: template/random.hpp
   requiredBy:
+  - bit/subset_range_add_point_get.hpp
   - convolution/mul_mod_p_conv.hpp
   - graph/bipartite_matching.hpp
   - graph/nazo_bipartite_matching.hpp
@@ -98,6 +105,7 @@ data:
   timestamp: '2024-07-18 16:56:22+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - bit/test/subset_range_add_point_get.test.cpp
   - convolution/test/gcd_convolution.stress.test.cpp
   - convolution/test/mul_modp_convolution.test.cpp
   - convolution/test/index_difference.test.cpp

@@ -2,6 +2,9 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
+  - icon: ':warning:'
+    path: bit/test/point_add_subset_sum_test.cpp
+    title: bit/test/point_add_subset_sum_test.cpp
   - icon: ':heavy_check_mark:'
     path: convolution/index_difference.hpp
     title: convolution/index_difference.hpp
@@ -308,6 +311,7 @@ data:
   isVerificationFile: false
   path: number_theory/utils.hpp
   requiredBy:
+  - bit/test/point_add_subset_sum_test.cpp
   - poly/fft.hpp
   - poly/fps_pow.hpp
   - poly/composition.hpp

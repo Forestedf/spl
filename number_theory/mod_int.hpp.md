@@ -5,6 +5,9 @@ data:
     path: number_theory/utils.hpp
     title: number_theory/utils.hpp
   _extendedRequiredBy:
+  - icon: ':warning:'
+    path: bit/test/point_add_subset_sum_test.cpp
+    title: bit/test/point_add_subset_sum_test.cpp
   - icon: ':heavy_check_mark:'
     path: convolution/index_difference.hpp
     title: convolution/index_difference.hpp
@@ -330,6 +333,7 @@ data:
   isVerificationFile: false
   path: number_theory/mod_int.hpp
   requiredBy:
+  - bit/test/point_add_subset_sum_test.cpp
   - poly/fft.hpp
   - poly/fps_pow.hpp
   - poly/composition.hpp

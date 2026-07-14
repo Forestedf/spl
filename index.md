@@ -23,12 +23,20 @@ data:
       title: algebra/system_of_linear_equations.hpp
   - name: bit
     pages:
+    - icon: ':warning:'
+      path: bit/point_add_subset_sum.hpp
+      title: bit/point_add_subset_sum.hpp
     - icon: ':heavy_check_mark:'
       path: bit/subset_range_add_point_get.hpp
       title: bit/subset_range_add_point_get.hpp
     - icon: ':heavy_check_mark:'
       path: bit/xor_convolution.hpp
       title: bit/xor_convolution.hpp
+  - name: bit/test
+    pages:
+    - icon: ':warning:'
+      path: bit/test/point_add_subset_sum_test.cpp
+      title: bit/test/point_add_subset_sum_test.cpp
   - name: convolution
     pages:
     - icon: ':heavy_check_mark:'

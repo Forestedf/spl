@@ -1,7 +1,10 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: bit/test/point_add_subset_sum_test.cpp
+    title: bit/test/point_add_subset_sum_test.cpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: algebra/test/division_free_determinant.test.cpp
@@ -353,7 +356,8 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: template/template.hpp
-  requiredBy: []
+  requiredBy:
+  - bit/test/point_add_subset_sum_test.cpp
   timestamp: '2025-06-28 10:05:47+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

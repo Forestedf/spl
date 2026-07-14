@@ -2,6 +2,9 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
+  - icon: ':warning:'
+    path: bit/test/point_add_subset_sum_test.cpp
+    title: bit/test/point_add_subset_sum_test.cpp
   - icon: ':heavy_check_mark:'
     path: data_structure/fenwick_tree.hpp
     title: data_structure/fenwick_tree.hpp
@@ -93,6 +96,7 @@ data:
   isVerificationFile: false
   path: data_structure/operations.hpp
   requiredBy:
+  - bit/test/point_add_subset_sum_test.cpp
   - data_structure/range_add_point_get.hpp
   - data_structure/range_add_range_sum.hpp
   - data_structure/fenwick_tree.hpp

@@ -2,9 +2,15 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
+  - icon: ':warning:'
+    path: bit/point_add_subset_sum.hpp
+    title: bit/point_add_subset_sum.hpp
   - icon: ':heavy_check_mark:'
     path: bit/subset_range_add_point_get.hpp
     title: bit/subset_range_add_point_get.hpp
+  - icon: ':warning:'
+    path: bit/test/point_add_subset_sum_test.cpp
+    title: bit/test/point_add_subset_sum_test.cpp
   - icon: ':heavy_check_mark:'
     path: convolution/mul_mod_p_conv.hpp
     title: convolution/mul_mod_p_conv.hpp
@@ -96,6 +102,8 @@ data:
   isVerificationFile: false
   path: template/random.hpp
   requiredBy:
+  - bit/point_add_subset_sum.hpp
+  - bit/test/point_add_subset_sum_test.cpp
   - bit/subset_range_add_point_get.hpp
   - convolution/mul_mod_p_conv.hpp
   - graph/bipartite_matching.hpp

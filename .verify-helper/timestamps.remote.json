@@ -56,6 +56,7 @@
 "number_theory/test/factorize.test.cpp": "2025-09-14 09:21:44 +0900",
 "number_theory/test/frac_binsearch_stress.test.cpp": "2025-06-28 10:05:47 +0900",
 "number_theory/test/inv_mod_stress.test.cpp": "2025-06-28 10:05:47 +0900",
+"number_theory/test/linear_sieve.test.cpp": "2026-08-07 18:08:01 +0900",
 "number_theory/test/montgomery_64_stress.test.cpp": "2025-06-28 10:05:47 +0900",
 "number_theory/test/primality_test.test.cpp": "2025-06-28 10:05:47 +0900",
 "number_theory/test/primitive_root.test.cpp": "2025-06-28 10:05:47 +0900",

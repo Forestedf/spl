@@ -76,6 +76,9 @@ data:
     path: number_theory/test/inv_mod_stress.test.cpp
     title: number_theory/test/inv_mod_stress.test.cpp
   - icon: ':heavy_check_mark:'
+    path: number_theory/test/linear_sieve.test.cpp
+    title: number_theory/test/linear_sieve.test.cpp
+  - icon: ':heavy_check_mark:'
     path: number_theory/test/montgomery_64_stress.test.cpp
     title: number_theory/test/montgomery_64_stress.test.cpp
   - icon: ':heavy_check_mark:'
@@ -102,35 +105,36 @@ data:
   isVerificationFile: false
   path: template/random.hpp
   requiredBy:
-  - bit/point_add_subset_sum.hpp
-  - bit/test/point_add_subset_sum_test.cpp
-  - bit/subset_range_add_point_get.hpp
-  - convolution/mul_mod_p_conv.hpp
-  - graph/bipartite_matching.hpp
   - graph/nazo_bipartite_matching.hpp
+  - graph/bipartite_matching.hpp
   - number_theory/primitive_root.hpp
   - number_theory/factorize.hpp
+  - convolution/mul_mod_p_conv.hpp
+  - bit/point_add_subset_sum.hpp
+  - bit/subset_range_add_point_get.hpp
+  - bit/test/point_add_subset_sum_test.cpp
   timestamp: '2024-07-18 16:56:22+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - bit/test/subset_range_add_point_get.test.cpp
-  - convolution/test/gcd_convolution.stress.test.cpp
-  - convolution/test/mul_modp_convolution.test.cpp
-  - convolution/test/index_difference.test.cpp
-  - convolution/test/lcm_convolution.stress.test.cpp
-  - data_structure/test/wavelet_matrix.test.cpp
   - algebra/test/division_free_determinant.test.cpp
   - graph/test/bipartitematching.test.cpp
   - graph/test/nazo_bipartitematching.test.cpp
   - number_theory/test/primitive_root.test.cpp
-  - number_theory/test/inv_mod_stress.test.cpp
   - number_theory/test/extgcd2_stress.test.cpp
-  - number_theory/test/dynamic_modint_stress.test.cpp
   - number_theory/test/ax_by_c_stress.test.cpp
-  - number_theory/test/montgomery_64_stress.test.cpp
+  - number_theory/test/inv_mod_stress.test.cpp
+  - number_theory/test/factorize.test.cpp
   - number_theory/test/binary_gcd_stress.test.cpp
   - number_theory/test/frac_binsearch_stress.test.cpp
-  - number_theory/test/factorize.test.cpp
+  - number_theory/test/linear_sieve.test.cpp
+  - number_theory/test/montgomery_64_stress.test.cpp
+  - number_theory/test/dynamic_modint_stress.test.cpp
+  - data_structure/test/wavelet_matrix.test.cpp
+  - convolution/test/lcm_convolution.stress.test.cpp
+  - convolution/test/mul_modp_convolution.test.cpp
+  - convolution/test/index_difference.test.cpp
+  - convolution/test/gcd_convolution.stress.test.cpp
+  - bit/test/subset_range_add_point_get.test.cpp
 documentation_of: template/random.hpp
 layout: document
 redirect_from:

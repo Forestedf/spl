@@ -211,6 +211,9 @@ data:
       path: number_theory/frac_binsearch.hpp
       title: number_theory/frac_binsearch.hpp
     - icon: ':heavy_check_mark:'
+      path: number_theory/linear_sieve.hpp
+      title: number_theory/linear_sieve.hpp
+    - icon: ':heavy_check_mark:'
       path: number_theory/mod_int.hpp
       title: number_theory/mod_int.hpp
     - icon: ':heavy_check_mark:'
@@ -527,6 +530,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: number_theory/test/inv_mod_stress.test.cpp
       title: number_theory/test/inv_mod_stress.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: number_theory/test/linear_sieve.test.cpp
+      title: number_theory/test/linear_sieve.test.cpp
     - icon: ':heavy_check_mark:'
       path: number_theory/test/montgomery_64_stress.test.cpp
       title: number_theory/test/montgomery_64_stress.test.cpp

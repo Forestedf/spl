@@ -291,8 +291,8 @@ data:
   isVerificationFile: false
   path: poly/fps_log.hpp
   requiredBy:
-  - poly/fps_pow.hpp
   - poly/compositional_inverse.hpp
+  - poly/fps_pow.hpp
   timestamp: '2026-03-31 19:28:56+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

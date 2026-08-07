@@ -19,6 +19,9 @@ data:
     path: number_theory/test/factorize.test.cpp
     title: number_theory/test/factorize.test.cpp
   - icon: ':heavy_check_mark:'
+    path: number_theory/test/linear_sieve.test.cpp
+    title: number_theory/test/linear_sieve.test.cpp
+  - icon: ':heavy_check_mark:'
     path: number_theory/test/montgomery_64_stress.test.cpp
     title: number_theory/test/montgomery_64_stress.test.cpp
   - icon: ':heavy_check_mark:'
@@ -91,16 +94,17 @@ data:
   isVerificationFile: false
   path: number_theory/montgomery_64.hpp
   requiredBy:
-  - convolution/mul_mod_p_conv.hpp
   - number_theory/primitive_root.hpp
   - number_theory/factorize.hpp
+  - convolution/mul_mod_p_conv.hpp
   timestamp: '2025-01-27 21:12:31+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - convolution/test/mul_modp_convolution.test.cpp
   - number_theory/test/primitive_root.test.cpp
-  - number_theory/test/montgomery_64_stress.test.cpp
   - number_theory/test/factorize.test.cpp
+  - number_theory/test/linear_sieve.test.cpp
+  - number_theory/test/montgomery_64_stress.test.cpp
+  - convolution/test/mul_modp_convolution.test.cpp
 documentation_of: number_theory/montgomery_64.hpp
 layout: document
 redirect_from:

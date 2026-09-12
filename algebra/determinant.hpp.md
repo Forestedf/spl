@@ -92,8 +92,8 @@ data:
   timestamp: '2025-08-07 23:11:18+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - algebra/test/matrix_det.test.cpp
   - algebra/test/division_free_determinant.test.cpp
+  - algebra/test/matrix_det.test.cpp
 documentation_of: algebra/determinant.hpp
 layout: document
 redirect_from:

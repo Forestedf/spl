@@ -219,6 +219,12 @@ data:
     - icon: ':heavy_check_mark:'
       path: number_theory/montgomery_64.hpp
       title: number_theory/montgomery_64.hpp
+    - icon: ':warning:'
+      path: number_theory/powers.hpp
+      title: number_theory/powers.hpp
+    - icon: ':heavy_check_mark:'
+      path: number_theory/prefix_binomial_sum.hpp
+      title: number_theory/prefix_binomial_sum.hpp
     - icon: ':heavy_check_mark:'
       path: number_theory/primality.hpp
       title: number_theory/primality.hpp
@@ -536,6 +542,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: number_theory/test/montgomery_64_stress.test.cpp
       title: number_theory/test/montgomery_64_stress.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: number_theory/test/prefix_binomial_sum.stress.test.cpp
+      title: number_theory/test/prefix_binomial_sum.stress.test.cpp
     - icon: ':heavy_check_mark:'
       path: number_theory/test/primality_test.test.cpp
       title: number_theory/test/primality_test.test.cpp

@@ -40,6 +40,9 @@ data:
     title: poly/taylor_shift.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: number_theory/test/prefix_binomial_sum.stress.test.cpp
+    title: number_theory/test/prefix_binomial_sum.stress.test.cpp
+  - icon: ':heavy_check_mark:'
     path: poly/test/composition_of_formal_power_series_large.test.cpp
     title: poly/test/composition_of_formal_power_series_large.test.cpp
   - icon: ':heavy_check_mark:'
@@ -117,32 +120,33 @@ data:
   isVerificationFile: false
   path: number_theory/factorial.hpp
   requiredBy:
-  - poly/compositional_inverse.hpp
+  - poly/fps_log_sparse.hpp
+  - poly/stirling2.hpp
+  - poly/fps_pow_sparse.hpp
   - poly/fps_pow.hpp
+  - poly/power_projection.hpp
+  - poly/fps_log.hpp
+  - poly/compositional_inverse.hpp
   - poly/fps_exp.hpp
   - poly/stirling1.hpp
   - poly/composition.hpp
-  - poly/fps_log.hpp
-  - poly/fps_log_sparse.hpp
-  - poly/stirling2.hpp
-  - poly/taylor_shift.hpp
-  - poly/fps_pow_sparse.hpp
-  - poly/power_projection.hpp
   - poly/fps_exp_sparse.hpp
+  - poly/taylor_shift.hpp
   timestamp: '2024-03-29 17:56:07+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - poly/test/pow_of_formal_power_series.test.cpp
-  - poly/test/exp_of_formal_power_series_sparse.test.cpp
-  - poly/test/pow_of_formal_power_series_sparse.test.cpp
-  - poly/test/log_of_formal_power_series_sparse.test.cpp
-  - poly/test/compositional_inverse_of_formal_power_series_large.test.cpp
-  - poly/test/polynomial_taylor_shift.test.cpp
+  - number_theory/test/prefix_binomial_sum.stress.test.cpp
+  - poly/test/composition_of_formal_power_series_large.test.cpp
   - poly/test/log_of_formal_power_series.test.cpp
   - poly/test/stirling_number_of_the_second_kind.test.cpp
   - poly/test/exp_of_formal_power_series.test.cpp
-  - poly/test/composition_of_formal_power_series_large.test.cpp
+  - poly/test/pow_of_formal_power_series.test.cpp
+  - poly/test/log_of_formal_power_series_sparse.test.cpp
+  - poly/test/compositional_inverse_of_formal_power_series_large.test.cpp
+  - poly/test/exp_of_formal_power_series_sparse.test.cpp
   - poly/test/stirling_number_of_the_first_kind.test.cpp
+  - poly/test/pow_of_formal_power_series_sparse.test.cpp
+  - poly/test/polynomial_taylor_shift.test.cpp
 documentation_of: number_theory/factorial.hpp
 layout: document
 redirect_from:

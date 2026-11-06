@@ -90,4 +90,59 @@ public:
     }
 
     Value all_prod() const { return node[1]; }
+    
+    template <typename F>
+    int max_right(int l, F f) const {
+        assert(0 <= l && l <= old_length);
+        assert(f(Monoid::id()));
+        if (l == old_length) {
+            return old_length;
+        }
+        l += length;
+        Value prod = Monoid::id();
+        do {
+            while (!(l & 1)) {
+                l >>= 1;
+            }
+            if (!f(Monoid::op(prod, node[l]))) {
+                while (l < length) {
+                    l <<= 1;
+                    if (f(Monoid::op(prod, node[l]))) {
+                        prod = Monoid::op(prod, node[l++]);
+                    }
+                }
+                return l - length;
+            }
+            prod = Monoid::op(prod, node[l++]);
+        } while ((l & -l) != l);
+        return old_length;
+    }
+    
+    template <typename F>
+    int min_left(int r, F f) const {
+        assert(0 <= r && r <= old_length);
+        assert(f(Monoid::id()));
+        if (r == 0) {
+            return 0;
+        }
+        r += length;
+        Value prod = Monoid::id();
+        do {
+            --r;
+            while (r > 1 && (r & 1)) {
+                r >>= 1;
+            }
+            if (!f(Monoid::op(node[r], prod))) {
+                while (r < length) {
+                    r = (r << 1) | 1;
+                    if (f(Monoid::op(node[r], prod))) {
+                        prod = Monoid::op(node[r--], prod);
+                    }
+                }
+                return r + 1 - length;
+            }
+            prod = Monoid::op(prod, node[r]);
+        } while ((r & -r) != r);
+        return 0;
+    }
 };

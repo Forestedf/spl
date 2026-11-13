@@ -5,49 +5,54 @@
 
 class StaticTopTree {
 public:
-    enum class NodeType {
-        AddEdge,
-        AddVertex,
-        Compress,
-        Rake
-    };
+    enum class NodeType { AddEdge, AddVertex, Compress, Rake };
     struct Node {
         NodeType ty;
-        int par, lch, rch;
+        int par, lch, rch, top, bottom;
     };
 
     std::vector<Node> nodes;
     int stt_root;
 
     template <typename T, bool DIR>
-    StaticTopTree(Graph<T, DIR> &g, int root = 0) {
+    StaticTopTree(Graph<T, DIR>& g, int root = 0) {
         assert(0 <= root && root < g.v());
         nodes.reserve(3 * g.v());
         dfs(g, root, -1);
-        nodes.resize(g.v(), Node{NodeType::AddVertex, -1, -1, -1});
+        nodes.resize(g.v());
+        for (int v = 0; v < g.v(); ++v) {
+            nodes[v] = {NodeType::AddVertex, -1, -1, -1, v, v};
+        }
         stt_root = compress(g, root, -1).second;
     }
 
 private:
     template <typename T, bool DIR>
-    int dfs(Graph<T, DIR> &g, int v, int p) {
+    int dfs(Graph<T, DIR>& g, int v, int p) {
         int sz = 1, mx = 0;
-        for (Edge<T> &e : g[v]) {
+        for (Edge<T>& e : g[v]) {
             if (e.to == p) {
                 continue;
             }
             int t = dfs(g, e.to, v);
             if (mx < t) {
                 mx = t;
-                swap(g[v][0], e);
+                std::swap(g[v][0], e);
             }
             sz += t;
+        }
+        for (Edge<T>& e : g[v]) {
+            if (e.to == p) {
+                std::swap(e, g[v][g[v].size() - 1]);
+                break;
+            }
         }
         return sz;
     }
     int make_node(NodeType ty, int lch, int rch) {
         int v = (int)nodes.size();
-        nodes.emplace_back(Node{ty, -1, lch, rch});
+        nodes.emplace_back(Node{ty, -1, lch, rch, nodes[lch].top,
+                                ty == NodeType::Compress ? nodes[rch].bottom : nodes[lch].bottom});
         if (lch != -1) {
             nodes[lch].par = v;
         }
@@ -56,7 +61,7 @@ private:
         }
         return v;
     }
-    void merge(std::vector<std::pair<int, int>> &path) {
+    void merge(std::vector<std::pair<int, int>>& path) {
         auto [xf, xs] = path.back();
         path.pop_back();
         auto [yf, ys] = path.back();
@@ -64,13 +69,14 @@ private:
         path.emplace_back(std::max(xf, yf) + 1, make_node(NodeType::Compress, ys, xs));
     }
     template <typename T, bool DIR>
-    std::pair<int, int> compress(const Graph<T, DIR> &g, int v, int p) {
+    std::pair<int, int> compress(const Graph<T, DIR>& g, int v, int p) {
         std::vector<std::pair<int, int>> path;
         while (true) {
             path.emplace_back(rake(g, v, p));
             while (true) {
                 int l = (int)path.size();
-                if (l >= 3 && (path[l - 3].first == path[l - 2].first || path[l - 3].first <= path[l - 1].first)) {
+                if (l >= 3 &&
+                    (path[l - 3].first == path[l - 2].first || path[l - 3].first <= path[l - 1].first)) {
                     std::pair<int, int> t = path.back();
                     path.pop_back();
                     merge(path);
@@ -95,10 +101,10 @@ private:
         return std::pair<int, int>(xf + 1, z);
     }
     template <typename T, bool DIR>
-    std::pair<int, int> rake(const Graph<T, DIR> &g, int v, int p) {
+    std::pair<int, int> rake(const Graph<T, DIR>& g, int v, int p) {
         std::priority_queue<std::pair<int, int>, std::vector<std::pair<int, int>>, std::greater<>> pq;
         for (int i = 1; i < (int)g[v].size(); ++i) {
-            const Edge<T> &e = g[v][i];
+            const Edge<T>& e = g[v][i];
             if (e.to == p) {
                 continue;
             }

@@ -47,6 +47,7 @@
 "graph/test/point_set_tree_path_composite_sum_fixed_root.test.cpp": "2026-04-09 11:45:48 +0900",
 "graph/test/scc.test.cpp": "2025-06-28 10:05:47 +0900",
 "graph/test/shortest_path.test.cpp": "2025-06-28 10:05:47 +0900",
+"graph/test/tree_path_composite_sum.test.cpp": "2026-11-13 18:06:14 +0900",
 "graph/test/two_edge_connected_components.test.cpp": "2025-06-28 10:05:47 +0900",
 "graph/test/vertex_add_path_sum.test.cpp": "2025-06-28 10:05:47 +0900",
 "number_theory/test/ax_by_c_stress.test.cpp": "2025-06-28 10:05:47 +0900",

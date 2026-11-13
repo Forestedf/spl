@@ -176,6 +176,9 @@ data:
       path: graph/nazo_bipartite_matching.hpp
       title: graph/nazo_bipartite_matching.hpp
     - icon: ':heavy_check_mark:'
+      path: graph/rerooting.hpp
+      title: graph/rerooting.hpp
+    - icon: ':heavy_check_mark:'
       path: graph/static_top_tree.hpp
       title: graph/static_top_tree.hpp
     - icon: ':heavy_check_mark:'
@@ -510,6 +513,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/test/shortest_path.test.cpp
       title: graph/test/shortest_path.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: graph/test/tree_path_composite_sum.test.cpp
+      title: graph/test/tree_path_composite_sum.test.cpp
     - icon: ':heavy_check_mark:'
       path: graph/test/two_edge_connected_components.test.cpp
       title: graph/test/two_edge_connected_components.test.cpp

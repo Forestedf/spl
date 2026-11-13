@@ -151,6 +151,9 @@ data:
     path: graph/test/shortest_path.test.cpp
     title: graph/test/shortest_path.test.cpp
   - icon: ':heavy_check_mark:'
+    path: graph/test/tree_path_composite_sum.test.cpp
+    title: graph/test/tree_path_composite_sum.test.cpp
+  - icon: ':heavy_check_mark:'
     path: graph/test/two_edge_connected_components.test.cpp
     title: graph/test/two_edge_connected_components.test.cpp
   - icon: ':heavy_check_mark:'
@@ -451,6 +454,7 @@ data:
   - graph/test/scc.test.cpp
   - graph/test/nazo_bipartitematching.test.cpp
   - graph/test/two_edge_connected_components.test.cpp
+  - graph/test/tree_path_composite_sum.test.cpp
   - graph/test/shortest_path.test.cpp
   - graph/test/enumerate_triangles.test.cpp
   - graph/test/lca.test.cpp

@@ -58,6 +58,9 @@ data:
     path: graph/test/point_set_tree_path_composite_sum_fixed_root.test.cpp
     title: graph/test/point_set_tree_path_composite_sum_fixed_root.test.cpp
   - icon: ':heavy_check_mark:'
+    path: graph/test/tree_path_composite_sum.test.cpp
+    title: graph/test/tree_path_composite_sum.test.cpp
+  - icon: ':heavy_check_mark:'
     path: number_theory/test/factorize.test.cpp
     title: number_theory/test/factorize.test.cpp
   - icon: ':heavy_check_mark:'
@@ -341,6 +344,7 @@ data:
   - graph/test/bipartitematching.test.cpp
   - graph/test/eulerian_trail_undirected.test.cpp
   - graph/test/nazo_bipartitematching.test.cpp
+  - graph/test/tree_path_composite_sum.test.cpp
   - graph/test/enumerate_triangles.test.cpp
   - graph/test/eulerian_trail_directed.test.cpp
   - bit/test/bitwise_xor_convolution.test.cpp

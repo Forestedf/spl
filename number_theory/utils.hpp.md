@@ -30,6 +30,9 @@ data:
     path: poly/compositional_inverse.hpp
     title: poly/compositional_inverse.hpp
   - icon: ':heavy_check_mark:'
+    path: poly/division.hpp
+    title: poly/division.hpp
+  - icon: ':heavy_check_mark:'
     path: poly/fft.hpp
     title: poly/fft.hpp
   - icon: ':heavy_check_mark:'
@@ -165,6 +168,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: poly/test/convolution_mod.test.cpp
     title: poly/test/convolution_mod.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: poly/test/division_of_polynomials.test.cpp
+    title: poly/test/division_of_polynomials.test.cpp
   - icon: ':heavy_check_mark:'
     path: poly/test/exp_of_formal_power_series.test.cpp
     title: poly/test/exp_of_formal_power_series.test.cpp
@@ -314,81 +320,83 @@ data:
   isVerificationFile: false
   path: number_theory/utils.hpp
   requiredBy:
-  - bit/test/point_add_subset_sum_test.cpp
-  - convolution/index_difference.hpp
-  - convolution/mul_mod_p_conv.hpp
-  - number_theory/dynamic_mod_int.hpp
   - number_theory/ax_by_c.hpp
+  - number_theory/dynamic_mod_int.hpp
   - number_theory/mod_int.hpp
+  - poly/fft.hpp
+  - poly/composition.hpp
   - poly/multieval.hpp
+  - poly/polynomial_interpolation_geometric.hpp
+  - poly/fps_inv.hpp
+  - poly/stirling1.hpp
+  - poly/fps_exp.hpp
+  - poly/rational_sum_1.hpp
+  - poly/division.hpp
+  - poly/fps_div_at.hpp
+  - poly/fps_log.hpp
+  - poly/fps_pow.hpp
+  - poly/compositional_inverse.hpp
   - poly/multieval_geometric.hpp
   - poly/stirling2.hpp
-  - poly/fps_pow.hpp
-  - poly/fps_div_at.hpp
   - poly/power_projection.hpp
-  - poly/fps_inv.hpp
-  - poly/fps_log.hpp
-  - poly/rational_sum_1.hpp
-  - poly/compositional_inverse.hpp
-  - poly/middle_product.hpp
-  - poly/polynomial_interpolation_geometric.hpp
-  - poly/fps_exp.hpp
-  - poly/stirling1.hpp
-  - poly/composition.hpp
-  - poly/fft.hpp
   - poly/taylor_shift.hpp
+  - poly/middle_product.hpp
+  - convolution/mul_mod_p_conv.hpp
+  - convolution/index_difference.hpp
   - graph/frequency_table_of_tree_distance.hpp
+  - bit/test/point_add_subset_sum_test.cpp
   timestamp: '2024-07-18 16:56:22+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - bit/test/bitwise_xor_convolution.test.cpp
-  - bit/test/subset_range_add_point_get.test.cpp
-  - convolution/test/lcm_convolution.test.cpp
-  - convolution/test/gcd_convolution.test.cpp
-  - convolution/test/mul_modp_convolution.test.cpp
-  - convolution/test/lcm_convolution.stress.test.cpp
-  - convolution/test/index_difference.test.cpp
-  - convolution/test/gcd_convolution.stress.test.cpp
-  - number_theory/test/dynamic_modint_stress.test.cpp
-  - number_theory/test/extgcd2_stress.test.cpp
-  - number_theory/test/inv_mod_stress.test.cpp
-  - number_theory/test/prefix_binomial_sum.stress.test.cpp
-  - number_theory/test/ax_by_c_stress.test.cpp
   - data_structure/test/range_affine_range_sum.test.cpp
-  - data_structure/test/range_affine_point_get.test.cpp
-  - data_structure/test/queue_operate_all_composite.test.cpp
   - data_structure/test/point_set_range_composite.test.cpp
   - data_structure/test/1891.test.cpp
-  - poly/test/composition_of_formal_power_series_large.test.cpp
-  - poly/test/log_of_formal_power_series.test.cpp
-  - poly/test/stirling_number_of_the_second_kind.test.cpp
-  - poly/test/exp_of_formal_power_series.test.cpp
-  - poly/test/yuki_1145.test.cpp
-  - poly/test/convolution_mod.test.cpp
-  - poly/test/multipoint_evaluation.test.cpp
-  - poly/test/find_linear_recurrence.test.cpp
-  - poly/test/pow_of_formal_power_series.test.cpp
-  - poly/test/inv_of_formal_power_series.test.cpp
+  - data_structure/test/queue_operate_all_composite.test.cpp
+  - data_structure/test/range_affine_point_get.test.cpp
+  - number_theory/test/inv_mod_stress.test.cpp
+  - number_theory/test/dynamic_modint_stress.test.cpp
+  - number_theory/test/ax_by_c_stress.test.cpp
+  - number_theory/test/prefix_binomial_sum.stress.test.cpp
+  - number_theory/test/extgcd2_stress.test.cpp
   - poly/test/log_of_formal_power_series_sparse.test.cpp
-  - poly/test/compositional_inverse_of_formal_power_series_large.test.cpp
-  - poly/test/exp_of_formal_power_series_sparse.test.cpp
-  - poly/test/multipoint_evaluation_on_geometric_sequence.test.cpp
-  - poly/test/stirling_number_of_the_first_kind.test.cpp
-  - poly/test/prod_of_polys.test.cpp
-  - poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - poly/test/polynomial_interpolation_on_geometric_sequence.test.cpp
   - poly/test/pow_of_formal_power_series_sparse.test.cpp
-  - poly/test/polynomial_taylor_shift.test.cpp
+  - poly/test/exp_of_formal_power_series.test.cpp
+  - poly/test/convolution_mod.test.cpp
   - poly/test/inv_of_formal_power_series_sparse.test.cpp
+  - poly/test/inv_of_formal_power_series.test.cpp
+  - poly/test/multipoint_evaluation.test.cpp
+  - poly/test/log_of_formal_power_series.test.cpp
+  - poly/test/polynomial_taylor_shift.test.cpp
+  - poly/test/find_linear_recurrence.test.cpp
+  - poly/test/prod_of_polys.test.cpp
+  - poly/test/pow_of_formal_power_series.test.cpp
+  - poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
+  - poly/test/stirling_number_of_the_second_kind.test.cpp
+  - poly/test/composition_of_formal_power_series_large.test.cpp
+  - poly/test/multipoint_evaluation_on_geometric_sequence.test.cpp
+  - poly/test/exp_of_formal_power_series_sparse.test.cpp
+  - poly/test/division_of_polynomials.test.cpp
+  - poly/test/yuki_1145.test.cpp
+  - poly/test/stirling_number_of_the_first_kind.test.cpp
+  - poly/test/compositional_inverse_of_formal_power_series_large.test.cpp
+  - poly/test/polynomial_interpolation_on_geometric_sequence.test.cpp
   - algebra/test/division_free_determinant.test.cpp
-  - algebra/test/matrix_rank.test.cpp
-  - algebra/test/system_of_linear_equations.test.cpp
-  - algebra/test/inverse_matrix.test.cpp
   - algebra/test/matrix_det.test.cpp
+  - algebra/test/system_of_linear_equations.test.cpp
   - algebra/test/matrix_product.test.cpp
-  - graph/test/frequency_table_of_tree_distance.test.cpp
+  - algebra/test/inverse_matrix.test.cpp
+  - algebra/test/matrix_rank.test.cpp
+  - convolution/test/lcm_convolution.stress.test.cpp
+  - convolution/test/index_difference.test.cpp
+  - convolution/test/mul_modp_convolution.test.cpp
+  - convolution/test/gcd_convolution.stress.test.cpp
+  - convolution/test/lcm_convolution.test.cpp
+  - convolution/test/gcd_convolution.test.cpp
   - graph/test/point_set_tree_path_composite_sum_fixed_root.test.cpp
+  - graph/test/frequency_table_of_tree_distance.test.cpp
   - graph/test/enumerate_triangles.test.cpp
+  - bit/test/bitwise_xor_convolution.test.cpp
+  - bit/test/subset_range_add_point_get.test.cpp
 documentation_of: number_theory/utils.hpp
 layout: document
 redirect_from:

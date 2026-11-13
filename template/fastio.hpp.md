@@ -70,6 +70,9 @@ data:
     path: poly/test/compositional_inverse_of_formal_power_series_large.test.cpp
     title: poly/test/compositional_inverse_of_formal_power_series_large.test.cpp
   - icon: ':heavy_check_mark:'
+    path: poly/test/division_of_polynomials.test.cpp
+    title: poly/test/division_of_polynomials.test.cpp
+  - icon: ':heavy_check_mark:'
     path: poly/test/exp_of_formal_power_series.test.cpp
     title: poly/test/exp_of_formal_power_series.test.cpp
   - icon: ':heavy_check_mark:'
@@ -304,42 +307,43 @@ data:
   timestamp: '2025-09-14 09:21:44+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - bit/test/bitwise_xor_convolution.test.cpp
-  - convolution/test/lcm_convolution.test.cpp
-  - convolution/test/gcd_convolution.test.cpp
+  - data_structure/test/range_affine_point_get.test.cpp
+  - number_theory/test/factorize.test.cpp
+  - number_theory/test/sum_of_floor_of_linear.test.cpp
+  - poly/test/log_of_formal_power_series_sparse.test.cpp
+  - poly/test/pow_of_formal_power_series_sparse.test.cpp
+  - poly/test/exp_of_formal_power_series.test.cpp
+  - poly/test/inv_of_formal_power_series_sparse.test.cpp
+  - poly/test/inv_of_formal_power_series.test.cpp
+  - poly/test/multipoint_evaluation.test.cpp
+  - poly/test/log_of_formal_power_series.test.cpp
+  - poly/test/find_linear_recurrence.test.cpp
+  - poly/test/prod_of_polys.test.cpp
+  - poly/test/pow_of_formal_power_series.test.cpp
+  - poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
+  - poly/test/composition_of_formal_power_series_large.test.cpp
+  - poly/test/multipoint_evaluation_on_geometric_sequence.test.cpp
+  - poly/test/exp_of_formal_power_series_sparse.test.cpp
+  - poly/test/division_of_polynomials.test.cpp
+  - poly/test/compositional_inverse_of_formal_power_series_large.test.cpp
+  - poly/test/polynomial_interpolation_on_geometric_sequence.test.cpp
+  - algebra/test/matrix_det.test.cpp
+  - algebra/test/system_of_linear_equations.test.cpp
+  - algebra/test/matrix_product.test.cpp
+  - algebra/test/inverse_matrix.test.cpp
+  - algebra/test/matrix_rank.test.cpp
+  - convolution/test/min_plus_convolution_convex_convex.test.cpp
   - convolution/test/mul_modp_convolution.test.cpp
   - convolution/test/min_plus_convolution_convex_arbitrary.test.cpp
-  - convolution/test/min_plus_convolution_convex_convex.test.cpp
-  - number_theory/test/sum_of_floor_of_linear.test.cpp
-  - number_theory/test/factorize.test.cpp
-  - data_structure/test/range_affine_point_get.test.cpp
-  - poly/test/composition_of_formal_power_series_large.test.cpp
-  - poly/test/log_of_formal_power_series.test.cpp
-  - poly/test/exp_of_formal_power_series.test.cpp
-  - poly/test/multipoint_evaluation.test.cpp
-  - poly/test/find_linear_recurrence.test.cpp
-  - poly/test/pow_of_formal_power_series.test.cpp
-  - poly/test/inv_of_formal_power_series.test.cpp
-  - poly/test/log_of_formal_power_series_sparse.test.cpp
-  - poly/test/compositional_inverse_of_formal_power_series_large.test.cpp
-  - poly/test/exp_of_formal_power_series_sparse.test.cpp
-  - poly/test/multipoint_evaluation_on_geometric_sequence.test.cpp
-  - poly/test/prod_of_polys.test.cpp
-  - poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - poly/test/polynomial_interpolation_on_geometric_sequence.test.cpp
-  - poly/test/pow_of_formal_power_series_sparse.test.cpp
-  - poly/test/inv_of_formal_power_series_sparse.test.cpp
-  - algebra/test/matrix_rank.test.cpp
-  - algebra/test/system_of_linear_equations.test.cpp
-  - algebra/test/inverse_matrix.test.cpp
-  - algebra/test/matrix_det.test.cpp
-  - algebra/test/matrix_product.test.cpp
-  - graph/test/eulerian_trail_undirected.test.cpp
-  - graph/test/bipartitematching.test.cpp
-  - graph/test/eulerian_trail_directed.test.cpp
+  - convolution/test/lcm_convolution.test.cpp
+  - convolution/test/gcd_convolution.test.cpp
   - graph/test/point_set_tree_path_composite_sum_fixed_root.test.cpp
-  - graph/test/enumerate_triangles.test.cpp
+  - graph/test/bipartitematching.test.cpp
+  - graph/test/eulerian_trail_undirected.test.cpp
   - graph/test/nazo_bipartitematching.test.cpp
+  - graph/test/enumerate_triangles.test.cpp
+  - graph/test/eulerian_trail_directed.test.cpp
+  - bit/test/bitwise_xor_convolution.test.cpp
 documentation_of: template/fastio.hpp
 layout: document
 redirect_from:

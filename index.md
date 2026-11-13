@@ -265,6 +265,9 @@ data:
       path: poly/compositional_inverse.hpp
       title: poly/compositional_inverse.hpp
     - icon: ':heavy_check_mark:'
+      path: poly/division.hpp
+      title: poly/division.hpp
+    - icon: ':heavy_check_mark:'
       path: poly/fft.hpp
       title: poly/fft.hpp
     - icon: ':heavy_check_mark:'
@@ -570,6 +573,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: poly/test/convolution_mod.test.cpp
       title: poly/test/convolution_mod.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: poly/test/division_of_polynomials.test.cpp
+      title: poly/test/division_of_polynomials.test.cpp
     - icon: ':heavy_check_mark:'
       path: poly/test/exp_of_formal_power_series.test.cpp
       title: poly/test/exp_of_formal_power_series.test.cpp

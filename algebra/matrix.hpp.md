@@ -127,16 +127,16 @@ data:
   requiredBy:
   - algebra/determinant.hpp
   - algebra/division_free_determinant.hpp
-  - algebra/inverse_matrix.hpp
   - algebra/rank_of_matrix.hpp
+  - algebra/inverse_matrix.hpp
   timestamp: '2025-08-07 23:11:18+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - algebra/test/division_free_determinant.test.cpp
-  - algebra/test/matrix_rank.test.cpp
-  - algebra/test/inverse_matrix.test.cpp
   - algebra/test/matrix_det.test.cpp
   - algebra/test/matrix_product.test.cpp
+  - algebra/test/inverse_matrix.test.cpp
+  - algebra/test/matrix_rank.test.cpp
 documentation_of: algebra/matrix.hpp
 layout: document
 redirect_from:

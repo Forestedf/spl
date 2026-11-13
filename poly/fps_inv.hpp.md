@@ -15,6 +15,9 @@ data:
     path: poly/compositional_inverse.hpp
     title: poly/compositional_inverse.hpp
   - icon: ':heavy_check_mark:'
+    path: poly/division.hpp
+    title: poly/division.hpp
+  - icon: ':heavy_check_mark:'
     path: poly/fps_div_at.hpp
     title: poly/fps_div_at.hpp
   - icon: ':heavy_check_mark:'
@@ -33,6 +36,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: poly/test/compositional_inverse_of_formal_power_series_large.test.cpp
     title: poly/test/compositional_inverse_of_formal_power_series_large.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: poly/test/division_of_polynomials.test.cpp
+    title: poly/test/division_of_polynomials.test.cpp
   - icon: ':heavy_check_mark:'
     path: poly/test/inv_of_formal_power_series.test.cpp
     title: poly/test/inv_of_formal_power_series.test.cpp
@@ -286,21 +292,23 @@ data:
   path: poly/fps_inv.hpp
   requiredBy:
   - poly/multieval.hpp
-  - poly/fps_pow.hpp
+  - poly/rational_sum_1.hpp
+  - poly/division.hpp
   - poly/fps_div_at.hpp
   - poly/fps_log.hpp
-  - poly/rational_sum_1.hpp
+  - poly/fps_pow.hpp
   - poly/compositional_inverse.hpp
   timestamp: '2026-03-31 19:28:56+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - poly/test/log_of_formal_power_series.test.cpp
-  - poly/test/yuki_1145.test.cpp
-  - poly/test/multipoint_evaluation.test.cpp
-  - poly/test/pow_of_formal_power_series.test.cpp
   - poly/test/inv_of_formal_power_series.test.cpp
-  - poly/test/compositional_inverse_of_formal_power_series_large.test.cpp
+  - poly/test/multipoint_evaluation.test.cpp
+  - poly/test/log_of_formal_power_series.test.cpp
+  - poly/test/pow_of_formal_power_series.test.cpp
   - poly/test/kth_term_of_linearly_recurrent_sequence.test.cpp
+  - poly/test/division_of_polynomials.test.cpp
+  - poly/test/yuki_1145.test.cpp
+  - poly/test/compositional_inverse_of_formal_power_series_large.test.cpp
 documentation_of: poly/fps_inv.hpp
 layout: document
 redirect_from:

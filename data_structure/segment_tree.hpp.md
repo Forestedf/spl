@@ -66,7 +66,28 @@ data:
     \    if (r & 1) {\n                prodr = Monoid::op(node[--r], prodr);\n   \
     \         }\n            l >>= 1;\n            r >>= 1;\n        }\n        return\
     \ Monoid::op(prodl, prodr);\n    }\n\n    Value all_prod() const { return node[1];\
-    \ }\n};\n"
+    \ }\n    \n    template <typename F>\n    int max_right(int l, F f) const {\n\
+    \        assert(0 <= l && l <= old_length);\n        assert(f(Monoid::id()));\n\
+    \        if (l == old_length) {\n            return old_length;\n        }\n \
+    \       l += length;\n        Value prod = Monoid::id();\n        do {\n     \
+    \       while (!(l & 1)) {\n                l >>= 1;\n            }\n        \
+    \    if (!f(Monoid::op(prod, node[l]))) {\n                while (l < length)\
+    \ {\n                    l <<= 1;\n                    if (f(Monoid::op(prod,\
+    \ node[l]))) {\n                        prod = Monoid::op(prod, node[l++]);\n\
+    \                    }\n                }\n                return l - length;\n\
+    \            }\n            prod = Monoid::op(prod, node[l++]);\n        } while\
+    \ ((l & -l) != l);\n        return old_length;\n    }\n    \n    template <typename\
+    \ F>\n    int min_left(int r, F f) const {\n        assert(0 <= r && r <= old_length);\n\
+    \        assert(f(Monoid::id()));\n        if (r == 0) {\n            return 0;\n\
+    \        }\n        r += length;\n        Value prod = Monoid::id();\n       \
+    \ do {\n            --r;\n            while (r > 1 && (r & 1)) {\n           \
+    \     r >>= 1;\n            }\n            if (!f(Monoid::op(node[r], prod)))\
+    \ {\n                while (r < length) {\n                    r = (r << 1) |\
+    \ 1;\n                    if (f(Monoid::op(node[r], prod))) {\n              \
+    \          prod = Monoid::op(node[r--], prod);\n                    }\n      \
+    \          }\n                return r + 1 - length;\n            }\n        \
+    \    prod = Monoid::op(prod, node[r]);\n        } while ((r & -r) != r);\n   \
+    \     return 0;\n    }\n};\n"
   code: "#pragma once\n\n#include <cassert>\n#include <utility>\n#include <vector>\n\
     #include \"operations.hpp\"\n\ntemplate <typename Monoid>\nclass SegmentTree {\n\
     public:\n    using Value = typename Monoid::Value;\n\nprivate:\n    int old_length;\n\
@@ -97,13 +118,34 @@ data:
     \    if (r & 1) {\n                prodr = Monoid::op(node[--r], prodr);\n   \
     \         }\n            l >>= 1;\n            r >>= 1;\n        }\n        return\
     \ Monoid::op(prodl, prodr);\n    }\n\n    Value all_prod() const { return node[1];\
-    \ }\n};\n"
+    \ }\n    \n    template <typename F>\n    int max_right(int l, F f) const {\n\
+    \        assert(0 <= l && l <= old_length);\n        assert(f(Monoid::id()));\n\
+    \        if (l == old_length) {\n            return old_length;\n        }\n \
+    \       l += length;\n        Value prod = Monoid::id();\n        do {\n     \
+    \       while (!(l & 1)) {\n                l >>= 1;\n            }\n        \
+    \    if (!f(Monoid::op(prod, node[l]))) {\n                while (l < length)\
+    \ {\n                    l <<= 1;\n                    if (f(Monoid::op(prod,\
+    \ node[l]))) {\n                        prod = Monoid::op(prod, node[l++]);\n\
+    \                    }\n                }\n                return l - length;\n\
+    \            }\n            prod = Monoid::op(prod, node[l++]);\n        } while\
+    \ ((l & -l) != l);\n        return old_length;\n    }\n    \n    template <typename\
+    \ F>\n    int min_left(int r, F f) const {\n        assert(0 <= r && r <= old_length);\n\
+    \        assert(f(Monoid::id()));\n        if (r == 0) {\n            return 0;\n\
+    \        }\n        r += length;\n        Value prod = Monoid::id();\n       \
+    \ do {\n            --r;\n            while (r > 1 && (r & 1)) {\n           \
+    \     r >>= 1;\n            }\n            if (!f(Monoid::op(node[r], prod)))\
+    \ {\n                while (r < length) {\n                    r = (r << 1) |\
+    \ 1;\n                    if (f(Monoid::op(node[r], prod))) {\n              \
+    \          prod = Monoid::op(node[r--], prod);\n                    }\n      \
+    \          }\n                return r + 1 - length;\n            }\n        \
+    \    prod = Monoid::op(prod, node[r]);\n        } while ((r & -r) != r);\n   \
+    \     return 0;\n    }\n};\n"
   dependsOn:
   - data_structure/operations.hpp
   isVerificationFile: false
   path: data_structure/segment_tree.hpp
   requiredBy: []
-  timestamp: '2023-12-26 16:56:23+09:00'
+  timestamp: '2026-11-06 15:45:35+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - data_structure/test/point_set_range_composite.test.cpp

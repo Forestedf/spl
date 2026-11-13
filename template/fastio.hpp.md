@@ -55,6 +55,9 @@ data:
     path: graph/test/nazo_bipartitematching.test.cpp
     title: graph/test/nazo_bipartitematching.test.cpp
   - icon: ':heavy_check_mark:'
+    path: graph/test/point_set_tree_path_composite_sum.test.cpp
+    title: graph/test/point_set_tree_path_composite_sum.test.cpp
+  - icon: ':heavy_check_mark:'
     path: graph/test/point_set_tree_path_composite_sum_fixed_root.test.cpp
     title: graph/test/point_set_tree_path_composite_sum_fixed_root.test.cpp
   - icon: ':heavy_check_mark:'
@@ -342,6 +345,7 @@ data:
   - convolution/test/gcd_convolution.test.cpp
   - graph/test/point_set_tree_path_composite_sum_fixed_root.test.cpp
   - graph/test/bipartitematching.test.cpp
+  - graph/test/point_set_tree_path_composite_sum.test.cpp
   - graph/test/eulerian_trail_undirected.test.cpp
   - graph/test/nazo_bipartitematching.test.cpp
   - graph/test/tree_path_composite_sum.test.cpp

@@ -27,6 +27,9 @@ data:
     path: graph/dynamic_tree_dp.hpp
     title: graph/dynamic_tree_dp.hpp
   - icon: ':heavy_check_mark:'
+    path: graph/dynamic_tree_dp_rerooting.hpp
+    title: graph/dynamic_tree_dp_rerooting.hpp
+  - icon: ':heavy_check_mark:'
     path: graph/enumerate_triangles.hpp
     title: graph/enumerate_triangles.hpp
   - icon: ':heavy_check_mark:'
@@ -78,6 +81,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/test/lca.test.cpp
     title: graph/test/lca.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: graph/test/point_set_tree_path_composite_sum.test.cpp
+    title: graph/test/point_set_tree_path_composite_sum.test.cpp
   - icon: ':heavy_check_mark:'
     path: graph/test/point_set_tree_path_composite_sum_fixed_root.test.cpp
     title: graph/test/point_set_tree_path_composite_sum_fixed_root.test.cpp
@@ -177,6 +183,7 @@ data:
   - graph/centroid_decomposition.hpp
   - graph/frequency_table_of_tree_distance.hpp
   - graph/biconnected_components.hpp
+  - graph/dynamic_tree_dp_rerooting.hpp
   - graph/complement_graph_connected_components.hpp
   - graph/two_edge_connected_components.hpp
   - graph/static_top_tree.hpp
@@ -191,6 +198,7 @@ data:
   - graph/test/point_set_tree_path_composite_sum_fixed_root.test.cpp
   - graph/test/frequency_table_of_tree_distance.test.cpp
   - graph/test/ALDS1_11_D.test.cpp
+  - graph/test/point_set_tree_path_composite_sum.test.cpp
   - graph/test/biconnected_components.test.cpp
   - graph/test/vertex_add_path_sum.test.cpp
   - graph/test/block_cut_tree.test.cpp

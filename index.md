@@ -158,6 +158,9 @@ data:
       path: graph/dynamic_tree_dp.hpp
       title: graph/dynamic_tree_dp.hpp
     - icon: ':heavy_check_mark:'
+      path: graph/dynamic_tree_dp_rerooting.hpp
+      title: graph/dynamic_tree_dp_rerooting.hpp
+    - icon: ':heavy_check_mark:'
       path: graph/enumerate_triangles.hpp
       title: graph/enumerate_triangles.hpp
     - icon: ':heavy_check_mark:'
@@ -504,6 +507,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/test/nazo_bipartitematching.test.cpp
       title: graph/test/nazo_bipartitematching.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: graph/test/point_set_tree_path_composite_sum.test.cpp
+      title: graph/test/point_set_tree_path_composite_sum.test.cpp
     - icon: ':heavy_check_mark:'
       path: graph/test/point_set_tree_path_composite_sum_fixed_root.test.cpp
       title: graph/test/point_set_tree_path_composite_sum_fixed_root.test.cpp

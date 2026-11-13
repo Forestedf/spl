@@ -142,6 +142,9 @@ data:
     path: graph/test/nazo_bipartitematching.test.cpp
     title: graph/test/nazo_bipartitematching.test.cpp
   - icon: ':heavy_check_mark:'
+    path: graph/test/point_set_tree_path_composite_sum.test.cpp
+    title: graph/test/point_set_tree_path_composite_sum.test.cpp
+  - icon: ':heavy_check_mark:'
     path: graph/test/point_set_tree_path_composite_sum_fixed_root.test.cpp
     title: graph/test/point_set_tree_path_composite_sum_fixed_root.test.cpp
   - icon: ':heavy_check_mark:'
@@ -446,6 +449,7 @@ data:
   - graph/test/bipartitematching.test.cpp
   - graph/test/frequency_table_of_tree_distance.test.cpp
   - graph/test/ALDS1_11_D.test.cpp
+  - graph/test/point_set_tree_path_composite_sum.test.cpp
   - graph/test/biconnected_components.test.cpp
   - graph/test/vertex_add_path_sum.test.cpp
   - graph/test/block_cut_tree.test.cpp

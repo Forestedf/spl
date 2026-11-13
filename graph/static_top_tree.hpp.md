@@ -8,7 +8,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/dynamic_tree_dp.hpp
     title: graph/dynamic_tree_dp.hpp
+  - icon: ':heavy_check_mark:'
+    path: graph/dynamic_tree_dp_rerooting.hpp
+    title: graph/dynamic_tree_dp_rerooting.hpp
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: graph/test/point_set_tree_path_composite_sum.test.cpp
+    title: graph/test/point_set_tree_path_composite_sum.test.cpp
   - icon: ':heavy_check_mark:'
     path: graph/test/point_set_tree_path_composite_sum_fixed_root.test.cpp
     title: graph/test/point_set_tree_path_composite_sum_fixed_root.test.cpp
@@ -52,45 +58,49 @@ data:
     \ + 1]};\n    }\n    ConstAdjacency operator[](int v) const {\n        assert(built\
     \ && 0 <= v && v < n);\n        return ConstAdjacency{csr.begin() + sep[v], csr.begin()\
     \ + sep[v + 1]};\n    }\n};\n#line 5 \"graph/static_top_tree.hpp\"\n\nclass StaticTopTree\
-    \ {\npublic:\n    enum class NodeType {\n        AddEdge,\n        AddVertex,\n\
-    \        Compress,\n        Rake\n    };\n    struct Node {\n        NodeType\
-    \ ty;\n        int par, lch, rch;\n    };\n\n    std::vector<Node> nodes;\n  \
-    \  int stt_root;\n\n    template <typename T, bool DIR>\n    StaticTopTree(Graph<T,\
-    \ DIR> &g, int root = 0) {\n        assert(0 <= root && root < g.v());\n     \
-    \   nodes.reserve(3 * g.v());\n        dfs(g, root, -1);\n        nodes.resize(g.v(),\
-    \ Node{NodeType::AddVertex, -1, -1, -1});\n        stt_root = compress(g, root,\
-    \ -1).second;\n    }\n\nprivate:\n    template <typename T, bool DIR>\n    int\
-    \ dfs(Graph<T, DIR> &g, int v, int p) {\n        int sz = 1, mx = 0;\n       \
-    \ for (Edge<T> &e : g[v]) {\n            if (e.to == p) {\n                continue;\n\
-    \            }\n            int t = dfs(g, e.to, v);\n            if (mx < t)\
-    \ {\n                mx = t;\n                swap(g[v][0], e);\n            }\n\
-    \            sz += t;\n        }\n        return sz;\n    }\n    int make_node(NodeType\
+    \ {\npublic:\n    enum class NodeType { AddEdge, AddVertex, Compress, Rake };\n\
+    \    struct Node {\n        NodeType ty;\n        int par, lch, rch, top, bottom;\n\
+    \    };\n\n    std::vector<Node> nodes;\n    int stt_root;\n\n    template <typename\
+    \ T, bool DIR>\n    StaticTopTree(Graph<T, DIR>& g, int root = 0) {\n        assert(0\
+    \ <= root && root < g.v());\n        nodes.reserve(3 * g.v());\n        dfs(g,\
+    \ root, -1);\n        nodes.resize(g.v());\n        for (int v = 0; v < g.v();\
+    \ ++v) {\n            nodes[v] = {NodeType::AddVertex, -1, -1, -1, v, v};\n  \
+    \      }\n        stt_root = compress(g, root, -1).second;\n    }\n\nprivate:\n\
+    \    template <typename T, bool DIR>\n    int dfs(Graph<T, DIR>& g, int v, int\
+    \ p) {\n        int sz = 1, mx = 0;\n        for (Edge<T>& e : g[v]) {\n     \
+    \       if (e.to == p) {\n                continue;\n            }\n         \
+    \   int t = dfs(g, e.to, v);\n            if (mx < t) {\n                mx =\
+    \ t;\n                std::swap(g[v][0], e);\n            }\n            sz +=\
+    \ t;\n        }\n        for (Edge<T>& e : g[v]) {\n            if (e.to == p)\
+    \ {\n                std::swap(e, g[v][g[v].size() - 1]);\n                break;\n\
+    \            }\n        }\n        return sz;\n    }\n    int make_node(NodeType\
     \ ty, int lch, int rch) {\n        int v = (int)nodes.size();\n        nodes.emplace_back(Node{ty,\
-    \ -1, lch, rch});\n        if (lch != -1) {\n            nodes[lch].par = v;\n\
-    \        }\n        if (rch != -1) {\n            nodes[rch].par = v;\n      \
-    \  }\n        return v;\n    }\n    void merge(std::vector<std::pair<int, int>>\
-    \ &path) {\n        auto [xf, xs] = path.back();\n        path.pop_back();\n \
-    \       auto [yf, ys] = path.back();\n        path.pop_back();\n        path.emplace_back(std::max(xf,\
+    \ -1, lch, rch, nodes[lch].top,\n                                ty == NodeType::Compress\
+    \ ? nodes[rch].bottom : nodes[lch].bottom});\n        if (lch != -1) {\n     \
+    \       nodes[lch].par = v;\n        }\n        if (rch != -1) {\n           \
+    \ nodes[rch].par = v;\n        }\n        return v;\n    }\n    void merge(std::vector<std::pair<int,\
+    \ int>>& path) {\n        auto [xf, xs] = path.back();\n        path.pop_back();\n\
+    \        auto [yf, ys] = path.back();\n        path.pop_back();\n        path.emplace_back(std::max(xf,\
     \ yf) + 1, make_node(NodeType::Compress, ys, xs));\n    }\n    template <typename\
-    \ T, bool DIR>\n    std::pair<int, int> compress(const Graph<T, DIR> &g, int v,\
+    \ T, bool DIR>\n    std::pair<int, int> compress(const Graph<T, DIR>& g, int v,\
     \ int p) {\n        std::vector<std::pair<int, int>> path;\n        while (true)\
     \ {\n            path.emplace_back(rake(g, v, p));\n            while (true) {\n\
-    \                int l = (int)path.size();\n                if (l >= 3 && (path[l\
-    \ - 3].first == path[l - 2].first || path[l - 3].first <= path[l - 1].first))\
-    \ {\n                    std::pair<int, int> t = path.back();\n              \
-    \      path.pop_back();\n                    merge(path);\n                  \
-    \  path.emplace_back(t);\n                } else if (l >= 2 && path[l - 2].first\
-    \ <= path[l - 1].first) {\n                    merge(path);\n                }\
-    \ else {\n                    break;\n                }\n            }\n     \
-    \       if (g[v].size() == 0 || g[v][0].to == p) {\n                break;\n \
-    \           }\n            p = v;\n            v = g[v][0].to;\n        }\n  \
-    \      while (path.size() >= 2) {\n            merge(path);\n        }\n     \
-    \   auto [xf, xs] = path.back();\n        int z = make_node(NodeType::AddEdge,\
+    \                int l = (int)path.size();\n                if (l >= 3 &&\n  \
+    \                  (path[l - 3].first == path[l - 2].first || path[l - 3].first\
+    \ <= path[l - 1].first)) {\n                    std::pair<int, int> t = path.back();\n\
+    \                    path.pop_back();\n                    merge(path);\n    \
+    \                path.emplace_back(t);\n                } else if (l >= 2 && path[l\
+    \ - 2].first <= path[l - 1].first) {\n                    merge(path);\n     \
+    \           } else {\n                    break;\n                }\n        \
+    \    }\n            if (g[v].size() == 0 || g[v][0].to == p) {\n             \
+    \   break;\n            }\n            p = v;\n            v = g[v][0].to;\n \
+    \       }\n        while (path.size() >= 2) {\n            merge(path);\n    \
+    \    }\n        auto [xf, xs] = path.back();\n        int z = make_node(NodeType::AddEdge,\
     \ xs, -1);\n        return std::pair<int, int>(xf + 1, z);\n    }\n    template\
-    \ <typename T, bool DIR>\n    std::pair<int, int> rake(const Graph<T, DIR> &g,\
+    \ <typename T, bool DIR>\n    std::pair<int, int> rake(const Graph<T, DIR>& g,\
     \ int v, int p) {\n        std::priority_queue<std::pair<int, int>, std::vector<std::pair<int,\
     \ int>>, std::greater<>> pq;\n        for (int i = 1; i < (int)g[v].size(); ++i)\
-    \ {\n            const Edge<T> &e = g[v][i];\n            if (e.to == p) {\n \
+    \ {\n            const Edge<T>& e = g[v][i];\n            if (e.to == p) {\n \
     \               continue;\n            }\n            pq.emplace(compress(g, e.to,\
     \ v));\n        }\n        if (pq.empty()) {\n            return std::pair<int,\
     \ int>(0, v);\n        }\n        while (pq.size() >= 2) {\n            auto [xf,\
@@ -100,45 +110,50 @@ data:
     \ = rs;\n        nodes[rs].par = v;\n        return std::pair<int, int>(rf + 1,\
     \ v);\n    }\n};\n"
   code: "#pragma once\n#include <algorithm>\n#include <queue>\n#include \"graph.hpp\"\
-    \n\nclass StaticTopTree {\npublic:\n    enum class NodeType {\n        AddEdge,\n\
-    \        AddVertex,\n        Compress,\n        Rake\n    };\n    struct Node\
-    \ {\n        NodeType ty;\n        int par, lch, rch;\n    };\n\n    std::vector<Node>\
-    \ nodes;\n    int stt_root;\n\n    template <typename T, bool DIR>\n    StaticTopTree(Graph<T,\
-    \ DIR> &g, int root = 0) {\n        assert(0 <= root && root < g.v());\n     \
-    \   nodes.reserve(3 * g.v());\n        dfs(g, root, -1);\n        nodes.resize(g.v(),\
-    \ Node{NodeType::AddVertex, -1, -1, -1});\n        stt_root = compress(g, root,\
-    \ -1).second;\n    }\n\nprivate:\n    template <typename T, bool DIR>\n    int\
-    \ dfs(Graph<T, DIR> &g, int v, int p) {\n        int sz = 1, mx = 0;\n       \
-    \ for (Edge<T> &e : g[v]) {\n            if (e.to == p) {\n                continue;\n\
-    \            }\n            int t = dfs(g, e.to, v);\n            if (mx < t)\
-    \ {\n                mx = t;\n                swap(g[v][0], e);\n            }\n\
-    \            sz += t;\n        }\n        return sz;\n    }\n    int make_node(NodeType\
-    \ ty, int lch, int rch) {\n        int v = (int)nodes.size();\n        nodes.emplace_back(Node{ty,\
-    \ -1, lch, rch});\n        if (lch != -1) {\n            nodes[lch].par = v;\n\
-    \        }\n        if (rch != -1) {\n            nodes[rch].par = v;\n      \
-    \  }\n        return v;\n    }\n    void merge(std::vector<std::pair<int, int>>\
-    \ &path) {\n        auto [xf, xs] = path.back();\n        path.pop_back();\n \
-    \       auto [yf, ys] = path.back();\n        path.pop_back();\n        path.emplace_back(std::max(xf,\
+    \n\nclass StaticTopTree {\npublic:\n    enum class NodeType { AddEdge, AddVertex,\
+    \ Compress, Rake };\n    struct Node {\n        NodeType ty;\n        int par,\
+    \ lch, rch, top, bottom;\n    };\n\n    std::vector<Node> nodes;\n    int stt_root;\n\
+    \n    template <typename T, bool DIR>\n    StaticTopTree(Graph<T, DIR>& g, int\
+    \ root = 0) {\n        assert(0 <= root && root < g.v());\n        nodes.reserve(3\
+    \ * g.v());\n        dfs(g, root, -1);\n        nodes.resize(g.v());\n       \
+    \ for (int v = 0; v < g.v(); ++v) {\n            nodes[v] = {NodeType::AddVertex,\
+    \ -1, -1, -1, v, v};\n        }\n        stt_root = compress(g, root, -1).second;\n\
+    \    }\n\nprivate:\n    template <typename T, bool DIR>\n    int dfs(Graph<T,\
+    \ DIR>& g, int v, int p) {\n        int sz = 1, mx = 0;\n        for (Edge<T>&\
+    \ e : g[v]) {\n            if (e.to == p) {\n                continue;\n     \
+    \       }\n            int t = dfs(g, e.to, v);\n            if (mx < t) {\n \
+    \               mx = t;\n                std::swap(g[v][0], e);\n            }\n\
+    \            sz += t;\n        }\n        for (Edge<T>& e : g[v]) {\n        \
+    \    if (e.to == p) {\n                std::swap(e, g[v][g[v].size() - 1]);\n\
+    \                break;\n            }\n        }\n        return sz;\n    }\n\
+    \    int make_node(NodeType ty, int lch, int rch) {\n        int v = (int)nodes.size();\n\
+    \        nodes.emplace_back(Node{ty, -1, lch, rch, nodes[lch].top,\n         \
+    \                       ty == NodeType::Compress ? nodes[rch].bottom : nodes[lch].bottom});\n\
+    \        if (lch != -1) {\n            nodes[lch].par = v;\n        }\n      \
+    \  if (rch != -1) {\n            nodes[rch].par = v;\n        }\n        return\
+    \ v;\n    }\n    void merge(std::vector<std::pair<int, int>>& path) {\n      \
+    \  auto [xf, xs] = path.back();\n        path.pop_back();\n        auto [yf, ys]\
+    \ = path.back();\n        path.pop_back();\n        path.emplace_back(std::max(xf,\
     \ yf) + 1, make_node(NodeType::Compress, ys, xs));\n    }\n    template <typename\
-    \ T, bool DIR>\n    std::pair<int, int> compress(const Graph<T, DIR> &g, int v,\
+    \ T, bool DIR>\n    std::pair<int, int> compress(const Graph<T, DIR>& g, int v,\
     \ int p) {\n        std::vector<std::pair<int, int>> path;\n        while (true)\
     \ {\n            path.emplace_back(rake(g, v, p));\n            while (true) {\n\
-    \                int l = (int)path.size();\n                if (l >= 3 && (path[l\
-    \ - 3].first == path[l - 2].first || path[l - 3].first <= path[l - 1].first))\
-    \ {\n                    std::pair<int, int> t = path.back();\n              \
-    \      path.pop_back();\n                    merge(path);\n                  \
-    \  path.emplace_back(t);\n                } else if (l >= 2 && path[l - 2].first\
-    \ <= path[l - 1].first) {\n                    merge(path);\n                }\
-    \ else {\n                    break;\n                }\n            }\n     \
-    \       if (g[v].size() == 0 || g[v][0].to == p) {\n                break;\n \
-    \           }\n            p = v;\n            v = g[v][0].to;\n        }\n  \
-    \      while (path.size() >= 2) {\n            merge(path);\n        }\n     \
-    \   auto [xf, xs] = path.back();\n        int z = make_node(NodeType::AddEdge,\
+    \                int l = (int)path.size();\n                if (l >= 3 &&\n  \
+    \                  (path[l - 3].first == path[l - 2].first || path[l - 3].first\
+    \ <= path[l - 1].first)) {\n                    std::pair<int, int> t = path.back();\n\
+    \                    path.pop_back();\n                    merge(path);\n    \
+    \                path.emplace_back(t);\n                } else if (l >= 2 && path[l\
+    \ - 2].first <= path[l - 1].first) {\n                    merge(path);\n     \
+    \           } else {\n                    break;\n                }\n        \
+    \    }\n            if (g[v].size() == 0 || g[v][0].to == p) {\n             \
+    \   break;\n            }\n            p = v;\n            v = g[v][0].to;\n \
+    \       }\n        while (path.size() >= 2) {\n            merge(path);\n    \
+    \    }\n        auto [xf, xs] = path.back();\n        int z = make_node(NodeType::AddEdge,\
     \ xs, -1);\n        return std::pair<int, int>(xf + 1, z);\n    }\n    template\
-    \ <typename T, bool DIR>\n    std::pair<int, int> rake(const Graph<T, DIR> &g,\
+    \ <typename T, bool DIR>\n    std::pair<int, int> rake(const Graph<T, DIR>& g,\
     \ int v, int p) {\n        std::priority_queue<std::pair<int, int>, std::vector<std::pair<int,\
     \ int>>, std::greater<>> pq;\n        for (int i = 1; i < (int)g[v].size(); ++i)\
-    \ {\n            const Edge<T> &e = g[v][i];\n            if (e.to == p) {\n \
+    \ {\n            const Edge<T>& e = g[v][i];\n            if (e.to == p) {\n \
     \               continue;\n            }\n            pq.emplace(compress(g, e.to,\
     \ v));\n        }\n        if (pq.empty()) {\n            return std::pair<int,\
     \ int>(0, v);\n        }\n        while (pq.size() >= 2) {\n            auto [xf,\
@@ -153,10 +168,12 @@ data:
   path: graph/static_top_tree.hpp
   requiredBy:
   - graph/dynamic_tree_dp.hpp
-  timestamp: '2026-04-09 11:45:48+09:00'
+  - graph/dynamic_tree_dp_rerooting.hpp
+  timestamp: '2026-11-13 22:55:16+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - graph/test/point_set_tree_path_composite_sum_fixed_root.test.cpp
+  - graph/test/point_set_tree_path_composite_sum.test.cpp
 documentation_of: graph/static_top_tree.hpp
 layout: document
 redirect_from:

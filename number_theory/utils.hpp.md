@@ -142,6 +142,9 @@ data:
     path: graph/test/frequency_table_of_tree_distance.test.cpp
     title: graph/test/frequency_table_of_tree_distance.test.cpp
   - icon: ':heavy_check_mark:'
+    path: graph/test/point_set_tree_path_composite_sum.test.cpp
+    title: graph/test/point_set_tree_path_composite_sum.test.cpp
+  - icon: ':heavy_check_mark:'
     path: graph/test/point_set_tree_path_composite_sum_fixed_root.test.cpp
     title: graph/test/point_set_tree_path_composite_sum_fixed_root.test.cpp
   - icon: ':heavy_check_mark:'
@@ -397,6 +400,7 @@ data:
   - convolution/test/gcd_convolution.test.cpp
   - graph/test/point_set_tree_path_composite_sum_fixed_root.test.cpp
   - graph/test/frequency_table_of_tree_distance.test.cpp
+  - graph/test/point_set_tree_path_composite_sum.test.cpp
   - graph/test/tree_path_composite_sum.test.cpp
   - graph/test/enumerate_triangles.test.cpp
   - bit/test/bitwise_xor_convolution.test.cpp
